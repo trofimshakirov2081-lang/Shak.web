@@ -92,17 +92,18 @@
 
   function money(rub) {
     var cur = C.currency[st.cur];
-    var v = Math.round(rub * cur.rate / 1000) * 1000;
+    var v = Math.round(rub * cur.rate / 100) * 100;
     return v.toLocaleString("ru-RU") + " " + cur.sign;
   }
 
   function estimate() {
     var picked = st.features || [];
     var chosen = C.features.filter(function (f) { return picked.indexOf(f.id) >= 0; });
-    var price = C.base.price, days = C.base.days;
-    chosen.forEach(function (f) { price += f.price; days += f.days; });
-    var pkg = C.packages.filter(function (p) { return price <= p.upTo; })[0];
-    return { chosen: chosen, min: price, max: Math.round(price * 1.3 / 1000) * 1000, days: days, daysMax: days + Math.ceil(days * 0.3), pkg: pkg };
+    var dev = C.base.price, days = C.base.days;
+    chosen.forEach(function (f) { dev += f.price; days += f.days; });
+    var full = dev + C.base.setup, price = full - C.discount.price;
+    var pkg = C.packages.filter(function (p) { return full <= p.upTo; })[0];
+    return { chosen: chosen, dev: dev, full: full, min: price, days: days, daysMax: days + Math.ceil(days * 0.3), pkg: pkg };
   }
 
   function budgetNote(e) {
@@ -198,11 +199,11 @@
   };
 
   V.budget = function () {
-    var sign = C.currency[st.cur].sign;
+    var sign = C.currency[st.cur].sign, curs = Object.keys(C.currency);
     return '<h2>Какой бюджет комфортен?</h2><p class="lead">Это поможет предложить реальный вариант, а не самый дорогой.</p>' +
-      '<div class="seg" role="group" aria-label="Валюта">' + Object.keys(C.currency).map(function (k) {
+      (curs.length > 1 ? '<div class="seg" role="group" aria-label="Валюта">' + curs.map(function (k) {
         return '<button class="' + (st.cur === k ? "on" : "") + '" data-cur="' + k + '">' + C.currency[k].sign + '</button>';
-      }).join("") + '</div>' +
+      }).join("") + '</div>' : '') +
       '<div class="budgets">' + C.budgets.map(function (b) {
         var label = b.max === null ? b.label : budgetLabel(b) + " " + sign;
         return '<button class="budget' + (st.budget === b.id ? " on" : "") + '" data-budget="' + b.id + '">' + (b.max === null ? "🤔 " : "") + esc(label) + '</button>';
@@ -237,7 +238,7 @@
       "Функции: админка" + (e.chosen.length ? ", " + e.chosen.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1); }).join(", ") : ""),
       "Пакет: " + e.pkg.name,
       "Бюджет: " + (b ? (b.max === null ? b.label : budgetLabel(b) + " " + C.currency[st.cur].sign) : "не указан"),
-      "Ориентир: " + money(e.min) + " - " + money(e.max) + ", " + e.days + "-" + e.daysMax + " рабочих дней",
+      "Ориентир: " + money(e.min) + " (разработка " + money(e.dev) + " + настройка " + money(C.base.setup) + " - " + C.discount.title + " " + money(C.discount.price) + "), " + e.days + "-" + e.daysMax + " рабочих дней",
       "Контакт: " + (st.person ? st.person + ", " : "") + st.contact,
       st.comment ? "Пожелания: " + st.comment : ""
     ].filter(Boolean).join("\n");
@@ -251,8 +252,8 @@
       '<span class="pill">Готово' + (st.person ? ", " + esc(st.person) : "") + ' 🎉</span>' +
       '<h2>Черновик сайта «' + esc(bizName()) + '»</h2>' +
       '<div class="draft">' + mock(s, p, f, "big") + '</div>' +
-      '<div class="estimate"><div><small>Пакет</small><b>' + esc(e.pkg.name) + '</b></div><div><small>Примерная стоимость</small><b>' + money(e.min) + ' - ' + money(e.max) + '</b></div><div><small>Срок</small><b>' + e.days + '-' + e.daysMax + ' рабочих дней</b></div>' +
-        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Это ориентир по выбранным функциям. Точную цену назовём после короткого разговора.</p></div>' +
+      '<div class="estimate"><div><small>Пакет</small><b>' + esc(e.pkg.name) + '</b></div><div><small>Примерная стоимость</small><b>' + money(e.min) + '</b> <s class="old">' + money(e.full) + '</s></div><div><small>Срок</small><b>' + e.days + '-' + e.daysMax + ' рабочих дней</b></div>' +
+        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + настройка и запуск ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p></div>' +
       '<h3>Мини-брендбук</h3>' +
       '<div class="book"><div class="book-colors">' + p.c.map(function (x, i) {
         return '<button class="swatch" data-copy="' + x + '" style="--c:' + x + '"><i></i><b>' + roles[i] + '</b><span>' + x + '</span></button>';
@@ -435,5 +436,6 @@
   });
 
   if (st.step >= STEPS.length) st.step = 0;
+  if (!C.currency[st.cur]) st.cur = Object.keys(C.currency)[0];
   render();
 })();
