@@ -1,6 +1,7 @@
 :root { --ink: #121826; --mut: #667085; --line: #E4E7EC; --bg: #FFFFFF; --soft: #F4F6FB; --pri: #1F6BFF; --pri-soft: #EAF1FF; --sun: #FFD23F; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { background: #fff; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 Manrope, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 .wrap { width: min(1120px, 100% - 32px); margin: 0 auto; }
@@ -125,7 +126,9 @@ details p { color: var(--mut); margin: 10px 0 0; }
 .contacts a { text-decoration: none; background: rgba(255,255,255,.08); border-radius: 16px; padding: 14px 18px; font-weight: 700; }
 .contacts small { display: block; font-weight: 400; opacity: .6; font-size: 13px; }
 
-.sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 30; display: none; text-align: center; background: var(--pri); color: #fff; text-decoration: none; font-weight: 800; padding: 17px; border-radius: 18px; box-shadow: 0 14px 40px rgba(31,107,255,.45); }
+.sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 30; display: none; text-align: center; background-color: transparent; background-image: linear-gradient(var(--pri), var(--pri)); color: #fff; text-decoration: none; font-weight: 800; padding: 17px; border-radius: 18px; box-shadow: 0 8px 24px rgba(18,24,38,.18); }
+/* Цвет кнопки задан картинкой-градиентом, а не background-color: новый Safari на iPhone
+   берёт background-color закреплённого внизу элемента и красит им свою панель. */
 @media (max-width: 760px) { .sticky-cta { display: block; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .25s; } .sticky-cta.show { opacity: 1; transform: none; pointer-events: auto; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
