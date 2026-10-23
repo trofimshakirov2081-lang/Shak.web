@@ -254,7 +254,7 @@
       '<h2>Черновик сайта «' + esc(bizName()) + '»</h2>' +
       '<div class="draft">' + mock(s, p, f, "big") + '</div>' +
       '<div class="estimate"><div><small>Пакет</small><b>' + esc(e.pkg.name) + '</b></div><div><small>Примерная стоимость</small><b>' + money(e.min) + '</b> <s class="old">' + money(e.full) + '</s></div><div><small>Срок</small><b>' + e.days + '-' + e.daysMax + ' рабочих дней</b></div>' +
-        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + настройка и запуск ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p>' +
+        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + запуск и настройка ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p>' +
         '<p class="small">Есть свой полный брендбук и ТЗ с дизайном? Тогда скидка ' + money(C.discountFull.price) + ' вместо ' + money(C.discount.price) + '. <a href="' + C.discountFull.link + '" target="_blank" rel="noopener">Что значит «полный»</a></p></div>' +
       '<h3>Мини-брендбук</h3>' +
       '<div class="book"><div class="book-colors">' + p.c.map(function (x, i) {
