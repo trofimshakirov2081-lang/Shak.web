@@ -159,12 +159,12 @@ function build(cfgPath) {
       };
     }),
     contacts: {
-      phone: c.phone || "+7 900 000-00-00",
+      phone: c.phone ?? "+7 900 000-00-00",
       whatsapp: c.whatsapp ?? String(c.phone || "79000000000").replace(/\D/g, ""),
       telegram: c.telegram || "",
       instagram: c.instagram || "",
       address: c.address || "",
-      hours: c.hours || "Ежедневно 9:00-21:00"
+      hours: c.hours ?? "Ежедневно 9:00-21:00"
     },
     demo: { banner: cfg.demoBanner !== false, pin: String(cfg.pin || "1234") }
   };
