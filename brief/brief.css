@@ -229,3 +229,39 @@ h3 { font-size: 20px; margin: 32px 0 12px; }
   .estimate { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .mock, .swatch i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* Шаг со свайпами: всё в один экран телефона, следующая карточка видна сзади */
+.step-style .app, .step-style { padding-bottom: 96px; }
+.swipe-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.swipe-head h2 { font-size: clamp(22px, 5.6vw, 32px); margin: 0; }
+.swipe-head .count { color: var(--mut); font-weight: 700; }
+.small-lead { font-size: 15px; margin: 4px 0 10px; }
+.deck { position: relative; display: grid; place-items: center; padding: 0 0 6px; }
+.deck .swipe { grid-area: 1 / 1; width: min(300px, 82vw); }
+.swipe.next { transform: scale(.94) translateY(14px); opacity: .7; filter: saturate(.8); pointer-events: none; transition: transform .26s, opacity .26s; }
+.swipe.next.up { transform: none; opacity: 1; filter: none; }
+.swipe.cur { z-index: 2; }
+.deck .mock { font-size: 9px; }
+.deck .m-title { font-size: 19px; max-width: 64%; overflow-wrap: normal; }
+.deck .mock { height: min(290px, 44vh); overflow: hidden; }
+.deck .m-hero { min-height: 96px; padding-bottom: 10px; }
+.deck .m-pic { font-size: 18px; }
+.swipe-cap { padding: 8px 4px 2px; }
+.swipe-cap b { font-size: 18px; }
+.swipe-cap span { font-size: 14px; line-height: 1.35; }
+.vote-nav { align-items: center; justify-content: space-between; }
+.vote-nav .round { width: 60px; height: 60px; font-size: 26px; flex: none; }
+.vote-nav .btn.sq { flex: 0 1 auto; padding: 12px 14px; font-size: 15px; }
+.vote-nav .btn.sq:first-child { width: 48px; padding: 12px 0; }
+.teach { animation: teach 2.4s ease-in-out .6s 2; }
+@keyframes teach { 15% { transform: translateX(46px) rotate(4deg); } 30% { transform: none; } 45% { transform: translateX(-46px) rotate(-4deg); } 60% { transform: none; } }
+.teach .stamp.yes { animation: stampYes 2.4s ease-in-out .6s 2; }
+.teach .stamp.no { animation: stampNo 2.4s ease-in-out .6s 2; }
+@keyframes stampYes { 10%, 22% { opacity: 1; } 0%, 30%, 100% { opacity: 0; } }
+@keyframes stampNo { 40%, 52% { opacity: 1; } 0%, 35%, 60%, 100% { opacity: 0; } }
+.swipe-hint { position: absolute; z-index: 3; bottom: 44%; left: 50%; transform: translateX(-50%); background: rgba(18,24,38,.85); color: #fff; font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 99px; pointer-events: none; animation: hintFade 5.4s forwards; }
+@keyframes hintFade { 85% { opacity: 1; } 100% { opacity: 0; } }
+@media (max-height: 620px) { .swipe-cap span { display: none; } }
+@media (prefers-reduced-motion: reduce) { .teach, .teach .stamp, .swipe-hint { animation: none; } }
+.deck .s-retro .m-art { display: none; }
+.deck .s-photo .m-art { aspect-ratio: 16 / 6; font-size: 34px; }

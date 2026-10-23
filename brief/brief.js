@@ -146,14 +146,20 @@
           : '<p class="lead">Не страшно: начнём с современного стиля, а на созвоне покажем больше вариантов.</p>') +
         '<button class="btn ghost" data-reswipe>Пролистать ещё раз</button>';
     }
-    var s = C.styles[st.swipe];
-    var p = C.palettes[[1, 5, 14, 28, 0, 25][st.swipe % 6]];
-    var f = C.fonts[[9, 0, 1, 10, 2, 13][st.swipe % 6]];
-    loadFonts([f]);
-    return '<h2>Какой стиль вам ближе?</h2><p class="lead">Листайте как в Tinder: вправо нравится, влево нет. ' + (st.swipe + 1) + ' из ' + C.styles.length + '.</p>' +
-      '<div class="deck"><div class="swipe" id="swipe">' + mock(s, p, f) + '<div class="swipe-cap"><b>' + esc(s.name) + '</b><span>' + esc(s.text) + '</span></div>' +
-      '<span class="stamp yes">Нравится</span><span class="stamp no">Не моё</span></div></div>' +
-      '<div class="vote"><button class="round no" data-vote="no" aria-label="Не нравится">👎</button><button class="round yes" data-vote="yes" aria-label="Нравится">👍</button></div>';
+    var PAL = [1, 5, 14, 28, 0, 25], FNT = [9, 0, 1, 10, 2, 13];
+    function card(i, cls) {
+      var s = C.styles[i], p = C.palettes[PAL[i % 6]], f = C.fonts[FNT[i % 6]];
+      loadFonts([f]);
+      return '<div class="swipe ' + cls + '"' + (cls === "cur" ? ' id="swipe"' : ' aria-hidden="true"') + '>' + mock(s, p, f) +
+        '<div class="swipe-cap"><b>' + esc(s.name) + '</b><span>' + esc(s.text) + '</span></div>' +
+        (cls === "cur" ? '<span class="stamp yes">Нравится</span><span class="stamp no">Не моё</span>' : '') + '</div>';
+    }
+    var next = st.swipe + 1 < C.styles.length ? card(st.swipe + 1, "next") : "";
+    return '<div class="swipe-head"><h2>Какой стиль вам ближе?</h2><span class="count">' + (st.swipe + 1) + '/' + C.styles.length + '</span></div>' +
+      '<p class="lead small-lead">Смахните вправо, если нравится, влево, если нет.</p>' +
+      '<div class="deck">' + next + card(st.swipe, "cur" + (st.swipe === 0 ? " teach" : "")) +
+      (st.swipe === 0 ? '<span class="swipe-hint" aria-hidden="true">👆 смахните</span>' : '') + '</div>' +
+      '';
   };
 
   V.colors = function () {
@@ -320,8 +326,15 @@
     var nav = "";
     if (name !== "intro" && name !== "result") {
       var canNext = name !== "style" || st.swipe >= C.styles.length;
-      nav = '<nav class="nav"><button class="btn ghost" data-back>← Назад</button>' +
-        (canNext ? '<button class="btn" data-next>' + (name === "contact" ? "Получить результат" : "Дальше →") + '</button>' : '<button class="btn ghost" data-skip>Пропустить</button>') + '</nav>';
+      if (canNext) {
+        nav = '<nav class="nav"><button class="btn ghost" data-back>← Назад</button>' +
+          '<button class="btn" data-next>' + (name === "contact" ? "Получить результат" : "Дальше →") + '</button></nav>';
+      } else {
+        // Свайпы: кнопки «нравится / нет» прямо в нижней панели, как в Tinder
+        nav = '<nav class="nav vote-nav"><button class="btn ghost sq" data-back aria-label="Назад">←</button>' +
+          '<button class="round no" data-vote="no" aria-label="Не нравится">👎</button><button class="round yes" data-vote="yes" aria-label="Нравится">👍</button>' +
+          '<button class="btn ghost sq" data-skip>Пропустить</button></nav>';
+      }
     }
     app.className = "app step-" + name;
     app.innerHTML = '<div class="screen">' + body + '</div>' + nav;
@@ -366,6 +379,8 @@
     var card = document.getElementById("swipe");
     if (card) {
       card.classList.add(yes ? "out-yes" : "out-no");
+      var nx = document.querySelector(".swipe.next");
+      if (nx) nx.classList.add("up");
       setTimeout(function () { st.swipe++; render(); }, 260);
     } else { st.swipe++; render(); }
   }
@@ -374,7 +389,7 @@
     var card = document.getElementById("swipe");
     if (!card) return;
     var x0 = null, dx = 0;
-    card.addEventListener("pointerdown", function (e) { x0 = e.clientX; card.setPointerCapture(e.pointerId); card.style.transition = "none"; });
+    card.addEventListener("pointerdown", function (e) { card.classList.remove("teach"); var h = document.querySelector(".swipe-hint"); if (h) h.remove(); x0 = e.clientX; card.setPointerCapture(e.pointerId); card.style.transition = "none"; });
     card.addEventListener("pointermove", function (e) {
       if (x0 === null) return;
       dx = e.clientX - x0;
