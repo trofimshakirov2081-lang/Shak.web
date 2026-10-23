@@ -114,6 +114,7 @@ h3 { font-size: 20px; margin: 32px 0 12px; }
 .estimate { margin-top: 16px; background: var(--ink); color: #fff; border-radius: 22px; padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .estimate small { display: block; opacity: .6; font-size: 13px; }
 .estimate b { font-size: 18px; }
+.estimate a { color: #8FB3FF; }
 .estimate .old { opacity: .5; font-size: 14px; margin-left: 6px; }
 .estimate p { grid-column: 1 / -1; margin: 0; }
 .estimate .muted { color: rgba(255,255,255,.6); }

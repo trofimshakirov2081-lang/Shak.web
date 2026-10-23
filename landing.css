@@ -128,3 +128,9 @@ details p { color: var(--mut); margin: 10px 0 0; }
 .sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 30; display: none; text-align: center; background: var(--pri); color: #fff; text-decoration: none; font-weight: 800; padding: 17px; border-radius: 18px; box-shadow: 0 14px 40px rgba(31,107,255,.45); }
 @media (max-width: 760px) { .sticky-cta { display: block; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .25s; } .sticky-cta.show { opacity: 1; transform: none; pointer-events: auto; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.one-pack { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
+.pack-side { display: grid; gap: 14px; }
+.pack-side .tile { background: #fff; }
+.pack-side a { color: var(--pri); font-weight: 700; text-decoration: none; display: inline-block; margin-top: 8px; }
+@media (max-width: 900px) { .one-pack { grid-template-columns: 1fr; } }

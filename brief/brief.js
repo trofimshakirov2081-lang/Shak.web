@@ -103,12 +103,13 @@
     chosen.forEach(function (f) { dev += f.price; days += f.days; });
     var full = dev + C.base.setup, price = full - C.discount.price;
     var pkg = C.packages.filter(function (p) { return full <= p.upTo; })[0];
-    return { chosen: chosen, dev: dev, full: full, min: price, days: days, daysMax: days + Math.ceil(days * 0.3), pkg: pkg };
+    var extras = chosen.filter(function (f) { return f.price > 0; });
+    return { chosen: chosen, extras: extras, dev: dev, full: full, min: price, days: days, daysMax: days + Math.ceil(days * 0.3), pkg: pkg };
   }
 
   function budgetNote(e) {
     var b = C.budgets.filter(function (x) { return x.id === st.budget; })[0];
-    if (!b || b.max === null) return "Посоветуем: для ваших задач подойдёт пакет «" + e.pkg.name + "». Можно начать с базового сайта и добавлять функции, когда пойдут заказы.";
+    if (!b || b.max === null) return "Посоветую: начните с пакета «" + e.pkg.name + "», а доплатные функции добавим, когда пойдут заказы.";
     if (e.min <= b.max) return "Укладываемся в ваш бюджет 👍";
     return "Выбранные функции выше бюджета. Предложим, с чего начать сейчас, а остальное добавим позже: сайт с админкой можно наращивать постепенно.";
   }
@@ -190,11 +191,11 @@
     if (!st.features) {
       st.features = C.features.filter(function (f) { return f.t && f.t.indexOf(st.niche) >= 0; }).map(function (f) { return f.id; });
     }
-    return '<h2>Что должен уметь сайт?</h2><p class="lead">Отметили популярное для вашей сферы, поправьте как вам нужно.</p>' +
+    return '<h2>Что должен уметь сайт?</h2><p class="lead">Отметили популярное для вашей сферы. «В пакете» уже входит в цену, остальное за доплату.</p>' +
       '<div class="feat always"><span class="ic">⚙️</span><span><b>Админка</b><small>Входит всегда: цены, тексты и фото вы меняете сами, без программиста</small></span><span class="tick">✓</span></div>' +
       '<div class="feats">' + C.features.map(function (f) {
         var on = st.features.indexOf(f.id) >= 0;
-        return '<button class="feat' + (on ? " on" : "") + '" data-feat="' + f.id + '" aria-pressed="' + on + '"><span class="ic">' + f.icon + '</span><span><b>' + esc(f.title) + '</b></span><span class="tick">' + (on ? "✓" : "+") + '</span></button>';
+        return '<button class="feat' + (on ? " on" : "") + '" data-feat="' + f.id + '" aria-pressed="' + on + '"><span class="ic">' + f.icon + '</span><span><b>' + esc(f.title) + '</b><small>' + (f.price ? "+ " + money(f.price) : "В пакете") + '</small></span><span class="tick">' + (on ? "✓" : "+") + '</span></button>';
       }).join("") + '</div>';
   };
 
@@ -236,7 +237,7 @@
       "Цвета «" + p.n + "»: основной " + p.c[0] + ", акцент " + p.c[1] + ", фон " + p.c[2] + ", текст " + p.c[3],
       "Шрифты: заголовки " + f.h + ", текст " + f.b,
       "Функции: админка" + (e.chosen.length ? ", " + e.chosen.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1); }).join(", ") : ""),
-      "Пакет: " + e.pkg.name,
+      "Пакет: " + e.pkg.name + (e.extras.length ? " + доплаты: " + e.extras.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1) + " " + money(x.price); }).join(", ") : ""),
       "Бюджет: " + (b ? (b.max === null ? b.label : budgetLabel(b) + " " + C.currency[st.cur].sign) : "не указан"),
       "Ориентир: " + money(e.min) + " (разработка " + money(e.dev) + " + настройка " + money(C.base.setup) + " - " + C.discount.title + " " + money(C.discount.price) + "), " + e.days + "-" + e.daysMax + " рабочих дней",
       "Контакт: " + (st.person ? st.person + ", " : "") + st.contact,
@@ -253,7 +254,8 @@
       '<h2>Черновик сайта «' + esc(bizName()) + '»</h2>' +
       '<div class="draft">' + mock(s, p, f, "big") + '</div>' +
       '<div class="estimate"><div><small>Пакет</small><b>' + esc(e.pkg.name) + '</b></div><div><small>Примерная стоимость</small><b>' + money(e.min) + '</b> <s class="old">' + money(e.full) + '</s></div><div><small>Срок</small><b>' + e.days + '-' + e.daysMax + ' рабочих дней</b></div>' +
-        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + настройка и запуск ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p></div>' +
+        '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + настройка и запуск ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p>' +
+        '<p class="small">Есть свой полный брендбук и ТЗ с дизайном? Тогда скидка ' + money(C.discountFull.price) + ' вместо ' + money(C.discount.price) + '. <a href="' + C.discountFull.link + '" target="_blank" rel="noopener">Что значит «полный»</a></p></div>' +
       '<h3>Мини-брендбук</h3>' +
       '<div class="book"><div class="book-colors">' + p.c.map(function (x, i) {
         return '<button class="swatch" data-copy="' + x + '" style="--c:' + x + '"><i></i><b>' + roles[i] + '</b><span>' + x + '</span></button>';

@@ -5,20 +5,19 @@ window.BRIEF = {
   // Если заполнить, заявка уйдёт в Telegram сама через бота. Пусто: клиент копирует ТЗ и пишет в личку.
   bot: { token: "", chatId: "" },
 
-  // Цены: ставка 1000 ₽ в час, расклад по часам в ЦЕНЫ.md. days: рабочие дни.
+  // Цены: ставка 1000 ₽ в час, расклад по часам в ЦЕНЫ.md. Один пакет «Сайт под ключ».
   currency: { rub: { sign: "₽", rate: 1 } },
-  base: { price: 15000, setup: 2500, days: 5, title: "Сайт с админкой: главная, каталог с ценами, контакты, адаптация под телефон" },
-  // Скидка за готовое ТЗ и брендбук: клиент прошёл бриф, и мне не нужно 3 часа собирать это самой
-  discount: { price: 3000, title: "скидка за готовое ТЗ и брендбук из брифа" },
+  base: { price: 13000, setup: 1500, days: 5, title: "Сайт под ключ с админкой" },
+  // Скидки не складываются, берётся одна. Бриф пройден всегда, когда клиент видит итог.
+  discount: { price: 1200, title: "скидка за пройденный бриф" },
+  discountFull: { price: 3000, title: "скидка за полный брендбук и ТЗ с дизайном", link: "../tz/" },
   packages: [
-    { id: "start", name: "Старт", upTo: 20000, text: "Сайт-витрина с админкой" },
-    { id: "business", name: "Бизнес", upTo: 40000, text: "Заказы, запись, отзывы" },
-    { id: "full", name: "Под ключ", upTo: Infinity, text: "Всё включено: оплата, бонусы, кабинет, тексты и фото" }
+    { id: "one", name: "Сайт под ключ", upTo: Infinity, text: "Всё нужное в одном пакете" }
   ],
   budgets: [
-    { id: "b1", max: 20000, label: "до 20 000" },
-    { id: "b2", max: 40000, label: "20 000 - 40 000" },
-    { id: "b3", max: Infinity, label: "от 40 000" },
+    { id: "b1", max: 12000, label: "до 12 000" },
+    { id: "b2", max: 20000, label: "12 000 - 20 000" },
+    { id: "b3", max: Infinity, label: "от 20 000" },
     { id: "idk", max: null, label: "Не знаю, посоветуйте" }
   ],
 
@@ -102,20 +101,19 @@ window.BRIEF = {
     { h: "El Messiri", b: "Raleway", n: "Восточный", t: ["kofeynya", "cvety", "other"] }
   ],
 
+  // price 0: уже есть в моих шаблонах, входит в пакет. Остальное: доплата по часам (ЦЕНЫ.md).
   features: [
-    { id: "cart", icon: "🛒", title: "Корзина и заказы в Telegram или WhatsApp", price: 6000, days: 2, t: ["konditerskaya", "kofeynya", "cvety"] },
-    { id: "booking", icon: "📅", title: "Онлайн-запись на услуги", price: 8000, days: 2, t: ["salon", "studiya"] },
-    { id: "delivery", icon: "🚚", title: "Доставка: зоны и стоимость", price: 4000, days: 1, t: ["cvety", "konditerskaya"] },
-    { id: "payment", icon: "💳", title: "Онлайн-оплата (Kaspi, карты)", price: 8000, days: 2 },
-    { id: "loyalty", icon: "🎁", title: "Бонусы и программа лояльности", price: 8000, days: 2 },
-    { id: "promo", icon: "🏷️", title: "Промокоды и акции", price: 3000, days: 1 },
-    { id: "builder", icon: "🎂", title: "Конструктор: торт, букет или набор", price: 12000, days: 3 },
-    { id: "reviews", icon: "⭐", title: "Отзывы клиентов", price: 2000, days: 1, t: ["salon", "studiya", "konditerskaya"] },
-    { id: "gallery", icon: "🖼️", title: "Галерея работ", price: 2000, days: 1, t: ["salon", "cvety", "studiya"] },
-    { id: "account", icon: "👤", title: "Личный кабинет клиента", price: 10000, days: 2 },
-    { id: "wheel", icon: "🎡", title: "Колесо удачи и мини-игры", price: 5000, days: 1 },
-    { id: "excel", icon: "📊", title: "Выгрузка заказов в Excel", price: 3000, days: 1 },
-    { id: "lang", icon: "🌐", title: "Второй язык (казахский или английский)", price: 6000, days: 2 },
-    { id: "content", icon: "📸", title: "Тексты и подбор фото под ключ", price: 6000, days: 2 }
+    { id: "cart", icon: "🛒", title: "Корзина и заказы в Telegram", price: 0, days: 0, t: ["konditerskaya", "kofeynya", "cvety"] },
+    { id: "booking", icon: "📅", title: "Запись или заявка на пробное", price: 0, days: 0, t: ["salon", "studiya", "other"] },
+    { id: "delivery", icon: "🚚", title: "Доставка: зоны и стоимость", price: 0, days: 0, t: ["cvety", "konditerskaya"] },
+    { id: "reviews", icon: "⭐", title: "Отзывы клиентов", price: 0, days: 0, t: ["salon", "studiya", "konditerskaya", "cvety"] },
+    { id: "gallery", icon: "🖼️", title: "Галерея и портфолио", price: 0, days: 0, t: ["salon", "studiya"] },
+    { id: "promo", icon: "🏷️", title: "Акции и промокоды", price: 0, days: 0 },
+    { id: "loyalty", icon: "🎁", title: "Бонусы и «приведи друга»", price: 0, days: 0 },
+    { id: "account", icon: "👤", title: "Личный кабинет клиента", price: 0, days: 0 },
+    { id: "builder", icon: "🎂", title: "Конструктор торта или букета", price: 0, days: 0 },
+    { id: "payment", icon: "💳", title: "Онлайн-оплата (Kaspi, карты)", price: 3000, days: 1 },
+    { id: "lang", icon: "🌐", title: "Второй язык (казахский или английский)", price: 4000, days: 2 },
+    { id: "content", icon: "📸", title: "Тексты и подбор фото за вас", price: 3000, days: 1 }
   ]
 };

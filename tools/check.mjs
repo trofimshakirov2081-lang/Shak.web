@@ -19,7 +19,7 @@ const SKIP = new Set([".git", "node_modules", "reports", ".claude", "_configs"])
 const LONG_DASH = "\u2014";
 
 const issues = []; // { page, level: "ошибка" | "внимание", text }
-const add = (page, level, text) => issues.push({ page, level, text });
+const add = (page, level, text) => { if (!issues.some(i => i.page === page && i.text === text)) issues.push({ page, level, text }); };
 
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -144,8 +144,8 @@ async function checkBrowser() {
     const tab = await ctx.newPage();
     const errors = new Set();
     tab.on("pageerror", e => errors.add("Ошибка JS: " + e.message));
-    tab.on("console", m => { if (m.type() === "error" && !/favicon\.ico/.test(m.location().url || "") && !/fonts\.g|Failed to load resource: net::ERR_(TUNNEL|PROXY|NAME|CONNECTION|INTERNET|CERT)/.test(m.text())) errors.add("Консоль: " + m.text().slice(0, 160) + (m.location().url ? " (" + m.location().url.replace(base, "/") + ")" : "")); });
-    tab.on("response", r => { if (r.url().startsWith(base) && !r.url().endsWith("/favicon.ico") && r.status() >= 400) errors.add(`Файл не найден (${r.status()}): ${r.url().replace(base, "/")}`); });
+    tab.on("console", m => { if (m.type() === "error" && !/favicon\.ico|\.php/.test(m.location().url || "") && !/fonts\.g|Failed to load resource: net::ERR_(TUNNEL|PROXY|NAME|CONNECTION|INTERNET|CERT)/.test(m.text())) errors.add("Консоль: " + m.text().slice(0, 160) + (m.location().url ? " (" + m.location().url.replace(base, "/") + ")" : "")); });
+    tab.on("response", r => { if (r.url().startsWith(base) && /\.php(\?|$)/.test(r.url())) { add(page, "внимание", "Нужен хостинг с PHP: " + r.url().replace(base, "/").split("?")[0] + " (на Netlify не работает)"); return; } if (r.url().startsWith(base) && !r.url().endsWith("/favicon.ico") && r.status() >= 400) errors.add(`Файл не найден (${r.status()}): ${r.url().replace(base, "/")}`); });
     try {
       await tab.goto(base + page, { waitUntil: "load", timeout: 20000 });
       await tab.waitForTimeout(700);
