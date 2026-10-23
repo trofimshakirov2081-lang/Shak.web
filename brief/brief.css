@@ -136,6 +136,16 @@ h3 { font-size: 20px; margin: 32px 0 12px; }
 .send .btn.big { grid-column: 1 / -1; }
 .after { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 18px; }
 .after a { color: var(--pri); padding: 6px; }
+.link.light { color: #8FB3FF; padding: 0; }
+.info { margin-top: 24px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 4px 18px; }
+.info summary { cursor: pointer; font-weight: 700; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.info summary::-webkit-details-marker { display: none; }
+.info summary::after { content: "+"; color: var(--pri); font-size: 22px; line-height: 1; }
+.info[open] summary::after { content: "−"; }
+.info h4 { margin: 16px 0 6px; }
+.info ul { margin: 0; padding-left: 20px; }
+.info li { margin: 4px 0; }
+.info[open] { padding-bottom: 16px; }
 
 /* Мини-макет сайта */
 .mock { --fh: Georgia; --fb: system-ui; background: var(--b); color: var(--t); border-radius: 16px; overflow: hidden; font-family: var(--fb), system-ui, sans-serif; font-size: 10px; position: relative; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,.06); pointer-events: none; }
@@ -212,6 +222,7 @@ h3 { font-size: 20px; margin: 32px 0 12px; }
 
 @media print {
   .top, .nav, .send, .after, .hint { display: none !important; }
+  .info { border: 0; padding: 0; }
   body { background: #fff; }
   .app { width: 100%; padding: 0; }
   .draft, .book, .tz { box-shadow: none; break-inside: avoid; }

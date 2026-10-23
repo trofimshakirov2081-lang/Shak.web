@@ -7,7 +7,7 @@ window.BRIEF = {
 
   // Цены: ставка 1000 ₽ в час, расклад по часам в ЦЕНЫ.md. Один пакет «Сайт под ключ».
   currency: { rub: { sign: "₽", rate: 1 } },
-  base: { price: 13000, setup: 4000, days: 7, title: "Сайт под ключ с админкой" },
+  base: { price: 13000, setup: 2500, days: 7, title: "Сайт под ключ с админкой" },
   // Скидки не складываются, берётся одна. Бриф пройден всегда, когда клиент видит итог.
   discount: { price: 1200, title: "скидка за пройденный бриф" },
   discountFull: { price: 3000, title: "скидка за полный брендбук и ТЗ с дизайном", link: "../tz/" },
@@ -15,9 +15,9 @@ window.BRIEF = {
     { id: "one", name: "Сайт под ключ", upTo: Infinity, text: "Всё нужное в одном пакете" }
   ],
   budgets: [
-    { id: "b1", max: 15000, label: "до 15 000" },
-    { id: "b2", max: 20000, label: "15 000 - 20 000" },
-    { id: "b3", max: Infinity, label: "от 20 000" },
+    { id: "b1", max: 13000, label: "до 13 000" },
+    { id: "b2", max: 16000, label: "13 000 - 16 000" },
+    { id: "b3", max: Infinity, label: "от 16 000" },
     { id: "idk", max: null, label: "Не знаю, посоветуйте" }
   ],
 
@@ -101,7 +101,7 @@ window.BRIEF = {
     { h: "El Messiri", b: "Raleway", n: "Восточный", t: ["kofeynya", "cvety", "other"] }
   ],
 
-  // price 0: уже есть в моих шаблонах, входит в пакет. Остальное: доплата по часам (ЦЕНЫ.md).
+  // price 0: уже есть в моих шаблонах, входит в пакет. price null: по договорённости, в сумму не входит.
   features: [
     { id: "cart", icon: "🛒", title: "Корзина и заказы в Telegram", price: 0, days: 0, t: ["konditerskaya", "kofeynya", "cvety"] },
     { id: "booking", icon: "📅", title: "Запись или заявка на пробное", price: 0, days: 0, t: ["salon", "studiya", "other"] },
@@ -112,8 +112,9 @@ window.BRIEF = {
     { id: "loyalty", icon: "🎁", title: "Бонусы и «приведи друга»", price: 0, days: 0 },
     { id: "account", icon: "👤", title: "Личный кабинет клиента", price: 0, days: 0 },
     { id: "builder", icon: "🎂", title: "Конструктор торта или букета", price: 0, days: 0 },
-    { id: "payment", icon: "💳", title: "Онлайн-оплата (Kaspi, карты)", price: 3000, days: 1 },
-    { id: "lang", icon: "🌐", title: "Второй язык (казахский или английский)", price: 4000, days: 2 },
-    { id: "content", icon: "📸", title: "Тексты и подбор фото за вас", price: 3000, days: 1 }
+    { id: "payment", icon: "💳", title: "Онлайн-оплата (карты, СБП)", price: null, days: 1 },
+    { id: "lang", icon: "🌐", title: "Английская версия сайта", price: null, days: 2 },
+    { id: "content", icon: "📸", title: "Тексты и подбор фото за вас", price: null, days: 1 },
+    { id: "logo", icon: "✏️", title: "Разработка логотипа", price: null, days: 0 }
   ]
 };

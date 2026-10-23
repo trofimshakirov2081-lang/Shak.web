@@ -109,7 +109,7 @@
       '</div>' +
       '<label>Шрифт заголовков</label><select data-k="fonts.head">' + opt("fonts.head") + '</select>' +
       '<label>Шрифт текста</label><select data-k="fonts.body">' + opt("fonts.body") + '</select>' +
-      field("Валюта", "currency", { ph: "₸ или ₽" });
+      field("Валюта", "currency", { ph: "₽" });
   }
 
   function contactsTab() {

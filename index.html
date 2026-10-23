@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>shak.web | Сайты под ключ с админкой для малого бизнеса</title>
-  <meta name="description" content="Сайты для кофеен, кондитерских, салонов, цветочных и студий в России и Казахстане. С админкой: цены, тексты и фото вы меняете сами.">
+  <meta name="description" content="Сайты для кофеен, кондитерских, салонов, цветочных и студий по всей России. С админкой: цены, тексты и фото вы меняете сами.">
   <meta property="og:title" content="Сайт, в котором вы сами меняете цены">
   <meta property="og:description" content="Сайты под ключ с админкой для малого бизнеса. Соберите свой сайт бесплатно за 10 минут.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
@@ -33,7 +33,7 @@
         <div>
           <span class="pill">Кофейни · кондитерские · салоны · цветочные · студии</span>
           <h1>Сайт, в котором вы <mark>сами</mark> меняете цены</h1>
-          <p class="lead">Делаю сайты под ключ для малого бизнеса в России и Казахстане. В каждом есть админка: цены, тексты и фото вы меняете с телефона за минуту, без программиста и без ожидания.</p>
+          <p class="lead">Делаю сайты под ключ для малого бизнеса по всей России. В каждом есть админка: цены, тексты и фото вы меняете с телефона за минуту, без программиста и без ожидания.</p>
           <div class="actions">
             <a class="btn huge" href="brief/">Собрать свой сайт бесплатно →</a>
             <a class="btn ghost" href="#demo">Посмотреть демо</a>
@@ -45,13 +45,13 @@
             <div class="ph-head"><b>Булочная Тани</b><span>🛒</span></div>
             <div class="ph-card">
               <div class="ph-pic">🥐</div>
-              <div><b>Синнабон с корицей</b><small>Мягкая булочка со сливочным кремом</small><strong class="ph-price" id="phPrice">850 ₸</strong></div>
+              <div><b>Синнабон с корицей</b><small>Мягкая булочка со сливочным кремом</small><strong class="ph-price" id="phPrice">190 ₽</strong></div>
             </div>
-            <div class="ph-card dim"><div class="ph-pic">🥖</div><div><b>Хлеб на закваске</b><small>600 г</small><strong>1 200 ₸</strong></div></div>
+            <div class="ph-card dim"><div class="ph-pic">🥖</div><div><b>Хлеб на закваске</b><small>600 г</small><strong>320 ₽</strong></div></div>
           </div>
           <div class="admin-pop">
             <small>Админка · цена</small>
-            <div class="typing"><span id="phInput">850</span><i></i></div>
+            <div class="typing"><span id="phInput">190</span><i></i></div>
             <span class="saved" id="phSaved">Сохранено ✓</span>
           </div>
         </div>
@@ -72,9 +72,9 @@
           <div>
             <h3>Попробуйте сами</h3>
             <p class="muted">Поменяйте цену, как в настоящей админке.</p>
-            <label class="try-field">Цена медовика<input id="tryPrice" inputmode="numeric" value="2500" maxlength="7" aria-label="Цена медовика"></label>
+            <label class="try-field">Цена медовика<input id="tryPrice" inputmode="numeric" value="850" maxlength="7" aria-label="Цена медовика"></label>
           </div>
-          <div class="try-card"><div class="ph-pic big">🍯</div><div><b>Медовик</b><small>Тонкие коржи, сметанный крем</small><strong id="tryOut">2 500 ₸</strong></div></div>
+          <div class="try-card"><div class="ph-pic big">🍯</div><div><b>Медовик</b><small>Тонкие коржи, сметанный крем</small><strong id="tryOut">850 ₽</strong></div></div>
         </div>
       </div>
     </section>
@@ -160,7 +160,7 @@
         <details><summary>Нужно ли платить каждый месяц?</summary><p>Мне нет. Вы платите только хостингу за место для сайта и базы данных (обычно несколько сотен рублей в месяц) и за домен раз в год, напрямую им. Всё оформлено на вас, сайт полностью ваш.</p></details>
         <details><summary>Сколько времени занимает сайт?</summary><p>7-10 рабочих дней с момента, когда есть материалы, доступы и предоплата.</p></details>
         <details><summary>Куда приходят заказы?</summary><p>В Telegram или WhatsApp, как вам удобнее. Клиент собирает корзину, а вы получаете готовое сообщение с составом заказа и контактами.</p></details>
-        <details><summary>Работаете с Россией и Казахстаном?</summary><p>Да, работаю удалённо с обеими странами. Цены на сайте могут быть в рублях или тенге.</p></details>
+        <details><summary>Работаете удалённо?</summary><p>Да, с бизнесами по всей России. Созвоны, правки и запуск онлайн, вам никуда не нужно ехать.</p></details>
       </div>
     </section>
   </main>
@@ -182,7 +182,7 @@
 
   <script>
     (function () {
-      var fmt = function (n) { return Number(n).toLocaleString("ru-RU") + " ₸"; };
+      var fmt = function (n) { return Number(n).toLocaleString("ru-RU") + " ₽"; };
 
       // Поле «попробуйте сами»
       var inp = document.getElementById("tryPrice"), out = document.getElementById("tryOut");
@@ -205,7 +205,7 @@
       // Анимация на первом экране: цена печатается в админке и меняется на сайте
       var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduce) return;
-      var prices = ["850", "900", "950", "850"], k = 0;
+      var prices = ["190", "210", "230", "190"], k = 0;
       var field = document.getElementById("phInput"), price = document.getElementById("phPrice"), saved = document.getElementById("phSaved");
       function cycle() {
         var next = prices[++k % prices.length], i = 0;

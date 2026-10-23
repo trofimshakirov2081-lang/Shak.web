@@ -6,9 +6,6 @@
   var STEPS = ["intro", "niche", "style", "colors", "fonts", "features", "budget", "contact", "result"];
   var SHORT_LIST = { colors: 9, fonts: 8 };
 
-  var KZ_TZ = /^Asia\/(Almaty|Qyzylorda|Aqtobe|Aqtau|Atyrau|Oral|Qostanay)$/;
-  var tz = "";
-  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
 
   var st = {
     step: 0, niche: "", name: "", city: "",
@@ -16,7 +13,7 @@
     palette: -1, allPal: false,
     font: -1, allFonts: false,
     features: null,
-    budget: "", cur: KZ_TZ.test(tz) ? "kzt" : "rub",
+    budget: "", cur: "rub",
     person: "", contact: "", comment: "",
     sent: false
   };
@@ -100,10 +97,10 @@
     var picked = st.features || [];
     var chosen = C.features.filter(function (f) { return picked.indexOf(f.id) >= 0; });
     var dev = C.base.price, days = C.base.days;
-    chosen.forEach(function (f) { dev += f.price; days += f.days; });
+    chosen.forEach(function (f) { dev += f.price || 0; days += f.days; });
     var full = dev + C.base.setup, price = full - C.discount.price;
     var pkg = C.packages.filter(function (p) { return full <= p.upTo; })[0];
-    var extras = chosen.filter(function (f) { return f.price > 0; });
+    var extras = chosen.filter(function (f) { return f.price !== 0; });
     return { chosen: chosen, extras: extras, dev: dev, full: full, min: price, days: days, daysMax: days + Math.ceil(days * 0.3), pkg: pkg };
   }
 
@@ -134,7 +131,7 @@
         return '<button class="chip' + (st.niche === n.id ? " on" : "") + '" data-niche="' + n.id + '"><span>' + n.emoji + '</span>' + esc(n.name) + '</button>';
       }).join("") + '</div>' +
       '<label class="field">Как называется ваш бизнес?<input id="name" value="' + esc(st.name) + '" placeholder="Например, Булочная Тани" maxlength="40" autocomplete="organization"></label>' +
-      '<label class="field">Город <span class="muted">(необязательно)</span><input id="city" value="' + esc(st.city) + '" placeholder="Алматы" maxlength="30"></label>' +
+      '<label class="field">Город <span class="muted">(необязательно)</span><input id="city" value="' + esc(st.city) + '" placeholder="Москва" maxlength="30"></label>' +
       '<p class="err" id="err" hidden></p>';
   };
 
@@ -191,11 +188,11 @@
     if (!st.features) {
       st.features = C.features.filter(function (f) { return f.t && f.t.indexOf(st.niche) >= 0; }).map(function (f) { return f.id; });
     }
-    return '<h2>Что должен уметь сайт?</h2><p class="lead">Отметили популярное для вашей сферы. «В пакете» уже входит в цену, остальное за доплату.</p>' +
+    return '<h2>Что должен уметь сайт?</h2><p class="lead">Отметили популярное для вашей сферы. «В пакете» уже входит в цену, остальное обсудим отдельно.</p>' +
       '<div class="feat always"><span class="ic">⚙️</span><span><b>Админка</b><small>Входит всегда: цены, тексты и фото вы меняете сами, без программиста</small></span><span class="tick">✓</span></div>' +
       '<div class="feats">' + C.features.map(function (f) {
         var on = st.features.indexOf(f.id) >= 0;
-        return '<button class="feat' + (on ? " on" : "") + '" data-feat="' + f.id + '" aria-pressed="' + on + '"><span class="ic">' + f.icon + '</span><span><b>' + esc(f.title) + '</b><small>' + (f.price ? "+ " + money(f.price) : "В пакете") + '</small></span><span class="tick">' + (on ? "✓" : "+") + '</span></button>';
+        return '<button class="feat' + (on ? " on" : "") + '" data-feat="' + f.id + '" aria-pressed="' + on + '"><span class="ic">' + f.icon + '</span><span><b>' + esc(f.title) + '</b><small>' + (f.price === 0 ? "В пакете" : f.price ? "+ " + money(f.price) : "По договорённости") + '</small></span><span class="tick">' + (on ? "✓" : "+") + '</span></button>';
       }).join("") + '</div>';
   };
 
@@ -237,7 +234,7 @@
       "Цвета «" + p.n + "»: основной " + p.c[0] + ", акцент " + p.c[1] + ", фон " + p.c[2] + ", текст " + p.c[3],
       "Шрифты: заголовки " + f.h + ", текст " + f.b,
       "Функции: админка" + (e.chosen.length ? ", " + e.chosen.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1); }).join(", ") : ""),
-      "Пакет: " + e.pkg.name + (e.extras.length ? " + доплаты: " + e.extras.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1) + " " + money(x.price); }).join(", ") : ""),
+      "Пакет: " + e.pkg.name + (e.extras.length ? " + обсудить отдельно: " + e.extras.map(function (x) { return x.title.charAt(0).toLowerCase() + x.title.slice(1) + (x.price ? " " + money(x.price) : " (по договорённости)"); }).join(", ") : ""),
       "Бюджет: " + (b ? (b.max === null ? b.label : budgetLabel(b) + " " + C.currency[st.cur].sign) : "не указан"),
       "Ориентир: " + money(e.min) + " (разработка " + money(e.dev) + " + настройка " + money(C.base.setup) + " - " + C.discount.title + " " + money(C.discount.price) + "), " + e.days + "-" + e.daysMax + " рабочих дней",
       "Контакт: " + (st.person ? st.person + ", " : "") + st.contact,
@@ -255,7 +252,7 @@
       '<div class="draft">' + mock(s, p, f, "big") + '</div>' +
       '<div class="estimate"><div><small>Пакет</small><b>' + esc(e.pkg.name) + '</b></div><div><small>Примерная стоимость</small><b>' + money(e.min) + '</b> <s class="old">' + money(e.full) + '</s></div><div><small>Срок</small><b>' + e.days + '-' + e.daysMax + ' рабочих дней</b></div>' +
         '<p>' + esc(budgetNote(e)) + '</p><p class="muted small">Разработка ' + money(e.dev) + ' + запуск и настройка ' + money(C.base.setup) + ', минус ' + money(C.discount.price) + ': ' + esc(C.discount.title) + '. Это ориентир, точную цену назову после короткого разговора.</p>' +
-        '<p class="small">Есть свой полный брендбук и ТЗ с дизайном? Тогда скидка ' + money(C.discountFull.price) + ' вместо ' + money(C.discount.price) + '. <a href="' + C.discountFull.link + '" target="_blank" rel="noopener">Что значит «полный»</a></p></div>' +
+        '<p class="small">Есть свой полный брендбук и ТЗ с дизайном? Тогда скидка ' + money(C.discountFull.price) + ' вместо ' + money(C.discount.price) + '. <button class="link light" data-info>Что значит «полный»</button></p></div>' +
       '<h3>Мини-брендбук</h3>' +
       '<div class="book"><div class="book-colors">' + p.c.map(function (x, i) {
         return '<button class="swatch" data-copy="' + x + '" style="--c:' + x + '"><i></i><b>' + roles[i] + '</b><span>' + x + '</span></button>';
@@ -270,8 +267,47 @@
         '<button class="btn ghost" data-pdf>Скачать PDF</button>' +
       '</div><p class="hint center" id="sendHint">' + (st.sent ? "✓ Отправлено. Ответ придёт в течение дня." : "") + '</p>' +
       '<div class="after"><a href="../demos/">Посмотреть живые демо-сайты</a><button class="link" data-edit>Изменить ответы</button><button class="link" data-restart>Начать заново</button></div>' +
+      infoBlock() +
       '</section>';
   };
+
+  // Скрытый раздел в конце итога: цены, скидки, что значит полный брендбук и ТЗ
+  function infoBlock() {
+    var full = C.base.price + C.base.setup;
+    var nego = C.features.filter(function (f) { return f.price === null; }).map(function (f) { return "<li>" + esc(f.title) + "</li>"; }).join("");
+    return '<details class="info" id="info"><summary>Цены, скидки и что значит «полное ТЗ и брендбук»</summary>' +
+      '<h4>Цена</h4><ul>' +
+        '<li>Сайт под ключ: <b>' + money(full) + '</b> (разработка ' + money(C.base.price) + ' + запуск и настройка ' + money(C.base.setup) + ')</li>' +
+        '<li>Прошли этот бриф до конца: <b>' + money(full - C.discount.price) + '</b> (скидка ' + money(C.discount.price) + ')</li>' +
+        '<li>Есть полный брендбук и ТЗ с дизайном: <b>' + money(full - C.discountFull.price) + '</b> (скидка ' + money(C.discountFull.price) + ')</li>' +
+      '</ul><p class="muted small">Скидки не складываются. Срок 7-10 рабочих дней с момента, когда есть материалы, доступы и предоплата 50%.</p>' +
+      '<h4>Что входит</h4><ul>' +
+        '<li>Дизайн под ваш бренд, тексты, версия для телефона</li>' +
+        '<li>Каталог или прайс, заказ или запись, заявки в Telegram, отзывы, галерея, вопросы, контакты с картой</li>' +
+        '<li>Админка: цены, тексты и фото меняете сами</li>' +
+        '<li>Запуск на вашем хостинге: база данных, домен, https, Telegram-бот</li>' +
+        '<li>Яндекс Метрика, Вебмастер, Google, карточки на картах</li>' +
+        '<li>2 круга правок, обучение админке, 14 дней поддержки</li>' +
+      '</ul>' +
+      '<h4>Полный брендбук</h4><ul>' +
+        '<li>Логотип в векторе (SVG, PDF или AI) для светлого и тёмного фона</li>' +
+        '<li>Минимум 3 цвета с кодами HEX или RGB, понятно, какой основной</li>' +
+        '<li>Шрифты с кириллицей для заголовков и текста</li>' +
+        '<li>Готовые фото от 1500 px или 3-5 примеров стиля</li>' +
+      '</ul><h4>Полное ТЗ</h4><ul>' +
+        '<li>Список блоков сайта по порядку</li>' +
+        '<li>Все тексты готовы, без «потом допишем»</li>' +
+        '<li>Товары или услуги таблицей: название, цена, описание, фото</li>' +
+        '<li>Контакты, адрес, часы работы, соцсети</li>' +
+        '<li>Какие функции нужны и куда приходят заявки</li>' +
+      '</ul><h4>Дизайн</h4><ul>' +
+        '<li>Макет в Figma или схема главной страницы для телефона</li>' +
+        '<li>2-3 сайта-примера с пояснением, что нравится</li>' +
+      '</ul><p class="muted small">Если чего-то не хватает, действует скидка за бриф.</p>' +
+      '<h4>По договорённости</h4><ul>' + nego + '<li>Правки сверх двух кругов и поддержка после 14 дней</li></ul>' +
+      '<h4>Оплачиваете напрямую</h4><ul><li>Хостинг с базой данных (обычно несколько сотен рублей в месяц)</li><li>Домен (обычно до 1 000 ₽ в год)</li></ul>' +
+      '</details>';
+  }
 
   // ---------- Отрисовка и навигация ----------
   function render() {
@@ -416,6 +452,7 @@
     else if (d.copy) { copy(d.copy); t.querySelector("span").textContent = "Скопировано"; setTimeout(function () { t.querySelector("span").textContent = d.copy; }, 1200); }
     else if (d.send) send(d.send);
     else if (t.hasAttribute("data-pdf")) window.print();
+    else if (t.hasAttribute("data-info")) { var inf = document.getElementById("info"); inf.open = true; inf.scrollIntoView({ behavior: "smooth" }); }
     else if (t.hasAttribute("data-edit")) { st.step = 1; render(); }
     else if (t.hasAttribute("data-restart")) {
       if (confirm("Начать бриф заново? Ответы сотрутся.")) { try { localStorage.removeItem(KEY); } catch (err) {} location.reload(); }

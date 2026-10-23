@@ -1,12 +1,12 @@
 // Собрано генератором shak.web из demos/_configs/bulochnaya-tani.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bulochnaya-tani",
-  "rev": "2026-10-23T09:28:18.634Z",
+  "rev": "2026-10-23T12:58:06.563Z",
   "brand": {
     "name": "Булочная Тани",
     "tagline": "Семейная булочная",
     "logo": "img/logo.svg",
-    "city": "Алматы"
+    "city": "Казань"
   },
   "hero": {
     "title": "Тёплый хлеб и булочки, как дома у бабушки",
@@ -46,13 +46,13 @@ window.SITE = {
     "head": "Playfair Display",
     "body": "Manrope"
   },
-  "currency": "₸",
+  "currency": "₽",
   "items": [
     {
       "id": "i1",
       "name": "Хлеб на закваске",
       "desc": "Хрустящая корочка, пористый мякиш, 600 г",
-      "price": 1200,
+      "price": 320,
       "emoji": "🥖",
       "photo": "",
       "tag": "Хит"
@@ -61,7 +61,7 @@ window.SITE = {
       "id": "i2",
       "name": "Синнабон с корицей",
       "desc": "Мягкая булочка со сливочным кремом",
-      "price": 850,
+      "price": 190,
       "emoji": "🥐",
       "photo": "",
       "tag": ""
@@ -70,7 +70,7 @@ window.SITE = {
       "id": "i3",
       "name": "Пирожки с капустой, 3 шт",
       "desc": "Тонкое тесто, много начинки",
-      "price": 900,
+      "price": 210,
       "emoji": "🥟",
       "photo": "",
       "tag": ""
@@ -79,7 +79,7 @@ window.SITE = {
       "id": "i4",
       "name": "Медовик Тани",
       "desc": "Целый торт на 1,2 кг, фирменный рецепт",
-      "price": 6500,
+      "price": 1900,
       "emoji": "🍯",
       "photo": "",
       "tag": "Под заказ"
@@ -88,18 +88,18 @@ window.SITE = {
       "id": "i5",
       "name": "Овсяное печенье, 6 шт",
       "desc": "С изюмом и грецким орехом",
-      "price": 1000,
+      "price": 260,
       "emoji": "🍪",
       "photo": "",
       "tag": ""
     }
   ],
   "contacts": {
-    "phone": "+7 701 123 45 67",
-    "whatsapp": "77011234567",
+    "phone": "+7 917 123-45-67",
+    "whatsapp": "79171234567",
     "telegram": "",
     "instagram": "bulochnaya.tani",
-    "address": "мкр. Самал-2, 58",
+    "address": "ул. Баумана, 58",
     "hours": "Ежедневно 7:00-20:00"
   },
   "demo": {

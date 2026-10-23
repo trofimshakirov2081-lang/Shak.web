@@ -126,7 +126,7 @@ function build(cfgPath) {
     features: cfg.features || niche.features,
     colors: resolveColors(cfg.colors, niche.colors),
     fonts: { ...niche.fonts, ...(cfg.fonts || {}) },
-    currency: cfg.currency || "₸",
+    currency: cfg.currency || "₽",
     items: cfg.items.map((it, i) => {
       if (!it.name) fail(`У товара №${i + 1} нет названия`);
       const price = Number(String(it.price ?? "").replace(/[^\d.]/g, ""));
@@ -142,8 +142,8 @@ function build(cfgPath) {
       };
     }),
     contacts: {
-      phone: c.phone || "+7 700 000 00 00",
-      whatsapp: c.whatsapp ?? String(c.phone || "77000000000").replace(/\D/g, ""),
+      phone: c.phone || "+7 900 000-00-00",
+      whatsapp: c.whatsapp ?? String(c.phone || "79000000000").replace(/\D/g, ""),
       telegram: c.telegram || "",
       instagram: c.instagram || "",
       address: c.address || "",
