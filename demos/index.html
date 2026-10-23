@@ -12,7 +12,7 @@
     p { color: #6d6d76; margin: 0 0 28px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .card { display: grid; gap: 4px; padding: 18px; border-radius: 22px; background: var(--b); color: var(--t); text-decoration: none; border: 1px solid rgba(0,0,0,.06); }
-    .pic { height: 120px; border-radius: 16px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, var(--m), var(--a)); margin-bottom: 8px; }
+    .pic { height: 120px; border-radius: 16px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, var(--m), var(--a)) center / cover; margin-bottom: 8px; }
     small { opacity: .7; }
     a.back { color: #1F6BFF; }
   </style>
@@ -23,27 +23,27 @@
     <p>Каждое демо собрано под конкретный бизнес. В каждом есть админка: откройте и поменяйте цену сами. <a class="back" href="../">← На главную shak.web</a></p>
     <div class="grid">
       <a class="card" href="angel-cakes/" style="--m:#B04A6F;--a:#F4C6D3;--b:#FFF7F9;--t:#200D14">
-        <span class="pic">🎂</span>
+        <span class="pic" style="background-image:url('angel-cakes/img/hero.jpg')"></span>
         <strong>Angel Cakes</strong>
         <small>Кондитерская, Казань</small>
       </a>
       <a class="card" href="brovi-kazan/" style="--m:#6B4E3D;--a:#E8CDB5;--b:#FBF6F1;--t:#130E0B">
-        <span class="pic">✨</span>
+        <span class="pic" style="background-image:url('brovi-kazan/img/hero.jpg')"></span>
         <strong>Брови Ресницы</strong>
         <small>Салон красоты, Казань</small>
       </a>
       <a class="card" href="bulochnaya-tani/" style="--m:#6B4226;--a:#C68E4E;--b:#FFF8EE;--t:#130C07">
-        <span class="pic">🥖</span>
+        <span class="pic" style="background-image:url('bulochnaya-tani/img/hero.jpg')"></span>
         <strong>Булочная Тани</strong>
         <small>Кондитерская, Казань</small>
       </a>
       <a class="card" href="freya/" style="--m:#8E2340;--a:#F5C6D0;--b:#FFF7F9;--t:#1A060C">
-        <span class="pic">🌸</span>
+        <span class="pic" style="background-image:url('freya/img/hero.jpg')"></span>
         <strong>FREYA</strong>
         <small>Цветочная, Балаково</small>
       </a>
       <a class="card" href="veranda/" style="--m:#3F5E4B;--a:#E9C9B1;--b:#FBF7F1;--t:#0B110E">
-        <span class="pic">💐</span>
+        <span class="pic" style="background-image:url('veranda/img/hero.jpg')"></span>
         <strong>Veranda</strong>
         <small>Цветочная, Арзамас</small>
       </a>

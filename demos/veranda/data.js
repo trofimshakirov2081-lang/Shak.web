@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/veranda.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-veranda",
-  "rev": "2026-10-23T14:06:18.028Z",
+  "rev": "2026-10-23T14:43:57.259Z",
   "brand": {
     "name": "Veranda",
     "tagline": "Цветочная мастерская",
@@ -11,7 +11,8 @@ window.SITE = {
   "hero": {
     "title": "Букеты с любовью, доставка по Арзамасу 24/7",
     "text": "Французские розы, пионы, гортензии и эустома. Соберём букет под повод и привезём в любое время.",
-    "cta": "Выбрать букет"
+    "cta": "Выбрать букет",
+    "photo": "img/hero.jpg"
   },
   "sections": {
     "catalogTitle": "Букеты",
@@ -54,7 +55,7 @@ window.SITE = {
       "desc": "Французские розы в праздничной упаковке",
       "price": 1600,
       "emoji": "💐",
-      "photo": "",
+      "photo": "img/item-1.jpg",
       "tag": "Хит"
     },
     {
@@ -63,7 +64,7 @@ window.SITE = {
       "desc": "Французские розы и эустома",
       "price": 2550,
       "emoji": "🎁",
-      "photo": "",
+      "photo": "img/item-2.jpg",
       "tag": ""
     },
     {
@@ -72,7 +73,7 @@ window.SITE = {
       "desc": "Стоит долго, отличный подарок",
       "price": 3500,
       "emoji": "🌹",
-      "photo": "",
+      "photo": "img/item-3.jpg",
       "tag": ""
     },
     {
@@ -81,7 +82,7 @@ window.SITE = {
       "desc": "Подсолнух, хризантема, розы, эустома",
       "price": 4000,
       "emoji": "🌻",
-      "photo": "",
+      "photo": "img/item-4.jpg",
       "tag": ""
     },
     {
@@ -90,7 +91,7 @@ window.SITE = {
       "desc": "Яркий и сочный, цвета можно поменять",
       "price": 5000,
       "emoji": "🌷",
-      "photo": "",
+      "photo": "img/item-5.jpg",
       "tag": ""
     },
     {
@@ -99,7 +100,7 @@ window.SITE = {
       "desc": "От 2 500 ₽, цену уточним при заказе",
       "price": 2500,
       "emoji": "🤍",
-      "photo": "",
+      "photo": "img/item-6.jpg",
       "tag": "От"
     }
   ],
@@ -114,5 +115,41 @@ window.SITE = {
   "demo": {
     "banner": true,
     "pin": "1234"
-  }
+  },
+  "designs": [
+    {
+      "name": "Классика",
+      "layout": "classic"
+    },
+    {
+      "name": "Минимализм",
+      "layout": "minimal",
+      "colors": {
+        "main": "#2F4738",
+        "accent": "#E9C9B1",
+        "bg": "#FFFFFF",
+        "text": "#161616"
+      },
+      "fonts": {
+        "head": "Playfair Display",
+        "body": "Inter"
+      }
+    },
+    {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#E9C9B1",
+        "accent": "#3F5E4B",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    }
+  ],
+  "design": 0,
+  "credits": "Фото: Pexels"
 };

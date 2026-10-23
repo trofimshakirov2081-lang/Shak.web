@@ -62,6 +62,22 @@ function resolveColors(input, fallback) {
   return c;
 }
 
+// Три разных дизайна: классика (цвета бренда), минимализм (светлый), тёмный (фото на весь экран)
+function lighten(h, minLum) { let c = h, t = 0; while (lum(c) < minLum && t < 1) { t += 0.1; c = mix(h, "#FFFFFF", t); } return c; }
+function makeDesigns(colors, fonts, custom) {
+  if (Array.isArray(custom) && custom.length) return custom;
+  const serif2 = fonts.head === "Playfair Display" ? "Cormorant Garamond" : "Playfair Display";
+  return [
+    { name: "Классика", layout: "classic" },
+    { name: "Минимализм", layout: "minimal",
+      colors: { main: mix(colors.main, "#000000", 0.25), accent: colors.accent, bg: "#FFFFFF", text: "#161616" },
+      fonts: { head: serif2, body: "Inter" } },
+    { name: "Тёмный", layout: "bold",
+      colors: { main: lighten(colors.accent && lum(colors.accent) > lum(colors.main) ? colors.accent : colors.main, 0.55), accent: colors.main, bg: "#121212", text: "#F4EFEA" },
+      fonts: { head: "Unbounded", body: "Manrope" } }
+  ];
+}
+
 function findNiche(n) {
   const s = String(n || "").trim().toLowerCase();
   if (NICHES[s]) return s;
@@ -121,7 +137,7 @@ function build(cfgPath) {
       logo: asset(cfg.logo, cfgDir, outDir, "logo"),
       city: cfg.city || ""
     },
-    hero: { ...niche.hero, ...(cfg.hero || {}) },
+    hero: { ...niche.hero, ...(cfg.hero || {}), photo: asset(cfg.hero && cfg.hero.photo, cfgDir, outDir, "hero") },
     sections: { ...niche.sections, ...(cfg.about ? { aboutText: cfg.about } : {}), ...(cfg.sections || {}) },
     features: cfg.features || niche.features,
     colors: resolveColors(cfg.colors, niche.colors),
@@ -151,6 +167,9 @@ function build(cfgPath) {
     },
     demo: { banner: cfg.demoBanner !== false, pin: String(cfg.pin || "1234") }
   };
+  site.designs = makeDesigns(site.colors, site.fonts, cfg.designs);
+  site.design = 0;
+  if (cfg.credits) site.credits = cfg.credits;
 
   fs.writeFileSync(path.join(outDir, "data.js"),
     `// Собрано генератором shak.web из ${path.relative(ROOT, path.resolve(cfgPath))}. Правьте настройки и пересобирайте.\nwindow.SITE = ${JSON.stringify(site, null, 2)};\n`);
@@ -177,10 +196,11 @@ function gallery() {
     const slug = cfg.slug || slugify(cfg.name);
     if (!fs.existsSync(path.join(ROOT, "demos", slug, "data.js"))) return null;
     const niche = NICHES[findNiche(cfg.niche)];
-    return { slug, name: cfg.name, niche: niche.label, city: cfg.city || "", colors: resolveColors(cfg.colors, niche.colors), emoji: cfg.items[0].emoji || niche.emoji[0] };
+    const photo = fs.existsSync(path.join(ROOT, "demos", slug, "img", "hero.jpg")) ? slug + "/img/hero.jpg" : "";
+    return { slug, name: cfg.name, niche: niche.label, city: cfg.city || "", colors: resolveColors(cfg.colors, niche.colors), emoji: cfg.items[0].emoji || niche.emoji[0], photo };
   }).filter(Boolean);
   const cards = list.map(d => `      <a class="card" href="${d.slug}/" style="--m:${d.colors.main};--a:${d.colors.accent};--b:${d.colors.bg};--t:${d.colors.text}">
-        <span class="pic">${htmlEsc(d.emoji)}</span>
+        <span class="pic"${d.photo ? ` style="background-image:url('${d.photo}')"` : ""}>${d.photo ? "" : htmlEsc(d.emoji)}</span>
         <strong>${htmlEsc(d.name)}</strong>
         <small>${htmlEsc(d.niche)}${d.city ? ", " + htmlEsc(d.city) : ""}</small>
       </a>`).join("\n");
@@ -198,7 +218,7 @@ function gallery() {
     p { color: #6d6d76; margin: 0 0 28px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .card { display: grid; gap: 4px; padding: 18px; border-radius: 22px; background: var(--b); color: var(--t); text-decoration: none; border: 1px solid rgba(0,0,0,.06); }
-    .pic { height: 120px; border-radius: 16px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, var(--m), var(--a)); margin-bottom: 8px; }
+    .pic { height: 120px; border-radius: 16px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, var(--m), var(--a)) center / cover; margin-bottom: 8px; }
     small { opacity: .7; }
     a.back { color: #1F6BFF; }
   </style>

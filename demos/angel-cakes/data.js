@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/angel-cakes.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-angel-cakes",
-  "rev": "2026-10-23T14:06:17.998Z",
+  "rev": "2026-10-23T14:43:57.220Z",
   "brand": {
     "name": "Angel Cakes",
     "tagline": "Торты ручной работы",
@@ -11,7 +11,8 @@ window.SITE = {
   "hero": {
     "title": "Торт, который запомнят все гости",
     "text": "Собираем торт под ваш праздник: вкус, размер и декор. Бенто, чизкейки, пирожные Павлова и трайфлы.",
-    "cta": "Выбрать торт"
+    "cta": "Выбрать торт",
+    "photo": "img/hero.jpg"
   },
   "sections": {
     "catalogTitle": "Меню",
@@ -54,7 +55,7 @@ window.SITE = {
       "desc": "Маленький торт на 2-3 человек с надписью",
       "price": 850,
       "emoji": "🎂",
-      "photo": "",
+      "photo": "img/item-1.jpg",
       "tag": "Хит"
     },
     {
@@ -63,7 +64,7 @@ window.SITE = {
       "desc": "Нежные бисквиты и сливочный крем",
       "price": 1600,
       "emoji": "🍰",
-      "photo": "",
+      "photo": "img/item-2.jpg",
       "tag": ""
     },
     {
@@ -72,7 +73,7 @@ window.SITE = {
       "desc": "Классический, с ягодным соусом",
       "price": 2550,
       "emoji": "🧀",
-      "photo": "",
+      "photo": "img/item-3.jpg",
       "tag": ""
     },
     {
@@ -81,7 +82,7 @@ window.SITE = {
       "desc": "Хрустящая меренга, крем и ягоды",
       "price": 1000,
       "emoji": "🍓",
-      "photo": "",
+      "photo": "img/item-4.jpg",
       "tag": ""
     },
     {
@@ -90,7 +91,7 @@ window.SITE = {
       "desc": "Десерты в стаканчиках для праздника",
       "price": 1200,
       "emoji": "🍨",
-      "photo": "",
+      "photo": "img/item-5.jpg",
       "tag": ""
     },
     {
@@ -99,7 +100,7 @@ window.SITE = {
       "desc": "Около 1,3 кг, украсим по вашей теме",
       "price": 1500,
       "emoji": "🎉",
-      "photo": "",
+      "photo": "img/item-6.jpg",
       "tag": "На заказ"
     }
   ],
@@ -114,5 +115,41 @@ window.SITE = {
   "demo": {
     "banner": true,
     "pin": "1234"
-  }
+  },
+  "designs": [
+    {
+      "name": "Классика",
+      "layout": "classic"
+    },
+    {
+      "name": "Минимализм",
+      "layout": "minimal",
+      "colors": {
+        "main": "#843853",
+        "accent": "#F4C6D3",
+        "bg": "#FFFFFF",
+        "text": "#161616"
+      },
+      "fonts": {
+        "head": "Playfair Display",
+        "body": "Inter"
+      }
+    },
+    {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#F4C6D3",
+        "accent": "#B04A6F",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    }
+  ],
+  "design": 0,
+  "credits": "Фото: Pexels"
 };

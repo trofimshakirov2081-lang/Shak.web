@@ -5,7 +5,19 @@
   var CART_KEY = S.KEY + ":cart";
   try { cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}"); } catch (e) {}
 
-  S.applyTheme(data);
+  // Варианты дизайна: первый берёт цвета и шрифты из админки, остальные свои
+  var DKEY = S.KEY + ":design";
+  function designs() { return (data.designs && data.designs.length ? data.designs : [{ name: "Классика", layout: "classic" }]).slice(0, 3); }
+  var di = Number(data.design || 0);
+  try { var savedD = localStorage.getItem(DKEY); if (savedD !== null) di = Number(savedD); } catch (e) {}
+  if (!(di >= 0 && di < designs().length)) di = 0;
+  function applyDesign() {
+    var ds = designs()[di];
+    S.applyTheme({ colors: ds.colors || data.colors, fonts: ds.fonts || data.fonts });
+    document.body.setAttribute("data-layout", ds.layout || "classic");
+    var b = document.querySelector("[data-design]");
+    if (b) b.textContent = "Дизайн " + (di + 1) + "/" + designs().length;
+  }
   document.title = data.brand.name + (data.brand.tagline ? " | " + data.brand.tagline : "");
 
   function money(n) { return S.money(n, data.currency); }
@@ -40,7 +52,7 @@
   function render() {
     var d = data;
     document.getElementById("app").innerHTML =
-      (d.demo && d.demo.banner ? '<div class="demo-bar" data-demo><p>Демо от <b>shak.web</b><span class="long">. Цены, тексты и фото владелец меняет сам</span></p><a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>' : '') +
+      (d.demo && d.demo.banner ? '<div class="demo-bar" data-demo><p>Демо от <b>shak.web</b><span class="long">. Цены, тексты и фото владелец меняет сам</span></p>' + (designs().length > 1 ? '<button class="dsw" data-design>Дизайн 1/' + designs().length + '</button>' : '') + '<a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>' : '') +
       '<header class="top" id="top"><div class="wrap">' + logo() +
         '<nav class="nav"><a href="#menu">' + esc(d.sections.catalogTitle) + '</a><a href="#about">' + esc(d.sections.aboutTitle) + '</a><a href="#contacts">Контакты</a></nav>' +
         '<button class="cart-btn" data-open-cart>' + esc(d.sections.cartLabel || "Корзина") + '<b data-count>0</b></button>' +
@@ -62,7 +74,7 @@
       '</div></div></section>' +
       '<section class="about" id="about"><div class="wrap"><div class="box"><h2>' + esc(d.sections.aboutTitle) + '</h2><p>' + esc(d.sections.aboutText) + '</p></div></div></section>' +
       '<section class="contacts" id="contacts"><div class="wrap"><h2>Контакты</h2><div class="grid2">' + contactsHtml() + '</div></div></section>' +
-      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(d.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a> · Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(d.brand.name) + (d.credits ? ' · <small>' + esc(d.credits) + '</small>' : '') + '</span><span><a href="admin.html">Вход для владельца</a> · Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>' +
       '<div class="drawer-bg" data-close-cart></div><aside class="drawer" aria-label="Корзина"><header><h3 style="margin:0">' + esc(d.sections.orderTitle || "Ваш заказ") + '</h3><button data-close-cart aria-label="Закрыть">×</button></header><div class="list" data-list></div>' +
         '<div class="foot"><div class="total"><span>Итого</span><span data-total></span></div>' +
         '<input data-name placeholder="Ваше имя" autocomplete="name"><input data-phone placeholder="Телефон" inputmode="tel" autocomplete="tel"><textarea data-comment rows="2" placeholder="Комментарий: дата, время, надпись на торте"></textarea>' +
@@ -73,7 +85,8 @@
 
   function heroArt() {
     var first = data.items[0] || {};
-    if (first.photo) return '<div class="hero-art">' + pic(first) + '</div>';
+    var hp = (data.hero && data.hero.photo) || first.photo;
+    if (hp) return '<div class="hero-art photo"><img src="' + esc(hp) + '" alt="' + esc(data.brand.name) + '"></div>';
     var orbs = data.items.slice(1, 3).map(function (i, n) { return '<span class="orb o' + (n + 1) + '">' + esc(i.emoji || "") + '</span>'; }).join("");
     return '<div class="hero-art" aria-hidden="true"><span class="main">' + esc(first.emoji || "🍰") + '</span>' + orbs + '</div>';
   }
@@ -134,6 +147,11 @@
     else if (t.hasAttribute("data-open-cart")) document.body.classList.add("open");
     else if (t.hasAttribute("data-close-cart")) document.body.classList.remove("open");
     else if (t.hasAttribute("data-hide-demo")) document.querySelector("[data-demo]").remove();
+    else if (t.hasAttribute("data-design")) {
+      di = (di + 1) % designs().length;
+      try { localStorage.setItem(DKEY, di); } catch (e) {}
+      applyDesign();
+    }
     else if (ds.order) {
       if (!count()) { toast("Добавьте что-нибудь в корзину"); return; }
       var text = orderText();
@@ -148,4 +166,5 @@
   });
 
   render();
+  applyDesign();
 })();

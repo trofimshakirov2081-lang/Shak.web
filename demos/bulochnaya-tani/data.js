@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bulochnaya-tani.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bulochnaya-tani",
-  "rev": "2026-10-23T14:06:18.015Z",
+  "rev": "2026-10-23T14:43:57.241Z",
   "brand": {
     "name": "Булочная Тани",
     "tagline": "Семейная булочная",
@@ -11,7 +11,8 @@ window.SITE = {
   "hero": {
     "title": "Тёплый хлеб и булочки, как дома у бабушки",
     "text": "Таня печёт каждое утро с шести часов. Закажите с вечера, утром заберёте горячим.",
-    "cta": "Смотреть меню"
+    "cta": "Смотреть меню",
+    "photo": "img/hero.jpg"
   },
   "sections": {
     "catalogTitle": "Меню",
@@ -54,7 +55,7 @@ window.SITE = {
       "desc": "Хрустящая корочка, пористый мякиш, 600 г",
       "price": 320,
       "emoji": "🥖",
-      "photo": "",
+      "photo": "img/item-1.jpg",
       "tag": "Хит"
     },
     {
@@ -63,7 +64,7 @@ window.SITE = {
       "desc": "Мягкая булочка со сливочным кремом",
       "price": 190,
       "emoji": "🥐",
-      "photo": "",
+      "photo": "img/item-2.jpg",
       "tag": ""
     },
     {
@@ -72,7 +73,7 @@ window.SITE = {
       "desc": "Тонкое тесто, много начинки",
       "price": 210,
       "emoji": "🥟",
-      "photo": "",
+      "photo": "img/item-3.jpg",
       "tag": ""
     },
     {
@@ -81,7 +82,7 @@ window.SITE = {
       "desc": "Целый торт на 1,2 кг, фирменный рецепт",
       "price": 1900,
       "emoji": "🍯",
-      "photo": "",
+      "photo": "img/item-4.jpg",
       "tag": "Под заказ"
     },
     {
@@ -90,7 +91,7 @@ window.SITE = {
       "desc": "С изюмом и грецким орехом",
       "price": 260,
       "emoji": "🍪",
-      "photo": "",
+      "photo": "img/item-5.jpg",
       "tag": ""
     }
   ],
@@ -105,5 +106,41 @@ window.SITE = {
   "demo": {
     "banner": true,
     "pin": "1234"
-  }
+  },
+  "designs": [
+    {
+      "name": "Классика",
+      "layout": "classic"
+    },
+    {
+      "name": "Минимализм",
+      "layout": "minimal",
+      "colors": {
+        "main": "#50321D",
+        "accent": "#C68E4E",
+        "bg": "#FFFFFF",
+        "text": "#161616"
+      },
+      "fonts": {
+        "head": "Cormorant Garamond",
+        "body": "Inter"
+      }
+    },
+    {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#C68E4E",
+        "accent": "#6B4226",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    }
+  ],
+  "design": 0,
+  "credits": "Фото: Pexels"
 };
