@@ -43,7 +43,7 @@
       (d.demo && d.demo.banner ? '<div class="demo-bar" data-demo><p>Демо от <b>shak.web</b><span class="long">. Цены, тексты и фото владелец меняет сам</span></p><a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>' : '') +
       '<header class="top" id="top"><div class="wrap">' + logo() +
         '<nav class="nav"><a href="#menu">' + esc(d.sections.catalogTitle) + '</a><a href="#about">' + esc(d.sections.aboutTitle) + '</a><a href="#contacts">Контакты</a></nav>' +
-        '<button class="cart-btn" data-open-cart>Корзина<b data-count>0</b></button>' +
+        '<button class="cart-btn" data-open-cart>' + esc(d.sections.cartLabel || "Корзина") + '<b data-count>0</b></button>' +
       '</div></header>' +
       '<section class="hero"><div class="wrap"><div>' +
         (d.brand.tagline ? '<span class="kicker">' + esc(d.brand.tagline) + (d.brand.city ? ' · ' + esc(d.brand.city) : '') + '</span>' : '') +
@@ -57,13 +57,13 @@
         d.items.map(function (i) {
           return '<article class="card"><div class="pic">' + pic(i) + (i.tag ? '<span class="tag">' + esc(i.tag) + '</span>' : '') + '</div>' +
             '<div class="body"><h3>' + esc(i.name) + '</h3><p>' + esc(i.desc) + '</p>' +
-            '<div class="row"><span class="price">' + money(i.price) + '</span><button class="add" data-add="' + esc(i.id) + '">В корзину</button></div></div></article>';
+            '<div class="row"><span class="price">' + money(i.price) + '</span><button class="add" data-add="' + esc(i.id) + '">' + esc(d.sections.addLabel || "В корзину") + '</button></div></div></article>';
         }).join("") +
       '</div></div></section>' +
       '<section class="about" id="about"><div class="wrap"><div class="box"><h2>' + esc(d.sections.aboutTitle) + '</h2><p>' + esc(d.sections.aboutText) + '</p></div></div></section>' +
       '<section class="contacts" id="contacts"><div class="wrap"><h2>Контакты</h2><div class="grid2">' + contactsHtml() + '</div></div></section>' +
       '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(d.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a> · Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>' +
-      '<div class="drawer-bg" data-close-cart></div><aside class="drawer" aria-label="Корзина"><header><h3 style="margin:0">Ваш заказ</h3><button data-close-cart aria-label="Закрыть">×</button></header><div class="list" data-list></div>' +
+      '<div class="drawer-bg" data-close-cart></div><aside class="drawer" aria-label="Корзина"><header><h3 style="margin:0">' + esc(d.sections.orderTitle || "Ваш заказ") + '</h3><button data-close-cart aria-label="Закрыть">×</button></header><div class="list" data-list></div>' +
         '<div class="foot"><div class="total"><span>Итого</span><span data-total></span></div>' +
         '<input data-name placeholder="Ваше имя" autocomplete="name"><input data-phone placeholder="Телефон" inputmode="tel" autocomplete="tel"><textarea data-comment rows="2" placeholder="Комментарий: дата, время, надпись на торте"></textarea>' +
         orderButtons() + '</div></aside>' +
@@ -128,7 +128,7 @@
     if (ds.add) {
       cart[ds.add] = (cart[ds.add] || 0) + 1; updateCart();
       t.classList.add("done"); t.textContent = "Добавлено ✓";
-      setTimeout(function () { t.classList.remove("done"); t.textContent = "В корзину"; }, 1200);
+      setTimeout(function () { t.classList.remove("done"); t.textContent = data.sections.addLabel || "В корзину"; }, 1200);
     } else if (ds.inc) { cart[ds.inc]++; updateCart(); }
     else if (ds.dec) { cart[ds.dec]--; updateCart(); }
     else if (t.hasAttribute("data-open-cart")) document.body.classList.add("open");

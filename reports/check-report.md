@@ -1,17 +1,25 @@
 # Отчёт проверки сайтов
 
-Дата: 23.10.2026, 18:55:09 (Алматы)
+Дата: 23.10.2026, 19:08:12 (Алматы)
 
-Страниц: 19. Ошибок: 1. Замечаний: 15.
+Страниц: 29. Ошибок: 1. Замечаний: 15.
 Внешние ссылки: не проверялись (запустите с --external). Вид на телефоне (390px): проверен, скриншоты в reports/screens/.
 
 ## Проверенные страницы
 
 - ✅ brief-v2/index.html
 - ⚠️ brief/index.html
+- ✅ demos/angel-cakes/admin.html
+- ✅ demos/angel-cakes/index.html
+- ✅ demos/brovi-kazan/admin.html
+- ✅ demos/brovi-kazan/index.html
 - ✅ demos/bulochnaya-tani/admin.html
 - ✅ demos/bulochnaya-tani/index.html
+- ✅ demos/freya/admin.html
+- ✅ demos/freya/index.html
 - ✅ demos/index.html
+- ✅ demos/veranda/admin.html
+- ✅ demos/veranda/index.html
 - ✅ index.html
 - ✅ templates/konditerskaya/admin.html
 - ✅ templates/konditerskaya/index.html
@@ -23,9 +31,11 @@
 - ✅ для-вас/1-как-продаём.html
 - ✅ для-вас/2-цены-и-что-входит.html
 - ✅ для-вас/3-эмирэлд-файлы-на-beget.html
+- ✅ для-вас/4-первые-клиенты.html
 - ✅ для-вас/src/1-как-продаём.html
 - ✅ для-вас/src/2-цены-и-что-входит.html
 - ✅ для-вас/src/3-эмирэлд-файлы-на-beget.html
+- ✅ для-вас/src/4-первые-клиенты.html
 
 ## Что найдено
 
