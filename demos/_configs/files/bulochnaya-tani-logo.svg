@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="58" fill="#C4703F"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#FFF6E9" stroke-width="2" stroke-dasharray="3 5"/>
+  <path d="M30 66c0-15 13-24 30-24s30 9 30 24c0 6-5 9-11 9H41c-6 0-11-3-11-9z" fill="#F6C27A"/>
+  <path d="M42 56c4 4 4 10 1 15M56 52c4 5 4 13 1 19M70 53c4 5 4 12 1 18" stroke="#C4703F" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="60" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#FFF6E9" letter-spacing="1">ТАНЯ</text>
+</svg>
