@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/freya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-freya",
-  "rev": "2026-10-23T14:43:57.251Z",
+  "rev": "2026-10-23T14:59:04.692Z",
   "brand": {
     "name": "FREYA",
     "tagline": "Цветочная мастерская",
@@ -118,6 +118,20 @@ window.SITE = {
   },
   "designs": [
     {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#F5C6D0",
+        "accent": "#8E2340",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    },
+    {
       "name": "Классика",
       "layout": "classic"
     },
@@ -133,20 +147,6 @@ window.SITE = {
       "fonts": {
         "head": "Cormorant Garamond",
         "body": "Inter"
-      }
-    },
-    {
-      "name": "Тёмный",
-      "layout": "bold",
-      "colors": {
-        "main": "#F5C6D0",
-        "accent": "#8E2340",
-        "bg": "#121212",
-        "text": "#F4EFEA"
-      },
-      "fonts": {
-        "head": "Unbounded",
-        "body": "Manrope"
       }
     }
   ],

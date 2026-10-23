@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/brovi-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-brovi-kazan",
-  "rev": "2026-10-23T14:43:57.233Z",
+  "rev": "2026-10-23T14:59:04.361Z",
   "brand": {
     "name": "Брови Ресницы",
     "tagline": "Студия бровей и ресниц",
@@ -112,6 +112,20 @@ window.SITE = {
   },
   "designs": [
     {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#E8CDB5",
+        "accent": "#6B4E3D",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    },
+    {
       "name": "Классика",
       "layout": "classic"
     },
@@ -127,20 +141,6 @@ window.SITE = {
       "fonts": {
         "head": "Playfair Display",
         "body": "Inter"
-      }
-    },
-    {
-      "name": "Тёмный",
-      "layout": "bold",
-      "colors": {
-        "main": "#E8CDB5",
-        "accent": "#6B4E3D",
-        "bg": "#121212",
-        "text": "#F4EFEA"
-      },
-      "fonts": {
-        "head": "Unbounded",
-        "body": "Manrope"
       }
     }
   ],

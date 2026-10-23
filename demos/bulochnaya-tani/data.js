@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bulochnaya-tani.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bulochnaya-tani",
-  "rev": "2026-10-23T14:43:57.241Z",
+  "rev": "2026-10-23T14:59:04.555Z",
   "brand": {
     "name": "Булочная Тани",
     "tagline": "Семейная булочная",
@@ -109,6 +109,20 @@ window.SITE = {
   },
   "designs": [
     {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#C68E4E",
+        "accent": "#6B4226",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    },
+    {
       "name": "Классика",
       "layout": "classic"
     },
@@ -124,20 +138,6 @@ window.SITE = {
       "fonts": {
         "head": "Cormorant Garamond",
         "body": "Inter"
-      }
-    },
-    {
-      "name": "Тёмный",
-      "layout": "bold",
-      "colors": {
-        "main": "#C68E4E",
-        "accent": "#6B4226",
-        "bg": "#121212",
-        "text": "#F4EFEA"
-      },
-      "fonts": {
-        "head": "Unbounded",
-        "body": "Manrope"
       }
     }
   ],

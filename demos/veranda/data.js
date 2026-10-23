@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/veranda.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-veranda",
-  "rev": "2026-10-23T14:43:57.259Z",
+  "rev": "2026-10-23T14:59:05.084Z",
   "brand": {
     "name": "Veranda",
     "tagline": "Цветочная мастерская",
@@ -118,6 +118,20 @@ window.SITE = {
   },
   "designs": [
     {
+      "name": "Тёмный",
+      "layout": "bold",
+      "colors": {
+        "main": "#E9C9B1",
+        "accent": "#3F5E4B",
+        "bg": "#121212",
+        "text": "#F4EFEA"
+      },
+      "fonts": {
+        "head": "Unbounded",
+        "body": "Manrope"
+      }
+    },
+    {
       "name": "Классика",
       "layout": "classic"
     },
@@ -133,20 +147,6 @@ window.SITE = {
       "fonts": {
         "head": "Playfair Display",
         "body": "Inter"
-      }
-    },
-    {
-      "name": "Тёмный",
-      "layout": "bold",
-      "colors": {
-        "main": "#E9C9B1",
-        "accent": "#3F5E4B",
-        "bg": "#121212",
-        "text": "#F4EFEA"
-      },
-      "fonts": {
-        "head": "Unbounded",
-        "body": "Manrope"
       }
     }
   ],

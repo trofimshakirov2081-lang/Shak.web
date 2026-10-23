@@ -67,14 +67,15 @@ function lighten(h, minLum) { let c = h, t = 0; while (lum(c) < minLum && t < 1)
 function makeDesigns(colors, fonts, custom) {
   if (Array.isArray(custom) && custom.length) return custom;
   const serif2 = fonts.head === "Playfair Display" ? "Cormorant Garamond" : "Playfair Display";
+  // Порядок: тёмный первым, затем классика (цвета из админки) и минимализм
   return [
+    { name: "Тёмный", layout: "bold",
+      colors: { main: lighten(colors.accent && lum(colors.accent) > lum(colors.main) ? colors.accent : colors.main, 0.55), accent: colors.main, bg: "#121212", text: "#F4EFEA" },
+      fonts: { head: "Unbounded", body: "Manrope" } },
     { name: "Классика", layout: "classic" },
     { name: "Минимализм", layout: "minimal",
       colors: { main: mix(colors.main, "#000000", 0.25), accent: colors.accent, bg: "#FFFFFF", text: "#161616" },
-      fonts: { head: serif2, body: "Inter" } },
-    { name: "Тёмный", layout: "bold",
-      colors: { main: lighten(colors.accent && lum(colors.accent) > lum(colors.main) ? colors.accent : colors.main, 0.55), accent: colors.main, bg: "#121212", text: "#F4EFEA" },
-      fonts: { head: "Unbounded", body: "Manrope" } }
+      fonts: { head: serif2, body: "Inter" } }
   ];
 }
 
