@@ -1,19 +1,21 @@
 # Отчёт проверки сайтов
 
-Дата: 23.10.2026, 18:45:02 (Алматы)
+Дата: 23.10.2026, 18:54:06 (Алматы)
 
-Страниц: 17. Ошибок: 0. Замечаний: 12.
+Страниц: 19. Ошибок: 2. Замечаний: 15.
 Внешние ссылки: не проверялись (запустите с --external). Вид на телефоне (390px): проверен, скриншоты в reports/screens/.
 
 ## Проверенные страницы
 
-- ✅ brief/index.html
+- ✅ brief-v2/index.html
+- ⚠️ brief/index.html
 - ✅ demos/bulochnaya-tani/admin.html
 - ✅ demos/bulochnaya-tani/index.html
 - ✅ demos/index.html
 - ✅ index.html
 - ✅ templates/konditerskaya/admin.html
 - ✅ templates/konditerskaya/index.html
+- ⚠️ templates/originals/brief/index.html
 - ⚠️ templates/originals/emirald-studiya/index.html
 - ⚠️ templates/originals/malli-botanicals-cvety/index.html
 - ⚠️ templates/originals/summer-konditerskaya/index.html
@@ -46,5 +48,16 @@
 
 - **внимание**: В тексте есть длинное тире, замените на точку, двоеточие или дефис
 - **внимание**: Мелкий текст меньше 12px: 27 элементов
+- **внимание**: На странице видно длинное тире
+
+### brief/index.html
+
+- **ошибка**: На телефоне страница шире экрана (397px при 390px): div.sp, div.sp, div.sp
+- **внимание**: Мелкий текст меньше 12px: 10 элементов
+
+### templates/originals/brief/index.html
+
+- **ошибка**: На телефоне страница шире экрана (397px при 390px): div.sp, div.sp, div.sp
+- **внимание**: Мелкий текст меньше 12px: 10 элементов
 - **внимание**: На странице видно длинное тире
 

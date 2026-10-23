@@ -1,26 +1,1390 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Соберите свой сайт за 10 минут | shak.web</title>
-  <meta name="description" content="Бесплатный бриф: выберите стиль, цвета, шрифты и функции, получите черновик сайта, мини-брендбук, ТЗ и примерную стоимость.">
-  <meta property="og:title" content="Соберите свой сайт за 10 минут">
-  <meta property="og:description" content="Бесплатно и ни к чему не обязывает. Черновик сайта, брендбук и ТЗ в конце.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-  <link rel="stylesheet" href="brief.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бриф на сайт</title>
+<meta name="description" content="Выберите стиль, цвета, шрифты и структуру будущего сайта - ТЗ соберётся автоматически">
+<meta name="theme-color" content="#6d5dfc">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SHAK web">
+<meta property="og:title" content="Соберите свой сайт за 10 минут">
+<meta property="og:description" content="Листайте варианты, выбирайте стиль, цвета и шрифты - увидите свой будущий сайт, а ТЗ само уйдёт дизайнеру.">
+<meta property="og:url" content="https://bespoke-cheesecake-c23dc7.netlify.app/">
+<meta property="og:image" content="https://bespoke-cheesecake-c23dc7.netlify.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236d5dfc'/%3E%3Cstop offset='.5' stop-color='%23b65cf0'/%3E%3Cstop offset='1' stop-color='%23ff7a59'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 22h28M18 32h20M18 42h12' stroke='%23fff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Comfortaa:wght@400;700&family=Exo+2:wght@400;700&family=Jost:wght@400;600;700&family=Lora:wght@500;700&family=Nunito:wght@400;700&family=Prata&family=Raleway:wght@400;700;800&family=Russo+One&family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;600;800&family=Manrope:wght@400;600;800&family=Montserrat:wght@400;600;800&family=Onest:wght@400;600;800&family=Oswald:wght@500;700&family=Playfair+Display:wght@600;800&family=Roboto+Slab:wght@500;700&family=Rubik:wght@400;600&family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --bg:#f6f5f2; --card:#ffffff; --text:#17171a; --muted:#6b6b75; --line:#e4e2dc;
+  --accent:#5b4bff; --accent-soft:#ecebff; --ok:#1f9d6a; --radius:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+  --grad:linear-gradient(120deg,#6d5dfc 0%,#b65cf0 50%,#ff7a59 100%); --blob:.3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121215; --card:#1b1b20; --text:#f1f1f4; --muted:#a0a0ab; --line:#2c2c34;
+    --accent:#8a7dff; --accent-soft:#25223f; --ok:#3ccf91; --shadow:0 8px 24px rgba(0,0,0,.35); --blob:.16;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121215; --card:#1b1b20; --text:#f1f1f4; --muted:#a0a0ab; --line:#2c2c34;
+  --accent:#8a7dff; --accent-soft:#25223f; --ok:#3ccf91; --shadow:0 8px 24px rgba(0,0,0,.35); --blob:.16;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:16px/1.5 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* шапка */
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:12px;letter-spacing:0}
+.progress{flex:1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s}
+.stepnum{font-size:13px;color:var(--muted);white-space:nowrap}
+.theme-btn{border:1px solid var(--line);background:var(--card);border-radius:10px;width:36px;height:36px;cursor:pointer}
+
+/* шаг */
+main{padding:32px 0 120px}
+.step-head h1{font-size:clamp(26px,4vw,38px);line-height:1.15;letter-spacing:-.03em;margin:0 0 8px}
+.step-head p{color:var(--muted);margin:0 0 24px;max-width:680px}
+.section{margin:28px 0}
+.section h3{font-size:17px;margin:0 0 4px}
+.section .hint{color:var(--muted);font-size:14px;margin:0 0 14px}
+
+/* поля */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field label{font-weight:600;font-size:14px}
+.field input,.field textarea,.field select{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:border .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field textarea{min-height:90px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+
+/* чипсы */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:9px 16px;cursor:pointer;font-size:14px;transition:all .15s;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.idk{border-style:dashed}
+.chip.idk.on{background:var(--text);border-color:var(--text);color:var(--bg)}
+
+/* карточки выбора */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px 14px;padding-top:10px}
+.card{position:relative;background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:12px;cursor:pointer;transition:transform .15s,border-color .15s;box-shadow:var(--shadow)}
+.card:hover{transform:translateY(-2px)}
+.card.on{border-color:var(--accent)}
+.card .tick{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:none;place-items:center;font-size:14px;font-weight:800;z-index:2}
+.card.on .tick{display:grid}
+.card .reco{position:absolute;top:-10px;left:12px;z-index:2;background:var(--ok);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;display:none}
+.card.is-reco .reco{display:block}
+.card h4{margin:10px 0 2px;font-size:15px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.card.simple{padding:14px 16px}
+.card.simple h4{margin-top:0}
+
+/* превью стилей */
+.mock{height:150px;border-radius:10px;overflow:hidden;position:relative;padding:12px;display:flex;flex-direction:column;gap:6px}
+.mock .nav{display:flex;justify-content:space-between;align-items:center;font-size:9px;opacity:.85}
+.mock .nav span{display:flex;gap:6px}
+.mock .h{font-size:17px;line-height:1.05;margin-top:8px;max-width:62%}
+.mock .s{font-size:9px;opacity:.7;max-width:55%}
+.mock .b{align-self:flex-start;font-size:9px;padding:5px 10px;margin-top:4px}
+.mock .img{position:absolute;right:12px;bottom:12px;width:34%;height:60%}
+.mock>*:not(.img){position:relative;z-index:1}
+.mock.center{align-items:center;text-align:center}
+.mock.center .nav{align-self:stretch}
+.mock.center .h,.mock.center .s{max-width:85%}
+.mock.center .b{align-self:center}
+.mock.center .img{left:0;right:0;bottom:0;width:100%;height:16%;opacity:.9}
+.mock.full .img{inset:0;width:100%;height:100%}
+.mock.full .img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0))}
+.mock .bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.4fr 1fr;gap:5px;width:38%;height:70%}
+.mock .bento i:first-child{grid-column:1/3}
+
+/* палитры */
+.pal{display:flex;height:70px;border-radius:10px;overflow:hidden}
+.pal i{flex:1}
+
+/* шрифты */
+.fontprev .big{font-size:28px;line-height:1.1;margin:4px 0 6px}
+.fontprev .small{font-size:13px;color:var(--muted)}
+
+/* блоки лендинга */
+.blocks{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.blk{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.blk.on{border-color:var(--accent)}
+.blk .box{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;color:#fff;margin-top:2px}
+.blk.on .box{background:var(--accent);border-color:var(--accent)}
+.blk b{display:block;font-size:14px}
+.blk span{font-size:12.5px;color:var(--muted)}
+.blk .rb{display:inline-block;background:var(--accent-soft);color:var(--accent);font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:1px}
+
+/* помощник */
+.helper{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 24px}
+.helper p{margin:0;flex:1;min-width:220px;font-size:14px}
+.btn{border:0;border-radius:12px;padding:12px 22px;font-weight:700;cursor:pointer;transition:transform .1s,opacity .2s;background:var(--card);border:1px solid var(--line)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.dark{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.sm{padding:8px 14px;font-size:14px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* навигация снизу */
+.bottom{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:10}
+.bottom{padding-bottom:env(safe-area-inset-bottom)}
+.bottom .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;height:72px}
+.bottom .note{font-size:13px;color:var(--muted);text-align:center;flex:1}
+
+/* приветствие */
+/* фон: медленно плывущие цветные пятна */
+.blobs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.blobs i{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(80px);opacity:var(--blob);animation:float 24s ease-in-out infinite alternate}
+.blobs i:nth-child(1){background:#7c6cff;top:-20vmax;left:-14vmax}
+.blobs i:nth-child(2){background:#ff8ac0;top:28%;right:-22vmax;animation-delay:-8s;animation-duration:28s}
+.blobs i:nth-child(3){background:#ffb35c;bottom:-26vmax;left:18%;animation-delay:-15s}
+@keyframes float{50%{transform:translate(6vmax,4vmax) scale(1.08)}100%{transform:translate(-4vmax,-3vmax) scale(.95)}}
+
+/* фирменные акценты */
+.brand,.step-head h1,.wl h1,.modal .mh b{font-family:Unbounded,Manrope,sans-serif}
+.brand{font-weight:700}
+.step-head h1{font-weight:700;letter-spacing:-.02em;font-size:clamp(23px,3.4vw,34px)}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.progress i{background:var(--grad)}
+.btn.primary{background:var(--grad);border:0;color:#fff;box-shadow:0 10px 26px -10px rgba(109,93,252,.75)}
+.btn.primary:hover{transform:translateY(-1px);box-shadow:0 14px 30px -10px rgba(109,93,252,.85)}
+.card.on{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent),var(--shadow)}
+.card{will-change:transform}
+.stage{animation:enter .45s cubic-bezier(.2,.8,.2,1)}
+.just{animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+.shake{animation:shake .4s}
+@keyframes enter{from{opacity:0;transform:translateY(16px)}}
+@keyframes pop{0%{transform:scale(.92)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+@keyframes fade{from{opacity:0}}
+
+/* приветствие */
+.wl{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:12px 0 0}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+.wl h1{font-size:clamp(30px,5vw,54px);line-height:1.05;letter-spacing:-.03em;margin:16px 0 14px;font-weight:800}
+.wl .lead{font-size:17px;color:var(--muted);margin:0 0 22px;max-width:520px}
+.wform{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);max-width:520px}
+.wform .field{margin-bottom:12px}
+.wform .btn{width:100%;padding:15px;font-size:17px}
+.wform small{display:block;color:var(--muted);font-size:12.5px;margin-top:10px;text-align:center}
+.stack{position:relative;height:400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.stack .sp{position:absolute;left:0;right:0;top:56px;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s;box-shadow:0 30px 60px -24px rgba(20,20,50,.45)}
+.stack .sp[data-pos="0"]{transform:rotate(-2deg);z-index:3}
+.stack .sp[data-pos="1"]{transform:translate(26px,-28px) rotate(3deg) scale(.95);z-index:2;opacity:.85}
+.stack .sp[data-pos="2"]{transform:translate(52px,-54px) rotate(7deg) scale(.9);z-index:1;opacity:.55}
+.stack .sp[data-pos="3"]{transform:translate(-80px,60px) rotate(-14deg) scale(.9);opacity:0;z-index:0}
+.stack-hint{text-align:center;font-size:13px;color:var(--muted);margin-top:4px}
+.marquee{overflow:hidden;margin:30px -16px 6px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee div{display:flex;gap:10px;width:max-content;animation:marq 60s linear infinite}
+.marquee span{padding:8px 16px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px;white-space:nowrap}
+@keyframes marq{to{transform:translateX(-50%)}}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0 10px}
+.how div{background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:var(--radius);padding:18px;font-size:14.5px}
+.how b{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;font-size:18px;margin-bottom:12px;font-family:Unbounded}
+
+/* «Ваш сайт» - живое превью по кнопке */
+.peek{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:11;display:flex;align-items:center;gap:8px;padding:11px 18px 11px 14px;border-radius:99px;border:0;background:var(--text);color:var(--bg);font-weight:700;font-size:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.55);cursor:pointer}
+.peek[hidden]{display:none}
+.peek i{width:9px;height:9px;border-radius:50%;background:var(--grad)}
+.peek.pulse{animation:pop .5s}
+.modal{position:fixed;inset:0;z-index:30;background:rgba(10,10,20,.55);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;animation:fade .2s}
+.modal .box{background:var(--card);border-radius:22px;padding:16px;width:min(560px,100%);max-height:90vh;overflow:auto;animation:enter .3s}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.modal .mh b{font-size:16px}
+.modal .nav2{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+.modal .nav2 small{color:var(--muted);text-align:center;font-size:12.5px}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
+.stepnum b{font-weight:600;color:var(--text);margin-right:6px}
+
+/* итог */
+.doc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.doc h2{margin:28px 0 10px;font-size:20px;letter-spacing:-.02em}
+.doc h2:first-child{margin-top:0}
+.doc table{width:100%;border-collapse:collapse;font-size:14.5px}
+.doc td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.doc td:first-child{color:var(--muted);width:38%;padding-right:12px}
+.bb{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bb .sw{display:flex;gap:8px;flex-wrap:wrap}
+.bb .sw{flex-wrap:nowrap!important}
+.bb .sw div{flex:1;min-width:0}
+.bb .sw i{display:block;height:56px;border-radius:12px;border:1px solid var(--line)}
+.bb .sw small{display:block;font-size:11px;color:var(--muted);margin-top:4px;font-family:ui-monospace,monospace}
+.send{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:12px 20px;border-radius:12px;opacity:0;transition:all .25s;pointer-events:none;z-index:20;font-size:14px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.empty{color:var(--muted);font-style:italic}
+
+/* живое превью сайта */
+.sp{border-radius:14px;overflow:hidden;display:flex;flex-direction:column;position:relative;line-height:1.3;border:1px solid rgba(127,127,127,.18)}
+.sp-hero{position:relative;padding:14px 16px 22px;display:flex;flex-direction:column;gap:8px;min-height:210px}
+.sp-hero>*{position:relative;z-index:1}
+.sp-nav{display:flex;justify-content:space-between;align-items:center;font-size:10px;gap:8px;margin-bottom:12px}
+.sp-nav b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.sp-nav span{display:flex;gap:8px;opacity:.75;white-space:nowrap;overflow:hidden}
+.sp-h{font-size:23px;line-height:1.08;max-width:60%;overflow-wrap:anywhere}
+.sp-s{font-size:11px;opacity:.78;max-width:58%}
+.sp-b{align-self:flex-start;padding:8px 14px;font-size:11px;font-weight:700;margin-top:4px}
+.sp-hero>.sp-art{position:absolute;z-index:0;right:16px;top:46px;bottom:22px;width:33%}
+.sp-art.bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.4fr 1fr;gap:6px}
+.sp-art.bento i:first-child{grid-column:1/3}
+.sp.center .sp-hero{align-items:center;text-align:center}
+.sp.center .sp-nav{align-self:stretch}
+.sp.center .sp-h,.sp.center .sp-s{max-width:92%}
+.sp.center .sp-b{align-self:center}
+.sp.full .sp-hero{min-height:240px;color:#fff}
+.sp.full .sp-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.05));z-index:0}
+.sp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px 16px}
+.sp-row div{padding:10px;font-size:10px;min-height:66px;display:flex;flex-direction:column;gap:6px}
+.sp-row i{width:16px;height:16px;border-radius:50%;flex:none}
+.sp-row b{font-weight:600;hyphens:auto;overflow-wrap:break-word}
+.previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.previews figure{margin:0}
+.previews figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* свайп-тест */
+.deck{position:relative;height:430px;max-width:380px;margin:6px auto 0}
+.swc{position:absolute;inset:0;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:12px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;transition:transform .25s ease}
+.swc.drag{transition:none;cursor:grabbing}
+.swc.back{transform:scale(.94) translateY(16px);opacity:.6;pointer-events:none}
+.swc h4{margin:12px 4px 0;font-size:17px}
+.swc p{margin:2px 4px 0;color:var(--muted);font-size:13px}
+.swc .stamp{position:absolute;top:26px;padding:4px 14px;border-radius:10px;font-weight:800;font-size:22px;border:3px solid;opacity:0;z-index:5;background:var(--card)}
+.swc .yes{left:22px;color:var(--ok);transform:rotate(-12deg)}
+.swc .no{right:22px;color:#e5484d;transform:rotate(12deg)}
+.swbtns{display:flex;justify-content:center;align-items:center;gap:22px;margin:22px 0 8px}
+.swbtns button{width:66px;height:66px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:28px;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s}
+.swbtns button:active{transform:scale(.9)}
+.swcount{text-align:center;color:var(--muted);font-size:14px}
+.swb{display:none;gap:18px}
+.bottom.swiping .note{display:none}
+.bottom.swiping .swb{display:flex}
+.swb button{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:24px;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s;color:var(--text)}
+.swb button:active{transform:scale(.9)}
+.bottom.swiping .btn{padding-left:14px;padding-right:14px;font-size:14px;white-space:nowrap}
+.bottom.swiping #prevBtn{width:48px;padding:0}
+.swb{gap:12px}
+.deck{height:min(430px,calc(100svh - 300px));min-height:300px}
+.swc{overflow:hidden}
+.swc.teach{animation:teach 2.4s ease-in-out .6s 2}
+@keyframes teach{15%{transform:translateX(46px) rotate(4deg)}30%{transform:none}45%{transform:translateX(-46px) rotate(-4deg)}60%{transform:none}}
+.sw-hint{position:absolute;z-index:6;left:50%;top:45%;transform:translateX(-50%);background:rgba(18,18,24,.85);color:#fff;font-weight:700;font-size:14px;padding:8px 14px;border-radius:99px;pointer-events:none;animation:hintFade 5.4s forwards}
+@keyframes hintFade{85%{opacity:1}100%{opacity:0}}
+.more-btn{display:block;width:100%;margin-top:12px}
+.price-box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:0 0 24px}
+.price-box .pr-row{display:flex;flex-wrap:wrap;gap:12px 28px}
+.price-box small{display:block;color:var(--muted);font-size:13px}
+.price-box b{font-size:22px}
+.price-box s{color:var(--muted);font-size:14px;margin-left:6px}
+.price-box p{margin:10px 0 0;font-size:14px}
+.pr-more{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+.pr-more summary{cursor:pointer;font-weight:700;padding:6px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.pr-more summary::-webkit-details-marker{display:none}
+.pr-more summary::after{content:"+";color:var(--muted);font-size:20px;line-height:1}
+.pr-more[open] summary::after{content:"−"}
+.pr-more h4{margin:14px 0 4px;font-size:15px}
+.pr-more ul{margin:0;padding-left:20px;font-size:14px}
+.pr-more li{margin:3px 0}
+.pr-more .pr-note{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.swc.teach,.sw-hint{animation:none}}
+.skip{display:block;margin:10px auto 0;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:14px}
+
+/* подсказки к полям */
+.hints{display:flex;flex-wrap:wrap;gap:6px;margin:-6px 0 18px;align-items:center}
+.hints small{color:var(--muted);font-size:12.5px;margin-right:2px}
+.hint-chip{font-size:12.5px;padding:5px 11px;border-radius:99px;background:var(--accent-soft);color:var(--accent);cursor:pointer;border:0}
+
+/* файлы */
+.drop{display:flex;flex-direction:column;align-items:center;gap:4px;border:2px dashed var(--line);border-radius:var(--radius);padding:22px;cursor:pointer;text-align:center;background:var(--card)}
+.drop:hover{border-color:var(--accent)}
+.drop span{font-size:13px;color:var(--muted)}
+.files{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.fl{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px}
+.fl span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fl button{border:0;background:none;cursor:pointer;color:var(--muted);font-size:16px}
+
+/* отправка */
+.sendbox{background:var(--accent-soft);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+.sendbox p{margin:0}
+.sendbox.ok{background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.sendbox .field{margin:10px 0}
+
+@media (max-width:640px){
+  .grid2,.bb{grid-template-columns:1fr}
+  .previews{grid-template-columns:1fr}
+  .top .brand small{display:none}
+  .doc{padding:18px}
+  .doc td:first-child{width:42%}
+  .bottom .note{display:none}
+  .cards{grid-template-columns:1fr 1fr;gap:10px}
+  .mock{height:120px}
+  .mock .h{font-size:13px}
+}
+@media (max-width:820px){
+  .wl{grid-template-columns:1fr;gap:6px}
+  .wl .vis{margin-top:22px}
+  .stack{height:340px;max-width:380px;margin:0 auto;width:100%}
+  .stack .sp{top:50px;left:4px;right:30px}
+  .how{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){ .stepnum b{display:none} }
+@media (max-width:400px){ .cards{grid-template-columns:1fr} }
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+@media print{
+  header.top,.bottom,.send,.no-print,.blobs,.peek{display:none!important}
+  body{background:#fff;color:#000}
+  main{padding:0}
+  .doc{box-shadow:none;border:0;padding:0}
+}
+</style>
 </head>
 <body>
-  <header class="top">
-    <a class="brand" href="../">shak<span>.</span>web</a>
-    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
-    <span class="step-n" id="stepN"></span>
-  </header>
-  <main id="app" class="app"></main>
-  <script src="config.js"></script>
-  <script src="brief.js"></script>
+<div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand" id="brandName">Бриф на сайт<small id="brandSub"></small></div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="stepnum" id="stepnum"></div>
+    <button class="theme-btn" id="themeBtn" title="Тема">◐</button>
+  </div>
+</header>
+
+<main><div class="wrap" id="app"></div></main>
+
+<nav class="bottom" id="bottom">
+  <div class="wrap">
+    <button class="btn" id="prevBtn">← Назад</button>
+    <div class="note" id="note">Ответы сохраняются автоматически</div>
+    <div class="swb" id="swb"><button data-swipe="no" title="Не нравится" aria-label="Не нравится">✕</button><button data-swipe="yes" title="Нравится" aria-label="Нравится" style="color:#e5484d">♥</button></div>
+    <button class="btn primary" id="nextBtn">Дальше →</button>
+  </div>
+</nav>
+
+<button class="peek" id="peek" hidden><i></i>Ваш сайт</button>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   НАСТРОЙКИ - поменяйте под себя
+   ===================================================================== */
+const CONFIG = {
+  designer: 'SHAK web',           // как вас подписать
+  telegram:  'SHAKIROVtrofim',    // ник в Telegram без @ (пусто - кнопка скрыта)
+  instagram: 'shak.web',          // ник в Instagram без @ (пусто - кнопка скрыта)
+  whatsapp:  '',                  // номер 7999... без + (пусто - кнопка скрыта)
+  email:     '',                  // почта (пусто - кнопка скрыта)
+  // бот, который сам присылает вам ТЗ, файлы и ссылку на визуальный бриф
+  botToken:  '8989402727:AAFYfRA3LtQGmcB6UQBl7jK0rNa4t88mFLI',
+  chatId:    '1971837615',        // куда слать (ваш личный чат с ботом)
+};
+
+/* =====================================================================
+   ДАННЫЕ
+   ===================================================================== */
+// Цены shak.web: те же цифры в ЦЕНЫ.md, менять вместе
+const PRICE = { dev: 13000, setup: 2500, briefOff: 1200, fullOff: 3000 };
+const BUDGETS = ['до 13 000 ₽','13 000 - 16 000 ₽','от 16 000 ₽','Не знаю, посоветуйте'];
+const rub = n => n.toLocaleString('ru-RU') + '\u00a0₽';
+
+const NICHES = [
+  {id:'beauty', name:'Красота и уход', styles:['soft','luxury','minimal'], pals:['powder','lavender','mono'], fonts:['lux','soft','classic']},
+  {id:'food', name:'Еда, кафе, доставка', styles:['bright','photo','eco','memphis','retro'], pals:['terra','coffee','energy'], fonts:['bold','soft','poster']},
+  {id:'build', name:'Строительство, ремонт', styles:['corporate','brutal','minimal'], pals:['concrete','ocean','mono'], fonts:['strict','poster','modern']},
+  {id:'med', name:'Медицина, здоровье', styles:['corporate','minimal','soft'], pals:['med','ocean','lavender'], fonts:['modern','digital','strict']},
+  {id:'edu', name:'Обучение, курсы, эксперт', styles:['bright','editorial','tech'], pals:['energy','lavender','neon'], fonts:['bold','modern','classic']},
+  {id:'it', name:'IT, сервис, приложение', styles:['tech','bento','minimal','glass','cyber'], pals:['neon','ocean','mono'], fonts:['digital','bold','modern']},
+  {id:'event', name:'Мероприятия, свадьбы', styles:['editorial','luxury','boho','photo','watercolor'], pals:['gold','powder','terra'], fonts:['lux','classic','soft']},
+  {id:'fit', name:'Спорт и фитнес', styles:['brutal','acid','photo','tech'], pals:['energy','concrete','neon'], fonts:['poster','bold','modern']},
+  {id:'estate', name:'Недвижимость', styles:['luxury','photo','minimal','artdeco','corporate'], pals:['gold','ocean','mono'], fonts:['classic','lux','modern']},
+  {id:'auto', name:'Авто и транспорт', styles:['brutal','tech','corporate'], pals:['concrete','neon','mono'], fonts:['poster','digital','strict']},
+  {id:'kids', name:'Детские товары и услуги', styles:['playful','bright','memphis','soft','watercolor'], pals:['energy','lavender','eco'], fonts:['soft','bold','modern']},
+  {id:'law', name:'Юристы, финансы, B2B', styles:['corporate','classic','minimal','newspaper','swiss'], pals:['ocean','mono','coffee'], fonts:['strict','classic','modern']},
+  {id:'shop', name:'Товары, магазин', styles:['minimal','bright','eco'], pals:['mono','energy','terra'], fonts:['modern','bold','digital']},
+  {id:'craft', name:'Хендмейд, эко, натуральное', styles:['eco','boho','hand','organic','watercolor'], pals:['eco','terra','coffee'], fonts:['lux','soft','classic']},
+  {id:'psy', name:'Психология, коучинг', styles:['soft','organic','scandi','watercolor','japan'], pals:['sage','lavender','peach'], fonts:['book','soft','light']},
+  {id:'travel', name:'Туризм, отдых', styles:['photo','bright','editorial','eco'], pals:['sea','peach','energy'], fonts:['bold','fashion','modern']},
+  {id:'photo', name:'Фото, видео, творчество', styles:['darkmin','editorial','swiss'], pals:['mono','bwred','retro'], fonts:['fashion','light','classic']},
+  {id:'pets', name:'Товары и услуги для животных', styles:['playful','soft','bright'], pals:['peach','mint','energy'], fonts:['soft','hand','bold']},
+  {id:'interior', name:'Интерьер, мебель, дизайн', styles:['scandi','loft','japan','boho','minimal'], pals:['sand','coffee','mono'], fonts:['fashion','light','lux']},
+  {id:'fashion', name:'Одежда, украшения, мода', styles:['editorial','darkmin','luxury'], pals:['bwred','gold','powder'], fonts:['fashion','lux','classic']},
+  {id:'factory', name:'Производство, опт', styles:['corporate','swiss','brutal'], pals:['ocean','electric','concrete'], fonts:['strict','techno','modern']},
+  {id:'clean', name:'Клининг, бытовые услуги', styles:['playful','corporate','minimal'], pals:['mint','med','electric'], fonts:['modern','soft','digital']},
+  {id:'other', name:'Другое', styles:['minimal','corporate','bright'], pals:['mono','ocean','energy'], fonts:['modern','classic','digital']},
+];
+
+// примеры «что вы продаёте» - подсказки на шаге «О проекте»
+const NICHE_EX = {
+  beauty:'Маникюр и педикюр с выездом на дом, от 1500 ₽', food:'Доставка домашней еды за 40 минут', build:'Ремонт квартир под ключ с фиксированной сметой',
+  med:'Частная стоматология: лечение без боли', edu:'Онлайн-курс по английскому для взрослых', it:'Сервис для учёта заказов малого бизнеса',
+  event:'Организация свадеб под ключ', fit:'Персональные тренировки и онлайн-марафоны', estate:'Квартиры в новостройках от застройщика',
+  auto:'Детейлинг и полировка авто', kids:'Развивающие занятия для детей 3–7 лет', law:'Юридическое сопровождение бизнеса',
+  shop:'Интернет-магазин натуральной косметики', craft:'Свечи и керамика ручной работы', psy:'Консультации психолога онлайн',
+  travel:'Авторские туры по Алтаю', photo:'Семейные и love story фотосессии', pets:'Груминг собак и кошек',
+  interior:'Дизайн интерьера квартир', fashion:'Украшения из серебра ручной работы', factory:'Производство металлоконструкций под заказ',
+  clean:'Генеральная уборка квартир и офисов', other:'Опишите свой продукт в одном предложении',
+};
+const USP_EX = ['Опыт более 5 лет','Гарантия результата','Работаем по договору','Фиксированная цена','Сроки прописываем в договоре','Бесплатная консультация','Бесплатный выезд','Своё производство, без посредников','Сертифицированные специалисты','Более 300 довольных клиентов','Отвечаем за 15 минут','Работаем без выходных','Индивидуальный подход','Натуральные материалы','Подарок при первом заказе','Возврат денег, если не понравится'];
+const AUDIENCE_EX = ['Женщины 25–45 лет','Мужчины 30–55 лет','Мамы с детьми','Молодёжь 18–25','Предприниматели','Компании (B2B)','Жители нашего города','Доход выше среднего','Ценят качество, а не цену','Хотят быстро и без хлопот','Ищут недорого','Покупают в подарок'];
+
+const GOALS = ['Получать заявки','Продавать товар','Записывать на услугу','Продать курс / вебинар','Презентовать компанию','Собрать регистрации на событие','Портфолио / визитка','Тест новой идеи (MVP)','Собрать подписчиков / базу','Найти сотрудников','Привлечь партнёров / инвесторов','Продвигаться в поиске','Повысить узнаваемость бренда','Запустить акцию / спецпредложение'];
+
+const STYLES = [
+  {id:'minimal', name:'Минимализм', desc:'Много воздуха, чистая типографика, ничего лишнего',
+    m:{bg:'#ffffff',fg:'#111',ac:'#111',font:'Inter',w:800,r:0,btn:'#111',btnfg:'#fff',img:'#ececec'}},
+  {id:'luxury', name:'Премиум / люкс', desc:'Тёмный фон, золото, засечки - дорого и статусно',
+    m:{bg:'#0e0e0e',fg:'#f3ead7',ac:'#c9a45c',font:'Playfair Display',w:600,r:0,btn:'transparent',btnfg:'#c9a45c',bd:'1px solid #c9a45c',img:'linear-gradient(160deg,#2a2418,#c9a45c55)'}},
+  {id:'bright', name:'Яркий и смелый', desc:'Сочные цвета, крупные шрифты, энергия',
+    m:{bg:'linear-gradient(135deg,#ff3d68,#ffb21c)',fg:'#fff',ac:'#1b1b3a',font:'Unbounded',w:800,r:18,btn:'#1b1b3a',btnfg:'#fff',img:'#ffd23f'}},
+  {id:'corporate', name:'Деловой / корпоративный', desc:'Строго, надёжно, вызывает доверие',
+    m:{bg:'#f4f7fb',fg:'#0b2545',ac:'#134074',font:'Montserrat',w:700,r:6,btn:'#134074',btnfg:'#fff',img:'linear-gradient(160deg,#8da9c4,#134074)'}},
+  {id:'tech', name:'Технологичный', desc:'Тёмная тема, неон, градиенты, стекло',
+    m:{bg:'radial-gradient(circle at 80% 20%,#3a1c8f,#0a0f2c 60%)',fg:'#e0e7ff',ac:'#00e5ff',font:'Onest',w:800,r:10,btn:'linear-gradient(90deg,#7b2ff7,#00e5ff)',btnfg:'#fff',img:'linear-gradient(135deg,#7b2ff799,#00e5ff55)'}},
+  {id:'eco', name:'Натуральный / эко', desc:'Природные оттенки, мягкие формы, тепло',
+    m:{bg:'#f3efe4',fg:'#2d3a2e',ac:'#5b7553',font:'Cormorant Garamond',w:700,r:40,btn:'#5b7553',btnfg:'#fff',img:'#a3b18a'}},
+  {id:'brutal', name:'Брутализм', desc:'Жирные рамки, капслок, контраст - запоминается',
+    m:{bg:'#ffe600',fg:'#000',ac:'#000',font:'Oswald',w:700,r:0,btn:'#000',btnfg:'#ffe600',img:'#000',up:1,bd:'3px solid #000'}},
+  {id:'soft', name:'Нежный / пастельный', desc:'Пастель, округлости, лёгкость и забота',
+    m:{bg:'linear-gradient(160deg,#fbe9f0,#e8e1f7)',fg:'#4a3a5c',ac:'#c08bb0',font:'Comfortaa',w:700,r:22,btn:'#c08bb0',btnfg:'#fff',img:'#ffffffaa'}},
+  {id:'editorial', name:'Журнальный', desc:'Как глянцевый журнал: крупные засечки, фото, колонки',
+    m:{bg:'#f5efe6',fg:'#1a1a1a',ac:'#a0522d',font:'Playfair Display',w:800,r:0,btn:'#1a1a1a',btnfg:'#f5efe6',img:'linear-gradient(160deg,#d9895b,#3d2c2e)'}},
+  {id:'darkmin', name:'Тёмный минимализм', desc:'Чёрный фон, белая типографика, сдержанно и стильно',
+    m:{bg:'#0b0b0c',fg:'#f2f2f2',ac:'#fff',font:'Jost',w:600,r:4,btn:'#f2f2f2',btnfg:'#0b0b0c',img:'#232326'}},
+  {id:'scandi', name:'Скандинавский', desc:'Светло, тепло, натуральные текстуры и простота',
+    m:{bg:'#f7f4ef',fg:'#3b3a36',ac:'#8a9a8c',font:'Raleway',w:700,r:8,btn:'#3b3a36',btnfg:'#f7f4ef',img:'linear-gradient(160deg,#e6dccd,#c9bba5)'}},
+  {id:'retro', name:'Ретро / винтаж', desc:'Тёплые выцветшие цвета, характерные шрифты 70-х',
+    m:{bg:'#f1e4c8',fg:'#5a2e1c',ac:'#d9622b',font:'Prata',w:400,r:30,btn:'#d9622b',btnfg:'#f1e4c8',img:'repeating-linear-gradient(0deg,#d9622b 0 10px,#e9a23b 10px 20px,#4f8a8b 20px 30px)'}},
+  {id:'playful', name:'Игривый / 3D', desc:'Объёмные фигуры, мягкие тени, весело и современно',
+    m:{bg:'#eef3ff',fg:'#1d2b64',ac:'#ff7a59',font:'Nunito',w:700,r:24,btn:'#ff7a59',btnfg:'#fff',img:'radial-gradient(circle at 35% 30%,#ffd1c2,#ff7a59 55%,#c94a2e)'}},
+  {id:'swiss', name:'Швейцарский / сетка', desc:'Строгая сетка, крупные цифры, красный акцент',
+    m:{bg:'#ffffff',fg:'#111',ac:'#e30613',font:'Inter',w:800,r:0,btn:'#e30613',btnfg:'#fff',img:'linear-gradient(90deg,#111 0 33%,#fff 33% 36%,#e30613 36%)'}},
+  {id:'hand', name:'Арт / рукописный', desc:'Иллюстрации, рукописные шрифты, живая авторская подача',
+    m:{bg:'#fffaf0',fg:'#2b2b2b',ac:'#3c7a89',font:'Caveat',w:700,r:14,btn:'#3c7a89',btnfg:'#fff',img:'radial-gradient(circle at 30% 40%,#f6c453 0 22%,transparent 23%),radial-gradient(circle at 70% 65%,#3c7a8988 0 28%,transparent 29%),#f3ead8'}},
+  {id:'glass', name:'Стекло / градиенты', desc:'Полупрозрачные карточки, размытие, переливы цвета',
+    m:{bg:'linear-gradient(135deg,#a1c4fd,#c2e9fb 40%,#fbc2eb)',fg:'#1f2a44',ac:'#5b4bff',font:'Manrope',w:800,r:16,btn:'rgba(255,255,255,.6)',btnfg:'#1f2a44',img:'rgba(255,255,255,.45)'}},
+  {id:'photo', name:'Фото на весь экран', desc:'Большое атмосферное фото, текст поверх - сразу эмоция',
+    m:{lay:'full',bg:'#222',fg:'#fff',ac:'#fff',font:'Montserrat',w:800,r:6,btn:'#fff',btnfg:'#111',img:'linear-gradient(160deg,#3d5a80 0%,#98c1d9 45%,#ee6c4d 100%)'}},
+  {id:'bento', name:'Бенто-сетка', desc:'Аккуратные карточки-плитки, как у Apple',
+    m:{lay:'bento',bg:'#f2f2f7',fg:'#1c1c1e',ac:'#0a84ff',font:'Inter',w:800,r:12,btn:'#1c1c1e',btnfg:'#fff',img:'linear-gradient(135deg,#d1d1d6,#ffffff)',img2:'#ff9f0a'}},
+  {id:'artdeco', name:'Арт-деко', desc:'Геометрия, золото и изумруд - эстетика «Великого Гэтсби»',
+    m:{lay:'center',bg:'#0f2a24',fg:'#f3e7c4',ac:'#d4af37',font:'Prata',w:400,r:0,btn:'transparent',btnfg:'#d4af37',bd:'1px solid #d4af37',img:'repeating-linear-gradient(90deg,#d4af37 0 2px,transparent 2px 10px)'}},
+  {id:'classic', name:'Классика / барокко', desc:'Благородные засечки, орнаменты, традиции',
+    m:{lay:'center',bg:'#fbf8f1',fg:'#3a2a1a',ac:'#8b6b3d',font:'Cormorant Garamond',w:700,r:0,btn:'#3a2a1a',btnfg:'#fbf8f1',img:'linear-gradient(90deg,transparent,#8b6b3d,transparent)'}},
+  {id:'japan', name:'Японский / ваби-саби', desc:'Тишина, пустота, один яркий акцент',
+    m:{lay:'center',bg:'#f4f1ea',fg:'#2b2b2b',ac:'#b33a3a',font:'Prata',w:400,r:0,btn:'#b33a3a',btnfg:'#fff',img:'radial-gradient(circle at 50% 0%,#b33a3a 0 30%,transparent 31%)'}},
+  {id:'newspaper', name:'Газетный', desc:'Как первая полоса газеты: колонки, линии, серьёзный тон',
+    m:{lay:'center',bg:'#f3f0e8',fg:'#111',ac:'#111',font:'Playfair Display',w:800,r:0,btn:'#111',btnfg:'#f3f0e8',img:'repeating-linear-gradient(0deg,#111 0 1px,transparent 1px 5px)'}},
+  {id:'y2k', name:'Y2K / нулевые', desc:'Хром, переливы, блёстки - дерзко и молодо',
+    m:{bg:'linear-gradient(135deg,#e0e0e0,#f7c6ff 40%,#b5f1ff 75%,#e0e0e0)',fg:'#2a0a4a',ac:'#ff2fb2',font:'Unbounded',w:800,r:30,btn:'#2a0a4a',btnfg:'#fff',img:'radial-gradient(circle at 30% 30%,#fff,#c0c0d8 40%,#7a7a9a)'}},
+  {id:'memphis', name:'Мемфис', desc:'Геометрические фигуры, горошек, зигзаги - весело и смело',
+    m:{bg:'radial-gradient(#1b1b3a 1.2px,transparent 1.5px) 0 0/12px 12px,#fff7e8',fg:'#1b1b3a',ac:'#ff3d68',font:'Rubik',w:600,r:0,btn:'#ff3d68',btnfg:'#fff',img:'repeating-linear-gradient(45deg,#3bceac 0 6px,#ffd23f 6px 12px)'}},
+  {id:'cyber', name:'Киберпанк', desc:'Неоновый розовый и бирюзовый на чёрном, глитч',
+    m:{bg:'linear-gradient(180deg,#0d0221,#241734)',fg:'#f8f8f2',ac:'#ff2a6d',font:'Russo One',w:400,r:0,btn:'#05d9e8',btnfg:'#0d0221',img:'linear-gradient(135deg,#ff2a6d,#05d9e8)',up:1}},
+  {id:'pixel', name:'Пиксель / ретро-игры', desc:'8-бит, пиксели, ностальгия по приставкам',
+    m:{bg:'#1a1c2c',fg:'#f4f4f4',ac:'#ffcd75',font:'Russo One',w:400,r:0,btn:'#38b764',btnfg:'#1a1c2c',img:'repeating-conic-gradient(#ffcd75 0 25%,#ef7d57 0 50%) 0 0/12px 12px'}},
+  {id:'acid', name:'Кислотный', desc:'Лайм, чёрный, огромные буквы - невозможно не заметить',
+    m:{bg:'#c6f432',fg:'#111',ac:'#111',font:'Unbounded',w:800,r:40,btn:'#111',btnfg:'#c6f432',img:'#111',up:1}},
+  {id:'duotone', name:'Дуотон', desc:'Два контрастных цвета на всё - графично и модно',
+    m:{bg:'#2d00f7',fg:'#f2ff00',ac:'#f2ff00',font:'Jost',w:700,r:0,btn:'#f2ff00',btnfg:'#2d00f7',img:'linear-gradient(160deg,#f2ff00,#2d00f7)'}},
+  {id:'loft', name:'Лофт / индустриальный', desc:'Бетон, металл, кирпич, тёплый свет',
+    m:{bg:'linear-gradient(180deg,#2b2b2b,#3a3633)',fg:'#eee',ac:'#e0a96d',font:'Oswald',w:700,r:2,btn:'#e0a96d',btnfg:'#1e1e1e',img:'repeating-linear-gradient(0deg,#8a4b38 0 7px,#5c3226 7px 8px)',up:1}},
+  {id:'boho', name:'Бохо', desc:'Арки, терракота, сухоцветы - тепло и уютно',
+    m:{bg:'#efe2d0',fg:'#5c4033',ac:'#c1734b',font:'Lora',w:700,r:60,btn:'#c1734b',btnfg:'#fff',img:'linear-gradient(180deg,#d9a07b,#c1734b)'}},
+  {id:'cosmic', name:'Космос', desc:'Звёзды, планеты, глубина - масштабно и мечтательно',
+    m:{lay:'full',bg:'#05010f',fg:'#fff',ac:'#b69cff',font:'Exo 2',w:700,r:20,btn:'#b69cff',btnfg:'#05010f',img:'radial-gradient(circle at 78% 60%,#ff9a62 0 12%,#7b2ff7 13%,transparent 30%),radial-gradient(#fff 1px,transparent 1.5px) 0 0/14px 14px,radial-gradient(circle at 70% 30%,#2a1a5e,#05010f 70%)'}},
+  {id:'watercolor', name:'Акварель', desc:'Мягкие размытые пятна цвета, нежно и художественно',
+    m:{bg:'radial-gradient(circle at 15% 85%,#ffd6e0 0,transparent 35%),radial-gradient(circle at 90% 10%,#c9e4ff 0,transparent 40%),#fffdf9',fg:'#3d3a4a',ac:'#e07a9b',font:'Lora',w:700,r:50,btn:'#e07a9b',btnfg:'#fff',img:'radial-gradient(circle at 40% 40%,#b8e0d2,#d6eadf00 70%),radial-gradient(circle at 70% 70%,#f6c6ea,#f6c6ea00 60%)'}},
+  {id:'organic', name:'Органика / плавные формы', desc:'Волны, капли, никаких острых углов',
+    m:{bg:'#fdf6ec',fg:'#2f4f4f',ac:'#e07a5f',font:'Nunito',w:800,r:60,btn:'#2f4f4f',btnfg:'#fff',img:'linear-gradient(135deg,#81b29a,#f2cc8f)'}},
+];
+
+const PALETTES = [
+  {id:'mono', name:'Чистый монохром', c:['#111111','#444444','#9a9a9a','#ececec','#ffffff']},
+  {id:'gold', name:'Ночное золото', c:['#0e0e0e','#1c1c1c','#c9a45c','#e8d9b5','#f7f3ea']},
+  {id:'ocean', name:'Глубокий океан', c:['#0b2545','#13315c','#134074','#8da9c4','#eef4ed']},
+  {id:'eco', name:'Зелень и лён', c:['#2d3a2e','#5b7553','#a3b18a','#e9e5d6','#faf8f2']},
+  {id:'powder', name:'Пудра', c:['#6b4f4f','#c08b8b','#e8c4c4','#f6e7e7','#fffafa']},
+  {id:'energy', name:'Энергия', c:['#ff3d68','#ff9f1c','#ffd23f','#3bceac','#1b1b3a']},
+  {id:'neon', name:'Неон tech', c:['#0a0f2c','#1f2b6c','#7b2ff7','#00e5ff','#e0e7ff']},
+  {id:'terra', name:'Терракота', c:['#3d2c2e','#a0522d','#d9895b','#f2d0a9','#fbf3e9']},
+  {id:'med', name:'Свежесть / медицина', c:['#0f4c5c','#2a9d8f','#8ecae6','#e0f2f1','#ffffff']},
+  {id:'lavender', name:'Лаванда', c:['#3c2a4d','#7e6bb3','#b8a9e3','#e8e1f7','#fbf9ff']},
+  {id:'coffee', name:'Кофе с молоком', c:['#2b1d14','#6f4e37','#b08968','#ddb892','#f5ebe0']},
+  {id:'concrete', name:'Бетон + оранжевый', c:['#1e1e1e','#4a4a4a','#d4d4d4','#f2f2f2','#ff5a1f']},
+  {id:'mint', name:'Мята', c:['#16423c','#3aa58e','#8fd9c4','#dff5ee','#ffffff']},
+  {id:'wine', name:'Бордо', c:['#2a0a12','#6d1a2f','#a8324a','#e8c8ce','#faf3f4']},
+  {id:'sea', name:'Песок и море', c:['#05445e','#189ab4','#75e6da','#f4e3c1','#fffaf0']},
+  {id:'retro', name:'Ретро 70-х', c:['#5a2e1c','#d9622b','#e9a23b','#4f8a8b','#f1e4c8']},
+  {id:'night', name:'Ночное небо', c:['#0d1b2a','#1b263b','#415a77','#778da9','#e0e1dd']},
+  {id:'peach', name:'Персик', c:['#5c3d2e','#f28c6b','#ffb997','#ffe3d3','#fff8f3']},
+  {id:'sakura', name:'Сакура', c:['#3a2e39','#e56b8a','#f4a6b8','#fbe0e7','#ffffff']},
+  {id:'sage', name:'Шалфей', c:['#2f3e36','#6b8f71','#aac0aa','#e6ede4','#fbfcf8']},
+  {id:'bwred', name:'Чёрный, белый, красный', c:['#000000','#1a1a1a','#e30613','#f0f0f0','#ffffff']},
+  {id:'electric', name:'Электрик', c:['#001233','#0353a4','#2f80ed','#cfe2ff','#ffffff']},
+  {id:'sand', name:'Песочный беж', c:['#3b3a36','#8c7b6b','#c9bba5','#e6dccd','#f7f4ef']},
+  {id:'lime', name:'Лайм и графит', c:['#1c1c1c','#333333','#c6f432','#eeeeee','#ffffff']},
+];
+
+const FONTS = [
+  {id:'classic', name:'Классика', h:'Playfair Display', b:'Inter', hw:800, desc:'Элегантно и солидно'},
+  {id:'modern', name:'Современный гротеск', h:'Montserrat', b:'Inter', hw:800, desc:'Универсально и чисто'},
+  {id:'bold', name:'Дерзкий акцент', h:'Unbounded', b:'Manrope', hw:800, desc:'Заметно, молодо, смело'},
+  {id:'lux', name:'Утончённая роскошь', h:'Cormorant Garamond', b:'Montserrat', hw:700, desc:'Изысканно, для премиума'},
+  {id:'strict', name:'Строгий и надёжный', h:'Roboto Slab', b:'Rubik', hw:700, desc:'Основательно, по-деловому'},
+  {id:'soft', name:'Мягкий и дружелюбный', h:'Comfortaa', b:'Rubik', hw:700, desc:'Тепло, по-домашнему'},
+  {id:'poster', name:'Плакатный', h:'Oswald', b:'Inter', hw:700, desc:'Крупно, мощно, спортивно', up:1},
+  {id:'digital', name:'Нейтральный digital', h:'Onest', b:'Onest', hw:800, desc:'Как у сервисов и приложений'},
+  {id:'book', name:'Книжный и тёплый', h:'Lora', b:'Nunito', hw:700, desc:'Уютно, вызывает доверие'},
+  {id:'light', name:'Лёгкая геометрия', h:'Raleway', b:'Raleway', hw:800, desc:'Воздушно и аккуратно'},
+  {id:'fashion', name:'Модный журнал', h:'Prata', b:'Jost', hw:400, desc:'Как в глянце: мода, интерьер, фото'},
+  {id:'techno', name:'Техно / авто', h:'Russo One', b:'Exo 2', hw:400, desc:'Скорость, техника, мощь'},
+  {id:'hand', name:'Рукописный', h:'Caveat', b:'Nunito', hw:700, desc:'Лично, живо, по-авторски'},
+  {id:'scandi', name:'Скандинавский', h:'Jost', b:'Jost', hw:700, desc:'Просто, современно, дружелюбно'},
+];
+
+const BLOCKS = [
+  {id:'hero', name:'Первый экран', d:'Оффер, главная выгода и кнопка', must:1},
+  {id:'pain', name:'Боли клиента', d:'«Узнаёте себя?» - проблемы, которые вы решаете'},
+  {id:'benefits', name:'Преимущества', d:'Почему выбирают вас'},
+  {id:'services', name:'Услуги / товары', d:'Что именно вы предлагаете'},
+  {id:'prices', name:'Цены / тарифы', d:'Пакеты и стоимость'},
+  {id:'cases', name:'Кейсы / портфолио', d:'Примеры работ, до/после'},
+  {id:'steps', name:'Как мы работаем', d:'Этапы от заявки до результата'},
+  {id:'about', name:'О компании / эксперте', d:'История, фото, ценности'},
+  {id:'team', name:'Команда', d:'Лица специалистов'},
+  {id:'reviews', name:'Отзывы', d:'Текст, скриншоты или видео'},
+  {id:'video', name:'Видео', d:'Ролик о продукте или эксперте'},
+  {id:'quiz', name:'Квиз', d:'Опрос с подарком в обмен на контакт'},
+  {id:'calc', name:'Калькулятор', d:'Клиент сам считает стоимость'},
+  {id:'lead', name:'Лид-магнит', d:'Бесплатный гайд / скидка за контакт'},
+  {id:'guarantee', name:'Гарантии', d:'Договор, возврат денег, сроки'},
+  {id:'certs', name:'Сертификаты, награды', d:'Подтверждение экспертности'},
+  {id:'clients', name:'Логотипы клиентов', d:'Кто уже с вами работает'},
+  {id:'faq', name:'Вопросы и ответы', d:'Снимаем возражения'},
+  {id:'numbers', name:'Цифры и результаты', d:'Лет опыта, клиентов, проектов'},
+  {id:'beforeafter', name:'До / после', d:'Наглядный результат работы'},
+  {id:'gallery', name:'Галерея', d:'Фото продукта, процесса, места'},
+  {id:'compare', name:'Сравнение', d:'Мы vs другие / тарифы рядом'},
+  {id:'promo', name:'Акция / спецпредложение', d:'Скидка, подарок, ограниченное время'},
+  {id:'timer', name:'Таймер', d:'Обратный отсчёт до конца акции или старта'},
+  {id:'program', name:'Программа', d:'Программа курса / мероприятия'},
+  {id:'speakers', name:'Спикеры', d:'Кто выступает или ведёт'},
+  {id:'bonuses', name:'Бонусы', d:'Что клиент получит в подарок'},
+  {id:'forwhom', name:'Для кого', d:'Кому подойдёт, а кому нет'},
+  {id:'social', name:'Соцсети', d:'Лента или ссылки на Instagram, Telegram, VK'},
+  {id:'blog', name:'Полезные статьи', d:'Советы и материалы от вас'},
+  {id:'form', name:'Форма заявки', d:'Финальный призыв к действию', must:1},
+  {id:'contacts', name:'Контакты и карта', d:'Адрес, телефон, мессенджеры, соцсети'},
+];
+const GOAL_BLOCKS = {
+  'Получать заявки':['benefits','services','cases','reviews','steps','faq','quiz'],
+  'Продавать товар':['benefits','services','prices','reviews','guarantee','faq'],
+  'Записывать на услугу':['services','prices','team','reviews','faq','contacts'],
+  'Продать курс / вебинар':['pain','forwhom','program','about','bonuses','prices','reviews','guarantee','faq'],
+  'Презентовать компанию':['about','services','cases','clients','team','contacts'],
+  'Собрать регистрации на событие':['benefits','program','speakers','timer','gallery','reviews','faq'],
+  'Портфолио / визитка':['about','cases','services','reviews','contacts'],
+  'Тест новой идеи (MVP)':['pain','benefits','lead'],
+  'Собрать подписчиков / базу':['benefits','lead','social','reviews'],
+  'Найти сотрудников':['about','team','numbers','gallery','faq'],
+  'Привлечь партнёров / инвесторов':['about','numbers','cases','clients','team','steps'],
+  'Продвигаться в поиске':['services','blog','faq','contacts'],
+  'Повысить узнаваемость бренда':['about','gallery','numbers','social','reviews'],
+  'Запустить акцию / спецпредложение':['promo','timer','benefits','bonuses','reviews','faq'],
+};
+
+const FEATURES = ['Форма заявки','Квиз','Онлайн-оплата','Онлайн-запись / календарь','Калькулятор стоимости','Заявки в Telegram','Интеграция с CRM (amoCRM, Bitrix24)','Кнопки мессенджеров','Чат-бот / онлайн-чат','Карта','Яндекс.Метрика / аналитика','SEO-настройка','Анимации и эффекты','Видео на фоне','Слайдеры и галереи','Тёмная тема','Несколько языков','Блог / статьи','Каталог с фильтрами','Корзина','Промокоды','Поп-ап со скидкой','Таймер акции','Подписка на рассылку','Отзывы с Яндекс Карт / 2ГИС','Личный кабинет','Поиск по сайту','Версия для слабовидящих','Политика конфиденциальности и cookie'];
+const MOODS = ['Дорого','Надёжно','Дружелюбно','Дерзко','Уютно','Современно','Экспертно','Весело','Спокойно','Стильно','Просто и понятно','Вдохновляюще','Заботливо','Эксклюзивно','Динамично','Честно','Минималистично','Роскошно','Молодёжно','Женственно','Мужественно','Традиционно','Креативно','Тепло','Технологично','Природно','Нежно','Смело','Солидно','Легко'];
+const TONES = ['На «вы», официально','На «вы», но тепло','На «ты», по-дружески','С юмором','Коротко и по делу','Вдохновляюще','Простым языком, без терминов','Экспертно, с терминами','Эмоционально, через истории','Дерзко, с провокацией','Заботливо и мягко'];
+const BB_ITEMS = ['Логотип','Цветовая палитра','Шрифты','Фирменный паттерн / графика','Иконки','Иллюстрации','Фирменный персонаж / маскот','Фавикон (иконка сайта)','Визитки','Шаблоны для соцсетей','Аватарки и обложки','Стикеры','Презентация компании','Email-подпись','Бланки, документы','Вывеска / наружная реклама','Мерч / упаковка','Полноценный брендбук (гайд)'];
+const PRIORITIES = ['Быстрая загрузка','Идеально на телефоне','Вау-дизайн','Простота и понятность','Много заявок','Хорошо находиться в поиске','Легко самому менять тексты','Запуск как можно быстрее'];
+
+/* =====================================================================
+   ШАГИ
+   ===================================================================== */
+const STEPS = [
+  {id:'welcome', title:'Привет!'},
+  {id:'about', title:'О проекте'},
+  {id:'taste', title:'Тест вкуса'},
+  {id:'style', title:'Стиль'},
+  {id:'colors', title:'Цвета'},
+  {id:'fonts', title:'Шрифты'},
+  {id:'mood', title:'Настроение и бренд'},
+  {id:'structure', title:'Структура лендинга'},
+  {id:'features', title:'Функции и контент'},
+  {id:'terms', title:'Сроки и пожелания'},
+  {id:'result', title:'Готовое ТЗ'},
+];
+
+/* =====================================================================
+   СОСТОЯНИЕ
+   ===================================================================== */
+const KEY = 'site-brief-v2';
+const blank = () => ({step:0, a:{
+  name:'', company:'', contact:'', niches:[], nicheOther:'', product:'', audience:'', competitors:'', goals:[], usp:'',
+  deck:[], swipeIdx:0, liked:[], disliked:[],
+  styles:[], styleIdk:false, likeSites:'', dislike:'',
+  palettes:[], palIdk:false, brandColors:'', avoidColors:'',
+  fonts:[], fontIdk:false,
+  moods:[], tone:[], logo:[], bb:[],
+  blocks:['hero','form'], blocksIdk:false, blocksExtra:'',
+  features:[], texts:[], photos:[], domain:[],
+  deadline:[], priorities:[], comment:'', budget:'', from:''
+}});
+let S = blank();
+// ?#brief=... - режим просмотра присланного брифа (только чтение, ничего не сохраняем)
+const VIEW = /^#brief=/.test(location.hash);
+const FILES = [];           // прикреплённые файлы живут только в памяти вкладки
+let SENDING = false, SEND_ERR = false;
+const MORE = {styles:false, palettes:false, fonts:false};
+const SHORT = {styles:10, palettes:9, fonts:8};
+// сначала подходящие для сферы и уже выбранные, остальное по кнопке «Показать ещё»
+function shortList(key, all, rec){
+  const ids = all.map(x => x.id);
+  const order = [...new Set(rec.filter(id => ids.includes(id)).concat(A[key], ids))];
+  const shown = MORE[key] ? order : [...new Set(order.slice(0, SHORT[key]).concat(A[key]))];
+  const rest = order.length - shown.length;
+  return {items: shown.map(id => all.find(x => x.id === id)), more: rest > 0 ? `<button class="btn more-btn" data-more="${key}">Показать ещё ${rest}</button>` : ''};
+}
+let ANIM = true, JUST = null, STACK_T = null, PV = 0, SAMPLE = '';
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!VIEW) try{
+  const raw = localStorage.getItem(KEY);
+  if(raw){
+    const p = JSON.parse(raw), b = blank().a;
+    S = Object.assign(blank(), p, {a:Object.assign(b, p.a||{})});
+    for(const k in b) if(Array.isArray(b[k]) && !Array.isArray(S.a[k])) S.a[k] = b[k];
+  }
+}catch(e){}
+// префилл из ссылки: index.html?name=Анна&niche=beauty
+try{
+  const q = new URLSearchParams(location.search);
+  if(q.get('name') && !S.a.name) S.a.name = q.get('name');
+  // метка ролика: brief/?from=ikea попадает в ТЗ
+  if(/^[\w-]{1,40}$/.test(q.get('from') || '')) S.a.from = q.get('from');
+  if(q.get('niche') && !S.a.niches.length) S.a.niches = q.get('niche').split(',').filter(id => NICHES.some(n => n.id === id));
+}catch(e){}
+const save = () => { if(VIEW) return; try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
+
+const A = S.a;
+const $ = s => document.querySelector(s);
+const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// рекомендации по всем выбранным нишам (по очереди берём лучшие варианты каждой)
+const niche = () => {
+  const ns = A.niches.map(id => NICHES.find(n => n.id === id)).filter(Boolean);
+  if(!ns.length) ns.push(NICHES.find(n => n.id === 'other'));
+  const mix = key => [...new Set([0,1,2].flatMap(i => ns.map(n => n[key][i])))];
+  return {styles:mix('styles'), pals:mix('pals'), fonts:mix('fonts')};
+};
+const toggle = (arr, v) => { const i = arr.indexOf(v); if(i > -1) arr.splice(i,1); else arr.push(v); };
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 2200); }
+
+/* =====================================================================
+   РЕНДЕР ШАГОВ
+   ===================================================================== */
+function head(title, text){ return `<div class="step-head"><h1>${title}</h1><p>${text}</p></div>`; }
+function helper(text, action){ return `<div class="helper"><p>🤔 ${text}</p><button class="btn primary sm" data-auto="${action}">Подобрать за меня</button></div>`; }
+function input(key, label, ph='', type='text'){ return `<div class="field"><label>${label}</label><input type="${type}" data-k="${key}" value="${esc(A[key])}" placeholder="${esc(ph)}"></div>`; }
+function area(key, label, ph=''){ return `<div class="field"><label>${label}</label><textarea data-k="${key}" placeholder="${esc(ph)}">${esc(A[key])}</textarea></div>`; }
+function chips(key, list, multi=true, idk=false){
+  const val = A[key];
+  return `<div class="chips">${list.map(v => {
+    const on = multi ? val.includes(v) : val === v;
+    return `<div class="chip ${on?'on':''}" data-chip="${key}" data-multi="${multi?1:0}" data-v="${esc(v)}">${esc(v)}</div>`;
+  }).join('')}${idk ? `<div class="chip idk ${(multi?val.includes('Не знаю'):val==='Не знаю')?'on':''}" data-chip="${key}" data-multi="${multi?1:0}" data-v="Не знаю">Не знаю - посоветуйте</div>` : ''}</div>`;
+}
+function hints(key, list){
+  return `<div class="hints"><small>Нажмите, чтобы добавить:</small>${list.map(v => `<button class="hint-chip" data-hint="${key}" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>`;
+}
+function sec(title, hint, body){ return `<div class="section"><h3>${title}</h3>${hint?`<p class="hint">${hint}</p>`:''}${body}</div>`; }
+
+function mockHTML(m){
+  const tt = m.up ? 'text-transform:uppercase;letter-spacing:.02em;' : '';
+  const art = m.lay === 'bento'
+    ? `<div class="img bento"><i style="background:${m.img};border-radius:${m.r}px"></i><i style="background:${m.ac};border-radius:${m.r}px"></i><i style="background:${m.img2||m.ac};border-radius:${m.r}px;opacity:.6"></i></div>`
+    : `<div class="img" style="background:${m.img};border-radius:${m.lay==='full'?0:m.r}px;${m.bd&&m.up?'border:'+m.bd+';':''}"></div>`;
+  return `<div class="mock ${m.lay||''}" style="background:${m.bg};color:${m.fg};font-family:'${m.font}',sans-serif;${m.bd&&m.up?'border:'+m.bd+';':''}">${art}
+    <div class="nav"><b style="color:${m.ac}">LOGO</b><span><i>Услуги</i><i>Цены</i><i>Контакты</i></span></div>
+    <div class="h" style="font-weight:${m.w};${tt}">Ваш сайт, который продаёт</div>
+    <div class="s">Короткий подзаголовок про главную выгоду для клиента</div>
+    <div class="b" style="background:${m.btn};color:${m.btnfg};border-radius:${m.r}px;${m.bd?'border:'+m.bd+';':''}${tt}">Оставить заявку</div>
+  </div>`;
+}
+
+/* ---------- живое превью сайта из выбранных стиля, палитры и шрифта ---------- */
+const rgb = h => { h = h.replace('#',''); if(h.length === 3) h = h.replace(/./g,'$&$&'); const n = parseInt(h.slice(0,6),16); return [n>>16&255, n>>8&255, n&255]; };
+const lum = h => { const [r,g,b] = rgb(h); return (.299*r + .587*g + .114*b) / 255; };
+const sat = h => { const c = rgb(h); return (Math.max(...c) - Math.min(...c)) / 255; };
+const darkStyle = m => { const hex = (m.bg.match(/#[0-9a-f]{6}|#[0-9a-f]{3}\b/i)||['#fff'])[0]; return lum(hex) < .45; };
+const ctaText = () => {
+  const g = A.goals.join(' ');
+  if(/Записывать/.test(g)) return 'Записаться';
+  if(/Продавать товар/.test(g)) return 'Выбрать товар';
+  if(/курс/.test(g)) return 'Записаться на курс';
+  if(/событие/.test(g)) return 'Зарегистрироваться';
+  if(/подписчиков/.test(g)) return 'Подписаться';
+  if(/сотрудников/.test(g)) return 'Откликнуться';
+  return 'Оставить заявку';
+};
+const cut = (t, n) => { t = String(t||'').trim().split('\n')[0]; return t.length > n ? t.slice(0, n-1).trim() + '…' : t; };
+function sitePreview(styleId, palId, fontId, generic){
+  const st = STYLES.find(x => x.id === styleId) || STYLES[0], m = st.m;
+  const pal = PALETTES.find(x => x.id === palId), f = FONTS.find(x => x.id === fontId);
+  let bg = m.bg, fg = m.fg, ac = m.ac, btn = m.btn, btnfg = m.btnfg, art = m.img, card = 'rgba(127,127,127,.12)', bd = m.bd || '';
+  if(pal){
+    const c = [...pal.c].sort((a,b) => lum(a) - lum(b));
+    const mid = c.slice(1,4).sort((a,b) => sat(b) - sat(a))[0];
+    const accent = sat(mid) > .25 ? mid : (sat(c[4]) > .25 ? c[4] : sat(c[0]) > .25 ? c[0] : mid);
+    if(darkStyle(m)){ bg = c[0]; fg = c[4]; card = c[1]; ac = accent; btn = lum(accent) > .2 ? accent : c[4]; }
+    else { bg = c[4]; fg = c[0]; card = c[3]; ac = accent; btn = lum(accent) < .75 ? accent : c[0]; }
+    btnfg = lum(btn) > .6 ? c[0] : '#fff';
+    art = `linear-gradient(135deg,${ac},${c[2]})`;
+    bd = bd ? `1px solid ${ac}` : '';
+    if(btn === 'transparent') btn = ac;
+  }
+  const fh = f ? f.h : m.font, fb = f ? f.b : m.font, hw = f ? f.hw : m.w, up = f ? f.up : m.up;
+  const tt = up ? 'text-transform:uppercase;' : '';
+  const lay = m.lay || '';
+  const logo = esc(cut(A.company, 18) || 'LOGO');
+  const title = esc(generic ? (A.company ? cut(A.company, 30) : 'Ваш сайт, который продаёт') : (cut(A.product, 60) || cut(A.company, 30) || 'Ваш сайт, который продаёт'));
+  const sub = esc(generic ? 'Коротко о главной выгоде для клиента' : (cut(A.usp, 90) || 'Коротко о главной выгоде для клиента'));
+  const nav = (A.blocks.length > 3 ? BLOCKS.filter(b => A.blocks.includes(b.id) && !b.must).slice(0,3).map(b => b.name.split(/[ /,]/)[0]) : ['Услуги','О нас','Контакты']).map(x => `<i>${esc(x)}</i>`).join('');
+  const parts = (A.usp || '').split(/[,;\n]+/).map(x => x.trim()).filter(Boolean);
+  const ben = (parts.length >= 2 && !generic ? parts : ['Опыт и гарантия','Быстро и удобно','Честные условия']).slice(0,3);
+  const artHTML = lay === 'bento'
+    ? `<div class="sp-art bento"><i style="background:${art};border-radius:${m.r}px"></i><i style="background:${ac};border-radius:${m.r}px"></i><i style="background:${card};border-radius:${m.r}px"></i></div>`
+    : (lay === 'full' || lay === 'center') ? '' : `<div class="sp-art" style="background:${art};border-radius:${m.r}px"></div>`;
+  return `<div class="sp ${lay}" style="background:${bg};color:${fg};font-family:'${fb}',sans-serif">
+    <div class="sp-hero" style="${lay === 'full' ? 'background:'+art+';' : ''}">${artHTML}
+      <div class="sp-nav"><b style="color:${lay==='full'?'#fff':ac};font-family:'${fh}'">${logo}</b><span>${nav}</span></div>
+      <div class="sp-h" style="font-family:'${fh}',serif;font-weight:${hw};${tt}${title.length > 32 ? 'font-size:17px;' : ''}">${title}</div>
+      <div class="sp-s">${sub}</div>
+      <div class="sp-b" style="background:${btn};color:${btnfg};border-radius:${m.r}px;${bd?'border:'+bd+';':''}${tt}">${esc(ctaText())}</div>
+    </div>
+    <div class="sp-row">${ben.map(b => `<div style="background:${card};border-radius:${Math.min(m.r,16)}px"><i style="background:${ac}"></i><b>${esc(cut(b, 40))}</b></div>`).join('')}</div>
+  </div>`;
+}
+const vcap = v => [(STYLES.find(x=>x.id===v.s)||{}).name, (PALETTES.find(x=>x.id===v.p)||{}).name, (FONTS.find(x=>x.id===v.f)||{}).name].filter(Boolean).join(' · ');
+function variants(){
+  const st = A.styles.length ? A.styles : A.liked.length ? A.liked : niche().styles.slice(0,2);
+  const pl = A.palettes.length ? A.palettes : [null], ft = A.fonts.length ? A.fonts : [null];
+  const n = Math.min(4, Math.max(st.length, pl.length, ft.length));
+  return Array.from({length:n}, (_, i) => ({s:st[i % st.length], p:pl[i % pl.length], f:ft[i % ft.length]}));
+}
+
+/* ---------- колода для свайп-теста ---------- */
+function ensureDeck(){
+  if(A.deck.length) return;
+  const order = ['minimal','luxury','bright','photo','soft','tech','eco','brutal','editorial','bento','corporate','retro','darkmin','playful','boho','cyber','japan','memphis','scandi','artdeco','acid','watercolor','loft','cosmic','glass','swiss','hand','y2k','newspaper','classic','duotone','organic','pixel'];
+  A.deck = [...new Set(niche().styles.slice(0,6).concat(order))].slice(0,16);
+}
+
+const R = {
+  welcome(){
+    const demo = ['bright','luxury','soft','tech','eco','photo','brutal','bento','retro','cosmic'];
+    return `<section class="wl">
+      <div>
+        <span class="badge"><i></i>${esc(CONFIG.designer)} · бриф на сайт</span>
+        <h1>Соберите <span class="grad-text">свой сайт</span> за&nbsp;10&nbsp;минут</h1>
+        <p class="lead">Не нужно разбираться в дизайне: листайте варианты и выбирайте, что нравится. В конце увидите, как может выглядеть ваш сайт, - а ТЗ само уйдёт дизайнеру.</p>
+        <div class="wform" id="wform">
+          ${input('name','Как к вам обращаться?','Например, Анна')}
+          ${input('contact','Куда вам ответить?','Телефон, Telegram или Instagram')}
+          <button class="btn primary" data-start="1">Начать →</button>
+          <small>🔒 Контакт увидит только дизайнер. Без спама и рассылок.</small>
+        </div>
+      </div>
+      <div class="vis">
+        <div class="stack" id="stack">${demo.map((id, i) => sitePreview(id, null, null, true).replace('<div class="sp ', `<div data-pos="${Math.min(i, 3)}" class="sp `)).join('')}</div>
+        <div class="stack-hint">Нажмите на карточку - покажем другой стиль</div>
+      </div>
+    </section>
+    <div class="marquee" aria-hidden="true"><div>${[...STYLES, ...STYLES].map(x => `<span>${x.name}</span>`).join('')}</div></div>
+    <div class="how">
+      <div><b>1</b>Пара слов о бизнесе</div>
+      <div><b>2</b>Свайпаете сайты: нравится или нет</div>
+      <div><b>3</b>Выбираете цвета, шрифты, блоки</div>
+      <div><b>4</b>Видите свой сайт - ТЗ уходит дизайнеру</div>
+    </div>`;
+  },
+  about(){
+    return head('Расскажите о проекте','Пара слов - этого достаточно. Всё, что не знаете, можно пропустить.')
+    + sec('Ваша сфера','Можно выбрать несколько - от этого зависят подсказки на следующих шагах',
+      `<div class="chips">${NICHES.map(n => `<div class="chip ${A.niches.includes(n.id)?'on':''}" data-niche="${n.id}">${n.name}</div>`).join('')}</div>`
+      + (A.niches.includes('other') ? `<div style="margin-top:12px">${input('nicheOther','Какая сфера?','')}</div>` : ''))
+    + input('company','Название компании / бренда','Если есть')
+    + area('product','Что вы продаёте или какую услугу оказываете?','Например: маникюр с выездом на дом, от 1500 ₽')
+    + `<div class="hints"><small>Формула: что + для кого + выгода. Пример:</small>${(A.niches.length ? A.niches : ['other']).map(id => NICHE_EX[id]).filter(Boolean).map(v => `<button class="hint-chip" data-hint="product" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>`
+    + sec('Главная цель сайта','Можно выбрать несколько', chips('goals', GOALS, true, true))
+    + area('audience','Кто ваш клиент?','Возраст, пол, город, чем увлекается, что для него важно…') + hints('audience', AUDIENCE_EX)
+    + area('usp','Чем вы лучше конкурентов?','Опыт, гарантия, цена, скорость, подход… Если не знаете - напишите «помогите сформулировать»') + hints('usp', USP_EX)
+    + input('competitors','Конкуренты (ссылки, если есть)','');
+  },
+  taste(){
+    ensureDeck();
+    const left = A.deck.slice(A.swipeIdx);
+    const h = head('Нравится или нет?','Смахните вправо, если нравится, влево, если нет.');
+    if(!left.length){
+      const names = ids => ids.map(id => (STYLES.find(s => s.id === id)||{}).name).filter(Boolean);
+      return h + `<div class="doc" style="text-align:center">
+        <div style="font-size:44px">🎉</div><h2 style="margin-top:6px">Готово!</h2>
+        <p>${A.liked.length ? 'Вам понравилось: <b>' + esc(names(A.liked).join(', ')) + '</b>. Мы отметили эти стили на следующем шаге.' : 'Ничего не зацепило - не страшно, на следующем шаге есть ещё варианты.'}</p>
+        <button class="btn sm" data-swipe="reset" style="margin-top:12px">Пройти заново</button></div>`;
+    }
+    const card = (id, cls) => { const st = STYLES.find(s => s.id === id); return `<div class="swc ${cls}" data-id="${id}"><span class="stamp yes">ДА</span><span class="stamp no">НЕТ</span>${sitePreview(id, null, null, true)}<h4>${st.name}</h4><p>${st.desc}</p></div>`; };
+    return h + `<div class="deck">${left[1] ? card(left[1], 'back') : ''}${card(left[0], 'top' + (A.swipeIdx === 0 ? ' teach' : ''))}${A.swipeIdx === 0 ? '<span class="sw-hint">👆 смахните</span>' : ''}</div>
+      <div class="swcount">${A.swipeIdx + 1} из ${A.deck.length}</div>`;
+  },
+  style(){
+    const rec = niche().styles;
+    return head('Какой стиль вам ближе?','Отметьте все варианты, которые «цепляют», - сколько угодно. Это не окончательный дизайн, а направление.')
+    + helper('Не уверены? Подберём 2–3 стиля, которые обычно хорошо работают в вашей сфере.','styles')
+    + `<div class="cards">${shortList('styles', STYLES, rec).items.map(s => `<div class="card ${A.styles.includes(s.id)?'on':''} ${rec.includes(s.id)?'is-reco':''}" data-pick="styles" data-v="${s.id}">
+        <span class="tick">✓</span><span class="reco">Подходит вам</span>${mockHTML(s.m)}<h4>${s.name}</h4><p>${s.desc}</p></div>`).join('')}</div>${shortList('styles', STYLES, rec).more}`
+    + `<div class="section">${area('likeSites','Сайты, которые вам нравятся (необязательно)','Ссылки и что именно нравится')}${area('dislike','Что точно НЕ хотите видеть?','Например: розовый цвет, много анимации, мелкий текст')}</div>`;
+  },
+  colors(){
+    const rec = niche().pals;
+    return head('Выберите цвета','Отметьте все палитры, которые нравятся. Оттенки потом подстроим под ваш бренд.')
+    + helper('Подберём палитры, которые вызывают доверие именно в вашей нише.','palettes')
+    + `<div class="cards">${shortList('palettes', PALETTES, rec).items.map(p => `<div class="card ${A.palettes.includes(p.id)?'on':''} ${rec.includes(p.id)?'is-reco':''}" data-pick="palettes" data-v="${p.id}">
+        <span class="tick">✓</span><span class="reco">Подходит вам</span><div class="pal">${p.c.map(c=>`<i style="background:${c}"></i>`).join('')}</div><h4>${p.name}</h4></div>`).join('')}</div>${shortList('palettes', PALETTES, rec).more}`
+    + `<div class="section grid2">${input('brandColors','Уже есть фирменные цвета?','Например: тёмно-синий и оранжевый')}${input('avoidColors','Цвета, которые не нравятся','')}</div>`;
+  },
+  fonts(){
+    const rec = niche().fonts;
+    const name = esc(SAMPLE || A.company || 'Ваш бренд');
+    return head('Какие шрифты нравятся?','Шрифт задаёт характер сайта не меньше, чем цвет. Отметьте все, что нравятся.')
+    + helper('Подберём шрифты под ваш стиль и нишу.','fonts')
+    + `<div class="field"><label>Напишите свой текст - посмотрите, как он выглядит</label><input id="sample" value="${esc(SAMPLE)}" placeholder="${esc(A.company || 'Например, название бренда')}"></div>`
+    + `<div class="cards">${shortList('fonts', FONTS, rec).items.map(f => `<div class="card simple fontprev ${A.fonts.includes(f.id)?'on':''} ${rec.includes(f.id)?'is-reco':''}" data-pick="fonts" data-v="${f.id}">
+        <span class="tick">✓</span><span class="reco">Подходит вам</span>
+        <div class="big" style="font-family:'${f.h}';font-weight:${f.hw};${f.up?'text-transform:uppercase':''};margin-top:22px">${name}</div>
+        <div class="small" style="font-family:'${f.b}'">Текст на сайте будет выглядеть вот так. Удобно читать с телефона.</div>
+        <h4>${f.name}</h4><p>${f.desc} · ${f.h} + ${f.b}</p></div>`).join('')}</div>${shortList('fonts', FONTS, rec).more}`;
+  },
+  mood(){
+    return head('Настроение и бренд','Какие эмоции должен вызывать сайт и что нужно по фирменному стилю.')
+    + sec('Какие ощущения должен вызывать сайт?','Отметьте все подходящие слова', chips('moods', MOODS, true, true))
+    + sec('Как общаться с клиентом в текстах?','', chips('tone', TONES, true, true))
+    + sec('Что с логотипом?','', chips('logo', ['Есть, всё устраивает','Есть, но хочу обновить','Есть только название шрифтом','Нет, нужно создать','Нужен простой знак','Нужно несколько вариантов на выбор','Не нужен'], true, true))
+    + sec('Что нужно из фирменного стиля (брендбука)?','Отметьте всё, что пригодится - или ничего, если есть свой', chips('bb', BB_ITEMS, true, true));
+  },
+  structure(){
+    const goalRec = new Set(A.goals.flatMap(g => GOAL_BLOCKS[g]||[]));
+    return head('Из каких блоков будет лендинг?','Отметьте, что должно быть на сайте. Значок «рекомендуем» - подсказка по вашей цели.')
+    + helper('Соберём структуру, которая лучше всего подходит под вашу цель.','blocks')
+    + `<div class="blocks">${BLOCKS.map(b => `<div class="blk ${A.blocks.includes(b.id)?'on':''}" data-blk="${b.id}">
+        <div class="box">${A.blocks.includes(b.id)?'✓':''}</div>
+        <div><b>${b.name}${goalRec.has(b.id)||b.must?'<span class="rb">рекомендуем</span>':''}</b><span>${b.d}</span></div></div>`).join('')}</div>`
+    + `<div class="section">${area('blocksExtra','Чего-то не хватает?','Опишите свой блок')}</div>`;
+  },
+  features(){
+    return head('Функции и материалы','Что должно уметь сайт и что у вас уже есть для наполнения.')
+    + sec('Какие функции нужны?','', chips('features', FEATURES, true, true))
+    + sec('Тексты для сайта','', chips('texts', ['Есть готовые','Есть частично','Нужен копирайтер','Помогите сформулировать оффер','Сгенерировать с ИИ и отредактировать','Нужны тексты для SEO'], true, true))
+    + sec('Фото и видео','', chips('photos', ['Есть свои качественные','Есть, но не очень','Нужна фотосъёмка','Подойдут стоки','Можно сгенерировать ИИ','Нужны иллюстрации','Нужна 3D-графика','Нужно видео'], true, true))
+    + sec('Домен (адрес сайта)','', chips('domain', ['Уже есть','Нужно купить','Помогите выбрать','Нужна корпоративная почта'], true, true))
+    + sec('Материалы','Логотип, фото, скриншоты понравившихся сайтов, документы - всё уйдёт дизайнеру вместе с ТЗ. До 20 МБ на файл.',
+      `<label class="drop"><input type="file" id="fileIn" multiple hidden><b>＋ Прикрепить файлы</b><span>Можно выбрать сразу несколько</span></label>
+       <div class="files">${FILES.map((f, i) => `<div class="fl"><span>${/^image/.test(f.type) ? '🖼' : '📄'} ${esc(f.name)} · ${(f.size/1048576).toFixed(1)} МБ</span><button data-rmfile="${i}" title="Убрать">✕</button></div>`).join('')}</div>
+       ${FILES.length ? '<p class="hint" style="margin-top:8px">Файлы хранятся только в этой вкладке - не закрывайте её до отправки.</p>' : ''}`);
+  },
+  terms(){
+    return head('Сроки и пожелания','Последний шаг - и ТЗ готово.')
+    + sec('Когда нужен сайт?','', chips('deadline', ['Срочно, за неделю','2–3 недели','Месяц','Не горит','К конкретной дате (напишу ниже)','Можно запускать по частям'], true, true))
+    + sec('Какой бюджет комфортен?','Поможет предложить реальный вариант, а не самый дорогой', chips('budget', BUDGETS, false))
+    + sec('Что для вас важнее всего?','Отметьте всё, что важно', chips('priorities', PRIORITIES, true, true))
+    + area('comment','Что-то ещё важное?','Любые пожелания, идеи, вопросы');
+  },
+  result(){
+    const t = buildText();
+    const pals = A.palettes.map(id => PALETTES.find(p=>p.id===id)).filter(Boolean);
+    const fonts = A.fonts.map(id => FONTS.find(f=>f.id===id)).filter(Boolean);
+    const styles = A.styles.map(id => STYLES.find(s=>s.id===id)).filter(Boolean);
+    const rows = obj => `<table>${obj.map(([k,v]) => `<tr><td>${k}</td><td>${v ? esc(v) : '<span class="empty">не указано</span>'}</td></tr>`).join('')}</table>`;
+    const send = [];
+    if(CONFIG.telegram) send.push(`<button class="btn primary" data-send="tg">Отправить в Telegram</button>`);
+    if(CONFIG.instagram) send.push(`<button class="btn primary" data-send="ig">Отправить в Instagram</button>`);
+    if(CONFIG.whatsapp) send.push(`<button class="btn primary" data-send="wa">Отправить в WhatsApp</button>`);
+    if(CONFIG.email) send.push(`<button class="btn" data-send="mail">Отправить на почту</button>`);
+    const top = VIEW
+      ? head(`Бриф${A.company ? ': ' + esc(A.company) : ''}`, `${esc(A.name || 'Клиент')}${A.contact ? ' · ' + esc(A.contact) : ''}`)
+        + `<div class="send no-print"><button class="btn primary" data-send="copy">Скопировать текст ТЗ</button><button class="btn" data-send="print">Сохранить PDF</button></div>`
+      : head('Готово! Вот ваше ТЗ 🎉', `Проверьте, всё ли верно. Изменить ответы можно кнопкой «Назад» - обновлённая версия тоже уйдёт дизайнеру.`)
+        + `<div class="sendbox no-print" id="sendbox">${sendboxHTML()}</div>`
+        + `<p class="hint no-print" style="margin:0 0 8px;font-size:14px;color:var(--muted)">Хотите написать лично? Отправьте ТЗ в мессенджер:</p>`
+        + `<div class="send no-print" style="margin-top:0">${send.join('')}</div>${CONFIG.instagram ? `<p class="hint no-print" style="margin:-8px 0 16px;font-size:13px;color:var(--muted)">Instagram не умеет вставлять текст сам: мы скопируем ТЗ - просто нажмите «Вставить» в открывшемся чате.</p>` : ''}<div class="send no-print"><button class="btn" data-send="copy">Скопировать текст</button><button class="btn" data-send="link">Ссылка на бриф</button><button class="btn" data-send="file">Скачать файл</button><button class="btn" data-send="print">Сохранить PDF</button></div>`;
+    return top
+    + `<div class="doc">
+      ${priceHTML()}
+      <h2>Так может выглядеть ваш сайт</h2>
+      <p class="hint" style="margin:-4px 0 14px;color:var(--muted);font-size:14px">Черновые варианты по вашим ответам - финальный дизайн будет детальнее.</p>
+      <div class="previews">${variants().map(v => `<figure>${sitePreview(v.s, v.p, v.f)}<figcaption>${vcap(v)}</figcaption></figure>`).join('')}</div>
+      <h2>Мини-брендбук</h2>
+      ${styles.length ? `<div class="cards" style="margin-bottom:16px">${styles.map(s=>`<div class="card simple" style="cursor:default">${mockHTML(s.m)}<h4>${s.name}</h4><p>${s.desc}</p></div>`).join('')}</div>` : '<p class="empty">Стиль - на усмотрение дизайнера</p>'}
+      <div class="bb">
+        <div><h3 style="margin:0 0 10px;font-size:15px">Цвета</h3>${pals.length ? pals.map(p=>`<div style="margin-bottom:12px"><div class="sw">${p.c.map(c=>`<div><i style="background:${c}"></i><small>${c}</small></div>`).join('')}</div><small style="color:var(--muted)">${p.name}</small></div>`).join('') : '<p class="empty">на усмотрение дизайнера</p>'}</div>
+        <div><h3 style="margin:0 0 10px;font-size:15px">Шрифты</h3>${fonts.length ? fonts.map(f=>`<div style="margin-bottom:14px"><div style="font-family:'${f.h}';font-weight:${f.hw};font-size:26px;line-height:1.1;${f.up?'text-transform:uppercase':''}">${esc(A.company||'Заголовок')}</div><div style="font-family:'${f.b}';font-size:14px;color:var(--muted)">${f.h} + ${f.b} - ${f.name}</div></div>`).join('') : '<p class="empty">на усмотрение дизайнера</p>'}</div>
+      </div>
+      <h2>О проекте</h2>${rows(D.about())}
+      <h2>Дизайн</h2>${rows(D.design())}
+      <h2>Бренд</h2>${rows(D.brand())}
+      <h2>Структура лендинга</h2>${A.blocks.length ? `<ol>${blockList().map(b=>`<li><b>${esc(b.name)}</b> - <span style="color:var(--muted)">${esc(b.d)}</span></li>`).join('')}</ol>` : '<p class="empty">на усмотрение дизайнера</p>'}${A.blocksExtra?`<p>Дополнительно: ${esc(A.blocksExtra)}</p>`:''}
+      <h2>Функции и контент</h2>${rows(D.features())}
+      <h2>Сроки и пожелания</h2>${rows(D.terms())}
+    </div>
+    <textarea id="plain" style="position:absolute;left:-9999px" readonly>${esc(t)}</textarea>`;
+  },
+};
+
+/* ---------- примерная цена и скрытый раздел с правилами ---------- */
+function priceHTML(){
+  const full = PRICE.dev + PRICE.setup;
+  const nego = [];
+  if(A.features.some(f => /оплат/i.test(f))) nego.push('онлайн-оплата');
+  if(A.features.some(f => /язык/i.test(f))) nego.push('второй язык');
+  if(A.logo.some(l => /создать|обновить|знак|вариант/i.test(l))) nego.push('логотип');
+  if(A.texts.some(t => /копирайтер|SEO/i.test(t))) nego.push('тексты');
+  return `<div class="price-box">
+    <div class="pr-row"><div><small>Сайт под ключ</small><b>${rub(full - PRICE.briefOff)}</b> <s>${rub(full)}</s></div><div><small>Срок</small><b>7-10 рабочих дней</b></div></div>
+    <p>Скидка ${rub(PRICE.briefOff)} за пройденный бриф уже учтена. Всё в одном пакете: дизайн, админка, заявки в Telegram, запуск и настройка.${nego.length ? ' Отдельно, по договорённости: ' + esc(nego.join(', ')) + '.' : ''}</p>
+    <details class="pr-more"><summary>Цены, скидки и что значит «полное ТЗ и брендбук»</summary>
+      <h4>Цена</h4><ul>
+        <li>Сайт под ключ: <b>${rub(full)}</b> (разработка ${rub(PRICE.dev)} + запуск и настройка ${rub(PRICE.setup)})</li>
+        <li>Прошли этот бриф до конца: <b>${rub(full - PRICE.briefOff)}</b></li>
+        <li>Есть полный брендбук и ТЗ с дизайном: <b>${rub(full - PRICE.fullOff)}</b></li></ul>
+      <p class="pr-note">Скидки не складываются. Срок считается с момента, когда есть материалы, доступы и предоплата 50%.</p>
+      <h4>Что входит</h4><ul>
+        <li>Дизайн под ваш бренд, тексты, версия для телефона</li>
+        <li>Каталог или прайс, заказ или запись, заявки в Telegram, отзывы, галерея, вопросы, контакты с картой</li>
+        <li>Админка: цены, тексты и фото меняете сами</li>
+        <li>Запуск на вашем хостинге: база данных, домен, https</li>
+        <li>Яндекс Метрика, Вебмастер, Google, карточки на картах</li>
+        <li>2 круга правок, обучение админке, 14 дней поддержки</li></ul>
+      <h4>Полный брендбук</h4><ul>
+        <li>Логотип в векторе (SVG, PDF или AI) для светлого и тёмного фона</li>
+        <li>Минимум 3 цвета с кодами HEX или RGB, понятно, какой основной</li>
+        <li>Шрифты с кириллицей для заголовков и текста</li>
+        <li>Готовые фото от 1500 px или 3-5 примеров стиля</li></ul>
+      <h4>Полное ТЗ</h4><ul>
+        <li>Список блоков сайта по порядку</li>
+        <li>Все тексты готовы, без «потом допишем»</li>
+        <li>Товары или услуги таблицей: название, цена, описание, фото</li>
+        <li>Контакты, адрес, часы работы, соцсети</li>
+        <li>Какие функции нужны и куда приходят заявки</li></ul>
+      <h4>Дизайн</h4><ul>
+        <li>Макет в Figma или схема главной страницы для телефона</li>
+        <li>2-3 сайта-примера с пояснением, что нравится</li></ul>
+      <p class="pr-note">Если чего-то не хватает, действует скидка за бриф.</p>
+      <h4>По договорённости</h4><ul>
+        <li>Разработка логотипа</li><li>Онлайн-оплата</li><li>Английская или другая языковая версия</li><li>Тексты и подбор фото за вас</li><li>Правки сверх двух кругов и поддержка после 14 дней</li></ul>
+      <h4>Оплачиваете напрямую</h4><ul><li>Хостинг с базой данных (обычно несколько сотен рублей в месяц)</li><li>Домен (обычно до 1 000 ₽ в год)</li></ul>
+    </details>
+  </div>`;
+}
+
+/* =====================================================================
+   ДАННЫЕ ДЛЯ ТЗ
+   ===================================================================== */
+const list = (arr, fallback='на усмотрение дизайнера') => {
+  const real = arr.filter(v => v !== 'Не знаю');
+  if(!real.length) return arr.includes('Не знаю') ? fallback : '';
+  return real.join(', ') + (arr.includes('Не знаю') ? ' (+ нужна консультация)' : '');
+};
+const nicheName = () => A.niches.map(id => id === 'other' ? (A.nicheOther || 'Другое') : (NICHES.find(n=>n.id===id)||{}).name).filter(Boolean).join(', ');
+const blockList = () => BLOCKS.filter(b => A.blocks.includes(b.id));
+const D = {
+  about: () => [['Имя', A.name],['Компания', A.company],['Контакт', A.contact],['Сфера', nicheName()],['Продукт / услуга', A.product],['Цель сайта', list(A.goals)],['Целевая аудитория', A.audience],['Преимущества (УТП)', A.usp],['Конкуренты', A.competitors],['Откуда пришёл', A.from]],
+  design: () => [
+    ['Стиль', A.styles.map(id=>(STYLES.find(s=>s.id===id)||{}).name).join(', ') || (A.styleIdk?'на усмотрение дизайнера':'')],
+    ['Палитра', A.palettes.map(id=>{const p=PALETTES.find(x=>x.id===id); return p ? `${p.name} (${p.c.join(' ')})` : '';}).join('; ') || (A.palIdk?'на усмотрение дизайнера':'')],
+    ['Фирменные цвета', A.brandColors],['Нежелательные цвета', A.avoidColors],
+    ['Шрифты', A.fonts.map(id=>{const f=FONTS.find(x=>x.id===id); return f ? `${f.h} + ${f.b}` : '';}).join('; ') || (A.fontIdk?'на усмотрение дизайнера':'')],
+    ['Понравилось в тесте', A.liked.map(id=>(STYLES.find(s=>s.id===id)||{}).name).join(', ')],
+    ['Не понравилось в тесте', A.disliked.map(id=>(STYLES.find(s=>s.id===id)||{}).name).join(', ')],
+    ['Нравятся сайты', A.likeSites],['Не хочу видеть', A.dislike]],
+  brand: () => [['Ощущения от сайта', list(A.moods)],['Тон текстов', list(A.tone)],['Логотип', list(A.logo, 'нужна консультация')],['Нужно из фирменного стиля', list(A.bb)]],
+  features: () => [['Функции', list(A.features)],['Тексты', list(A.texts, 'нужна консультация')],['Фото / видео', list(A.photos, 'нужна консультация')],['Домен', list(A.domain, 'нужна консультация')],['Прикреплённые файлы', FILES.map(f => f.name).join(', ')]],
+  terms: () => [['Бюджет', A.budget],['Сроки', list(A.deadline, 'нужна консультация')],['Приоритеты', list(A.priorities)],['Комментарий', A.comment]],
+};
+
+function buildText(){
+  const sect = (t, rows) => `\n\n■ ${t.toUpperCase()}\n` + rows.map(([k,v]) => `• ${k}: ${v || '-'}`).join('\n');
+  return `ТЗ НА САЙТ${A.company ? ' - ' + A.company : ''}\nот ${A.name || 'клиента'}, ${new Date().toLocaleDateString('ru-RU')}`
+    + sect('О проекте', D.about())
+    + sect('Дизайн', D.design())
+    + sect('Бренд', D.brand())
+    + `\n\n■ СТРУКТУРА ЛЕНДИНГА\n` + (blockList().map((b,i)=>`${i+1}. ${b.name}`).join('\n') || '-') + (A.blocksExtra ? `\n+ ${A.blocksExtra}` : '')
+    + sect('Функции и контент', D.features())
+    + sect('Сроки и пожелания', D.terms())
+    + `\n\n■ ОРИЕНТИР ПО ЦЕНЕ\n${rub(PRICE.dev + PRICE.setup - PRICE.briefOff)} со скидкой за бриф, 7-10 рабочих дней`;
+}
+
+/* =====================================================================
+   АВТОПОДБОР «ЗА МЕНЯ»
+   ===================================================================== */
+const AUTO = {
+  styles(){ A.styles = niche().styles.slice(0,2); A.styleIdk = true; },
+  palettes(){ A.palettes = niche().pals.slice(0,2); A.palIdk = true; },
+  fonts(){
+    // шрифт под выбранный стиль, иначе - под нишу
+    const byStyle = {minimal:'modern',luxury:'lux',bright:'bold',corporate:'strict',tech:'digital',eco:'lux',brutal:'poster',soft:'soft',editorial:'classic',darkmin:'fashion',scandi:'scandi',retro:'fashion',playful:'soft',swiss:'modern',hand:'hand',glass:'digital',photo:'modern',bento:'digital',artdeco:'fashion',classic:'lux',japan:'fashion',newspaper:'classic',y2k:'bold',memphis:'bold',cyber:'techno',pixel:'techno',acid:'bold',duotone:'scandi',loft:'poster',boho:'book',cosmic:'techno',watercolor:'book',organic:'soft'};
+    const f = [...new Set(A.styles.map(s=>byStyle[s]).concat(niche().fonts))].slice(0,2);
+    A.fonts = f; A.fontIdk = true;
+  },
+  blocks(){
+    const goals = A.goals.filter(g => GOAL_BLOCKS[g]);
+    const rec = new Set(['hero','form','benefits','reviews','faq','contacts']);
+    (goals.length ? goals : ['Получать заявки']).forEach(g => GOAL_BLOCKS[g].forEach(b => rec.add(b)));
+    A.blocks = BLOCKS.map(b=>b.id).filter(id => rec.has(id)); A.blocksIdk = true;
+  },
+};
+
+/* =====================================================================
+   ОТПРАВКА
+   ===================================================================== */
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); return true; }
+  catch(e){ const ta = $('#plain'); ta.select(); try{ return document.execCommand('copy'); }catch(_){ return false; } }
+}
+/* ---------- ссылка на визуальный бриф: ответы сжаты прямо в адрес ---------- */
+const b64u = bytes => { let s = ''; for(let i = 0; i < bytes.length; i += 8192) s += String.fromCharCode(...bytes.subarray(i, i + 8192)); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); };
+const unb64u = str => Uint8Array.from(atob(str.replace(/-/g,'+').replace(/_/g,'/')), c => c.charCodeAt(0));
+async function briefLink(){
+  const {deck, swipeIdx, ...data} = A;
+  const raw = new TextEncoder().encode(JSON.stringify(data));
+  let enc;
+  try{ enc = 'z' + b64u(new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer())); }
+  catch(e){ enc = 'j' + b64u(raw); }
+  return location.href.split('#')[0].split('?')[0] + '#brief=' + enc;
+}
+async function readBrief(){
+  const enc = location.hash.slice(7), bytes = unb64u(enc.slice(1));
+  const json = enc[0] === 'z' ? await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text() : new TextDecoder().decode(bytes);
+  return JSON.parse(json);
+}
+
+/* ---------- автоотправка дизайнеру через Telegram-бота ---------- */
+const hash = str => { let h = 0; for(let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0; return String(h); };
+// отправлять нужно, если ответы изменились или появились новые файлы
+const briefSig = () => hash(JSON.stringify(A));
+const needSend = () => S.sentSig !== briefSig() || FILES.some(f => !f.sent);
+function sendboxHTML(){
+  if(!CONFIG.botToken || !CONFIG.chatId) return `<p>Отправьте ТЗ дизайнеру кнопками ниже.</p>`;
+  if(SENDING) return `<p>⏳ Отправляем ТЗ дизайнеру…</p>`;
+  if(!needSend()) return `<p><b>✅ ТЗ отправлено!</b> ${esc(CONFIG.designer)} скоро свяжется с вами${A.contact ? ': ' + esc(A.contact) : ''}.</p>`;
+  return `${SEND_ERR ? '<p style="margin-bottom:8px">⚠️ Не получилось отправить - проверьте интернет и попробуйте ещё раз, или напишите в мессенджер ниже.</p>' : `<p><b>Последний шаг:</b> куда вам ответить?</p>`}
+    <div class="field"><input data-k="contact" value="${esc(A.contact)}" placeholder="Телефон, Telegram или Instagram"></div>
+    <button class="btn primary" data-send="bot">Отправить ТЗ дизайнеру</button>`;
+}
+const updateSendbox = () => { const el = $('#sendbox'); if(el){ el.innerHTML = sendboxHTML(); el.classList.toggle('ok', !needSend() && !SENDING); } };
+async function botSend(){
+  if(SENDING || !CONFIG.botToken || !CONFIG.chatId) return;
+  const bad = checkContact(A.contact);
+  if(bad){ toast(bad); $('#sendbox input')?.focus(); return; }
+  SENDING = true; SEND_ERR = false; updateSendbox();
+  const call = async (method, fields) => {
+    const fd = new FormData(); fd.append('chat_id', CONFIG.chatId);
+    for(const k in fields) Array.isArray(fields[k]) ? fd.append(k, ...fields[k]) : fd.append(k, fields[k]);
+    const j = await (await fetch(`https://api.telegram.org/bot${CONFIG.botToken}/${method}`, {method:'POST', body:fd})).json();
+    if(!j.ok) throw new Error(j.description);
+  };
+  try{
+    const sig = briefSig();
+    if(S.sentSig !== sig){
+      const text = (S.sentSig ? '🔄 ОБНОВЛЁННОЕ ' : '🆕 ') + buildText();
+      for(let i = 0; i < text.length; i += 4000) await call('sendMessage', {text: text.slice(i, i + 4000)});
+      await call('sendMessage', {text: `<a href="${esc(await briefLink())}">🎨 Открыть визуальный бриф</a>`, parse_mode:'HTML', link_preview_options:'{"is_disabled":true}'});
+      await call('sendDocument', {document: [new Blob([briefHTML()], {type:'text/html'}), fileName()]});
+      S.sentSig = sig; save();
+    }
+    const fresh = FILES.filter(f => !f.sent);
+    if(fresh.length) await call('sendMessage', {text: `📎 Файлы от ${A.name || 'клиента'}${A.company ? ' (' + A.company + ')' : ''}: ${fresh.length} шт.`});
+    for(const f of fresh){ await call('sendDocument', {document: [f, f.name]}); f.sent = true; }
+  }catch(e){ SEND_ERR = true; console.error(e); }
+  SENDING = false; updateSendbox();
+}
+
+// короткое сообщение в бота; beacon - для момента, когда вкладку закрывают
+function botMsg(text, beacon){
+  if(VIEW || !CONFIG.botToken || !CONFIG.chatId) return;
+  const url = `https://api.telegram.org/bot${CONFIG.botToken}/sendMessage`;
+  const fd = new FormData(); fd.append('chat_id', CONFIG.chatId); fd.append('text', text.slice(0, 4000));
+  if(beacon && navigator.sendBeacon && navigator.sendBeacon(url, fd)) return;
+  fetch(url, {method:'POST', body:fd, keepalive:true}).catch(() => {});
+}
+// Контакт: телефон, @ник или ссылка
+function checkContact(v){
+  const s = String(v || '').trim();
+  if(!s) return 'Оставьте контакт, чтобы дизайнер смог ответить';
+  const d = s.replace(/[\s()\-]/g, '');
+  if(/^\+?\d{10,15}$/.test(d)) return /^(\+7|8|7)\d{10}$/.test(d) || /^\+\d{10,15}$/.test(d) ? '' : 'Похоже на телефон, но не хватает цифр. Пример: +7 900 123-45-67';
+  if(/^@[A-Za-z0-9_.]{3,32}$/.test(s)) return '';
+  if(/^@/.test(s)) return 'Ник пишется латиницей, от 3 символов: @shak.web';
+  if(/^(https?:\/\/)?(www\.)?(t\.me|telegram\.me|instagram\.com|wa\.me|vk\.com)\/[A-Za-z0-9_.+]{2,}\/?(\?.*)?$/i.test(s)) return '';
+  if(/^https?:\/\/[^\s.]+\.\S{2,}$/i.test(s)) return '';
+  return 'Напишите телефон (+7 900 123-45-67), ник (@shak.web) или ссылку (t.me/ваш_ник)';
+}
+function start(){
+  const bad = checkContact(A.contact);
+  if(bad){
+    const f = $('#wform'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+    $('#wform [data-k="contact"]').focus(); toast(bad);
+    return;
+  }
+  if(!S.startSent){
+    S.startSent = true;
+    botMsg(`👋 Новый клиент открыл анкету\n\nИмя: ${A.name || '-'}\nКонтакт: ${A.contact}${A.niches.length ? '\nСфера: ' + nicheName() : ''}`);
+  }
+  go(1);
+}
+// ушёл, не закончив: шлём то, что успел заполнить (не чаще раза в 3 минуты и только если что-то изменилось)
+function sendPartial(){
+  if(VIEW || !S.startSent || !A.contact.trim() || S.step === 0 || STEPS[S.step].id === 'result') return;
+  const sig = briefSig();
+  if(sig === S.partialSig || sig === S.sentSig || Date.now() - (S.partialAt || 0) < 180000) return;
+  S.partialSig = sig; S.partialAt = Date.now(); save();
+  botMsg(`⏸ НЕ ЗАКОНЧИЛ АНКЕТУ - остановился на шаге ${S.step} из ${STEPS.length - 1} («${STEPS[S.step].title}»)\n\n` + buildText(), true);
+}
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') sendPartial(); });
+window.addEventListener('pagehide', sendPartial);
+
+const fileName = () => `TZ-${(A.company||A.name||'site').replace(/[^\wа-яё-]+/gi,'_')}.html`;
+function briefHTML(){
+  const doc = $('.doc').outerHTML;
+  const css = document.querySelector('style').textContent;
+  const fonts = document.querySelector('link[href*="fonts.googleapis.com/css2"]').outerHTML;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ТЗ - ${esc(A.company||A.name||'сайт')}</title>${fonts}<style>${css}</style></head><body data-theme="light"><main><div class="wrap"><h1 style="letter-spacing:-.03em">ТЗ на сайт${A.company?' - '+esc(A.company):''}</h1><p style="color:#6b6b75">${esc(A.name)} · ${new Date().toLocaleDateString('ru-RU')}</p>${doc}<pre style="white-space:pre-wrap;font-size:12px;color:#888;margin-top:40px">${esc(buildText())}</pre></div></main></body></html>`;
+}
+function download(){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([briefHTML()], {type:'text/html'}));
+  a.download = fileName();
+  document.body.appendChild(a); a.click(); a.remove();
+}
+async function send(kind){
+  const t = buildText();
+  if(kind === 'bot'){ botSend(); }
+  else if(kind === 'copy'){ toast(await copyText(t) ? 'Текст ТЗ скопирован' : 'Не удалось скопировать'); }
+  else if(kind === 'link'){ toast(await copyText(await briefLink()) ? 'Ссылка на бриф скопирована' : 'Не удалось скопировать'); }
+  else if(kind === 'file'){ download(); toast('Файл ТЗ скачан - отправьте его дизайнеру'); }
+  else if(kind === 'print'){ window.print(); }
+  // Telegram сам подставляет текст в поле сообщения (?text=), копируем на всякий случай
+  else if(kind === 'tg'){ await copyText(t); location.href = 'https://t.me/'+CONFIG.telegram+'?text='+encodeURIComponent(t); }
+  // Instagram не принимает текст в ссылке - копируем и открываем директ
+  else if(kind === 'ig'){ const ok = await copyText(t); toast(ok ? 'ТЗ скопировано - вставьте его в чат' : 'Скопируйте текст кнопкой ниже'); setTimeout(() => location.href = 'https://ig.me/m/'+CONFIG.instagram, 900); }
+  else if(kind === 'wa'){ location.href = 'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(t); }
+  else if(kind === 'mail'){ location.href = 'mailto:'+CONFIG.email+'?subject='+encodeURIComponent('ТЗ на сайт'+(A.company?' - '+A.company:''))+'&body='+encodeURIComponent(t); }
+}
+
+/* =====================================================================
+   ОТРИСОВКА И СОБЫТИЯ
+   ===================================================================== */
+function render(){
+  const st = STEPS[S.step];
+  clearInterval(STACK_T);
+  $('#app').innerHTML = `<div class="${ANIM ? 'stage' : ''}">${R[st.id]()}</div>`;
+  ANIM = false;
+  if(JUST){ document.querySelector(JUST)?.classList.add('just'); JUST = null; }
+  $('#bar').style.width = (S.step / (STEPS.length-1) * 100) + '%';
+  $('#stepnum').innerHTML = S.step === 0 ? '' : `<b>${st.title}</b>${S.step} / ${STEPS.length-1}`;
+  $('#peek').hidden = VIEW || !['style','colors','fonts','mood','structure','features','terms'].includes(st.id);
+  if(st.id === 'welcome') bindStack();
+  $('#prevBtn').style.visibility = S.step === 0 ? 'hidden' : 'visible';
+  $('#nextBtn').style.display = (S.step === 0 || S.step === STEPS.length-1) ? 'none' : '';
+  const swiping = st.id === 'taste' && A.swipeIdx < (A.deck.length || 1) && !VIEW;
+  $('#bottom').classList.toggle('swiping', swiping);
+  $('#prevBtn').textContent = swiping ? '←' : '← Назад';
+  $('#nextBtn').textContent = swiping ? 'Пропустить' : S.step === STEPS.length-2 ? 'Собрать ТЗ ✓' : 'Дальше →';
+  $('#note').textContent = S.step === STEPS.length-1 ? 'Можно вернуться и поменять ответы' : 'Ответы сохраняются автоматически · можно пропускать';
+  $('#bottom').style.display = (S.step === 0 || VIEW) ? 'none' : '';
+  if(VIEW){ $('.progress').style.visibility = 'hidden'; $('#stepnum').textContent = ''; }
+  if(st.id === 'taste') bindSwipe();
+  if(st.id === 'result' && !VIEW){ updateSendbox(); if(!checkContact(A.contact) && needSend() && !SEND_ERR) botSend(); }
+  save();
+}
+
+/* свайп карточек пальцем или мышью */
+function swipe(yes){
+  const el = $('.swc.top'); if(!el) return;
+  const id = el.dataset.id;
+  (yes ? A.liked : A.disliked).push(id);
+  if(yes && !A.styles.includes(id)) A.styles.push(id);
+  A.swipeIdx++;
+  el.style.transform = `translateX(${yes ? 700 : -700}px) rotate(${yes ? 25 : -25}deg)`;
+  setTimeout(render, 230);
+}
+function bindSwipe(){
+  const el = $('.swc.top'); if(!el) return;
+  let x0 = null, dx = 0;
+  const stamp = c => el.querySelector('.stamp.' + c);
+  el.addEventListener('pointerdown', e => { el.classList.remove('teach'); $('.sw-hint')?.remove(); x0 = e.clientX; dx = 0; el.classList.add('drag'); el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => {
+    if(x0 === null) return;
+    dx = e.clientX - x0;
+    el.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
+    stamp('yes').style.opacity = Math.max(0, dx / 100); stamp('no').style.opacity = Math.max(0, -dx / 100);
+  });
+  const end = () => {
+    if(x0 === null) return; x0 = null; el.classList.remove('drag');
+    if(Math.abs(dx) > 90) swipe(dx > 0);
+    else { el.style.transform = ''; stamp('yes').style.opacity = 0; stamp('no').style.opacity = 0; }
+  };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+}
+function go(n){
+  const was = S.step;
+  S.step = Math.max(0, Math.min(STEPS.length-1, n)); ANIM = true; render(); window.scrollTo({top:0, behavior:'smooth'});
+  if(STEPS[S.step].id === 'result' && was !== S.step) confetti();
+}
+
+/* стопка превью на первом экране: листается сама и по нажатию */
+function bindStack(){
+  const el = $('#stack'); if(!el) return;
+  const cards = [...el.children]; let k = 0;
+  const tick = () => { k++; cards.forEach((c, i) => c.dataset.pos = Math.min((i - k % cards.length + cards.length) % cards.length, 3)); };
+  el.onclick = () => { tick(); clearInterval(STACK_T); if(!REDUCED) STACK_T = setInterval(tick, 3200); };
+  if(!REDUCED) STACK_T = setInterval(tick, 3200);
+}
+
+/* окно «Ваш сайт сейчас» */
+function drawPeek(){
+  const v = variants(); PV = (PV + v.length) % v.length; const x = v[PV];
+  let m = $('#modal');
+  if(!m){ m = document.createElement('div'); m.id = 'modal'; m.className = 'modal'; document.body.appendChild(m); }
+  m.innerHTML = `<div class="box"><div class="mh"><b>Ваш сайт сейчас</b><button class="btn sm" data-peek="close" aria-label="Закрыть">✕</button></div>
+    ${sitePreview(x.s, x.p, x.f)}
+    <div class="nav2"><button class="btn sm" data-peek="prev" ${v.length < 2 ? 'disabled' : ''}>‹</button><small>${vcap(x)}${v.length > 1 ? ' · ' + (PV + 1) + ' из ' + v.length : ''}</small><button class="btn sm" data-peek="next" ${v.length < 2 ? 'disabled' : ''}>›</button></div>
+    <p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Превью меняется, когда вы выбираете стиль, цвета и шрифты.</p></div>`;
+}
+const closePeek = () => $('#modal')?.remove();
+$('#peek').onclick = () => { PV = 0; drawPeek(); };
+
+/* конфетти на финише */
+function confetti(){
+  if(REDUCED) return;
+  const c = document.createElement('canvas'); c.className = 'confetti'; document.body.appendChild(c);
+  const dpr = devicePixelRatio || 1, W = c.width = innerWidth * dpr, H = c.height = innerHeight * dpr, ctx = c.getContext('2d');
+  const cols = ['#6d5dfc','#b65cf0','#ff7a59','#ffd23f','#3bceac'];
+  const ps = Array.from({length:140}, () => ({x:W/2, y:H*.35, vx:(Math.random()-.5)*16*dpr, vy:(Math.random()*-14-4)*dpr, r:(4+Math.random()*5)*dpr, c:cols[Math.random()*5|0], a:Math.random()*6, s:Math.random()*.3-.15}));
+  let t = 0;
+  (function f(){
+    ctx.clearRect(0, 0, W, H);
+    ps.forEach(p => { p.vy += .45*dpr; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.s; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r/2, -p.r/4, p.r, p.r/2); ctx.restore(); });
+    if(++t < 150) requestAnimationFrame(f); else c.remove();
+  })();
+}
+
+/* лёгкий 3D-наклон карточек за курсором (только мышь) */
+let TILT = null;
+if(matchMedia('(pointer: fine)').matches && !REDUCED) document.addEventListener('pointermove', e => {
+  const c = e.target.closest('.cards .card');
+  if(TILT && TILT !== c) TILT.style.transform = '';
+  TILT = c; if(!c) return;
+  const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+  c.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) translateY(-3px)`;
+});
+
+$('#prevBtn').onclick = () => go(S.step-1);
+$('#nextBtn').onclick = () => go(S.step+1);
+$('#brandSub').textContent = CONFIG.designer;
+
+document.addEventListener('change', e => {
+  if(e.target.id !== 'fileIn') return;
+  const big = [];
+  for(const f of e.target.files){ if(f.size > 20 * 1048576) big.push(f.name); else FILES.push(f); }
+  if(big.length) toast('Слишком большие (больше 20 МБ): ' + big.join(', '));
+  render();
+});
+document.addEventListener('input', e => {
+  if(e.target.id === 'sample'){ SAMPLE = e.target.value; document.querySelectorAll('.fontprev .big').forEach(b => b.textContent = SAMPLE || A.company || 'Ваш бренд'); return; }
+  const k = e.target.dataset.k; if(!k) return;
+  A[k] = e.target.value; save();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target.tagName === 'INPUT' && S.step === 0) start();
+  if(e.key === 'Escape') closePeek();
+});
+document.addEventListener('click', e => {
+  if(e.target.id === 'modal'){ closePeek(); return; }
+  const t = e.target.closest('[data-more],[data-go],[data-start],[data-peek],[data-chip],[data-niche],[data-pick],[data-blk],[data-auto],[data-send],[data-swipe],[data-hint],[data-rmfile]');
+  if(!t) return;
+  const d = t.dataset;
+  if(d.start){ start(); return; }
+  if(d.more){ MORE[d.more] = true; render(); return; }
+  if(d.peek){ if(d.peek === 'close') closePeek(); else { PV += d.peek === 'next' ? 1 : -1; drawPeek(); } return; }
+  const q = v => `"${CSS.escape(v)}"`;
+  if(d.chip) JUST = `[data-chip=${q(d.chip)}][data-v=${q(d.v)}]`;
+  else if(d.pick) JUST = `[data-pick=${q(d.pick)}][data-v=${q(d.v)}]`;
+  else if(d.blk) JUST = `[data-blk=${q(d.blk)}]`;
+  else if(d.niche) JUST = `[data-niche=${q(d.niche)}]`;
+  if(d.pick){ const pk = $('#peek'); pk.classList.remove('pulse'); void pk.offsetWidth; pk.classList.add('pulse'); }
+  if(d.swipe){
+    if(d.swipe === 'reset'){ A.deck = []; A.swipeIdx = 0; A.liked = []; A.disliked = []; render(); }
+    else swipe(d.swipe === 'yes');
+    return;
+  }
+  if(d.hint){
+    const k = d.hint, cur = A[k].trim();
+    if(!cur.includes(d.v)) A[k] = k === 'product' ? d.v : (cur ? cur.replace(/[\s,.;]+$/,'') + ', ' : '') + d.v;
+    render(); return;
+  }
+  if(d.rmfile !== undefined){ FILES.splice(+d.rmfile, 1); render(); return; }
+  if(d.go){ go(+d.go); return; }
+  if(d.send){ send(d.send); return; }
+  if(d.niche){ toggle(A.niches, d.niche); if(!A.swipeIdx) A.deck = []; render(); return; }
+  if(d.chip){
+    const k = d.chip, v = d.v;
+    if(d.multi === '1'){
+      if(v === 'Не знаю') A[k] = A[k].includes(v) ? [] : ['Не знаю'];
+      else { A[k] = A[k].filter(x => x !== 'Не знаю'); toggle(A[k], v); }
+    } else A[k] = A[k] === v ? '' : v;
+    render(); return;
+  }
+  if(d.pick){
+    toggle(A[d.pick], d.v);
+    if(d.pick === 'styles') A.styleIdk = false;
+    if(d.pick === 'palettes') A.palIdk = false;
+    if(d.pick === 'fonts') A.fontIdk = false;
+    render(); return;
+  }
+  if(d.blk){ toggle(A.blocks, d.blk); A.blocksIdk = false; render(); return; }
+  if(d.auto){ AUTO[d.auto](); render(); toast('Подобрали варианты - можно поправить вручную'); }
+});
+
+// тема
+(function(){
+  let th = null; try{ th = localStorage.getItem('brief-theme'); }catch(e){}
+  if(th) document.documentElement.dataset.theme = th;
+  $('#themeBtn').onclick = () => {
+    const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const nx = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = nx;
+    try{ localStorage.setItem('brief-theme', nx); }catch(e){}
+  };
+})();
+
+if(VIEW){
+  S.step = STEPS.findIndex(x => x.id === 'result');
+  readBrief().then(data => { Object.assign(A, data); render(); })
+    .catch(() => { $('#app').innerHTML = head('Ссылка повреждена', 'Не удалось открыть бриф - попросите прислать ссылку ещё раз.'); });
+} else render();
+</script>
 </body>
 </html>

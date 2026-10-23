@@ -62,7 +62,7 @@
       '</div></div></section>' +
       '<section class="about" id="about"><div class="wrap"><div class="box"><h2>' + esc(d.sections.aboutTitle) + '</h2><p>' + esc(d.sections.aboutText) + '</p></div></div></section>' +
       '<section class="contacts" id="contacts"><div class="wrap"><h2>Контакты</h2><div class="grid2">' + contactsHtml() + '</div></div></section>' +
-      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(d.brand.name) + '</span><span>Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(d.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a> · Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>' +
       '<div class="drawer-bg" data-close-cart></div><aside class="drawer" aria-label="Корзина"><header><h3 style="margin:0">Ваш заказ</h3><button data-close-cart aria-label="Закрыть">×</button></header><div class="list" data-list></div>' +
         '<div class="foot"><div class="total"><span>Итого</span><span data-total></span></div>' +
         '<input data-name placeholder="Ваше имя" autocomplete="name"><input data-phone placeholder="Телефон" inputmode="tel" autocomplete="tel"><textarea data-comment rows="2" placeholder="Комментарий: дата, время, надпись на торте"></textarea>' +
