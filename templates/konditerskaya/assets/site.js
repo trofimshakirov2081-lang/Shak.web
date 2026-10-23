@@ -40,6 +40,7 @@
   function render() {
     var d = data;
     document.getElementById("app").innerHTML =
+      (d.demo && d.demo.banner ? '<div class="demo-bar" data-demo><p>Демо от <b>shak.web</b><span class="long">. Цены, тексты и фото владелец меняет сам</span></p><a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>' : '') +
       '<header class="top" id="top"><div class="wrap">' + logo() +
         '<nav class="nav"><a href="#menu">' + esc(d.sections.catalogTitle) + '</a><a href="#about">' + esc(d.sections.aboutTitle) + '</a><a href="#contacts">Контакты</a></nav>' +
         '<button class="cart-btn" data-open-cart>Корзина<b data-count>0</b></button>' +
@@ -66,7 +67,6 @@
         '<div class="foot"><div class="total"><span>Итого</span><span data-total></span></div>' +
         '<input data-name placeholder="Ваше имя" autocomplete="name"><input data-phone placeholder="Телефон" inputmode="tel" autocomplete="tel"><textarea data-comment rows="2" placeholder="Комментарий: дата, время, надпись на торте"></textarea>' +
         orderButtons() + '</div></aside>' +
-      (d.demo && d.demo.banner ? '<div class="demo-bar" data-demo><p>Демо от <b>shak.web</b><span class="long">. Цены, тексты и фото владелец меняет сам</span></p><a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>' : '') +
       '<div class="toast" data-toast></div>';
     updateCart();
   }

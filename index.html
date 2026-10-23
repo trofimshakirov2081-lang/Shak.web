@@ -24,7 +24,7 @@
         <a href="#demo">Демо</a>
         <a href="#contacts">Контакты</a>
       </nav>
-      <a class="btn small" href="https://t.me/SHAKIROVtrofim" target="_blank" rel="noopener">Написать</a>
+      <a class="btn small" id="topCta" href="https://t.me/SHAKIROVtrofim" target="_blank" rel="noopener">Написать</a>
     </div>
   </header>
 
@@ -179,7 +179,6 @@
     </div>
   </footer>
 
-  <a class="sticky-cta" href="brief/">Собрать свой сайт бесплатно</a>
 
   <script>
     (function () {
@@ -193,15 +192,16 @@
         out.classList.remove("pop"); void out.offsetWidth; out.classList.add("pop");
       });
 
-      // Липкая кнопка на телефоне: прячем, когда видна главная кнопка или финальный призыв
-      var sticky = document.querySelector(".sticky-cta"), seen = new Set();
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (es) {
-          es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
-          sticky.classList.toggle("show", seen.size === 0);
-        });
-        document.querySelectorAll(".hero .actions, .cta, .foot").forEach(function (el) { io.observe(el); });
-      } else sticky.classList.add("show");
+      // Внизу экрана ничего не закрепляем: Safari на iPhone тогда заливает свою панель цветом.
+      // Вместо этого кнопка в шапке после прокрутки ведёт на бриф.
+      var topCta = document.getElementById("topCta"), heroBtns = document.querySelector(".hero .actions");
+      function setTopCta(toBrief) {
+        if (toBrief) { topCta.textContent = "Собрать сайт"; topCta.href = "brief/"; topCta.removeAttribute("target"); }
+        else { topCta.textContent = "Написать"; topCta.href = "https://t.me/SHAKIROVtrofim"; topCta.target = "_blank"; }
+      }
+      if ("IntersectionObserver" in window && heroBtns) {
+        new IntersectionObserver(function (es) { setTopCta(!es[0].isIntersecting && es[0].boundingClientRect.top < 0); }).observe(heroBtns);
+      }
 
       // Анимация на первом экране: цена печатается в админке и меняется на сайте
       var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;

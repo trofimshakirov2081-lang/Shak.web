@@ -18,6 +18,9 @@
     sent: false
   };
   try { Object.assign(st, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+  // Откуда пришёл клиент: ссылка вида brief/?from=ikea (метка ролика) попадает в ТЗ
+  var from = (location.search.match(/[?&]from=([\w\-]{1,40})/) || [])[1];
+  if (from) st.from = from;
 
   var app = document.getElementById("app");
 
@@ -238,6 +241,7 @@
       "Бюджет: " + (b ? (b.max === null ? b.label : budgetLabel(b) + " " + C.currency[st.cur].sign) : "не указан"),
       "Ориентир: " + money(e.min) + " (разработка " + money(e.dev) + " + настройка " + money(C.base.setup) + " - " + C.discount.title + " " + money(C.discount.price) + "), " + e.days + "-" + e.daysMax + " рабочих дней",
       "Контакт: " + (st.person ? st.person + ", " : "") + st.contact,
+      st.from ? "Откуда: " + st.from : "",
       st.comment ? "Пожелания: " + st.comment : ""
     ].filter(Boolean).join("\n");
   }

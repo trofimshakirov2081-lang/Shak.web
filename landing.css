@@ -17,7 +17,7 @@ mark { background: linear-gradient(transparent 58%, var(--sun) 58%); color: inhe
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--pri); color: #fff; text-decoration: none; font-weight: 800; padding: 15px 24px; border-radius: 16px; border: 0; transition: transform .15s; }
 .btn:active { transform: scale(.97); }
-.btn.small { padding: 10px 16px; font-size: 15px; border-radius: 12px; }
+.btn.small { padding: 10px 16px; font-size: 15px; border-radius: 12px; white-space: nowrap; }
 .btn.ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
 .btn.huge { font-size: 20px; padding: 22px 30px; border-radius: 20px; box-shadow: 0 16px 40px rgba(31,107,255,.35); }
 .btn.light { background: #fff; color: var(--pri); box-shadow: 0 16px 40px rgba(0,0,0,.2); }
@@ -119,17 +119,13 @@ summary::after { content: "+"; color: var(--pri); font-size: 24px; line-height: 
 details[open] summary::after { content: "−"; }
 details p { color: var(--mut); margin: 10px 0 0; }
 
-.foot { background: var(--ink); color: #fff; padding: 48px 0 120px; }
+.foot { background: var(--ink); color: #fff; padding: 48px 0 calc(48px + env(safe-area-inset-bottom)); }
 .foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
 .foot .muted { color: rgba(255,255,255,.6); }
 .contacts { display: flex; flex-wrap: wrap; gap: 12px; }
 .contacts a { text-decoration: none; background: rgba(255,255,255,.08); border-radius: 16px; padding: 14px 18px; font-weight: 700; }
 .contacts small { display: block; font-weight: 400; opacity: .6; font-size: 13px; }
 
-.sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 30; display: none; text-align: center; background-color: transparent; background-image: linear-gradient(var(--pri), var(--pri)); color: #fff; text-decoration: none; font-weight: 800; padding: 17px; border-radius: 18px; box-shadow: 0 8px 24px rgba(18,24,38,.18); }
-/* Цвет кнопки задан картинкой-градиентом, а не background-color: новый Safari на iPhone
-   берёт background-color закреплённого внизу элемента и красит им свою панель. */
-@media (max-width: 760px) { .sticky-cta { display: block; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .25s; } .sticky-cta.show { opacity: 1; transform: none; pointer-events: auto; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
 .one-pack { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }

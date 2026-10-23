@@ -112,7 +112,7 @@ h3 { font-size: 20px; }
 .contact { background: var(--soft); border-radius: var(--radius); padding: 18px 20px; text-decoration: none; display: block; }
 .contact small { display: block; opacity: .6; font-size: 13px; }
 .contact strong { font-size: 17px; word-break: break-word; }
-footer { border-top: 1px solid var(--line); padding: 24px 0 110px; font-size: 14px; opacity: .7; }
+footer { border-top: 1px solid var(--line); padding: 24px 0 calc(24px + env(safe-area-inset-bottom)); font-size: 14px; opacity: .7; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
 
 /* Корзина */
@@ -133,7 +133,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: s
 .btn.wide { width: 100%; justify-content: center; }
 
 /* Полоска демо */
-.demo-bar { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 30; display: flex; align-items: center; gap: 12px; background: #161616; color: #fff; padding: 12px 14px 12px 18px; border-radius: 18px; box-shadow: 0 12px 40px rgba(0,0,0,.25); max-width: 620px; margin-inline: auto; font-size: 14px; }
+.demo-bar { display: flex; align-items: center; gap: 12px; background: #161616; color: #fff; padding: 10px 12px 10px 16px; font-size: 14px; }
+/* Полоска демо стоит сверху в потоке страницы: закреплённый низ Safari на iPhone заливает цветом */
 .demo-bar p { margin: 0; flex: 1; }
 .demo-bar a { background: #fff; color: #161616; text-decoration: none; font-weight: 700; padding: 9px 14px; border-radius: 12px; white-space: nowrap; }
 @media (max-width: 560px) { .demo-bar { font-size: 13px; padding: 10px 10px 10px 14px; gap: 8px; } .demo-bar .long { display: none; } .demo-bar a { padding: 8px 10px; } }
