@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bulochnaya-tani.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bulochnaya-tani",
-  "rev": "2026-10-23T09:20:06.640Z",
+  "rev": "2026-10-23T09:28:18.634Z",
   "brand": {
     "name": "Булочная Тани",
     "tagline": "Семейная булочная",
