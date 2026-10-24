@@ -1,0 +1,127 @@
+{
+  "slug": "flora-line",
+  "name": "Флора-Лайн",
+  "niche": "цветы",
+  "city": "Москва",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#C9B27C",
+    "accent": "#2C4A3D",
+    "bg": "#14261F",
+    "text": "#EEF0E6"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Цветочная мастерская у Красных ворот",
+    "text": "Букеты, композиции и корзины из живых цветов. Место флористических экспериментов.",
+    "cta": "Выбрать букет",
+    "photo": "files/flora-line/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Флора-Лайн: цветочная мастерская, где мы экспериментируем и собираем букеты, композиции и корзины из живых цветов.",
+  "features": [
+    {
+      "icon": "🌿",
+      "title": "Живые цветы",
+      "text": "Только свежие поставки."
+    },
+    {
+      "icon": "🧺",
+      "title": "Корзины и композиции",
+      "text": "Для подарка и интерьера."
+    },
+    {
+      "icon": "📍",
+      "title": "Орликов переулок",
+      "text": "Москва, центр."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/flora-line/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/flora-line/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/flora-line/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/flora-line/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/flora-line/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/flora-line/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/flora-line/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/flora-line/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 495 607-83-17",
+    "whatsapp": "74956078317",
+    "address": "Орликов пер., 3, стр. 1",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Букеты как маленькое искусство",
+    "vars": {
+      "deep": "#0D1A15",
+      "c-surface": "#14261F"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://floraline.orgs.biz/",
+  "email": "flora-line2010@mail.ru"
+}

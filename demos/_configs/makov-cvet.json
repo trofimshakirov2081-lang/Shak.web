@@ -1,0 +1,162 @@
+{
+  "slug": "makov-cvet",
+  "name": "Маков Цвет",
+  "niche": "цветы",
+  "city": "Челябинск",
+  "tagline": "Авторские букеты с бесплатной доставкой",
+  "colors": {
+    "main": "#C8241B",
+    "accent": "#EF7A63",
+    "bg": "#F9E6E1",
+    "text": "#2B1513"
+  },
+  "fonts": {
+    "head": "Geologica",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Букеты, которые собирают руками, а не по шаблону",
+    "text": "Авторские букеты и композиции в Челябинске. Доставим бесплатно, а перед отправкой пришлём фото.",
+    "cta": "Выбрать букет",
+    "photo": "files/makov-cvet/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты и композиции",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О мастерской",
+    "orderTitle": "Ваш букет",
+    "addLabel": "В корзину"
+  },
+  "about": "Маков Цвет: цветочная мастерская на Мамина, 19/3. Каждый букет собираем под повод и под человека: спросим, кому он, и подберём цвета. Если не знаете, что выбрать, просто напишите, поможем.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Бесплатная доставка",
+      "text": "Привезём по Челябинску к нужному времени."
+    },
+    {
+      "icon": "🌺",
+      "title": "Авторские букеты",
+      "text": "Собираем под повод, а не из одной заготовки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет до того, как он выедет."
+    }
+  ],
+  "items": [
+    {
+      "name": "Одной единственной",
+      "price": 5100,
+      "desc": "Большой букет красных роз",
+      "emoji": "🌹",
+      "photo": "files/makov-cvet/odnoy.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Ласковый август",
+      "price": 1940,
+      "desc": "Подсолнухи с зеленью",
+      "emoji": "🌻",
+      "photo": "files/makov-cvet/avgust.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Грация",
+      "price": 1460,
+      "desc": "Розовые хризантемы",
+      "emoji": "🌸",
+      "photo": "files/makov-cvet/graciya.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Витаминка",
+      "price": 1280,
+      "desc": "Композиция с оранжевыми розами",
+      "emoji": "🧡",
+      "photo": "files/makov-cvet/vitaminka.jpg",
+      "tag": "Композиция"
+    },
+    {
+      "name": "Самой красивой",
+      "price": 990,
+      "desc": "Яркая сборная композиция",
+      "emoji": "💐",
+      "photo": "files/makov-cvet/samoy.jpg",
+      "tag": "Композиция"
+    },
+    {
+      "name": "Матильда",
+      "price": 1850,
+      "desc": "Розы с орхидеями",
+      "emoji": "🌷",
+      "photo": "files/makov-cvet/matilda.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Аромат хризантем",
+      "price": 1320,
+      "desc": "Пышные кустовые хризантемы",
+      "emoji": "🌼",
+      "photo": "files/makov-cvet/hriz.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "",
+    "whatsapp": "79000720616",
+    "address": "ул. Мамина, 19/3",
+    "hours": ""
+  },
+  "extra": {
+    "vk": "vk.com/idkarkusha",
+    "commentHint": "Кому букет, адрес, дата и время доставки",
+    "orderIntro": "Здравствуйте! Хочу заказать букет с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине."
+  },
+  "credits": "Фото: Pexels",
+  "designName": "Светлый",
+  "alt": [
+    {
+      "custom": "luxe",
+      "name": "Вечерний",
+      "extra": {
+        "vars": {
+          "bg": "#2A1215",
+          "text": "#F1E7DA",
+          "main": "#D9B48F",
+          "accent": "#5A2228"
+        },
+        "fonts": {
+          "head": "Cormorant Garamond",
+          "body": "Manrope"
+        },
+        "heroTitle": "Цветы, о которых вспоминают",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки."
+      }
+    },
+    {
+      "custom": "yulya-konditer",
+      "name": "Пастельный",
+      "extra": {
+        "vars": {
+          "bg": "#F3EEF8",
+          "main": "#B4325E",
+          "accent": "#F6D5E0",
+          "text": "#2E1E2A",
+          "lilac": "#E3D9F3",
+          "pist": "#DCEBCF",
+          "butter": "#FBEAC4"
+        },
+        "fonts": {
+          "head": "Unbounded",
+          "body": "Nunito"
+        },
+        "fromLabel": "Букеты от",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+        "orderMsg": "Здравствуйте! Хочу заказать букет"
+      }
+    }
+  ]
+}

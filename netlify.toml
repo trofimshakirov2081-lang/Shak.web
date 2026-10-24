@@ -1,0 +1,26 @@
+# Сайт публикуется как обычные файлы, сборка не нужна.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Служебные папки не показываем посетителям
+[[redirects]]
+  from = "/tools/*"
+  to = "/404"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/reports/*"
+  to = "/404"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/demos/_configs/*"
+  to = "/404"
+  status = 404
+  force = true

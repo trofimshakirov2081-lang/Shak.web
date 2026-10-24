@@ -1,0 +1,127 @@
+{
+  "slug": "the-rose",
+  "name": "The Rose",
+  "niche": "цветы",
+  "city": "Уфа",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#E2B98F",
+    "accent": "#4A382E",
+    "bg": "#2B211C",
+    "text": "#F3EAE0"
+  },
+  "fonts": {
+    "head": "Prata",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Розы, которые живут годами",
+    "text": "Стабилизированные розы в колбе стоят 3-5 лет без воды и ухода. Подарок, который не завянет.",
+    "cta": "Выбрать букет",
+    "photo": "files/the-rose/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "The Rose: настоящие срезанные розы в стабильном состоянии. Они сохраняют вид 3-5 лет и украшают интерьер.",
+  "features": [
+    {
+      "icon": "⏳",
+      "title": "3-5 лет",
+      "text": "Без воды и ухода."
+    },
+    {
+      "icon": "🌹",
+      "title": "Настоящие розы",
+      "text": "Стабилизированные."
+    },
+    {
+      "icon": "🎁",
+      "title": "ВАУ-коробка",
+      "text": "Красиво дарить."
+    }
+  ],
+  "items": [
+    {
+      "name": "Роза в колбе",
+      "price": 2499,
+      "desc": "Товар: Роза в колбе! 1.Популярный по всему миру изысканный…",
+      "photo": "files/the-rose/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Роза в колбе с ВАУ коробкой",
+      "price": 2999,
+      "desc": "Товар: Роза в колбе с ВАУ коробкой! 1.Популярный по всему…",
+      "photo": "files/the-rose/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/the-rose/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/the-rose/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/the-rose/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/the-rose/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/the-rose/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/the-rose/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 963 896-97-97",
+    "whatsapp": "79638969797",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Роза, которая не завянет",
+    "vars": {
+      "deep": "#1E1713",
+      "c-surface": "#2B211C"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://club191511502.orgs.biz/",
+  "email": "dinis.sagitov@list.ru"
+}

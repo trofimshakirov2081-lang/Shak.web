@@ -1,0 +1,127 @@
+{
+  "slug": "iz-cvetov",
+  "name": "Из цветов",
+  "niche": "цветы",
+  "city": "Санкт-Петербург",
+  "custom": "makov-cvet",
+  "tagline": "Цветочная мастерская в Петербурге",
+  "colors": {
+    "main": "#5B2A43",
+    "accent": "#EBC7C9",
+    "bg": "#F8F4F3",
+    "text": "#24121B"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Большие авторские букеты в Петербурге",
+    "text": "Пышные сезонные букеты с вкусными названиями, оформление мероприятий и доставка по городу.",
+    "cta": "Выбрать букет",
+    "photo": "files/iz-cvetov/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "«Из цветов»: мастерская на Чкаловском проспекте с лёгкой творческой атмосферой. Собираем стильные авторские букеты и оформляем праздники.",
+  "features": [
+    {
+      "icon": "🌺",
+      "title": "Авторские букеты",
+      "text": "Каждый собираем вручную."
+    },
+    {
+      "icon": "🎉",
+      "title": "Оформление",
+      "text": "Праздники и мероприятия."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Петербургу."
+    }
+  ],
+  "items": [
+    {
+      "name": "Вишнёвый глинтвейн",
+      "price": 5200,
+      "desc": "Глубокие ягодные оттенки",
+      "tag": "",
+      "photo": "files/iz-cvetov/item-1.jpg"
+    },
+    {
+      "name": "Персик с мандарином",
+      "price": 11000,
+      "desc": "Большой тёплый букет",
+      "photo": "files/iz-cvetov/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Маффин, 9 шт",
+      "price": 7600,
+      "desc": "Средний, но щедрый",
+      "photo": "files/iz-cvetov/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Маффин, 7 шт",
+      "price": 5900,
+      "desc": "Маленький, но милый",
+      "tag": "",
+      "photo": "files/iz-cvetov/item-4.jpg"
+    },
+    {
+      "name": "Рыжик",
+      "price": 8500,
+      "desc": "Огненный осенний букет",
+      "photo": "files/iz-cvetov/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Павлова",
+      "price": 9500,
+      "desc": "Воздушный и нежный",
+      "tag": "",
+      "photo": "files/iz-cvetov/item-6.jpg"
+    },
+    {
+      "name": "Медовик",
+      "price": 6200,
+      "desc": "Медовые оттенки",
+      "photo": "files/iz-cvetov/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прима Мариинки",
+      "price": 6500,
+      "desc": "Изящный букет",
+      "tag": "",
+      "photo": "files/iz-cvetov/item-8.jpg"
+    }
+  ],
+  "contacts": {
+    "phone": "+7 901 316-81-00",
+    "whatsapp": "79013168100",
+    "address": "Чкаловский пр., 17",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ]
+    ],
+    "vars": {
+      "soft": "#EFE6E6",
+      "ok": "#3F7D58"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://easeflowers.orgs.biz/"
+}

@@ -1,0 +1,100 @@
+{
+  "slug": "bento-sarov",
+  "name": "Бенто Саров",
+  "niche": "кондитерская",
+  "city": "Саров",
+  "tagline": "Бенто, торты и капкейки",
+  "colors": [
+    "#2F6E8E",
+    "#F6C9A8",
+    "#F5FAFC",
+    "#16303D"
+  ],
+  "fonts": {
+    "head": "Comfortaa",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Торт с рисунком к любому поводу",
+    "text": "Бенто-торты с вашим рисунком, торты на вес, капкейки и тортик с собой. Выберите, что нравится, и отправьте заказ в WhatsApp.",
+    "cta": "Выбрать торт",
+    "photo": "files/bento-sarov/velvet.jpg"
+  },
+  "about": "Домашняя кондитерская в Сарове. Печём бенто-торты с рисунком, торты на вес и капкейки. Рисуем по вашей идее и подбираем начинку под вкус.",
+  "features": [
+    {
+      "icon": "🎨",
+      "title": "Рисунок по вашей идее",
+      "text": "Нарисуем персонажа или надпись."
+    },
+    {
+      "icon": "⚖️",
+      "title": "Торты на вес",
+      "text": "От 1 300 ₽ за килограмм."
+    },
+    {
+      "icon": "🧁",
+      "title": "Капкейки поштучно",
+      "text": "Берите сколько нужно."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 850,
+      "desc": "Маленький торт с надписью",
+      "emoji": "🎂",
+      "photo": "files/bento-sarov/bento.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Бенто-торт с рисунком",
+      "price": 900,
+      "desc": "Нарисуем по вашей идее",
+      "emoji": "🎨",
+      "photo": "files/bento-sarov/bentorisunok.jpg"
+    },
+    {
+      "name": "Тортик с собой",
+      "price": 950,
+      "desc": "Порционный торт в коробочке",
+      "emoji": "🍰",
+      "photo": "files/bento-sarov/togo.jpg"
+    },
+    {
+      "name": "Торт «Банан-карамель», 1 кг",
+      "price": 1300,
+      "desc": "Банан, карамель и нежный крем",
+      "emoji": "🍌",
+      "photo": "files/bento-sarov/banan.jpg"
+    },
+    {
+      "name": "Красный бархат с чизкейком, 1 кг",
+      "price": 1300,
+      "desc": "Бархатный бисквит и чизкейк",
+      "emoji": "❤️",
+      "photo": "files/bento-sarov/velvet.jpg"
+    },
+    {
+      "name": "Капкейк «Красный бархат»",
+      "price": 165,
+      "desc": "Цена за 1 шт",
+      "emoji": "🧁",
+      "photo": "files/bento-sarov/cupvelvet.jpg"
+    },
+    {
+      "name": "Капкейк",
+      "price": 160,
+      "desc": "Цена за 1 шт, вкус на выбор",
+      "emoji": "🧁",
+      "photo": "files/bento-sarov/cup.jpg"
+    }
+  ],
+  "contacts": {
+    "phone": "+7 952 463-29-24",
+    "whatsapp": "79524632924",
+    "address": "",
+    "hours": ""
+  },
+  "credits": "Фото: Pexels"
+}

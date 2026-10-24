@@ -1,0 +1,126 @@
+{
+  "slug": "konditer-tatyana",
+  "name": "Кондитер Татьяна",
+  "niche": "кондитерская",
+  "city": "Новосибирск",
+  "custom": "yulya-konditer",
+  "tagline": "Торты на заказ в Новосибирске",
+  "colors": {
+    "main": "#2D6A4F",
+    "accent": "#FFD6A5",
+    "bg": "#F7FAF5",
+    "text": "#1B2E24"
+  },
+  "fonts": {
+    "head": "Wix Madefor Display",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Торты на заказ без сюрпризов в цене",
+    "text": "Натуральные сливки, шоколад и ягоды. Дизайн по вашему фото, цена за кг фиксируется при заказе.",
+    "cta": "Собрать заказ",
+    "photo": "files/konditer-tatyana/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Торты и десерты",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Татьяна",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Кондитерская на дому в Новосибирске. Делаю торты на свадьбы, детские и взрослые праздники, а ещё эклеры, профитроли и мадлен.",
+  "features": [
+    {
+      "icon": "🌿",
+      "title": "Натуральный состав",
+      "text": "Сливки, шоколад, ягоды."
+    },
+    {
+      "icon": "📸",
+      "title": "Дизайн по фото",
+      "text": "Или придумаем с нуля."
+    },
+    {
+      "icon": "💰",
+      "title": "Цена фиксируется",
+      "text": "Без сюрпризов при выдаче."
+    }
+  ],
+  "items": [
+    {
+      "name": "Фисташка-малина",
+      "price": 2500,
+      "desc": "Коржи с фисташковой пастой",
+      "photo": "files/konditer-tatyana/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Красный бархат",
+      "price": 2000,
+      "desc": "Влажный бисквит и крем-чиз",
+      "photo": "files/konditer-tatyana/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Молочная девочка",
+      "price": 2000,
+      "desc": "Коржи на сгущённом молоке",
+      "photo": "files/konditer-tatyana/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шоколадный чизкейк",
+      "price": 2000,
+      "desc": "Насыщенный и шелковистый",
+      "photo": "files/konditer-tatyana/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Меренговый рулет",
+      "price": 1800,
+      "desc": "Хрустящая корочка, тягучая середина",
+      "photo": "files/konditer-tatyana/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Эклеры",
+      "price": 120,
+      "desc": "За штуку",
+      "photo": "files/konditer-tatyana/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Профитроли XL",
+      "price": 120,
+      "desc": "За штуку",
+      "photo": "files/konditer-tatyana/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Мадлен",
+      "price": 130,
+      "desc": "За штуку",
+      "photo": "files/konditer-tatyana/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 999 465-52-18",
+    "whatsapp": "79994655218",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#F6D6DC",
+      "pist": "#D8EBDD",
+      "butter": "#FFE8C2"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://konditer-nsk-tat.orgs.biz/"
+}

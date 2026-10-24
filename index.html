@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>shak.web | Сайты под ключ с админкой для малого бизнеса</title>
+  <meta name="description" content="Сайты для кофеен, кондитерских, салонов, цветочных и студий по всей России. С админкой: цены, тексты и фото вы меняете сами.">
+  <meta property="og:title" content="Сайт, в котором вы сами меняете цены">
+  <meta property="og:description" content="Сайты под ключ с админкой для малого бизнеса. Соберите свой сайт бесплатно за 10 минут.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@700&display=swap">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#">shak<span>.</span>web</a>
+      <nav class="nav">
+        <a href="#admin">Админка</a>
+        <a href="#packages">Что входит</a>
+        <a href="#demo">Демо</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="btn small" id="topCta" href="https://t.me/SHAKIROVtrofim" target="_blank" rel="noopener">Написать</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="pill">Кофейни · кондитерские · салоны · цветочные · студии</span>
+          <h1>Сайт, в котором вы <mark>сами</mark> меняете цены</h1>
+          <p class="lead">Делаю сайты под ключ для малого бизнеса по всей России. В каждом есть админка: цены, тексты и фото вы меняете с телефона за минуту, без программиста и без ожидания.</p>
+          <div class="actions">
+            <a class="btn huge" href="brief/">Собрать свой сайт бесплатно →</a>
+            <a class="btn ghost" href="#demo">Посмотреть демо</a>
+          </div>
+          <p class="muted small">10 минут, ни к чему не обязывает. В конце черновик сайта, брендбук и ТЗ.</p>
+        </div>
+        <div class="phone" aria-label="Пример: цена в админке меняется и сразу видна на сайте">
+          <div class="screen">
+            <div class="ph-head"><b>Булочная Тани</b><span>🛒</span></div>
+            <div class="ph-card">
+              <div class="ph-pic">🥐</div>
+              <div><b>Синнабон с корицей</b><small>Мягкая булочка со сливочным кремом</small><strong class="ph-price" id="phPrice">190 ₽</strong></div>
+            </div>
+            <div class="ph-card dim"><div class="ph-pic">🥖</div><div><b>Хлеб на закваске</b><small>600 г</small><strong>320 ₽</strong></div></div>
+          </div>
+          <div class="admin-pop">
+            <small>Админка · цена</small>
+            <div class="typing"><span id="phInput">190</span><i></i></div>
+            <span class="saved" id="phSaved">Сохранено ✓</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="admin">
+      <div class="wrap">
+        <h2>Админка. Главное, чем мои сайты отличаются</h2>
+        <p class="lead">Обычно, чтобы поменять цену на сайте, нужно написать разработчику и ждать. У вас это займёт минуту.</p>
+        <div class="admin-grid">
+          <div class="tile"><span>💸</span><h3>Цены за минуту</h3><p>Подорожали продукты? Поменяли цену в телефоне, сайт обновился.</p></div>
+          <div class="tile"><span>📸</span><h3>Фото с телефона</h3><p>Сфотографировали новый торт и сразу добавили на сайт.</p></div>
+          <div class="tile"><span>✍️</span><h3>Тексты и акции</h3><p>Меню, часы работы, акции недели. Всё правится без кода.</p></div>
+          <div class="tile"><span>🔒</span><h3>Сайт остаётся вашим</h3><p>Никаких ежемесячных платежей разработчику за каждую правку.</p></div>
+        </div>
+        <div class="try">
+          <div>
+            <h3>Попробуйте сами</h3>
+            <p class="muted">Поменяйте цену, как в настоящей админке.</p>
+            <label class="try-field">Цена медовика<input id="tryPrice" inputmode="numeric" value="850" maxlength="7" aria-label="Цена медовика"></label>
+          </div>
+          <div class="try-card"><div class="ph-pic big">🍯</div><div><b>Медовик</b><small>Тонкие коржи, сметанный крем</small><strong id="tryOut">850 ₽</strong></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="packages">
+      <div class="wrap">
+        <h2>Один пакет, всё включено</h2>
+        <p class="lead">Без выбора между «Старт» и «Премиум». Всё, что нужно малому бизнесу, уже в пакете: функции берутся из моих готовых сайтов, поэтому не стоят отдельных денег.</p>
+        <div class="one-pack">
+          <article class="pack hit">
+            <span class="badge">Сайт под ключ</span>
+            <h3>Что входит</h3>
+            <ul>
+              <li>Дизайн под ваш бренд: цвета, шрифты, логотип</li>
+              <li>Все нужные блоки: услуги или меню с ценами, о вас, отзывы, галерея, вопросы, контакты с картой</li>
+              <li>Админка: цены, тексты и фото меняете сами</li>
+              <li>Заказы или заявки прилетают в Telegram или WhatsApp</li>
+              <li>Удобно на телефоне, быстро открывается</li>
+              <li>Запуск на вашем хостинге: база данных, домен, https, защита админки</li>
+              <li>Яндекс Метрика, Вебмастер, Google, карточки на картах</li>
+              <li>Обучение админке и 14 дней поддержки</li>
+            </ul>
+            <div class="price">Цена по запросу</div>
+            <a class="btn wide" href="https://t.me/SHAKIROVtrofim" target="_blank" rel="noopener">Узнать цену</a>
+          </article>
+          <div class="pack-side">
+            <div class="tile"><span>🎁</span><h3>Скидка за бриф</h3><p>Пройдите бриф, и сайт обойдётся дешевле. А если у вас уже есть полный брендбук и ТЗ, скидка ещё больше.</p><a href="tz/">Что значит «полный» →</a></div>
+            <div class="tile"><span>🧩</span><h3>Тоже в пакете</h3><p>Корзина, запись, доставка, бонусы, промокоды, личный кабинет, конструктор торта или букета. Отдельно только онлайн-оплата, второй язык и тексты за вас.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="wrap">
+        <h2>Демо и портфолио</h2>
+        <p class="lead">Откройте любой сайт с телефона. В демо «Булочной Тани» можно зайти в админку (PIN 1234) и поменять цену самим.</p>
+        <div class="demos">
+          <a class="demo" href="demos/bulochnaya-tani/" style="--c1:#6B4226;--c2:#C68E4E">
+            <span class="d-pic">🥖</span><b>Булочная Тани</b><small>Пекарня · демо с админкой</small>
+          </a>
+          <a class="demo" href="https://summer-cakes.netlify.app" target="_blank" rel="noopener" style="--c1:#E37B9B;--c2:#FFD1DC">
+            <span class="d-pic">🎂</span><b>Summer</b><small>Кондитерская · конструктор торта, бонусы</small>
+          </a>
+          <a class="demo" href="https://malli-botanicals.netlify.app" target="_blank" rel="noopener" style="--c1:#2F5D50;--c2:#E8B4A0">
+            <span class="d-pic">💐</span><b>Malli Botanicals</b><small>Цветы · подбор букета, промокоды</small>
+          </a>
+          <a class="demo" href="https://brow-studio.netlify.app" target="_blank" rel="noopener" style="--c1:#8C6A5D;--c2:#EAD7C7">
+            <span class="d-pic">✨</span><b>LUMÉ</b><small>Салон бровей · запись, выгрузка в Excel</small>
+          </a>
+        </div>
+        <div class="row-links">
+          <a class="btn ghost" href="demos/">Все демо-сайты</a>
+          <a class="btn ghost" href="https://instagram.com/shak.web" target="_blank" rel="noopener">Портфолио в Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="wrap">
+        <h2>Как всё происходит</h2>
+        <ol class="steps">
+          <li><b>Бриф за 10 минут</b><span>Выбираете стиль, цвета и функции. Получаете черновик и ТЗ.</span></li>
+          <li><b>Демо под вас</b><span>Покажу сайт с вашим названием, цветами и товарами ещё до оплаты.</span></li>
+          <li><b>Правки и запуск</b><span>Доводим детали, подключаю домен и заказы в мессенджер.</span></li>
+          <li><b>Вы управляете сами</b><span>Меняете цены и фото в админке. Я на связи, если нужна помощь.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <h2>Посмотрите, каким может быть ваш сайт</h2>
+        <p>Бесплатно, ни к чему не обязывает. Можно просто поиграть.</p>
+        <a class="btn huge light" href="brief/">Собрать свой сайт бесплатно →</a>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <h2>Частые вопросы</h2>
+        <details><summary>Я не разбираюсь в сайтах. Справлюсь с админкой?</summary><p>Да. Админка устроена как обычное приложение: поле с ценой, кнопка «Сохранить». Покажу всё на коротком созвоне и пришлю видео-инструкцию.</p></details>
+        <details><summary>Нужно ли платить каждый месяц?</summary><p>Мне нет. Вы платите только хостингу за место для сайта и базы данных (обычно несколько сотен рублей в месяц) и за домен раз в год, напрямую им. Всё оформлено на вас, сайт полностью ваш.</p></details>
+        <details><summary>Сколько времени занимает сайт?</summary><p>7-10 рабочих дней с момента, когда есть материалы, доступы и предоплата.</p></details>
+        <details><summary>Куда приходят заказы?</summary><p>В Telegram или WhatsApp, как вам удобнее. Клиент собирает корзину, а вы получаете готовое сообщение с составом заказа и контактами.</p></details>
+        <details><summary>Работаете удалённо?</summary><p>Да, с бизнесами по всей России. Созвоны, правки и запуск онлайн, вам никуда не нужно ехать.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" id="contacts">
+    <div class="wrap">
+      <div>
+        <a class="brand" href="#">shak<span>.</span>web</a>
+        <p class="muted">Сайты под ключ с админкой для малого бизнеса</p>
+      </div>
+      <div class="contacts">
+        <a href="https://t.me/SHAKIROVtrofim" target="_blank" rel="noopener"><small>Telegram</small>@SHAKIROVtrofim</a>
+        <a href="https://instagram.com/shak.web" target="_blank" rel="noopener"><small>Instagram</small>@shak.web</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    (function () {
+      var fmt = function (n) { return Number(n).toLocaleString("ru-RU") + " ₽"; };
+
+      // Поле «попробуйте сами»
+      var inp = document.getElementById("tryPrice"), out = document.getElementById("tryOut");
+      inp.addEventListener("input", function () {
+        inp.value = inp.value.replace(/\D/g, "");
+        out.textContent = fmt(inp.value || 0);
+        out.classList.remove("pop"); void out.offsetWidth; out.classList.add("pop");
+      });
+
+      // Внизу экрана ничего не закрепляем: Safari на iPhone тогда заливает свою панель цветом.
+      // Вместо этого кнопка в шапке после прокрутки ведёт на бриф.
+      var topCta = document.getElementById("topCta"), heroBtns = document.querySelector(".hero .actions");
+      function setTopCta(toBrief) {
+        if (toBrief) { topCta.textContent = "Собрать сайт"; topCta.href = "brief/"; topCta.removeAttribute("target"); }
+        else { topCta.textContent = "Написать"; topCta.href = "https://t.me/SHAKIROVtrofim"; topCta.target = "_blank"; }
+      }
+      if ("IntersectionObserver" in window && heroBtns) {
+        new IntersectionObserver(function (es) { setTopCta(!es[0].isIntersecting && es[0].boundingClientRect.top < 0); }).observe(heroBtns);
+      }
+
+      // Анимация на первом экране: цена печатается в админке и меняется на сайте
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
+      var prices = ["190", "210", "230", "190"], k = 0;
+      var field = document.getElementById("phInput"), price = document.getElementById("phPrice"), saved = document.getElementById("phSaved");
+      function cycle() {
+        var next = prices[++k % prices.length], i = 0;
+        field.textContent = "";
+        saved.classList.remove("show");
+        var t = setInterval(function () {
+          field.textContent = next.slice(0, ++i);
+          if (i >= next.length) {
+            clearInterval(t);
+            setTimeout(function () {
+              saved.classList.add("show");
+              price.textContent = fmt(next);
+              price.classList.remove("pop"); void price.offsetWidth; price.classList.add("pop");
+            }, 400);
+          }
+        }, 220);
+      }
+      setInterval(cycle, 3600);
+    })();
+  </script>
+</body>
+</html>
