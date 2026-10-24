@@ -1,0 +1,161 @@
+{
+  "slug": "wow-for-you",
+  "name": "WOW For You",
+  "niche": "брови",
+  "city": "Санкт-Петербург",
+  "custom": "browlash",
+  "tagline": "Студия красоты",
+  "colors": {
+    "main": "#7D5BA6",
+    "accent": "#E6DCF2",
+    "bg": "#F7F4FA",
+    "text": "#221A2C"
+  },
+  "fonts": {
+    "head": "Tenor Sans",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Красота без спешки и по записи",
+    "text": "Выберите услугу и запишитесь в WhatsApp. Санкт-Петербург.",
+    "cta": "Выбрать услугу",
+    "photo": "files/wow-for-you/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Популярные услуги",
+    "catalogText": "Отметьте услуги, и заявка уйдёт в WhatsApp. Подберём время.",
+    "aboutTitle": "О студии",
+    "orderTitle": "Ваша запись",
+    "addLabel": "Записаться"
+  },
+  "about": "WOW For You: аккуратная работа, стерильность и приятная атмосфера.",
+  "features": [
+    {
+      "icon": "✨",
+      "title": "Опытные мастера",
+      "text": "Аккуратно и качественно."
+    },
+    {
+      "icon": "🧼",
+      "title": "Стерильность",
+      "text": "Одноразовые расходники."
+    },
+    {
+      "icon": "📍",
+      "title": "Санкт-Петербург",
+      "text": "Удобно добираться."
+    }
+  ],
+  "items": [
+    {
+      "name": "Скидка на смарт-педикюр!",
+      "price": 1990,
+      "desc": "💗ВЕСЬ ноябрь💗 смарт--педикюр по цене 1990 рублей ВМЕСТО…",
+      "photo": "files/wow-for-you/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Акция на педикюр!",
+      "price": 1190,
+      "desc": "Холодное время - не повод забыть о внешнем виде своих ног!…",
+      "photo": "files/wow-for-you/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "лами бровей за 400 рублей!",
+      "price": 400,
+      "desc": "При ламинировании ресниц, ламинирование бровей будет стоить…",
+      "photo": "files/wow-for-you/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Однодневный курс по смарт педикюру",
+      "price": 7000,
+      "desc": "Курс по СМАРТ-педикюру от For you 💯 SMART педикюр уже…",
+      "photo": "files/wow-for-you/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "педикюр за 1850 рублей!",
+      "price": 1850,
+      "desc": "Мастера в салоне красоты For You сделают вам качественный…",
+      "photo": "files/wow-for-you/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Педикюр",
+      "price": 990,
+      "desc": "Ухоженные стопы этой весной вместе с For you! Ждем вас на…",
+      "photo": "files/wow-for-you/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Оформление бровей",
+      "price": 990,
+      "desc": "Красивые, выразительные брови важны всем! Только до конца…",
+      "photo": "files/wow-for-you/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пудровые бровки",
+      "price": 5500,
+      "desc": "С 10 марта до конца месяца мы снижаем цену на пудровые…",
+      "photo": "files/wow-for-you/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 812 565-35-82",
+    "whatsapp": "78125653582",
+    "address": "ул. Передовиков, 9к2",
+    "hours": ""
+  },
+  "extra": {
+    "plainLevels": true,
+    "cards": [
+      [
+        "#221A2C",
+        "#F7F4FA"
+      ],
+      [
+        "#E6DCF2",
+        "#221A2C"
+      ],
+      [
+        "#7D5BA6",
+        "#FFFFFF"
+      ],
+      [
+        "#FFFFFF",
+        "#221A2C"
+      ],
+      [
+        "#B9A0D6",
+        "#221A2C"
+      ]
+    ],
+    "services": [
+      "Маникюр",
+      "Стрижки и окрашивание",
+      "Брови",
+      "Ресницы",
+      "Подарочный сертификат"
+    ],
+    "levelDefault": "Услуга",
+    "lines": false,
+    "heroAlt": "WOW For You",
+    "cartBtn": "Запись",
+    "svcTitle": "Ещё услуги",
+    "svcLink": "Все услуги",
+    "findText": "Напишите в WhatsApp, подберём удобное время.",
+    "sendLabel": "Отправить запись в WhatsApp",
+    "addedLabel": "Выбрано",
+    "commentHint": "Удобные дата и время",
+    "orderIntro": "Здравствуйте! Хочу записаться:",
+    "emptyText": "Пока ничего не выбрано. Отметьте услугу.",
+    "emptyToast": "Сначала выберите услугу"
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://artstyle4you.orgs.biz/",
+  "telegram_lead": "foryou_li"
+}

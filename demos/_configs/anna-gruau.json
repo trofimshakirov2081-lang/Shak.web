@@ -1,0 +1,150 @@
+{
+  "slug": "anna-gruau",
+  "name": "Anna Gruau",
+  "niche": "кофейня",
+  "city": "Новоселье",
+  "custom": "altynnur",
+  "tagline": "Кофе",
+  "colors": {
+    "main": "#1F5C4A",
+    "accent": "#D9B26A",
+    "bg": "#F5F7F4",
+    "text": "#10201B"
+  },
+  "fonts": {
+    "head": "Prata",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Кофе, ради которого хочется выйти пораньше",
+    "text": "Anna Gruau в Новоселье. Соберите заказ на сайте и заберите его, когда удобно.",
+    "cta": "Смотреть меню",
+    "photo": "files/anna-gruau/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Меню",
+    "catalogText": "Добавьте позиции в заказ и отправьте нам.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Anna Gruau: кофе и выпечка в Новоселье. Готовим с любовью и ждём вас каждый день.",
+  "features": [
+    {
+      "icon": "☕",
+      "title": "Свежий кофе",
+      "text": "Каждый день."
+    },
+    {
+      "icon": "🥐",
+      "title": "Выпечка",
+      "text": "К кофе и с собой."
+    },
+    {
+      "icon": "📍",
+      "title": "Новоселье",
+      "text": "Ждём в гости."
+    }
+  ],
+  "items": [
+    {
+      "name": "Капучино",
+      "price": 190,
+      "desc": "250/350 мл",
+      "photo": "files/anna-gruau/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Латте",
+      "price": 210,
+      "desc": "300/400 мл",
+      "photo": "files/anna-gruau/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Раф ванильный",
+      "price": 260,
+      "desc": "300 мл",
+      "photo": "files/anna-gruau/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Флэт уайт",
+      "price": 220,
+      "desc": "200 мл",
+      "photo": "files/anna-gruau/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Американо",
+      "price": 160,
+      "desc": "250/350 мл",
+      "photo": "files/anna-gruau/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Матча латте",
+      "price": 280,
+      "desc": "300 мл",
+      "photo": "files/anna-gruau/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Какао с маршмеллоу",
+      "price": 220,
+      "desc": "300 мл",
+      "photo": "files/anna-gruau/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Круассан",
+      "price": 150,
+      "desc": "Свежий, с маслом",
+      "photo": "files/anna-gruau/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 408-70-98",
+    "whatsapp": "79214087098",
+    "address": "Центральная ул., 10к1",
+    "hours": ""
+  },
+  "extra": {
+    "groups": [
+      [
+        "Кофе",
+        "кофе|капучин|латте|раф|флэт|американо|эспрессо|зерн|колумб|эфиоп|бразил|кения|дрип"
+      ],
+      [
+        "Другое",
+        "матча|какао|чай"
+      ],
+      [
+        "Выпечка",
+        "круассан|хлеб|булоч|пирог|багет|выпеч"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Всё меню",
+    "orderTitle": "Заказать заранее",
+    "orderText": "Соберите заказ на сайте и заберите его без очереди.",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки подготовить, пожелания",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой.",
+    "emptyToast": "Сначала выберите позицию",
+    "vars": {
+      "deep": "#0F2E26",
+      "glow": "#B8862F",
+      "glow2": "#2E7D64",
+      "sky": "#E3EEE8",
+      "ok": "#B8862F"
+    }
+  },
+  "credits": "остальные фото: Pexels, для примера",
+  "source": "https://anna-gruau.orgs.biz/",
+  "telegram_lead": "Darhik05"
+}

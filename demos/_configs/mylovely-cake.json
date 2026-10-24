@@ -1,0 +1,130 @@
+{
+  "slug": "mylovely-cake",
+  "name": "MyLovely Cake",
+  "niche": "кондитерская",
+  "city": "Воронеж",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#C0567B",
+    "accent": "#FFD9E6",
+    "bg": "#FDF6F8",
+    "text": "#2C1A22"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Десерты от Ольга, которые хочется заказать снова",
+    "text": "Начинку и надпись напишите в комментарии, я отвечу и всё согласую.",
+    "cta": "Собрать заказ",
+    "photo": "files/mylovely-cake/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Ольга",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Ольга, я пеку торты и десерты на заказ в Воронеже. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Воронеж",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Капкейки",
+      "price": 270,
+      "desc": "Капкейки, от 4шт. От 270руб/шт в зависимости от сложности…",
+      "photo": "files/mylovely-cake/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Бенто торты",
+      "price": 1400,
+      "desc": "Бенто-торты: Мини - 400-450гр - 1400руб Макси - 1кг -…",
+      "photo": "files/mylovely-cake/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торты от 2кг",
+      "price": 1600,
+      "desc": "Торты от 2кг, цена за кг: 🍯Медовый - 1600руб 🍫Сникерс -…",
+      "photo": "files/mylovely-cake/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/mylovely-cake/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/mylovely-cake/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/mylovely-cake/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/mylovely-cake/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/mylovely-cake/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 951 851-45-65",
+    "whatsapp": "79518514565",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#EADFF6",
+      "pist": "#DDF0E3",
+      "butter": "#FFEFCF"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://mylovely-cakes.orgs.biz/",
+  "telegram_lead": "olga_mylovely_cake"
+}

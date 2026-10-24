@@ -1,0 +1,127 @@
+{
+  "slug": "elite-flowers",
+  "name": "Elite Flowers",
+  "niche": "цветы",
+  "city": "Москва",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#C9B27C",
+    "accent": "#2C4A3D",
+    "bg": "#14261F",
+    "text": "#EEF0E6"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Свежие цветы и букеты под ваш повод",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/elite-flowers/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Elite Flowers: цветы в Москве. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Москве к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Ранюнкулюсы, кустовые розы и диантусы",
+      "price": 14990,
+      "desc": "Авторский сборный букет.",
+      "photo": "files/elite-flowers/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет из пионовидных кустовых роз",
+      "price": 6490,
+      "desc": "Розовый моно букет.",
+      "photo": "files/elite-flowers/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветочная корзина «Spring Aura",
+      "price": 45990,
+      "desc": "Корзина из гортензий и кустовых роз.",
+      "photo": "files/elite-flowers/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Красные алые розы",
+      "price": 9990,
+      "desc": "Красные кустовые розы.",
+      "photo": "files/elite-flowers/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет «ELITE",
+      "price": 10490,
+      "desc": "Букет из сиреневых гортензий.",
+      "photo": "files/elite-flowers/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Авторский букет",
+      "price": 8990,
+      "desc": "Букет из гортензий, кустовых роз.",
+      "photo": "files/elite-flowers/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Белые розы",
+      "price": 3490,
+      "desc": "Букет из 7 белых роз.",
+      "photo": "files/elite-flowers/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Моно букет из белых гортензий",
+      "price": 15990,
+      "desc": "Букет из 31 белой гортензии.",
+      "photo": "files/elite-flowers/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 993 588-69-08",
+    "whatsapp": "79935886908",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу заказать букет",
+    "commentHint": "Кому букет, адрес, дата и время",
+    "emptyText": "Пока пусто. Выберите букет.",
+    "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+    "vars": {
+      "deep": "#0D1A15",
+      "c-surface": "#14261F"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://elite--fllowers.orgs.biz/",
+  "telegram_lead": "elite_flowers77"
+}

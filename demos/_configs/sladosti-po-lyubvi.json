@@ -1,0 +1,130 @@
+{
+  "slug": "sladosti-po-lyubvi",
+  "name": "Сладости по любви",
+  "niche": "кондитерская",
+  "city": "Саратов",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#7A5AF8",
+    "accent": "#FCE3EC",
+    "bg": "#F6F3FF",
+    "text": "#2A2140"
+  },
+  "fonts": {
+    "head": "Comfortaa",
+    "body": "Mulish"
+  },
+  "hero": {
+    "title": "Бенто, капкейки и торты на заказ",
+    "text": "Бенто, торты и капкейки в Саратове. Соберите заказ за минуту.",
+    "cta": "Собрать заказ",
+    "photo": "files/sladosti-po-lyubvi/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Сладости по любви: торты и десерты на заказ в Саратове. Только свежие продукты и дизайн под ваш повод.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Саратов",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Дубайский шоколад",
+      "price": 1000,
+      "desc": "💚 Восточное лакомство с хрустящей сочной начинкой,…",
+      "photo": "files/sladosti-po-lyubvi/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Зефир в шоколаде 4 шт",
+      "price": 650,
+      "desc": "💜 Сочетание воздушного ягодного зефира и глазури из темного…",
+      "photo": "files/sladosti-po-lyubvi/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Зефир 6 шт",
+      "price": 950,
+      "desc": "🔷Воздушный десерт на основе свежих ягод порадует нежным…",
+      "photo": "files/sladosti-po-lyubvi/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ванильные капкейки набор 4 шт",
+      "price": 1000,
+      "desc": "♥️ Нежные ванильные кексы с аппетитной шапочкой тающего…",
+      "photo": "files/sladosti-po-lyubvi/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/sladosti-po-lyubvi/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/sladosti-po-lyubvi/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/sladosti-po-lyubvi/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/sladosti-po-lyubvi/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 906 309-51-12",
+    "whatsapp": "79063095112",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#E7E0FF",
+      "pist": "#DFF3EA",
+      "butter": "#FFF1C9"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://sladostis.orgs.biz/",
+  "telegram_lead": "savochkina1101"
+}
