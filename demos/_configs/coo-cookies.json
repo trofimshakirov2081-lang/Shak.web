@@ -1,0 +1,130 @@
+{
+  "slug": "coo-cookies",
+  "name": "Coo-Cookies",
+  "niche": "кондитерская",
+  "city": "Архангельск",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#C0567B",
+    "accent": "#FFD9E6",
+    "bg": "#FDF6F8",
+    "text": "#2C1A22"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Козули, пряники и домашние сладости",
+    "text": "Северные пряники-козули, меренги, зефир и капкейки. В наличии и на заказ.",
+    "cta": "Собрать заказ",
+    "photo": "files/coo-cookies/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Coo-Cookies: домашние сладости из Архангельска. Печём козули, пряники с начинкой, зефир и тортики.",
+  "features": [
+    {
+      "icon": "🦌",
+      "title": "Северные козули",
+      "text": "Традиционные пряники."
+    },
+    {
+      "icon": "🍬",
+      "title": "Леденцы и зефир",
+      "text": "Для детей и взрослых."
+    },
+    {
+      "icon": "✅",
+      "title": "В наличии и на заказ",
+      "text": "Подскажем, что готово."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/coo-cookies/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/coo-cookies/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/coo-cookies/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/coo-cookies/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/coo-cookies/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/coo-cookies/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/coo-cookies/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с рисунком",
+      "price": 3900,
+      "desc": "Нарисую по вашему фото",
+      "photo": "files/coo-cookies/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 952 258-13-30",
+    "whatsapp": "79522581330",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Сладости от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#EADFF6",
+      "pist": "#DDF0E3",
+      "butter": "#FFEFCF"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://coo-cookies.orgs.biz/",
+  "email": "coo-cookies@yandex.ru"
+}

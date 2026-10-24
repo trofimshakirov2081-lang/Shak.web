@@ -1,0 +1,106 @@
+{
+  "slug": "floral-design-house",
+  "name": "Floral Design House",
+  "niche": "цветы",
+  "city": "Москва",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#C9B27C",
+    "accent": "#2C4A3D",
+    "bg": "#14261F",
+    "text": "#EEF0E6"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Эксклюзивные букеты на Можайском валу",
+    "text": "Авторские букеты и композиции с доставкой по Москве. Соберём под ваш повод.",
+    "cta": "Выбрать букет",
+    "photo": "files/floral-design-house/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Floral Design House: ваш партнёр в мире цветов. Эксклюзивные букеты, композиции и оформление.",
+  "features": [
+    {
+      "icon": "💐",
+      "title": "Авторские букеты",
+      "text": "Розовый вальс, Нежная симфония."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Москве."
+    },
+    {
+      "icon": "📍",
+      "title": "Можайский вал, 10",
+      "text": "Заходите в студию."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет на заказ",
+      "price": 2000,
+      "desc": "Хотите создать уникальный букет, который идеально подойдет…",
+      "photo": "files/floral-design-house/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет \"Красная страсть",
+      "price": 4000,
+      "desc": "Букет \"Красная страсть\" – это воплощение глубоких чувств и…",
+      "photo": "files/floral-design-house/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Нежная симфония",
+      "price": 4000,
+      "desc": "Букет \"Нежная симфония\" – это воплощение утонченной…",
+      "photo": "files/floral-design-house/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Волшебное Сияние",
+      "price": 12000,
+      "desc": "Букет \"Волшебное Сияние\" – это настоящий праздник цвета и…",
+      "photo": "files/floral-design-house/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Роскошное очарование",
+      "price": 12000,
+      "desc": "Букет \"Роскошное очарование\" - это идеальное сочетание…",
+      "photo": "files/floral-design-house/item-5.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 915 418-90-00",
+    "whatsapp": "79154189000",
+    "address": "Можайский вал, 10",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Цветы, о которых говорят",
+    "vars": {
+      "deep": "#0D1A15",
+      "c-surface": "#14261F"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://flodeshouse.orgs.biz/",
+  "email": "anisat009@ya.ru"
+}

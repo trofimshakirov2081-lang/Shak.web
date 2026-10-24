@@ -1,0 +1,126 @@
+{
+  "slug": "beauty-lab-nsk",
+  "name": "Лаборатория красоты BEAUTY",
+  "niche": "брови",
+  "city": "Новосибирск",
+  "custom": "browlash",
+  "tagline": "Студия красоты",
+  "colors": {
+    "main": "#B4566E",
+    "accent": "#E9C9C6",
+    "bg": "#F6F0EC",
+    "text": "#2A1F1D"
+  },
+  "fonts": {
+    "head": "Prata",
+    "body": "Inter Tight"
+  },
+  "hero": {
+    "title": "Маникюр, брови и ресницы по записи",
+    "text": "Маникюр, педикюр, брови, ресницы, макияж и причёски. Работаем ежедневно по записи.",
+    "cta": "Выбрать услугу",
+    "photo": "files/beauty-lab-nsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Популярные услуги",
+    "catalogText": "Отметьте услуги, и заявка уйдёт в WhatsApp. Подберём время.",
+    "aboutTitle": "О студии",
+    "orderTitle": "Ваша запись",
+    "addLabel": "Записаться"
+  },
+  "about": "Лаборатория красоты BEAUTY на Планировочной. Ногти, брови, ресницы и образ в одном месте.",
+  "features": [
+    {
+      "icon": "💅",
+      "title": "Ногти",
+      "text": "Маникюр и педикюр."
+    },
+    {
+      "icon": "👁",
+      "title": "Брови и ресницы",
+      "text": "Коррекция и окрашивание."
+    },
+    {
+      "icon": "📅",
+      "title": "Ежедневно",
+      "text": "По записи."
+    }
+  ],
+  "items": [
+    {
+      "name": "френч/растяжка",
+      "price": 500,
+      "desc": "Французский маникюр с растяжкой, или френч-омбре, это…",
+      "photo": "files/beauty-lab-nsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Коррекция бровей воском",
+      "price": 250,
+      "desc": "Этот метод позволяет добиться гладкой кожи и четкой формы…",
+      "photo": "files/beauty-lab-nsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Окрашивание бровей",
+      "price": 450,
+      "desc": "косметическая процедура, направленная на изменение цвета…",
+      "photo": "files/beauty-lab-nsk/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 913 934-74-46",
+    "whatsapp": "79139347446",
+    "address": "ул. Планировочная, 46",
+    "hours": ""
+  },
+  "extra": {
+    "plainLevels": true,
+    "cards": [
+      [
+        "#2A1F1D",
+        "#F6F0EC"
+      ],
+      [
+        "#E9C9C6",
+        "#2A1F1D"
+      ],
+      [
+        "#5B4038",
+        "#F6F0EC"
+      ],
+      [
+        "#FFFFFF",
+        "#2A1F1D"
+      ],
+      [
+        "#B4566E",
+        "#FFFFFF"
+      ]
+    ],
+    "services": [
+      "Маникюр",
+      "Педикюр",
+      "Брови",
+      "Ресницы",
+      "Макияж и причёски"
+    ],
+    "levelDefault": "Услуга",
+    "lines": false,
+    "heroAlt": "Лаборатория красоты BEAUTY",
+    "cartBtn": "Запись",
+    "svcTitle": "Ещё услуги",
+    "svcLink": "Все услуги",
+    "findText": "Напишите в WhatsApp, подберём удобное время.",
+    "sendLabel": "Отправить запись в WhatsApp",
+    "addedLabel": "Выбрано",
+    "commentHint": "Удобные дата и время",
+    "orderIntro": "Здравствуйте! Хочу записаться:",
+    "emptyText": "Пока ничего не выбрано. Отметьте услугу.",
+    "emptyToast": "Сначала выберите услугу"
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://beauty-nsk46.orgs.biz/",
+  "email": "aapashenkoo@mail.ru"
+}

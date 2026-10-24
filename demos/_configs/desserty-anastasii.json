@@ -1,0 +1,130 @@
+{
+  "slug": "desserty-anastasii",
+  "name": "Десерты от Анастасии",
+  "niche": "кондитерская",
+  "city": "Шарья",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#1F3A5F",
+    "accent": "#F2C14E",
+    "bg": "#F3F0EA",
+    "text": "#1A2433"
+  },
+  "fonts": {
+    "head": "Exo 2",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Десерты, которые тают во рту, а не в коробке",
+    "text": "Меренговые рулеты, трайфлы, капкейки и медовички в Шарье. Выберите и отправьте заказ.",
+    "cta": "Собрать заказ",
+    "photo": "files/desserty-anastasii/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Анастасия",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Я Анастасия, ваш кондитер. Пеку торты, капкейки, трайфлы и рулеты из натуральных продуктов.",
+  "features": [
+    {
+      "icon": "🍰",
+      "title": "Большой выбор",
+      "text": "Торты, рулеты, трайфлы."
+    },
+    {
+      "icon": "🌿",
+      "title": "Натуральный состав",
+      "text": "Без лишней химии."
+    },
+    {
+      "icon": "📍",
+      "title": "Шарья",
+      "text": "Ул. Южная, 31."
+    }
+  ],
+  "items": [
+    {
+      "name": "Меренговый рулет",
+      "price": 1299,
+      "desc": "Нежнейшая меренга Сливочный крем Фруктовая / ягодная начинка",
+      "photo": "files/desserty-anastasii/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Вишня в шоколаде",
+      "price": 1499,
+      "desc": "Шоколадный бисквит Шоколадный крем Вишнёвая прослойка",
+      "photo": "files/desserty-anastasii/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/desserty-anastasii/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/desserty-anastasii/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/desserty-anastasii/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/desserty-anastasii/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/desserty-anastasii/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/desserty-anastasii/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 915 909-40-33",
+    "whatsapp": "79159094033",
+    "address": "ул. Южная, 31",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F3D3C4",
+      "pist": "#D9E6F2",
+      "butter": "#F6DFA8"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://dessertsfromanastasia.orgs.biz/",
+  "email": "budeeva9528030@gmail.com"
+}

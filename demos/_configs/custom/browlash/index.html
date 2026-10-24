@@ -121,7 +121,7 @@
     var hp = D.hero.photo || "";
 
     // Направление и уровень курса определяем по названию, порядок как в админке
-    var TRACKS = [["Брови", /бров|brow/i], ["Ресницы", /ресниц|леш|lash/i], ["Перманент", /перманент|pm\b/i]];
+    var TRACKS = [["Брови", /бров|brow/i], ["Ресницы", /ресниц|леш|lash/i], ["Перманент", /перманент|pm\b/i], ["Ногти", /маникюр|педикюр|ногт|nail/i], ["Макияж", /макияж|визаж|образ/i], ["Волосы", /стрижк|окрашив|волос|уклад|причес/i]];
     var seen = {};
     function level(i) {
       for (var k = 0; k < TRACKS.length; k++) if (TRACKS[k][1].test(i.name)) {
@@ -129,7 +129,7 @@
         seen[t] = (seen[t] || 0) + 1;
         return total < 2 || x.plainLevels ? t : t + (seen[t] === 1 ? ", база" : ", следующий уровень");
       }
-      return "Курс";
+      return x.levelDefault || "Курс";
     }
     var THEMES = x.cards || [["#2A1F1D", "#F6F0EC"], ["#E9C9C6", "#2A1F1D"], ["#5B4038", "#F6F0EC"], ["#FFFFFF", "#2A1F1D"], ["#B4566E", "#FFFFFF"]];
 
@@ -150,12 +150,12 @@
     }).join("");
 
     // Разметка в координатах фото 1200×801: начало, изгиб и кончик брови
-    var shot = '<figure class="shot" style="margin:0"><div class="inner">' + (hp ? '<img src="' + e(hp) + '" alt="Брови и ресницы, работа студии">' : '') +
-      '<svg viewBox="0 0 1200 801" aria-hidden="true">' +
+    var shot = '<figure class="shot" style="margin:0"><div class="inner">' + (hp ? '<img src="' + e(hp) + '" alt="' + e(x.heroAlt || "Брови и ресницы, работа студии") + '">' : '') +
+      (x.lines === false ? '' : '<svg viewBox="0 0 1200 801" aria-hidden="true">' +
         '<line class="l1" x1="150" y1="560" x2="150" y2="140"/><line class="l2" x1="170" y1="801" x2="639" y2="70"/><line class="l3" x1="170" y1="801" x2="976" y2="210"/>' +
         '<path class="l4" d="M150 292 Q 560 110 905 262"/>' +
         '<circle class="d1" cx="150" cy="292" r="12"/><circle class="d2" cx="588" cy="160" r="12"/><circle class="d3" cx="905" cy="262" r="12"/>' +
-      '</svg></div></figure>';
+      '</svg>') + '</div></figure>';
 
     Core.mount(
       '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a>' +
@@ -163,12 +163,12 @@
         (D.contacts.whatsapp ? '<a class="book" href="' + Core.wa("Здравствуйте! Хочу записаться") + '" target="_blank" rel="noopener">Записаться</a>' : '') + '</div></header>' +
       '<main id="top"><section class="hero">' + shot +
         '<div class="card"><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><a class="btn" href="#courses">' + e(D.hero.cta) + '</a>' +
-        (pills ? '<a class="link" href="#services">Процедуры</a>' : '') + '</div></section>' +
+        (pills ? '<a class="link" href="#services">' + e(x.svcLink || "Процедуры") + '</a>' : '') + '</div></section>' +
       '<section class="courses" id="courses"><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="lead">' + e(D.sections.catalogText) + '</p><div class="stack">' + courses + '</div></div></section>' +
-      (pills ? '<section class="svc" id="services"><div class="wrap"><h2>Процедуры в студии</h2><p class="lead" style="margin-bottom:0">Нажмите на процедуру, и мы подберём время. Стоимость зависит от техники и объёма, подскажем в WhatsApp.</p><div class="pills">' + pills + '</div></div></section>' : '') +
+      (pills ? '<section class="svc" id="services"><div class="wrap"><h2>' + e(x.svcTitle || "Процедуры в студии") + '</h2><p class="lead" style="margin-bottom:0">' + e(x.svcText || "Нажмите на процедуру, и мы подберём время. Стоимость зависит от техники и объёма, подскажем в WhatsApp.") + '</p><div class="pills">' + pills + '</div></div></section>' : '') +
       '<section class="about"><div class="wrap"><div class="box"><div><h2>' + e(D.sections.aboutTitle) + '</h2><p class="say" data-reveal>' + e(D.sections.aboutText) + '</p></div>' +
         '<ul>' + D.features.map(function (f) { return '<li data-reveal><strong>' + e(f.title) + '</strong><span>' + e(f.text) + '</span></li>'; }).join("") + '</ul></div></div></section>' +
-      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>Контакты</h2><p style="opacity:.7;margin:12px 0 22px">Ответим в WhatsApp, пришлём программу курса и свободные даты.</p>' +
+      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>Контакты</h2><p style="opacity:.7;margin:12px 0 22px">' + e(x.findText || "Ответим в WhatsApp, пришлём программу курса и свободные даты.") + '</p>' +
         (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa() + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') + '</div><div class="rows">' + rows + '</div></div></div></section></main>' +
       '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
     );
