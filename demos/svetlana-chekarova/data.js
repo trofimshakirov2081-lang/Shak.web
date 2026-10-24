@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/svetlana-chekarova.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-svetlana-chekarova",
-  "rev": "2026-10-24T08:37:32.573Z",
+  "rev": "2026-10-24T14:16:01.871Z",
   "brand": {
     "name": "Десерты Светланы",
     "tagline": "Десерты в Челябинске",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pion-buton.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pion-buton",
-  "rev": "2026-10-24T08:37:31.492Z",
+  "rev": "2026-10-24T14:16:01.797Z",
   "brand": {
     "name": "Пион-Бутон",
     "tagline": "Цветы в Новосибирске",

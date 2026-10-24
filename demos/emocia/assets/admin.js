@@ -98,7 +98,7 @@
         return '<option' + (f === get(path) ? ' selected' : '') + '>' + esc(f) + '</option>';
       }).join("");
     };
-    return '<h2>Цвета и шрифты</h2><p class="sub">Выберите готовую палитру или настройте цвета вручную.</p>' +
+    return pagesBlock() + '<h2>Цвета и шрифты</h2><p class="sub">Выберите готовую палитру или настройте цвета вручную.</p>' +
       '<div class="presets">' + PALETTES.map(function (p, n) {
         return '<button data-pal="' + n + '" aria-label="Палитра ' + (n + 1) + '">' + p.map(function (x) { return '<i style="background:' + x + '"></i>'; }).join("") + '</button>';
       }).join("") + '</div>' +
@@ -110,6 +110,21 @@
       '<label>Шрифт заголовков</label><select data-k="fonts.head">' + opt("fonts.head") + '</select>' +
       '<label>Шрифт текста</label><select data-k="fonts.body">' + opt("fonts.body") + '</select>' +
       field("Валюта", "currency", { ph: "₽" });
+  }
+
+  // Выбор дизайна, если у сайта их несколько (extra.designPages): сайт сразу открывается в выбранном
+  function curPage() { try { return localStorage.getItem(S.KEY + ":page") || "index.html"; } catch (e) { return "index.html"; } }
+  function pagesBlock() {
+    var x = data.extra || {}, P = x.designPages;
+    if (!P || P.length < 2) return "";
+    var cur = curPage(), names = x.designNames || [];
+    return '<h2>Дизайн сайта</h2><p class="sub">Тексты, цены и фото общие, меняется только вид. Включается сразу.</p><div class="pages">' +
+      P.map(function (p, n) {
+        var v = ((x.pageExtra || {})[p] || {}).vars || {}, c = data.colors;
+        var bg = v.bg || c.bg, fg = v.text || c.text, m = v.main || c.main;
+        return '<button data-page="' + esc(p) + '"' + (p === cur ? ' class="on"' : '') + ' style="background:' + esc(bg) + ';color:' + esc(fg) + '">' +
+          '<i style="background:' + esc(m) + '"></i><b>' + esc(names[n] || "Дизайн " + (n + 1)) + '</b><small>' + (p === cur ? "Включён" : "Включить") + '</small></button>';
+      }).join("") + '</div><a class="ghost seesite" href="' + esc(cur) + '" target="_blank">Открыть сайт</a>';
   }
 
   function contactsTab() {
@@ -200,6 +215,13 @@
     else if (t.hasAttribute("data-additem")) {
       data.items.push({ id: "i" + Date.now(), name: "Новый товар", desc: "", price: 0, emoji: "🍰", photo: "", tag: "" });
       markDirty(); render();
+    }
+    else if (d.page != null) {
+      try { localStorage.setItem(S.KEY + ":page", d.page); } catch (err) {}
+      document.getElementById("status").textContent = "Дизайн включён ✓ Сайт обновлён";
+      var fr = document.getElementById("frame");
+      if (fr && fr.contentWindow) fr.contentWindow.location.reload();
+      render();
     }
     else if (d.pal != null) {
       var p = PALETTES[d.pal];

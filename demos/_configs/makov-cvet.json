@@ -115,5 +115,48 @@
     "orderIntro": "Здравствуйте! Хочу заказать букет с сайта:",
     "emptyText": "Пока пусто. Выберите букет на витрине."
   },
-  "credits": "Фото: Pexels"
+  "credits": "Фото: Pexels",
+  "designName": "Светлый",
+  "alt": [
+    {
+      "custom": "luxe",
+      "name": "Вечерний",
+      "extra": {
+        "vars": {
+          "bg": "#2A1215",
+          "text": "#F1E7DA",
+          "main": "#D9B48F",
+          "accent": "#5A2228"
+        },
+        "fonts": {
+          "head": "Cormorant Garamond",
+          "body": "Manrope"
+        },
+        "heroTitle": "Цветы, о которых вспоминают",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки."
+      }
+    },
+    {
+      "custom": "yulya-konditer",
+      "name": "Пастельный",
+      "extra": {
+        "vars": {
+          "bg": "#F3EEF8",
+          "main": "#B4325E",
+          "accent": "#F6D5E0",
+          "text": "#2E1E2A",
+          "lilac": "#E3D9F3",
+          "pist": "#DCEBCF",
+          "butter": "#FBEAC4"
+        },
+        "fonts": {
+          "head": "Unbounded",
+          "body": "Nunito"
+        },
+        "fromLabel": "Букеты от",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+        "orderMsg": "Здравствуйте! Хочу заказать букет"
+      }
+    }
+  ]
 }

@@ -64,3 +64,12 @@ label { display: block; font-size: 13px; color: var(--mut); margin: 12px 0 4px; 
   .item .fields { grid-template-columns: 1fr 1fr; }
   .item .fields .nm { grid-column: 1 / -1; }
 }
+
+/* Выбор дизайна сайта */
+.pages { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 8px 0 12px; }
+.pages button { position: relative; display: grid; gap: 2px; text-align: left; padding: 44px 14px 12px; border-radius: 16px; border: 2px solid transparent; cursor: pointer; font: inherit; box-shadow: 0 0 0 1px var(--line); }
+.pages button.on { border-color: #1F6BFF; }
+.pages i { position: absolute; top: 14px; left: 14px; width: 22px; height: 22px; border-radius: 50%; }
+.pages b { font-size: 16px; }
+.pages small { opacity: .7; }
+.seesite { display: inline-block; margin-bottom: 26px; text-decoration: none; color: inherit; }

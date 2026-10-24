@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yulya-konditer.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yulya-konditer",
-  "rev": "2026-10-24T07:45:27.240Z",
+  "rev": "2026-10-24T14:16:02.061Z",
   "brand": {
     "name": "Юля - ваш кондитер",
     "tagline": "Домашние десерты на заказ",

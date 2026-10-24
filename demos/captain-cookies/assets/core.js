@@ -4,6 +4,14 @@
   var S = window.Store, esc = S.esc;
   var data = S.load();
   var x = data.extra || {};
+  // Несколько дизайнов одного сайта: владелец выбирает в админке, сайт открывает нужную страницу
+  var PAGE = (location.pathname.split("/").pop() || "index.html");
+  var PAGES = x.designPages || null;
+  if (PAGES) {
+    var want = null; try { want = localStorage.getItem(S.KEY + ":page"); } catch (e) {}
+    if (want && want !== PAGE && PAGES.indexOf(want) >= 0 && !/[?&]nodesign/.test(location.search)) { location.replace(want); return; }
+    var pe = (x.pageExtra || {})[PAGE]; if (pe) { var merged = {}; for (var k0 in x) merged[k0] = x[k0]; for (var k1 in pe) merged[k1] = pe[k1]; x = merged; }
+  }
   var sec = data.sections || {};
   var CART_KEY = S.KEY + ":cart";
   var cart = {};
@@ -14,12 +22,14 @@
     var c = data.colors, st = document.documentElement.style;
     ["main", "accent", "bg", "text"].forEach(function (k) { if (c[k]) st.setProperty("--" + k, c[k]); });
     // Дополнительные цвета конкретного дизайна из настроек демо (extra.vars)
-    var v = (data.extra && data.extra.vars) || {};
+    var v = x.vars || {};
     for (var k in v) st.setProperty("--" + k, v[k]);
-    st.setProperty("--font-head", "'" + data.fonts.head + "', Georgia, serif");
-    st.setProperty("--font-body", "'" + data.fonts.body + "', system-ui, sans-serif");
+    // Свои шрифты у отдельного дизайна (pageExtra.fonts), иначе общие из админки
+    var fonts = x.fonts || data.fonts;
+    st.setProperty("--font-head", "'" + fonts.head + "', Georgia, serif");
+    st.setProperty("--font-body", "'" + fonts.body + "', system-ui, sans-serif");
     var have = (document.documentElement.getAttribute("data-fonts") || "").split("|");
-    [data.fonts.head, data.fonts.body].forEach(function (f) {
+    [fonts.head, fonts.body].forEach(function (f) {
       if (!f || have.indexOf(f) >= 0) return;
       // У части шрифтов только обычное начертание: запрос с толщиной 700 для них вернул бы ошибку
       var single = /^(Yeseva One|Tenor Sans|Marmelad|Forum|Alice|Prata|Kurale|Russo One|Lobster|Pacifico)$/.test(f);
@@ -86,6 +96,7 @@
   function demoBar() {
     if (!(data.demo && data.demo.banner)) return "";
     return '<div class="c-demo" data-demo><p>Демо от <b>shak.web</b><span>. Цены, тексты и фото владелец меняет сам</span></p>' +
+      (PAGES ? '<button class="c-dsw" data-next-design>Дизайн ' + (PAGES.indexOf(PAGE) + 1) + '/' + PAGES.length + '</button>' : '') +
       '<a href="admin.html">Открыть админку</a><button data-hide-demo aria-label="Скрыть">×</button></div>';
   }
 
@@ -153,17 +164,48 @@
     else if (t.hasAttribute("data-open-cart")) open(true);
     else if (t.hasAttribute("data-close-cart")) open(false);
     else if (t.hasAttribute("data-hide-demo")) document.querySelector("[data-demo]").remove();
+    else if (t.hasAttribute("data-next-design")) { var nx = PAGES[(PAGES.indexOf(PAGE) + 1) % PAGES.length]; try { localStorage.setItem(S.KEY + ":page", nx); } catch (e) {} location.href = nx; }
     else if (t.hasAttribute("data-order")) {
       if (!count()) { toast(x.emptyToast || "Сначала выберите позицию"); return; }
       window.open(wa(orderText()), "_blank");
     }
   });
 
+  // Заставка при первом входе: знак бренда рисуется линией, потом шторка уходит вверх
+  function splash() {
+    var seen = null; try { seen = localStorage.getItem(S.KEY + ":seen"); localStorage.setItem(S.KEY + ":seen", "1"); } catch (e) {}
+    if (seen || x.splash === false || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    var name = data.brand.name, ch = esc(name.trim().charAt(0).toUpperCase());
+    var letters = name.split("").map(function (l, i) { return '<span style="animation-delay:' + (0.55 + i * 0.035).toFixed(3) + 's">' + (l === " " ? "&nbsp;" : esc(l)) + '</span>'; }).join("");
+    var el = document.createElement("div"); el.className = "c-splash"; el.setAttribute("aria-hidden", "true");
+    el.innerHTML = '<div class="c-sp-in"><svg viewBox="0 0 120 120"><circle class="c-sp-ring" cx="60" cy="60" r="52"/><circle class="c-sp-dot" cx="60" cy="8" r="4"/></svg><b>' + ch + '</b></div><div class="c-sp-name">' + letters + '</div>' +
+      (data.brand.tagline ? '<div class="c-sp-tag">' + esc(data.brand.tagline) + '</div>' : '');
+    document.body.appendChild(el);
+    el.addEventListener("animationend", function (e) { if (e.target === el) el.remove(); });
+    el.addEventListener("click", function () { el.remove(); });
+    // Анимации первого экрана ждут, пока уходит заставка, иначе они отыграют под ней
+    if (document.getAnimations) document.getAnimations().forEach(function (a) { var tg = a.effect && a.effect.target; if (tg && !el.contains(tg)) a.currentTime = (a.currentTime || 0) - 1800; });
+  }
+  var spCss = document.createElement("style");
+  spCss.textContent =
+    ".c-splash{position:fixed;inset:0;z-index:100;background:var(--sp-bg,var(--bg));color:var(--sp-fg,var(--text));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;font-family:var(--font-head);animation:c-sp-out .8s 1.75s cubic-bezier(.7,0,.2,1) forwards}" +
+    ".c-sp-in{position:relative;width:112px;height:112px;display:grid;place-items:center}.c-sp-in svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}" +
+    ".c-sp-ring{fill:none;stroke:var(--main);stroke-width:3;stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;animation:c-sp-draw 1.05s cubic-bezier(.6,.05,.25,1) forwards}" +
+    ".c-sp-dot{fill:var(--main);transform-origin:60px 60px;animation:c-sp-orbit 1.05s cubic-bezier(.6,.05,.25,1) forwards}" +
+    ".c-sp-in b{font:700 48px/1 var(--font-head);color:var(--main);opacity:0;transform:scale(.6);animation:c-sp-pop .5s .8s cubic-bezier(.3,1.6,.5,1) forwards}" +
+    ".c-sp-name{font:600 26px/1.1 var(--font-head);letter-spacing:.01em;overflow:hidden;padding:2px 0}.c-sp-name span{display:inline-block;transform:translateY(110%);animation:c-sp-up .6s cubic-bezier(.2,.8,.2,1) forwards}" +
+    ".c-sp-tag{font:400 14px/1.3 var(--font-body);opacity:0;animation:c-sp-fade .5s 1.05s forwards}" +
+    "@keyframes c-sp-draw{to{stroke-dashoffset:0}}@keyframes c-sp-orbit{to{transform:rotate(360deg)}}@keyframes c-sp-pop{to{opacity:1;transform:none}}@keyframes c-sp-up{to{transform:none}}@keyframes c-sp-fade{to{opacity:.6}}" +
+    "@keyframes c-sp-out{from{clip-path:inset(0 0 0 0)}99%{visibility:visible}to{clip-path:inset(0 0 100% 0);visibility:hidden}}" +
+    ".c-dsw{background:none;border:1px solid currentColor;border-radius:999px;color:inherit;font:600 12px var(--font-body);padding:4px 10px;cursor:pointer;white-space:nowrap}";
+  document.head.appendChild(spCss);
+
   window.Core = {
     data: data, x: x, esc: esc, money: money, item: item, pic: pic, wa: wa, contacts: contacts, toast: toast,
     mount: function (html) {
       document.title = data.brand.name + (data.brand.tagline ? " | " + data.brand.tagline : "");
       document.getElementById("app").innerHTML = demoBar() + html + drawer();
+      splash();
       update();
       document.documentElement.classList.add("ready");
       // Плавное появление: только для блоков с data-reveal

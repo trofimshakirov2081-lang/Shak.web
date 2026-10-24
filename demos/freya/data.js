@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/freya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-freya",
-  "rev": "2026-10-23T14:59:04.692Z",
+  "rev": "2026-10-24T14:16:01.632Z",
   "brand": {
     "name": "FREYA",
     "tagline": "Цветочная мастерская",

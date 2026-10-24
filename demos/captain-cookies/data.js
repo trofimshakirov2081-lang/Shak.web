@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/captain-cookies.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-captain-cookies",
-  "rev": "2026-10-24T07:42:55.251Z",
+  "rev": "2026-10-24T14:16:01.585Z",
   "brand": {
     "name": "Captain Cookies",
     "tagline": "Десерты на заказ",

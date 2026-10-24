@@ -1,8 +1,8 @@
 # Отчёт проверки сайтов
 
-Дата: 24.10.2026, 13:45:15 (Алматы)
+Дата: 24.10.2026, 19:15:06 (Алматы)
 
-Страниц: 127. Ошибок: 1. Замечаний: 15.
+Страниц: 129. Ошибок: 1. Замечаний: 15.
 Внешние ссылки: не проверялись (запустите с --external). Вид на телефоне (390px): проверен, скриншоты в reports/screens/.
 
 ## Проверенные страницы
@@ -73,6 +73,8 @@
 - ✅ demos/lizzy-cake/admin.html
 - ✅ demos/lizzy-cake/index.html
 - ✅ demos/makov-cvet/admin.html
+- ✅ demos/makov-cvet/design-2.html
+- ✅ demos/makov-cvet/design-3.html
 - ✅ demos/makov-cvet/index.html
 - ✅ demos/mart-flowers/admin.html
 - ✅ demos/mart-flowers/index.html

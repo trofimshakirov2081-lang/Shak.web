@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sladkoe-korolevstvo.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sladkoe-korolevstvo",
-  "rev": "2026-10-24T07:42:55.530Z",
+  "rev": "2026-10-24T14:16:01.862Z",
   "brand": {
     "name": "Сладкое Королевство",
     "tagline": "Десерты на заказ",

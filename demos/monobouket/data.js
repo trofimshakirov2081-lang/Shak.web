@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/monobouket.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-monobouket",
-  "rev": "2026-10-24T03:30:47.232Z",
+  "rev": "2026-10-24T14:16:01.779Z",
   "brand": {
     "name": "MonoBouket",
     "tagline": "Авторские букеты с доставкой",

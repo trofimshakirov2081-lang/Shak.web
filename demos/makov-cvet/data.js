@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/makov-cvet.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-makov-cvet",
-  "rev": "2026-10-24T07:45:26.707Z",
+  "rev": "2026-10-24T14:16:01.732Z",
   "brand": {
     "name": "Маков Цвет",
     "tagline": "Авторские букеты с бесплатной доставкой",
@@ -167,6 +167,50 @@ window.SITE = {
     "vk": "vk.com/idkarkusha",
     "commentHint": "Кому букет, адрес, дата и время доставки",
     "orderIntro": "Здравствуйте! Хочу заказать букет с сайта:",
-    "emptyText": "Пока пусто. Выберите букет на витрине."
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "designPages": [
+      "index.html",
+      "design-2.html",
+      "design-3.html"
+    ],
+    "designNames": [
+      "Светлый",
+      "Вечерний",
+      "Пастельный"
+    ],
+    "pageExtra": {
+      "design-2.html": {
+        "vars": {
+          "bg": "#2A1215",
+          "text": "#F1E7DA",
+          "main": "#D9B48F",
+          "accent": "#5A2228"
+        },
+        "fonts": {
+          "head": "Cormorant Garamond",
+          "body": "Manrope"
+        },
+        "heroTitle": "Цветы, о которых вспоминают",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки."
+      },
+      "design-3.html": {
+        "vars": {
+          "bg": "#F3EEF8",
+          "main": "#B4325E",
+          "accent": "#F6D5E0",
+          "text": "#2E1E2A",
+          "lilac": "#E3D9F3",
+          "pist": "#DCEBCF",
+          "butter": "#FBEAC4"
+        },
+        "fonts": {
+          "head": "Unbounded",
+          "body": "Nunito"
+        },
+        "fromLabel": "Букеты от",
+        "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+        "orderMsg": "Здравствуйте! Хочу заказать букет"
+      }
+    }
   }
 };

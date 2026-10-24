@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/nemskie-sladosti.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-nemskie-sladosti",
-  "rev": "2026-10-24T08:37:32.254Z",
+  "rev": "2026-10-24T14:16:01.787Z",
   "brand": {
     "name": "Немские сладости",
     "tagline": "Домашняя кондитерская",

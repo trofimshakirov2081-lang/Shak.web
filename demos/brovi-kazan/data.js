@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/brovi-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-brovi-kazan",
-  "rev": "2026-10-23T14:59:04.361Z",
+  "rev": "2026-10-24T14:16:01.541Z",
   "brand": {
     "name": "Брови Ресницы",
     "tagline": "Студия бровей и ресниц",

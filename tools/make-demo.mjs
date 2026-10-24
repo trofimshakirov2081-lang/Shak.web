@@ -172,6 +172,16 @@ function build(cfgPath) {
   site.design = 0;
   if (cfg.credits) site.credits = cfg.credits;
   if (cfg.extra) site.extra = cfg.extra;
+  // Запасные дизайны: alt: [{ custom: "<папка>", name, extra }] станут design-2.html, design-3.html...
+  const alt = Array.isArray(cfg.alt) ? cfg.alt : [];
+  const pages = ["index.html"].concat(alt.map((a, n) => `design-${n + 2}.html`));
+  if (alt.length) {
+    site.extra = Object.assign({}, site.extra, {
+      designPages: pages,
+      designNames: [cfg.designName || "Основной"].concat(alt.map((a, n) => a.name || `Дизайн ${n + 2}`)),
+      pageExtra: Object.fromEntries(alt.map((a, n) => [pages[n + 1], a.extra || {}]))
+    });
+  }
 
   fs.writeFileSync(path.join(outDir, "data.js"),
     `// Собрано генератором shak.web из ${path.relative(ROOT, path.resolve(cfgPath))}. Правьте настройки и пересобирайте.\nwindow.SITE = ${JSON.stringify(site, null, 2)};\n`);
@@ -184,13 +194,18 @@ function build(cfgPath) {
     fs.copyFileSync(path.join(CONFIGS, "custom", "_core.js"), path.join(outDir, "assets", "core.js"));
     for (const f of ["site.js", "site.css"]) fs.rmSync(path.join(outDir, "assets", f), { force: true });
   }
+  alt.forEach((a, n) => {
+    const src = path.join(CONFIGS, "custom", a.custom || "", "index.html");
+    if (!a.custom || !fs.existsSync(src)) fail(`Нет дизайна custom/${a.custom}/index.html`);
+    fs.copyFileSync(src, path.join(outDir, pages[n + 1]));
+  });
 
-  for (const f of ["index.html", "admin.html"]) {
+  for (const f of pages.concat("admin.html")) {
     const p = path.join(outDir, f);
     let h = fs.readFileSync(p, "utf8");
     const title = f === "admin.html" ? `Админка: ${site.brand.name}` : `${site.brand.name} | ${site.brand.tagline}`;
     h = h.replace(/<title>.*?<\/title>/, `<title>${htmlEsc(title)}</title>`);
-    if (f === "index.html") {
+    if (f !== "admin.html") {
       const desc = `${site.brand.name}${site.brand.city ? ", " + site.brand.city : ""}. ${site.hero.text}`;
       h = h.replace(/<meta name="description" content=".*?">/, `<meta name="description" content="${htmlEsc(desc)}">\n  <meta property="og:title" content="${htmlEsc(site.brand.name)}">\n  <meta property="og:description" content="${htmlEsc(site.hero.text)}">`);
     }

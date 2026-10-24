@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/wh-coffee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-wh-coffee",
-  "rev": "2026-10-23T19:57:44.598Z",
+  "rev": "2026-10-24T14:16:02.039Z",
   "brand": {
     "name": "Кофейня WH",
     "tagline": "Coffee bar в сердце шопинга",

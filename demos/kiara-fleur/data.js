@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kiara-fleur.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kiara-fleur",
-  "rev": "2026-10-24T08:37:31.684Z",
+  "rev": "2026-10-24T14:16:01.677Z",
   "brand": {
     "name": "Kiara Fleur",
     "tagline": "Цветы в Южно-Сахалинске",

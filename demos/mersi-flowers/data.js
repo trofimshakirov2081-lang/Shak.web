@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mersi-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mersi-flowers",
-  "rev": "2026-10-24T08:37:31.918Z",
+  "rev": "2026-10-24T14:16:01.756Z",
   "brand": {
     "name": "Mersi Flowers",
     "tagline": "Цветы в Иркутске",

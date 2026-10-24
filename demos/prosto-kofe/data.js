@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/prosto-kofe.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-prosto-kofe",
-  "rev": "2026-10-24T07:42:55.882Z",
+  "rev": "2026-10-24T14:16:01.845Z",
   "brand": {
     "name": "Просто кофе",
     "tagline": "Кофейня",

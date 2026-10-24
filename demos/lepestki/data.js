@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lepestki.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lepestki",
-  "rev": "2026-10-24T07:42:54.922Z",
+  "rev": "2026-10-24T14:16:01.706Z",
   "brand": {
     "name": "Лепестки",
     "tagline": "Цветы в Новороссийске",
