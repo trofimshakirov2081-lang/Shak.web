@@ -155,7 +155,7 @@ function build(cfgPath) {
         price,
         emoji: it.emoji || niche.emoji[i % niche.emoji.length],
         photo: asset(it.photo, cfgDir, outDir, "item-" + (i + 1)),
-        tag: it.tag || (i === 0 ? "Хит" : "")
+        tag: it.tag ?? (i === 0 ? "Хит" : "")
       };
     }),
     contacts: {
@@ -171,9 +171,19 @@ function build(cfgPath) {
   site.designs = makeDesigns(site.colors, site.fonts, cfg.designs);
   site.design = 0;
   if (cfg.credits) site.credits = cfg.credits;
+  if (cfg.extra) site.extra = cfg.extra;
 
   fs.writeFileSync(path.join(outDir, "data.js"),
     `// Собрано генератором shak.web из ${path.relative(ROOT, path.resolve(cfgPath))}. Правьте настройки и пересобирайте.\nwindow.SITE = ${JSON.stringify(site, null, 2)};\n`);
+
+  // Свой дизайн: demos/_configs/custom/<slug>/ поверх шаблона, админка и данные остаются общими
+  const customDir = path.join(CONFIGS, "custom", cfg.custom || slug);
+  if (cfg.custom || fs.existsSync(customDir)) {
+    if (!fs.existsSync(customDir)) fail(`Нет папки ${path.relative(ROOT, customDir)}`);
+    copyDir(customDir, outDir);
+    fs.copyFileSync(path.join(CONFIGS, "custom", "_core.js"), path.join(outDir, "assets", "core.js"));
+    for (const f of ["site.js", "site.css"]) fs.rmSync(path.join(outDir, "assets", f), { force: true });
+  }
 
   for (const f of ["index.html", "admin.html"]) {
     const p = path.join(outDir, f);
