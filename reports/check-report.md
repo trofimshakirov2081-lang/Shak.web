@@ -1,14 +1,16 @@
 # Отчёт проверки сайтов
 
-Дата: 24.10.2026, 12:49:56 (Алматы)
+Дата: 24.10.2026, 13:45:15 (Алматы)
 
-Страниц: 87. Ошибок: 1. Замечаний: 15.
+Страниц: 127. Ошибок: 1. Замечаний: 15.
 Внешние ссылки: не проверялись (запустите с --external). Вид на телефоне (390px): проверен, скриншоты в reports/screens/.
 
 ## Проверенные страницы
 
 - ✅ brief-v2/index.html
 - ⚠️ brief/index.html
+- ✅ demos/alfeya/admin.html
+- ✅ demos/alfeya/index.html
 - ✅ demos/altynnur/admin.html
 - ✅ demos/altynnur/index.html
 - ✅ demos/angel-cakes/admin.html
@@ -19,6 +21,8 @@
 - ✅ demos/bento-krsk/index.html
 - ✅ demos/bento-sarov/admin.html
 - ✅ demos/bento-sarov/index.html
+- ✅ demos/beriponchik/admin.html
+- ✅ demos/beriponchik/index.html
 - ✅ demos/biscotto/admin.html
 - ✅ demos/biscotto/index.html
 - ✅ demos/bloom-stav/admin.html
@@ -31,8 +35,18 @@
 - ✅ demos/buketoliya/index.html
 - ✅ demos/bulochnaya-tani/admin.html
 - ✅ demos/bulochnaya-tani/index.html
+- ✅ demos/cake-vasilisa/admin.html
+- ✅ demos/cake-vasilisa/index.html
 - ✅ demos/captain-cookies/admin.html
 - ✅ demos/captain-cookies/index.html
+- ✅ demos/centralnaya-kofeynya/admin.html
+- ✅ demos/centralnaya-kofeynya/index.html
+- ✅ demos/cveti-omsk/admin.html
+- ✅ demos/cveti-omsk/index.html
+- ✅ demos/cvetochny-dvorik/admin.html
+- ✅ demos/cvetochny-dvorik/index.html
+- ✅ demos/elena-konditer/admin.html
+- ✅ demos/elena-konditer/index.html
 - ✅ demos/emocia/admin.html
 - ✅ demos/emocia/index.html
 - ✅ demos/freya/admin.html
@@ -41,31 +55,55 @@
 - ✅ demos/galant/index.html
 - ✅ demos/goman-macaron/admin.html
 - ✅ demos/goman-macaron/index.html
+- ✅ demos/ideya-prazdnika/admin.html
+- ✅ demos/ideya-prazdnika/index.html
 - ✅ demos/index.html
 - ✅ demos/iz-cvetov/admin.html
 - ✅ demos/iz-cvetov/index.html
+- ✅ demos/kiara-fleur/admin.html
+- ✅ demos/kiara-fleur/index.html
 - ✅ demos/konditer-tatyana/admin.html
 - ✅ demos/konditer-tatyana/index.html
 - ✅ demos/ksy-cake/admin.html
 - ✅ demos/ksy-cake/index.html
 - ✅ demos/lepestki/admin.html
 - ✅ demos/lepestki/index.html
+- ✅ demos/lina-rulety/admin.html
+- ✅ demos/lina-rulety/index.html
 - ✅ demos/lizzy-cake/admin.html
 - ✅ demos/lizzy-cake/index.html
 - ✅ demos/makov-cvet/admin.html
 - ✅ demos/makov-cvet/index.html
 - ✅ demos/mart-flowers/admin.html
 - ✅ demos/mart-flowers/index.html
+- ✅ demos/mersi-flowers/admin.html
+- ✅ demos/mersi-flowers/index.html
 - ✅ demos/mila-feya/admin.html
 - ✅ demos/mila-feya/index.html
+- ✅ demos/moka/admin.html
+- ✅ demos/moka/index.html
 - ✅ demos/monobouket/admin.html
 - ✅ demos/monobouket/index.html
+- ✅ demos/nemskie-sladosti/admin.html
+- ✅ demos/nemskie-sladosti/index.html
+- ✅ demos/pion-buton/admin.html
+- ✅ demos/pion-buton/index.html
+- ✅ demos/pirogovy-dom/admin.html
+- ✅ demos/pirogovy-dom/index.html
+- ✅ demos/pmplace/admin.html
+- ✅ demos/pmplace/index.html
+- ✅ demos/polincvet/admin.html
+- ✅ demos/polincvet/index.html
 - ✅ demos/privalova-brows/admin.html
 - ✅ demos/privalova-brows/index.html
 - ✅ demos/prosto-kofe/admin.html
 - ✅ demos/prosto-kofe/index.html
+- ✅ demos/sladkiy-mir/admin.html
+- ✅ demos/sladkiy-mir/index.html
 - ✅ demos/sladkoe-korolevstvo/admin.html
 - ✅ demos/sladkoe-korolevstvo/index.html
+- ✅ demos/svetlana-chekarova/admin.html
+- ✅ demos/svetlana-chekarova/index.html
 - ✅ demos/toxic-coffee/admin.html
 - ✅ demos/toxic-coffee/index.html
 - ✅ demos/tsaplya/admin.html
@@ -78,6 +116,8 @@
 - ✅ demos/white-roses/index.html
 - ✅ demos/yulya-konditer/admin.html
 - ✅ demos/yulya-konditer/index.html
+- ✅ demos/zefirnye-cvety/admin.html
+- ✅ demos/zefirnye-cvety/index.html
 - ✅ index.html
 - ✅ templates/konditerskaya/admin.html
 - ✅ templates/konditerskaya/index.html

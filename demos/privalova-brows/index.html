@@ -161,7 +161,7 @@
 
     Core.mount(
       '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a>' +
-        '<button class="sel" data-open-cart>Курсы <b data-count>0</b></button>' +
+        '<button class="sel" data-open-cart>' + e(x.cartBtn || "Курсы") + ' <b data-count>0</b></button>' +
         (D.contacts.whatsapp ? '<a class="book" href="' + Core.wa("Здравствуйте! Хочу записаться") + '" target="_blank" rel="noopener">Записаться</a>' : '') + '</div></header>' +
       '<main id="top"><section class="hero">' + shot +
         '<div class="card"><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><a class="btn" href="#courses">' + e(D.hero.cta) + '</a>' +

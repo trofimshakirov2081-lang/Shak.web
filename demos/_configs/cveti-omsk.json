@@ -1,0 +1,127 @@
+{
+  "slug": "cveti-omsk",
+  "name": "ЦветИ",
+  "niche": "цветы",
+  "city": "Омск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Омске",
+  "colors": {
+    "main": "#6C5BA7",
+    "accent": "#E7E1F7",
+    "bg": "#F9F8FD",
+    "text": "#1F1A33"
+  },
+  "fonts": {
+    "head": "Sofia Sans",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Доставка цветов по Омску за 60 минут",
+    "text": "Только свежие цветы. Высокие розы 60 см, нежные букеты и комплименты в стакане.",
+    "cta": "Выбрать букет",
+    "photo": "files/cveti-omsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "ЦветИ: доставка цветов по Омску за 60 минут или быстрее. Регулярно делаем специальные предложения на розы.",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "За 60 минут",
+      "text": "Или быстрее."
+    },
+    {
+      "icon": "🌹",
+      "title": "Розы 60 см",
+      "text": "Выгоднее от 11 штук."
+    },
+    {
+      "icon": "🌸",
+      "title": "Свежие цветы",
+      "text": "Каждый день."
+    }
+  ],
+  "items": [
+    {
+      "name": "Кустовая роза и хризантема",
+      "price": 2280,
+      "desc": "Стойкий нежный букет",
+      "photo": "files/cveti-omsk/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет без повода",
+      "price": 2500,
+      "desc": "Нежные оттенки",
+      "photo": "files/cveti-omsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет с гортензией",
+      "price": 2700,
+      "desc": "Идеальная дружба",
+      "photo": "files/cveti-omsk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет «Счастье»",
+      "price": 1500,
+      "desc": "Хризантемы и хлопок",
+      "photo": "files/cveti-omsk/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Эквадорская роза и эвкалипт",
+      "price": 3430,
+      "desc": "Стойкое сочетание",
+      "photo": "files/cveti-omsk/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "«Нежность и забота»",
+      "price": 2400,
+      "desc": "Тихий и точный",
+      "tag": "",
+      "photo": "files/cveti-omsk/item-6.jpg"
+    },
+    {
+      "name": "Розовые хризантемы",
+      "price": 1940,
+      "desc": "Мягкий букет",
+      "photo": "files/cveti-omsk/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Комплимент в стакане",
+      "price": 1050,
+      "desc": "Без повода",
+      "photo": "files/cveti-omsk/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 908 316-01-71",
+    "whatsapp": "79083160171",
+    "address": "ул. Ипподромная, 12а",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ]
+    ],
+    "vars": {
+      "soft": "#EEEAF8",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://cvetiomsk-55.orgs.biz/"
+}

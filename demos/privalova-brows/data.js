@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/privalova-brows.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-privalova-brows",
-  "rev": "2026-10-24T07:45:05.584Z",
+  "rev": "2026-10-24T08:38:54.102Z",
   "brand": {
     "name": "Ирина Привалова",
     "tagline": "Школа-студия дизайна бровей",
