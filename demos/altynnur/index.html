@@ -24,14 +24,14 @@
     /* Первый экран: глубокий синий и золотой рассвет, который мягко «дышит» */
     .hero { position: relative; overflow: hidden; background: var(--deep); color: #fff; border-radius: 0 0 36px 36px; isolation: isolate; }
     .glow { position: absolute; z-index: -1; border-radius: 50%; filter: blur(60px); }
-    .g1 { width: 120vw; max-width: 900px; aspect-ratio: 1; left: 85%; bottom: 25%; opacity: .7; transform: translateX(-50%); background: radial-gradient(circle, #F7C25A 0%, #E8902F 35%, rgba(31,78,154,0) 70%); animation: dawn 3s var(--ease) both, breathe 9s 3s ease-in-out infinite; }
-    .g2 { width: 70vw; max-width: 600px; aspect-ratio: 1; right: -30%; top: -20%; background: radial-gradient(circle, #2F6BD0 0%, rgba(14,42,85,0) 70%); opacity: .8; }
+    .g1 { width: 120vw; max-width: 900px; aspect-ratio: 1; left: 85%; bottom: 25%; opacity: .7; transform: translateX(-50%); background: radial-gradient(circle, var(--accent) 0%, var(--glow, #E8902F) 35%, rgba(31,78,154,0) 70%); animation: dawn 3s var(--ease) both, breathe 9s 3s ease-in-out infinite; }
+    .g2 { width: 70vw; max-width: 600px; aspect-ratio: 1; right: -30%; top: -20%; background: radial-gradient(circle, var(--glow2, #2F6BD0) 0%, rgba(14,42,85,0) 70%); opacity: .8; }
     @keyframes dawn { from { transform: translate(-50%, 35%); opacity: 0; } }
     @keyframes breathe { 50% { transform: translate(-50%, -4%) scale(1.06); } }
     .top { position: relative; z-index: 2; }
     .top .wrap { display: flex; align-items: center; gap: 10px; height: 64px; }
     .logo { margin-right: auto; display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 19px var(--font-head); letter-spacing: -.02em; }
-    .logo i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 50% 70%, #FFE3A3, var(--accent) 60%); box-shadow: 0 0 18px rgba(242,181,68,.7); }
+    .logo i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 50% 70%, #fff, var(--accent) 60%); box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent); }
     .req { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; font: 500 14px var(--font-body); padding: 9px 10px 9px 15px; border-radius: 999px; cursor: pointer; }
     .req b { min-width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; font-size: 12px; }
     .req b.has { background: var(--accent); color: var(--text); }
@@ -40,12 +40,12 @@
     .hero p { margin: 14px 0 24px; max-width: 40ch; color: rgba(255,255,255,.78); animation: up 1s .35s var(--ease) both; }
     @keyframes up { from { opacity: 0; transform: translateY(24px); } }
     .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 26px; border-radius: 999px; border: 0; background: var(--accent); color: var(--text); font: 600 16px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(242,181,68,.8); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--accent) 80%, transparent); }
     .hero .btn { animation: up 1s .5s var(--ease) both; }
     .pic { position: relative; border-radius: 28px 28px 0 0; overflow: hidden; aspect-ratio: 4 / 3.3; animation: up 1.2s .4s var(--ease) both; }
     .pic img { width: 100%; height: 100%; object-fit: cover; }
     .stats { position: absolute; left: 12px; right: 12px; bottom: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .stats span { padding: 10px; border-radius: 16px; background: rgba(14,42,85,.45); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.18); font: 500 12px/1.25 var(--font-body); }
+    .stats span { padding: 10px; border-radius: 16px; background: color-mix(in srgb, var(--deep) 45%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.18); font: 500 12px/1.25 var(--font-body); }
 
     /* Курсы: вкладки по направлениям */
     .courses { padding: 60px 0 30px; }
@@ -74,7 +74,7 @@
 
     .about { padding: 40px 0; }
     .about .box { border-radius: 32px; background: #fff; padding: 32px 22px; display: grid; gap: 22px; position: relative; overflow: hidden; }
-    .about .box::before { content: ""; position: absolute; width: 300px; height: 300px; right: -120px; top: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(242,181,68,.35), transparent 70%); }
+    .about .box::before { content: ""; position: absolute; width: 300px; height: 300px; right: -120px; top: -120px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%); }
     .about p { margin: 12px 0 0; max-width: 58ch; font-size: 17px; position: relative; }
     .feats { display: grid; gap: 10px; position: relative; }
     .feats div { padding: 18px; border-radius: 20px; background: var(--bg); }
@@ -85,7 +85,7 @@
 
     .find { padding: 0 0 48px; }
     .find .box { border-radius: 32px; background: var(--deep); color: #fff; padding: 32px 22px; display: grid; gap: 22px; position: relative; overflow: hidden; isolation: isolate; }
-    .find .box::before { content: ""; position: absolute; z-index: -1; width: 500px; height: 500px; left: -150px; bottom: -330px; border-radius: 50%; background: radial-gradient(circle, rgba(242,181,68,.55), transparent 65%); filter: blur(20px); }
+    .find .box::before { content: ""; position: absolute; z-index: -1; width: 500px; height: 500px; left: -150px; bottom: -330px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 55%, transparent), transparent 65%); filter: blur(20px); }
     .rows > * { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.14); text-decoration: none; }
     .rows small { opacity: .6; }
     .rows strong { font-weight: 500; text-align: right; }
@@ -116,11 +116,12 @@
   (function () {
     var D = Core.data, e = Core.esc, x = Core.x;
     var hp = D.hero.photo || "";
-    var DIRS = [["Брови и ресницы", /бров|ресниц|леш|lash|brow/i], ["Волосы", /волос|кератин|ботокс|нанопласт/i], ["Ногти", /ногт|маник|педик/i], ["Лицо", /косметик|эстет|лиц|уход/i]];
-    function dir(i) { for (var k = 0; k < DIRS.length; k++) if (DIRS[k][1].test(i.name)) return k; return -1; }
+    var DIRS = x.groups ? x.groups.map(function (g) { return [g[0], new RegExp(g[1], "i")]; }) :
+      [["Брови и ресницы", /бров|ресниц|леш|lash|brow/i], ["Волосы", /волос|кератин|ботокс|нанопласт/i], ["Ногти", /ногт|маник|педик/i], ["Лицо", /косметик|эстет|лиц|уход/i]];
+    function dir(i) { for (var k = 0; k < DIRS.length; k++) if (DIRS[k][1].test(i.name + " " + i.tag)) return k; return -1; }
     var used = DIRS.filter(function (d, k) { return D.items.some(function (i) { return dir(i) === k; }); });
 
-    var tabs = used.length > 1 ? '<div class="tabs" role="group" aria-label="Направление"><button class="on" data-d="all">Все курсы</button>' +
+    var tabs = used.length > 1 ? '<div class="tabs" role="group" aria-label="Направление"><button class="on" data-d="all">' + e(x.allLabel || "Все курсы") + '</button>' +
       DIRS.map(function (d, k) { return used.indexOf(d) >= 0 ? '<button data-d="' + k + '">' + e(d[0]) + '</button>' : ''; }).join("") + '</div>' : '';
 
     var list = D.items.map(function (i) {
@@ -138,15 +139,15 @@
 
     Core.mount(
       '<section class="hero" id="top"><span class="glow g1"></span><span class="glow g2"></span>' +
-        '<header class="top"><div class="wrap"><a class="logo" href="#top"><i></i>' + e(D.brand.name) + '</a><button class="req" data-open-cart>Заявка <b data-count>0</b></button></div></header>' +
+        '<header class="top"><div class="wrap"><a class="logo" href="#top"><i></i>' + e(D.brand.name) + '</a><button class="req" data-open-cart>' + e(x.cartBtn || "Заявка") + ' <b data-count>0</b></button></div></header>' +
         '<div class="wrap in"><div><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><a class="btn" href="#courses">' + e(D.hero.cta) + '</a></div>' +
         '<div class="pic">' + (hp ? '<img src="' + e(hp) + '" alt="Занятие в учебном центре ' + e(D.brand.name) + '">' : '') +
           '<div class="stats">' + D.features.map(function (f) { return '<span>' + e(f.title) + '</span>'; }).join("") + '</div></div></div></section>' +
       '<main><section class="courses" id="courses"><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="lead">' + e(D.sections.catalogText) + '</p>' + tabs + '<div class="list">' + list + '</div></div></section>' +
       '<section class="about"><div class="wrap"><div class="box"><div><h2>' + e(D.sections.aboutTitle) + '</h2><p>' + e(D.sections.aboutText) + '</p></div>' +
         '<div class="feats">' + D.features.map(function (f) { return '<div data-reveal><strong>' + e(f.title) + '</strong><span>' + e(f.text) + '</span></div>'; }).join("") + '</div></div></div></section>' +
-      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>Записаться</h2><p style="opacity:.75;margin:12px 0 22px">Напишите, какой курс интересует, пришлём программу и даты ближайшей группы.</p><div class="acts">' +
-        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa("Здравствуйте! Хочу узнать про курсы") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
+      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>' + e(x.orderTitle || "Записаться") + '</h2><p style="opacity:.75;margin:12px 0 22px">' + e(x.orderText || "Напишите, какой курс интересует, пришлём программу и даты ближайшей группы.") + '</p><div class="acts">' +
+        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa(x.orderMsg || "Здравствуйте! Хочу узнать про курсы") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
         (vk ? '<a class="btn glass" href="' + e(vk) + '" target="_blank" rel="noopener">ВКонтакте</a>' : '') + '</div></div><div class="rows">' + rows + '</div></div></div></section></main>' +
       '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
     );

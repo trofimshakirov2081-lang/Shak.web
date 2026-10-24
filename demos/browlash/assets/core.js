@@ -13,14 +13,19 @@
   (function theme() {
     var c = data.colors, st = document.documentElement.style;
     ["main", "accent", "bg", "text"].forEach(function (k) { if (c[k]) st.setProperty("--" + k, c[k]); });
+    // Дополнительные цвета конкретного дизайна из настроек демо (extra.vars)
+    var v = (data.extra && data.extra.vars) || {};
+    for (var k in v) st.setProperty("--" + k, v[k]);
     st.setProperty("--font-head", "'" + data.fonts.head + "', Georgia, serif");
     st.setProperty("--font-body", "'" + data.fonts.body + "', system-ui, sans-serif");
     var have = (document.documentElement.getAttribute("data-fonts") || "").split("|");
     [data.fonts.head, data.fonts.body].forEach(function (f) {
       if (!f || have.indexOf(f) >= 0) return;
+      // У части шрифтов только обычное начертание: запрос с толщиной 700 для них вернул бы ошибку
+      var single = /^(Yeseva One|Tenor Sans|Marmelad|Forum|Alice|Prata|Kurale|Russo One|Lobster|Pacifico)$/.test(f);
       var l = document.createElement("link");
       l.rel = "stylesheet";
-      l.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(f) + ":wght@400;700&display=swap";
+      l.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(f) + (single ? "" : ":wght@400;700") + "&display=swap";
       document.head.appendChild(l);
     });
   })();

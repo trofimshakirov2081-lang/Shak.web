@@ -1,0 +1,131 @@
+{
+  "slug": "white-roses",
+  "name": "White Roses",
+  "niche": "цветы",
+  "city": "Ульяновск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Ульяновске",
+  "colors": {
+    "main": "#1E1E1E",
+    "accent": "#E9E2D6",
+    "bg": "#FFFFFF",
+    "text": "#141414"
+  },
+  "fonts": {
+    "head": "Tenor Sans",
+    "body": "Inter Tight"
+  },
+  "hero": {
+    "title": "Элегантность и свежесть в каждом лепестке",
+    "text": "Розы напрямую от проверенных поставщиков, большие букеты-гиганты и сезонные композиции. Доставка по Ульяновску.",
+    "cta": "Выбрать букет",
+    "photo": "files/white-roses/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "White Roses: магазин цветов на Радищева. Работаем напрямую с проверенными поставщиками, поэтому цветы свежие, а букеты пышные.",
+  "features": [
+    {
+      "icon": "🌹",
+      "title": "Свежие розы",
+      "text": "Напрямую от поставщиков."
+    },
+    {
+      "icon": "💐",
+      "title": "Букеты-гиганты",
+      "text": "Для особого повода."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Ульяновску."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет-гигант из роз",
+      "price": 3700,
+      "desc": "Авторский, очень пышный",
+      "photo": "files/white-roses/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный с гортензией",
+      "price": 3000,
+      "desc": "Цветочная нежность",
+      "photo": "files/white-roses/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция сезонная",
+      "price": 2500,
+      "desc": "Немного летнего солнца",
+      "photo": "files/white-roses/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет",
+      "price": 6200,
+      "desc": "Розы, альстромерия, гортензия",
+      "tag": "",
+      "photo": "files/white-roses/item-4.jpg"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2200,
+      "desc": "Небольшой и яркий",
+      "photo": "files/white-roses/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Французская роза",
+      "price": 2800,
+      "desc": "Букет «Нежность в деталях»",
+      "photo": "files/white-roses/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "51 алая роза",
+      "price": 9800,
+      "desc": "Сорт Эксплорер",
+      "photo": "files/white-roses/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пионовидная лимонная роза",
+      "price": 2700,
+      "desc": "Нежный жёлтый букет",
+      "photo": "files/white-roses/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 927 838-28-61",
+    "whatsapp": "79278382861",
+    "address": "ул. Радищева, 68",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц"
+      ]
+    ],
+    "vars": {
+      "soft": "#F2F0EC",
+      "ok": "#3F7D58"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://white-roses-73.orgs.biz/"
+}

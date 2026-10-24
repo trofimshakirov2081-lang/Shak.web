@@ -1,0 +1,131 @@
+{
+  "slug": "emocia",
+  "name": "Эмоция",
+  "niche": "цветы",
+  "city": "Ростов-на-Дону",
+  "custom": "makov-cvet",
+  "tagline": "Цветы и шары в Ростове",
+  "colors": {
+    "main": "#E23C7C",
+    "accent": "#FFD3E4",
+    "bg": "#FFF7FA",
+    "text": "#2B0F1B"
+  },
+  "fonts": {
+    "head": "Rubik",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Цветы и шары с доставкой от 30 минут",
+    "text": "Яркие букеты, корзины и коробочки по Ростову-на-Дону. Выберите букет и отправьте заказ в WhatsApp.",
+    "cta": "Выбрать букет",
+    "photo": "files/emocia/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Эмоция: цветы и воздушные шары в Ростове-на-Дону. В каждом букете и шаре эмоции, а доставка занимает от 30 минут.",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "От 30 минут",
+      "text": "Быстрая доставка по городу."
+    },
+    {
+      "icon": "🎈",
+      "title": "Цветы и шары",
+      "text": "Соберём подарок целиком."
+    },
+    {
+      "icon": "💬",
+      "title": "Заказ в WhatsApp",
+      "text": "Ответим и подскажем."
+    }
+  ],
+  "items": [
+    {
+      "name": "Яркий букет",
+      "price": 2500,
+      "desc": "В розово-красных оттенках",
+      "photo": "files/emocia/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет из хризантем",
+      "price": 2000,
+      "desc": "Сиреневый и яркий",
+      "photo": "files/emocia/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветочная корзина",
+      "price": 3000,
+      "desc": "Бело-сиреневые оттенки",
+      "photo": "files/emocia/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветочное лукошко",
+      "price": 2600,
+      "desc": "Нежные бело-зелёные тона",
+      "photo": "files/emocia/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветочная коробочка",
+      "price": 1900,
+      "desc": "Нежная розовая композиция",
+      "photo": "files/emocia/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Микс из альстромерий",
+      "price": 2900,
+      "desc": "Яркий и сочный",
+      "photo": "files/emocia/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ромашки",
+      "price": 2000,
+      "desc": "Те самые ромашки",
+      "photo": "files/emocia/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Большой нежный букет",
+      "price": 4000,
+      "desc": "Розово-белая гамма",
+      "photo": "files/emocia/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 988 256-03-04",
+    "whatsapp": "79882560304",
+    "address": "ул. Добровольского, 30а",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Корзины и коробки",
+        "корзин|лукош|коробоч"
+      ]
+    ],
+    "vars": {
+      "soft": "#FBE5EE",
+      "ok": "#2F8F6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://emocia-rostov.orgs.biz/"
+}

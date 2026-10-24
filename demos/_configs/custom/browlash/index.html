@@ -21,7 +21,7 @@
 
     .top { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     .top .wrap { display: flex; align-items: center; gap: 8px; height: 60px; }
-    .logo { margin-right: auto; text-decoration: none; font: 400 20px/1 var(--font-head); white-space: nowrap; }
+    .logo { margin-right: auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; text-decoration: none; font: 400 17px/1.2 var(--font-head); white-space: nowrap; }
     .sel { display: inline-flex; align-items: center; gap: 6px; border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); background: none; color: var(--text); font: 500 14px var(--font-body); padding: 9px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
     .sel b { min-width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: var(--blush); }
     .sel b.has { background: var(--main); color: #fff; }
@@ -127,11 +127,11 @@
       for (var k = 0; k < TRACKS.length; k++) if (TRACKS[k][1].test(i.name)) {
         var t = TRACKS[k][0], total = D.items.filter(function (j) { return TRACKS[k][1].test(j.name); }).length;
         seen[t] = (seen[t] || 0) + 1;
-        return total < 2 ? t : t + (seen[t] === 1 ? ", база" : ", следующий уровень");
+        return total < 2 || x.plainLevels ? t : t + (seen[t] === 1 ? ", база" : ", следующий уровень");
       }
       return "Курс";
     }
-    var THEMES = [["#2A1F1D", "#F6F0EC"], ["#E9C9C6", "#2A1F1D"], ["#5B4038", "#F6F0EC"], ["#FFFFFF", "#2A1F1D"], ["#B4566E", "#FFFFFF"]];
+    var THEMES = x.cards || [["#2A1F1D", "#F6F0EC"], ["#E9C9C6", "#2A1F1D"], ["#5B4038", "#F6F0EC"], ["#FFFFFF", "#2A1F1D"], ["#B4566E", "#FFFFFF"]];
 
     var courses = D.items.map(function (i, n) {
       var th = THEMES[n % THEMES.length];

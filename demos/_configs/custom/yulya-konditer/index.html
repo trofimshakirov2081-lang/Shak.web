@@ -141,13 +141,13 @@
         '<button class="cart" data-open-cart>' + e(D.sections.cartLabel || "Корзина") + '<b data-count>0</b></button></div></header>' +
       '<main id="top"><section class="hero"><div class="wrap"><div class="tiles">' +
         '<div class="t t-main"><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><div><a class="btn" href="#menu">' + e(D.hero.cta) + '</a></div></div>' +
-        '<div class="t t-photo">' + (hp ? '<img src="' + e(hp) + '" alt="Десерты ' + e(D.brand.name) + '">' : '') + (D.items[0] ? '<span class="float">Десерты от ' + Core.money(Math.min.apply(null, D.items.map(function (i) { return i.price; }))) + '</span>' : '') + '</div>' +
+        '<div class="t t-photo">' + (hp ? '<img src="' + e(hp) + '" alt="' + e(D.brand.name) + '">' : '') + (D.items[0] ? '<span class="float">' + e(x.fromLabel || "Десерты от") + ' ' + Core.money(Math.min.apply(null, D.items.map(function (i) { return i.price; }))) + '</span>' : '') + '</div>' +
         small + '</div></div></section>' +
       '<section class="menu" id="menu"><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="lead">' + e(D.sections.catalogText) + '</p><div class="grid">' + items + '</div></div></section>' +
       '<section class="hi"><div class="wrap"><div class="t me"><h2>' + e(D.sections.aboutTitle) + '</h2><p>' + e(D.sections.aboutText) + '</p></div>' +
         '</div></section>' +
-      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>Заказать</h2><p style="opacity:.75;margin:10px 0 20px">Напишите дату и повод, я отвечу и всё уточню.</p><div class="acts">' +
-        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa("Юля, здравствуйте! Хочу заказать десерт") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
+      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>' + e(x.orderTitle || "Заказать") + '</h2><p style="opacity:.75;margin:10px 0 20px">' + e(x.orderText || "Напишите дату и повод, я отвечу и всё уточню.") + '</p><div class="acts">' +
+        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa(x.orderMsg || "Здравствуйте! Хочу заказать десерт") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
         (D.contacts.phone ? '<a class="btn ghost" href="tel:' + e(D.contacts.phone.replace(/[^\d+]/g, "")) + '">Позвонить</a>' : '') + '</div></div><div class="rows">' + rows + '</div></div></div></section></main>' +
       '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
     );

@@ -1,0 +1,145 @@
+{
+  "slug": "toxic-coffee",
+  "name": "Toxic coffee",
+  "niche": "кофейня",
+  "city": "Магнитогорск",
+  "custom": "altynnur",
+  "tagline": "Кофейня",
+  "colors": {
+    "main": "#2B2F2A",
+    "accent": "#B8F35A",
+    "bg": "#F3F5F0",
+    "text": "#121512"
+  },
+  "fonts": {
+    "head": "Tektur",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Поднимем настроение горячим кофе",
+    "text": "Эспрессо-тоник, бамбл, айс-матча и классика. Соберите заказ заранее, заберёте без ожидания.",
+    "cta": "Смотреть меню",
+    "photo": "files/toxic-coffee/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Меню",
+    "catalogText": "Цены за меньший объём. Добавьте напитки в заказ и отправьте нам.",
+    "aboutTitle": "О кофейне",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Toxic coffee на Газеты Правды. Варим вкусный горячий кофе, дарим улыбку и энергию на весь день.",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "Энергия на весь день",
+      "text": "Крепкий вкусный кофе."
+    },
+    {
+      "icon": "🧊",
+      "title": "Холодные напитки",
+      "text": "Тоник, бамбл, айс-латте."
+    },
+    {
+      "icon": "😊",
+      "title": "С улыбкой",
+      "text": "Поднимем настроение."
+    }
+  ],
+  "items": [
+    {
+      "name": "Латте",
+      "price": 200,
+      "desc": "Нежный и сбалансированный",
+      "photo": "files/toxic-coffee/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Раф",
+      "price": 180,
+      "desc": "Сливочный кофейный десерт",
+      "photo": "files/toxic-coffee/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Флэт уайт",
+      "price": 170,
+      "desc": "На двойном эспрессо",
+      "photo": "files/toxic-coffee/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Какао",
+      "price": 170,
+      "desc": "Насыщенный шоколадный",
+      "photo": "files/toxic-coffee/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Эспрессо-тоник",
+      "price": 200,
+      "desc": "Бодрящий и свежий",
+      "photo": "files/toxic-coffee/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бамбл",
+      "price": 200,
+      "desc": "Эспрессо и апельсиновый сок",
+      "photo": "files/toxic-coffee/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Айс-крим латте",
+      "price": 300,
+      "desc": "С пломбиром",
+      "photo": "files/toxic-coffee/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Айс-матча латте",
+      "price": 210,
+      "desc": "Освежающий",
+      "photo": "files/toxic-coffee/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 995 476-15-00",
+    "whatsapp": "79954761500",
+    "address": "ул. Газеты Правды, 75а",
+    "hours": ""
+  },
+  "extra": {
+    "groups": [
+      [
+        "Горячее",
+        "латте|раф|флэт|какао"
+      ],
+      [
+        "Холодное",
+        "тоник|бамбл|айс|кола|лимонад"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Всё меню",
+    "orderTitle": "Заказать заранее",
+    "orderText": "Соберите заказ на сайте и заберите его без очереди.",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки подготовить, объём, сироп",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой. Выберите напиток.",
+    "emptyToast": "Сначала выберите напиток",
+    "vars": {
+      "deep": "#101410",
+      "glow": "#6FBF2E",
+      "glow2": "#2E4D2A",
+      "sky": "#E5EADF",
+      "ok": "#4D8F2A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://toxic-coffee.orgs.biz/"
+}

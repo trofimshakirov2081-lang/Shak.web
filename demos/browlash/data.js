@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/browlash.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-browlash",
-  "rev": "2026-10-24T06:08:22.415Z",
+  "rev": "2026-10-24T07:45:05.687Z",
   "brand": {
     "name": "Brow Lash Bar",
     "tagline": "Студия и обучение: брови, ресницы, перманент",
