@@ -48,58 +48,58 @@
   ],
   "items": [
     {
+      "name": "Корзина из красных французских роз",
+      "price": 8990,
+      "desc": "Композиция из красных французских роз — классический символ…",
+      "photo": "files/liliya-flowers/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
       "name": "Букет из 11 альстромерий",
       "price": 4150,
       "desc": "Букет из нежных альстромерий подойдёт абсолютно на любой…",
-      "photo": "files/liliya-flowers/item-1.jpg",
-      "tag": "Хит"
+      "photo": "files/liliya-flowers/item-2.jpg",
+      "tag": ""
     },
     {
       "name": "Букет из 25 роз",
       "price": 4500,
       "desc": "Красные, белые или микс",
-      "photo": "files/liliya-flowers/item-2.jpg",
+      "photo": "files/liliya-flowers/item-3.jpg",
       "tag": ""
     },
     {
       "name": "Сборный букет",
       "price": 2900,
       "desc": "Сезонные цветы и зелень",
-      "photo": "files/liliya-flowers/item-3.jpg",
+      "photo": "files/liliya-flowers/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Цветы в шляпной коробке",
       "price": 3800,
       "desc": "С мини-открыткой",
-      "photo": "files/liliya-flowers/item-4.jpg",
+      "photo": "files/liliya-flowers/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Хризантемы",
       "price": 2200,
       "desc": "Пышный и стойкий букет",
-      "photo": "files/liliya-flowers/item-5.jpg",
+      "photo": "files/liliya-flowers/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Тюльпаны, 25 шт",
       "price": 3200,
       "desc": "Цвет на выбор",
-      "photo": "files/liliya-flowers/item-6.jpg",
+      "photo": "files/liliya-flowers/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Композиция в корзине",
       "price": 5200,
       "desc": "Для особого повода",
-      "photo": "files/liliya-flowers/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет невесты",
-      "price": 4500,
-      "desc": "Соберём под ваш образ",
       "photo": "files/liliya-flowers/item-8.jpg",
       "tag": ""
     }

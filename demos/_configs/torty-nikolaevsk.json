@@ -1,0 +1,130 @@
+{
+  "slug": "torty-nikolaevsk",
+  "name": "Торты и пирожные",
+  "niche": "кондитерская",
+  "city": "Николаевск",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#1F3A5F",
+    "accent": "#F2C14E",
+    "bg": "#F3F0EA",
+    "text": "#1A2433"
+  },
+  "fonts": {
+    "head": "Exo 2",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Бенто, капкейки и торты на заказ",
+    "text": "Бенто, торты и капкейки в Николаевске. Соберите заказ за минуту.",
+    "cta": "Собрать заказ",
+    "photo": "files/torty-nikolaevsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Торты и пирожные: торты и десерты на заказ в Николаевске. Только свежие продукты и дизайн под ваш повод.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Николаевск",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Медовик с заварным кремом",
+      "price": 2100,
+      "desc": "Нежные медовые коржи с заварным кремом без масла",
+      "photo": "files/torty-nikolaevsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тортик стандартное украшение (начинка на в",
+      "price": 1850,
+      "desc": "Любая начинка из прайса в стандартном украшении",
+      "photo": "files/torty-nikolaevsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шоколадная девочка",
+      "price": 2100,
+      "desc": "Шоколадные коржи, шоколадный крем",
+      "photo": "files/torty-nikolaevsk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт в боксе",
+      "price": 300,
+      "desc": "Любимый тортик в мини версии",
+      "photo": "files/torty-nikolaevsk/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Муссовый красный бархат",
+      "price": 2100,
+      "desc": "Бисквит красный бархат, ягодное конфи, сливочный мусс",
+      "photo": "files/torty-nikolaevsk/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Муссовое пирожное",
+      "price": 220,
+      "desc": "Шоколадный мусс, ягодная прослойка, шоколадный бисквит",
+      "photo": "files/torty-nikolaevsk/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Муссовый торт",
+      "price": 2100,
+      "desc": "Шоколадный мусс, два вида ягодной прослойки, шоколадный…",
+      "photo": "files/torty-nikolaevsk/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Меренговый рулет",
+      "price": 1500,
+      "desc": "Меренговый рулет с ягодным конфи",
+      "photo": "files/torty-nikolaevsk/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 927 539-27-27",
+    "whatsapp": "79275392727",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F3D3C4",
+      "pist": "#D9E6F2",
+      "butter": "#F6DFA8"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club229831425.orgs.biz/",
+  "vk_lead": "https://vk.me/club229831425"
+}

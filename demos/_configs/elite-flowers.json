@@ -62,44 +62,44 @@
       "tag": ""
     },
     {
+      "name": "Букет из кустовых роз и эвкалипта",
+      "price": 9490,
+      "desc": "Нежный, розовый сборный букет.",
+      "photo": "files/elite-flowers/item-3.jpg",
+      "tag": ""
+    },
+    {
       "name": "Цветочная корзина «Spring Aura",
       "price": 45990,
       "desc": "Корзина из гортензий и кустовых роз.",
-      "photo": "files/elite-flowers/item-3.jpg",
+      "photo": "files/elite-flowers/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Красные алые розы",
       "price": 9990,
       "desc": "Красные кустовые розы.",
-      "photo": "files/elite-flowers/item-4.jpg",
+      "photo": "files/elite-flowers/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Букет «ELITE",
       "price": 10490,
       "desc": "Букет из сиреневых гортензий.",
-      "photo": "files/elite-flowers/item-5.jpg",
+      "photo": "files/elite-flowers/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Авторский букет",
       "price": 8990,
       "desc": "Букет из гортензий, кустовых роз.",
-      "photo": "files/elite-flowers/item-6.jpg",
+      "photo": "files/elite-flowers/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Белые розы",
       "price": 3490,
       "desc": "Букет из 7 белых роз.",
-      "photo": "files/elite-flowers/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Моно букет из белых гортензий",
-      "price": 15990,
-      "desc": "Букет из 31 белой гортензии.",
       "photo": "files/elite-flowers/item-8.jpg",
       "tag": ""
     }

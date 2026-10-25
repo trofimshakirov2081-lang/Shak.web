@@ -48,58 +48,58 @@
   ],
   "items": [
     {
+      "name": "Тюльпаны на 8 марта",
+      "price": 2000,
+      "desc": "Тюльпаны — это весна в одном букете 🌿 Соберём свежий букет,…",
+      "photo": "files/peredai-s-lyubovyu/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
       "name": "Букеты 5-8к",
       "price": 6500,
       "desc": "Более объёмный “вау-эффект”, богаче состав. Цена зависит от…",
-      "photo": "files/peredai-s-lyubovyu/item-1.jpg",
-      "tag": "Хит"
+      "photo": "files/peredai-s-lyubovyu/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БУКЕТЫ 3-5к",
+      "price": 4000,
+      "desc": "Самый популярный формат: красиво и уместно. Цена зависит от…",
+      "photo": "files/peredai-s-lyubovyu/item-3.jpg",
+      "tag": ""
     },
     {
       "name": "БУКЕТ до 3000",
       "price": 3000,
       "desc": "Подберём варианты в вашем городе под бюджет и повод. Цена…",
-      "photo": "files/peredai-s-lyubovyu/item-2.jpg",
+      "photo": "files/peredai-s-lyubovyu/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Букет из 25 роз",
       "price": 4500,
       "desc": "Красные, белые или микс",
-      "photo": "files/peredai-s-lyubovyu/item-3.jpg",
+      "photo": "files/peredai-s-lyubovyu/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Сборный букет",
       "price": 2900,
       "desc": "Сезонные цветы и зелень",
-      "photo": "files/peredai-s-lyubovyu/item-4.jpg",
+      "photo": "files/peredai-s-lyubovyu/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Цветы в шляпной коробке",
       "price": 3800,
       "desc": "С мини-открыткой",
-      "photo": "files/peredai-s-lyubovyu/item-5.jpg",
+      "photo": "files/peredai-s-lyubovyu/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Хризантемы",
       "price": 2200,
       "desc": "Пышный и стойкий букет",
-      "photo": "files/peredai-s-lyubovyu/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Тюльпаны, 25 шт",
-      "price": 3200,
-      "desc": "Цвет на выбор",
-      "photo": "files/peredai-s-lyubovyu/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Композиция в корзине",
-      "price": 5200,
-      "desc": "Для особого повода",
       "photo": "files/peredai-s-lyubovyu/item-8.jpg",
       "tag": ""
     }

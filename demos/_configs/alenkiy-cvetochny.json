@@ -69,37 +69,37 @@
       "tag": ""
     },
     {
+      "name": "Букет Классному руководителю",
+      "price": 3500,
+      "desc": "Состав букета: - альстромения, 3шт - эустома, 1шт -…",
+      "photo": "files/alenkiy-cvetochny/item-4.jpg",
+      "tag": ""
+    },
+    {
       "name": "Букет-комплимент ко Дню знаний",
       "price": 2400,
       "desc": "Состав букета: - гладиолус, 1шт - гвоздика, 2шт - роза…",
-      "photo": "files/alenkiy-cvetochny/item-4.jpg",
+      "photo": "files/alenkiy-cvetochny/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Дофаминовый букет на 1 сентября",
       "price": 3700,
       "desc": "Состав букета: - дельфиниум, 1шт - гвоздика одноголовая,…",
-      "photo": "files/alenkiy-cvetochny/item-5.jpg",
+      "photo": "files/alenkiy-cvetochny/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Монобукет кремовых роз Кендилайт 101 штука",
       "price": 15200,
       "desc": "Состав букета: - 101 роза сорта Кенди Лайт",
-      "photo": "files/alenkiy-cvetochny/item-6.jpg",
+      "photo": "files/alenkiy-cvetochny/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Монобукет кремовых роз Кендилайт 51 штука",
       "price": 7900,
       "desc": "Состав букета: - 51 роза сорта Кенди Лайт",
-      "photo": "files/alenkiy-cvetochny/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Монобукет кремовых роз Кендилайт 35 штук(",
-      "price": 6000,
-      "desc": "Состав букета: - 35 роз сорта Кенди Лайт",
       "photo": "files/alenkiy-cvetochny/item-8.jpg",
       "tag": ""
     }

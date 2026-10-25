@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/doza-coffee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-doza-coffee",
-  "rev": "2026-10-24T19:14:36.375Z",
+  "rev": "2026-10-25T05:12:02.705Z",
   "brand": {
     "name": "DOZA Coffee",
     "tagline": "Кофе",

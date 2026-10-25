@@ -55,51 +55,51 @@
       "tag": "Хит"
     },
     {
+      "name": "Авторский букет Бронзовая элегия",
+      "price": 7650,
+      "desc": "Букет \"Бронзовая элегия\" воплощает утонченную роскошь в…",
+      "photo": "files/flower-corner/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Авторский букет с хризантемой и розой",
+      "price": 7700,
+      "desc": "Изысканный авторский букет сочетает пышные хризантемы…",
+      "photo": "files/flower-corner/item-3.jpg",
+      "tag": ""
+    },
+    {
       "name": "Авторский букет Белоснежное Счастье",
       "price": 12250,
       "desc": "Роскошный авторский букет \"Белоснежное Счастье\" в нежной…",
-      "photo": "files/flower-corner/item-2.jpg",
+      "photo": "files/flower-corner/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Авторский букет с розой и гортензией",
       "price": 12100,
       "desc": "Изысканный авторский букет с благородными розами и пышной…",
-      "photo": "files/flower-corner/item-3.jpg",
+      "photo": "files/flower-corner/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Авторский букет в нежных оттенках",
       "price": 9300,
       "desc": "Авторский букет в нежных оттенках - изысканная композиция…",
-      "photo": "files/flower-corner/item-4.jpg",
+      "photo": "files/flower-corner/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Монобукет из 7 гладиулусов / Розовый",
       "price": 3300,
       "desc": "Монобукет из гладиолусов — выразительный, элегантный и…",
-      "photo": "files/flower-corner/item-5.jpg",
+      "photo": "files/flower-corner/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Композиция Красный сентябрь",
       "price": 3900,
       "desc": "Выразительная композиция в глубоких красных и свежих…",
-      "photo": "files/flower-corner/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Монобукет из 5 гладиолусов",
-      "price": 2450,
-      "desc": "Монобукет из 5 гладиолусов — аккуратный, лёгкий и…",
-      "photo": "files/flower-corner/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Монобукет из 7 гладиулусов / Белый",
-      "price": 3300,
-      "desc": "Монобукет из гладиолусов — выразительный, элегантный и…",
       "photo": "files/flower-corner/item-8.jpg",
       "tag": ""
     }

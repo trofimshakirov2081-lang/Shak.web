@@ -69,37 +69,37 @@
       "tag": ""
     },
     {
+      "name": "Монобукет #8",
+      "price": 3800,
+      "desc": "Букет из 11 розовых роз и эвкалипта",
+      "photo": "files/rosa-yurga/item-4.jpg",
+      "tag": ""
+    },
+    {
       "name": "Корзина с розами",
       "price": 25000,
       "desc": "Композиция в плетенной корзине из 69 роз и эвкалипта",
-      "photo": "files/rosa-yurga/item-4.jpg",
+      "photo": "files/rosa-yurga/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Корзина с цветами #3",
       "price": 20000,
       "desc": "Корзина из цветов, наполнение возможно любое и в любой…",
-      "photo": "files/rosa-yurga/item-5.jpg",
+      "photo": "files/rosa-yurga/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Монобукет #7",
       "price": 4000,
       "desc": "Монобукет из 9 роз сорта Канделайт и крашенной цветной…",
-      "photo": "files/rosa-yurga/item-6.jpg",
+      "photo": "files/rosa-yurga/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Авторский букет #1",
       "price": 5100,
       "desc": "Букет из белых диантусов, хризантемы Делигрин, розовых роз,…",
-      "photo": "files/rosa-yurga/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Триобукет #4",
-      "price": 4300,
-      "desc": "Букет из 5 кустовых белых хризантем, 5 розовых диантусов и…",
       "photo": "files/rosa-yurga/item-8.jpg",
       "tag": ""
     }

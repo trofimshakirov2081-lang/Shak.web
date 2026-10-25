@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mandarinya-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mandarinya-cake",
-  "rev": "2026-10-24T19:14:36.517Z",
+  "rev": "2026-10-25T05:12:02.811Z",
   "brand": {
     "name": "Mandarinya cake",
     "tagline": "Десерты на заказ",

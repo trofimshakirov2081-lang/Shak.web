@@ -62,44 +62,44 @@
       "tag": ""
     },
     {
+      "name": "Букет из 5 французских роз",
+      "price": 2500,
+      "desc": "Роза французская - 5 шт Эвкалипт- 3 шт Пленка Лента",
+      "photo": "files/you-bloom/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сумочка с французской розой",
+      "price": 2700,
+      "desc": "Французская роза, эвкалипт, флористическая губка, сумка",
+      "photo": "files/you-bloom/item-4.jpg",
+      "tag": ""
+    },
+    {
       "name": "Композиция в сумке",
       "price": 2750,
       "desc": "Французска роза, кустовая роза, эвкалипт, флористическая…",
-      "photo": "files/you-bloom/item-3.jpg",
+      "photo": "files/you-bloom/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Букет из 15 Французских роз",
       "price": 5300,
       "desc": "Роза французская - 15 шт Атласная лента - 1 шт",
-      "photo": "files/you-bloom/item-4.jpg",
+      "photo": "files/you-bloom/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Букет№18",
       "price": 2200,
       "desc": "Франзуская роза, эвкалипт, упаковка",
-      "photo": "files/you-bloom/item-5.jpg",
+      "photo": "files/you-bloom/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Букет№17",
       "price": 3300,
       "desc": "Гортензия микс, альстромерия, гипсофила, эвкалипт, упаковка",
-      "photo": "files/you-bloom/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет№16",
-      "price": 4550,
-      "desc": "Роза кустовая пионовидная, эвкалипт, упаковка",
-      "photo": "files/you-bloom/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет№13",
-      "price": 2350,
-      "desc": "Хризантема Сантини микс 9 шт, упаковка",
       "photo": "files/you-bloom/item-8.jpg",
       "tag": ""
     }

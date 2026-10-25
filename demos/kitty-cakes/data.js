@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kitty-cakes.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kitty-cakes",
-  "rev": "2026-10-24T19:14:36.445Z",
+  "rev": "2026-10-25T05:12:02.766Z",
   "brand": {
     "name": "Kitty Cakes",
     "tagline": "Десерты на заказ",

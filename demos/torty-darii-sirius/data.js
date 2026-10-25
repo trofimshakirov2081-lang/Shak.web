@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-darii-sirius.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-darii-sirius",
-  "rev": "2026-10-24T19:14:36.627Z",
+  "rev": "2026-10-25T05:12:02.921Z",
   "brand": {
     "name": "Торты Дарьи",
     "tagline": "Десерты на заказ",

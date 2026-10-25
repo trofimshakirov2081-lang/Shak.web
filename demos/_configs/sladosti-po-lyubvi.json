@@ -48,59 +48,45 @@
   ],
   "items": [
     {
+      "name": "Рождественский кекс",
+      "price": 700,
+      "desc": "Сладкий, пряный и нарядный новогодний кекс - настоящий…",
+      "photo": "files/sladosti-po-lyubvi/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шоколадный трюфель",
+      "price": 800,
+      "desc": "💜 Насыщенный и благородный десерт из отборного бельгийского…",
+      "photo": "files/sladosti-po-lyubvi/item-2.jpg",
+      "tag": ""
+    },
+    {
       "name": "Дубайский шоколад",
       "price": 1000,
       "desc": "💚 Восточное лакомство с хрустящей сочной начинкой,…",
-      "photo": "files/sladosti-po-lyubvi/item-1.jpg",
-      "tag": "Хит"
+      "photo": "files/sladosti-po-lyubvi/item-3.jpg",
+      "tag": ""
     },
     {
       "name": "Зефир в шоколаде 4 шт",
       "price": 650,
       "desc": "💜 Сочетание воздушного ягодного зефира и глазури из темного…",
-      "photo": "files/sladosti-po-lyubvi/item-2.jpg",
+      "photo": "files/sladosti-po-lyubvi/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Зефир 6 шт",
       "price": 950,
       "desc": "🔷Воздушный десерт на основе свежих ягод порадует нежным…",
-      "photo": "files/sladosti-po-lyubvi/item-3.jpg",
+      "photo": "files/sladosti-po-lyubvi/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Ванильные капкейки набор 4 шт",
       "price": 1000,
       "desc": "♥️ Нежные ванильные кексы с аппетитной шапочкой тающего…",
-      "photo": "files/sladosti-po-lyubvi/item-4.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Бенто-торт",
-      "price": 1800,
-      "desc": "На 1-2 человек, с надписью",
-      "photo": "files/sladosti-po-lyubvi/item-5.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Торт на праздник",
-      "price": 3600,
-      "desc": "От 1,5 кг, начинка на выбор",
       "photo": "files/sladosti-po-lyubvi/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Капкейки, 6 шт",
-      "price": 1200,
-      "desc": "С кремовой шапочкой",
-      "photo": "files/sladosti-po-lyubvi/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Медовик",
-      "price": 2400,
-      "desc": "Тонкие медовые коржи",
-      "photo": "files/sladosti-po-lyubvi/item-8.jpg",
       "tag": ""
     }
   ],

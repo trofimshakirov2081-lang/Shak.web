@@ -62,44 +62,44 @@
       "tag": ""
     },
     {
+      "name": "Цветы в сумочке «Радуга",
+      "price": 2350,
+      "desc": "Сборная цветочная композиция",
+      "photo": "files/cvety-i-tochka/item-3.jpg",
+      "tag": ""
+    },
+    {
       "name": "Монобукет из чайных роз «Приятный Вечер",
       "price": 6500,
       "desc": "Монобукет из роз",
-      "photo": "files/cvety-i-tochka/item-3.jpg",
+      "photo": "files/cvety-i-tochka/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Букет «Светлая Нежность",
       "price": 4650,
       "desc": "Сборный букет",
-      "photo": "files/cvety-i-tochka/item-4.jpg",
+      "photo": "files/cvety-i-tochka/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Букет «Огненная Страсть",
       "price": 6850,
       "desc": "Стильный сборный букет",
-      "photo": "files/cvety-i-tochka/item-5.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет «Изящный",
-      "price": 4250,
-      "desc": "Сборный цветочный микс",
       "photo": "files/cvety-i-tochka/item-6.jpg",
       "tag": ""
     },
     {
-      "name": "Монобукет из белых пионов «Зефирки",
-      "price": 6000,
-      "desc": "Белоснежные пионы в нежном Монобукете",
+      "name": "Цветы в коробке «Цветочное Лето",
+      "price": 3900,
+      "desc": "Сборная цветочная композиция",
       "photo": "files/cvety-i-tochka/item-7.jpg",
       "tag": ""
     },
     {
-      "name": "Букет «Радость Души",
-      "price": 2900,
-      "desc": "Стильный сборный букет",
+      "name": "Букет «Цветущий Сад",
+      "price": 6500,
+      "desc": "Сборный цветочный микс",
       "photo": "files/cvety-i-tochka/item-8.jpg",
       "tag": ""
     }

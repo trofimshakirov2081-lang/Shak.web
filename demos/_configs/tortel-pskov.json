@@ -48,58 +48,58 @@
   ],
   "items": [
     {
-      "name": "Бенто \"Мак-лимон",
-      "price": 1350,
+      "name": "БентоMAX \"Мак-лимон",
+      "price": 2200,
       "desc": "В составе: маковый бисквит, пропитанный сахарным сиропом. В…",
       "photo": "files/tortel-pskov/item-1.jpg",
       "tag": "Хит"
     },
     {
+      "name": "Бенто \"Мак-лимон",
+      "price": 1350,
+      "desc": "В составе: маковый бисквит, пропитанный сахарным сиропом. В…",
+      "photo": "files/tortel-pskov/item-2.jpg",
+      "tag": ""
+    },
+    {
       "name": "БентоMAX \"Кокосовый",
       "price": 2200,
       "desc": "В составе: классический ванильный бисквит, пропитанный…",
-      "photo": "files/tortel-pskov/item-2.jpg",
+      "photo": "files/tortel-pskov/item-3.jpg",
       "tag": ""
     },
     {
       "name": "Бенто \"Кокосовый",
       "price": 1350,
       "desc": "В составе: классический ванильный бисквит, пропитанный…",
-      "photo": "files/tortel-pskov/item-3.jpg",
+      "photo": "files/tortel-pskov/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БентоMAX \"Шоколад-малина",
+      "price": 2200,
+      "desc": "В составе: шоколадный шифоновый бисквит, пропитанный…",
+      "photo": "files/tortel-pskov/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Бенто \"Шоколад-малина",
       "price": 1350,
       "desc": "В составе: шоколадный шифоновый бисквит, пропитанный…",
-      "photo": "files/tortel-pskov/item-4.jpg",
+      "photo": "files/tortel-pskov/item-6.jpg",
       "tag": ""
     },
     {
       "name": "БентоMAX \"Молочная девочка",
       "price": 2200,
       "desc": "Состав: бисквит на основе сгущённого молока. Для сборки и…",
-      "photo": "files/tortel-pskov/item-5.jpg",
+      "photo": "files/tortel-pskov/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Бенто \"Молочная девочка",
       "price": 1350,
       "desc": "Состав: бисквит на основе сгущённого молока. Для сборки и…",
-      "photo": "files/tortel-pskov/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "БентоMAX Шоколадный баноффи (1кг)",
-      "price": 2100,
-      "desc": "Состав: шоколадный шифоновый бисквит, пропитанный сахарным…",
-      "photo": "files/tortel-pskov/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "БентоMAX Шоколадная нутелла (1кг)",
-      "price": 2100,
-      "desc": "Состав: шоколадный шифоновый бисквит, пропитанный сахарным…",
       "photo": "files/tortel-pskov/item-8.jpg",
       "tag": ""
     }

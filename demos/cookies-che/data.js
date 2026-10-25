@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cookies-che.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cookies-che",
-  "rev": "2026-10-24T19:14:36.325Z",
+  "rev": "2026-10-25T05:12:02.665Z",
   "brand": {
     "name": "Cookies.Che",
     "tagline": "Десерты на заказ",

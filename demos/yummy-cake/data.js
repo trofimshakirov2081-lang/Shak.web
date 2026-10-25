@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yummy-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yummy-cake",
-  "rev": "2026-10-24T19:14:36.689Z",
+  "rev": "2026-10-25T05:12:02.988Z",
   "brand": {
     "name": "YUMMY CAKE",
     "tagline": "Десерты на заказ",
@@ -125,8 +125,8 @@ window.SITE = {
     }
   ],
   "contacts": {
-    "phone": "+7 967 145-34-71",
-    "whatsapp": "79671453471",
+    "phone": "",
+    "whatsapp": "",
     "telegram": "",
     "instagram": "",
     "address": "",

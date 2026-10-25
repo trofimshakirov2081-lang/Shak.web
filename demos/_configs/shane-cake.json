@@ -48,59 +48,45 @@
   ],
   "items": [
     {
+      "name": "Трайфлы",
+      "price": 300,
+      "desc": "Лаконичный порционный торт в стаканчике, который удобно…",
+      "photo": "files/shane-cake/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Капкейки",
+      "price": 900,
+      "desc": "Капкейки – удобные порционные десерты на большую компанию…",
+      "photo": "files/shane-cake/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто торт",
+      "price": 1000,
+      "desc": "Бенто торт – прекрасный и лаконичный подарок для пары и…",
+      "photo": "files/shane-cake/item-3.jpg",
+      "tag": ""
+    },
+    {
       "name": "Печенье «Мадлен",
       "price": 500,
       "desc": "Нежнейшая бисквитная основа покрыта хрустящим шоколадом, с…",
-      "photo": "files/shane-cake/item-1.jpg",
-      "tag": "Хит"
+      "photo": "files/shane-cake/item-4.jpg",
+      "tag": ""
     },
     {
       "name": "Зефир",
       "price": 360,
       "desc": "Натуральный зефир ручной работы, отлично подходит в…",
-      "photo": "files/shane-cake/item-2.jpg",
+      "photo": "files/shane-cake/item-5.jpg",
       "tag": ""
     },
     {
       "name": "Торты",
       "price": 2500,
       "desc": "Здесь вы можете выбрать начинку для торта к торжеству,…",
-      "photo": "files/shane-cake/item-3.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Бенто-торт",
-      "price": 1800,
-      "desc": "На 1-2 человек, с надписью",
-      "photo": "files/shane-cake/item-4.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Торт на праздник",
-      "price": 3600,
-      "desc": "От 1,5 кг, начинка на выбор",
-      "photo": "files/shane-cake/item-5.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Капкейки, 6 шт",
-      "price": 1200,
-      "desc": "С кремовой шапочкой",
       "photo": "files/shane-cake/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Медовик",
-      "price": 2400,
-      "desc": "Тонкие медовые коржи",
-      "photo": "files/shane-cake/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Макаронс, 12 шт",
-      "price": 1300,
-      "desc": "Ассорти вкусов",
-      "photo": "files/shane-cake/item-8.jpg",
       "tag": ""
     }
   ],

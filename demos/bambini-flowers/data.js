@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bambini-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bambini-flowers",
-  "rev": "2026-10-24T19:14:36.282Z",
+  "rev": "2026-10-25T05:12:02.636Z",
   "brand": {
     "name": "Bambini Flowers",
     "tagline": "Цветы с доставкой",

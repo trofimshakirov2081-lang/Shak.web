@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/la-fraise.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-la-fraise",
-  "rev": "2026-10-24T19:14:36.475Z",
+  "rev": "2026-10-25T05:12:02.786Z",
   "brand": {
     "name": "La Fraise",
     "tagline": "Десерты на заказ",

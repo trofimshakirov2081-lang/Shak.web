@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cake-and-care.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cake-and-care",
-  "rev": "2026-10-24T19:14:36.293Z",
+  "rev": "2026-10-25T05:12:02.644Z",
   "brand": {
     "name": "Cake & Care",
     "tagline": "Десерты на заказ",
@@ -63,8 +63,8 @@ window.SITE = {
     {
       "id": "i2",
       "name": "Бенто-торт",
-      "desc": "На 1-2 человек, с надписью",
-      "price": 1800,
+      "desc": "Бенто-торт - это маленький тортик на 1-2 порции. Вес такого…",
+      "price": 1000,
       "emoji": "🍰",
       "photo": "img/item-2.jpg",
       "tag": ""

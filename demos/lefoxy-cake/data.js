@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lefoxy-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lefoxy-cake",
-  "rev": "2026-10-24T19:14:36.488Z",
+  "rev": "2026-10-25T05:12:02.794Z",
   "brand": {
     "name": "LeFoxy Cake",
     "tagline": "Десерты на заказ",

@@ -69,37 +69,37 @@
       "tag": ""
     },
     {
+      "name": "Композиция \"Радужная",
+      "price": 1890,
+      "desc": "Гипсофила - это именно тот цветок, который обладает высокой…",
+      "photo": "files/cvetochka-kineshma/item-4.jpg",
+      "tag": ""
+    },
+    {
       "name": "Букет \"Розовые мечты",
       "price": 3390,
       "desc": "Весенний букет из тюльпанов и эустомы — это утренний…",
-      "photo": "files/cvetochka-kineshma/item-4.jpg",
+      "photo": "files/cvetochka-kineshma/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Солнечные блики",
+      "price": 2890,
+      "desc": "Композиция из жёлтых тюльпанов и альстрамерии — солнечный…",
+      "photo": "files/cvetochka-kineshma/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Букет \"Краски весны",
       "price": 3990,
       "desc": "Букет из ирисов и жёлтых тюльпанов — это гармония ярких…",
-      "photo": "files/cvetochka-kineshma/item-5.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет \"Антонов",
-      "price": 2990,
-      "desc": "Этот изысканный букет из хризантем - воплощение нежности и…",
-      "photo": "files/cvetochka-kineshma/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Букет \"Нежная весна",
-      "price": 3190,
-      "desc": "Этот весенний букет - яркий и живой символ пробуждения…",
       "photo": "files/cvetochka-kineshma/item-7.jpg",
       "tag": ""
     },
     {
-      "name": "Букет \"Весенние ноты",
-      "price": 3690,
-      "desc": "Этот весенний букет — настоящее воплощение обновления и…",
+      "name": "Букет \"Розовый шик",
+      "price": 3590,
+      "desc": "Букет из розовых тюльпанов и альстрамерии – нежное…",
       "photo": "files/cvetochka-kineshma/item-8.jpg",
       "tag": ""
     }

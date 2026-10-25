@@ -55,52 +55,31 @@
       "tag": "Хит"
     },
     {
+      "name": "Ярусный торт",
+      "price": 9200,
+      "desc": "Ярусные торты от 4 кг, количество ярусов до 4х, дизайн…",
+      "photo": "files/izilizi-cake/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт от 1,5 кг",
+      "price": 2850,
+      "desc": "Бисквитный торт от 1,5 кг, дизайн рассчитывается индивидуально",
+      "photo": "files/izilizi-cake/item-3.jpg",
+      "tag": ""
+    },
+    {
       "name": "Мини-торт",
       "price": 2000,
       "desc": "Торт весом 1-1,2 кг, дизайн рассчитывается индивидуально",
-      "photo": "files/izilizi-cake/item-2.jpg",
+      "photo": "files/izilizi-cake/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Бенто-торт",
       "price": 1200,
       "desc": "Торт весом 400-450 гр, в индивидуальном боксе, с ложечкой и…",
-      "photo": "files/izilizi-cake/item-3.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Торт на праздник",
-      "price": 3600,
-      "desc": "От 1,5 кг, начинка на выбор",
-      "photo": "files/izilizi-cake/item-4.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Капкейки, 6 шт",
-      "price": 1200,
-      "desc": "С кремовой шапочкой",
       "photo": "files/izilizi-cake/item-5.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Медовик",
-      "price": 2400,
-      "desc": "Тонкие медовые коржи",
-      "photo": "files/izilizi-cake/item-6.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Макаронс, 12 шт",
-      "price": 1300,
-      "desc": "Ассорти вкусов",
-      "photo": "files/izilizi-cake/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Клубника в шоколаде",
-      "price": 1500,
-      "desc": "Набор из 9 ягод",
-      "photo": "files/izilizi-cake/item-8.jpg",
       "tag": ""
     }
   ],

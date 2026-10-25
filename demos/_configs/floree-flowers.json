@@ -1,0 +1,127 @@
+{
+  "slug": "floree-flowers",
+  "name": "Floree Flowers",
+  "niche": "цветы",
+  "city": "Санкт-Петербург",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#C9B27C",
+    "accent": "#2C4A3D",
+    "bg": "#14261F",
+    "text": "#EEF0E6"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Свежие цветы и букеты под ваш повод",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/floree-flowers/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Floree Flowers: цветы в Петербурге. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Петербургу к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет №117",
+      "price": 8300,
+      "desc": "Буплерум - 6 шт Маттиола белая - 4 шт Пионовидная роза…",
+      "photo": "files/floree-flowers/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет №116",
+      "price": 16500,
+      "desc": "роскошный букет с пионами Рейн Хортенс, французскими розами…",
+      "photo": "files/floree-flowers/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №87",
+      "price": 6300,
+      "desc": "• Гортензия мини розовая 1 шт • Французская роза Пинк…",
+      "photo": "files/floree-flowers/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №72",
+      "price": 7500,
+      "desc": "• Гортензия белая - 1 шт. • Пионовидная роза Тай Дай - 3…",
+      "photo": "files/floree-flowers/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №64",
+      "price": 10100,
+      "desc": "• Кустовая роза Джентли Трендсеттер - 6шт. • Пионовидная…",
+      "photo": "files/floree-flowers/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №73",
+      "price": 14500,
+      "desc": "• Пионовидная роза Тай Дай - 7 шт. • Кустовая роза Викки…",
+      "photo": "files/floree-flowers/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №69",
+      "price": 7000,
+      "desc": "• Кустовая роза Джульетта - 9 шт • Упаковка - тишью,…",
+      "photo": "files/floree-flowers/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет №60 L",
+      "price": 15100,
+      "desc": "• Пионовидная роза Тай Дай - 25 шт. • Упаковка - тишью,…",
+      "photo": "files/floree-flowers/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 993 075-05-77",
+    "whatsapp": "79930750577",
+    "address": "Полтавский пр., 2",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу заказать букет",
+    "commentHint": "Кому букет, адрес, дата и время",
+    "emptyText": "Пока пусто. Выберите букет.",
+    "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+    "vars": {
+      "deep": "#0D1A15",
+      "c-surface": "#14261F"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club230325649.orgs.biz/",
+  "vk_lead": "https://vk.me/club230325649"
+}

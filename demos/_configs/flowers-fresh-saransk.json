@@ -1,0 +1,135 @@
+{
+  "slug": "flowers-fresh-saransk",
+  "name": "Flowers Fresh",
+  "niche": "цветы",
+  "city": "Саранск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#7B4FA0",
+    "accent": "#E9DDF5",
+    "bg": "#FBF8FD",
+    "text": "#221830"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Цветы, которые запоминаются",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/flowers-fresh-saransk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Flowers Fresh: цветы в Саранске. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Саранску к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Цветочная композиция",
+      "price": 2200,
+      "desc": "Летняя композиция - 2200₽",
+      "photo": "files/flowers-fresh-saransk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 3500,
+      "desc": "Прекрасный сборный букет ✔️3500₽ ❌3850₽",
+      "photo": "files/flowers-fresh-saransk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборная композиция",
+      "price": 2800,
+      "desc": "❌3080₽ ✅2800",
+      "photo": "files/flowers-fresh-saransk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кустовая роза «Аврора",
+      "price": 300,
+      "desc": "Стебель - 60 см в длину Изящная и нежная",
+      "photo": "files/flowers-fresh-saransk/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Подарочный набор",
+      "price": 250,
+      "desc": "Подарочный набор: • Свечи из вощины • Соль для ванны ❌275 ✅250",
+      "photo": "files/flowers-fresh-saransk/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Дофаминовый букет",
+      "price": 2550,
+      "desc": "💐 Трендовый букет ❌2850₽ ✅2550",
+      "photo": "files/flowers-fresh-saransk/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Вязанный букет",
+      "price": 1500,
+      "desc": "Вязанный букет на 1-ый заказ СКИДКА 10% ❌1650₽ ✅1500₽",
+      "photo": "files/flowers-fresh-saransk/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет с игрушками",
+      "price": 1500,
+      "desc": "Детский букет с игрушками на 1-ый заказ СКИДКА 10% ❌1650₽…",
+      "photo": "files/flowers-fresh-saransk/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 951 052-56-61",
+    "whatsapp": "79510525661",
+    "address": "ул. Полежаева, 52",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#F0E8F7",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club230184303.orgs.biz/",
+  "vk_lead": "https://vk.me/club230184303"
+}

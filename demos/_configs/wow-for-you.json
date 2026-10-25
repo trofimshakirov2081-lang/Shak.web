@@ -48,58 +48,58 @@
   ],
   "items": [
     {
+      "name": "Педикюр с покрытием 1990 рублей!",
+      "price": 1990,
+      "desc": "Приходите на качественный педикюр без сколов и трещин!",
+      "photo": "files/wow-for-you/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
       "name": "Скидка на смарт-педикюр!",
       "price": 1990,
       "desc": "💗ВЕСЬ ноябрь💗 смарт--педикюр по цене 1990 рублей ВМЕСТО…",
-      "photo": "files/wow-for-you/item-1.jpg",
-      "tag": "Хит"
+      "photo": "files/wow-for-you/item-2.jpg",
+      "tag": ""
     },
     {
       "name": "Акция на педикюр!",
       "price": 1190,
       "desc": "Холодное время - не повод забыть о внешнем виде своих ног!…",
-      "photo": "files/wow-for-you/item-2.jpg",
+      "photo": "files/wow-for-you/item-3.jpg",
       "tag": ""
     },
     {
       "name": "лами бровей за 400 рублей!",
       "price": 400,
       "desc": "При ламинировании ресниц, ламинирование бровей будет стоить…",
-      "photo": "files/wow-for-you/item-3.jpg",
+      "photo": "files/wow-for-you/item-4.jpg",
       "tag": ""
     },
     {
       "name": "Однодневный курс по смарт педикюру",
       "price": 7000,
       "desc": "Курс по СМАРТ-педикюру от For you 💯 SMART педикюр уже…",
-      "photo": "files/wow-for-you/item-4.jpg",
+      "photo": "files/wow-for-you/item-5.jpg",
       "tag": ""
     },
     {
       "name": "педикюр за 1850 рублей!",
       "price": 1850,
       "desc": "Мастера в салоне красоты For You сделают вам качественный…",
-      "photo": "files/wow-for-you/item-5.jpg",
+      "photo": "files/wow-for-you/item-6.jpg",
       "tag": ""
     },
     {
       "name": "Педикюр",
       "price": 990,
       "desc": "Ухоженные стопы этой весной вместе с For you! Ждем вас на…",
-      "photo": "files/wow-for-you/item-6.jpg",
+      "photo": "files/wow-for-you/item-7.jpg",
       "tag": ""
     },
     {
       "name": "Оформление бровей",
       "price": 990,
       "desc": "Красивые, выразительные брови важны всем! Только до конца…",
-      "photo": "files/wow-for-you/item-7.jpg",
-      "tag": ""
-    },
-    {
-      "name": "Пудровые бровки",
-      "price": 5500,
-      "desc": "С 10 марта до конца месяца мы снижаем цену на пудровые…",
       "photo": "files/wow-for-you/item-8.jpg",
       "tag": ""
     }
