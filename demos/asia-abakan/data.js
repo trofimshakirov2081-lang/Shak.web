@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/asia-abakan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-asia-abakan",
-  "rev": "2026-10-26T11:44:48.340Z",
+  "rev": "2026-10-26T12:15:14.554Z",
   "brand": {
     "name": "Отель «Азия»",
     "tagline": "Гостиница",

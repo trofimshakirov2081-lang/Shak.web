@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/gid-irkutsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-gid-irkutsk",
-  "rev": "2026-10-26T11:44:54.582Z",
+  "rev": "2026-10-26T12:15:17.493Z",
   "brand": {
     "name": "Походим по Иркутску",
     "tagline": "Туры и экскурсии",

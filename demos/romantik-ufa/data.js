@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/romantik-ufa.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-romantik-ufa",
-  "rev": "2026-10-25T05:12:03.211Z",
+  "rev": "2026-10-26T12:15:20.221Z",
   "brand": {
     "name": "Романтик",
     "tagline": "Цветы с доставкой",

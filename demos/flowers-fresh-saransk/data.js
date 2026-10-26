@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/flowers-fresh-saransk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-flowers-fresh-saransk",
-  "rev": "2026-10-25T05:12:03.082Z",
+  "rev": "2026-10-26T12:15:17.406Z",
   "brand": {
     "name": "Flowers Fresh",
     "tagline": "Цветы с доставкой",

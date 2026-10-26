@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/freelance-detailing.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-freelance-detailing",
-  "rev": "2026-10-26T11:44:52.310Z",
+  "rev": "2026-10-26T12:15:17.440Z",
   "brand": {
     "name": "Фриланс Детейлинг",
     "tagline": "Детейлинг",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yourparadise.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yourparadise",
-  "rev": "2026-10-24T17:14:44.331Z",
+  "rev": "2026-10-26T12:15:21.649Z",
   "brand": {
     "name": "yourparadise",
     "tagline": "Десерты на заказ",

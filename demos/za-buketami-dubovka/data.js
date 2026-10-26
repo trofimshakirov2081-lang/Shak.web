@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/za-buketami-dubovka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-za-buketami-dubovka",
-  "rev": "2026-10-25T05:12:03.309Z",
+  "rev": "2026-10-26T12:15:21.815Z",
   "brand": {
     "name": "За букетами",
     "tagline": "Цветы с доставкой",

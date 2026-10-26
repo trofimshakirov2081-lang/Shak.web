@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/polincvet.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-polincvet",
-  "rev": "2026-10-24T14:16:01.824Z",
+  "rev": "2026-10-26T12:15:19.948Z",
   "brand": {
     "name": "ПолинЦвет",
     "tagline": "Цветы в Брянске",

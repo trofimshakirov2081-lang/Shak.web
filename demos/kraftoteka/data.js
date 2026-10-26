@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kraftoteka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kraftoteka",
-  "rev": "2026-10-25T05:12:03.119Z",
+  "rev": "2026-10-26T12:15:18.159Z",
   "brand": {
     "name": "Крафтотека",
     "tagline": "Десерты на заказ",

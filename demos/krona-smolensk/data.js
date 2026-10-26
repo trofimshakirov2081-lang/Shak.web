@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/krona-smolensk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-krona-smolensk",
-  "rev": "2026-10-26T11:44:53.141Z",
+  "rev": "2026-10-26T12:15:18.523Z",
   "brand": {
     "name": "Крона",
     "tagline": "Строительство домов",

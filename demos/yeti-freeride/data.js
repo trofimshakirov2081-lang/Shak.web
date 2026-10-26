@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yeti-freeride.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yeti-freeride",
-  "rev": "2026-10-26T11:44:54.436Z",
+  "rev": "2026-10-26T12:15:21.610Z",
   "brand": {
     "name": "Йети Фрирайд",
     "tagline": "Туры и экскурсии",

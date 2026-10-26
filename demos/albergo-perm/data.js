@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/albergo-perm.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-albergo-perm",
-  "rev": "2026-10-26T11:44:48.813Z",
+  "rev": "2026-10-26T12:15:13.187Z",
   "brand": {
     "name": "ALBERGO",
     "tagline": "Гостиница",

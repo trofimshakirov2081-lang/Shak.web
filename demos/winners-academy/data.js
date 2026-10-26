@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/winners-academy.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-winners-academy",
-  "rev": "2026-10-26T11:44:51.495Z",
+  "rev": "2026-10-26T12:15:21.562Z",
   "brand": {
     "name": "Winners Academy",
     "tagline": "Спортивный клуб",

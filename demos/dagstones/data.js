@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dagstones.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dagstones",
-  "rev": "2026-10-26T11:44:54.876Z",
+  "rev": "2026-10-26T12:15:16.869Z",
   "brand": {
     "name": "DagStones Tour",
     "tagline": "Туры и экскурсии",

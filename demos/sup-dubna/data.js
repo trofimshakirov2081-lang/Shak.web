@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sup-dubna.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sup-dubna",
-  "rev": "2026-10-26T11:44:50.757Z",
+  "rev": "2026-10-26T12:15:20.740Z",
   "brand": {
     "name": "САП Дубна",
     "tagline": "Сапы и прогулки",

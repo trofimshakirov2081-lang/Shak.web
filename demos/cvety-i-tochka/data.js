@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvety-i-tochka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvety-i-tochka",
-  "rev": "2026-10-25T05:12:02.696Z",
+  "rev": "2026-10-26T12:15:16.782Z",
   "brand": {
     "name": "Цветы и Точка",
     "tagline": "Цветочная студия",

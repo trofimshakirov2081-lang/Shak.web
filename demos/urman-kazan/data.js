@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/urman-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-urman-kazan",
-  "rev": "2026-10-26T11:44:49.816Z",
+  "rev": "2026-10-26T12:15:21.264Z",
   "brand": {
     "name": "Урман",
     "tagline": "Баня",

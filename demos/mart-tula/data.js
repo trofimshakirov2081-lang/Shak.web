@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mart-tula.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mart-tula",
-  "rev": "2026-10-25T05:12:02.820Z",
+  "rev": "2026-10-26T12:15:19.116Z",
   "brand": {
     "name": "Март",
     "tagline": "Цветы с доставкой",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mila-feya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mila-feya",
-  "rev": "2026-10-24T14:16:01.764Z",
+  "rev": "2026-10-26T12:15:19.185Z",
   "brand": {
     "name": "Mila Feya",
     "tagline": "Десерты на заказ в Трёхгорном",

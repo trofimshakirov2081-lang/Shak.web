@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/wow-for-you.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-wow-for-you",
-  "rev": "2026-10-25T05:12:02.969Z",
+  "rev": "2026-10-26T12:15:21.574Z",
   "brand": {
     "name": "WOW For You",
     "tagline": "Студия красоты",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/gorodnya-kayak.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-gorodnya-kayak",
-  "rev": "2026-10-26T11:44:50.846Z",
+  "rev": "2026-10-26T12:15:17.538Z",
   "brand": {
     "name": "GorodnyaTravel",
     "tagline": "Сплавы на каяках",

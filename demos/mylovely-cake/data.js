@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mylovely-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mylovely-cake",
-  "rev": "2026-10-25T05:12:02.837Z",
+  "rev": "2026-10-26T12:15:19.370Z",
   "brand": {
     "name": "MyLovely Cake",
     "tagline": "Десерты на заказ",

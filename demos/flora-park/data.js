@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/flora-park.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-flora-park",
-  "rev": "2026-10-25T05:12:02.720Z",
+  "rev": "2026-10-26T12:15:17.335Z",
   "brand": {
     "name": "Флора Парк",
     "tagline": "Цветы с доставкой",

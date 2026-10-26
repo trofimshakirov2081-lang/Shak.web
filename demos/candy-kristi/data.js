@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/candy-kristi.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-candy-kristi",
-  "rev": "2026-10-25T05:12:02.655Z",
+  "rev": "2026-10-26T12:15:16.149Z",
   "brand": {
     "name": "Candy Kristi",
     "tagline": "Десерты на заказ",

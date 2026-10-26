@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dsk-spb.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dsk-spb",
-  "rev": "2026-10-26T11:44:53.362Z",
+  "rev": "2026-10-26T12:15:17.121Z",
   "brand": {
     "name": "DSK",
     "tagline": "Строительство домов",

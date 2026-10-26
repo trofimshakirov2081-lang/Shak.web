@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/asti-tula.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-asti-tula",
-  "rev": "2026-10-26T11:44:53.732Z",
+  "rev": "2026-10-26T12:15:14.715Z",
   "brand": {
     "name": "ASTI",
     "tagline": "Мебель на заказ",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/rakassna.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-rakassna",
-  "rev": "2026-10-26T11:44:52.158Z",
+  "rev": "2026-10-26T12:15:20.146Z",
   "brand": {
     "name": "Ракассна",
     "tagline": "Школа танцев",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/avtospa-piter.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-avtospa-piter",
-  "rev": "2026-10-26T11:44:52.386Z",
+  "rev": "2026-10-26T12:15:15.101Z",
   "brand": {
     "name": "АвтоСпа",
     "tagline": "Детейлинг",

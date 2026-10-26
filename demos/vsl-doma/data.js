@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vsl-doma.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vsl-doma",
-  "rev": "2026-10-26T11:44:53.217Z",
+  "rev": "2026-10-26T12:15:21.413Z",
   "brand": {
     "name": "ВСЛ",
     "tagline": "Строительство домов",

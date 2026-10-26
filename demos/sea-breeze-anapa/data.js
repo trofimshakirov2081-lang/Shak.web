@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sea-breeze-anapa.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sea-breeze-anapa",
-  "rev": "2026-10-26T11:44:49.371Z",
+  "rev": "2026-10-26T12:15:20.333Z",
   "brand": {
     "name": "Sea Breeze Resort",
     "tagline": "Гостиница",

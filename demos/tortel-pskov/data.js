@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/tortel-pskov.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-tortel-pskov",
-  "rev": "2026-10-25T05:12:02.904Z",
+  "rev": "2026-10-26T12:15:20.839Z",
   "brand": {
     "name": "Тортэль",
     "tagline": "Десерты на заказ",

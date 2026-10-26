@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/hotel-chasy.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-hotel-chasy",
-  "rev": "2026-10-26T11:44:49.112Z",
+  "rev": "2026-10-26T12:15:17.643Z",
   "brand": {
     "name": "Отель «Часы»",
     "tagline": "Гостиница",

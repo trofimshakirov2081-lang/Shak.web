@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pushka-tula.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pushka-tula",
-  "rev": "2026-10-26T11:44:49.967Z",
+  "rev": "2026-10-26T12:15:20.126Z",
   "brand": {
     "name": "Пушка",
     "tagline": "Баня",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/veranda.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-veranda",
-  "rev": "2026-10-24T14:16:02.030Z",
+  "rev": "2026-10-26T12:15:21.317Z",
   "brand": {
     "name": "Veranda",
     "tagline": "Цветочная мастерская",

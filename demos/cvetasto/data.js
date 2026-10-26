@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetasto.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetasto",
-  "rev": "2026-10-24T17:14:44.124Z",
+  "rev": "2026-10-26T12:15:16.520Z",
   "brand": {
     "name": "Цветасто",
     "tagline": "Цветы с доставкой",

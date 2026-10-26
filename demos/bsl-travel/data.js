@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bsl-travel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bsl-travel",
-  "rev": "2026-10-26T11:44:54.356Z",
+  "rev": "2026-10-26T12:15:15.941Z",
   "brand": {
     "name": "БСЛ Тревел",
     "tagline": "Туры и экскурсии",

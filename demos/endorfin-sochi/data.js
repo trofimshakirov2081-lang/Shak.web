@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/endorfin-sochi.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-endorfin-sochi",
-  "rev": "2026-10-25T05:12:03.057Z",
+  "rev": "2026-10-26T12:15:17.267Z",
   "brand": {
     "name": "Эндорфин",
     "tagline": "Цветочная студия",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/irina-zhmak.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-irina-zhmak",
-  "rev": "2026-10-25T05:12:02.741Z",
+  "rev": "2026-10-26T12:15:17.713Z",
   "brand": {
     "name": "Косметолог Ирина Жмак",
     "tagline": "Студия красоты",

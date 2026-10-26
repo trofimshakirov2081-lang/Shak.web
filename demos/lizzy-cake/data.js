@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lizzy-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lizzy-cake",
-  "rev": "2026-10-24T14:16:01.722Z",
+  "rev": "2026-10-26T12:15:18.842Z",
   "brand": {
     "name": "Lizzy Cake",
     "tagline": "Мини-десерты на заказ",

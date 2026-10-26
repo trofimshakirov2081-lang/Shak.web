@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-yuli-rodniki.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-yuli-rodniki",
-  "rev": "2026-10-25T05:12:03.279Z",
+  "rev": "2026-10-26T12:15:21.068Z",
   "brand": {
     "name": "Торты Юли",
     "tagline": "Десерты на заказ",

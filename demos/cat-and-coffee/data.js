@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cat-and-coffee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cat-and-coffee",
-  "rev": "2026-10-25T05:12:03.008Z",
+  "rev": "2026-10-26T12:15:16.292Z",
   "brand": {
     "name": "Кот энд кофе",
     "tagline": "Кофе",

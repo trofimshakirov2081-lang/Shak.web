@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/esh-dessert.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-esh-dessert",
-  "rev": "2026-10-24T17:14:43.952Z",
+  "rev": "2026-10-26T12:15:17.279Z",
   "brand": {
     "name": "Десерты Завьялово",
     "tagline": "Десерты на заказ",

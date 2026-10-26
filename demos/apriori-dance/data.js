@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/apriori-dance.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-apriori-dance",
-  "rev": "2026-10-26T11:44:52.088Z",
+  "rev": "2026-10-26T12:15:14.015Z",
   "brand": {
     "name": "АПРИОРИ",
     "tagline": "Школа танцев",

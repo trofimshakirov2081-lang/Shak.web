@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/anna-florence.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-anna-florence",
-  "rev": "2026-10-24T17:14:44.249Z",
+  "rev": "2026-10-26T12:15:13.963Z",
   "brand": {
     "name": "Мастерская Анны Флоренции",
     "tagline": "Цветочная студия",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/desert-club.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-desert-club",
-  "rev": "2026-10-24T17:14:43.992Z",
+  "rev": "2026-10-26T12:15:16.976Z",
   "brand": {
     "name": "Desert Club",
     "tagline": "Десерты на заказ",

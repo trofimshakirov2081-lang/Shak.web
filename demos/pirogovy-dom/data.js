@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pirogovy-dom.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pirogovy-dom",
-  "rev": "2026-10-24T14:16:01.806Z",
+  "rev": "2026-10-26T12:15:19.856Z",
   "brand": {
     "name": "Пироговый Дом",
     "tagline": "Кофейня",

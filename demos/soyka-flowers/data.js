@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/soyka-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-soyka-flowers",
-  "rev": "2026-10-25T05:12:02.895Z",
+  "rev": "2026-10-26T12:15:20.575Z",
   "brand": {
     "name": "SOYKA flowers",
     "tagline": "Цветы с доставкой",

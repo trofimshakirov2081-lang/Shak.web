@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/flowersmania.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-flowersmania",
-  "rev": "2026-10-24T17:14:44.181Z",
+  "rev": "2026-10-26T12:15:17.415Z",
   "brand": {
     "name": "Flowersmania",
     "tagline": "Цветы с доставкой",

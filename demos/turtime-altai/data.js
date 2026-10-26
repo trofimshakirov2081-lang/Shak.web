@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/turtime-altai.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-turtime-altai",
-  "rev": "2026-10-26T11:44:54.501Z",
+  "rev": "2026-10-26T12:15:21.170Z",
   "brand": {
     "name": "ТурТайм",
     "tagline": "Туры и экскурсии",

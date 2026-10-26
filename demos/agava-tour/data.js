@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/agava-tour.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-agava-tour",
-  "rev": "2026-10-26T11:44:55.394Z",
+  "rev": "2026-10-26T12:15:12.753Z",
   "brand": {
     "name": "Агава Тур",
     "tagline": "Туры и экскурсии",

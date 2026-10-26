@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/premier-mebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-premier-mebel",
-  "rev": "2026-10-26T11:44:53.799Z",
+  "rev": "2026-10-26T12:15:19.974Z",
   "brand": {
     "name": "Премьер Мебель",
     "tagline": "Мебель на заказ",

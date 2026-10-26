@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-anastasii-orenburg.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-anastasii-orenburg",
-  "rev": "2026-10-25T05:12:02.912Z",
+  "rev": "2026-10-26T12:15:20.862Z",
   "brand": {
     "name": "Торты Анастасии",
     "tagline": "Десерты на заказ",

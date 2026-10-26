@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bloom-stav.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bloom-stav",
-  "rev": "2026-10-24T14:16:01.533Z",
+  "rev": "2026-10-26T12:15:15.852Z",
   "brand": {
     "name": "Bloom",
     "tagline": "Цветы в Ставрополе",

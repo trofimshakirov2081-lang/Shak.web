@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ogonek-krd.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ogonek-krd",
-  "rev": "2026-10-26T11:44:48.602Z",
+  "rev": "2026-10-26T12:15:19.574Z",
   "brand": {
     "name": "Гостиница «Огонёк»",
     "tagline": "Гостиница",

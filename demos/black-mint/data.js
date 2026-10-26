@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/black-mint.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-black-mint",
-  "rev": "2026-10-25T05:12:02.994Z",
+  "rev": "2026-10-26T12:15:15.843Z",
   "brand": {
     "name": "Black mint",
     "tagline": "Студия красоты",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/izilizi-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-izilizi-cake",
-  "rev": "2026-10-25T05:12:02.749Z",
+  "rev": "2026-10-26T12:15:17.745Z",
   "brand": {
     "name": "IZILIZI.CAKE",
     "tagline": "Десерты на заказ",

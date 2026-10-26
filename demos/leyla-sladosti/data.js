@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/leyla-sladosti.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-leyla-sladosti",
-  "rev": "2026-10-24T17:14:43.983Z",
+  "rev": "2026-10-26T12:15:18.759Z",
   "brand": {
     "name": "Сладости Лейлы",
     "tagline": "Десерты на заказ",

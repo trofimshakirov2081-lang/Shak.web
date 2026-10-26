@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/proice-kids.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-proice-kids",
-  "rev": "2026-10-26T11:44:51.842Z",
+  "rev": "2026-10-26T12:15:20.093Z",
   "brand": {
     "name": "PROice Kids",
     "tagline": "Фигурное катание",

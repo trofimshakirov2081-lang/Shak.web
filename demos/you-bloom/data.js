@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/you-bloom.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-you-bloom",
-  "rev": "2026-10-25T05:12:02.978Z",
+  "rev": "2026-10-26T12:15:21.627Z",
   "brand": {
     "name": "You Bloom",
     "tagline": "Цветы с доставкой",

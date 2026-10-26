@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/shane-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-shane-cake",
-  "rev": "2026-10-25T05:12:02.878Z",
+  "rev": "2026-10-26T12:15:20.409Z",
   "brand": {
     "name": "ShAne",
     "tagline": "Десерты на заказ",

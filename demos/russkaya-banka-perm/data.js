@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/russkaya-banka-perm.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-russkaya-banka-perm",
-  "rev": "2026-10-26T11:44:50.235Z",
+  "rev": "2026-10-26T12:15:20.307Z",
   "brand": {
     "name": "Русская банька",
     "tagline": "Баня",

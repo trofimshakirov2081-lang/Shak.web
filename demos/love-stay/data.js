@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/love-stay.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-love-stay",
-  "rev": "2026-10-25T05:12:03.142Z",
+  "rev": "2026-10-26T12:15:18.857Z",
   "brand": {
     "name": "LOVE STAY",
     "tagline": "Цветочная студия",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kraskrepost.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kraskrepost",
-  "rev": "2026-10-26T11:44:53.042Z",
+  "rev": "2026-10-26T12:15:18.181Z",
   "brand": {
     "name": "КрасКрепость",
     "tagline": "Строительство домов",

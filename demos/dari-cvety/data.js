@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dari-cvety.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dari-cvety",
-  "rev": "2026-10-24T17:14:44.260Z",
+  "rev": "2026-10-26T12:15:16.941Z",
   "brand": {
     "name": "Дари цветы 86",
     "tagline": "Цветы с доставкой",

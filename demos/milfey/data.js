@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/milfey.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-milfey",
-  "rev": "2026-10-25T05:12:02.828Z",
+  "rev": "2026-10-26T12:15:19.216Z",
   "brand": {
     "name": "Мильфей",
     "tagline": "Десерты на заказ",

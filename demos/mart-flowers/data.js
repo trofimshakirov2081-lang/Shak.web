@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mart-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mart-flowers",
-  "rev": "2026-10-24T14:16:01.749Z",
+  "rev": "2026-10-26T12:15:19.073Z",
   "brand": {
     "name": "МАРТ",
     "tagline": "Цветочная мастерская",

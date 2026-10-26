@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/coo-cookies.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-coo-cookies",
-  "rev": "2026-10-24T17:14:44.050Z",
+  "rev": "2026-10-26T12:15:16.445Z",
   "brand": {
     "name": "Coo-Cookies",
     "tagline": "Десерты на заказ",

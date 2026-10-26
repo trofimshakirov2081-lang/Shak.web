@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/tvoy-dom.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-tvoy-dom",
-  "rev": "2026-10-26T11:44:53.442Z",
+  "rev": "2026-10-26T12:15:21.188Z",
   "brand": {
     "name": "Твой дом",
     "tagline": "Строительство домов",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-nikolaevsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-nikolaevsk",
-  "rev": "2026-10-25T05:12:03.268Z",
+  "rev": "2026-10-26T12:15:21.042Z",
   "brand": {
     "name": "Торты и пирожные",
     "tagline": "Десерты на заказ",

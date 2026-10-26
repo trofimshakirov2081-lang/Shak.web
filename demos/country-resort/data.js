@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/country-resort.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-country-resort",
-  "rev": "2026-10-26T11:44:48.234Z",
+  "rev": "2026-10-26T12:15:16.500Z",
   "brand": {
     "name": "Кантри Резорт",
     "tagline": "Гостиница",

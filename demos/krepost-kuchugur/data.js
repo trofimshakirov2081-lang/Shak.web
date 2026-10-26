@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/krepost-kuchugur.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-krepost-kuchugur",
-  "rev": "2026-10-26T11:44:49.527Z",
+  "rev": "2026-10-26T12:15:18.508Z",
   "brand": {
     "name": "Крепость Кучугур",
     "tagline": "Гостиница",

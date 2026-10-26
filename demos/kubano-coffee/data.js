@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kubano-coffee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kubano-coffee",
-  "rev": "2026-10-25T05:12:03.127Z",
+  "rev": "2026-10-26T12:15:18.598Z",
   "brand": {
     "name": "Кубано",
     "tagline": "Кофе",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/semiozerye.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-semiozerye",
-  "rev": "2026-10-26T11:44:48.033Z",
+  "rev": "2026-10-26T12:15:20.348Z",
   "brand": {
     "name": "Семиозерье",
     "tagline": "Загородный отдых",

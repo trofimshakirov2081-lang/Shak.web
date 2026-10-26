@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/baikal-asia.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-baikal-asia",
-  "rev": "2026-10-26T11:44:55.100Z",
+  "rev": "2026-10-26T12:15:15.253Z",
   "brand": {
     "name": "Байкал Азия Туристик",
     "tagline": "Туры и экскурсии",

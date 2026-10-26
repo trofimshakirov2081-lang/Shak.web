@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/maple-leaf.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-maple-leaf",
-  "rev": "2026-10-25T05:12:03.157Z",
+  "rev": "2026-10-26T12:15:19.014Z",
   "brand": {
     "name": "Maple leaf",
     "tagline": "Цветы с доставкой",

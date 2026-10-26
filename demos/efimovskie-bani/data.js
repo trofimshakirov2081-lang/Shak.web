@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/efimovskie-bani.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-efimovskie-bani",
-  "rev": "2026-10-26T11:44:50.147Z",
+  "rev": "2026-10-26T12:15:17.146Z",
   "brand": {
     "name": "Ефимовские бани",
     "tagline": "Баня",

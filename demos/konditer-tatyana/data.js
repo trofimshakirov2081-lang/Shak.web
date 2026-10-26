@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/konditer-tatyana.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-konditer-tatyana",
-  "rev": "2026-10-24T14:16:01.687Z",
+  "rev": "2026-10-26T12:15:18.089Z",
   "brand": {
     "name": "Кондитер Татьяна",
     "tagline": "Торты на заказ в Новосибирске",

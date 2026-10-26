@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zhara-tobolsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zhara-tobolsk",
-  "rev": "2026-10-25T05:12:03.346Z",
+  "rev": "2026-10-26T12:15:21.957Z",
   "brand": {
     "name": "Студия Жара",
     "tagline": "Студия красоты",

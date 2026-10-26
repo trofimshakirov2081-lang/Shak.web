@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/stuler-chan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-stuler-chan",
-  "rev": "2026-10-26T11:44:52.596Z",
+  "rev": "2026-10-26T12:15:20.714Z",
   "brand": {
     "name": "STULER",
     "tagline": "Банные чаны",

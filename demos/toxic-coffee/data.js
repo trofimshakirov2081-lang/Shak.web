@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/toxic-coffee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-toxic-coffee",
-  "rev": "2026-10-24T14:16:02.006Z",
+  "rev": "2026-10-26T12:15:21.092Z",
   "brand": {
     "name": "Toxic coffee",
     "tagline": "Кофейня",

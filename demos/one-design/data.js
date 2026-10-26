@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/one-design.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-one-design",
-  "rev": "2026-10-26T11:44:52.228Z",
+  "rev": "2026-10-26T12:15:19.590Z",
   "brand": {
     "name": "One Design",
     "tagline": "Детейлинг",

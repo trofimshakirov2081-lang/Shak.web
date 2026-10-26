@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/manikyur-voronezh.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-manikyur-voronezh",
-  "rev": "2026-10-25T05:12:03.149Z",
+  "rev": "2026-10-26T12:15:19.002Z",
   "brand": {
     "name": "Маникюр Воронеж",
     "tagline": "Студия красоты",

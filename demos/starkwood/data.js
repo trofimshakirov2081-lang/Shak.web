@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/starkwood.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-starkwood",
-  "rev": "2026-10-26T11:44:53.290Z",
+  "rev": "2026-10-26T12:15:20.684Z",
   "brand": {
     "name": "Starkwood",
     "tagline": "Строительство домов",

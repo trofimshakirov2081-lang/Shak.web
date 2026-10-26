@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/banya-karelia.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-banya-karelia",
-  "rev": "2026-10-26T11:44:50.060Z",
+  "rev": "2026-10-26T12:15:15.586Z",
   "brand": {
     "name": "Баня в Карелии",
     "tagline": "Баня",

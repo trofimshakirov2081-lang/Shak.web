@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/nefrit-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-nefrit-kazan",
-  "rev": "2026-10-26T11:44:49.738Z",
+  "rev": "2026-10-26T12:15:19.406Z",
   "brand": {
     "name": "Нефрит",
     "tagline": "Баня",

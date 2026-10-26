@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/florum-krasnodar.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-florum-krasnodar",
-  "rev": "2026-10-25T05:12:03.074Z",
+  "rev": "2026-10-26T12:15:17.367Z",
   "brand": {
     "name": "Флорум",
     "tagline": "Цветы с доставкой",

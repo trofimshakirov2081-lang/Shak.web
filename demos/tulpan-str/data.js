@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/tulpan-str.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-tulpan-str",
-  "rev": "2026-10-25T05:12:03.290Z",
+  "rev": "2026-10-26T12:15:21.141Z",
   "brand": {
     "name": "Зефирные цветы",
     "tagline": "Десерты на заказ",

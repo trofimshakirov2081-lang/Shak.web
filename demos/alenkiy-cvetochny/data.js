@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/alenkiy-cvetochny.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-alenkiy-cvetochny",
-  "rev": "2026-10-25T05:12:02.609Z",
+  "rev": "2026-10-26T12:15:13.458Z",
   "brand": {
     "name": "Аленький Цветочный",
     "tagline": "Цветы с доставкой",

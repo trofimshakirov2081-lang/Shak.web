@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pestiki-tychinki.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pestiki-tychinki",
-  "rev": "2026-10-25T05:12:03.202Z",
+  "rev": "2026-10-26T12:15:19.740Z",
   "brand": {
     "name": "Пестики и тычинки",
     "tagline": "Цветочная студия",

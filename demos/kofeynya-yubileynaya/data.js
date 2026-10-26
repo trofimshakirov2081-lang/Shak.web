@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kofeynya-yubileynaya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kofeynya-yubileynaya",
-  "rev": "2026-10-25T05:12:03.111Z",
+  "rev": "2026-10-26T12:15:18.063Z",
   "brand": {
     "name": "Кофейня на Юбилейной",
     "tagline": "Кофе",

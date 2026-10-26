@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetochka-kineshma.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetochka-kineshma",
-  "rev": "2026-10-25T05:12:02.675Z",
+  "rev": "2026-10-26T12:15:16.587Z",
   "brand": {
     "name": "ЦВЕточка",
     "tagline": "Цветы с доставкой",

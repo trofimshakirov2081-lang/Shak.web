@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/karakosoff.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-karakosoff",
-  "rev": "2026-10-26T11:44:51.367Z",
+  "rev": "2026-10-26T12:15:17.793Z",
   "brand": {
     "name": "KARAKOSOFF",
     "tagline": "Персональный тренер",

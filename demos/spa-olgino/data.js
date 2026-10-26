@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/spa-olgino.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-spa-olgino",
-  "rev": "2026-10-26T11:44:50.356Z",
+  "rev": "2026-10-26T12:15:20.591Z",
   "brand": {
     "name": "SPA в Ольгино",
     "tagline": "Баня",

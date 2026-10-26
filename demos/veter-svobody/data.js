@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/veter-svobody.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-veter-svobody",
-  "rev": "2026-10-26T11:44:55.025Z",
+  "rev": "2026-10-26T12:15:21.341Z",
   "brand": {
     "name": "Ветер Свободы",
     "tagline": "Туры и экскурсии",

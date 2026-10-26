@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/salon-elena.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-salon-elena",
-  "rev": "2026-10-25T05:12:03.220Z",
+  "rev": "2026-10-26T12:15:20.322Z",
   "brand": {
     "name": "Салон красоты Елена",
     "tagline": "Студия красоты",

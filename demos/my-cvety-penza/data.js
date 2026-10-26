@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/my-cvety-penza.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-my-cvety-penza",
-  "rev": "2026-10-25T05:12:03.183Z",
+  "rev": "2026-10-26T12:15:19.352Z",
   "brand": {
     "name": "Мы Цветы",
     "tagline": "Цветы с доставкой",

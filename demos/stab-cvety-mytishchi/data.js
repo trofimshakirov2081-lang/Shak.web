@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/stab-cvety-mytishchi.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-stab-cvety-mytishchi",
-  "rev": "2026-10-25T05:12:03.230Z",
+  "rev": "2026-10-26T12:15:20.642Z",
   "brand": {
     "name": "Цветы, которые не вянут",
     "tagline": "Цветочная студия",
