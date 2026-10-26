@@ -157,6 +157,28 @@
         "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
         "orderMsg": "Здравствуйте! Хочу заказать букет"
       }
+    },
+    {
+      "custom": "kino",
+      "name": "Кино",
+      "extra": {
+        "vars": {
+          "bg": "#F3E7E2",
+          "text": "#22110F",
+          "main": "#C8241B",
+          "milk": "#FBF5F2",
+          "c-surface": "#FBF5F2"
+        },
+        "fonts": {
+          "head": "Geologica",
+          "body": "Golos Text"
+        },
+        "heroTitle": "Цветы, которые запоминают",
+        "fanTitle": "Букеты этой недели",
+        "cartBtn": "Корзина",
+        "orderTitle": "Заказать букет",
+        "allLabel": "Все"
+      }
     }
   ]
 }

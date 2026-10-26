@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/makov-cvet.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-makov-cvet",
-  "rev": "2026-10-24T19:19:24.747Z",
+  "rev": "2026-10-26T06:43:57.717Z",
   "brand": {
     "name": "Маков Цвет",
     "tagline": "Авторские букеты с бесплатной доставкой",
@@ -171,12 +171,14 @@ window.SITE = {
     "designPages": [
       "index.html",
       "design-2.html",
-      "design-3.html"
+      "design-3.html",
+      "design-4.html"
     ],
     "designNames": [
       "Светлый",
       "Вечерний",
-      "Пастельный"
+      "Пастельный",
+      "Кино"
     ],
     "pageExtra": {
       "design-2.html": {
@@ -210,6 +212,24 @@ window.SITE = {
         "fromLabel": "Букеты от",
         "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
         "orderMsg": "Здравствуйте! Хочу заказать букет"
+      },
+      "design-4.html": {
+        "vars": {
+          "bg": "#F3E7E2",
+          "text": "#22110F",
+          "main": "#C8241B",
+          "milk": "#FBF5F2",
+          "c-surface": "#FBF5F2"
+        },
+        "fonts": {
+          "head": "Geologica",
+          "body": "Golos Text"
+        },
+        "heroTitle": "Цветы, которые запоминают",
+        "fanTitle": "Букеты этой недели",
+        "cartBtn": "Корзина",
+        "orderTitle": "Заказать букет",
+        "allLabel": "Все"
       }
     }
   }
