@@ -1,0 +1,70 @@
+{
+  "slug": "serebryanye-rodniki",
+  "name": "Серебряные родники",
+  "niche": "otdyh",
+  "city": "Чемал",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#1E3A4C",
+    "accent": "#E0A458",
+    "bg": "#EEF1F0",
+    "text": "#14232D"
+  },
+  "fonts": {
+    "head": "Literata",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Отдых за городом без лишних звонков",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/serebryanye-rodniki/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Серебряные родники: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Домик у воды",
+      "price": 6500,
+      "desc": "До 4 гостей, своя терраса",
+      "photo": "files/serebryanye-rodniki/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Семейный коттедж",
+      "price": 12000,
+      "desc": "До 8 гостей, кухня и мангал",
+      "photo": "files/serebryanye-rodniki/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Домик для двоих",
+      "price": 5500,
+      "desc": "Большое окно и завтрак",
+      "photo": "files/serebryanye-rodniki/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 903 930-03-20",
+    "whatsapp": "79039300320",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#A9C4CF",
+      "paper": "#FAFBFA"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://silverspringshotel.orgs.biz/",
+  "contact_lead": "em:silver4springs@gmail.com"
+}

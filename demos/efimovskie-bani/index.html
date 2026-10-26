@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru" data-fonts="Dela Gothic One|Manrope">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♨️</text></svg>">
+  <title>Ефимовские бани | Баня</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Manrope:wght@400;500;700&display=swap">
+  <style>
+    /* «Пар»: баня. Тёплая темнота, пар поднимается над фото, бронь по часам собирается из чипов */
+    :root { --bg: #1A1614; --text: #EDE7DF; --main: #C8773A; --accent: #7C8B4F; --coal: #241E1B; --wood: #33291F; --c-radius: 12px; --c-surface: var(--coal); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; line-height: 1.02; letter-spacing: -.01em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 62%, transparent); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 0; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--coal) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 14%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 18%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 400 18px/1 var(--font-head); text-decoration: none; }
+    .cta { border: 0; border-radius: 999px; background: var(--main); color: #1A1614; padding: 10px 18px; font-weight: 700; font-size: 15px; text-decoration: none; }
+
+    .hero { position: relative; padding: 18px 0 0; }
+    .hero h1 { font-size: clamp(38px, 12vw, 120px); text-transform: none; max-width: 10ch; position: relative; z-index: 2; }
+    .hero .lead { max-width: 42ch; margin: 16px 0 22px; font-size: 17px; }
+    .photo { position: relative; border-radius: 28px 28px 0 0; overflow: hidden; height: 62svh; min-height: 360px; margin-top: 24px; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.05); }
+    .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26, 22, 20, 0) 40%, var(--bg) 100%); }
+    /* Пар: размытые облака медленно поднимаются и тают */
+    .steam { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .steam i { position: absolute; bottom: -20%; width: 46%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(237, 231, 223, .38), rgba(237, 231, 223, 0) 65%); filter: blur(18px); animation: rise 9s linear infinite; opacity: 0; }
+    .steam i:nth-child(1) { left: 4%; animation-delay: 0s; }
+    .steam i:nth-child(2) { left: 34%; animation-delay: 3s; width: 54%; }
+    .steam i:nth-child(3) { left: 60%; animation-delay: 6s; }
+    @keyframes rise { 0% { transform: translateY(0) scale(.8); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-120%) scale(1.5); opacity: 0; } }
+
+    section { padding: 64px 0 0; }
+    h2 { font-size: clamp(32px, 7vw, 60px); margin-bottom: 12px; }
+
+    /* Бронь: день, время, часы, зал, дополнения. Итог считается сразу */
+    .book { background: var(--coal); border-radius: 24px; padding: 22px 18px; display: grid; gap: 22px; }
+    .book > *, .grid2 > * { min-width: 0; }
+    .step h3 { font: 700 14px var(--font-body); margin-bottom: 10px; color: color-mix(in srgb, var(--text) 70%, transparent); }
+    .chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -18px; padding: 0 18px; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: none; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); background: none; border-radius: 14px; padding: 10px 14px; cursor: pointer; text-align: center; line-height: 1.2; min-width: 64px; }
+    .chip small { display: block; font-size: 12px; opacity: .65; }
+    .chip.on { background: var(--main); border-color: var(--main); color: #1A1614; }
+    .chip.on small { opacity: .8; }
+    .chip:disabled { opacity: .3; text-decoration: line-through; cursor: default; }
+    .hours { display: flex; align-items: center; gap: 14px; }
+    .hours button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); background: none; font-size: 20px; cursor: pointer; }
+    .hours b { font: 400 28px var(--font-head); min-width: 3ch; text-align: center; }
+    .extras { display: grid; gap: 8px; }
+    .extra { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); cursor: pointer; }
+    .extra input { accent-color: var(--main); width: 20px; height: 20px; margin: 0 10px 0 0; flex: none; }
+    .extra span { flex: 1; }
+    .extra:has(input:checked) { border-color: var(--main); }
+    .total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+    .total b { font: 400 34px var(--font-head); color: var(--main); }
+    .who { font: 16px var(--font-body); padding: 14px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); background: transparent; color: inherit; width: 100%; }
+    .go { border: 0; border-radius: 16px; background: var(--main); color: #1A1614; font: 700 17px var(--font-body); padding: 17px; cursor: pointer; width: 100%; }
+
+    .halls { display: grid; gap: 14px; }
+    .hall { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center; padding: 10px; border-radius: 20px; background: var(--coal); border: 1px solid transparent; cursor: pointer; text-align: left; width: 100%; }
+    .hall.on { border-color: var(--main); }
+    .hall img, .hall .noimg { width: 112px; height: 112px; border-radius: 14px; object-fit: cover; display: grid; place-items: center; font-size: 44px; background: var(--wood); }
+    .hall h3 { font: 700 19px/1.2 var(--font-body); margin-bottom: 4px; }
+    .hall p { margin: 0 0 6px; font-size: 14px; }
+    .hall .p { font: 400 20px var(--font-head); color: var(--main); }
+    .hall .p small { font: 400 13px var(--font-body); color: color-mix(in srgb, var(--text) 60%, transparent); }
+
+    .feats { display: grid; gap: 0; }
+    .feats div { padding: 18px 0; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; }
+    .feats strong { font: 400 20px/1.15 var(--font-head); }
+    .about { font-size: clamp(20px, 4.4vw, 28px); line-height: 1.45; max-width: 34ch; margin: 0; }
+
+    .find { padding-bottom: 40px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 55%, transparent); padding: 18px 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+
+    @media (min-width: 860px) {
+      .grid2 { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: start; }
+      .book { position: sticky; top: 80px; padding: 28px; }
+      .chips { margin: 0; padding: 0; flex-wrap: wrap; }
+      .photo { height: 70svh; }
+      .feats { grid-template-columns: repeat(3, 1fr); gap: 0 28px; } .feats div { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { .steam { display: none; } }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var minH = Number(X.minHours || 2), open = Number(X.open || 10), close = Number(X.close || 24);
+    var extras = X.extras || [["Веник берёзовый", 400], ["Парение с мастером", 1500], ["Чан на дровах", 2500]];
+    var DAYS = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+
+    var halls = D.items.map(function (i, k) {
+      return '<button class="hall' + (k ? '' : ' on') + '" data-hall="' + e(i.id) + '">' + Core.pic(i) + '<div><h3>' + e(i.name) + '</h3><p class="mute">' + e(i.desc || "") + (i.tag ? ". " + e(i.tag) : "") + '</p>' +
+        '<span class="p">' + Core.money(i.price) + ' <small>' + e(X.per || "в час") + '</small></span></div></button>';
+    }).join("");
+    var days = [], d0 = new Date();
+    for (var k = 0; k < 10; k++) { var d = new Date(d0); d.setDate(d0.getDate() + k); days.push('<button class="chip' + (k ? '' : ' on') + '" data-day="' + k + '">' + (k === 0 ? "Сегодня" : k === 1 ? "Завтра" : d.getDate() + "." + String(d.getMonth() + 1).padStart(2, "0")) + '<small>' + DAYS[d.getDay()] + '</small></button>'); }
+    var feats = D.features.map(function (f) { return '<div><strong>' + e(f.title) + '</strong><span class="mute">' + e(f.text) + '</span></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#book">' + e(X.bookBtn || "Забронировать") + '</a></div></header>' +
+      '<main id="top"><section class="hero" style="padding-top:18px"><div class="wrap"><p class="mute" style="margin:0 0 10px">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p>' +
+        '<h1>' + e(X.heroTitle || D.hero.title) + '</h1><p class="lead mute">' + e(D.hero.text) + '</p></div>' +
+        '<div class="wrap photo">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') + '<div class="steam" aria-hidden="true"><i></i><i></i><i></i></div></div></section>' +
+      '<section id="book" style="padding-top:8px"><div class="wrap grid2"><div><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute">' + e(D.sections.catalogText) + '</p><div class="halls">' + halls + '</div></div>' +
+        '<div class="book"><div class="step"><h3>День</h3><div class="chips" data-days>' + days.join("") + '</div></div>' +
+        '<div class="step"><h3>Время начала</h3><div class="chips" data-times></div></div>' +
+        '<div class="step"><h3>Сколько часов</h3><div class="hours"><button data-h="-1" aria-label="Меньше">−</button><b data-hours>' + minH + '</b><button data-h="1" aria-label="Больше">+</button><span class="mute">минимум ' + minH + '</span></div></div>' +
+        '<div class="step"><h3>Добавить</h3><div class="extras">' + extras.map(function (x, n) { return '<label class="extra"><input type="checkbox" data-x="' + n + '"><span>' + e(x[0]) + '</span><span class="mute">+' + Core.money(x[1]) + '</span></label>'; }).join("") + '</div></div>' +
+        '<div class="total"><span data-sumtext class="mute"></span><b data-sum></b></div>' +
+        '<input class="who" data-who placeholder="Имя и телефон" autocomplete="name"><button class="go" data-go>' + e(X.sendLabel || "Забронировать в WhatsApp") + '</button></div></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p><div class="feats" style="margin-top:28px">' + feats + '</div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Как добраться") + '</h2><div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var st = { day: 0, time: null, hours: minH, hall: D.items[0] && D.items[0].id };
+    var $ = function (s) { return document.querySelector(s); };
+    // Занятые часы в демо выбираются по дате, чтобы сетка выглядела живой
+    function busy(day, h) { return ((day * 7 + h * 3) % 11) < 2; }
+    function times() {
+      var now = new Date(), html = [];
+      for (var h = open; h <= close - minH; h++) {
+        var past = st.day === 0 && h <= now.getHours(), b = busy(st.day, h);
+        html.push('<button class="chip' + (st.time === h ? ' on' : '') + '" data-time="' + h + '"' + (past || b ? ' disabled' : '') + '>' + String(h % 24).padStart(2, "0") + ':00</button>');
+      }
+      $("[data-times]").innerHTML = html.join("");
+      if (st.time !== null && document.querySelector('[data-time="' + st.time + '"]:disabled')) st.time = null;
+    }
+    function calc() {
+      var it = Core.item(st.hall), x = 0;
+      [].forEach.call(document.querySelectorAll("[data-x]:checked"), function (c) { x += extras[c.dataset.x][1]; });
+      var t = it ? it.price * st.hours + x : 0;
+      $("[data-sum]").textContent = Core.money(t);
+      $("[data-sumtext]").textContent = (it ? it.name : "") + ", " + st.hours + " ч";
+      return t;
+    }
+    document.addEventListener("click", function (ev) {
+      var t = ev.target.closest("[data-day],[data-time],[data-h],[data-hall],[data-go]"); if (!t) return;
+      if (t.dataset.day) { st.day = +t.dataset.day; [].forEach.call(document.querySelectorAll("[data-day]"), function (b) { b.classList.toggle("on", b === t); }); times(); }
+      else if (t.dataset.time) { st.time = +t.dataset.time; [].forEach.call(document.querySelectorAll("[data-time]"), function (b) { b.classList.toggle("on", b === t); }); }
+      else if (t.dataset.h) { st.hours = Math.max(minH, Math.min(12, st.hours + +t.dataset.h)); $("[data-hours]").textContent = st.hours; }
+      else if (t.dataset.hall) { st.hall = t.dataset.hall; [].forEach.call(document.querySelectorAll("[data-hall]"), function (b) { b.classList.toggle("on", b === t); }); if (innerWidth < 860) $(".book").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      else if (t.hasAttribute("data-go")) {
+        if (st.time === null) { Core.toast("Выберите время начала"); return; }
+        var d = new Date(); d.setDate(d.getDate() + st.day);
+        var xs = [].map.call(document.querySelectorAll("[data-x]:checked"), function (c) { return extras[c.dataset.x][0]; });
+        var who = $("[data-who]").value.trim();
+        window.open(Core.wa("Здравствуйте! Хочу забронировать " + Core.item(st.hall).name + "\n" + d.getDate() + "." + String(d.getMonth() + 1).padStart(2, "0") + " с " + String(st.time).padStart(2, "0") + ":00 на " + st.hours + " ч" + (xs.length ? "\nДополнительно: " + xs.join(", ") : "") + "\nПо сайту выходит " + Core.money(calc()) + (who ? "\n" + who : "")), "_blank");
+        return;
+      }
+      calc();
+    });
+    document.addEventListener("change", function (ev) { if (ev.target.matches("[data-x]")) calc(); });
+    times(); calc();
+  })();
+  </script>
+</body>
+</html>

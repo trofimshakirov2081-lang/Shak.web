@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru" data-fonts="Sofia Sans Extra Condensed|Sofia Sans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏅</text></svg>">
+  <title>Восходящая звезда | Фигурное катание</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Sofia+Sans:wght@400;600;800&display=swap">
+  <style>
+    /* «Старт»: спортклуб. Первый экран размечен беговыми дорожками, расписание по дням, запись на пробную тренировку */
+    :root { --bg: #F7F5F0; --text: #15171A; --main: #D7442E; --accent: #2F6B4F; --lane: #E6E0D4; --c-radius: 8px; --c-surface: #fff; --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 800; margin: 0; line-height: .9; letter-spacing: -.01em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 64%, transparent); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 0; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--bg) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 800 italic 26px/1 var(--font-head); text-decoration: none; }
+    .cta { background: var(--main); color: #fff; border-radius: 8px; padding: 10px 16px; font-weight: 800; font-size: 15px; text-decoration: none; }
+
+    /* Дорожки: красное покрытие, белые линии, номера у старта */
+    .track { position: relative; background: var(--main); color: #fff; overflow: hidden; padding: 26px 0 0; }
+    .track::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 62px, rgba(255, 255, 255, .55) 62px 64px); }
+    .lanes { position: absolute; left: 6px; top: 26px; display: grid; grid-auto-rows: 64px; font: 800 italic 22px/64px var(--font-head); opacity: .5; }
+    .track .wrap { position: relative; padding-left: 22px; }
+    .track h1 { font-size: clamp(46px, 13.5vw, 170px); hyphens: manual; -webkit-hyphens: manual; text-transform: uppercase; font-style: italic; line-height: .86; max-width: 9ch; }
+    .track h1 span { display: inline-block; margin-right: .18em; animation: run .8s var(--ease) both; }
+    .track h1 span:nth-child(2) { animation-delay: .12s; } .track h1 span:nth-child(3) { animation-delay: .24s; } .track h1 span:nth-child(4) { animation-delay: .36s; }
+    @keyframes run { from { transform: translateX(-30vw); opacity: 0; } }
+    .track .lead { max-width: 36ch; font-size: 17px; margin: 18px 0 0; }
+    .shot { position: relative; margin-top: 26px; height: 44svh; min-height: 280px; clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%); }
+    .shot img { width: 100%; height: 100%; object-fit: cover; }
+    .finish { position: absolute; right: 0; top: 0; bottom: 0; width: 22px; background: repeating-conic-gradient(#fff 0 25%, #15171A 0 50%) 0 0 / 22px 22px; opacity: .9; }
+
+    section { padding: 56px 0 0; }
+    h2 { font-size: clamp(46px, 12vw, 96px); text-transform: uppercase; font-style: italic; margin-bottom: 14px; }
+
+    /* Расписание: дни недели вкладками, группы строками с временем */
+    .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 14px; }
+    .days button { border: 0; background: var(--lane); border-radius: 8px; padding: 10px 0; font-weight: 800; cursor: pointer; }
+    .days button.on { background: var(--text); color: var(--bg); }
+    .slots { display: grid; gap: 8px; }
+    .slot { display: grid; grid-template-columns: 70px 1fr auto; gap: 12px; align-items: center; background: #fff; border-radius: 10px; padding: 12px 12px 12px 0; border-left: 6px solid var(--accent); }
+    .slot time { font: 800 italic 28px/1 var(--font-head); text-align: right; }
+    .slot strong { display: block; font-size: 16px; line-height: 1.2; }
+    .slot small { color: color-mix(in srgb, var(--text) 60%, transparent); }
+    .slot button { border: 1.5px solid var(--text); background: none; border-radius: 8px; padding: 8px 10px; font-weight: 800; font-size: 14px; cursor: pointer; }
+    .slot.on { border-left-color: var(--main); }
+    .slot.on button { background: var(--main); border-color: var(--main); color: #fff; }
+    .nothing { background: #fff; border-radius: 10px; padding: 18px; }
+
+    .trial { background: var(--text); color: var(--bg); border-radius: 16px; padding: 22px 18px; margin-top: 22px; display: grid; gap: 12px; }
+    .trial h3 { font-size: 40px; text-transform: uppercase; font-style: italic; }
+    .trial p { margin: 0; opacity: .8; }
+    .trial input { font: 16px var(--font-body); padding: 14px; border-radius: 10px; border: 0; width: 100%; min-width: 0; min-height: 48px; }
+    .trial .go { border: 0; border-radius: 10px; background: var(--main); color: #fff; font: 800 18px var(--font-body); padding: 16px; cursor: pointer; }
+
+    .plans { display: grid; gap: 10px; }
+    .plan { display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: center; background: #fff; border-radius: 12px; padding: 10px; }
+    .plan .ph { width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: var(--lane); }
+    .plan .ph img, .plan .ph .noimg { width: 100%; height: 100%; object-fit: cover; display: grid; place-items: center; font-size: 40px; }
+    .plan h3 { font: 800 18px/1.15 var(--font-body); }
+    .plan p { margin: 2px 0 6px; font-size: 14px; }
+    .plan b { font: 800 italic 26px/1 var(--font-head); color: var(--main); }
+    .plan b small { font: 600 13px var(--font-body); color: color-mix(in srgb, var(--text) 60%, transparent); }
+
+    .why { display: grid; gap: 0; }
+    .why div { padding: 16px 0; border-top: 2px solid var(--text); }
+    .why strong { display: block; font: 800 italic 30px/1 var(--font-head); text-transform: uppercase; margin-bottom: 6px; }
+    .about { font-size: clamp(19px, 4.4vw, 26px); line-height: 1.4; margin: 0 0 24px; max-width: 34ch; }
+
+    .find { padding-bottom: 36px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 55%, transparent); padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .hero2 { display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; }
+      .shot { margin-top: 0; height: 520px; clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); }
+      .grid2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: start; }
+      .trial { margin-top: 0; position: sticky; top: 20px; padding: 28px; }
+      .plans { grid-template-columns: 1fr 1fr; }
+      .why { grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .track h1 span { animation: none; } }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var DN = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+    // Расписание: из настроек [день 0-6, "17:30", индекс позиции] или по умолчанию: группы через день
+    var sched = X.schedule || [];
+    if (!sched.length) D.items.forEach(function (i, k) {
+      var days = k % 2 ? [1, 3, 5] : [0, 2, 4], hh = 16 + Math.floor(k * 1.5), mm = k % 2 ? "30" : "00";
+      days.forEach(function (d) { sched.push([d, (hh > 21 ? 10 + k : hh) + ":" + mm, k]); });
+      if (k === 0) sched.push([5, "11:00", k]);
+    });
+    var title = (X.heroTitle || D.hero.title).split(/\s+/);
+    var h1 = title.map(function (w) { return "<span>" + e(w) + "</span>"; }).join("");
+    var lanes = ""; for (var n = 1; n <= 12; n++) lanes += "<span>" + n + "</span>";
+    var plans = D.items.map(function (i) {
+      return '<div class="plan"><div class="ph">' + Core.pic(i) + '</div><div><h3>' + e(i.name) + '</h3><p class="mute">' + e(i.desc || "") + (i.tag ? ". " + e(i.tag) : "") + '</p><b>' + Core.money(i.price) + ' <small>' + e(X.per || "в месяц") + '</small></b></div></div>';
+    }).join("");
+    var why = D.features.map(function (f) { return '<div><strong>' + e(f.title) + '</strong><span class="mute">' + e(f.text) + '</span></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+    var today = (new Date().getDay() + 6) % 7;
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#schedule">' + e(X.bookBtn || "Записаться") + '</a></div></header>' +
+      '<main id="top"><section class="track" style="padding-top:26px"><div class="lanes" aria-hidden="true">' + lanes + '</div><div class="wrap hero2"><div><p style="margin:0 0 12px;font-weight:600">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p><h1>' + h1 + '</h1><p class="lead">' + e(D.hero.text) + '</p></div>' +
+        '<div class="shot">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') + '<span class="finish" aria-hidden="true"></span></div></div></section>' +
+      '<section id="schedule"><div class="wrap grid2"><div><h2>' + e(X.scheduleTitle || "Расписание") + '</h2><div class="days" role="group" aria-label="День недели">' + DN.map(function (d, k) { return '<button data-day="' + k + '"' + (k === today ? ' class="on"' : '') + '>' + d + '</button>'; }).join("") + '</div><div class="slots" data-slots></div></div>' +
+        '<form class="trial" onsubmit="return false"><h3>' + e(X.trialTitle || "Пробная бесплатно") + '</h3><p data-chosen>Выберите группу в расписании.</p>' +
+        '<input data-who placeholder="Имя и телефон" autocomplete="name"><input data-age placeholder="' + e(X.ageHint || "Возраст или уровень (необязательно)") + '"><button class="go" data-go>' + e(X.sendLabel || "Записаться в WhatsApp") + '</button></form></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:0 0 18px">' + e(D.sections.catalogText) + '</p><div class="plans">' + plans + '</div></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p><div class="why">' + why + '</div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Где мы") + '</h2><div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var day = today, chosen = null, $ = function (s) { return document.querySelector(s); };
+    function slots() {
+      var list = sched.filter(function (s) { return s[0] === day && D.items[s[2]]; }).sort(function (a, b) { return a[1].localeCompare(b[1], "ru", { numeric: true }); });
+      $("[data-slots]").innerHTML = list.map(function (s) {
+        var i = D.items[s[2]], key = s[0] + "|" + s[1] + "|" + s[2];
+        return '<div class="slot' + (chosen === key ? ' on' : '') + '"><time>' + e(s[1]) + '</time><div><strong>' + e(i.name) + '</strong><small>' + e(i.desc || "") + '</small></div><button data-slot="' + e(key) + '">' + (chosen === key ? "Выбрано" : "Пробная") + '</button></div>';
+      }).join("") || '<p class="nothing mute">' + e(X.restText || "В этот день тренировок нет. Отдыхаем и восстанавливаемся.") + '</p>';
+    }
+    document.addEventListener("click", function (ev) {
+      var d = ev.target.closest("[data-day]");
+      if (d) { day = +d.dataset.day; [].forEach.call(document.querySelectorAll("[data-day]"), function (b) { b.classList.toggle("on", b === d); }); slots(); return; }
+      var s = ev.target.closest("[data-slot]");
+      if (s) {
+        chosen = s.dataset.slot; slots(); var p = chosen.split("|");
+        $("[data-chosen]").textContent = D.items[p[2]].name + ", " + DN[p[0]].toLowerCase() + " в " + p[1];
+        if (innerWidth < 860) $(".trial").scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+      if (ev.target.closest("[data-go]")) {
+        if (!chosen) { Core.toast("Выберите группу в расписании"); return; }
+        var q = chosen.split("|"), who = $("[data-who]").value.trim(), age = $("[data-age]").value.trim();
+        window.open(Core.wa("Здравствуйте! Хочу на пробную тренировку.\n" + D.items[q[2]].name + ", " + DN[q[0]].toLowerCase() + " в " + q[1] + (age ? "\n" + age : "") + (who ? "\n" + who : "")), "_blank");
+      }
+    });
+    slots();
+  })();
+  </script>
+</body>
+</html>

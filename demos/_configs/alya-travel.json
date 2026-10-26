@@ -1,0 +1,68 @@
+{
+  "slug": "alya-travel",
+  "name": "АляTravel",
+  "niche": "tury",
+  "city": "Абхазия",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/alya-travel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Аля, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Долина 7 озёр",
+      "price": 4000,
+      "desc": "Целый день, джип и гид",
+      "photo": "files/alya-travel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Восточная Абхазия",
+      "price": 4000,
+      "desc": "Целый день, водопады и пещеры",
+      "photo": "files/alya-travel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Рица и Гегский водопад",
+      "price": 3500,
+      "desc": "Классика, 1 день",
+      "photo": "files/alya-travel/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 940 925-55-02",
+    "whatsapp": "79409255502",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Абхазия",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://alyatravel-abkhazia.orgs.biz/",
+  "contact_lead": "tg:AlyaTravelAbkhazia"
+}

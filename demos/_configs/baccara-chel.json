@@ -1,0 +1,77 @@
+{
+  "slug": "baccara-chel",
+  "name": "Мини-отель «Баккара»",
+  "niche": "otdyh",
+  "city": "Челябинск",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Literata",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Уютные номера и честные цены",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/baccara-chel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Мини-отель «Баккара» в Челябинске: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Тематический номер 1001 ночь с джакузи",
+      "price": 7000,
+      "desc": "🌙 Королевский люкс «1001 ночь» — окунитесь в сказку…",
+      "photo": "files/baccara-chel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тематический номер Бунгало (посуточно) |",
+      "price": 5000,
+      "desc": "🌴 Ощутите полное единение с природой, не покидая города!…",
+      "photo": "files/baccara-chel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тематический номер Пещера (посуточно) |",
+      "price": 5500,
+      "desc": "В таинственной Пещере есть огромное ложе, покрытое…",
+      "photo": "files/baccara-chel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тематический номер Каюта (посуточно) |",
+      "price": 4500,
+      "desc": "⚓️ Номер «Каюта» — ваше уютное убежище посреди морской…",
+      "photo": "files/baccara-chel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 952 508-11-31",
+    "whatsapp": "79525081131",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club216611576.orgs.biz/",
+  "contact_lead": "em:baccara174@yandex.ru"
+}

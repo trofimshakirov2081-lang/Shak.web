@@ -1,0 +1,68 @@
+{
+  "slug": "veter-svobody",
+  "name": "Ветер Свободы",
+  "niche": "tury",
+  "city": "Москва",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/veter-svobody/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Ветер Свободы: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Восхождение на Эльбрус",
+      "price": 98000,
+      "desc": "8 дней, с гидами",
+      "photo": "files/veter-svobody/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Поход по Карелии",
+      "price": 32000,
+      "desc": "6 дней, байдарки",
+      "photo": "files/veter-svobody/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хибины выходного дня",
+      "price": 21000,
+      "desc": "3 дня",
+      "photo": "files/veter-svobody/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 495 644-25-00",
+    "whatsapp": "74956442500",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Москва",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://v-svobody.orgs.biz/",
+  "contact_lead": "em:info@veter-s.ru"
+}

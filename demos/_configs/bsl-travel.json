@@ -1,0 +1,75 @@
+{
+  "slug": "bsl-travel",
+  "name": "БСЛ Тревел",
+  "niche": "tury",
+  "city": "Москва",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/bsl-travel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Евгения, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Байкал",
+      "price": 92900,
+      "desc": "Байкал с 14 по 19 августа Байкал: жемчужина Сибири! 💙…",
+      "photo": "files/bsl-travel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Нетипичный Дагестан",
+      "price": 49900,
+      "desc": "Нетипичный Дагестан с 30 апреля по 4 мая 🤫 Нетипичный…",
+      "photo": "files/bsl-travel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ингушетия",
+      "price": 45900,
+      "desc": "Ингушетия с 23 по 27 июля Ингушетия: древние башни и…",
+      "photo": "files/bsl-travel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Камчатка",
+      "price": 219900,
+      "desc": "Невероятная Камчатка с 4 по 10 августа 🔥 Камчатка: край…",
+      "photo": "files/bsl-travel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 901 363-38-03",
+    "whatsapp": "79013633803",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Москва",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://bsl--travel--club.orgs.biz/",
+  "contact_lead": "tg:Ev_zag"
+}

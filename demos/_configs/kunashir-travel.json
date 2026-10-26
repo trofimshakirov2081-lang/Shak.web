@@ -1,0 +1,75 @@
+{
+  "slug": "kunashir-travel",
+  "name": "Kunashir Travel",
+  "niche": "tury",
+  "city": "Кунашир",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/kunashir-travel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Kunashir Travel: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Экскурсия на КАЛЬДЕРУ ВУЛКАНА ГОЛОВНИНА",
+      "price": 12000,
+      "desc": "Назван в 1946 году в честь вице-адмирала, исследователя…",
+      "photo": "files/kunashir-travel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Экскурсия на ВУЛКАН МЕНДЕЛЕЕВА «СПЯЩАЯ",
+      "price": 13000,
+      "desc": "Приготовьтесь отправиться в незабываемое приключение,…",
+      "photo": "files/kunashir-travel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Экскурсия на ТЕРМАЛЬНЫЕ ИСТОЧНИКИ «ЧАЙКА",
+      "price": 14000,
+      "desc": "Побывать на Кунашир и не побывать здесь, это просто не…",
+      "photo": "files/kunashir-travel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Джип-тур.",
+      "price": 27000,
+      "desc": "Поездки на внедорожниках по пересечённой местности в…",
+      "photo": "files/kunashir-travel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 924 195-90-00",
+    "whatsapp": "79241959000",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Кунашир",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://kunashir-travel.orgs.biz/",
+  "contact_lead": "em:kunashirtravel@yandex.ru"
+}

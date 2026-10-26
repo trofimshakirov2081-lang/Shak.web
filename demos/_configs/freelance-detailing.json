@@ -1,0 +1,66 @@
+{
+  "slug": "freelance-detailing",
+  "name": "Фриланс Детейлинг",
+  "niche": "detailing",
+  "city": "Санкт-Петербург",
+  "custom": "glyanec",
+  "tagline": "Детейлинг",
+  "colors": {
+    "main": "#E4572E",
+    "accent": "#7FB7D9",
+    "bg": "#1C1F24",
+    "text": "#E9ECEF"
+  },
+  "fonts": {
+    "head": "Inter Tight",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Машина, как из салона",
+    "text": "Выберите класс машины и услуги: цена посчитается сразу, а запись уйдёт нам в WhatsApp.",
+    "photo": "files/freelance-detailing/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Услуги и цены",
+    "catalogText": "Цены для седана, для других классов переключите выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Фриланс Детейлинг: работаем аккуратно, показываем результат до и после.",
+  "items": [
+    {
+      "name": "Оклейка капота полиуретановой",
+      "price": 18000,
+      "desc": "Оклейка защитной плёнкой (PPF)",
+      "photo": "files/freelance-detailing/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Оклейка зеркал полиуретановой",
+      "price": 5000,
+      "desc": "Оклейка защитной плёнкой (PPF)",
+      "photo": "files/freelance-detailing/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бронирование фар (Полиуретановая пленка)",
+      "price": 5000,
+      "desc": "Бронирование фар защитной пленкой",
+      "photo": "files/freelance-detailing/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 756-96-66",
+    "whatsapp": "79217569666",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "graphite": "#2A2F36"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://freelancedetailing.orgs.biz/",
+  "contact_lead": "tg:freelancedetailing"
+}

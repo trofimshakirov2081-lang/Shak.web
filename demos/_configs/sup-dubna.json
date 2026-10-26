@@ -1,0 +1,75 @@
+{
+  "slug": "sup-dubna",
+  "name": "САП Дубна",
+  "niche": "prokat",
+  "city": "Дубна",
+  "custom": "volna",
+  "tagline": "Сапы и прогулки",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Montserrat Alternates",
+    "body": "Commissioner"
+  },
+  "hero": {
+    "title": "Берите доску, остальное у нас",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/sup-dubna/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно взять",
+    "catalogText": "Цены за час, на весь день дешевле.",
+    "aboutTitle": "О нас"
+  },
+  "about": "САП Дубна: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "Сап-доска",
+      "price": 600,
+      "desc": "Весло, жилет, гермомешок",
+      "photo": "files/sup-dubna/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сап для двоих",
+      "price": 900,
+      "desc": "Большая доска до 160 кг",
+      "photo": "files/sup-dubna/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прогулка с инструктором",
+      "price": 1500,
+      "desc": "2 часа, группа до 8",
+      "photo": "files/sup-dubna/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Фотосессия на сапах",
+      "price": 3000,
+      "desc": "Час, 30 фото в обработке",
+      "photo": "files/sup-dubna/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 995 924-58-03",
+    "whatsapp": "79959245803",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 4,
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://supdubna.orgs.biz/",
+  "contact_lead": "tg:supdubna"
+}

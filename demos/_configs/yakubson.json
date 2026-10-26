@@ -1,0 +1,75 @@
+{
+  "slug": "yakubson",
+  "name": "Проводник в неизвестное",
+  "niche": "tury",
+  "city": "Самара",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/yakubson/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Пётр, я сам веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Потайная Самара",
+      "price": 5000,
+      "desc": "«Тени и свет старой Самары: Дворы, Парадные, Артефакты»…",
+      "photo": "files/yakubson/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Космическая Управа",
+      "price": 5500,
+      "desc": "Посёлок с вековой историей, советским названием и…",
+      "photo": "files/yakubson/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Посетить Бункер Сталина",
+      "price": 5000,
+      "desc": "Индивидуальная экскурсия в объект гражданской обороны…",
+      "photo": "files/yakubson/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Впервые в Самаре, обзорная экскурсия",
+      "price": 4600,
+      "desc": "Добро пожаловать в Самару – город с уютной атмосферой,…",
+      "photo": "files/yakubson/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 960 811-99-54",
+    "whatsapp": "79608119954",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Самара",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://yakubson-guide.orgs.biz/",
+  "contact_lead": "tg:yacubson"
+}

@@ -1,0 +1,77 @@
+{
+  "slug": "dom-arhitektora",
+  "name": "Дом Архитектора",
+  "niche": "otdyh",
+  "city": "Кисловодск",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#24352B",
+    "accent": "#D9692E",
+    "bg": "#F2EFE6",
+    "text": "#1B241E"
+  },
+  "fonts": {
+    "head": "Literata",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Номер на ваши даты за минуту",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/dom-arhitektora/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Дом Архитектора в Кисловодске: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Стандарт",
+      "price": 3500,
+      "desc": "2 гостя, завтрак включён",
+      "photo": "files/dom-arhitektora/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Комфорт",
+      "price": 4500,
+      "desc": "2-3 гостя, большая кровать",
+      "photo": "files/dom-arhitektora/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Семейный номер",
+      "price": 6500,
+      "desc": "До 4 гостей, две комнаты",
+      "photo": "files/dom-arhitektora/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Люкс",
+      "price": 8500,
+      "desc": "Гостиная и вид из окна",
+      "photo": "files/dom-arhitektora/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 905 443-23-02",
+    "whatsapp": "79054432302",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#9DB7B5",
+      "paper": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club227791964.orgs.biz/",
+  "contact_lead": "em:dom.arhitect@yandex.ru"
+}

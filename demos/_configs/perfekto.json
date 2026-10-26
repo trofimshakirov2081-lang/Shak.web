@@ -1,0 +1,73 @@
+{
+  "slug": "perfekto",
+  "name": "PERFEKTO",
+  "niche": "masterskaya",
+  "city": "Барнаул",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Spectral",
+    "body": "IBM Plex Sans"
+  },
+  "hero": {
+    "title": "Кухня, сделанная под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/perfekto/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "PERFEKTO: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня",
+      "price": 28000,
+      "desc": "Под потолок, фурнитура Blum",
+      "photo": "files/perfekto/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шкаф-купе",
+      "price": 19000,
+      "desc": "Зеркало или ЛДСП",
+      "photo": "files/perfekto/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гардеробная",
+      "price": 16000,
+      "desc": "Открытые системы",
+      "photo": "files/perfekto/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 15000,
+      "desc": "С банкеткой и зеркалом",
+      "photo": "files/perfekto/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 929 397-35-37",
+    "whatsapp": "79293973537",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://perfekto-mebel.orgs.biz/",
+  "contact_lead": "em:572507@bk.ru"
+}

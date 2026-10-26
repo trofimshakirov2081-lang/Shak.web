@@ -1,0 +1,70 @@
+{
+  "slug": "lipovoe",
+  "name": "Липовое",
+  "niche": "otdyh",
+  "city": "Тюмень",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Literata",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Тишина, лес и тёплый дом",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/lipovoe/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Липовое: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Дома-бани KELO",
+      "price": 25000,
+      "desc": "Дома-Бани KELO – это эксклюзивное дизайнерское решение на…",
+      "photo": "files/lipovoe/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Коттедж 614 кв.м. (АРЕНДА)",
+      "price": 35000,
+      "desc": "КОТТЕДЖ 614 кв.м. на берегу озера Липовое. СТОИМОСТЬ:…",
+      "photo": "files/lipovoe/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Коттедж 275 кв.м. (АРЕНДА)",
+      "price": 25000,
+      "desc": "КОТТЕДЖ 275 кв.м. на берегу озера Липовое. ⠀ СТОИМОСТЬ:…",
+      "photo": "files/lipovoe/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 345 260-09-00",
+    "whatsapp": "73452600900",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://lipovoe.orgs.biz/",
+  "contact_lead": "em:mail@lipovoe.ru"
+}

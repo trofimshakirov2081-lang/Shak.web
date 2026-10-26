@@ -1,0 +1,68 @@
+{
+  "slug": "gid-severodvinsk",
+  "name": "Гид по Северодвинску",
+  "niche": "tury",
+  "city": "Северодвинск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/gid-severodvinsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Татьяна, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Обзорная по Северодвинску",
+      "price": 1500,
+      "desc": "2 часа, пешком",
+      "photo": "files/gid-severodvinsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Ягры и Белое море",
+      "price": 2500,
+      "desc": "3 часа, берег и маяк",
+      "photo": "files/gid-severodvinsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Корабельная история",
+      "price": 1800,
+      "desc": "2 часа, верфи и музеи",
+      "photo": "files/gid-severodvinsk/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 911 057-35-20",
+    "whatsapp": "79110573520",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Северодвинск",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://severodvinskguide.orgs.biz/",
+  "contact_lead": "tg:TanyaGribanova"
+}

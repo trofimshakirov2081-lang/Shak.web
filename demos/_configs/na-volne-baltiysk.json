@@ -1,0 +1,91 @@
+{
+  "slug": "na-volne-baltiysk",
+  "name": "На Волне",
+  "niche": "prokat",
+  "city": "Балтийск",
+  "custom": "volna",
+  "tagline": "Прогулки на воде",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Montserrat Alternates",
+    "body": "Commissioner"
+  },
+  "hero": {
+    "title": "Вода, ветер и свой капитан",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/na-volne-baltiysk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Прогулки",
+    "catalogText": "Цены указаны за услугу.",
+    "aboutTitle": "О нас"
+  },
+  "about": "На Волне: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "Прогулка на яхте",
+      "price": 6000,
+      "desc": "До 6 человек, с капитаном",
+      "photo": "files/na-volne-baltiysk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Закат на воде",
+      "price": 9000,
+      "desc": "2 часа, плед и чай",
+      "photo": "files/na-volne-baltiysk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Рыбалка с лодки",
+      "price": 12000,
+      "desc": "Полдня, снасти включены",
+      "photo": "files/na-volne-baltiysk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Аренда с сапами",
+      "price": 15000,
+      "desc": "Заброска в залив",
+      "photo": "files/na-volne-baltiysk/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 950 678-61-09",
+    "whatsapp": "79506786109",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 1,
+    "hourLabel": "Цена",
+    "dayLabel": "Компанией",
+    "steps": [
+      [
+        "Бронируете здесь",
+        "Выберите и отправьте заявку."
+      ],
+      [
+        "Подтверждаем",
+        "Созваниваемся и уточняем детали."
+      ],
+      [
+        "Встречаемся",
+        "Всё готово к вашему приезду."
+      ]
+    ],
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://progulki39.orgs.biz/",
+  "contact_lead": "em:progulkinakatere39@gmail.com"
+}

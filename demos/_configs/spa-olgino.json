@@ -1,0 +1,67 @@
+{
+  "slug": "spa-olgino",
+  "name": "SPA в Ольгино",
+  "niche": "banya",
+  "city": "Москва",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Парная, купель и тишина",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/spa-olgino/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "SPA в Ольгино: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "ПЕРЕЗАГРУЗКА",
+      "price": 20000,
+      "desc": "Программа на 1 человека. Продолжительность 2 часа -…",
+      "photo": "files/spa-olgino/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "РЕЛАКС",
+      "price": 35000,
+      "desc": "Программа на 2 человека. Продолжительность 3 часа -…",
+      "photo": "files/spa-olgino/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БУДДА",
+      "price": 35000,
+      "desc": "Программа на 2 человека. Продолжительность 3 часа -…",
+      "photo": "files/spa-olgino/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 985 235-48-71",
+    "whatsapp": "79852354871",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://spaolgino.orgs.biz/",
+  "contact_lead": "em:spa_olgino@mail.ru"
+}

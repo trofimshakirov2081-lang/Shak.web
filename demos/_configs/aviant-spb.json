@@ -1,0 +1,91 @@
+{
+  "slug": "aviant-spb",
+  "name": "Aviant",
+  "niche": "prokat",
+  "city": "Санкт-Петербург",
+  "custom": "volna",
+  "tagline": "Прогулки на воде",
+  "colors": {
+    "main": "#0A3D62",
+    "accent": "#FF6B35",
+    "bg": "#F4E9D8",
+    "text": "#0B2234"
+  },
+  "fonts": {
+    "head": "Montserrat Alternates",
+    "body": "Commissioner"
+  },
+  "hero": {
+    "title": "Вода, ветер и свой капитан",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/aviant-spb/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Прогулки",
+    "catalogText": "Цены указаны за услугу.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Aviant: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "Катер DEA",
+      "price": 10000,
+      "desc": "Цена: 10000 руб/час Вместимость: 4 человека На борту вас…",
+      "photo": "files/aviant-spb/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Катер ХЬЮСТОН",
+      "price": 8500,
+      "desc": "Цена: День: 8500 Ночь: 9500 Вместимость: 5+1 ребенок…",
+      "photo": "files/aviant-spb/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Яхта МИТРОФАН",
+      "price": 37000,
+      "desc": "Стоимость: Пн-Чт: 37.000 р/час Пт-Вс: 42.000 р/час…",
+      "photo": "files/aviant-spb/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Яхта DOMINATOR 68",
+      "price": 37000,
+      "desc": "Стоимость: Пн-Чт: 37.000 р/час Пт-Вс: 42.000 р/час…",
+      "photo": "files/aviant-spb/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 926 405-48-78",
+    "whatsapp": "79264054878",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 1,
+    "hourLabel": "Цена",
+    "dayLabel": "Компанией",
+    "steps": [
+      [
+        "Бронируете здесь",
+        "Выберите и отправьте заявку."
+      ],
+      [
+        "Подтверждаем",
+        "Созваниваемся и уточняем детали."
+      ],
+      [
+        "Встречаемся",
+        "Всё готово к вашему приезду."
+      ]
+    ],
+    "vars": {
+      "lagoon": "#2EC4B6",
+      "foam": "#FFFAF2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://aviantrf.orgs.biz/",
+  "contact_lead": "em:aviant.1@yandex.ru"
+}

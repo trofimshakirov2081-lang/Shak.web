@@ -1,0 +1,68 @@
+{
+  "slug": "gid-irkutsk",
+  "name": "Походим по Иркутску",
+  "niche": "tury",
+  "city": "Иркутск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/gid-irkutsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Антонина, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Обзорная по центру",
+      "price": 1000,
+      "desc": "2 часа, пешком",
+      "photo": "files/gid-irkutsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "130-й квартал вечером",
+      "price": 900,
+      "desc": "1,5 часа, огни города",
+      "photo": "files/gid-irkutsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Деревянный Иркутск",
+      "price": 1200,
+      "desc": "2 часа, резные дома",
+      "photo": "files/gid-irkutsk/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 902 568-74-96",
+    "whatsapp": "79025687496",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Иркутск",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://irkutsk-excursions.orgs.biz/",
+  "contact_lead": "tg:gid_irkutsk"
+}

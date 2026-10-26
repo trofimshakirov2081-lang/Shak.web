@@ -1,0 +1,90 @@
+{
+  "slug": "stuler-chan",
+  "name": "STULER",
+  "niche": "masterskaya",
+  "city": "Чебоксары",
+  "custom": "stolyar",
+  "tagline": "Банные чаны",
+  "colors": {
+    "main": "#3D5A80",
+    "accent": "#B98A5A",
+    "bg": "#F2F0EA",
+    "text": "#23262B"
+  },
+  "fonts": {
+    "head": "Spectral",
+    "body": "IBM Plex Sans"
+  },
+  "hero": {
+    "title": "Свой чан на участке",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/stuler-chan/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "STULER: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Банный чан",
+      "price": 9000,
+      "desc": "На 4-6 человек, печь внутри",
+      "photo": "files/stuler-chan/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Чан с гидромассажем",
+      "price": 12000,
+      "desc": "На 6-8 человек",
+      "photo": "files/stuler-chan/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Купель",
+      "price": 6000,
+      "desc": "Для холодной воды",
+      "photo": "files/stuler-chan/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 937 394-45-11",
+    "whatsapp": "79373944511",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "unit": "чел.",
+    "min": 2,
+    "max": 10,
+    "def": 6,
+    "materials": [
+      [
+        "Сталь",
+        1,
+        "linear-gradient(135deg,#9AA3AB,#5E666E)"
+      ],
+      [
+        "Нержавейка",
+        1.4,
+        "linear-gradient(135deg,#D9DEE2,#9FA8AF)"
+      ],
+      [
+        "Медь",
+        2,
+        "linear-gradient(135deg,#D9925E,#9C5A2E)"
+      ]
+    ],
+    "calcTitle": "Соберите свой чан",
+    "dimW": "Ø 2 000 мм",
+    "vars": {
+      "sheet": "#FBFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://stulerchan.orgs.biz/",
+  "contact_lead": "em:pml90@bk.ru"
+}

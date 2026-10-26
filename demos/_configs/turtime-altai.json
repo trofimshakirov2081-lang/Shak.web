@@ -1,0 +1,75 @@
+{
+  "slug": "turtime-altai",
+  "name": "ТурТайм",
+  "niche": "tury",
+  "city": "Новосибирск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/turtime-altai/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Анна, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Чуйский тракт за 3 дня.",
+      "price": 22000,
+      "desc": "Перевалы ,водопады ,Гейзерное озеро, Марс 1 и Марс 2…",
+      "photo": "files/turtime-altai/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тур по Чуйскому тракту 4 дня.",
+      "price": 26000,
+      "desc": "🎈Приглашаем в наше 4 х дневное путешествие по Чуйскому…",
+      "photo": "files/turtime-altai/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Телецкое озеро (3 дня)",
+      "price": 18000,
+      "desc": "РАСПИСАНИЕ ТУРА: 1 день: -выезд в 24:00 (Речной вокзал…",
+      "photo": "files/turtime-altai/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Лебединое озеро (1 день)",
+      "price": 5000,
+      "desc": "Во время экскурсии мы посетим романтическое место -…",
+      "photo": "files/turtime-altai/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 923 233-76-57",
+    "whatsapp": "79232337657",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Новосибирск",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://carours.orgs.biz/",
+  "contact_lead": "tg:annaturtime54"
+}

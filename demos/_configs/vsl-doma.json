@@ -1,0 +1,74 @@
+{
+  "slug": "vsl-doma",
+  "name": "ВСЛ",
+  "niche": "masterskaya",
+  "city": "Москва",
+  "custom": "stolyar",
+  "tagline": "Строительство домов",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Spectral",
+    "body": "IBM Plex Sans"
+  },
+  "hero": {
+    "title": "Дом, который строят под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/vsl-doma/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "ВСЛ: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Дом из бруса",
+      "price": 28000,
+      "desc": "Коробка под крышу",
+      "photo": "files/vsl-doma/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Дом под ключ",
+      "price": 55000,
+      "desc": "С инженерией и отделкой",
+      "photo": "files/vsl-doma/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Баня",
+      "price": 32000,
+      "desc": "Под ключ, с печью",
+      "photo": "files/vsl-doma/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Каркасный дом",
+      "price": 24000,
+      "desc": "Тёплый контур",
+      "photo": "files/vsl-doma/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 495 508-84-85",
+    "whatsapp": "74955088485",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://domavsl.orgs.biz/",
+  "contact_lead": "em:info@dom2000.ru"
+}
