@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/gorodnya-kayak.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-gorodnya-kayak",
-  "rev": "2026-10-26T12:15:17.538Z",
+  "rev": "2026-10-26T18:50:20.006Z",
   "brand": {
     "name": "GorodnyaTravel",
     "tagline": "Сплавы на каяках",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#0C2B2D"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

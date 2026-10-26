@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/semiozerye.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-semiozerye",
-  "rev": "2026-10-26T12:15:20.348Z",
+  "rev": "2026-10-26T18:50:20.943Z",
   "brand": {
     "name": "Семиозерье",
     "tagline": "Загородный отдых",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1B241E"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

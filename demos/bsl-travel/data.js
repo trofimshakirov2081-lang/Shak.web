@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bsl-travel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bsl-travel",
-  "rev": "2026-10-26T12:15:15.941Z",
+  "rev": "2026-10-26T18:50:19.440Z",
   "brand": {
     "name": "БСЛ Тревел",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

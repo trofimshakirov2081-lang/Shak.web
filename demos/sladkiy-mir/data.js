@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sladkiy-mir.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sladkiy-mir",
-  "rev": "2026-10-26T12:15:20.479Z",
+  "rev": "2026-10-26T18:50:21.010Z",
   "brand": {
     "name": "Сладкий мир Светланы",
     "tagline": "Торты в Колтушах",

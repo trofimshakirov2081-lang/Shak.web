@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ideya-prazdnika.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ideya-prazdnika",
-  "rev": "2026-10-26T12:15:17.701Z",
+  "rev": "2026-10-26T18:50:20.035Z",
   "brand": {
     "name": "Идея праздника",
     "tagline": "Цветы и шары в Ижевске",

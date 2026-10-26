@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/asia-abakan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-asia-abakan",
-  "rev": "2026-10-26T12:15:14.554Z",
+  "rev": "2026-10-26T18:50:19.203Z",
   "brand": {
     "name": "Отель «Азия»",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#14232D"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

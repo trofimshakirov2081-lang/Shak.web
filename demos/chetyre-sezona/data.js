@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/chetyre-sezona.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-chetyre-sezona",
-  "rev": "2026-10-26T12:15:16.385Z",
+  "rev": "2026-10-26T18:50:19.554Z",
   "brand": {
     "name": "Четыре сезона",
     "tagline": "Загородный отдых",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1B241E"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zaparilis.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zaparilis",
-  "rev": "2026-10-26T12:15:21.857Z",
+  "rev": "2026-10-26T18:50:21.512Z",
   "brand": {
     "name": "Запарились",
     "tagline": "Баня",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Dela Gothic One",
-    "body": "Manrope"
+    "body": "Finlandica"
   },
   "currency": "₽",
   "items": [

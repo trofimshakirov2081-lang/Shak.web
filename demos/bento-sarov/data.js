@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bento-sarov.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bento-sarov",
-  "rev": "2026-10-26T12:15:15.784Z",
+  "rev": "2026-10-26T18:50:19.354Z",
   "brand": {
     "name": "Бенто Саров",
     "tagline": "Бенто, торты и капкейки",

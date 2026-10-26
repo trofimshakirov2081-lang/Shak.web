@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/fleurfee.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-fleurfee",
-  "rev": "2026-10-26T12:15:17.310Z",
+  "rev": "2026-10-26T18:50:19.870Z",
   "brand": {
     "name": "Fleurfee",
     "tagline": "Цветы с доставкой",

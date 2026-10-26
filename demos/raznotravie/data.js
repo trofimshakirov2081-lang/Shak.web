@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/raznotravie.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-raznotravie",
-  "rev": "2026-10-26T12:15:20.161Z",
+  "rev": "2026-10-26T18:50:20.873Z",
   "brand": {
     "name": "Разнотравье",
     "tagline": "Цветочная студия",

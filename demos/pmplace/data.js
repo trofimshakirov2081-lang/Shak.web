@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pmplace.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pmplace",
-  "rev": "2026-10-26T12:15:19.889Z",
+  "rev": "2026-10-26T18:50:20.769Z",
   "brand": {
     "name": "PmPlace",
     "tagline": "Студия перманентного макияжа",

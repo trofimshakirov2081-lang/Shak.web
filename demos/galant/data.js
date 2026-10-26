@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/galant.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-galant",
-  "rev": "2026-10-26T12:15:17.472Z",
+  "rev": "2026-10-26T18:50:19.972Z",
   "brand": {
     "name": "Галант",
     "tagline": "Кофейня",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bani-44.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bani-44",
-  "rev": "2026-10-26T12:15:15.331Z",
+  "rev": "2026-10-26T18:50:19.279Z",
   "brand": {
     "name": "Бани 44",
     "tagline": "Бани под ключ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A1E19"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

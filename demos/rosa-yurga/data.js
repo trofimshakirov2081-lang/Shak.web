@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/rosa-yurga.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-rosa-yurga",
-  "rev": "2026-10-26T12:15:20.240Z",
+  "rev": "2026-10-26T18:50:20.897Z",
   "brand": {
     "name": "Rosà",
     "tagline": "Цветы с доставкой",

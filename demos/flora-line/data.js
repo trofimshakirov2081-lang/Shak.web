@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/flora-line.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-flora-line",
-  "rev": "2026-10-26T12:15:17.324Z",
+  "rev": "2026-10-26T18:50:19.879Z",
   "brand": {
     "name": "Флора-Лайн",
     "tagline": "Цветочная студия",

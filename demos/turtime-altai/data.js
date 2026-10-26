@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/turtime-altai.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-turtime-altai",
-  "rev": "2026-10-26T12:15:21.170Z",
+  "rev": "2026-10-26T18:50:21.278Z",
   "brand": {
     "name": "ТурТайм",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

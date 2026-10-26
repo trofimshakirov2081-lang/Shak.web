@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/serebryanye-rodniki.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-serebryanye-rodniki",
-  "rev": "2026-10-26T12:15:20.364Z",
+  "rev": "2026-10-26T18:50:20.951Z",
   "brand": {
     "name": "Серебряные родники",
     "tagline": "Загородный отдых",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#14232D"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

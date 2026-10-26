@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sfera-na-dache.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sfera-na-dache",
-  "rev": "2026-10-26T12:15:20.396Z",
+  "rev": "2026-10-26T18:50:20.957Z",
   "brand": {
     "name": "Сфера на даче",
     "tagline": "Загородный отдых",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A2018"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

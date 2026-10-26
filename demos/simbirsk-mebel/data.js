@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/simbirsk-mebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-simbirsk-mebel",
-  "rev": "2026-10-26T12:15:20.447Z",
+  "rev": "2026-10-26T18:50:20.984Z",
   "brand": {
     "name": "Симбирская мебельная компания",
     "tagline": "Мебель на заказ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1F2622"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

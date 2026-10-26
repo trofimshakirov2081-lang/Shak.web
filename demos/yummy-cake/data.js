@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yummy-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yummy-cake",
-  "rev": "2026-10-26T12:15:21.781Z",
+  "rev": "2026-10-26T18:50:21.480Z",
   "brand": {
     "name": "YUMMY CAKE",
     "tagline": "Десерты на заказ",
@@ -46,8 +46,8 @@ window.SITE = {
     "text": "#1B2E24"
   },
   "fonts": {
-    "head": "Wix Madefor Display",
-    "body": "Nunito"
+    "head": "Gabriela",
+    "body": "Ysabeau Infant"
   },
   "currency": "₽",
   "items": [

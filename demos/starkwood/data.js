@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/starkwood.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-starkwood",
-  "rev": "2026-10-26T12:15:20.684Z",
+  "rev": "2026-10-26T18:50:21.087Z",
   "brand": {
     "name": "Starkwood",
     "tagline": "Строительство домов",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#23262B"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

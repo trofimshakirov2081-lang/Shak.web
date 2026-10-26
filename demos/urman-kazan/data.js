@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/urman-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-urman-kazan",
-  "rev": "2026-10-26T12:15:21.264Z",
+  "rev": "2026-10-26T18:50:21.311Z",
   "brand": {
     "name": "Урман",
     "tagline": "Баня",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Dela Gothic One",
-    "body": "Manrope"
+    "body": "Finlandica"
   },
   "currency": "₽",
   "items": [

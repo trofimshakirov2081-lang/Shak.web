@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/pushka-tula.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-pushka-tula",
-  "rev": "2026-10-26T12:15:20.126Z",
+  "rev": "2026-10-26T18:50:20.856Z",
   "brand": {
     "name": "Пушка",
     "tagline": "Баня",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Dela Gothic One",
-    "body": "Manrope"
+    "body": "Finlandica"
   },
   "currency": "₽",
   "items": [

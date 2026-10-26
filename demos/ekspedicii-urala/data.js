@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ekspedicii-urala.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ekspedicii-urala",
-  "rev": "2026-10-26T12:15:17.213Z",
+  "rev": "2026-10-26T18:50:19.817Z",
   "brand": {
     "name": "Экспедиции Урала",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

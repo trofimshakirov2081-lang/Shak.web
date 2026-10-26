@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/venom-performance.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-venom-performance",
-  "rev": "2026-10-26T12:15:21.297Z",
+  "rev": "2026-10-26T18:50:21.325Z",
   "brand": {
     "name": "Venom Performance",
     "tagline": "Тюнинг и сервис",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#E9ECEF"
   },
   "fonts": {
-    "head": "Inter Tight",
-    "body": "Inter"
+    "head": "Akt",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

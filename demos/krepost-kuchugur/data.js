@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/krepost-kuchugur.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-krepost-kuchugur",
-  "rev": "2026-10-26T12:15:18.508Z",
+  "rev": "2026-10-26T18:50:20.221Z",
   "brand": {
     "name": "Крепость Кучугур",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1B241E"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

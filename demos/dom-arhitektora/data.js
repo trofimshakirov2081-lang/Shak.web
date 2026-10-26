@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dom-arhitektora.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dom-arhitektora",
-  "rev": "2026-10-26T12:15:17.014Z",
+  "rev": "2026-10-26T18:50:19.772Z",
   "brand": {
     "name": "Дом Архитектора",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1B241E"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

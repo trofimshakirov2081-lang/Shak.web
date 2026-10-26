@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lavandovaya-tochka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lavandovaya-tochka",
-  "rev": "2026-10-26T12:15:18.684Z",
+  "rev": "2026-10-26T18:50:20.306Z",
   "brand": {
     "name": "Лавандовая точка",
     "tagline": "Цветочная студия",

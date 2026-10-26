@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/white-roses.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-white-roses",
-  "rev": "2026-10-26T12:15:21.540Z",
+  "rev": "2026-10-26T18:50:21.403Z",
   "brand": {
     "name": "White Roses",
     "tagline": "Цветы в Ульяновске",

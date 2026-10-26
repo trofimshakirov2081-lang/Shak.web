@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/aviant-spb.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-aviant-spb",
-  "rev": "2026-10-26T12:15:15.069Z",
+  "rev": "2026-10-26T18:50:19.224Z",
   "brand": {
     "name": "Aviant",
     "tagline": "Прогулки на воде",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#0B2234"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

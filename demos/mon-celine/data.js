@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mon-celine.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mon-celine",
-  "rev": "2026-10-26T12:15:19.258Z",
+  "rev": "2026-10-26T18:50:20.593Z",
   "brand": {
     "name": "Мон Селин Десерт",
     "tagline": "Десерты на заказ",

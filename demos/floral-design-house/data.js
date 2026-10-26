@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/floral-design-house.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-floral-design-house",
-  "rev": "2026-10-26T12:15:17.345Z",
+  "rev": "2026-10-26T18:50:19.895Z",
   "brand": {
     "name": "Floral Design House",
     "tagline": "Цветочная студия",

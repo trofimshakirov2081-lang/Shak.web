@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/maestro-aero.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-maestro-aero",
-  "rev": "2026-10-26T12:15:18.909Z",
+  "rev": "2026-10-26T18:50:20.408Z",
   "brand": {
     "name": "Маэстро",
     "tagline": "Полёты на шаре",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#141F33"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

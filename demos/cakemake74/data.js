@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cakemake74.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cakemake74",
-  "rev": "2026-10-26T12:15:16.102Z",
+  "rev": "2026-10-26T18:50:19.503Z",
   "brand": {
     "name": "CakeMake74",
     "tagline": "Десерты на заказ",

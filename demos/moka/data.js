@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/moka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-moka",
-  "rev": "2026-10-26T12:15:19.245Z",
+  "rev": "2026-10-26T18:50:20.582Z",
   "brand": {
     "name": "МОКА",
     "tagline": "Кофейня",

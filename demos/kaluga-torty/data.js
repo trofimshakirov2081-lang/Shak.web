@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kaluga-torty.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kaluga-torty",
-  "rev": "2026-10-26T12:15:17.766Z",
+  "rev": "2026-10-26T18:50:20.074Z",
   "brand": {
     "name": "Торты на заказ",
     "tagline": "Десерты на заказ",

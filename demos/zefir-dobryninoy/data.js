@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zefir-dobryninoy.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zefir-dobryninoy",
-  "rev": "2026-10-26T12:15:21.891Z",
+  "rev": "2026-10-26T18:50:21.525Z",
   "brand": {
     "name": "Зефир Ольги Добрыниной",
     "tagline": "Десерты на заказ",

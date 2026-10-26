@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/grani-vkusa.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-grani-vkusa",
-  "rev": "2026-10-26T12:15:17.617Z",
+  "rev": "2026-10-26T18:50:20.013Z",
   "brand": {
     "name": "Грани вкуса",
     "tagline": "Десерты на заказ",

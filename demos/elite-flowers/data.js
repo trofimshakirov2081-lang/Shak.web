@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/elite-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-elite-flowers",
-  "rev": "2026-10-26T12:15:17.239Z",
+  "rev": "2026-10-26T18:50:19.830Z",
   "brand": {
     "name": "Elite Flowers",
     "tagline": "Цветочная студия",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cafe-de-france.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cafe-de-france",
-  "rev": "2026-10-26T12:15:16.006Z",
+  "rev": "2026-10-26T18:50:19.471Z",
   "brand": {
     "name": "Cafe de France",
     "tagline": "Кондитерская",

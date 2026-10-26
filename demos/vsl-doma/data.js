@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vsl-doma.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vsl-doma",
-  "rev": "2026-10-26T12:15:21.413Z",
+  "rev": "2026-10-26T18:50:21.373Z",
   "brand": {
     "name": "ВСЛ",
     "tagline": "Строительство домов",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A1E19"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dagestan-dreams.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dagestan-dreams",
-  "rev": "2026-10-26T12:15:16.795Z",
+  "rev": "2026-10-26T18:50:19.697Z",
   "brand": {
     "name": "Dagestan Dreams",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

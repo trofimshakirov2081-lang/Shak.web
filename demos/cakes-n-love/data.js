@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cakes-n-love.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cakes-n-love",
-  "rev": "2026-10-26T12:15:16.128Z",
+  "rev": "2026-10-26T18:50:19.512Z",
   "brand": {
     "name": "Cakes n Love",
     "tagline": "Десерты на заказ",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/nezabudka-belgorod.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-nezabudka-belgorod",
-  "rev": "2026-10-26T12:15:19.495Z",
+  "rev": "2026-10-26T18:50:20.650Z",
   "brand": {
     "name": "Незабудка",
     "tagline": "Цветы с доставкой",

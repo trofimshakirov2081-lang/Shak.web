@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/freelance-detailing.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-freelance-detailing",
-  "rev": "2026-10-26T12:15:17.440Z",
+  "rev": "2026-10-26T18:50:19.955Z",
   "brand": {
     "name": "Фриланс Детейлинг",
     "tagline": "Детейлинг",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#E9ECEF"
   },
   "fonts": {
-    "head": "Inter Tight",
-    "body": "Inter"
+    "head": "Akt",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

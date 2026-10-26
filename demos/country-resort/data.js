@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/country-resort.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-country-resort",
-  "rev": "2026-10-26T12:15:16.500Z",
+  "rev": "2026-10-26T18:50:19.581Z",
   "brand": {
     "name": "Кантри Резорт",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#14232D"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

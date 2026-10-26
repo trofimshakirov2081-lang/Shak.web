@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/goman-macaron.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-goman-macaron",
-  "rev": "2026-10-26T12:15:17.523Z",
+  "rev": "2026-10-26T18:50:19.999Z",
   "brand": {
     "name": "Goman Dream Desserts",
     "tagline": "Macaron в Липецке",

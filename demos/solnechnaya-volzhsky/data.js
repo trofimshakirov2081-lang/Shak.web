@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/solnechnaya-volzhsky.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-solnechnaya-volzhsky",
-  "rev": "2026-10-26T12:15:20.558Z",
+  "rev": "2026-10-26T18:50:21.040Z",
   "brand": {
     "name": "Гостиница «Солнечная»",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A2018"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

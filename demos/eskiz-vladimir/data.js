@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/eskiz-vladimir.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-eskiz-vladimir",
-  "rev": "2026-10-26T12:15:17.291Z",
+  "rev": "2026-10-26T18:50:19.858Z",
   "brand": {
     "name": "Эскиз",
     "tagline": "Мебель на заказ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1F2622"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

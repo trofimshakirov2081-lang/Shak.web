@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bani-bochki-izhevsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bani-bochki-izhevsk",
-  "rev": "2026-10-26T12:15:15.510Z",
+  "rev": "2026-10-26T18:50:19.307Z",
   "brand": {
     "name": "Мобильные бани",
     "tagline": "Бани под ключ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#23262B"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

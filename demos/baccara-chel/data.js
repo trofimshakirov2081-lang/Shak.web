@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/baccara-chel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-baccara-chel",
-  "rev": "2026-10-26T12:15:15.191Z",
+  "rev": "2026-10-26T18:50:19.245Z",
   "brand": {
     "name": "Мини-отель «Баккара»",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A2018"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

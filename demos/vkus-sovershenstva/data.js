@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vkus-sovershenstva.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vkus-sovershenstva",
-  "rev": "2026-10-26T12:15:21.360Z",
+  "rev": "2026-10-26T18:50:21.352Z",
   "brand": {
     "name": "ВкусСовершенства",
     "tagline": "Цветы с доставкой",

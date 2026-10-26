@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/profmastermebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-profmastermebel",
-  "rev": "2026-10-26T12:15:20.072Z",
+  "rev": "2026-10-26T18:50:20.833Z",
   "brand": {
     "name": "ПрофМастерМебель",
     "tagline": "Мебель на заказ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1F2622"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

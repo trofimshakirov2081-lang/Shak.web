@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/bloomix-izhevsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-bloomix-izhevsk",
-  "rev": "2026-10-26T12:15:15.869Z",
+  "rev": "2026-10-26T18:50:19.415Z",
   "brand": {
     "name": "Bloomix",
     "tagline": "Цветы с доставкой",

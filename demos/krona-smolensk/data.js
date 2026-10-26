@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/krona-smolensk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-krona-smolensk",
-  "rev": "2026-10-26T12:15:18.523Z",
+  "rev": "2026-10-26T18:50:20.232Z",
   "brand": {
     "name": "Крона",
     "tagline": "Строительство домов",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A1E19"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

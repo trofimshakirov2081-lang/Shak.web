@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dfleur.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dfleur",
-  "rev": "2026-10-26T12:15:17.004Z",
+  "rev": "2026-10-26T18:50:19.764Z",
   "brand": {
     "name": "D'Fleur",
     "tagline": "Цветочная студия",

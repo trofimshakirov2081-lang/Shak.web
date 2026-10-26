@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/gid-severodvinsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-gid-severodvinsk",
-  "rev": "2026-10-26T12:15:17.510Z",
+  "rev": "2026-10-26T18:50:19.990Z",
   "brand": {
     "name": "Гид по Северодвинску",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

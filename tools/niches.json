@@ -365,8 +365,8 @@
       "text": "#1B241E"
     },
     "fonts": {
-      "head": "Literata",
-      "body": "Onest"
+      "head": "Brygada 1918",
+      "body": "Arsenal"
     }
   },
   "banya": {
@@ -427,7 +427,7 @@
     },
     "fonts": {
       "head": "Dela Gothic One",
-      "body": "Manrope"
+      "body": "Finlandica"
     }
   },
   "prokat": {
@@ -491,8 +491,8 @@
       "text": "#0B2234"
     },
     "fonts": {
-      "head": "Montserrat Alternates",
-      "body": "Commissioner"
+      "head": "Lunasima",
+      "body": "Akt"
     }
   },
   "sport": {
@@ -621,8 +621,8 @@
       "text": "#E9ECEF"
     },
     "fonts": {
-      "head": "Inter Tight",
-      "body": "Inter"
+      "head": "Akt",
+      "body": "Gidole"
     }
   },
   "masterskaya": {
@@ -685,8 +685,8 @@
       "text": "#23262B"
     },
     "fonts": {
-      "head": "Spectral",
-      "body": "IBM Plex Sans"
+      "head": "Old Standard TT",
+      "body": "Gidole"
     }
   },
   "tury": {
@@ -749,7 +749,7 @@
     },
     "fonts": {
       "head": "Piazzolla",
-      "body": "Rubik"
+      "body": "Ysabeau Office"
     }
   }
 }

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zhenskaya-banya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zhenskaya-banya",
-  "rev": "2026-10-26T12:15:21.967Z",
+  "rev": "2026-10-26T18:50:21.569Z",
   "brand": {
     "name": "Мягкая женская баня",
     "tagline": "Баня",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Dela Gothic One",
-    "body": "Manrope"
+    "body": "Finlandica"
   },
   "currency": "₽",
   "items": [

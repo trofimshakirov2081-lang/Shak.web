@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/roast-arctic.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-roast-arctic",
-  "rev": "2026-10-26T12:15:20.200Z",
+  "rev": "2026-10-26T18:50:20.880Z",
   "brand": {
     "name": "Roast Arctic",
     "tagline": "Кофе",

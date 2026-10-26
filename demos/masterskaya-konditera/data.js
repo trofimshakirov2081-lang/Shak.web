@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/masterskaya-konditera.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-masterskaya-konditera",
-  "rev": "2026-10-26T12:15:19.137Z",
+  "rev": "2026-10-26T18:50:20.512Z",
   "brand": {
     "name": "Мастерская Кондитера",
     "tagline": "Десерты на заказ",

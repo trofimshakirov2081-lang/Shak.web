@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-marii-otradnaya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-marii-otradnaya",
-  "rev": "2026-10-26T12:15:20.969Z",
+  "rev": "2026-10-26T18:50:21.212Z",
   "brand": {
     "name": "Торты Марии",
     "tagline": "Десерты на заказ",

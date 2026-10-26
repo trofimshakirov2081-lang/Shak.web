@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kunashir-travel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kunashir-travel",
-  "rev": "2026-10-26T12:15:18.623Z",
+  "rev": "2026-10-26T18:50:20.285Z",
   "brand": {
     "name": "Kunashir Travel",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

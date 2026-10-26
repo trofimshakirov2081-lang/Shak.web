@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ks-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ks-cake",
-  "rev": "2026-10-26T12:15:18.542Z",
+  "rev": "2026-10-26T18:50:20.253Z",
   "brand": {
     "name": "KS Cake",
     "tagline": "Десерты на заказ",

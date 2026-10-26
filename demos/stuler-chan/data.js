@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/stuler-chan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-stuler-chan",
-  "rev": "2026-10-26T12:15:20.714Z",
+  "rev": "2026-10-26T18:50:21.097Z",
   "brand": {
     "name": "STULER",
     "tagline": "Банные чаны",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#23262B"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

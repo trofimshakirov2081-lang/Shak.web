@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/na-volne-baltiysk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-na-volne-baltiysk",
-  "rev": "2026-10-26T12:15:19.390Z",
+  "rev": "2026-10-26T18:50:20.627Z",
   "brand": {
     "name": "На Волне",
     "tagline": "Прогулки на воде",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#0C2B2D"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

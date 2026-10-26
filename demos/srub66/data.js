@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/srub66.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-srub66",
-  "rev": "2026-10-26T12:15:20.612Z",
+  "rev": "2026-10-26T18:50:21.066Z",
   "brand": {
     "name": "Срубы и бани",
     "tagline": "Бани под ключ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#23262B"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/floveya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-floveya",
-  "rev": "2026-10-26T12:15:17.377Z",
+  "rev": "2026-10-26T18:50:19.922Z",
   "brand": {
     "name": "Фловея",
     "tagline": "Цветы с доставкой",

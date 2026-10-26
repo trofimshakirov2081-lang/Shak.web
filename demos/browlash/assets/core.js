@@ -176,7 +176,11 @@
     var seen = null; try { seen = localStorage.getItem(S.KEY + ":seen"); localStorage.setItem(S.KEY + ":seen", "1"); } catch (e) {}
     if (seen || x.splash === false || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
     var name = data.brand.name, ch = esc(name.trim().charAt(0).toUpperCase());
-    var letters = name.split("").map(function (l, i) { return '<span style="animation-delay:' + (0.55 + i * 0.035).toFixed(3) + 's">' + (l === " " ? "&nbsp;" : esc(l)) + '</span>'; }).join("");
+    // Буквы собраны по словам: длинное название переносится между словами, а не рвётся и не вылезает за экран
+    var k = 0;
+    var letters = name.trim().split(/\s+/).map(function (w) {
+      return '<i>' + w.split("").map(function (l) { return '<span style="animation-delay:' + (0.55 + (k++) * 0.035).toFixed(3) + 's">' + esc(l) + '</span>'; }).join("") + '</i>';
+    }).join(" ");
     var el = document.createElement("div"); el.className = "c-splash"; el.setAttribute("aria-hidden", "true");
     el.innerHTML = '<div class="c-sp-in"><svg viewBox="0 0 120 120"><circle class="c-sp-ring" cx="60" cy="60" r="52"/><circle class="c-sp-dot" cx="60" cy="8" r="4"/></svg><b>' + ch + '</b></div><div class="c-sp-name">' + letters + '</div>' +
       (data.brand.tagline ? '<div class="c-sp-tag">' + esc(data.brand.tagline) + '</div>' : '');
@@ -193,7 +197,7 @@
     ".c-sp-ring{fill:none;stroke:var(--main);stroke-width:3;stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;animation:c-sp-draw 1.05s cubic-bezier(.6,.05,.25,1) forwards}" +
     ".c-sp-dot{fill:var(--main);transform-origin:60px 60px;animation:c-sp-orbit 1.05s cubic-bezier(.6,.05,.25,1) forwards}" +
     ".c-sp-in b{font:700 48px/1 var(--font-head);color:var(--main);opacity:0;transform:scale(.6);animation:c-sp-pop .5s .8s cubic-bezier(.3,1.6,.5,1) forwards}" +
-    ".c-sp-name{font:600 26px/1.1 var(--font-head);letter-spacing:.01em;overflow:hidden;padding:2px 0}.c-sp-name span{display:inline-block;transform:translateY(110%);animation:c-sp-up .6s cubic-bezier(.2,.8,.2,1) forwards}" +
+    ".c-sp-name{font:600 26px/1.15 var(--font-head);letter-spacing:.01em;padding:2px 0;max-width:calc(100% - 48px);text-align:center;overflow-wrap:normal}.c-sp-name i{font-style:normal;display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:top}.c-sp-name span{display:inline-block;transform:translateY(110%);animation:c-sp-up .6s cubic-bezier(.2,.8,.2,1) forwards}" +
     ".c-sp-tag{font:400 14px/1.3 var(--font-body);opacity:0;animation:c-sp-fade .5s 1.05s forwards}" +
     "@keyframes c-sp-draw{to{stroke-dashoffset:0}}@keyframes c-sp-orbit{to{transform:rotate(360deg)}}@keyframes c-sp-pop{to{opacity:1;transform:none}}@keyframes c-sp-up{to{transform:none}}@keyframes c-sp-fade{to{opacity:.6}}" +
     "@keyframes c-sp-out{from{clip-path:inset(0 0 0 0)}99%{visibility:visible}to{clip-path:inset(0 0 100% 0);visibility:hidden}}" +

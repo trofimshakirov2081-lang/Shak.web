@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zefirnye-cvety.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zefirnye-cvety",
-  "rev": "2026-10-26T12:15:21.936Z",
+  "rev": "2026-10-26T18:50:21.554Z",
   "brand": {
     "name": "Зефирные цветы",
     "tagline": "Зефирные цветы ручной работы",

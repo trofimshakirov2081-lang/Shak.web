@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/nefrit-kazan.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-nefrit-kazan",
-  "rev": "2026-10-26T12:15:19.406Z",
+  "rev": "2026-10-26T18:50:20.635Z",
   "brand": {
     "name": "Нефрит",
     "tagline": "Баня",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Dela Gothic One",
-    "body": "Manrope"
+    "body": "Finlandica"
   },
   "currency": "₽",
   "items": [

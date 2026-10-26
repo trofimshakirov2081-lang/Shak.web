@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/liliya-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-liliya-flowers",
-  "rev": "2026-10-26T12:15:18.781Z",
+  "rev": "2026-10-26T18:50:20.347Z",
   "brand": {
     "name": "Лилия",
     "tagline": "Цветы с доставкой",

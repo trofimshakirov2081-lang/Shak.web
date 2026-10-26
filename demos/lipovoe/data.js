@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lipovoe.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lipovoe",
-  "rev": "2026-10-26T12:15:18.831Z",
+  "rev": "2026-10-26T18:50:20.368Z",
   "brand": {
     "name": "Липовое",
     "tagline": "Загородный отдых",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A2018"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

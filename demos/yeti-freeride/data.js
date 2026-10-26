@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/yeti-freeride.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-yeti-freeride",
-  "rev": "2026-10-26T12:15:21.610Z",
+  "rev": "2026-10-26T18:50:21.440Z",
   "brand": {
     "name": "Йети Фрирайд",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

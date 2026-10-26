@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/beriponchik.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-beriponchik",
-  "rev": "2026-10-26T12:15:15.803Z",
+  "rev": "2026-10-26T18:50:19.361Z",
   "brand": {
     "name": "Beriponchik",
     "tagline": "Кофейня",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/angel-cakes.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-angel-cakes",
-  "rev": "2026-10-26T12:15:13.929Z",
+  "rev": "2026-10-26T18:50:19.140Z",
   "brand": {
     "name": "Angel Cakes",
     "tagline": "Торты ручной работы",

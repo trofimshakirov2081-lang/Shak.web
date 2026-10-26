@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/albergo-perm.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-albergo-perm",
-  "rev": "2026-10-26T12:15:13.187Z",
+  "rev": "2026-10-26T18:50:19.080Z",
   "brand": {
     "name": "ALBERGO",
     "tagline": "Гостиница",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#2A2018"
   },
   "fonts": {
-    "head": "Literata",
-    "body": "Onest"
+    "head": "Brygada 1918",
+    "body": "Arsenal"
   },
   "currency": "₽",
   "items": [

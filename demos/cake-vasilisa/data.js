@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cake-vasilisa.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cake-vasilisa",
-  "rev": "2026-10-26T12:15:16.072Z",
+  "rev": "2026-10-26T18:50:19.491Z",
   "brand": {
     "name": "CAKEvasilisa",
     "tagline": "Торты в Любино",

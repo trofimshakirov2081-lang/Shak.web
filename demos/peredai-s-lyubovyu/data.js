@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/peredai-s-lyubovyu.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-peredai-s-lyubovyu",
-  "rev": "2026-10-26T12:15:19.678Z",
+  "rev": "2026-10-26T18:50:20.705Z",
   "brand": {
     "name": "Передай с любовью",
     "tagline": "Цветы с доставкой",

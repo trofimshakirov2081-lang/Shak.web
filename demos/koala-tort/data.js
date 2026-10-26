@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/koala-tort.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-koala-tort",
-  "rev": "2026-10-26T12:15:18.008Z",
+  "rev": "2026-10-26T18:50:20.153Z",
   "brand": {
     "name": "КоалаТорт",
     "tagline": "Десерты на заказ",

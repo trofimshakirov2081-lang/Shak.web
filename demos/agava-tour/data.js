@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/agava-tour.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-agava-tour",
-  "rev": "2026-10-26T12:15:12.753Z",
+  "rev": "2026-10-26T18:50:19.064Z",
   "brand": {
     "name": "Агава Тур",
     "tagline": "Туры и экскурсии",
@@ -48,7 +48,7 @@ window.SITE = {
   },
   "fonts": {
     "head": "Piazzolla",
-    "body": "Rubik"
+    "body": "Ysabeau Office"
   },
   "currency": "₽",
   "items": [

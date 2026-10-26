@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zimniy-karting.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zimniy-karting",
-  "rev": "2026-10-26T12:15:21.986Z",
+  "rev": "2026-10-26T18:50:21.579Z",
   "brand": {
     "name": "Зимний картинг",
     "tagline": "Картинг",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#0C2B2D"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

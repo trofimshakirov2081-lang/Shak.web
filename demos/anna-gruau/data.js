@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/anna-gruau.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-anna-gruau",
-  "rev": "2026-10-26T12:15:13.994Z",
+  "rev": "2026-10-26T18:50:19.176Z",
   "brand": {
     "name": "Anna Gruau",
     "tagline": "Кофе",

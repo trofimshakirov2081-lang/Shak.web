@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/tonus-kite.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-tonus-kite",
-  "rev": "2026-10-26T12:15:20.826Z",
+  "rev": "2026-10-26T18:50:21.146Z",
   "brand": {
     "name": "Tonus Kite",
     "tagline": "Кайт-школа",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#0C2B2D"
   },
   "fonts": {
-    "head": "Montserrat Alternates",
-    "body": "Commissioner"
+    "head": "Lunasima",
+    "body": "Akt"
   },
   "currency": "₽",
   "items": [

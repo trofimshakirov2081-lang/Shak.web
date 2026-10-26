@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/premier-mebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-premier-mebel",
-  "rev": "2026-10-26T12:15:19.974Z",
+  "rev": "2026-10-26T18:50:20.807Z",
   "brand": {
     "name": "Премьер Мебель",
     "tagline": "Мебель на заказ",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#1F2622"
   },
   "fonts": {
-    "head": "Spectral",
-    "body": "IBM Plex Sans"
+    "head": "Old Standard TT",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vels-dzerzhinsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vels-dzerzhinsk",
-  "rev": "2026-10-26T12:15:21.275Z",
+  "rev": "2026-10-26T18:50:21.318Z",
   "brand": {
     "name": "Велс",
     "tagline": "Шинный центр",
@@ -47,8 +47,8 @@ window.SITE = {
     "text": "#ECECEA"
   },
   "fonts": {
-    "head": "Inter Tight",
-    "body": "Inter"
+    "head": "Akt",
+    "body": "Gidole"
   },
   "currency": "₽",
   "items": [
