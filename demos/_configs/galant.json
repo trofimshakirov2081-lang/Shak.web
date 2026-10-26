@@ -3,16 +3,16 @@
   "name": "Галант",
   "niche": "кофейня",
   "city": "Курск",
-  "custom": "altynnur",
+  "custom": "kino",
   "tagline": "Кофейня",
   "colors": {
     "main": "#1F5C4A",
     "accent": "#D9B26A",
-    "bg": "#F5F7F4",
-    "text": "#10201B"
+    "bg": "#EDE6DA",
+    "text": "#1C1410"
   },
   "fonts": {
-    "head": "Prata",
+    "head": "Geologica",
     "body": "Golos Text"
   },
   "hero": {
@@ -127,7 +127,7 @@
     ],
     "cartBtn": "Заказ",
     "allLabel": "Всё меню",
-    "orderTitle": "Заказать заранее",
+    "orderTitle": "Заходите",
     "orderText": "Соберите заказ на сайте и заберите его без очереди.",
     "orderMsg": "Здравствуйте! Хочу сделать заказ",
     "sendLabel": "Отправить заказ в WhatsApp",
@@ -137,13 +137,34 @@
     "emptyText": "Заказ пока пустой. Выберите напиток.",
     "emptyToast": "Сначала выберите напиток",
     "vars": {
-      "deep": "#0F2E26",
-      "glow": "#B8862F",
-      "glow2": "#2E7D64",
-      "sky": "#E3EEE8",
-      "ok": "#B8862F"
-    }
+      "milk": "#F7F2EA",
+      "c-surface": "#F7F2EA"
+    },
+    "heroTitle": "Кофе, ради которого стоит выйти"
   },
   "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
-  "source": "https://coffegalant.orgs.biz/"
+  "source": "https://coffegalant.orgs.biz/",
+  "designName": "Кино",
+  "alt": [
+    {
+      "custom": "altynnur",
+      "name": "Классический",
+      "extra": {
+        "vars": {
+          "deep": "#0F2E26",
+          "glow": "#B8862F",
+          "glow2": "#2E7D64",
+          "sky": "#E3EEE8",
+          "ok": "#B8862F",
+          "bg": "#F5F7F4",
+          "text": "#10201B"
+        },
+        "fonts": {
+          "head": "Prata",
+          "body": "Golos Text"
+        },
+        "orderTitle": "Заказать заранее"
+      }
+    }
+  ]
 }

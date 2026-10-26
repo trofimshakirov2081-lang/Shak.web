@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/galant.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-galant",
-  "rev": "2026-10-24T14:16:01.640Z",
+  "rev": "2026-10-26T06:06:27.860Z",
   "brand": {
     "name": "Галант",
     "tagline": "Кофейня",
@@ -42,11 +42,11 @@ window.SITE = {
   "colors": {
     "main": "#1F5C4A",
     "accent": "#D9B26A",
-    "bg": "#F5F7F4",
-    "text": "#10201B"
+    "bg": "#EDE6DA",
+    "text": "#1C1410"
   },
   "fonts": {
-    "head": "Prata",
+    "head": "Geologica",
     "body": "Golos Text"
   },
   "currency": "₽",
@@ -189,7 +189,7 @@ window.SITE = {
     ],
     "cartBtn": "Заказ",
     "allLabel": "Всё меню",
-    "orderTitle": "Заказать заранее",
+    "orderTitle": "Заходите",
     "orderText": "Соберите заказ на сайте и заберите его без очереди.",
     "orderMsg": "Здравствуйте! Хочу сделать заказ",
     "sendLabel": "Отправить заказ в WhatsApp",
@@ -199,11 +199,35 @@ window.SITE = {
     "emptyText": "Заказ пока пустой. Выберите напиток.",
     "emptyToast": "Сначала выберите напиток",
     "vars": {
-      "deep": "#0F2E26",
-      "glow": "#B8862F",
-      "glow2": "#2E7D64",
-      "sky": "#E3EEE8",
-      "ok": "#B8862F"
+      "milk": "#F7F2EA",
+      "c-surface": "#F7F2EA"
+    },
+    "heroTitle": "Кофе, ради которого стоит выйти",
+    "designPages": [
+      "index.html",
+      "design-2.html"
+    ],
+    "designNames": [
+      "Кино",
+      "Классический"
+    ],
+    "pageExtra": {
+      "design-2.html": {
+        "vars": {
+          "deep": "#0F2E26",
+          "glow": "#B8862F",
+          "glow2": "#2E7D64",
+          "sky": "#E3EEE8",
+          "ok": "#B8862F",
+          "bg": "#F5F7F4",
+          "text": "#10201B"
+        },
+        "fonts": {
+          "head": "Prata",
+          "body": "Golos Text"
+        },
+        "orderTitle": "Заказать заранее"
+      }
     }
   }
 };
