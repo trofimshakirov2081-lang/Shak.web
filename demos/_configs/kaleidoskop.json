@@ -1,0 +1,68 @@
+{
+  "slug": "kaleidoskop",
+  "name": "Калейдоскоп+",
+  "niche": "tury",
+  "city": "Набережные Челны",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/kaleidoskop/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Калейдоскоп+: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Семейный тур выходного дня",
+      "price": 9000,
+      "desc": "2 дня, дети и взрослые",
+      "photo": "files/kaleidoskop/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Экскурсия по Татарстану",
+      "price": 3500,
+      "desc": "Целый день, автобус и гид",
+      "photo": "files/kaleidoskop/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Детский лагерь на каникулы",
+      "price": 25000,
+      "desc": "Смена с программой",
+      "photo": "files/kaleidoskop/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 999 155-09-71",
+    "whatsapp": "79991550971",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Набережные Челны",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://kaleidoskop-tur.orgs.biz/",
+  "contact_lead": "em:kaleidoskop-fest@mail.ru"
+}
