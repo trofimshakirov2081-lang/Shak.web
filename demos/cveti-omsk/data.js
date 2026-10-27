@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cveti-omsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cveti-omsk",
-  "rev": "2026-10-26T18:50:19.607Z",
+  "rev": "2026-10-27T03:10:23.547Z",
   "brand": {
     "name": "ЦветИ",
     "tagline": "Цветы в Омске",

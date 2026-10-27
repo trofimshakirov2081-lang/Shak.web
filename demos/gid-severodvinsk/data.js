@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/gid-severodvinsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-gid-severodvinsk",
-  "rev": "2026-10-26T18:50:19.990Z",
+  "rev": "2026-10-27T03:10:26.936Z",
   "brand": {
     "name": "Гид по Северодвинску",
     "tagline": "Туры и экскурсии",

@@ -30,7 +30,7 @@ async function record(job, outDir) {
   };
   const centerOf = async loc => { const r = await loc.evaluate(e => { const b = e.getBoundingClientRect(); return b.top + scrollY + b.height / 2; }); return r - 844 * .55; };
 
-  await hold(1.8);
+  await hold(job.intro || 1.8);
   for (const [sel, kind, arg] of job.steps || []) {
     const loc = p.locator(sel).nth(kind === "click" ? arg : 0);
     if (!(await loc.count())) { console.warn("  нет элемента", sel); continue; }

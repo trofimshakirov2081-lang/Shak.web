@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetik-kofe.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetik-kofe",
-  "rev": "2026-10-26T18:50:19.617Z",
+  "rev": "2026-10-27T03:10:23.605Z",
   "brand": {
     "name": "Цветик Кофе",
     "tagline": "Кофе",

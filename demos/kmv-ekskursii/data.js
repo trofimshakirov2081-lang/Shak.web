@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kmv-ekskursii.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kmv-ekskursii",
-  "rev": "2026-10-26T18:50:20.141Z",
+  "rev": "2026-10-27T03:10:27.541Z",
   "brand": {
     "name": "Экскурсии КМВ",
     "tagline": "Туры и экскурсии",

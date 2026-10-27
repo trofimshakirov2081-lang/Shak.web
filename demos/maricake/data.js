@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/maricake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-maricake",
-  "rev": "2026-10-26T18:50:20.475Z",
+  "rev": "2026-10-27T03:10:29.713Z",
   "brand": {
     "name": "Марикейк",
     "tagline": "Десерты на заказ",

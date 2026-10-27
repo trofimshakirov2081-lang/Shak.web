@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/chetyre-sezona.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-chetyre-sezona",
-  "rev": "2026-10-26T18:50:19.554Z",
+  "rev": "2026-10-27T03:10:22.881Z",
   "brand": {
     "name": "Четыре сезона",
     "tagline": "Загородный отдых",

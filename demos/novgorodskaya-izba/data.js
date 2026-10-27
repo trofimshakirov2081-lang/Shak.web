@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/novgorodskaya-izba.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-novgorodskaya-izba",
-  "rev": "2026-10-26T18:50:20.662Z",
+  "rev": "2026-10-27T03:10:30.676Z",
   "brand": {
     "name": "Новгородская Изба",
     "tagline": "Строительство домов",

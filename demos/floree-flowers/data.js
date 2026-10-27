@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/floree-flowers.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-floree-flowers",
-  "rev": "2026-10-26T18:50:19.902Z",
+  "rev": "2026-10-27T03:10:26.333Z",
   "brand": {
     "name": "Floree Flowers",
     "tagline": "Цветочная студия",

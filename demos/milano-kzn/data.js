@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/milano-kzn.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-milano-kzn",
-  "rev": "2026-10-26T18:50:20.553Z",
+  "rev": "2026-10-27T03:10:30.258Z",
   "brand": {
     "name": "Студия красоты Milano",
     "tagline": "Студия красоты",

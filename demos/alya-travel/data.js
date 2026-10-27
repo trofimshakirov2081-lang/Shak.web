@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/alya-travel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-alya-travel",
-  "rev": "2026-10-26T18:50:19.130Z",
+  "rev": "2026-10-27T03:10:14.205Z",
   "brand": {
     "name": "АляTravel",
     "tagline": "Туры и экскурсии",

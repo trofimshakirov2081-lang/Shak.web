@@ -1,8 +1,8 @@
 # Отчёт проверки сайтов
 
-Дата: 26.10.2026, 23:43:04 (Алматы)
+Дата: 27.10.2026, 08:29:32 (Алматы)
 
-Страниц: 545. Ошибок: 1. Замечаний: 48.
+Страниц: 548. Ошибок: 1. Замечаний: 48.
 Внешние ссылки: не проверялись (запустите с --external). Вид на телефоне (390px): проверен, скриншоты в reports/screens/.
 
 ## Проверенные страницы
@@ -213,6 +213,8 @@
 - ✅ demos/ideya-prazdnika/admin.html
 - ✅ demos/ideya-prazdnika/index.html
 - ✅ demos/index.html
+- ✅ demos/irina-macrame/admin.html
+- ✅ demos/irina-macrame/index.html
 - ✅ demos/irina-zhmak/admin.html
 - ✅ demos/irina-zhmak/index.html
 - ✅ demos/iz-cvetov/admin.html
@@ -527,6 +529,7 @@
 - ✅ demos/zimniy-karting/admin.html
 - ✅ demos/zimniy-karting/index.html
 - ✅ index.html
+- ✅ raboty/index.html
 - ✅ templates/konditerskaya/admin.html
 - ✅ templates/konditerskaya/index.html
 - ⚠️ templates/originals/brief/index.html

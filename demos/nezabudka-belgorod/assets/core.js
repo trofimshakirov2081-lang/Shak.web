@@ -69,6 +69,7 @@
   function money(n) { return S.money(n, data.currency); }
   function item(id) { return data.items.filter(function (i) { return i.id === id; })[0]; }
   function digits(s) { return String(s || "").replace(/\D/g, ""); }
+  function tg(text) { return "https://t.me/" + String(data.contacts.telegram || "").replace(/^@/, "") + (text ? "?text=" + encodeURIComponent(text) : ""); }
   function wa(text) { return "https://wa.me/" + digits(data.contacts.whatsapp) + (text ? "?text=" + encodeURIComponent(text) : ""); }
   function pic(i, cls) {
     return i.photo ? '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + esc(i.photo) + '" alt="' + esc(i.name) + '" loading="lazy">'
@@ -167,7 +168,12 @@
     else if (t.hasAttribute("data-next-design")) { var nx = PAGES[(PAGES.indexOf(PAGE) + 1) % PAGES.length]; try { localStorage.setItem(S.KEY + ":page", nx); } catch (e) {} location.href = nx; }
     else if (t.hasAttribute("data-order")) {
       if (!count()) { toast(x.emptyToast || "Сначала выберите позицию"); return; }
-      window.open(wa(orderText()), "_blank");
+      if (x.orderTo === "telegram" && data.contacts.telegram) {
+        // В Telegram текст подставляется в чат по ссылке, а на всякий случай ещё и копируется
+        var txt = orderText();
+        try { navigator.clipboard.writeText(txt); } catch (e) {}
+        window.open(tg(txt), "_blank");
+      } else window.open(wa(orderText()), "_blank");
     }
   });
 
@@ -205,7 +211,7 @@
   document.head.appendChild(spCss);
 
   window.Core = {
-    data: data, x: x, esc: esc, money: money, item: item, pic: pic, wa: wa, contacts: contacts, toast: toast,
+    data: data, x: x, esc: esc, money: money, item: item, pic: pic, wa: wa, tg: tg, contacts: contacts, toast: toast,
     mount: function (html) {
       document.title = data.brand.name + (data.brand.tagline ? " | " + data.brand.tagline : "");
       document.getElementById("app").innerHTML = demoBar() + html + drawer();

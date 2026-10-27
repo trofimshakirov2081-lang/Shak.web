@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/mademoiselle-zefirka.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-mademoiselle-zefirka",
-  "rev": "2026-10-26T18:50:20.402Z",
+  "rev": "2026-10-27T03:10:29.454Z",
   "brand": {
     "name": "Мадмуазель Зефирка",
     "tagline": "Десерты на заказ",

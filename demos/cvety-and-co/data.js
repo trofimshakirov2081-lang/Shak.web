@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvety-and-co.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvety-and-co",
-  "rev": "2026-10-26T18:50:19.668Z",
+  "rev": "2026-10-27T03:10:24.159Z",
   "brand": {
     "name": "Цветы & Co",
     "tagline": "Цветы с доставкой",

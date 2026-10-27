@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/aviant-spb.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-aviant-spb",
-  "rev": "2026-10-26T18:50:19.224Z",
+  "rev": "2026-10-27T03:10:17.278Z",
   "brand": {
     "name": "Aviant",
     "tagline": "Прогулки на воде",

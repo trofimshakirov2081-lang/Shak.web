@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/anna-esman.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-anna-esman",
-  "rev": "2026-10-26T18:50:19.150Z",
+  "rev": "2026-10-27T03:10:15.043Z",
   "brand": {
     "name": "Anna Esman",
     "tagline": "Студия красоты",

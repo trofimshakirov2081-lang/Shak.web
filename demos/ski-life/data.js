@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ski-life.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ski-life",
-  "rev": "2026-10-26T18:50:21.000Z",
+  "rev": "2026-10-27T03:10:31.986Z",
   "brand": {
     "name": "SKI-LIFE",
     "tagline": "Горнолыжная школа",

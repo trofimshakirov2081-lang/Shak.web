@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvety-ferzikovo.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvety-ferzikovo",
-  "rev": "2026-10-26T18:50:19.679Z",
+  "rev": "2026-10-27T03:10:24.203Z",
   "brand": {
     "name": "Цветы Ферзиково",
     "tagline": "Цветы с доставкой",

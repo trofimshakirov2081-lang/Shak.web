@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vels-dzerzhinsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vels-dzerzhinsk",
-  "rev": "2026-10-26T18:50:21.318Z",
+  "rev": "2026-10-27T03:10:32.660Z",
   "brand": {
     "name": "Велс",
     "tagline": "Шинный центр",

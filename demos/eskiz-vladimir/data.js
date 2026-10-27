@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/eskiz-vladimir.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-eskiz-vladimir",
-  "rev": "2026-10-26T18:50:19.858Z",
+  "rev": "2026-10-27T03:10:25.813Z",
   "brand": {
     "name": "Эскиз",
     "tagline": "Мебель на заказ",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/oranzhevoe-leto.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-oranzhevoe-leto",
-  "rev": "2026-10-26T18:50:20.693Z",
+  "rev": "2026-10-27T03:10:30.811Z",
   "brand": {
     "name": "Оранжевое лето",
     "tagline": "Загородный отдых",

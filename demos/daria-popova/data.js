@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/daria-popova.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-daria-popova",
-  "rev": "2026-10-26T18:50:19.730Z",
+  "rev": "2026-10-27T03:10:24.394Z",
   "brand": {
     "name": "Daria Popova",
     "tagline": "Десерты на заказ",

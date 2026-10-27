@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zefirnaya-ledi.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zefirnaya-ledi",
-  "rev": "2026-10-26T18:50:21.538Z",
+  "rev": "2026-10-27T03:10:33.835Z",
   "brand": {
     "name": "Зефирная Леди",
     "tagline": "Десерты на заказ",

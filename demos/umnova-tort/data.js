@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/umnova-tort.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-umnova-tort",
-  "rev": "2026-10-26T18:50:21.305Z",
+  "rev": "2026-10-27T03:10:32.627Z",
   "brand": {
     "name": "Торты Ольги Умновой",
     "tagline": "Десерты на заказ",

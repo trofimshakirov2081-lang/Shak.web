@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dusha-altaya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dusha-altaya",
-  "rev": "2026-10-26T18:50:19.805Z",
+  "rev": "2026-10-27T03:10:25.117Z",
   "brand": {
     "name": "Душа Алтая",
     "tagline": "Туры и экскурсии",

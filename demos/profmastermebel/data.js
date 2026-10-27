@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/profmastermebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-profmastermebel",
-  "rev": "2026-10-26T18:50:20.833Z",
+  "rev": "2026-10-27T03:10:31.667Z",
   "brand": {
     "name": "ПрофМастерМебель",
     "tagline": "Мебель на заказ",

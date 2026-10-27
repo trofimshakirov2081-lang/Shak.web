@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/lipovoe.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-lipovoe",
-  "rev": "2026-10-26T18:50:20.368Z",
+  "rev": "2026-10-27T03:10:29.217Z",
   "brand": {
     "name": "Липовое",
     "tagline": "Загородный отдых",

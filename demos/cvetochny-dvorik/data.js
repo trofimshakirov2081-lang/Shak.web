@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetochny-dvorik.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetochny-dvorik",
-  "rev": "2026-10-26T18:50:19.659Z",
+  "rev": "2026-10-27T03:10:23.781Z",
   "brand": {
     "name": "Цветочный Дворик",
     "tagline": "Цветы в Орске",

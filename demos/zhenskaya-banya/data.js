@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/zhenskaya-banya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-zhenskaya-banya",
-  "rev": "2026-10-26T18:50:21.569Z",
+  "rev": "2026-10-27T03:10:33.880Z",
   "brand": {
     "name": "Мягкая женская баня",
     "tagline": "Баня",

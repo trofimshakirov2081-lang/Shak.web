@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/buketoliya.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-buketoliya",
-  "rev": "2026-10-26T18:50:19.449Z",
+  "rev": "2026-10-27T03:10:20.092Z",
   "brand": {
     "name": "Букетолия",
     "tagline": "Авторские букеты в Краснодаре",

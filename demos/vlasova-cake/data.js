@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/vlasova-cake.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-vlasova-cake",
-  "rev": "2026-10-26T18:50:21.361Z",
+  "rev": "2026-10-27T03:10:32.939Z",
   "brand": {
     "name": "Торты Ксении Власовой",
     "tagline": "Десерты на заказ",

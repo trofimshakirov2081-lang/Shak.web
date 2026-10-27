@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/baccara-chel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-baccara-chel",
-  "rev": "2026-10-26T18:50:19.245Z",
+  "rev": "2026-10-27T03:10:17.346Z",
   "brand": {
     "name": "Мини-отель «Баккара»",
     "tagline": "Гостиница",

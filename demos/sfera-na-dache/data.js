@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sfera-na-dache.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sfera-na-dache",
-  "rev": "2026-10-26T18:50:20.957Z",
+  "rev": "2026-10-27T03:10:31.916Z",
   "brand": {
     "name": "Сфера на даче",
     "tagline": "Загородный отдых",

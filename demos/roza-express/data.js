@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/roza-express.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-roza-express",
-  "rev": "2026-10-26T18:50:20.913Z",
+  "rev": "2026-10-27T03:10:31.833Z",
   "brand": {
     "name": "Roza-express",
     "tagline": "Цветы с доставкой",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/domotsvet.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-domotsvet",
-  "rev": "2026-10-26T18:50:19.783Z",
+  "rev": "2026-10-27T03:10:24.762Z",
   "brand": {
     "name": "Домоцвет",
     "tagline": "Цветы с доставкой",

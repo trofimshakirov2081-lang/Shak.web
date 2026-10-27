@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/dagestan-dreams.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-dagestan-dreams",
-  "rev": "2026-10-26T18:50:19.697Z",
+  "rev": "2026-10-27T03:10:24.228Z",
   "brand": {
     "name": "Dagestan Dreams",
     "tagline": "Туры и экскурсии",

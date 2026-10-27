@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/sladosti-po-lyubvi.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-sladosti-po-lyubvi",
-  "rev": "2026-10-26T18:50:21.032Z",
+  "rev": "2026-10-27T03:10:32.046Z",
   "brand": {
     "name": "Сладости по любви",
     "tagline": "Десерты на заказ",

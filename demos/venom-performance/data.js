@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/venom-performance.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-venom-performance",
-  "rev": "2026-10-26T18:50:21.325Z",
+  "rev": "2026-10-27T03:10:32.676Z",
   "brand": {
     "name": "Venom Performance",
     "tagline": "Тюнинг и сервис",

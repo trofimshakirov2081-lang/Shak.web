@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kunashir-travel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kunashir-travel",
-  "rev": "2026-10-26T18:50:20.285Z",
+  "rev": "2026-10-27T03:10:28.868Z",
   "brand": {
     "name": "Kunashir Travel",
     "tagline": "Туры и экскурсии",

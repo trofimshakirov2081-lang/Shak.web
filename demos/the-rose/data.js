@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/the-rose.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-the-rose",
-  "rev": "2026-10-26T18:50:21.139Z",
+  "rev": "2026-10-27T03:10:32.294Z",
   "brand": {
     "name": "The Rose",
     "tagline": "Цветочная студия",

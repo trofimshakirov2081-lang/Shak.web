@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/elena-konditer.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-elena-konditer",
-  "rev": "2026-10-26T18:50:19.823Z",
+  "rev": "2026-10-27T03:10:25.492Z",
   "brand": {
     "name": "Елена Суворова",
     "tagline": "Торты на заказ в Сургуте",

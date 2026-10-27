@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/beauty-lab-nsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-beauty-lab-nsk",
-  "rev": "2026-10-26T18:50:19.333Z",
+  "rev": "2026-10-27T03:10:17.663Z",
   "brand": {
     "name": "Лаборатория красоты BEAUTY",
     "tagline": "Студия красоты",

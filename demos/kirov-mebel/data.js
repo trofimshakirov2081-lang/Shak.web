@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/kirov-mebel.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-kirov-mebel",
-  "rev": "2026-10-26T18:50:20.120Z",
+  "rev": "2026-10-27T03:10:27.509Z",
   "brand": {
     "name": "Киров Мебель",
     "tagline": "Мебель на заказ",

@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/perfekto.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-perfekto",
-  "rev": "2026-10-26T18:50:20.714Z",
+  "rev": "2026-10-27T03:10:30.847Z",
   "brand": {
     "name": "PERFEKTO",
     "tagline": "Мебель на заказ",

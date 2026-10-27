@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/torty-eleny-tmn.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-torty-eleny-tmn",
-  "rev": "2026-10-26T18:50:21.202Z",
+  "rev": "2026-10-27T03:10:32.411Z",
   "brand": {
     "name": "Торты Елены",
     "tagline": "Десерты на заказ",

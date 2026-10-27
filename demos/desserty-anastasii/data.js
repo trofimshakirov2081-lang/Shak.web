@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/desserty-anastasii.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-desserty-anastasii",
-  "rev": "2026-10-26T18:50:19.753Z",
+  "rev": "2026-10-27T03:10:24.509Z",
   "brand": {
     "name": "Десерты от Анастасии",
     "tagline": "Десерты на заказ",

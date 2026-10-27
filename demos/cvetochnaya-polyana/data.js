@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetochnaya-polyana.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetochnaya-polyana",
-  "rev": "2026-10-26T18:50:19.634Z",
+  "rev": "2026-10-27T03:10:23.712Z",
   "brand": {
     "name": "Цветочная Поляна",
     "tagline": "Цветы с доставкой",

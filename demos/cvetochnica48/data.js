@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/cvetochnica48.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-cvetochnica48",
-  "rev": "2026-10-26T18:50:19.644Z",
+  "rev": "2026-10-27T03:10:23.726Z",
   "brand": {
     "name": "Цветочница 48",
     "tagline": "Цветы с доставкой",

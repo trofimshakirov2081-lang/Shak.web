@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/flower-corner.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-flower-corner",
-  "rev": "2026-10-26T18:50:19.930Z",
+  "rev": "2026-10-27T03:10:26.368Z",
   "brand": {
     "name": "Flower Corner",
     "tagline": "Цветочная студия",

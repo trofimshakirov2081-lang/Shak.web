@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/solnechnaya-volzhsky.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-solnechnaya-volzhsky",
-  "rev": "2026-10-26T18:50:21.040Z",
+  "rev": "2026-10-27T03:10:32.072Z",
   "brand": {
     "name": "Гостиница «Солнечная»",
     "tagline": "Гостиница",

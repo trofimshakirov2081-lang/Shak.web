@@ -172,6 +172,9 @@ function build(cfgPath) {
   site.design = 0;
   if (cfg.credits) site.credits = cfg.credits;
   if (cfg.extra) site.extra = cfg.extra;
+  // Картинки в extra (например, фото «о мастере»): пути files/... копируются в img/ демо
+  if (site.extra) for (const [k, v] of Object.entries(site.extra))
+    if (typeof v === "string" && v.startsWith("files/")) site.extra = { ...site.extra, [k]: asset(v, cfgDir, outDir, "x-" + k) };
   // Запасные дизайны: alt: [{ custom: "<папка>", name, extra }] станут design-2.html, design-3.html...
   const alt = Array.isArray(cfg.alt) ? cfg.alt : [];
   const pages = ["index.html"].concat(alt.map((a, n) => `design-${n + 2}.html`));
