@@ -963,7 +963,7 @@ function priceHTML(){
   if(A.logo.some(l => /создать|обновить|знак|вариант/i.test(l))) nego.push('логотип');
   if(A.texts.some(t => /копирайтер|SEO/i.test(t))) nego.push('тексты');
   return `<div class="price-box">
-    <div class="pr-row"><div><small>Сайт под ключ</small><b>${rub(full - PRICE.briefOff)}</b> <s>${rub(full)}</s></div><div><small>Срок</small><b>7-10 рабочих дней</b></div></div>
+    <div class="pr-row"><div><small>Сайт под ключ</small><b>${rub(full - PRICE.briefOff)}</b> <s>${rub(full)}</s></div><div><small>Срок</small><b>7-14 дней</b></div></div>
     <p>Скидка ${rub(PRICE.briefOff)} за пройденный бриф уже учтена. Всё в одном пакете: дизайн, админка, заявки в Telegram, запуск и настройка.${nego.length ? ' Отдельно, по договорённости: ' + esc(nego.join(', ')) + '.' : ''}</p>
     <details class="pr-more"><summary>Цены, скидки и что значит «полное ТЗ и брендбук»</summary>
       <h4>Цена</h4><ul>
@@ -1034,7 +1034,7 @@ function buildText(){
     + `\n\n■ СТРУКТУРА ЛЕНДИНГА\n` + (blockList().map((b,i)=>`${i+1}. ${b.name}`).join('\n') || '-') + (A.blocksExtra ? `\n+ ${A.blocksExtra}` : '')
     + sect('Функции и контент', D.features())
     + sect('Сроки и пожелания', D.terms())
-    + `\n\n■ ОРИЕНТИР ПО ЦЕНЕ\n${rub(PRICE.dev + PRICE.setup - PRICE.briefOff)} со скидкой за бриф, 7-10 рабочих дней`;
+    + `\n\n■ ОРИЕНТИР ПО ЦЕНЕ\n${rub(PRICE.dev + PRICE.setup - PRICE.briefOff)} со скидкой за бриф, 7-14 дней`;
 }
 
 /* =====================================================================
