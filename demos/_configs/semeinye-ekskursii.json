@@ -1,0 +1,75 @@
+{
+  "slug": "semeinye-ekskursii",
+  "name": "Семейные экскурсии",
+  "niche": "tury",
+  "city": "Самара",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/semeinye-ekskursii/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Семейные экскурсии: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Музей авиации и космонавтики",
+      "price": 500,
+      "desc": "Тематическая экскурсия в Музей авиации и космонавтики им.…",
+      "photo": "files/semeinye-ekskursii/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Музей ЖД техники",
+      "price": 250,
+      "desc": "Поволжский музей железнодорожной техники Куйбышевской…",
+      "photo": "files/semeinye-ekskursii/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Археологический центр",
+      "price": 670,
+      "desc": "Экскурсия по экспозиции музея \"Лицом к лицу\" и…",
+      "photo": "files/semeinye-ekskursii/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Музей МЧС",
+      "price": 300,
+      "desc": "Музейно-выставочный центр истории и развития…",
+      "photo": "files/semeinye-ekskursii/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 964 985-42-63",
+    "whatsapp": "79649854263",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Самара",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://family-excursions.orgs.biz/",
+  "contact_lead": "em:razvitievradost@yandex.ru"
+}

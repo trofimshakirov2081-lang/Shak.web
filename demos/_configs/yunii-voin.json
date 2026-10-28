@@ -1,0 +1,67 @@
+{
+  "slug": "yunii-voin",
+  "name": "Юный Воин",
+  "niche": "sport",
+  "city": "Мытищи",
+  "custom": "start",
+  "tagline": "Спортивный клуб",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Сильные дети и уверенные взрослые",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/yunii-voin/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Юный Воин: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Дети 4-6 лет",
+      "price": 4500,
+      "desc": "Игровая форма",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Дети 7-12 лет",
+      "price": 5000,
+      "desc": "Техника и соревнования",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Взрослые",
+      "price": 5500,
+      "desc": "С нуля",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 916 611-30-50",
+    "whatsapp": "79166113050",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://yunii-voin.orgs.biz/",
+  "contact_lead": "em:info@yunii-voin.ru"
+}

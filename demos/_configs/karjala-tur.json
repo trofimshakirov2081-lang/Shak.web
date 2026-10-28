@@ -1,0 +1,75 @@
+{
+  "slug": "karjala-tur",
+  "name": "KARJALA ТУР",
+  "niche": "tury",
+  "city": "Петрозаводск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/karjala-tur/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "KARJALA ТУР: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "КАРЕЛЬСКИЕ ДЕРЕВНИ",
+      "price": 6000,
+      "desc": "🚌 🥾АВТОБУСНО -ПЕШЕХОДНАЯ ЭКСКУРСИЯ 🌲Окунитесь в быт…",
+      "photo": "files/karjala-tur/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "ПЕТРОЗАВОДСК + ЧЕРТОВ СТУЛ",
+      "price": 6000,
+      "desc": "🚌 🥾АВТОБУСНО -ПЕШЕХОДНАЯ ЭКСКУРСИЯ «ПЕТРОЗАВОДСК + ЧЕРТОВ…",
+      "photo": "files/karjala-tur/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "РУСКЕАЛА ПАРК",
+      "price": 9000,
+      "desc": "🚌🥾АВТОБУСНО -ПЕШЕХОДНАЯ ЭКСКУРСИЯ «ГОРНЫЙ ПАРК РУСКЕАЛА»…",
+      "photo": "files/karjala-tur/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "КАРЕЛИЯ ЗА 1 ДЕНЬ",
+      "price": 9000,
+      "desc": "🥾🚍АВТОБУСНО-ПЕШЕХОДНАЯ ЭКСКУРСИЯ «КАРЕЛИЯ ЗА 1 ДЕНЬ»…",
+      "photo": "files/karjala-tur/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 999 652-34-54",
+    "whatsapp": "79996523454",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Петрозаводск",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://karjalasgidom.orgs.biz/",
+  "contact_lead": "em:karjala.s.gidom@gmail.com"
+}

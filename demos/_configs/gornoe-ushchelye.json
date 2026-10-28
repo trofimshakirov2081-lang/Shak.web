@@ -1,0 +1,77 @@
+{
+  "slug": "gornoe-ushchelye",
+  "name": "Горное Ущелье",
+  "niche": "otdyh",
+  "city": "Сочи",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#1E3A4C",
+    "accent": "#E0A458",
+    "bg": "#EEF1F0",
+    "text": "#14232D"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Остановиться с комфортом",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/gornoe-ushchelye/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Горное Ущелье в Сочи: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Стандарт",
+      "price": 3500,
+      "desc": "2 гостя, завтрак включён",
+      "photo": "files/gornoe-ushchelye/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Комфорт",
+      "price": 4500,
+      "desc": "2-3 гостя, большая кровать",
+      "photo": "files/gornoe-ushchelye/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Семейный номер",
+      "price": 6500,
+      "desc": "До 4 гостей, две комнаты",
+      "photo": "files/gornoe-ushchelye/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Люкс",
+      "price": 8500,
+      "desc": "Гостиная и вид из окна",
+      "photo": "files/gornoe-ushchelye/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 952 810-08-25",
+    "whatsapp": "79528100825",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#A9C4CF",
+      "paper": "#FAFBFA"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://hotelgu.orgs.biz/",
+  "contact_lead": "em:gornoe.u@mail.ru"
+}

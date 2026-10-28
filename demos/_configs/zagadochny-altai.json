@@ -1,0 +1,68 @@
+{
+  "slug": "zagadochny-altai",
+  "name": "Загадочный Алтай",
+  "niche": "tury",
+  "city": "Томск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/zagadochny-altai/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Загадочный Алтай: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "с 17сентября по 25 сентября - тур \"ЗОЛОТО И",
+      "price": 35500,
+      "desc": "С 17 СЕНТЯБРЯ ПО 25 СЕНТЯБРЯ 17 СЕНТЯБРЯ встречаем наших…",
+      "photo": "files/zagadochny-altai/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "с 27 августа по 4 сентября - ЗОЛОТОЙ КРАЙ -",
+      "price": 35500,
+      "desc": "С 27 АВГУСТА ПО 4 СЕНТЯБРЯ 27 августа встречаем наших…",
+      "photo": "files/zagadochny-altai/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "С 14 августа по 22 августа - тур",
+      "price": 35500,
+      "desc": "С 14 АВГУСТА ПО 22 АВГУСТА 14 АВГУСТА встречаем наших…",
+      "photo": "files/zagadochny-altai/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 952 803-27-52",
+    "whatsapp": "79528032752",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Томск",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://turaltai2017.orgs.biz/",
+  "contact_lead": "em:onis2015beresta@mail.ru"
+}

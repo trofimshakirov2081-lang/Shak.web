@@ -1,0 +1,68 @@
+{
+  "slug": "exburo1",
+  "name": "Экскурсионное бюро №1",
+  "niche": "tury",
+  "city": "Великий Новгород",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/exburo1/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Экскурсионное бюро №1: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Тур выходного дня",
+      "price": 15000,
+      "desc": "2 дня, транспорт и гид",
+      "photo": "files/exburo1/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Однодневная экскурсия",
+      "price": 4500,
+      "desc": "Целый день, обед включён",
+      "photo": "files/exburo1/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Авторский тур",
+      "price": 45000,
+      "desc": "5 дней, малая группа",
+      "photo": "files/exburo1/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 024-61-24",
+    "whatsapp": "79210246124",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Великий Новгород",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://exburo1.orgs.biz/",
+  "contact_lead": "em:elysiontravel@yandex.ru"
+}

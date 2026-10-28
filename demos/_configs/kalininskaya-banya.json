@@ -1,0 +1,67 @@
+{
+  "slug": "kalininskaya-banya",
+  "name": "Калининская баня",
+  "niche": "banya",
+  "city": "Ярославль",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Парная, купель и тишина",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/kalininskaya-banya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Калининская баня: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Русская баня на дровах",
+      "price": 2000,
+      "desc": "До 8 человек, купель",
+      "photo": "files/kalininskaya-banya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Финская сауна",
+      "price": 1700,
+      "desc": "До 6 человек",
+      "photo": "files/kalininskaya-banya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Большой зал",
+      "price": 3500,
+      "desc": "До 15 человек, бассейн и караоке",
+      "photo": "files/kalininskaya-banya/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 920 657-06-55",
+    "whatsapp": "79206570655",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club209966257.orgs.biz/",
+  "contact_lead": "em:agorjachev@ya.ru"
+}
