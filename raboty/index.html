@@ -52,8 +52,15 @@
     .row { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: none; }
     .row::-webkit-scrollbar { display: none; }
     .work { flex: 0 0 74%; scroll-snap-align: center; }
+    .work.wide { flex-basis: 100%; }
   }
   .work { min-width: 0; }
+  .work.wide { grid-column: 1 / -1; max-width: 980px; }
+  .laptop { padding: 0 4%; }
+  .laptop .scr { aspect-ratio: 16 / 10; border-radius: 16px 16px 4px 4px; padding: 1.6% 1.6% 2.2%; background: var(--ink); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 30px 50px -30px rgba(22,24,29,.55); }
+  .laptop video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; background: #0E0B09; }
+  .laptop .base { height: 14px; margin: 0 -4%; border-radius: 0 0 14px 14px; background: linear-gradient(#cfd2d8, #9a9ea7); position: relative; }
+  .laptop .base::before { content: ""; position: absolute; left: 50%; top: 0; width: 16%; height: 5px; transform: translateX(-50%); border-radius: 0 0 6px 6px; background: #8a8e96; }
   .phone { position: relative; aspect-ratio: 390 / 844; border-radius: 30px; padding: 7px; background: var(--ink); box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 24px 40px -24px rgba(22,24,29,.5); }
   .phone video, .phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 24px; background: #2a2c31; }
   .work h3 { margin: 16px 0 2px; font: 700 18px/1.3 "Ysabeau Office", sans-serif; }
@@ -84,7 +91,7 @@
 <main>
   <div class="wrap intro">
     <h1>Сайты, разные <i>как сами бизнесы</i></h1>
-    <p>Видео сняты с экрана телефона: так сайт увидит ваш клиент. В каждом есть <b>админка</b>, цены, фото и тексты владелец меняет сам.</p>
+    <p>Видео сняты прямо с экрана: так сайт увидит ваш клиент. В каждом есть <b>админка</b>, цены, фото и тексты владелец меняет сам.</p>
   </div>
   <div class="wrap jump" id="jump"></div>
   <div id="styles"></div>
@@ -106,6 +113,11 @@
 
 <script>
 var STYLES = [
+  { id: "kino", name: "Кинематографичные", wide: true, sw: ["#0E0B09", "#C27A45", "#FF7A2E", "#EFE3D3"],
+    text: "Сайт как трейлер: прокрутка запускает анимацию. Заголовок разлетается, предмет поворачивается и меняется, витрина едет вбок. Для брендов, которым важно впечатление с первой секунды.",
+    works: [
+      ["med-obzharka", "Медь", "Обжарка кофе, концепт", "Листаете, и зерно прожаривается на глазах: темнеет, температура растёт от 165 до 228 градусов, этапы обжарки переключаются."]
+    ] },
   { id: "strogie", name: "Строгие и лаконичные", sw: ["#EDE6DA", "#1C1410", "#3D5A80", "#F2F0EA"],
     text: "Много воздуха, крупный шрифт, ничего лишнего. Подходит кофейням, производству, архитектуре: всем, кто продаёт качество, а не скидки.",
     works: [
@@ -148,6 +160,8 @@ document.getElementById("styles").innerHTML = STYLES.map(function (s) {
     s.sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</div><p>" + e(s.text) + '</p></div><div class="row">' +
     s.works.map(function (w) {
       var url = "../demos/" + w[0] + "/";
+      if (s.wide) return '<article class="work wide"><div class="laptop"><div class="scr"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div><div class="base"></div></div>' +
+        "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
       return '<article class="work"><div class="phone"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div>' +
         "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
     }).join("") + "</div></section>";
