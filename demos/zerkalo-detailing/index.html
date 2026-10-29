@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru" data-fonts="Tektur|Finlandica">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚘</text></svg>">
+  <title>Зеркало | Детейлинг-студия</title>
+  <meta name="description" content="Зеркало, Казань. Полировка, керамика и защитная плёнка. Возвращаем машине глубину цвета и держим её под защитой до трёх лет.">
+  <meta property="og:title" content="Зеркало">
+  <meta property="og:description" content="Полировка, керамика и защитная плёнка. Возвращаем машине глубину цвета и держим её под защитой до трёх лет.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;800&family=Finlandica:wght@400;600&display=swap">
+  <style>
+    /* «Зеркало»: детейлинг. Заставка со счётчиком, название улетает в шапку со шлейфом, бегущие строки от скорости прокрутки,
+       процесс со сменой кадров шторками, «до / после» с бликом, карточки с наклоном */
+    :root { --bg: #07090D; --text: #E8ECF2; --main: #7FD4FF; --steel: #8A94A6; --brake: #FF3B3B; --c-radius: 12px; --c-surface: #0E1219; --v: 0; }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body.lock { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 800; margin: 0; line-height: .92; text-transform: uppercase; letter-spacing: -.01em; }
+    .wrap { width: min(1280px, 100% - 32px); margin: 0 auto; }
+    .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 10px; background: var(--text); color: #07090D; font: 800 15px var(--font-head); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; border: 0; cursor: pointer; }
+    .btn::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(127,212,255,.8), transparent); transform: skewX(-20deg); animation: shine 3.2s infinite; }
+    @keyframes shine { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+    .spot { position: fixed; inset: 0; pointer-events: none; z-index: 1; background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 30%), rgba(127,212,255,.07), transparent 60%); }
+
+    /* Заставка */
+    .pre { position: fixed; inset: 0; z-index: 90; background: #05070A; display: grid; place-items: center; }
+    .pre b { font: 800 clamp(80px, 18vw, 240px)/1 var(--font-head); color: var(--text); font-variant-numeric: tabular-nums; }
+    .pre i { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--main), #fff); box-shadow: 0 0 20px var(--main); }
+    .pre small { position: absolute; bottom: 24px; left: 24px; color: var(--steel); font: 500 13px var(--font-head); letter-spacing: .2em; }
+
+    .top { position: fixed; top: 0; left: 0; right: 0; z-index: 40; }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .top.solid { background: rgba(7,9,13,.7); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .logo { font: 800 20px/1 var(--font-head); letter-spacing: .06em; text-decoration: none; opacity: 0; }
+    .nav { display: flex; gap: 28px; font: 500 13px var(--font-head); text-transform: uppercase; letter-spacing: .12em; }
+    .nav a { text-decoration: none; color: var(--steel); } .nav a:hover { color: var(--text); }
+    .cart { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(232,236,242,.25); background: rgba(7,9,13,.4); color: inherit; border-radius: 10px; padding: 9px 14px; font: 600 13px var(--font-head); text-transform: uppercase; letter-spacing: .1em; cursor: pointer; }
+    .cart b { min-width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-size: 12px; background: rgba(232,236,242,.12); }
+    .cart b.has { background: var(--main); color: #07090D; }
+    @media (max-width: 800px) { .nav { display: none; } .hero .tag { top: calc(46% + 80px); letter-spacing: .25em; } }
+
+    /* Первый экран */
+    .hero { height: 260vh; position: relative; }
+    .hero .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .hero .ph { position: absolute; inset: 0; }
+    .hero .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .hero .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,13,.65), rgba(7,9,13,.1) 40%, rgba(7,9,13,.95)), radial-gradient(80% 60% at 50% 60%, transparent, rgba(7,9,13,.6)); }
+    .lights { position: absolute; inset: 0; pointer-events: none; }
+    .lights i { position: absolute; width: 22vw; height: 22vw; border-radius: 50%; background: radial-gradient(circle, rgba(127,212,255,.45), transparent 60%); mix-blend-mode: screen; opacity: 0; }
+    .title { position: absolute; left: 0; right: 0; top: 46%; text-align: center; font: 800 clamp(64px, 15vw, 250px)/.85 var(--font-head); letter-spacing: -.02em; white-space: nowrap; transform-origin: 50% 50%;
+      filter: drop-shadow(0 calc(var(--v) * 30px) 0 rgba(127,212,255,.18)) drop-shadow(0 calc(var(--v) * 60px) 0 rgba(127,212,255,.08)); }
+    .title span { display: inline-block; background: linear-gradient(180deg, #FFFFFF 10%, #AEB8C8 50%, #FFFFFF 52%, #6B7486 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .title .glare { position: absolute; inset: 0; display: block; background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,.95) 50%, transparent 58%); background-size: 300% 100%; background-position: -200% 0; -webkit-background-clip: text; background-clip: text; color: transparent; pointer-events: none; }
+    .hero .tag { position: absolute; left: 0; right: 0; top: calc(46% + clamp(70px, 14vw, 230px)); text-align: center; color: var(--steel); font: 500 clamp(12px, 1.2vw, 15px) var(--font-head); letter-spacing: .4em; text-transform: uppercase; }
+    .hero .sub { position: absolute; left: 0; right: 0; bottom: 7svh; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; padding: 0 16px; }
+    .hero .sub p { margin: 0; max-width: 560px; color: rgba(232,236,242,.8); font-size: clamp(16px, 1.6vw, 19px); }
+    .hero .second { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; padding: 0 16px; opacity: 0; }
+    .hero .second h2 { font-size: clamp(36px, 6.5vw, 100px); }
+    .hero .second h2 em { font-style: normal; color: var(--main); text-shadow: 0 0 40px rgba(127,212,255,.6); }
+
+    /* Бегущие строки */
+    .runs { padding: 7vh 0; overflow: hidden; border-block: 1px solid rgba(232,236,242,.08); }
+    .run { display: flex; white-space: nowrap; font: 800 clamp(44px, 7vw, 110px)/1.05 var(--font-head); text-transform: uppercase; will-change: transform; }
+    .run span { padding-right: .6em; }
+    .run span:nth-child(even) { color: transparent; -webkit-text-stroke: 1.5px rgba(232,236,242,.5); }
+    .run.r2 span:nth-child(odd) { color: var(--main); }
+
+    /* Процесс: сцена закреплена, кадры меняются шторками */
+    .proc { height: 460vh; position: relative; }
+    .proc .stage { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: 1fr 1.25fr; gap: 4vw; align-items: center; padding: 80px max(16px, 4vw) 40px; overflow: hidden; }
+    .proc .num { font: 800 clamp(90px, 13vw, 200px)/.8 var(--font-head); color: transparent; -webkit-text-stroke: 2px rgba(232,236,242,.35); display: flex; align-items: baseline; gap: 12px; }
+    .proc .num small { font-size: .22em; -webkit-text-stroke: 0; color: var(--steel); }
+    .proc h3 { font-size: clamp(32px, 4.2vw, 64px); margin: 26px 0 16px; min-height: 2em; }
+    .proc h3 .ch { display: inline-block; }
+    .proc p { margin: 0; max-width: 440px; color: rgba(232,236,242,.75); min-height: 5em; }
+    .prog { margin-top: 30px; height: 2px; background: rgba(232,236,242,.12); position: relative; max-width: 440px; }
+    .prog i { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(0); background: var(--main); box-shadow: 0 0 14px var(--main); }
+    .frames { position: relative; height: min(70svh, 640px); border-radius: 18px; overflow: hidden; }
+    .frames figure { position: absolute; inset: 0; margin: 0; }
+    .frames img { width: 100%; height: 100%; object-fit: cover; }
+    .frames .scan { position: absolute; left: 0; right: 0; height: 2px; background: var(--main); box-shadow: 0 0 24px 4px rgba(127,212,255,.7); top: 0; opacity: 0; }
+    @media (max-width: 800px) {
+      .proc .stage { grid-template-columns: 1fr; align-content: center; gap: 18px; padding-top: 76px; }
+      .frames { height: 40svh; order: -1; } .proc h3 { margin: 10px 0 8px; min-height: 0; } .proc p { min-height: 6.5em; font-size: 15px; } .proc .num { font-size: 70px; }
+    }
+
+    /* До / после */
+    .ba { height: 240vh; position: relative; }
+    .ba .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .ba .layer { position: absolute; inset: 0; }
+    .ba .layer img { width: 100%; height: 100%; object-fit: cover; }
+    .ba .before img { filter: grayscale(.7) brightness(.5) contrast(.75) blur(1px); }
+    .ba .before::after { content: ""; position: absolute; inset: 0; opacity: .55; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
+    .ba .after { clip-path: inset(0 100% 0 0); }
+    .ba .after img { filter: contrast(1.12) saturate(1.1) brightness(1.05); }
+    .ba .line { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: #fff; box-shadow: 0 0 30px 8px rgba(127,212,255,.6); }
+    .ba .line::before { content: ""; position: absolute; top: 0; bottom: 0; left: -180px; width: 180px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18)); }
+    .ba .lab { position: absolute; top: 90px; padding: 8px 14px; border-radius: 8px; background: rgba(7,9,13,.6); backdrop-filter: blur(8px); font: 600 13px var(--font-head); letter-spacing: .2em; text-transform: uppercase; }
+    .ba .l1 { right: 24px; } .ba .l2 { left: 24px; }
+    .ba .meter { position: absolute; left: 0; right: 0; bottom: 8svh; text-align: center; }
+    .ba .meter b { font: 800 clamp(70px, 12vw, 180px)/.9 var(--font-head); font-variant-numeric: tabular-nums; text-shadow: 0 0 40px rgba(127,212,255,.4); }
+    .ba .meter b em { font-style: normal; }
+    .ba .meter .ml { display: block; color: var(--steel); font: 500 14px var(--font-head); letter-spacing: .3em; text-transform: uppercase; }
+
+    /* Услуги */
+    .svc { padding: 16vh 0 10vh; }
+    .svc .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 44px; flex-wrap: wrap; }
+    .svc h2 { font-size: clamp(44px, 7vw, 110px); }
+    .svc .head p { max-width: 360px; margin: 0; color: rgba(232,236,242,.7); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; perspective: 1200px; }
+    .card { position: relative; border-radius: 16px; overflow: hidden; background: #0E1219; border: 1px solid rgba(232,236,242,.08); transform-style: preserve-3d; transition: transform .15s; }
+    .card .pic { aspect-ratio: 4/3; overflow: hidden; } .card .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+    .card:hover .pic img { transform: scale(1.06); }
+    .card .noimg { display: grid; place-items: center; height: 100%; font-size: 60px; }
+    .card .body { padding: 18px 20px 20px; }
+    .card h3 { font-size: 22px; line-height: 1.05; margin-bottom: 8px; }
+    .card small { color: rgba(232,236,242,.65); font-size: 15px; }
+    .card .row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+    .card .price { font: 800 20px var(--font-head); color: var(--main); }
+    .card .add { height: 42px; padding: 0 16px; border-radius: 10px; border: 1px solid rgba(232,236,242,.25); background: none; color: var(--text); font: 600 13px var(--font-head); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+    .card .add:hover { background: var(--main); color: #07090D; border-color: var(--main); }
+    .card .gl { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(400px circle at var(--gx, 50%) var(--gy, 0%), rgba(127,212,255,.16), transparent 50%); opacity: 0; transition: opacity .3s; }
+    .card:hover .gl { opacity: 1; }
+    .card .tag { position: absolute; top: 12px; left: 12px; padding: 4px 10px; border-radius: 6px; background: var(--brake); font: 600 11px var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
+
+    /* Цифры */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 8vh 0 14vh; }
+    .stats div { border-top: 1px solid rgba(232,236,242,.15); padding-top: 20px; }
+    .stats b { display: block; font: 800 clamp(54px, 7vw, 100px)/1 var(--font-head); font-variant-numeric: tabular-nums; }
+    .stats span { color: var(--steel); }
+    @media (max-width: 700px) { .stats { grid-template-columns: 1fr; } }
+
+    /* Финал */
+    .final { position: relative; min-height: 100svh; display: grid; align-items: center; overflow: hidden; text-align: center; }
+    .final img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
+    .final::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--bg), rgba(7,9,13,.3) 45%, var(--bg)); }
+    .final .wrap { position: relative; z-index: 1; }
+    .final h2 { font-size: clamp(50px, 10vw, 170px); background: linear-gradient(100deg, #6B7486 0%, #fff 30%, #7FD4FF 50%, #fff 70%, #6B7486 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .rows { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 44px; margin: 34px 0; }
+    .rows small { display: block; color: var(--steel); font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+    .rows a, .rows div { text-decoration: none; }
+    footer { padding: 26px 0 40px; font-size: 13px; color: var(--steel); position: relative; z-index: 2; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body class="lock">
+  <div class="pre" id="pre"><b><span id="pc">0</span>%</b><i id="pb"></i><small>ПОДГОТОВКА К ПОЛИРОВКЕ</small></div>
+  <div class="spot"></div>
+  <div id="app"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var name = X.bigWord || D.brand.name;
+    var chars = name.split("").map(function (c) { return "<span>" + e(c) + "</span>"; }).join("");
+    var steps = X.steps || [];
+    var frames = steps.map(function (s, i) { var ph = X["s" + (i + 1)]; return '<figure data-f="' + i + '">' + (ph ? '<img src="' + e(ph) + '" alt="">' : '') + '</figure>'; }).join("");
+    var cards = D.items.map(function (i) {
+      return '<article class="card"><div class="pic">' + Core.pic(i) + '</div>' + (i.tag ? '<span class="tag">' + e(i.tag) + '</span>' : '') +
+        '<div class="body"><h3>' + e(i.name) + '</h3>' + (i.desc ? '<small>' + e(i.desc) + '</small>' : '') +
+        '<div class="row"><span class="price">' + (X.pricePrefix ? e(X.pricePrefix) + " " : "") + Core.money(i.price) + '</span><button class="add" data-add="' + e(i.id) + '">' + e(D.sections.addLabel || "Выбрать") + '</button></div></div><span class="gl"></span></article>';
+    }).join("");
+    var stats = (X.stats || []).map(function (s) { return '<div><b data-to="' + e(s[0]) + '" data-suf="' + e(s[1] || "") + '">0' + e(s[1] || "") + '</b><span>' + e(s[2]) + '</span></div>'; }).join("");
+    var run = (X.run || []).map(function (w) { return "<span>" + e(w) + "</span>"; }).join("");
+    var rows = Core.contacts().map(function (r) {
+      var inner = '<small>' + e(r[0]) + '</small><strong>' + e(r[1]) + '</strong>';
+      return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>';
+    }).join("");
+
+    Core.mount(
+      '<header class="top" id="bar"><div class="wrap"><a class="logo" id="logo" href="#top">' + e(name) + '</a>' +
+        '<nav class="nav"><a href="#proc">Процесс</a><a href="#svc">' + e(D.sections.catalogTitle) + '</a><a href="#contacts">Контакты</a></nav>' +
+        '<button class="cart" data-open-cart>Запись <b data-count>0</b></button></div></header>' +
+      '<main id="top">' +
+      '<section class="hero"><div class="stage"><div class="ph"><img src="' + e(D.hero.photo) + '" alt=""></div>' +
+        '<h1 class="title" id="title" aria-label="' + e(name) + '">' + chars + '<span class="glare" aria-hidden="true">' + e(name) + '</span></h1>' +
+        '<div class="tag">' + e(D.brand.tagline) + (D.brand.city ? ', ' + e(D.brand.city) : '') + '</div>' +
+        '<div class="sub"><p>' + e(D.hero.text) + '</p><a class="btn" href="#svc">' + e(D.hero.cta) + '</a></div>' +
+        '<div class="second"><h2>' + (X.line2 || e(D.hero.title)) + '</h2></div></div></section>' +
+      '<section class="runs" aria-hidden="true"><div class="run r1">' + run + run + run + '</div><div class="run r2">' + run + run + run + '</div></section>' +
+      '<section class="proc" id="proc"><div class="stage"><div><div class="num"><span id="sn">01</span><small>/ ' + String(steps.length).padStart(2, "0") + '</small></div>' +
+        '<h3 id="st"></h3><p id="sp"></p><div class="prog"><i id="pg"></i></div></div><div class="frames">' + frames + '<span class="scan"></span></div></div></section>' +
+      '<section class="ba"><div class="stage"><div class="layer before"><img src="' + e(X.baPhoto || D.hero.photo) + '" alt=""></div><div class="layer after"><img src="' + e(X.baPhoto || D.hero.photo) + '" alt=""></div>' +
+        '<span class="line"></span><span class="lab l1">До</span><span class="lab l2">После</span><div class="meter"><b><em id="gl">0</em>%</b><span class="ml">' + e(X.baLabel || "Глубина блеска") + '</span></div></div></section>' +
+      '<section class="svc" id="svc"><div class="wrap"><div class="head"><h2>' + e(D.sections.catalogTitle) + '</h2><p>' + e(D.sections.catalogText) + '</p></div><div class="grid">' + cards + '</div>' +
+        '<div class="stats">' + stats + '</div></div></section>' +
+      '<section class="final" id="contacts"><img src="' + e(X.finalPhoto || D.hero.photo) + '" alt=""><div class="wrap"><h2 id="fh">' + e(X.finalTitle || "Ваша очередь") + '</h2>' +
+        '<div class="rows">' + rows + '</div><a class="btn" data-open-cart href="#">' + e(X.orderBtn || "Записаться") + '</a></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var pre = document.getElementById("pre");
+    var st = document.getElementById("st"), sp = document.getElementById("sp"), sn = document.getElementById("sn");
+    function setStep(i, anim) {
+      var s = steps[i]; if (!s) return;
+      sn.textContent = String(i + 1).padStart(2, "0");
+      st.innerHTML = s[0].split("").map(function (c) { return '<span class="ch">' + (c === " " ? "&nbsp;" : e(c)) + '</span>'; }).join("");
+      sp.textContent = s[1];
+      if (anim && window.gsap) {
+        gsap.fromTo("#st .ch", { y: 40, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: .45, stagger: .018, ease: "power3.out" });
+        gsap.fromTo(sp, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .4, delay: .1 });
+        gsap.fromTo(sn, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: "power3.out" });
+      }
+    }
+    setStep(0, false);
+
+    if (!window.gsap || !window.ScrollTrigger || reduce) {
+      pre.remove(); document.body.classList.remove("lock");
+      document.getElementById("logo").style.opacity = 1; document.querySelector(".hero .second").style.opacity = 1;
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Прожектор за курсором и блик по карточкам
+    addEventListener("pointermove", function (ev) { document.documentElement.style.setProperty("--mx", ev.clientX + "px"); document.documentElement.style.setProperty("--my", ev.clientY + "px"); }, { passive: true });
+    [].forEach.call(document.querySelectorAll(".card"), function (c) {
+      c.addEventListener("pointermove", function (ev) { var r = c.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
+        c.style.transform = "rotateY(" + ((x - .5) * 10) + "deg) rotateX(" + ((.5 - y) * 10) + "deg)"; c.style.setProperty("--gx", x * 100 + "%"); c.style.setProperty("--gy", y * 100 + "%"); });
+      c.addEventListener("pointerleave", function () { c.style.transform = ""; });
+    });
+
+    // Заставка: счётчик и полоса, потом шторка уезжает, буквы влетают из глубины
+    var o = { v: 0 }, pc = document.getElementById("pc");
+    var intro = gsap.timeline({ onComplete: function () { pre.remove(); document.body.classList.remove("lock"); ScrollTrigger.refresh(); } });
+    intro.to(o, { v: 100, duration: 1.3, ease: "power2.inOut", onUpdate: function () { pc.textContent = Math.round(o.v); } })
+      .to("#pb", { width: "100%", duration: 1.3, ease: "power2.inOut" }, 0)
+      .to(pre, { clipPath: "inset(0 0 100% 0)", duration: .7, ease: "power4.inOut" }, "+=.1")
+      .from(".hero .ph img", { scale: 1.4, filter: "brightness(0)", duration: 1.4, ease: "power3.out" }, "-=.45")
+      .from(".title span:not(.glare)", { z: 0, scale: 3, opacity: 0, filter: "blur(20px)", yPercent: function (i) { return (i % 2 ? -1 : 1) * 40; }, duration: .9, stagger: .05, ease: "expo.out" }, "<.1")
+      .fromTo(".title .glare", { backgroundPosition: "-200% 0" }, { backgroundPosition: "200% 0", duration: 1.2, ease: "power2.inOut" }, "-=.4")
+      .from(".hero .tag, .hero .sub > *", { y: 30, opacity: 0, duration: .6, stagger: .08, ease: "power3.out" }, "-=.6")
+      .from(".top .nav, .top .cart", { y: -20, opacity: 0, duration: .5 }, "<");
+
+    // Название улетает в логотип шапки, шлейф зависит от скорости
+    var title = document.getElementById("title"), logo = document.getElementById("logo");
+    function flyTo() { var a = title.getBoundingClientRect(), b = logo.getBoundingClientRect(); return { x: (b.left + b.width / 2) - (a.left + a.width / 2), y: (b.top + b.height / 2) - (a.top + a.height / 2), s: b.width / a.width }; }
+    var F = null;
+    var h = gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom bottom", scrub: .7, invalidateOnRefresh: true,
+      onRefresh: function () { gsap.set(title, { clearProps: "x,y,scale" }); F = flyTo(); },
+      onUpdate: function (self) { document.documentElement.style.setProperty("--v", Math.max(-1, Math.min(1, self.getVelocity() / 3000)).toFixed(3)); bar.classList.toggle("solid", self.progress > .45); } } });
+    h.to(title, { x: function () { return (F || flyTo()).x; }, y: function () { return (F || flyTo()).y; }, scale: function () { return (F || flyTo()).s; }, ease: "power2.in", duration: .45 }, 0)
+     .to(logo, { opacity: 1, duration: .02 }, .44).to(title, { opacity: 0, duration: .02 }, .45)
+     .to(".hero .tag, .hero .sub", { opacity: 0, y: -40, duration: .2 }, 0)
+     .to(".hero .ph img", { scale: 1.25, rotate: -2, duration: 1, ease: "none" }, 0)
+     .to(".hero .ph", { opacity: .35, duration: .4 }, .45)
+     .fromTo(".hero .second", { opacity: 0, scale: .8, filter: "blur(16px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: .3 }, .55);
+    var bar = document.getElementById("bar");
+
+    // Бегущие строки: скорость и наклон от прокрутки
+    var r1 = document.querySelector(".r1"), r2 = document.querySelector(".r2"), pos = 0, vel = 0;
+    ScrollTrigger.create({ trigger: ".runs", start: "top bottom", end: "bottom top", onUpdate: function (s) { vel = s.getVelocity(); } });
+    gsap.ticker.add(function () {
+      var w = r1.scrollWidth / 3; pos -= 1.2 + Math.abs(vel) / 220; vel *= .92; if (pos < -w) pos += w;
+      var sk = Math.max(-14, Math.min(14, vel / 220));
+      r1.style.transform = "translateX(" + pos + "px) skewX(" + (-sk) + "deg)"; r2.style.transform = "translateX(" + (-w - pos) + "px) skewX(" + sk + "deg)";
+    });
+
+    // Процесс: кадры сменяются шторками разной формы
+    var figs = [].slice.call(document.querySelectorAll(".frames figure")), n = figs.length, cur = 0;
+    var clips = [["inset(0 0 100% 0)", "inset(0 0 0% 0)"], ["circle(0% at 50% 50%)", "circle(75% at 50% 50%)"], ["polygon(0 0, 0 0, 0 100%, 0 100%)", "polygon(0 0, 100% 0, 100% 100%, 0 100%)"], ["inset(50% 0 50% 0)", "inset(0% 0 0% 0)"]];
+    figs.forEach(function (f, i) { if (i) gsap.set(f, { clipPath: clips[i % 4][0] }); });
+    var P = gsap.timeline({ scrollTrigger: { trigger: ".proc", start: "top top", end: "bottom bottom", scrub: .6,
+      onUpdate: function (s) { var k = Math.min(n - 1, Math.floor(s.progress * n * .999)); if (k !== cur) { cur = k; setStep(k, true); } } } });
+    figs.forEach(function (f, i) {
+      if (i) P.to(f, { clipPath: clips[i % 4][1], ease: "power2.inOut", duration: .5 }, i - .25);
+      P.fromTo(f.querySelector("img"), { scale: 1.3 }, { scale: 1, ease: "none", duration: 1.25 }, Math.max(0, i - .25));
+    });
+    P.to("#pg", { scaleX: 1, ease: "none", duration: n }, 0)
+     .fromTo(".frames .scan", { top: "0%", opacity: 0 }, { top: "100%", opacity: 1, ease: "none", duration: n, repeat: 0 }, 0);
+
+    // До / после: полоса ведёт блик, процент блеска растёт
+    var g = { p: 0 }, gl = document.getElementById("gl");
+    gsap.timeline({ scrollTrigger: { trigger: ".ba", start: "top top", end: "bottom bottom", scrub: .5 } })
+      .to(g, { p: 100, ease: "none", duration: 1, onUpdate: function () { gl.textContent = Math.round(g.p);
+        document.querySelector(".ba .after").style.clipPath = "inset(0 " + (100 - g.p) + "% 0 0)"; document.querySelector(".ba .line").style.left = g.p + "%"; } }, 0)
+      .fromTo(".ba .after img", { scale: 1.08 }, { scale: 1, ease: "none", duration: 1 }, 0);
+
+    // Карточки въезжают с наклоном, цифры считаются
+    gsap.from(".card", { y: 120, rotateX: -25, opacity: 0, duration: 1, stagger: .1, ease: "power3.out", scrollTrigger: { trigger: ".grid", start: "top 85%" } });
+    [].forEach.call(document.querySelectorAll("[data-to]"), function (b) {
+      var to = parseFloat(b.dataset.to), suf = b.dataset.suf || "", c = { v: 0 };
+      gsap.to(c, { v: to, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: b, start: "top 90%" }, onUpdate: function () { b.textContent = Math.round(c.v).toLocaleString("ru-RU") + suf; } });
+    });
+    gsap.from(".svc h2", { xPercent: -20, opacity: 0, filter: "blur(10px)", duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".svc", start: "top 75%" } });
+
+    // Финал: металлический перелив по тексту и фото с параллаксом
+    gsap.to("#fh", { backgroundPosition: "100% 0", ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.fromTo(".final img", { yPercent: -10, scale: 1.15 }, { yPercent: 6, scale: 1, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.from("#fh", { y: 100, opacity: 0, filter: "blur(14px)", duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".final", start: "top 60%" } });
+  })();
+  </script>
+</body>
+</html>
