@@ -1,0 +1,68 @@
+{
+  "slug": "sup-9legend",
+  "name": "9 легенд",
+  "niche": "prokat",
+  "city": "Нижний Новгород",
+  "custom": "volna",
+  "tagline": "Сапы и прогулки",
+  "colors": {
+    "main": "#23395B",
+    "accent": "#F25F5C",
+    "bg": "#F7F3E9",
+    "text": "#141F33"
+  },
+  "fonts": {
+    "head": "Lunasima",
+    "body": "Akt"
+  },
+  "hero": {
+    "title": "Берите доску, остальное у нас",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/sup-9legend/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно взять",
+    "catalogText": "Цены за час, на весь день дешевле.",
+    "aboutTitle": "О нас"
+  },
+  "about": "9 легенд: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "SUP - сплав",
+      "price": 2800,
+      "desc": "1-3 дневные сплавы на SUPах🏞 ⚜️Тур рассчитан для…",
+      "photo": "files/sup-9legend/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Индивидуальная программа",
+      "price": 3000,
+      "desc": "❤️Индивидуальное путешествие - это прогулка с вашими…",
+      "photo": "files/sup-9legend/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Подарочный сертификат",
+      "price": 3000,
+      "desc": "Уникальная возможность порадовать близкого человека🥰…",
+      "photo": "files/sup-9legend/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 991 453-46-89",
+    "whatsapp": "79914534689",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 4,
+    "vars": {
+      "lagoon": "#70C1B3",
+      "foam": "#FFFDF8"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://sup-9legend.orgs.biz/",
+  "contact_lead": "em:9legends@mail.ru"
+}

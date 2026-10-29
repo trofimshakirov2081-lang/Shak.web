@@ -1,0 +1,68 @@
+{
+  "slug": "devyataya-planeta",
+  "name": "Девятая планета",
+  "niche": "tury",
+  "city": "Краснодар",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/devyataya-planeta/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Девятая планета: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Тур в Центр подготовки космонавтов",
+      "price": 35000,
+      "desc": "ПОИСК — это уникальная программа, разработанная Летной…",
+      "photo": "files/devyataya-planeta/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тур на космодром Байконур",
+      "price": 45000,
+      "desc": "Туры на космодром Байконур. В межпусковой период, на…",
+      "photo": "files/devyataya-planeta/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Туры на космодром «Восточный",
+      "price": 15000,
+      "desc": "Посещение космодрома Восточный с возможностью увидеть…",
+      "photo": "files/devyataya-planeta/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 918 287-48-60",
+    "whatsapp": "79182874860",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Краснодар",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://moiavtorskietury.orgs.biz/",
+  "contact_lead": "em:9planeta.agency@inbox.ru"
+}
