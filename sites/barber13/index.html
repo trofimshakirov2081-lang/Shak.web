@@ -49,17 +49,11 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 
 /* первый экран */
-.hero{padding:34px 0 10px;display:grid;grid-template-columns:1fr;gap:6px}
-.hero h1{font-size:clamp(44px,12.5vw,84px);line-height:.98;margin:0}
+.hero{padding:22px 0 0;display:grid;grid-template-columns:1fr;gap:6px}
+.hero h1{font-size:clamp(38px,10.5vw,72px);line-height:1;margin:0}
 .hero h1 em{font-style:normal}
-.hero p{margin:14px 0 0;color:var(--smoke);max-width:40ch}
-.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.facts span{border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:15px;color:var(--ivory)}
+.hero p{margin:8px 0 0;color:var(--smoke);max-width:40ch}
 .hero{position:relative}
-.props{position:relative;height:200px;margin:-6px 0 4px}
-.props img{position:absolute;filter:drop-shadow(0 22px 22px rgba(0,0,0,.55));will-change:transform}
-.props .pr1{width:40%;max-width:230px;left:6%;top:6px;transform:rotate(-28deg)}
-.props .pr2{width:46%;max-width:280px;right:4%;top:56px;transform:rotate(-14deg);transform-origin:54.5% 54.7%}
 /* фоновые предметы у заголовков: целиком в экране, чуть приглушены */
 .side{position:absolute;right:4px;pointer-events:none;z-index:0;opacity:.8;filter:drop-shadow(0 16px 16px rgba(0,0,0,.55));will-change:transform}
 /* мягкий свет лампы скользит по коже при прокрутке */
@@ -81,10 +75,9 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .dots{display:flex;justify-content:center;gap:6px;margin-top:4px}
 .dots i{width:5px;height:5px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
 .dots i.on{background:var(--ivory);transform:scale(1.3)}
-@media (min-width:760px){.props{position:absolute;right:-40px;top:20px;width:380px;height:300px;margin:0}.hero h1,.hero p,.facts{max-width:60%}}
 
 /* запись: тёмная панель, шаги раскрываются по одному */
-.book{background:linear-gradient(180deg,rgba(30,25,22,.9),rgba(14,12,11,.92));border:1px solid var(--line);border-radius:20px;margin:22px 0 10px;overflow:hidden;scroll-margin-top:70px;
+.book{margin-top:16px;background:linear-gradient(180deg,rgba(30,25,22,.9),rgba(14,12,11,.92));border:1px solid var(--line);border-radius:20px;margin:22px 0 10px;overflow:hidden;scroll-margin-top:70px;
   box-shadow:inset 0 1px 0 rgba(241,221,174,.1),0 30px 60px -30px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .step{display:none;border-top:1px solid var(--line)}
 .step:first-child{border-top:0}
@@ -145,7 +138,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .err{color:#FF9A8A;font-weight:600;font-size:15px;min-height:1em;margin:0}
 .go{width:100%;padding:15px;font-size:17px}
 .note{font-size:14px;color:var(--smoke);margin:8px 0 0}
-.btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px rgba(239,231,218,.45)}
+.btn.line,header .btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px rgba(239,231,218,.45)}
 
 .mine{background:rgba(26,22,20,.9);border:1px solid rgba(239,231,218,.3);border-radius:18px;padding:14px 16px;margin:18px 0 0}
 .mine h3{font:400 24px "Forum";margin:0 0 4px}
@@ -231,15 +224,13 @@ body.entering main{transform:translateY(60px)}
 <div class="demo">Черновой пример от shak.web: записи пока сохраняются только в этом браузере</div>
 <header><div class="pole"></div><div class="wrap">
   <a class="logo" href="#">BARBER <span class="foil">13</span></a>
-  <a class="btn" href="#book">Записаться</a>
+  <a class="btn line" href="#" id="openfind">Моя запись</a>
 </div></header>
 
 <main class="wrap">
   <div class="hero">
-    <div class="props" aria-hidden="true"><img class="pr1" src="img/clip.webp" alt=""><img class="pr2" src="img/scis_h.webp" alt=""></div>
     <h1>Барбершоп на <em class="foil">Юбилейной, 13</em></h1>
-    <p>Выберите мастера, услугу и свободное время. Запись занимает минуту, звонить не нужно.</p>
-    <div class="facts"><span>Верхняя Пышма</span><span>Стрижка от 1 000 ₽</span><a href="#map" style="text-decoration:none"><span>Как пройти</span></a><a href="#" id="openfind" style="text-decoration:none"><span>Моя запись</span></a></div>
+    <p>Запись за минуту, звонить не нужно.</p>
     <div id="mine"></div>
   </div>
 
@@ -462,7 +453,7 @@ function showDone(r) {
   $("flow").hidden = true; $("done").hidden = false;
   $("done").innerHTML = `<h2>${r.status === "moved" ? "Запись перенесена" : "Вы записаны"}</h2><p>Ждём вас на Юбилейной, 13.</p>
     <div class="ticket"><b>${niceDate(r.date)}, ${hm(r.start)}</b><br>Мастер: ${m.name}<br>${r.svc.join(", ")}<br>${dur(r.len)}, ${rub(r.price)}</div>
-    <p style="margin:0">Код записи</p><p class="code foil">${r.code}</p>
+    <p style="margin:0">Код записи (СМС не будет, сохраните его)</p><p class="code foil">${r.code}</p>
     <p class="note" style="margin:4px 0 14px">Чтобы перенести или отменить, зайдите на сайт: с этого телефона запись откроется сама, с другого нажмите «Моя запись» и введите номер и код. Код и ссылка сохранятся в событии календаря.</p>
     <div class="row"><a class="btn line" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn line" type="button" id="again">Записать ещё кого-то</button></div>`;
   $("again").onclick = () => { st.edit = null; st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); show(1); };
@@ -506,28 +497,28 @@ drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawInfo(); refresh();
     });
     const k = ((Math.round(pos) % n) + n) % n; dots.forEach((x, i) => x.classList.toggle("on", i === k));
   }
-  function go(target) {
+  function go(target, ms = 900) {
     from = pos; to = target; t0 = performance.now(); cancelAnimationFrame(raf);
-    const step = now => { const t = Math.min(1, (now - t0) / (calm ? 1 : 900)); pos = from + (to - from) * ease(t); paint(); if (t < 1) raf = requestAnimationFrame(step); };
+    const step = now => { const t = Math.min(1, (now - t0) / (calm ? 1 : ms)); pos = from + (to - from) * ease(t); paint(); if (t < 1) raf = requestAnimationFrame(step); };
     raf = requestAnimationFrame(step);
   }
   setInterval(() => { if (visible && !drag && !calm && Date.now() > hold) go(Math.round(to) + 1); }, 3400);
   new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(box);
-  box.addEventListener("pointerdown", e => { drag = { x: e.clientX, p: pos, moved: false }; cancelAnimationFrame(raf); });
+  box.addEventListener("pointerdown", e => { drag = { x: e.clientX, p: pos, t: Math.round(to), moved: false }; cancelAnimationFrame(raf); });
   addEventListener("pointermove", e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true; pos = drag.p - dx / 190; paint(); });
   addEventListener("pointerup", e => {
     if (!drag) return; const d = drag; drag = null; hold = Date.now() + 6000;
-    if (d.moved) { const v = pos - d.p; go(Math.abs(v) > .15 ? (v > 0 ? Math.ceil(pos) : Math.floor(pos)) : Math.round(pos)); return; }
+    if (d.moved) { const v = pos - d.p, k = Math.abs(v) > .12 ? Math.max(1, Math.round(Math.abs(v))) : 0; go(d.t + Math.sign(v) * k, 380); return; } // каждый взмах сразу на карточку
     pick(e.target.closest(".qc"));
   });
   function pick(c) {
     if (!c) { go(Math.round(pos)); return; }
     const i = +c.dataset.i, d0 = wrap(i - pos);
-    if (Math.abs(d0) > .5) { go(pos + d0); return; } // боковую карточку сначала подвинуть в центр
+    if (Math.abs(d0) > .5) { go(Math.round(to) + Math.round(d0), 380); return; } // боковую карточку сначала подвинуть в центр
     const q = Q[i]; st.edit = null; st.master = q.m.id; st.svc = new Set([q.s.id]); st.date = null; st.time = null;
     $("flow").hidden = false; $("done").hidden = true; drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh(); show(3);
   }
-  box.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { hold = Date.now() + 6000; go(Math.round(to) + (e.key === "ArrowRight" ? 1 : -1)); } });
+  box.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { hold = Date.now() + 6000; go(Math.round(to) + (e.key === "ArrowRight" ? 1 : -1), 380); } });
   box.addEventListener("click", e => { if (e.detail === 0) { hold = Date.now() + 6000; pick(e.target.closest(".qc")); } }); // с клавиатуры
   paint();
 })();
@@ -535,11 +526,10 @@ drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawInfo(); refresh();
 // Фон: предметы лежат на коже и чуть смещаются при прокрутке, по коже скользит свет лампы
 (function bg() {
   if (calm) return;
-  const p1 = document.querySelector(".pr1"), p2 = document.querySelector(".pr2"), sides = [...document.querySelectorAll(".side")], R = document.documentElement;
+  const sides = [...document.querySelectorAll(".side")], R = document.documentElement;
   let raf = 0;
   const upd = () => {
     raf = 0; const y = scrollY, k = y / Math.max(1, R.scrollHeight - innerHeight);
-    if (y < 900) { p1.style.transform = `translateY(${y * .16}px) rotate(${-28 + y * .02}deg)`; p2.style.transform = `translateY(${y * .08}px) rotate(${-14 - y * .015}deg)`; }
     sides.forEach(el => { const r = el.parentElement.getBoundingClientRect(), d = r.top - innerHeight / 2;
       if (Math.abs(d) < innerHeight * 1.5) el.style.transform = `translateY(${d * -.07}px) rotate(${+el.dataset.rot + d * .01}deg)`; });
     R.style.setProperty("--ly", (12 + k * 76) + "%"); R.style.setProperty("--lx", (70 - Math.sin(k * Math.PI) * 40) + "%");
