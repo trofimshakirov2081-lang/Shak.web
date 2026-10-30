@@ -62,10 +62,25 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .props .pr2{width:46%;max-width:280px;right:4%;top:56px;transform:rotate(-14deg);transform-origin:54.5% 54.7%}
 /* фоновые предметы у заголовков: целиком в экране, чуть приглушены */
 .side{position:absolute;right:4px;pointer-events:none;z-index:0;opacity:.8;filter:drop-shadow(0 16px 16px rgba(0,0,0,.55));will-change:transform}
-.buzz{animation:buzz 70ms linear infinite}
-@keyframes buzz{25%{translate:.8px -.6px}50%{translate:-.7px .5px}75%{translate:.6px .8px}}
-.hair{position:absolute;width:1px;height:9px;border-radius:1px;background:var(--smoke);pointer-events:none;z-index:0;animation:fall 1.4s ease-in forwards}
-@keyframes fall{to{transform:translate(var(--dx),70px) rotate(var(--r));opacity:0}}
+/* мягкий свет лампы скользит по коже при прокрутке */
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(55% 32% at var(--lx,70%) var(--ly,18%),rgba(255,232,196,.07),transparent 70%)}
+/* быстрая запись: карточки на барабане, уходят влево в темноту и приходят справа */
+.lead{color:var(--smoke);margin:-6px 0 6px;max-width:36ch}
+.drum{position:relative;overflow:hidden;height:300px;perspective:900px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
+.qc{position:absolute;left:50%;top:14px;width:236px;margin-left:-118px;height:268px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;
+  padding:18px;border-radius:18px;border:1px solid var(--line);color:var(--ivory);cursor:pointer;backface-visibility:hidden;will-change:transform,opacity;
+  background:linear-gradient(180deg,rgba(34,29,25,.96),rgba(16,14,12,.97));box-shadow:inset 0 1px 0 rgba(239,231,218,.08),0 24px 40px -24px rgba(0,0,0,.9)}
+.qm{display:flex;align-items:center;gap:9px;font-size:15px;color:var(--smoke)}
+.qm img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.qt{font:400 29px/1.05 "Forum";margin-top:auto}
+.qd{font-size:15px;color:var(--smoke)}
+.qp{font-weight:800;font-size:19px;margin-top:6px}
+.qb{margin-top:10px;align-self:stretch;text-align:center;background:var(--ivory);color:var(--ink);font-weight:800;border-radius:999px;padding:10px}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:4px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
+.dots i.on{background:var(--ivory);transform:scale(1.3)}
 @media (min-width:760px){.props{position:absolute;right:-40px;top:20px;width:380px;height:300px;margin:0}.hero h1,.hero p,.facts{max-width:60%}}
 
 /* запись: тёмная панель, шаги раскрываются по одному */
@@ -120,7 +135,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .times{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .t{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);padding:10px 0;font-weight:800;cursor:pointer}
 .t[aria-pressed=true]{background:var(--ivory);border-color:transparent;color:var(--ink)}
-.empty{color:var(--smoke);margin:4px 0}
+.empty{color:var(--smoke);margin:4px 0;grid-column:1/-1}
 
 .f{display:grid;gap:10px}
 .f input,.f textarea,.find input{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;background:rgba(255,255,255,.04);color:var(--ivory)}
@@ -155,10 +170,6 @@ section.block h2::after{content:"";display:block;width:56px;height:1px;backgroun
 .team img{box-shadow:0 0 0 1px var(--line)}
 .team figcaption b{display:block;font:400 26px "Forum"}
 .team figcaption span{color:var(--smoke);font-size:15px}
-.price{border-top:1px solid var(--line)}
-.price h3{font:400 26px "Forum";margin:20px 0 4px}
-.price p{display:flex;justify-content:space-between;gap:12px;margin:0;padding:9px 0;border-bottom:1px solid var(--line)}
-.price p span:last-child{font-weight:800;white-space:nowrap}
 .map{border-radius:18px;overflow:hidden;background:var(--onyx2);box-shadow:0 0 0 1px var(--line)}
 .map iframe{display:block;width:100%;height:300px;border:0}
 .map div{padding:14px 16px;font-weight:600}
@@ -255,9 +266,10 @@ body.entering main{transform:translateY(60px)}
     <div class="done" id="done" hidden></div>
   </div>
 
-  <section class="block" id="team" style="position:relative"><img class="side snip" src="img/scis_h.webp" alt="" aria-hidden="true" style="width:40%;max-width:250px;top:-4px;transform-origin:54.5% 54.7%"><h2 style="position:relative;z-index:1">Мастера</h2><div class="team" id="teamlist" style="position:relative;z-index:1"></div></section>
-  <section class="block" id="prices" style="position:relative"><img class="side shave" src="img/razor1.webp" alt="" aria-hidden="true" style="width:46%;max-width:300px;top:12px"><h2 style="position:relative;z-index:1">Цены</h2><div class="price" id="price" style="position:relative;z-index:1"></div></section>
-  <section class="block" id="map" style="position:relative"><img class="side vib" src="img/clip_h.webp" alt="" aria-hidden="true" style="width:42%;max-width:260px;top:-6px"><h2 style="position:relative;z-index:1">Адрес</h2>
+  <section class="block" id="team" style="position:relative"><img class="side" data-rot="-8" src="img/scis_h.webp" alt="" aria-hidden="true" style="width:40%;max-width:250px;top:-4px;transform-origin:54.5% 54.7%"><h2 style="position:relative;z-index:1">Мастера</h2><div class="team" id="teamlist" style="position:relative;z-index:1"></div></section>
+  <section class="block" id="quick"><h2>Быстрая запись</h2><p class="lead">То, на что записываются чаще всего. Нажмите, и останется выбрать время.</p>
+    <div class="drum" id="drum" role="region" aria-label="Популярные услуги"></div><div class="dots" id="dots"></div></section>
+  <section class="block" id="map" style="position:relative"><img class="side" data-rot="4" src="img/clip_h.webp" alt="" aria-hidden="true" style="width:42%;max-width:260px;top:-6px"><h2 style="position:relative;z-index:1">Адрес</h2>
     <div class="map">
       <iframe title="BARBER 13 на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=60.557931%2C56.978845&amp;mode=search&amp;oid=21368857117&amp;ol=biz&amp;z=17"></iframe>
       <div>Верхняя Пышма, Юбилейная улица, 13. <a href="https://yandex.ru/maps/org/21368857117/" target="_blank" rel="noopener" style="color:var(--ivory)">Открыть в Яндекс Картах</a></div>
@@ -279,6 +291,8 @@ const SHOP = {
     { id: "ivan", name: "Иван", role: "Бренд-барбер", photo: "img/ivan.jpg" },
     { id: "andrey", name: "Андрей", role: "Барбер", photo: "img/andrey.jpg" }
   ],
+  // Быстрая запись: популярные услуги на барабане (id услуги и мастер)
+  quick: [[21653036, "ivan"], [31298730, "andrey"], [21653035, "ivan"], [22204230, "ivan"], [21653034, "ivan"], [31299288, "andrey"], [31298772, "andrey"]],
   services: [{"id":21653029,"t":"Укладка: мытьё головы и стайлинг","p":500,"m":30,"who":["andrey","ivan"],"extra":true},{"id":22204503,"t":"Пилинг кожи головы, укладка, воск","p":1000,"m":30,"who":["ivan"],"extra":true},{"id":22204536,"t":"Удаление волос воском","p":500,"m":15,"who":["andrey","ivan"],"extra":true},{"id":21653036,"t":"Мужская стрижка","p":1700,"m":75,"who":["ivan"]},{"id":22204230,"t":"Фейд","p":1500,"m":60,"who":["ivan"]},{"id":21653035,"t":"Стрижка и борода","p":2300,"m":90,"who":["ivan"]},{"id":21653034,"t":"Оформление бороды и усов","p":1300,"m":45,"who":["ivan"]},{"id":22204365,"t":"Авторская стрижка","p":2300,"m":110,"who":["ivan"]},{"id":22204332,"t":"Детская стрижка","p":1400,"m":75,"who":["ivan"]},{"id":21653033,"t":"Отец и сын","p":2700,"m":150,"who":["ivan"]},{"id":22204302,"t":"Женская стрижка","p":2000,"m":90,"who":["ivan"]},{"id":29031441,"t":"Камуфляж седины","p":1200,"m":30,"who":["ivan"]},{"id":21653217,"t":"Уход за кожей головы","p":1100,"m":60,"who":["ivan"]},{"id":21653031,"t":"Уход за кожей","p":1300,"m":60,"who":["ivan"]},{"id":21653032,"t":"Премиум-комплекс","p":3400,"m":135,"who":["ivan"]},{"id":22204353,"t":"Биозавивка","p":5000,"m":180,"who":["ivan"]},{"id":31298730,"t":"Мужская стрижка","p":1200,"m":80,"who":["andrey"]},{"id":31299288,"t":"Стрижка и борода","p":1700,"m":120,"who":["andrey"]},{"id":31298772,"t":"Детская стрижка","p":1000,"m":80,"who":["andrey"]},{"id":31298286,"t":"Отец и сын","p":2000,"m":180,"who":["andrey"]}]
 };
 
@@ -364,6 +378,7 @@ let cur = 1;
 function reach() { return !st.master ? 1 : !st.svc.size ? 2 : st.time == null ? 3 : 4; }
 function show(n) {
   cur = Math.min(n, reach());
+  if (cur === 3 && !st.date) { const f = document.querySelector(".d:not(:disabled)"); if (f) { st.date = f.dataset.d; drawDays(); drawTimes(); } } // сразу ближайший свободный день
   for (let i = 1; i <= 4; i++) $("s" + i).className = "step" + (i < cur ? " was" : i === cur ? " now" : i === cur + 1 ? " soon" : "");
   const top = $("book").getBoundingClientRect().top;
   if (top < 50 || top > innerHeight * .4) $("book").scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
@@ -455,8 +470,6 @@ function showDone(r) {
 }
 function drawInfo() {
   $("teamlist").innerHTML = SHOP.masters.map(m => `<figure><img src="${m.photo}" alt="${m.name}" loading="lazy"><figcaption><b>${m.name}</b><span>${m.role}</span></figcaption></figure>`).join("");
-  $("price").innerHTML = SHOP.masters.map(m => `<h3>${m.name}</h3>` + SHOP.services.filter(s => s.who.includes(m.id))
-    .map(s => `<p><span>${s.t}</span><span>${rub(s.p)}</span></p>`).join("")).join("");
 }
 drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawInfo(); refresh();
 // Личная ссылка ?b=... открывает запись сразу; без неё показываем будущие записи с этого телефона
@@ -474,49 +487,64 @@ drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawInfo(); refresh();
   el.addEventListener("click", () => { clearTimeout(t); close(); });
 })();
 
-// Фон от прокрутки: ножницы щёлкают, машинка дрожит, бритва делает проходы. Только пока предмет на экране.
+// Быстрая запись: барабан. Сам листается по одной карточке, можно смахнуть пальцем.
+(function drum() {
+  const box = $("drum"), Q = SHOP.quick.map(([id, mid]) => ({ s: SHOP.services.find(x => x.id === id), m: SHOP.masters.find(x => x.id === mid) })), n = Q.length;
+  box.innerHTML = Q.map((q, i) => `<button type="button" class="qc" data-i="${i}"><span class="qm"><img src="${q.m.photo}" alt="">${q.m.name}</span>
+    <b class="qt">${q.s.t}</b><span class="qd">${dur(q.s.m)}</span><span class="qp">${rub(q.s.p)}</span><span class="qb">Записаться</span></button>`).join("");
+  $("dots").innerHTML = Q.map(() => "<i></i>").join("");
+  const cards = [...box.children], dots = [...$("dots").children];
+  let pos = 0, from = 0, to = 0, t0 = 0, raf = 0, hold = 0, drag = null, visible = false;
+  const wrap = d => ((d % n) + n + n / 2) % n - n / 2;
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function paint() {
+    cards.forEach((c, i) => {
+      const d = wrap(i - pos), a = d * 0.62, far = Math.abs(d) > 1.6;
+      c.style.visibility = far ? "hidden" : "";
+      c.style.transform = `translateX(${Math.sin(a) * 330}px) translateZ(${(Math.cos(a) - 1) * 300}px) rotateY(${-a * 57}deg)`;
+      c.style.opacity = Math.max(0, 1 - Math.abs(d) * .7); c.style.zIndex = 10 - Math.round(Math.abs(d) * 3);
+    });
+    const k = ((Math.round(pos) % n) + n) % n; dots.forEach((x, i) => x.classList.toggle("on", i === k));
+  }
+  function go(target) {
+    from = pos; to = target; t0 = performance.now(); cancelAnimationFrame(raf);
+    const step = now => { const t = Math.min(1, (now - t0) / (calm ? 1 : 900)); pos = from + (to - from) * ease(t); paint(); if (t < 1) raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+  }
+  setInterval(() => { if (visible && !drag && !calm && Date.now() > hold) go(Math.round(to) + 1); }, 3400);
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(box);
+  box.addEventListener("pointerdown", e => { drag = { x: e.clientX, p: pos, moved: false }; cancelAnimationFrame(raf); });
+  addEventListener("pointermove", e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true; pos = drag.p - dx / 190; paint(); });
+  addEventListener("pointerup", e => {
+    if (!drag) return; const d = drag; drag = null; hold = Date.now() + 6000;
+    if (d.moved) { const v = pos - d.p; go(Math.abs(v) > .15 ? (v > 0 ? Math.ceil(pos) : Math.floor(pos)) : Math.round(pos)); return; }
+    pick(e.target.closest(".qc"));
+  });
+  function pick(c) {
+    if (!c) { go(Math.round(pos)); return; }
+    const i = +c.dataset.i, d0 = wrap(i - pos);
+    if (Math.abs(d0) > .5) { go(pos + d0); return; } // боковую карточку сначала подвинуть в центр
+    const q = Q[i]; st.edit = null; st.master = q.m.id; st.svc = new Set([q.s.id]); st.date = null; st.time = null;
+    $("flow").hidden = false; $("done").hidden = true; drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh(); show(3);
+  }
+  box.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { hold = Date.now() + 6000; go(Math.round(to) + (e.key === "ArrowRight" ? 1 : -1)); } });
+  box.addEventListener("click", e => { if (e.detail === 0) { hold = Date.now() + 6000; pick(e.target.closest(".qc")); } }); // с клавиатуры
+  paint();
+})();
+
+// Фон: предметы лежат на коже и чуть смещаются при прокрутке, по коже скользит свет лампы
 (function bg() {
   if (calm) return;
-  const q = c => [...document.querySelectorAll(c)];
-  const p1 = document.querySelector(".pr1"), p2 = document.querySelector(".pr2");
-  const snips = [p2, ...q(".snip")], vibs = [p1, ...q(".vib")], shaves = q(".shave");
-  const seen = el => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
-  const ease = t => t * t * (3 - 2 * t);
-  let raf = 0, idle = 0, lastSnip = 0;
-  const hair = el => {
-    // пара срезанных волосков падает от кончиков ножниц
-    const box = el.offsetParent, r = el.getBoundingClientRect(), b = box.getBoundingClientRect();
-    for (let i = 0; i < 2; i++) {
-      const h = document.createElement("i"); h.className = "hair";
-      h.style.left = (r.right - b.left - r.width * (.12 + Math.random() * .1)) + "px"; h.style.top = (r.top - b.top + r.height * .5) + "px";
-      h.style.setProperty("--dx", (Math.random() * 24 - 12) + "px"); h.style.setProperty("--r", (Math.random() * 160 - 80) + "deg");
-      box.appendChild(h); setTimeout(() => h.remove(), 1500);
-    }
-  };
+  const p1 = document.querySelector(".pr1"), p2 = document.querySelector(".pr2"), sides = [...document.querySelectorAll(".side")], R = document.documentElement;
+  let raf = 0;
   const upd = () => {
-    raf = 0; const y = scrollY;
-    if (y < 900) p1.style.transform = `translateY(${y * 0.16}px) rotate(${-28 + y * 0.025}deg)`;
-    snips.forEach((el, i) => {
-      if (!seen(el)) return;
-      // каждые 130 px прокрутки ножницы смыкаются и раскрываются
-      const ph = ((y + i * 50) % 130) / 130, k = ph < .3 ? Math.sin(ph / .3 * Math.PI) : 0;
-      const base = el === p2 ? `translateY(${Math.min(y, 900) * 0.09}px) rotate(-14deg)` : "rotate(-8deg)";
-      el.style.transform = `${base} scaleY(${1 - .42 * k})`;
-      if (k > .95 && Date.now() - lastSnip > 300) { lastSnip = Date.now(); hair(el); }
-    });
-    shaves.forEach(el => {
-      if (!seen(el)) return;
-      // проход бритвой вперёд, потом приподнять и вернуть
-      const ph = (y % 160) / 160, f = ph < .7 ? ease(ph / .7) : 1 - ease((ph - .7) / .3);
-      el.style.transform = `rotate(-6deg) translate(${-18 + f * 22}px, ${ph < .7 ? 0 : -6}px)`;
-    });
+    raf = 0; const y = scrollY, k = y / Math.max(1, R.scrollHeight - innerHeight);
+    if (y < 900) { p1.style.transform = `translateY(${y * .16}px) rotate(${-28 + y * .02}deg)`; p2.style.transform = `translateY(${y * .08}px) rotate(${-14 - y * .015}deg)`; }
+    sides.forEach(el => { const r = el.parentElement.getBoundingClientRect(), d = r.top - innerHeight / 2;
+      if (Math.abs(d) < innerHeight * 1.5) el.style.transform = `translateY(${d * -.07}px) rotate(${+el.dataset.rot + d * .01}deg)`; });
+    R.style.setProperty("--ly", (12 + k * 76) + "%"); R.style.setProperty("--lx", (70 - Math.sin(k * Math.PI) * 40) + "%");
   };
-  addEventListener("scroll", () => {
-    if (!raf) raf = requestAnimationFrame(upd);
-    vibs.forEach(el => el.classList.add("buzz")); clearTimeout(idle);
-    idle = setTimeout(() => vibs.forEach(el => el.classList.remove("buzz")), 160);
-  }, { passive: true });
-  upd();
+  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); upd();
 })();
 
 // Финал: машинка проезжает и «сбривает» надпись, когда до неё долистали
