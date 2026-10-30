@@ -34,7 +34,9 @@ function sheet() {
 }
 function rows() {
   const v = sheet().getDataRange().getValues(); v.shift();
-  return v.map((r, i) => ({ row: i + 2, id: String(r[0]), status: String(r[2]), date: String(r[3]), start: +r[12], len: +r[7], masterName: String(r[5]),
+  // Таблица иногда сама превращает текст в дату: приводим обратно к виду 2026-11-01
+  const day = x => x instanceof Date ? Utilities.formatDate(x, TZ, "yyyy-MM-dd") : String(x);
+  return v.map((r, i) => ({ row: i + 2, id: String(r[0]), status: String(r[2]), date: day(r[3]), start: +r[12], len: +r[7], masterName: String(r[5]),
     master: String(r[13]), svc: String(r[6]).split(", "), svcIds: JSON.parse(r[14] || "[]"), price: +r[8], name: String(r[9]), phone: String(r[10]),
     comment: String(r[11]), chat: String(r[15] || ""), r24: r[16], r2: r[17] })).filter(b => b.id);
 }
@@ -89,7 +91,7 @@ function handle(q) {
     r.id = old ? old.id : Utilities.getUuid().slice(0, 8);
     if (overlaps(r, list)) return { ok: false, error: "busy" };
     const m = (getCfg().masters || []).find(x => x.id === r.master);
-    const vals = [r.id, Utilities.formatDate(new Date(), TZ, "dd.MM.yyyy HH:mm"), old ? "moved" : "new", r.date, hm(r.start), m ? m.name : r.master, r.svc.join(", "), r.len, r.price,
+    const vals = [r.id, Utilities.formatDate(new Date(), TZ, "dd.MM.yyyy HH:mm"), old ? "moved" : "new", "'" + r.date, "'" + hm(r.start), m ? m.name : r.master, r.svc.join(", "), r.len, r.price,
       r.name, "'" + r.phone, r.comment || "", r.start, r.master, JSON.stringify(r.svcIds || []), old ? old.chat : "", "", ""];
     if (old) sheet().getRange(old.row, 1, 1, vals.length).setValues([vals]); else sheet().appendRow(vals);
     r.status = old ? "moved" : "new";

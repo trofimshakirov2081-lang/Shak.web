@@ -198,7 +198,7 @@ window.B13Admin = (function () {
   }
   function go(t) {
     tab = t; render(); root.scrollTop = 0;
-    if (t === "bookings" && API) api({ action: "list", pass: PASS }).then(r => { if (r.ok) { LIST = r.list; if (tab === "bookings") render(); } });
+    if (t === "bookings" && API) api({ action: "list", pass: PASS }).then(r => { if (r.ok) { LIST = r.list.map(b => Object.assign(b, { date: fixDay(b.date) })); if (tab === "bookings") render(); } });
   }
 
   // ---------- действия ----------

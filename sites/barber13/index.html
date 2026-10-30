@@ -325,7 +325,11 @@ const st = { master: null, svc: new Set(), date: null, time: null, edit: null };
 const API = "https://script.google.com/macros/s/AKfycbxMAuPaPKwbOx0YGaechmJkoGxPb4iCDmtbe2q3Q26NP91Y2HV4z981-5sf9bSvPafKMA/exec";
 let BUSY = null, BOT = "";
 const api = q => fetch(API, { method: "POST", body: JSON.stringify(q) }).then(r => r.json());
-const apiGet = q => fetch(API + "?" + new URLSearchParams(q)).then(r => r.json());
+// Если таблица отдала дату как «Fri Oct 30 2026 ...», переводим в 2026-10-30
+const fixDay = d => { if (/^\d{4}-\d\d-\d\d$/.test(d)) return d; const m = String(d).match(/(\w{3}) (\d{1,2}) (\d{4})/), k = m && "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(m[1]) / 3;
+  return m && k >= 0 ? `${m[3]}-${String(k + 1).padStart(2, "0")}-${m[2].padStart(2, "0")}` : d; };
+const apiGet = q => fetch(API + "?" + new URLSearchParams(q)).then(r => r.json()).then(r => {
+  (r.busy || []).forEach(b => b[1] = fixDay(b[1])); (r.list || []).forEach(b => b.date = fixDay(b.date)); return r; });
 // Сохранённые настройки: в черновике из этого браузера, в рабочей версии из таблицы
 const clone = o => JSON.parse(JSON.stringify(o));
 let SHOP = (() => { try { const x = JSON.parse(localStorage.getItem("b13cfg")); if (x) return Object.assign(clone(DEFAULT_SHOP), x); } catch (e) {} return clone(DEFAULT_SHOP); })();
