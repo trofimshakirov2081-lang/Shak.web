@@ -11,16 +11,28 @@ button{width:100%;margin:10px 0 0;padding:15px;border:0;border-radius:999px;back
 </style></head><body><main>
 <h1>Подключение таблицы BARBER 13</h1>
 <p class="mute">Google-таблица будет базой сайта: записи, расписание, цены, фото и токен бота. Бесплатно, займёт минут 5. Лучше делать с компьютера.</p>
+<div class="card"><b>С iPhone</b> в приложении «Google Таблицы» нет пункта «Расширения», таблицу создавать не нужно. Сделайте так:
+<ol style="margin:8px 0 0"><li>Откройте в Safari <a href="https://script.google.com/home/projects/create" target="_blank" style="color:var(--gold)">script.google.com</a> и войдите в Google-аккаунт.</li>
+<li>Нажмите <b>аА</b> в адресной строке → <b>Запросить настольный веб-сайт</b>, чтобы открылся полный редактор.</li>
+<li>Нажмите <b>Создать проект</b>, удалите всё в редакторе и вставьте код (кнопка «Скопировать код» ниже). Дальше с шага 4: таблица «BARBER 13 записи» создастся сама при запуске <code>setup</code>.</li></ol></div>
+<p><b>С компьютера:</b></p>
 <ol>
 <li>Откройте <a href="https://sheets.new" target="_blank" style="color:var(--gold)">sheets.new</a> под тем Google-аккаунтом, где будет жить база (лучше аккаунт владельца). Назовите таблицу <b>BARBER 13 записи</b>.</li>
 <li>В меню таблицы: <b>Расширения → Apps Script</b>. Откроется редактор кода.</li>
 <li>Удалите всё, что там написано, нажмите кнопку ниже и вставьте код. Сохраните (значок дискеты или Ctrl+S).
 <textarea id="code" readonly>// BARBER 13: записи, настройки сайта и Telegram-бот на Google-таблице.
 // Токен бота и пароль админки хранятся в закрытых свойствах скрипта, в коде их нет.
-// Установка: вставить этот код в «Расширения → Apps Script», запустить setup(), развернуть как веб-приложение.
+// Установка: вставить этот код в «Расширения → Apps Script» таблицы или в новый проект на script.google.com,
+// запустить setup(), развернуть как веб-приложение. Если скрипт не внутри таблицы, setup() сам создаст таблицу «BARBER 13 записи».
 
-const SS = SpreadsheetApp.getActive();
 const P = PropertiesService.getScriptProperties();
+let _ss = null;
+function book() {
+  if (_ss) return _ss;
+  _ss = SpreadsheetApp.getActive();
+  if (!_ss) { const id = P.getProperty(&quot;ssId&quot;); _ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create(&quot;BARBER 13 записи&quot;); P.setProperty(&quot;ssId&quot;, _ss.getId()); }
+  return _ss;
+}
 const TZ = &quot;Asia/Yekaterinburg&quot;, TZ_MIN = 300; // Верхняя Пышма, UTC+5
 const HEAD = [&quot;id&quot;, &quot;Создана&quot;, &quot;Статус&quot;, &quot;Дата&quot;, &quot;Время&quot;, &quot;Мастер&quot;, &quot;Услуги&quot;, &quot;Минут&quot;, &quot;Цена&quot;, &quot;Имя&quot;, &quot;Телефон&quot;, &quot;Комментарий&quot;, &quot;start&quot;, &quot;masterId&quot;, &quot;svcIds&quot;, &quot;tgChat&quot;, &quot;напомнил за день&quot;, &quot;напомнил за 2 ч&quot;];
 const MON = [&quot;янв&quot;, &quot;фев&quot;, &quot;мар&quot;, &quot;апр&quot;, &quot;мая&quot;, &quot;июн&quot;, &quot;июл&quot;, &quot;авг&quot;, &quot;сен&quot;, &quot;окт&quot;, &quot;ноя&quot;, &quot;дек&quot;], DOW = [&quot;вс&quot;, &quot;пн&quot;, &quot;вт&quot;, &quot;ср&quot;, &quot;чт&quot;, &quot;пт&quot;, &quot;сб&quot;];
@@ -32,13 +44,14 @@ function setup() {
   ScriptApp.getProjectTriggers().forEach(t =&gt; ScriptApp.deleteTrigger(t));
   ScriptApp.newTrigger(&quot;tick&quot;).timeBased().everyMinutes(1).create();
   cfgFile();
+  Logger.log(&quot;Таблица с записями: &quot; + book().getUrl());
   Logger.log(&quot;Готово. Теперь «Развернуть → Новое развертывание → Веб-приложение», доступ: все.&quot;);
 }
 
 // ---------- хранение ----------
 function sheet() {
-  let sh = SS.getSheetByName(&quot;Записи&quot;);
-  if (!sh) { sh = SS.insertSheet(&quot;Записи&quot;); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange(&quot;A:A&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;D:E&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;K:K&quot;).setNumberFormat(&quot;@&quot;); }
+  const ss = book(); let sh = ss.getSheetByName(&quot;Записи&quot;);
+  if (!sh) { sh = ss.insertSheet(&quot;Записи&quot;); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange(&quot;A:A&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;D:E&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;K:K&quot;).setNumberFormat(&quot;@&quot;); }
   return sh;
 }
 function rows() {

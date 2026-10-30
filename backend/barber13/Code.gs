@@ -1,9 +1,16 @@
 // BARBER 13: записи, настройки сайта и Telegram-бот на Google-таблице.
 // Токен бота и пароль админки хранятся в закрытых свойствах скрипта, в коде их нет.
-// Установка: вставить этот код в «Расширения → Apps Script», запустить setup(), развернуть как веб-приложение.
+// Установка: вставить этот код в «Расширения → Apps Script» таблицы или в новый проект на script.google.com,
+// запустить setup(), развернуть как веб-приложение. Если скрипт не внутри таблицы, setup() сам создаст таблицу «BARBER 13 записи».
 
-const SS = SpreadsheetApp.getActive();
 const P = PropertiesService.getScriptProperties();
+let _ss = null;
+function book() {
+  if (_ss) return _ss;
+  _ss = SpreadsheetApp.getActive();
+  if (!_ss) { const id = P.getProperty("ssId"); _ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create("BARBER 13 записи"); P.setProperty("ssId", _ss.getId()); }
+  return _ss;
+}
 const TZ = "Asia/Yekaterinburg", TZ_MIN = 300; // Верхняя Пышма, UTC+5
 const HEAD = ["id", "Создана", "Статус", "Дата", "Время", "Мастер", "Услуги", "Минут", "Цена", "Имя", "Телефон", "Комментарий", "start", "masterId", "svcIds", "tgChat", "напомнил за день", "напомнил за 2 ч"];
 const MON = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"], DOW = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
@@ -15,13 +22,14 @@ function setup() {
   ScriptApp.getProjectTriggers().forEach(t => ScriptApp.deleteTrigger(t));
   ScriptApp.newTrigger("tick").timeBased().everyMinutes(1).create();
   cfgFile();
+  Logger.log("Таблица с записями: " + book().getUrl());
   Logger.log("Готово. Теперь «Развернуть → Новое развертывание → Веб-приложение», доступ: все.");
 }
 
 // ---------- хранение ----------
 function sheet() {
-  let sh = SS.getSheetByName("Записи");
-  if (!sh) { sh = SS.insertSheet("Записи"); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange("A:A").setNumberFormat("@"); sh.getRange("D:E").setNumberFormat("@"); sh.getRange("K:K").setNumberFormat("@"); }
+  const ss = book(); let sh = ss.getSheetByName("Записи");
+  if (!sh) { sh = ss.insertSheet("Записи"); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange("A:A").setNumberFormat("@"); sh.getRange("D:E").setNumberFormat("@"); sh.getRange("K:K").setNumberFormat("@"); }
   return sh;
 }
 function rows() {
