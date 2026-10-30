@@ -1,0 +1,221 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BARBER 13: подключение таблицы</title><meta name="robots" content="noindex">
+<style>
+:root{--bg:#0E0C0B;--card:#1A1614;--line:rgba(239,231,218,.14);--txt:#EFE7DA;--mute:#9A9087;--gold:#C9A063}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:17px/1.6 system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:24px 16px 60px}h1{font-size:30px;line-height:1.15;margin:0 0 8px}
+ol{padding-left:22px}li{margin:0 0 16px}b{color:#fff}.mute{color:var(--mute)}code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+textarea{width:100%;height:220px;background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:12px;font:13px/1.4 ui-monospace,monospace}
+button{width:100%;margin:10px 0 0;padding:15px;border:0;border-radius:999px;background:var(--txt);color:#1E1915;font:800 17px system-ui;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0}
+</style></head><body><main>
+<h1>Подключение таблицы BARBER 13</h1>
+<p class="mute">Google-таблица будет базой сайта: записи, расписание, цены, фото и токен бота. Бесплатно, займёт минут 5. Лучше делать с компьютера.</p>
+<ol>
+<li>Откройте <a href="https://sheets.new" target="_blank" style="color:var(--gold)">sheets.new</a> под тем Google-аккаунтом, где будет жить база (лучше аккаунт владельца). Назовите таблицу <b>BARBER 13 записи</b>.</li>
+<li>В меню таблицы: <b>Расширения → Apps Script</b>. Откроется редактор кода.</li>
+<li>Удалите всё, что там написано, нажмите кнопку ниже и вставьте код. Сохраните (значок дискеты или Ctrl+S).
+<textarea id="code" readonly>// BARBER 13: записи, настройки сайта и Telegram-бот на Google-таблице.
+// Токен бота и пароль админки хранятся в закрытых свойствах скрипта, в коде их нет.
+// Установка: вставить этот код в «Расширения → Apps Script», запустить setup(), развернуть как веб-приложение.
+
+const SS = SpreadsheetApp.getActive();
+const P = PropertiesService.getScriptProperties();
+const TZ = &quot;Asia/Yekaterinburg&quot;, TZ_MIN = 300; // Верхняя Пышма, UTC+5
+const HEAD = [&quot;id&quot;, &quot;Создана&quot;, &quot;Статус&quot;, &quot;Дата&quot;, &quot;Время&quot;, &quot;Мастер&quot;, &quot;Услуги&quot;, &quot;Минут&quot;, &quot;Цена&quot;, &quot;Имя&quot;, &quot;Телефон&quot;, &quot;Комментарий&quot;, &quot;start&quot;, &quot;masterId&quot;, &quot;svcIds&quot;, &quot;tgChat&quot;, &quot;напомнил за день&quot;, &quot;напомнил за 2 ч&quot;];
+const MON = [&quot;янв&quot;, &quot;фев&quot;, &quot;мар&quot;, &quot;апр&quot;, &quot;мая&quot;, &quot;июн&quot;, &quot;июл&quot;, &quot;авг&quot;, &quot;сен&quot;, &quot;окт&quot;, &quot;ноя&quot;, &quot;дек&quot;], DOW = [&quot;вс&quot;, &quot;пн&quot;, &quot;вт&quot;, &quot;ср&quot;, &quot;чт&quot;, &quot;пт&quot;, &quot;сб&quot;];
+
+// ---------- первый запуск ----------
+function setup() {
+  sheet();
+  if (!P.getProperty(&quot;pass&quot;)) P.setProperty(&quot;pass&quot;, &quot;barber13&quot;);
+  ScriptApp.getProjectTriggers().forEach(t =&gt; ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger(&quot;tick&quot;).timeBased().everyMinutes(1).create();
+  cfgFile();
+  Logger.log(&quot;Готово. Теперь «Развернуть → Новое развертывание → Веб-приложение», доступ: все.&quot;);
+}
+
+// ---------- хранение ----------
+function sheet() {
+  let sh = SS.getSheetByName(&quot;Записи&quot;);
+  if (!sh) { sh = SS.insertSheet(&quot;Записи&quot;); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange(&quot;A:A&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;D:E&quot;).setNumberFormat(&quot;@&quot;); sh.getRange(&quot;K:K&quot;).setNumberFormat(&quot;@&quot;); }
+  return sh;
+}
+function rows() {
+  const v = sheet().getDataRange().getValues(); v.shift();
+  return v.map((r, i) =&gt; ({ row: i + 2, id: String(r[0]), status: String(r[2]), date: String(r[3]), start: +r[12], len: +r[7], masterName: String(r[5]),
+    master: String(r[13]), svc: String(r[6]).split(&quot;, &quot;), svcIds: JSON.parse(r[14] || &quot;[]&quot;), price: +r[8], name: String(r[9]), phone: String(r[10]),
+    comment: String(r[11]), chat: String(r[15] || &quot;&quot;), r24: r[16], r2: r[17] })).filter(b =&gt; b.id);
+}
+const pub = b =&gt; ({ id: b.id, status: b.status, date: b.date, start: b.start, len: b.len, master: b.master, svc: b.svc, svcIds: b.svcIds, price: b.price, name: b.name, phone: b.phone, comment: b.comment });
+const last10 = p =&gt; String(p || &quot;&quot;).replace(/\D/g, &quot;&quot;).slice(-10);
+const today = () =&gt; Utilities.formatDate(new Date(), TZ, &quot;yyyy-MM-dd&quot;);
+const hm = m =&gt; String(Math.floor(m / 60)).padStart(2, &quot;0&quot;) + &quot;:&quot; + String(m % 60).padStart(2, &quot;0&quot;);
+function nice(d) { const x = new Date(d + &quot;T12:00:00Z&quot;); return `${x.getUTCDate()} ${MON[x.getUTCMonth()]}, ${DOW[x.getUTCDay()]}`; }
+function at(b) { const [y, m, d] = b.date.split(&quot;-&quot;).map(Number); return Date.UTC(y, m - 1, d) + (b.start - TZ_MIN) * 60000; }
+
+// Настройки сайта лежат в JSON-файле на Диске рядом с таблицей (туда помещаются и фото)
+function cfgFile() {
+  const id = P.getProperty(&quot;cfgFile&quot;);
+  if (id) try { return DriveApp.getFileById(id); } catch (e) {}
+  const f = DriveApp.createFile(&quot;barber13-настройки-сайта.json&quot;, &quot;{}&quot;, &quot;application/json&quot;);
+  P.setProperty(&quot;cfgFile&quot;, f.getId()); return f;
+}
+function getCfg() { try { return JSON.parse(cfgFile().getBlob().getDataAsString() || &quot;{}&quot;); } catch (e) { return {}; } }
+function setCfg(c) { delete c.adminPass; cfgFile().setContent(JSON.stringify(c)); }
+
+// ---------- сайт ----------
+function out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function doGet(e) {
+  const a = e.parameter.a, t = today();
+  if (a === &quot;init&quot;) {
+    const busy = rows().filter(b =&gt; b.status !== &quot;cancelled&quot; &amp;&amp; b.date &gt;= t).map(b =&gt; [b.master, b.date, b.start, b.len, b.id]);
+    return out({ ok: true, cfg: getCfg(), busy, bot: P.getProperty(&quot;botName&quot;) || &quot;&quot; });
+  }
+  if (a === &quot;find&quot;) {
+    const p = last10(e.parameter.phone);
+    if (p.length &lt; 10) return out({ ok: false, error: &quot;Номер полностью&quot; });
+    return out({ ok: true, list: rows().filter(b =&gt; b.status !== &quot;cancelled&quot; &amp;&amp; b.date &gt;= t &amp;&amp; last10(b.phone) === p).map(pub) });
+  }
+  return out({ ok: true, hello: &quot;BARBER 13&quot; });
+}
+
+function doPost(e) {
+  let q; try { q = JSON.parse(e.postData.contents); } catch (x) { return out({ ok: false, error: &quot;Плохой запрос&quot; }); }
+  const lock = LockService.getScriptLock(); lock.waitLock(20000);
+  try { return out(handle(q)); } catch (x) { return out({ ok: false, error: String(x.message || x) }); } finally { lock.releaseLock(); }
+}
+
+function overlaps(r, list) {
+  return list.some(b =&gt; b.status !== &quot;cancelled&quot; &amp;&amp; b.master === r.master &amp;&amp; b.date === r.date &amp;&amp; b.id !== r.id &amp;&amp; r.start &lt; b.start + b.len &amp;&amp; r.start + r.len &gt; b.start);
+}
+
+function handle(q) {
+  const list = rows();
+  if (q.action === &quot;book&quot;) {
+    const r = q.rec, old = q.editId ? list.find(b =&gt; b.id === q.editId &amp;&amp; last10(b.phone) === last10(r.phone)) : null;
+    if (q.editId &amp;&amp; !old) return { ok: false, error: &quot;Запись для переноса не найдена&quot; };
+    r.id = old ? old.id : Utilities.getUuid().slice(0, 8);
+    if (overlaps(r, list)) return { ok: false, error: &quot;busy&quot; };
+    const m = (getCfg().masters || []).find(x =&gt; x.id === r.master);
+    const vals = [r.id, Utilities.formatDate(new Date(), TZ, &quot;dd.MM.yyyy HH:mm&quot;), old ? &quot;moved&quot; : &quot;new&quot;, r.date, hm(r.start), m ? m.name : r.master, r.svc.join(&quot;, &quot;), r.len, r.price,
+      r.name, &quot;&#x27;&quot; + r.phone, r.comment || &quot;&quot;, r.start, r.master, JSON.stringify(r.svcIds || []), old ? old.chat : &quot;&quot;, &quot;&quot;, &quot;&quot;];
+    if (old) sheet().getRange(old.row, 1, 1, vals.length).setValues([vals]); else sheet().appendRow(vals);
+    r.status = old ? &quot;moved&quot; : &quot;new&quot;;
+    notifyAdmins(`${old ? &quot;🔁 Перенос&quot; : &quot;✂️ Новая запись&quot;}: ${nice(r.date)}, ${hm(r.start)}\n${m ? m.name : &quot;&quot;}: ${r.svc.join(&quot;, &quot;)}\n${r.name}, ${r.phone}${r.comment ? &quot;\n&quot; + r.comment : &quot;&quot;}${old ? `\nБыло: ${nice(old.date)}, ${hm(old.start)}` : &quot;&quot;}`);
+    if (old &amp;&amp; old.chat) tg(&quot;sendMessage&quot;, { chat_id: old.chat, text: `Запись перенесена: ${nice(r.date)}, ${hm(r.start)}. Ждём вас!` });
+    return { ok: true, rec: r, bot: P.getProperty(&quot;botName&quot;) || &quot;&quot; };
+  }
+  if (q.action === &quot;cancel&quot;) {
+    const b = list.find(x =&gt; x.id === q.id &amp;&amp; last10(x.phone) === last10(q.phone));
+    if (!b) return { ok: false, error: &quot;Запись не найдена&quot; };
+    sheet().getRange(b.row, 3).setValue(&quot;cancelled&quot;);
+    notifyAdmins(`❌ Отмена: ${nice(b.date)}, ${hm(b.start)}\n${b.masterName}: ${b.svc.join(&quot;, &quot;)}\n${b.name}, ${b.phone}`);
+    return { ok: true };
+  }
+  // всё ниже только для мастера: нужен пароль
+  if (q.pass !== (P.getProperty(&quot;pass&quot;) || &quot;barber13&quot;)) return { ok: false, error: &quot;Неверный пароль&quot; };
+  if (q.action === &quot;login&quot;) return { ok: true };
+  if (q.action === &quot;list&quot;) return { ok: true, list: list.filter(b =&gt; b.date &gt;= today()).map(pub) };
+  if (q.action === &quot;adminCancel&quot;) { const b = list.find(x =&gt; x.id === q.id); if (b) sheet().getRange(b.row, 3).setValue(&quot;cancelled&quot;); return { ok: !!b }; }
+  if (q.action === &quot;saveCfg&quot;) { setCfg(q.cfg); return { ok: true }; }
+  if (q.action === &quot;setPass&quot;) { if (String(q.newPass || &quot;&quot;).length &lt; 6) return { ok: false, error: &quot;Короткий пароль&quot; }; P.setProperty(&quot;pass&quot;, q.newPass); return { ok: true }; }
+  if (q.action === &quot;setToken&quot;) {
+    const r = JSON.parse(UrlFetchApp.fetch(`https://api.telegram.org/bot${q.token}/getMe`, { muteHttpExceptions: true }).getContentText());
+    if (!r.ok) return { ok: false, error: &quot;Telegram не принял токен&quot; };
+    P.setProperty(&quot;token&quot;, q.token); P.setProperty(&quot;botName&quot;, r.result.username); P.deleteProperty(&quot;offset&quot;);
+    tg(&quot;deleteWebhook&quot;, {});
+    return { ok: true, bot: r.result.username };
+  }
+  return { ok: false, error: &quot;Неизвестное действие&quot; };
+}
+
+// ---------- Telegram ----------
+function tg(method, body) {
+  const t = P.getProperty(&quot;token&quot;); if (!t) return null;
+  try { return JSON.parse(UrlFetchApp.fetch(`https://api.telegram.org/bot${t}/${method}`, { method: &quot;post&quot;, contentType: &quot;application/json&quot;, payload: JSON.stringify(body), muteHttpExceptions: true }).getContentText()); }
+  catch (e) { return null; }
+}
+const admins = () =&gt; JSON.parse(P.getProperty(&quot;admins&quot;) || &quot;[]&quot;);
+function notifyAdmins(text) { admins().forEach(id =&gt; tg(&quot;sendMessage&quot;, { chat_id: id, text })); }
+
+// Раз в минуту: новые сообщения боту и напоминания клиентам
+function tick() {
+  if (!P.getProperty(&quot;token&quot;)) return;
+  const lock = LockService.getScriptLock(); if (!lock.tryLock(5000)) return;
+  try { poll(); remind(); } finally { lock.releaseLock(); }
+}
+function poll() {
+  const r = tg(&quot;getUpdates&quot;, { offset: +(P.getProperty(&quot;offset&quot;) || 0), timeout: 0, allowed_updates: [&quot;message&quot;, &quot;callback_query&quot;] });
+  if (!r || !r.ok) return;
+  r.result.forEach(u =&gt; { P.setProperty(&quot;offset&quot;, String(u.update_id + 1)); try { u.callback_query ? onButton(u.callback_query) : u.message &amp;&amp; onText(u.message); } catch (e) {} });
+}
+function onText(m) {
+  const chat = String(m.chat.id), text = String(m.text || &quot;&quot;).trim(), isAdmin = admins().includes(chat);
+  const say = (t, kb) =&gt; tg(&quot;sendMessage&quot;, Object.assign({ chat_id: chat, text: t }, kb ? { reply_markup: { inline_keyboard: kb } } : {}));
+  let mt;
+  if ((mt = text.match(/^\/start\s+(\w+)/))) {
+    const b = rows().find(x =&gt; x.id === mt[1]);
+    if (!b) return say(&quot;Запись не нашлась. Если вы записывались на сайте, напишите мастеру.&quot;);
+    sheet().getRange(b.row, 16).setValue(chat);
+    return say(`Готово! Запись: ${nice(b.date)}, ${hm(b.start)}, ${b.masterName}. Напомню за день и за 2 часа.`);
+  }
+  if ((mt = text.match(/^\/admin\s+(.+)/))) {
+    if (mt[1].trim() !== (P.getProperty(&quot;pass&quot;) || &quot;barber13&quot;)) return say(&quot;Пароль не подошёл.&quot;);
+    const a = admins(); if (!a.includes(chat)) { a.push(chat); P.setProperty(&quot;admins&quot;, JSON.stringify(a)); }
+    return say(&quot;Готово, сюда будут приходить записи, переносы и отмены.\n\n/записи: записи на сегодня и завтра\n/расписание: выходной или другие часы на любой день&quot;);
+  }
+  if (isAdmin &amp;&amp; /^\/(записи|zapisi)/i.test(text)) {
+    const t = today(), tm = Utilities.formatDate(new Date(Date.now() + 864e5), TZ, &quot;yyyy-MM-dd&quot;);
+    const l = rows().filter(b =&gt; b.status !== &quot;cancelled&quot; &amp;&amp; (b.date === t || b.date === tm)).sort((a, b) =&gt; (a.date + a.start).localeCompare(b.date + b.start));
+    return say(l.length ? l.map(b =&gt; `${nice(b.date)}, ${hm(b.start)}, ${b.masterName}: ${b.svc.join(&quot;, &quot;)}. ${b.name}, ${b.phone}`).join(&quot;\n&quot;) : &quot;На сегодня и завтра записей нет.&quot;);
+  }
+  if (isAdmin &amp;&amp; /^\/(расписание|raspisanie|schedule)/i.test(text)) return say(&quot;На какой день поменять расписание?&quot;, dayButtons());
+  if (/^\/start/.test(text)) return say(&quot;Здравствуйте! Это бот барбершопа BARBER 13. Записаться можно на сайте, а здесь я напомню о визите.&quot;);
+  if (!isAdmin) return say(&quot;Я умею только напоминать о записи. Записаться, перенести или отменить можно на сайте.&quot;);
+  return say(&quot;Команды: /записи, /расписание&quot;);
+}
+function dayButtons() {
+  const kb = [];
+  for (let i = 0; i &lt; 14; i += 2) kb.push([0, 1].map(k =&gt; { const d = Utilities.formatDate(new Date(Date.now() + (i + k) * 864e5), TZ, &quot;yyyy-MM-dd&quot;); return { text: (i + k === 0 ? &quot;Сегодня, &quot; : i + k === 1 ? &quot;Завтра, &quot; : &quot;&quot;) + nice(d), callback_data: &quot;d|&quot; + d }; }));
+  return kb;
+}
+function onButton(c) {
+  const chat = String(c.message.chat.id), [kind, d, mid, val] = c.data.split(&quot;|&quot;);
+  tg(&quot;answerCallbackQuery&quot;, { callback_query_id: c.id });
+  if (!admins().includes(chat)) return;
+  const edit = (text, kb) =&gt; tg(&quot;editMessageText&quot;, Object.assign({ chat_id: chat, message_id: c.message.message_id, text }, kb ? { reply_markup: { inline_keyboard: kb } } : {}));
+  const cfg = getCfg(), masters = cfg.masters || [];
+  if (kind === &quot;d&quot;) return edit(`${nice(d)}. Для кого?`, [[{ text: &quot;Все мастера&quot;, callback_data: `m|${d}|all` }], ...masters.map(m =&gt; [{ text: m.name, callback_data: `m|${d}|${m.id}` }])]);
+  if (kind === &quot;m&quot;) return edit(`${nice(d)}, ${mid === &quot;all&quot; ? &quot;все мастера&quot; : (masters.find(m =&gt; m.id === mid) || {}).name}. Как работаем?`, [
+    [{ text: &quot;Выходной&quot;, callback_data: `s|${d}|${mid}|off` }, { text: &quot;Как обычно&quot;, callback_data: `s|${d}|${mid}|reset` }],
+    [{ text: &quot;10:00-15:00&quot;, callback_data: `s|${d}|${mid}|600-900` }, { text: &quot;15:00-21:00&quot;, callback_data: `s|${d}|${mid}|900-1260` }],
+    [{ text: &quot;12:00-21:00&quot;, callback_data: `s|${d}|${mid}|720-1260` }, { text: &quot;10:00-18:00&quot;, callback_data: `s|${d}|${mid}|600-1080` }]]);
+  if (kind === &quot;s&quot;) {
+    cfg.exceptions = (cfg.exceptions || []).filter(x =&gt; !(x.date === d &amp;&amp; x.master === mid));
+    if (val === &quot;off&quot;) cfg.exceptions.push({ date: d, master: mid, off: true });
+    else if (val !== &quot;reset&quot;) { const [a, b] = val.split(&quot;-&quot;).map(Number); cfg.exceptions.push({ date: d, master: mid, from: a, to: b }); }
+    setCfg(cfg);
+    const who = mid === &quot;all&quot; ? &quot;все мастера&quot; : (masters.find(m =&gt; m.id === mid) || {}).name;
+    return edit(`Готово: ${nice(d)}, ${who}: ${val === &quot;off&quot; ? &quot;выходной&quot; : val === &quot;reset&quot; ? &quot;как обычно&quot; : val.split(&quot;-&quot;).map(Number).map(hm).join(&quot;-&quot;)}. На сайте уже обновилось.\n\nЕщё день: /расписание`);
+  }
+}
+function remind() {
+  const now = Date.now();
+  rows().forEach(b =&gt; {
+    if (!b.chat || b.status === &quot;cancelled&quot;) return;
+    const left = at(b) - now;
+    if (left &lt;= 0) return;
+    if (!b.r24 &amp;&amp; left &lt;= 24 * 36e5 &amp;&amp; left &gt; 3 * 36e5) { tg(&quot;sendMessage&quot;, { chat_id: b.chat, text: `Напоминаем: завтра ${hm(b.start)} вы записаны в BARBER 13, ${b.masterName}. Юбилейная, 13. Если планы поменялись, перенести или отменить можно на сайте.` }); sheet().getRange(b.row, 17).setValue(&quot;да&quot;); }
+    if (!b.r2 &amp;&amp; left &lt;= 2 * 36e5) { tg(&quot;sendMessage&quot;, { chat_id: b.chat, text: `Через 2 часа, в ${hm(b.start)}, ждём вас в BARBER 13, Юбилейная, 13.` }); sheet().getRange(b.row, 18).setValue(&quot;да&quot;); }
+  });
+}
+</textarea><button id="copy" type="button">Скопировать код</button></li>
+<li>Сверху рядом с кнопкой «Выполнить» выберите функцию <code>setup</code> и нажмите <b>Выполнить</b>. Google попросит доступ: <b>Проверить разрешения</b> → выбрать аккаунт → <b>Дополнительные настройки</b> → <b>Перейти к проекту</b> → <b>Разрешить</b>. Это ваш собственный скрипт, предупреждение стандартное.</li>
+<li>Справа сверху <b>Развернуть → Новое развертывание</b>. Шестерёнка у «Выберите тип» → <b>Веб-приложение</b>. «Запуск от имени»: <b>Я</b>. «У кого есть доступ»: <b>Все</b>. Нажмите <b>Развернуть</b>.</li>
+<li>Скопируйте <b>URL веб-приложения</b> (заканчивается на <code>/exec</code>) и пришлите Трофиму. Дальше он всё подключит сам.</li>
+</ol>
+<div class="card">После подключения мастер открывает бота и отправляет ему <code>/admin пароль</code> (пароль от админки сайта). С этого момента бот присылает записи, переносы и отмены, а командой <code>/расписание</code> можно поставить выходной или другие часы.</div>
+</main><script>
+document.getElementById("copy").onclick=async function(){const t=document.getElementById("code");try{await navigator.clipboard.writeText(t.value)}catch(e){t.select();document.execCommand("copy")}this.textContent="Скопировано";setTimeout(()=>this.textContent="Скопировать код",2000)};
+</script></body></html>

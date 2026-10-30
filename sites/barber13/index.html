@@ -309,6 +309,11 @@ const hm = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 6
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const st = { master: null, svc: new Set(), date: null, time: null, edit: null };
 
+// Ссылка на Google-таблицу (база записей и настроек). Пусто: черновой режим, всё хранится в этом браузере.
+const API = "";
+let BUSY = null, BOT = "";
+const api = q => fetch(API, { method: "POST", body: JSON.stringify(q) }).then(r => r.json());
+const apiGet = q => fetch(API + "?" + new URLSearchParams(q)).then(r => r.json());
 // Сохранённые настройки: в черновике из этого браузера, в рабочей версии из таблицы
 const clone = o => JSON.parse(JSON.stringify(o));
 let SHOP = (() => { try { const x = JSON.parse(localStorage.getItem("b13cfg")); if (x) return Object.assign(clone(DEFAULT_SHOP), x); } catch (e) {} return clone(DEFAULT_SHOP); })();
@@ -328,8 +333,9 @@ function workHours(mid, date) {
 function load() { try { return JSON.parse(localStorage.getItem("b13") || "[]"); } catch (e) { return []; } }
 function save(list) { try { localStorage.setItem("b13", JSON.stringify(list)); } catch (e) {} }
 function busy(master, date, wh) {
+  if (BUSY) return BUSY.filter(b => b[0] === master && b[1] === date && b[4] !== st.edit).map(b => [b[2], b[2] + b[3]]);
   const seed = [...(master + date)].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 9973, 7), out = [], span = Math.max(1, Math.floor((wh[1] - wh[0]) / 30));
-  if (SHOP.demoBusy) for (let i = 0; i < 4; i++) { const s = wh[0] + ((seed * (i + 3) * 37) % span) * 30; out.push([s, s + 60 + (i % 2) * 30]); }
+  if (SHOP.demoBusy && !API) for (let i = 0; i < 4; i++) { const s = wh[0] + ((seed * (i + 3) * 37) % span) * 30; out.push([s, s + 60 + (i % 2) * 30]); }
   load().filter(b => b.master === master && b.date === date && b.status !== "cancelled" && b.id !== st.edit).forEach(b => out.push([b.start, b.start + b.len]));
   return out;
 }
@@ -425,18 +431,25 @@ $("form").addEventListener("submit", e => {
   if (!slots(st.date).some(([m]) => m === st.time)) { $("err").textContent = "Это время уже заняли. Выберите другое."; drawTimes(); return; }
   $("err").textContent = "";
   const who = st.master === "any" ? slots(st.date).find(([m]) => m === st.time)[1] : st.master;
-  const t = total(), list = load(), old = st.edit && list.find(b => b.id === st.edit);
+  const t = total(), list = load(), old = st.edit && (list.find(b => b.id === st.edit) || KNOWN[st.edit]);
   const rec = { id: old ? old.id : Math.random().toString(36).slice(2, 10), master: who, date: st.date, start: st.time, len: t.m, svc: chosen().map(s => s.t), svcIds: [...st.svc], price: t.p, name, phone, comment: $("comment").value.trim(), at: Date.now(), status: old ? "moved" : "new" };
-  if (old) list.splice(list.indexOf(old), 1, rec); else list.push(rec);
-  save(list); st.edit = null; drawMine();
-  // Здесь в рабочей версии запись уходит в таблицу и мастеру в Telegram.
-  showDone(rec);
+  const keep = r => { const l = load().filter(b => b.id !== r.id); l.push(r); save(l); st.edit = null; drawMine(); showDone(r); };
+  if (!API) return keep(rec);
+  // Запись уходит в таблицу, мастеру приходит сообщение в Telegram
+  $("go").disabled = true; $("go").textContent = "Записываю...";
+  api({ action: "book", rec, editId: st.edit }).then(r => {
+    if (r.ok) { BUSY = BUSY.filter(b => b[4] !== r.rec.id).concat([[r.rec.master, r.rec.date, r.rec.start, r.rec.len, r.rec.id]]); keep(Object.assign(rec, r.rec)); }
+    else if (r.error === "busy") { $("err").textContent = "Это время только что заняли. Выберите другое."; reloadBusy(); }
+    else $("err").textContent = "Не получилось записаться: " + (r.error || "ошибка") + ". Попробуйте ещё раз.";
+  }).catch(() => { $("err").textContent = "Нет связи. Проверьте интернет и попробуйте ещё раз."; }).finally(refresh);
 });
+function reloadBusy() { return apiGet({ a: "init" }).then(r => { if (r.ok) { BUSY = r.busy; drawDays(); drawTimes(); refresh(); } }); }
+const KNOWN = {}; // записи, найденные по телефону
 
 const link = r => location.href.split(/[?#]/)[0] + "?b=" + r.id;
 function upcoming() { const now = ymd(new Date()); return load().filter(b => b.status !== "cancelled" && b.date >= now).sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start)); }
 function drawMine(list, msg) {
-  list = list || upcoming();
+  list = list || upcoming(); list.forEach(r => KNOWN[r.id] = r);
   $("mine").innerHTML = (msg ? `<div class="mine"><p>${msg}</p></div>` : "") + list.map(r => { const m = SHOP.masters.find(x => x.id === r.master);
     return `<div class="mine"><h3>Ваша запись</h3><p>${niceDate(r.date)}, ${hm(r.start)}, ${m ? m.name : ""}<br>${r.svc.join(", ")}</p>
     <div class="row"><button class="btn" data-move="${r.id}">Перенести</button><button class="btn line" data-cancel="${r.id}">Отменить</button></div></div>`; }).join("");
@@ -445,12 +458,15 @@ $("mine").addEventListener("click", e => {
   const mv = e.target.dataset.move, cn = e.target.dataset.cancel, list = load();
   if (cn) {
     if (!confirm("Отменить запись?")) return;
-    const r = list.find(b => b.id === cn); r.status = "cancelled"; save(list);
-    // В рабочей версии мастеру уходит сообщение об отмене.
-    drawMine(null, "Запись отменена. Время освободилось, можно записаться заново."); drawDays(); drawTimes(); return;
+    const r = list.find(b => b.id === cn) || KNOWN[cn];
+    const done = () => { save(load().filter(b => b.id !== cn)); if (BUSY) BUSY = BUSY.filter(b => b[4] !== cn); drawMine(null, "Запись отменена. Время освободилось, можно записаться заново."); drawDays(); drawTimes(); };
+    if (!API) { r.status = "cancelled"; save(list.map(b => b.id === cn ? r : b)); drawMine(null, "Запись отменена. Время освободилось, можно записаться заново."); drawDays(); drawTimes(); return; }
+    e.target.disabled = true;
+    api({ action: "cancel", id: cn, phone: r.phone }).then(x => x.ok ? done() : alert("Не получилось отменить: " + (x.error || "ошибка"))).catch(() => alert("Нет связи, попробуйте ещё раз."));
+    return;
   }
   if (mv) {
-    const r = list.find(b => b.id === mv); st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
+    const r = list.find(b => b.id === mv) || KNOWN[mv]; st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
     $("name").value = r.name; $("phone").value = r.phone; $("comment").value = r.comment || "";
     drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh();
     $("flow").hidden = false; $("done").hidden = true; show(3);
@@ -459,8 +475,10 @@ $("mine").addEventListener("click", e => {
     // Запись ищется по номеру телефона, который указали при записи. В рабочей версии поиск идёт по таблице записей.
     const ph = $("fphone").value.replace(/\D/g, "").slice(-10), now = ymd(new Date());
     if (ph.length < 10) { $("ferr").textContent = "Введите номер полностью, 10-11 цифр."; return; }
+    const none = () => $("ferr").textContent = "На этот номер записей нет. Проверьте номер или запишитесь заново.";
+    if (API) { $("ferr").textContent = "Ищу..."; apiGet({ a: "find", phone: ph }).then(r => r.ok && r.list.length ? drawMine(r.list) : none()).catch(() => $("ferr").textContent = "Нет связи, попробуйте ещё раз."); return; }
     const found = list.filter(b => b.status !== "cancelled" && b.date >= now && b.phone.replace(/\D/g, "").slice(-10) === ph);
-    if (found.length) drawMine(found); else $("ferr").textContent = "На этот номер записей нет. Проверьте номер или запишитесь заново.";
+    if (found.length) drawMine(found); else none();
   }
 });
 function openFind(e) {
@@ -483,7 +501,7 @@ function showDone(r) {
   $("done").innerHTML = `<h2>${r.status === "moved" ? "Запись перенесена" : "Вы записаны"}</h2><p>Ждём вас на Юбилейной, 13.</p>
     <div class="ticket"><b>${niceDate(r.date)}, ${hm(r.start)}</b><br>Мастер: ${m.name}<br>${r.svc.join(", ")}<br>${dur(r.len)}, ${rub(r.price)}</div>
     <p class="note" style="margin:4px 0 14px">Перенести или отменить можно в любой момент: нажмите «Перенести или отменить запись» вверху сайта и введите номер ${r.phone}. Можно с любого телефона.</p>
-    <div class="row"><a class="btn line" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn line" type="button" id="again">Записать ещё кого-то</button></div>`;
+    <div class="row">${BOT ? `<a class="btn" href="https://t.me/${BOT}?start=${r.id}" target="_blank" rel="noopener">Напомнить в Telegram</a>` : ""}<a class="btn line" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn line" type="button" id="again">Записать ещё кого-то</button></div>`;
   $("again").onclick = () => { st.edit = null; st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); show(1); };
   $("book").scrollIntoView({ block: "start" });
 }
@@ -538,6 +556,12 @@ function drawAll() {
   if (drum) drum.build();
 }
 drawAll();
+if (API) apiGet({ a: "init" }).then(r => {
+  if (!r.ok) return;
+  BUSY = r.busy; BOT = r.bot;
+  if (r.cfg && r.cfg.masters) { SHOP = Object.assign(clone(DEFAULT_SHOP), r.cfg); SHOP.demoBusy = false; }
+  drawAll(); drawMine();
+}).catch(() => {});
 // Админка: открывается по ссылке внизу сайта или по адресу #admin
 function openAdmin(e) { if (e) e.preventDefault(); if (window.B13Admin) return B13Admin.open(); const sc = document.createElement("script"); sc.src = "admin.js?v=1"; sc.onload = () => B13Admin.open(); document.body.appendChild(sc); }
 $("adminLink").addEventListener("click", openAdmin);

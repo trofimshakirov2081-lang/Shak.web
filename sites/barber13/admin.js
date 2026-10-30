@@ -9,7 +9,8 @@ window.B13Admin = (function () {
     ["Сайт", [["texts", "Тексты и контакты"], ["sections", "Разделы сайта"], ["look", "Оформление"]]],
     ["Настройки", [["bot", "Telegram-бот"], ["pass", "Пароль"]]]
   ];
-  let root, tab = null, dirty = false, authed = false;
+  let root, tab = null, dirty = false, authed = false, PASS = "", LIST = null; // LIST: записи из таблицы
+  const bookings = () => API ? (LIST || []) : load();
   const toMin = v => { const [h, m] = (v || "0:0").split(":").map(Number); return h * 60 + (m || 0); };
   const toHM = m => hm(m);
   const uid = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
@@ -82,10 +83,10 @@ window.B13Admin = (function () {
   const V = {};
   V.menu = () => MENU.map(([g, items]) => `<div class="mg"><span>${g}</span>${items.map(([id, l]) =>
     `<button class="row-l" data-open="${id}">${l}<small>${hint(id)}</small></button>`).join("")}</div>`).join("") +
-    `<p class="hint">Все правки сразу видны на сайте за этим окном. Чтобы они остались, нажмите «Сохранить».${SHOP.api ? "" : " Пока сайт не подключён к таблице, сохранение работает только в этом браузере."}</p>`;
+    `<p class="hint">Все правки сразу видны на сайте за этим окном. Чтобы они остались, нажмите «Сохранить».${API ? " Записи и настройки хранятся в Google-таблице." : " Пока сайт не подключён к таблице, сохранение работает только в этом браузере."}</p>`;
   function hint(id) {
     const now = ymd(new Date());
-    if (id === "bookings") { const n = load().filter(b => b.status !== "cancelled" && b.date >= now).length; return n ? n + " впереди" : ""; }
+    if (id === "bookings") { const n = bookings().filter(b => b.status !== "cancelled" && b.date >= now).length; return n ? n + " впереди" : ""; }
     if (id === "masters") return SHOP.masters.length;
     if (id === "services") return SHOP.services.length;
     if (id === "quick") return SHOP.quick.length + " карточек";
@@ -95,7 +96,7 @@ window.B13Admin = (function () {
   }
 
   V.bookings = () => {
-    const now = ymd(new Date()), all = load().filter(b => b.date >= now).sort((a, b) => (a.date + String(a.start).padStart(4, "0")).localeCompare(b.date + String(b.start).padStart(4, "0")));
+    const now = ymd(new Date()), all = bookings().filter(b => b.date >= now).sort((a, b) => (a.date + String(a.start).padStart(4, "0")).localeCompare(b.date + String(b.start).padStart(4, "0")));
     const days = [...new Set(all.map(b => b.date))];
     return `<button class="btn" data-act="newBooking" style="width:100%">Записать клиента</button>
       <p class="hint">Записи с сайта появляются здесь. Отмена и перенос освобождают время для других.</p>` +
@@ -175,8 +176,7 @@ window.B13Admin = (function () {
       <p class="hint" style="margin-top:0">Токен выдаёт @BotFather (команда /newbot или /token). Он хранится в закрытой таблице, а не в коде сайта, поэтому его никто не увидит.</p>
       <input type="password" id="botToken" autocomplete="off" placeholder="1234567890:AAH...">
       <button class="btn" data-act="saveToken" style="width:100%;margin-top:10px">Сохранить токен</button><p class="hint err" id="botMsg"></p></div>
-    <h3>Подключение к таблице</h3><div class="card"><label class="f">Ссылка на скрипт таблицы</label><input data-act="api" value="${esc(SHOP.api || "")}" placeholder="https://script.google.com/macros/s/.../exec">
-      <p class="hint">Её даёт Трофим при подключении. После этого записи, расписание и настройки видны всем, а не только в этом браузере.</p></div>`;
+    <div class="card"><b>Чтобы записи приходили вам</b><p class="hint" style="margin-bottom:0">Откройте бота${BOT ? " @" + BOT : ""} и отправьте ему: /admin и ваш пароль от админки через пробел. После этого бот присылает записи, переносы и отмены.</p></div>`;
 
   V.pass = () => `<div class="card"><label class="f">Новый пароль</label><input type="password" id="np1" autocomplete="new-password"><label class="f">Ещё раз</label><input type="password" id="np2" autocomplete="new-password">
     <button class="btn" data-act="savePass" style="width:100%;margin-top:12px">Сменить пароль</button><p class="hint err" id="passMsg"></p></div>`;
@@ -195,17 +195,32 @@ window.B13Admin = (function () {
     root.querySelector(".bd").innerHTML = V[tab || "menu"]();
     root.scrollTop = st0;
   }
-  function go(t) { tab = t; render(); root.scrollTop = 0; }
+  function go(t) {
+    tab = t; render(); root.scrollTop = 0;
+    if (t === "bookings" && API) api({ action: "list", pass: PASS }).then(r => { if (r.ok) { LIST = r.list; if (tab === "bookings") render(); } });
+  }
 
   // ---------- действия ----------
   const A = {
-    login() { const v = root.querySelector("#pw").value; if (v === (SHOP.adminPass || "barber13")) { authed = true; try { sessionStorage.setItem("b13adm", 1); } catch (e) {} render(); } else root.querySelector("#pwMsg").textContent = "Неверный пароль."; },
+    login() {
+      const v = root.querySelector("#pw").value, ok = () => { authed = true; PASS = v; try { sessionStorage.setItem("b13adm", v); } catch (e) {} render(); }, no = t => root.querySelector("#pwMsg").textContent = t;
+      if (!API) return v === (SHOP.adminPass || "barber13") ? ok() : no("Неверный пароль.");
+      no("Проверяю..."); api({ action: "login", pass: v }).then(r => r.ok ? ok() : no("Неверный пароль.")).catch(() => no("Нет связи с таблицей."));
+    },
     back() { go(null); },
     close() { if (dirty && confirm("Сохранить изменения?")) A.save(); else if (dirty) { SHOP = Object.assign(clone(DEFAULT_SHOP), JSON.parse(localStorage.getItem("b13cfg") || "{}")); drawAll(); } dirty = false; root.remove(); root = null; history.replaceState(null, "", location.pathname + location.search); },
-    save() { if (saveShop()) { dirty = false; top(); toast("Сохранено"); } },
+    save() {
+      if (!API) { if (saveShop()) { dirty = false; top(); toast("Сохранено"); } return; }
+      toast("Сохраняю...");
+      api({ action: "saveCfg", pass: PASS, cfg: SHOP }).then(r => { if (r.ok) { saveShop(); dirty = false; top(); toast("Сохранено"); } else alert("Не сохранилось: " + (r.error || "ошибка")); }).catch(() => alert("Нет связи с таблицей, попробуйте ещё раз."));
+    },
     newBooking() { A.close(); st.edit = null; st.master = null; st.svc.clear(); st.date = null; st.time = null; $("flow").hidden = false; $("done").hidden = true; drawAll(); show(1); $("book").scrollIntoView({ behavior: "smooth" }); },
-    cancelBooking(el) { if (!confirm("Отменить запись?")) return; const l = load(), r = l.find(b => b.id === el.dataset.id); r.status = "cancelled"; save(l); drawMine(); drawDays(); drawTimes(); render(); },
-    moveBooking(el) { const r = load().find(b => b.id === el.dataset.id); A.close(); st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
+    cancelBooking(el) {
+      if (!confirm("Отменить запись?")) return; const id = el.dataset.id;
+      if (!API) { const l = load(), r = l.find(b => b.id === id); r.status = "cancelled"; save(l); drawMine(); drawDays(); drawTimes(); render(); return; }
+      api({ action: "adminCancel", pass: PASS, id }).then(r => { if (!r.ok) return alert("Не получилось отменить."); LIST.find(b => b.id === id).status = "cancelled"; BUSY = (BUSY || []).filter(b => b[4] !== id); drawDays(); drawTimes(); render(); });
+    },
+    moveBooking(el) { const r = bookings().find(b => b.id === el.dataset.id); A.close(); st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
       $("name").value = r.name; $("phone").value = r.phone; $("comment").value = r.comment || ""; $("flow").hidden = false; $("done").hidden = true; drawAll(); show(3); },
     addEx() { const kind = root.querySelector("[name=exKind]:checked").value, x = { date: root.querySelector("#exDate").value, master: root.querySelector("#exWho").value };
       if (!x.date) return; if (kind === "off") x.off = true; else { x.from = toMin(root.querySelector("#exFrom").value); x.to = toMin(root.querySelector("#exTo").value); if (x.to <= x.from) return alert("Конец должен быть позже начала."); }
@@ -230,16 +245,18 @@ window.B13Admin = (function () {
     async saveToken() {
       const t = root.querySelector("#botToken").value.trim(), msg = root.querySelector("#botMsg");
       if (!/^\d{6,}:[\w-]{30,}$/.test(t)) { msg.textContent = "Похоже, это не токен. Он выглядит так: 1234567890:AAH... (цифры, двоеточие, буквы)."; return; }
-      if (!SHOP.api) { msg.textContent = "Таблица ещё не подключена, поэтому токен пока некуда сохранить. Вставьте его сюда ещё раз после подключения. В коде сайта токен не хранится."; return; }
+      if (!API) { msg.textContent = "Таблица ещё не подключена, поэтому токен пока некуда сохранить. Вставьте его сюда ещё раз после подключения. В коде сайта токен не хранится."; return; }
       msg.textContent = "Сохраняю...";
-      try { const r = await fetch(SHOP.api, { method: "POST", body: JSON.stringify({ action: "setToken", token: t, pass: SHOP.adminPass || "barber13" }) }).then(x => x.json());
-        msg.textContent = r.ok ? "Готово: бот подключён. Напишите ему /start, чтобы проверить." : "Не получилось: " + (r.error || "ошибка таблицы"); }
-      catch (e) { msg.textContent = "Нет связи с таблицей. Проверьте ссылку в разделе ниже."; }
+      try { const r = await api({ action: "setToken", token: t, pass: PASS });
+        if (r.ok) BOT = r.bot;
+        msg.textContent = r.ok ? `Готово: подключён бот @${r.bot}. Отправьте ему /admin и пароль, чтобы получать записи.` : "Не получилось: " + (r.error || "ошибка таблицы"); }
+      catch (e) { msg.textContent = "Нет связи с таблицей, попробуйте ещё раз."; }
       root.querySelector("#botToken").value = "";
     },
     savePass() { const a = root.querySelector("#np1").value, b = root.querySelector("#np2").value, msg = root.querySelector("#passMsg");
       if (a.length < 6) msg.textContent = "Пароль должен быть не короче 6 символов."; else if (a !== b) msg.textContent = "Пароли не совпадают.";
-      else { SHOP.adminPass = a; A.save(); msg.textContent = "Пароль изменён."; } }
+      else if (!API) { SHOP.adminPass = a; A.save(); msg.textContent = "Пароль изменён."; }
+      else api({ action: "setPass", pass: PASS, newPass: a }).then(r => { if (r.ok) { PASS = a; try { sessionStorage.setItem("b13adm", a); } catch (e) {} } msg.textContent = r.ok ? "Пароль изменён. В боте тоже теперь новый." : "Не получилось: " + (r.error || "ошибка"); }); }
   };
   // Поля, которые меняются при вводе
   const F = {
@@ -265,13 +282,13 @@ window.B13Admin = (function () {
     secTitle(el) { SHOP.sections[+el.dataset.i].title = el.value; changed(); },
     secText(el) { SHOP.sections[+el.dataset.i].text = el.value; changed(); },
     secPhoto(el) { el.files[0] && readPhoto(el.files[0], u => { SHOP.sections[+el.dataset.i].photo = u; changed(); render(); }); },
-    api(el) { SHOP.api = el.value.trim(); changed(); }
+    _(el) {}
   };
 
   function open() {
     if (root) return;
     if (!document.getElementById("admcss")) { const s = document.createElement("style"); s.id = "admcss"; s.textContent = css; document.head.appendChild(s); }
-    try { authed = !!sessionStorage.getItem("b13adm"); } catch (e) {}
+    try { PASS = sessionStorage.getItem("b13adm") || ""; authed = !!PASS; } catch (e) {}
     root = document.createElement("div"); root.className = "adm"; root.innerHTML = `<div class="pan"><div class="top"></div><div class="bd"></div></div>`;
     document.body.appendChild(root); tab = null; render();
     root.addEventListener("click", e => {
