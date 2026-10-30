@@ -19,7 +19,7 @@
   --ivory:#EFE7DA;    /* бланк записи, светлый текст */
   --ink:#1E1915;      /* текст на светлом */
   --smoke:#9A9087;
-  --line:rgba(201,160,99,.28);
+  --line:rgba(239,231,218,.14);
   --foil:linear-gradient(100deg,var(--gold-lo) 0%,var(--gold) 28%,var(--gold-hi) 48%,var(--gold) 66%,var(--gold-lo) 100%);
 }
 *{box-sizing:border-box}
@@ -33,16 +33,16 @@ button,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px;position:relative;z-index:1}
 h1,h2,h3,.logo,.serif{font-family:"Forum",serif;font-weight:400;letter-spacing:.02em}
-.foil{background:var(--foil);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.foil{color:inherit}
 
 /* шапка с полоской барбер-столба */
 header{position:sticky;top:0;z-index:10;background:rgba(14,12,11,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:58px}
-.pole{height:2px;background:var(--foil);background-size:200% 100%;animation:shine 7s ease-in-out infinite alternate}
+.pole{display:none}
 @keyframes shine{to{background-position:100% 0}}
 .logo{font-size:23px;text-decoration:none;letter-spacing:.18em}
 .logo span{color:var(--gold)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--foil);background-size:160% 100%;color:var(--ink);box-shadow:0 6px 18px -8px rgba(201,160,99,.6);
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--ivory);color:var(--ink);
   font-weight:800;padding:11px 18px;border-radius:999px;cursor:pointer;text-decoration:none;white-space:nowrap}
 .btn:disabled{opacity:.35;cursor:not-allowed}
 .btn.dark{background:var(--ink);color:var(--ivory);box-shadow:none}
@@ -64,7 +64,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .side{position:absolute;right:4px;pointer-events:none;z-index:0;opacity:.8;filter:drop-shadow(0 16px 16px rgba(0,0,0,.55));will-change:transform}
 .buzz{animation:buzz 70ms linear infinite}
 @keyframes buzz{25%{translate:.8px -.6px}50%{translate:-.7px .5px}75%{translate:.6px .8px}}
-.hair{position:absolute;width:1px;height:9px;border-radius:1px;background:var(--gold-lo);pointer-events:none;z-index:0;animation:fall 1.4s ease-in forwards}
+.hair{position:absolute;width:1px;height:9px;border-radius:1px;background:var(--smoke);pointer-events:none;z-index:0;animation:fall 1.4s ease-in forwards}
 @keyframes fall{to{transform:translate(var(--dx),70px) rotate(var(--r));opacity:0}}
 @media (min-width:760px){.props{position:absolute;right:-40px;top:20px;width:380px;height:300px;margin:0}.hero h1,.hero p,.facts{max-width:60%}}
 
@@ -75,9 +75,9 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .step:first-child{border-top:0}
 .step.was,.step.now,.step.soon{display:block}
 .sh{display:flex;align-items:baseline;gap:10px;width:100%;background:none;border:0;text-align:left;padding:14px 16px;cursor:pointer;color:var(--ivory)}
-.sh b{font:400 15px "Forum";color:var(--gold);min-width:1.1em}
+.sh b{font:400 15px "Forum";color:var(--smoke);min-width:1.1em}
 .sh .tt{font:400 20px/1 "Forum";white-space:nowrap;letter-spacing:.02em;transition:font-size .35s}
-.pick{font-weight:600;font-size:15px;color:var(--gold);margin-left:auto;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pick{font-weight:600;font-size:15px;color:var(--ivory);margin-left:auto;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .chg{font-size:13px;color:var(--smoke);text-decoration:underline;text-underline-offset:3px;flex:none}
 .step.now .sh{pointer-events:none;padding-top:18px}
 .step.now .sh .tt{font-size:28px}
@@ -98,56 +98,56 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .m .any{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#2A231E,var(--onyx))}
 .m b{display:block;margin-top:8px;font-size:17px;line-height:1.1}
 .m span{font-size:13px;color:var(--smoke);line-height:1.25;display:block}
-.m[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 10px 22px -12px rgba(201,160,99,.7);transform:translateY(-2px)}
+.m[aria-pressed=true]{border-color:var(--ivory);box-shadow:0 0 0 1px var(--ivory),0 10px 22px -12px rgba(0,0,0,.8);transform:translateY(-2px)}
 
 .svc{list-style:none;margin:0;padding:0}
-.svc li+li{border-top:1px solid rgba(201,160,99,.14)}
+.svc li+li{border-top:1px solid rgba(239,231,218,.08)}
 .svc label{display:flex;align-items:center;gap:12px;padding:10px 2px;cursor:pointer}
-.svc input{width:21px;height:21px;accent-color:var(--gold);flex:none}
+.svc input{width:21px;height:21px;accent-color:#D9CFC1;flex:none}
 .svc .n{flex:1}
 .svc .n small{display:block;color:var(--smoke);font-size:14px}
 .svc .p{font-weight:800;white-space:nowrap}
 .grp{font-weight:800;font-size:14px;color:var(--smoke);margin:12px 0 0}
-.sum{display:flex;justify-content:space-between;font-weight:800;margin-top:10px;padding-top:10px;border-top:1px solid var(--gold)}
+.sum{display:flex;justify-content:space-between;font-weight:800;margin-top:10px;padding-top:10px;border-top:1px solid var(--ivory)}
 
 .days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .d{flex:none;width:58px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);padding:7px 0;text-align:center;cursor:pointer;scroll-snap-align:start}
 .d small{display:block;font-size:12px;color:var(--smoke)}
 .d b{display:block;font-size:21px;line-height:1.1}
-.d[aria-pressed=true]{background:var(--foil);border-color:transparent;color:var(--ink)}
+.d[aria-pressed=true]{background:var(--ivory);border-color:transparent;color:var(--ink)}
 .d[aria-pressed=true] small{color:var(--ink)}
 .d:disabled{opacity:.3;cursor:not-allowed}
 .times{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .t{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);padding:10px 0;font-weight:800;cursor:pointer}
-.t[aria-pressed=true]{background:var(--foil);border-color:transparent;color:var(--ink)}
+.t[aria-pressed=true]{background:var(--ivory);border-color:transparent;color:var(--ink)}
 .empty{color:var(--smoke);margin:4px 0}
 
 .f{display:grid;gap:10px}
 .f input,.f textarea,.find input{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;background:rgba(255,255,255,.04);color:var(--ivory)}
-.f input:focus,.f textarea:focus,.find input:focus{border-color:var(--gold);outline:0}
+.f input:focus,.f textarea:focus,.find input:focus{border-color:var(--smoke);outline:0}
 ::placeholder{color:var(--smoke);opacity:1}
 .f textarea{min-height:64px;resize:vertical}
 .err{color:#FF9A8A;font-weight:600;font-size:15px;min-height:1em;margin:0}
 .go{width:100%;padding:15px;font-size:17px}
 .note{font-size:14px;color:var(--smoke);margin:8px 0 0}
-.btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px var(--gold)}
+.btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px rgba(239,231,218,.45)}
 
-.mine{background:rgba(26,22,20,.9);border:1px solid var(--gold);border-radius:18px;padding:14px 16px;margin:18px 0 0}
-.mine h3{font:400 24px "Forum";margin:0 0 4px;color:var(--gold)}
+.mine{background:rgba(26,22,20,.9);border:1px solid rgba(239,231,218,.3);border-radius:18px;padding:14px 16px;margin:18px 0 0}
+.mine h3{font:400 24px "Forum";margin:0 0 4px}
 .mine p{margin:0 0 10px}
 .mine .row .btn{padding:9px 14px}
 .find{display:grid;gap:8px;margin-top:10px}
 .code{font:400 40px/1 "Forum";letter-spacing:.25em;margin:4px 0 0}
 .done{padding:24px 16px}
 .done h2{font-size:38px;margin:0 0 6px;line-height:1}
-.ticket{background:rgba(255,255,255,.04);border-radius:14px;padding:14px 16px;margin:14px 0;line-height:1.65;border-left:3px solid var(--gold)}
+.ticket{background:rgba(255,255,255,.04);border-radius:14px;padding:14px 16px;margin:14px 0;line-height:1.65;border-left:2px solid var(--gold)}
 .ticket b{font-weight:800}
 .row{display:flex;flex-wrap:wrap;gap:8px}
 
 /* мастера, цены, адрес */
 section.block{margin:56px 0}
 section.block h2{font-size:clamp(38px,10vw,58px);line-height:1;margin:0 0 18px}
-section.block h2::after{content:"";display:block;width:56px;height:1px;background:var(--foil);margin-top:12px}
+section.block h2::after{content:"";display:block;width:56px;height:1px;background:var(--gold);margin-top:12px}
 .team{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .team figure{margin:0}
 .team img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;filter:grayscale(.15)}
@@ -156,7 +156,7 @@ section.block h2::after{content:"";display:block;width:56px;height:1px;backgroun
 .team figcaption b{display:block;font:400 26px "Forum"}
 .team figcaption span{color:var(--smoke);font-size:15px}
 .price{border-top:1px solid var(--line)}
-.price h3{font:400 26px "Forum";margin:20px 0 4px;color:var(--gold)}
+.price h3{font:400 26px "Forum";margin:20px 0 4px}
 .price p{display:flex;justify-content:space-between;gap:12px;margin:0;padding:9px 0;border-bottom:1px solid var(--line)}
 .price p span:last-child{font-weight:800;white-space:nowrap}
 .map{border-radius:18px;overflow:hidden;background:var(--onyx2);box-shadow:0 0 0 1px var(--line)}
@@ -186,7 +186,7 @@ footer{padding:10px 0 40px;color:var(--smoke);font-size:14px}
 .intro .tool:nth-child(odd){--from:-120vw}.intro .tool:nth-child(even){--from:120vw}
 .intro .t1{width:88%;animation-delay:.05s}.intro .t2{width:84%;animation-delay:.2s}.intro .t3{width:92%;animation-delay:.35s}.intro .t4{width:92%;animation-delay:.5s}
 @keyframes slide{from{transform:translateX(var(--from)) rotate(6deg);opacity:0}to{transform:none;opacity:1}}
-.intro .rule{width:0;height:1px;background:var(--foil);margin-top:14px;animation:rule .7s .85s ease-out forwards}
+.intro .rule{width:0;height:1px;background:var(--gold);margin-top:14px;animation:rule .7s .85s ease-out forwards}
 @keyframes rule{to{width:72%}}
 .intro .word{font:400 46px/1 "Forum";letter-spacing:.24em;margin:8px 0 0 .24em;opacity:0;animation:fadein .8s 1s ease-out forwards}
 .intro .sub{font-size:13px;letter-spacing:.3em;color:var(--smoke);opacity:0;animation:fadein .8s 1.2s ease-out forwards}
@@ -260,7 +260,7 @@ body.entering main{transform:translateY(60px)}
   <section class="block" id="map" style="position:relative"><img class="side vib" src="img/clip_h.webp" alt="" aria-hidden="true" style="width:42%;max-width:260px;top:-6px"><h2 style="position:relative;z-index:1">Адрес</h2>
     <div class="map">
       <iframe title="BARBER 13 на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=60.557931%2C56.978845&amp;mode=search&amp;oid=21368857117&amp;ol=biz&amp;z=17"></iframe>
-      <div>Верхняя Пышма, Юбилейная улица, 13. <a href="https://yandex.ru/maps/org/21368857117/" target="_blank" rel="noopener" style="color:var(--gold)">Открыть в Яндекс Картах</a></div>
+      <div>Верхняя Пышма, Юбилейная улица, 13. <a href="https://yandex.ru/maps/org/21368857117/" target="_blank" rel="noopener" style="color:var(--ivory)">Открыть в Яндекс Картах</a></div>
     </div>
   </section>
 
