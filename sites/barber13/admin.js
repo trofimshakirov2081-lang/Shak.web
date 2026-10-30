@@ -336,6 +336,7 @@ window.B13Admin = (function () {
     try { PASS = sessionStorage.getItem("b13adm") || ""; authed = !!PASS; } catch (e) {}
     root = document.createElement("div"); root.className = "adm"; root.innerHTML = `<div class="pan"><div class="top"></div><div class="bd"></div></div>`;
     document.body.appendChild(root); tab = null; render();
+    if (API) apiGet({ a: "init" }).then(r => { if (r.ok && r.cfg && r.cfg.masters && !dirty) { SHOP = Object.assign(clone(DEFAULT_SHOP), r.cfg); SHOP.demoBusy = false; BUSY = r.busy; drawAll(); if (root) render(); } }).catch(() => {});
     root.addEventListener("click", e => {
       const o = e.target.closest("[data-open]"); if (o) return go(o.dataset.open);
       const a = e.target.closest("[data-act]"); if (a && A[a.dataset.act]) { e.preventDefault(); A[a.dataset.act](a); }

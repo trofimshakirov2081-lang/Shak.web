@@ -6,6 +6,11 @@
 <title>BARBER 13: запись онлайн, Верхняя Пышма</title>
 <meta name="description" content="Барбершоп BARBER 13 в Верхней Пышме, Юбилейная, 13. Выберите мастера, услугу и свободное время.">
 <meta name="theme-color" content="#0E0C0B">
+<meta property="og:title" content="BARBER 13: онлайн-запись">
+<meta property="og:description" content="Барбершоп на Юбилейной, 13, Верхняя Пышма. Выберите мастера, услугу и время.">
+<meta property="og:image" content="https://trofimshakirov2081-lang.github.io/Shak.web/sites/barber13/img/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Ysabeau+Office:wght@400;600;800&display=swap" rel="stylesheet">
@@ -272,7 +277,7 @@ body.entering main{transform:translateY(60px)}
           <textarea id="comment" placeholder="Комментарий, если нужно" aria-label="Комментарий"></textarea>
           <p class="err" id="err"></p>
           <button class="btn go" id="go" type="submit" disabled>Записаться</button>
-          <div class="nav" style="margin-top:0"><button type="button" class="back" data-go="3">Назад</button><p class="note" style="margin:0">Мастер подтвердит запись. Перенести или отменить можно здесь же на сайте.</p></div>
+          <div class="nav" style="margin-top:0"><button type="button" class="back" data-go="3">Назад</button><p class="note" style="margin:0">Нажимая «Записаться», вы соглашаетесь с <a href="privacy.html" target="_blank" style="color:inherit">обработкой персональных данных</a>. Мастер подтвердит запись. Перенести или отменить можно здесь же на сайте.</p></div>
         </form></div></div></div>
     </div>
     <div class="done" id="done" hidden></div>
@@ -582,6 +587,7 @@ drawAll();
 if (API) apiGet({ a: "init" }).then(r => {
   if (!r.ok) return;
   BUSY = r.busy; BOT = r.bot;
+  save(load().filter(b => b.status === "cancelled" || BUSY.some(x => x[4] === b.id))); // запись отменили в админке или в боте
   if (r.cfg && r.cfg.masters) { SHOP = Object.assign(clone(DEFAULT_SHOP), r.cfg); SHOP.demoBusy = false; }
   drawAll(); drawMine();
 }).catch(() => {});

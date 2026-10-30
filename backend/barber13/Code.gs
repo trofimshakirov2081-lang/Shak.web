@@ -246,7 +246,7 @@ function remind() {
     if (!b.chat || b.status === "cancelled") return;
     const left = at(b) - now;
     if (left <= 0) return;
-    if (!b.r24 && left <= 24 * 36e5 && left > 3 * 36e5) { tg("sendMessage", { chat_id: b.chat, text: `Напоминаем: завтра ${hm(b.start)} вы записаны в BARBER 13, ${b.masterName}. Юбилейная, 13. Если планы поменялись, перенести или отменить можно на сайте.` }); sheet().getRange(b.row, 17).setValue("да"); }
+    if (!b.r24 && left <= 24 * 36e5 && left > 3 * 36e5) { tg("sendMessage", { chat_id: b.chat, text: `Напоминаем: ${b.date === today() ? "сегодня" : "завтра"} в ${hm(b.start)} вы записаны в BARBER 13, ${b.masterName}. Юбилейная, 13. Если планы поменялись, перенести или отменить можно на сайте.` }); sheet().getRange(b.row, 17).setValue("да"); }
     if (!b.r2 && left <= 2 * 36e5) { tg("sendMessage", { chat_id: b.chat, text: `Через 2 часа, в ${hm(b.start)}, ждём вас в BARBER 13, Юбилейная, 13.` }); sheet().getRange(b.row, 18).setValue("да"); }
   });
 }
