@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BARBER 13: запись онлайн, Верхняя Пышма</title>
+<meta name="description" content="Барбершоп BARBER 13 в Верхней Пышме, Юбилейная, 13. Выберите мастера, услугу и свободное время.">
+<meta name="theme-color" content="#D9DAD6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Ysabeau+Office:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#D9DAD6;   /* стена */
+  --brick:#C9CBC6;      /* швы кирпича */
+  --ink:#24272C;        /* текст */
+  --pink:#FF3E8E;       /* граффити */
+  --cobalt:#3058FF;     /* выбранное */
+  --paper:#FFFFFF;
+  --muted:#5D626B;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--concrete);color:var(--ink);font:400 17px/1.5 "Ysabeau Office",system-ui,sans-serif;
+  background-image:linear-gradient(var(--brick) 2px,transparent 2px),linear-gradient(90deg,var(--brick) 2px,transparent 2px);
+  background-size:120px 44px,120px 88px;background-position:0 0,60px 44px}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* шапка */
+header{position:sticky;top:0;z-index:5;background:var(--concrete);border-bottom:2px solid var(--ink)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.logo{font:400 18px/1 "Rubik Mono One";letter-spacing:.5px;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--ink);background:var(--ink);color:#fff;
+  font-weight:800;padding:10px 16px;border-radius:999px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.pink{background:var(--pink);border-color:var(--pink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* первый экран: огромная 13 как наклейка на стене */
+.hero{position:relative;padding:28px 0 8px;overflow:hidden}
+.hero .thirteen{font:400 min(42vw,240px)/.8 "Rubik Mono One";color:var(--pink);letter-spacing:-.06em;margin:0;
+  transform:rotate(-6deg);transform-origin:0 100%;text-shadow:6px 6px 0 var(--ink);user-select:none}
+.hero h1{font-weight:800;font-size:clamp(28px,7vw,40px);line-height:1.08;margin:18px 0 8px;max-width:16ch}
+.hero p{margin:0 0 6px;color:var(--muted);max-width:44ch}
+.addr{display:flex;flex-wrap:wrap;gap:6px 14px;font-weight:600;margin-top:10px}
+
+/* запись */
+.book{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);margin:22px 0;box-shadow:6px 6px 0 var(--ink)}
+.step{padding:18px 16px;border-top:2px dashed var(--brick)}
+.step:first-child{border-top:0}
+.step h2{display:flex;align-items:baseline;gap:10px;font-size:20px;font-weight:800;margin:0 0 12px}
+.step h2 b{font:400 13px/1 "Rubik Mono One";background:var(--ink);color:#fff;border-radius:6px;padding:5px 7px}
+.step.locked{opacity:.38;pointer-events:none}
+.pick{font-weight:600;color:var(--cobalt);font-size:15px;margin-left:auto}
+
+.masters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.m{border:2px solid var(--ink);border-radius:12px;padding:8px;background:var(--paper);cursor:pointer;text-align:left}
+.m img,.m .any{width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;display:block;background:var(--concrete)}
+.m .any{display:grid;place-items:center;font:400 30px "Rubik Mono One";color:var(--ink)}
+.m b{display:block;margin-top:6px;font-size:16px}
+.m span{font-size:13px;color:var(--muted);line-height:1.25;display:block}
+.m[aria-pressed=true]{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.m[aria-pressed=true] span{color:#DCE3FF}
+
+.svc{list-style:none;margin:0;padding:0}
+.svc li+li{border-top:1px solid #E6E7E3}
+.svc label{display:flex;align-items:center;gap:12px;padding:11px 2px;cursor:pointer}
+.svc input{width:22px;height:22px;accent-color:var(--cobalt);flex:none}
+.svc .n{flex:1}
+.svc .n small{display:block;color:var(--muted);font-size:14px}
+.svc .p{font-weight:800;white-space:nowrap}
+.grp{font-weight:800;font-size:14px;color:var(--muted);margin:10px 0 0}
+.sum{display:flex;justify-content:space-between;font-weight:800;margin-top:10px;padding-top:10px;border-top:2px solid var(--ink)}
+
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.d{flex:none;width:58px;border:2px solid var(--ink);border-radius:12px;background:var(--paper);padding:6px 0;text-align:center;cursor:pointer;scroll-snap-align:start}
+.d small{display:block;font-size:12px;color:var(--muted)}
+.d b{display:block;font-size:20px;line-height:1.1}
+.d[aria-pressed=true]{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.d[aria-pressed=true] small{color:#DCE3FF}
+.d:disabled{opacity:.3;cursor:not-allowed}
+.times{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t{border:2px solid var(--ink);border-radius:10px;background:var(--paper);padding:9px 0;font-weight:800;cursor:pointer}
+.t[aria-pressed=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+.empty{color:var(--muted);margin:4px 0}
+
+.f{display:grid;gap:10px}
+.f input,.f textarea{width:100%;border:2px solid var(--ink);border-radius:10px;padding:12px;background:var(--paper)}
+.f textarea{min-height:70px;resize:vertical}
+.err{color:#C4113F;font-weight:600;font-size:15px;min-height:1em;margin:0}
+.go{width:100%;padding:15px;font-size:18px;margin-top:4px}
+.note{font-size:14px;color:var(--muted);margin:8px 0 0}
+
+/* готово */
+.done{padding:22px 16px;text-align:left}
+.done h2{font-size:26px;font-weight:800;margin:0 0 6px}
+.ticket{border:2px dashed var(--ink);border-radius:12px;padding:12px 14px;margin:14px 0;line-height:1.6}
+.ticket b{font-weight:800}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+
+/* прайс и адрес */
+section.block{margin:34px 0}
+section.block h2{font:400 22px/1.1 "Rubik Mono One";margin:0 0 14px}
+.price{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);padding:6px 16px}
+.price h3{font-size:17px;margin:14px 0 4px;font-weight:800}
+.price p{display:flex;justify-content:space-between;gap:12px;margin:0;padding:7px 0;border-top:1px solid #E6E7E3}
+.price p span:last-child{font-weight:800;white-space:nowrap}
+.map{border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.map iframe{display:block;width:100%;height:300px;border:0}
+.map div{padding:12px 16px;font-weight:600}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px}
+.demo{background:var(--ink);color:#fff;font-size:13px;text-align:center;padding:6px 16px}
+@media (min-width:640px){.times{grid-template-columns:repeat(6,1fr)}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo">Черновой пример от shak.web: записи пока сохраняются только в этом браузере</div>
+<header><div class="wrap">
+  <a class="logo" href="#">BARBER 13</a>
+  <a class="btn pink" href="#book">Записаться</a>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="thirteen" aria-hidden="true">13</p>
+    <h1>Барбершоп на Юбилейной, 13</h1>
+    <p>Выберите мастера, услугу и свободное время. Запись занимает минуту, звонить не нужно.</p>
+    <div class="addr"><span>Верхняя Пышма, Юбилейная, 13</span><a href="#map">Как пройти</a></div>
+  </div>
+
+  <div class="book" id="book" aria-live="polite">
+    <div id="flow">
+      <div class="step" id="s1"><h2><b>1</b>Мастер <span class="pick" id="p1"></span></h2><div class="masters" id="masters"></div></div>
+      <div class="step locked" id="s2"><h2><b>2</b>Услуги <span class="pick" id="p2"></span></h2><div id="svcs"></div></div>
+      <div class="step locked" id="s3"><h2><b>3</b>Дата и время <span class="pick" id="p3"></span></h2><div class="days" id="days"></div><div class="times" id="times"></div></div>
+      <div class="step locked" id="s4"><h2><b>4</b>Ваши контакты</h2>
+        <form class="f" id="form" novalidate>
+          <input id="name" autocomplete="name" placeholder="Имя" aria-label="Имя">
+          <input id="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-label="Телефон">
+          <textarea id="comment" placeholder="Комментарий, если нужно" aria-label="Комментарий"></textarea>
+          <p class="err" id="err"></p>
+          <button class="btn go" id="go" type="submit" disabled>Записаться</button>
+          <p class="note">Мастер подтвердит запись сообщением. Если планы поменяются, просто напишите нам.</p>
+        </form>
+      </div>
+    </div>
+    <div class="done" id="done" hidden></div>
+  </div>
+
+  <section class="block" id="prices"><h2>Цены</h2><div class="price" id="price"></div></section>
+
+  <section class="block" id="map"><h2>Адрес</h2>
+    <div class="map">
+      <iframe title="BARBER 13 на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?oid=21368857117&amp;z=16"></iframe>
+      <div>Верхняя Пышма, Юбилейная улица, 13</div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">BARBER 13, Верхняя Пышма. Сайт сделан на shak.web.</div></footer>
+
+<script>
+// Данные салона: всё, что меняется (мастера, услуги, цены, часы работы), здесь.
+const SHOP = {
+  open: 10, close: 21, step: 30, daysAhead: 14,
+  masters: [
+    { id: "ivan", name: "Иван", role: "Бренд-барбер", photo: "img/ivan.jpg" },
+    { id: "andrey", name: "Андрей", role: "Барбер", photo: "img/andrey.jpg" }
+  ],
+  services: [{"id":21653029,"t":"Укладка: мытьё головы и стайлинг","p":500,"m":30,"who":["andrey","ivan"],"extra":true},{"id":22204503,"t":"Пилинг кожи головы, укладка, воск","p":1000,"m":30,"who":["ivan"],"extra":true},{"id":22204536,"t":"Удаление волос воском","p":500,"m":15,"who":["andrey","ivan"],"extra":true},{"id":21653036,"t":"Мужская стрижка","p":1700,"m":75,"who":["ivan"]},{"id":22204230,"t":"Фейд","p":1500,"m":60,"who":["ivan"]},{"id":21653035,"t":"Стрижка и борода","p":2300,"m":90,"who":["ivan"]},{"id":21653034,"t":"Оформление бороды и усов","p":1300,"m":45,"who":["ivan"]},{"id":22204365,"t":"Авторская стрижка","p":2300,"m":110,"who":["ivan"]},{"id":22204332,"t":"Детская стрижка","p":1400,"m":75,"who":["ivan"]},{"id":21653033,"t":"Отец и сын","p":2700,"m":150,"who":["ivan"]},{"id":22204302,"t":"Женская стрижка","p":2000,"m":90,"who":["ivan"]},{"id":29031441,"t":"Камуфляж седины","p":1200,"m":30,"who":["ivan"]},{"id":21653217,"t":"Уход за кожей головы","p":1100,"m":60,"who":["ivan"]},{"id":21653031,"t":"Уход за кожей","p":1300,"m":60,"who":["ivan"]},{"id":21653032,"t":"Премиум-комплекс","p":3400,"m":135,"who":["ivan"]},{"id":22204353,"t":"Биозавивка","p":5000,"m":180,"who":["ivan"]},{"id":31298730,"t":"Мужская стрижка","p":1200,"m":80,"who":["andrey"]},{"id":31299288,"t":"Стрижка и борода","p":1700,"m":120,"who":["andrey"]},{"id":31298772,"t":"Детская стрижка","p":1000,"m":80,"who":["andrey"]},{"id":31298286,"t":"Отец и сын","p":2000,"m":180,"who":["andrey"]}]
+};
+
+const $ = id => document.getElementById(id);
+const rub = n => n.toLocaleString("ru-RU") + " ₽";
+const dur = m => (m >= 60 ? Math.floor(m / 60) + " ч " : "") + (m % 60 ? m % 60 + " мин" : "").trim();
+const DOW = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+const MON = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const hm = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+const st = { master: null, svc: new Set(), date: null, time: null };
+
+// Занятые окна. В черновике: случайные «чужие» записи плюс свои из этого браузера.
+// В рабочей версии этот блок заменяется запросом к таблице записей.
+function load() { try { return JSON.parse(localStorage.getItem("b13") || "[]"); } catch (e) { return []; } }
+function save(list) { try { localStorage.setItem("b13", JSON.stringify(list)); } catch (e) {} }
+function busy(master, date) {
+  const seed = [...(master + date)].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 9973, 7), out = [];
+  for (let i = 0; i < 4; i++) { const s = SHOP.open * 60 + ((seed * (i + 3) * 37) % ((SHOP.close - SHOP.open) * 2)) * 30; out.push([s, s + 60 + (i % 2) * 30]); }
+  load().filter(b => b.master === master && b.date === date).forEach(b => out.push([b.start, b.start + b.len]));
+  return out;
+}
+function mastersFor() { return st.master === "any" ? SHOP.masters.map(m => m.id) : [st.master]; }
+function chosen() { return SHOP.services.filter(s => st.svc.has(s.id)); }
+function total() { const c = chosen(); return { p: c.reduce((a, s) => a + s.p, 0), m: c.reduce((a, s) => a + s.m, 0) }; }
+function slots(date) {
+  const len = total().m, now = new Date(), res = new Map();
+  const isToday = date === ymd(now), nowMin = now.getHours() * 60 + now.getMinutes() + 30;
+  for (const mid of mastersFor()) {
+    const B = busy(mid, date);
+    for (let s = SHOP.open * 60; s + len <= SHOP.close * 60; s += SHOP.step) {
+      if (isToday && s < nowMin) continue;
+      if (B.some(([a, b]) => s < b && s + len > a)) continue;
+      if (!res.has(s)) res.set(s, mid);
+    }
+  }
+  return [...res.entries()].sort((a, b) => a[0] - b[0]);
+}
+
+function lock(n, on) { $("s" + n).classList.toggle("locked", on); }
+function drawMasters() {
+  const list = [...SHOP.masters, { id: "any", name: "Любой", role: "Кто свободен в это время" }];
+  $("masters").innerHTML = list.map(m => `<button type="button" class="m" data-id="${m.id}" aria-pressed="${st.master === m.id}">
+    ${m.photo ? `<img src="${m.photo}" alt="${m.name}" loading="lazy">` : `<div class="any">13</div>`}<b>${m.name}</b><span>${m.role}</span></button>`).join("");
+}
+function drawSvcs() {
+  const ids = mastersFor(), list = SHOP.services.filter(s => s.who.some(w => ids.includes(w)));
+  // «Любой мастер»: одинаковые услуги показываем один раз, с ценой «от»
+  const seen = new Map();
+  if (st.master === "any") list.forEach(s => { const k = s.t; if (!seen.has(k) || seen.get(k).p > s.p) seen.set(k, s); });
+  const L = st.master === "any" ? [...seen.values()] : list;
+  const row = s => `<li><label><input type="checkbox" value="${s.id}" ${st.svc.has(s.id) ? "checked" : ""}><span class="n">${s.t}<small>${dur(s.m)}</small></span><span class="p">${st.master === "any" && list.filter(x => x.t === s.t).length > 1 ? "от " : ""}${rub(s.p)}</span></label></li>`;
+  const main = L.filter(s => !s.extra), extra = L.filter(s => s.extra);
+  const t = total();
+  $("svcs").innerHTML = `<ul class="svc">${main.map(row).join("")}</ul>${extra.length ? `<p class="grp">Можно добавить</p><ul class="svc">${extra.map(row).join("")}</ul>` : ""}
+    ${st.svc.size ? `<div class="sum"><span>${dur(t.m)}</span><span>${rub(t.p)}</span></div>` : ""}`;
+}
+function drawDays() {
+  const out = [], d = new Date();
+  for (let i = 0; i < SHOP.daysAhead; i++) {
+    const x = new Date(d); x.setDate(d.getDate() + i); const k = ymd(x), n = st.svc.size ? slots(k).length : 1;
+    out.push(`<button type="button" class="d" data-d="${k}" aria-pressed="${st.date === k}" ${n ? "" : "disabled"}><small>${i === 0 ? "сег" : i === 1 ? "завт" : DOW[x.getDay()]}</small><b>${x.getDate()}</b><small>${MON[x.getMonth()]}</small></button>`);
+  }
+  $("days").innerHTML = out.join("");
+}
+function drawTimes() {
+  if (!st.date) { $("times").innerHTML = `<p class="empty">Сначала выберите день.</p>`; return; }
+  const s = slots(st.date);
+  $("times").innerHTML = s.length ? s.map(([m]) => `<button type="button" class="t" data-t="${m}" aria-pressed="${st.time === m}">${hm(m)}</button>`).join("")
+    : `<p class="empty">В этот день свободного времени нет, выберите другой.</p>`;
+}
+function niceDate(k) { const x = new Date(k + "T12:00"); return `${x.getDate()} ${MON[x.getMonth()]}, ${DOW[x.getDay()]}`; }
+function refresh() {
+  const m = SHOP.masters.find(x => x.id === st.master);
+  $("p1").textContent = st.master ? (m ? m.name : "Любой") : "";
+  $("p2").textContent = st.svc.size ? rub(total().p) : "";
+  $("p3").textContent = st.date && st.time != null ? `${niceDate(st.date)}, ${hm(st.time)}` : "";
+  lock(2, !st.master); lock(3, !st.svc.size); lock(4, st.time == null);
+  $("go").disabled = st.time == null;
+  $("go").textContent = st.time == null ? "Записаться" : `Записаться на ${niceDate(st.date).split(",")[0]}, ${hm(st.time)}`;
+}
+function scrollTo(n) { setTimeout(() => $("s" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }), 60); }
+
+$("masters").addEventListener("click", e => {
+  const b = e.target.closest(".m"); if (!b) return;
+  st.master = b.dataset.id; st.svc.clear(); st.date = null; st.time = null;
+  drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh(); scrollTo(2);
+});
+$("svcs").addEventListener("change", e => {
+  const id = +e.target.value; e.target.checked ? st.svc.add(id) : st.svc.delete(id);
+  st.time = null; if (st.date && !slots(st.date).length) st.date = null;
+  drawSvcs(); drawDays(); drawTimes(); refresh();
+});
+$("days").addEventListener("click", e => { const b = e.target.closest(".d"); if (!b || b.disabled) return; st.date = b.dataset.d; st.time = null; drawDays(); drawTimes(); refresh(); });
+$("times").addEventListener("click", e => { const b = e.target.closest(".t"); if (!b) return; st.time = +b.dataset.t; drawTimes(); refresh(); scrollTo(4); });
+
+$("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("name").value.trim(), phone = $("phone").value.replace(/[^\d+]/g, "");
+  if (!name) { $("err").textContent = "Напишите, как к вам обращаться."; $("name").focus(); return; }
+  if (phone.replace(/\D/g, "").length < 10) { $("err").textContent = "Проверьте номер телефона: нужно 10-11 цифр."; $("phone").focus(); return; }
+  if (!slots(st.date).some(([m]) => m === st.time)) { $("err").textContent = "Это время уже заняли. Выберите другое."; drawTimes(); return; }
+  $("err").textContent = "";
+  const who = st.master === "any" ? slots(st.date).find(([m]) => m === st.time)[1] : st.master;
+  const t = total(), list = load();
+  const rec = { master: who, date: st.date, start: st.time, len: t.m, svc: chosen().map(s => s.t), price: t.p, name, phone, comment: $("comment").value.trim(), at: Date.now() };
+  list.push(rec); save(list);
+  // Здесь в рабочей версии запись уходит в таблицу и мастеру в Telegram.
+  showDone(rec);
+});
+
+function ics(r) {
+  const p = n => String(n).padStart(2, "0"), d = r.date.replace(/-/g, "");
+  const a = `${d}T${p(Math.floor(r.start / 60))}${p(r.start % 60)}00`, b = `${d}T${p(Math.floor((r.start + r.len) / 60))}${p((r.start + r.len) % 60)}00`;
+  return "data:text/calendar;charset=utf-8," + encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;TZID=Asia/Yekaterinburg:${a}\nDTEND;TZID=Asia/Yekaterinburg:${b}\nSUMMARY:BARBER 13: ${r.svc.join(", ")}\nLOCATION:Верхняя Пышма, Юбилейная, 13\nEND:VEVENT\nEND:VCALENDAR`);
+}
+function showDone(r) {
+  const m = SHOP.masters.find(x => x.id === r.master);
+  $("flow").hidden = true; $("done").hidden = false;
+  $("done").innerHTML = `<h2>Вы записаны</h2><p>Ждём вас. Если что-то изменится, напишите, перенесём.</p>
+    <div class="ticket"><b>${niceDate(r.date)}, ${hm(r.start)}</b><br>Мастер: ${m.name}<br>${r.svc.join(", ")}<br>${dur(r.len)}, ${rub(r.price)}<br>Юбилейная, 13</div>
+    <div class="row"><a class="btn" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn ghost" type="button" id="again">Записать ещё кого-то</button></div>`;
+  $("again").onclick = () => { st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); scrollTo(1); };
+  $("book").scrollIntoView({ block: "start" });
+}
+
+function drawPrice() {
+  $("price").innerHTML = SHOP.masters.map(m => `<h3>${m.name}</h3>` + SHOP.services.filter(s => s.who.includes(m.id))
+    .map(s => `<p><span>${s.t}</span><span>${rub(s.p)}</span></p>`).join("")).join("");
+}
+drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawPrice(); refresh();
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ set -e
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 OUT=$(mktemp -d)
 cp -r "$ROOT/index.html" "$ROOT/landing.css" "$ROOT/brief" "$ROOT/tz" "$ROOT/raboty" "$ROOT/demos" "$OUT/"
+[ -d "$ROOT/sites" ] && cp -r "$ROOT/sites" "$OUT/"
 rm -rf "$OUT/demos/_configs" "$OUT/demos/КАК-СДЕЛАТЬ-ДЕМО.md" "$OUT/raboty/videos.json"
 touch "$OUT/.nojekyll"
 cd "$OUT"
