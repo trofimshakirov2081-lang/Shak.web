@@ -80,11 +80,23 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 /* запись: тёмная панель, шаги раскрываются по одному */
 .book{margin-top:16px;background:linear-gradient(180deg,rgba(30,25,22,.9),rgba(14,12,11,.92));border:1px solid var(--line);border-radius:20px;margin:22px 0 10px;overflow:hidden;scroll-margin-top:70px;
   box-shadow:inset 0 1px 0 rgba(241,221,174,.1),0 30px 60px -30px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.book{position:relative}
+/* тонкая внутренняя рамка, как у меню дорогого заведения */
+.book::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,160,99,.22);border-radius:15px;pointer-events:none}
+.bhead{text-align:center;padding:26px 20px 18px;border-bottom:1px solid var(--line)}
+.bhead h2{font:400 34px/1 var(--fh,"Forum");margin:0;letter-spacing:.04em}
+.bhead p{margin:8px 0 0;color:var(--smoke);font-size:15px}
+.prog{display:flex;gap:6px;justify-content:center;margin-top:14px}
+.prog i{width:34px;height:2px;border-radius:2px;background:var(--line);transition:background .4s}
+.prog i.on{background:var(--gold)}
+.ask{display:none;margin:-4px 0 12px;color:var(--smoke);font-size:15px}
+.step.now .ask{display:block}
 .step{display:none;border-top:1px solid var(--line)}
 .step:first-child{border-top:0}
 .step.was,.step.now,.step.soon{display:block}
-.sh{display:flex;align-items:baseline;gap:10px;width:100%;background:none;border:0;text-align:left;padding:14px 16px;cursor:pointer;color:var(--ivory)}
-.sh b{font:400 15px var(--fh,"Forum");color:var(--smoke);min-width:1.1em}
+.sh{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;text-align:left;padding:14px 16px;cursor:pointer;color:var(--ivory)}
+.sh b{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid rgba(201,160,99,.5);font:400 14px/1 var(--fh,"Forum");color:var(--gold);align-self:center}
+.step.was .sh b{background:rgba(201,160,99,.14)}
 .sh .tt{font:400 20px/1 var(--fh,"Forum");white-space:nowrap;letter-spacing:.02em;transition:font-size .35s}
 .pick{font-weight:600;font-size:15px;color:var(--ivory);margin-left:auto;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .chg{font-size:13px;color:var(--smoke);text-decoration:underline;text-underline-offset:3px;flex:none}
@@ -96,7 +108,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.6,0,.2,1)}
 .step.now .body{grid-template-rows:1fr}
 .in{overflow:hidden;min-height:0}
-.in>div,.in>form{padding:0 16px 18px}
+.in>div,.in>form{padding:2px 16px 18px}
 .nav{display:flex;align-items:center;gap:10px;margin-top:14px}
 .nav .btn{flex:1}
 .back{background:none;border:1px solid var(--line);color:var(--ivory);border-radius:999px;padding:10px 16px;cursor:pointer;flex:none}
@@ -107,7 +119,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .m .any{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#2A231E,var(--onyx))}
 .m b{display:block;margin-top:8px;font-size:17px;line-height:1.1}
 .m span{font-size:13px;color:var(--smoke);line-height:1.25;display:block}
-.m[aria-pressed=true]{border-color:var(--ivory);box-shadow:0 0 0 1px var(--ivory),0 10px 22px -12px rgba(0,0,0,.8);transform:translateY(-2px)}
+.m[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 12px 26px -14px rgba(201,160,99,.55)}
 
 .svc{list-style:none;margin:0;padding:0}
 .svc li+li{border-top:1px solid rgba(239,231,218,.08)}
@@ -238,17 +250,18 @@ body.entering main{transform:translateY(60px)}
   </div>
 
   <div class="book" id="book" aria-live="polite">
+    <div class="bhead"><h2>Онлайн-запись</h2><p>Мастер, услуга, время и контакты. Около минуты.</p><div class="prog" id="prog"><i class="on"></i><i></i><i></i><i></i></div></div>
     <div id="flow">
       <div class="step now" id="s1"><button type="button" class="sh" data-go="1"><b>1</b><span class="tt">Мастер</span><span class="pick" id="p1"></span><span class="chg">изменить</span></button>
-        <div class="body"><div class="in"><div><div class="masters" id="masters"></div></div></div></div></div>
+        <div class="body"><div class="in"><div><p class="ask">Нажмите на мастера, к которому хотите записаться.</p><div class="masters" id="masters"></div></div></div></div></div>
       <div class="step soon" id="s2"><button type="button" class="sh" data-go="2"><b>2</b><span class="tt">Услуги</span><span class="pick" id="p2"></span><span class="chg">изменить</span></button>
-        <div class="body"><div class="in"><div><div id="svcs"></div>
+        <div class="body"><div class="in"><div><p class="ask">Отметьте одну или несколько услуг.</p><div id="svcs"></div>
           <div class="nav"><button type="button" class="back" data-go="1">Назад</button><button type="button" class="btn" id="next2" disabled>Выбрать время</button></div></div></div></div></div>
       <div class="step" id="s3"><button type="button" class="sh" data-go="3"><b>3</b><span class="tt">Дата и время</span><span class="pick" id="p3"></span><span class="chg">изменить</span></button>
-        <div class="body"><div class="in"><div><div class="days" id="days"></div><div class="times" id="times"></div>
+        <div class="body"><div class="in"><div><p class="ask">Выберите день, потом свободное время.</p><div class="days" id="days"></div><div class="times" id="times"></div>
           <div class="nav"><button type="button" class="back" data-go="2">Назад</button></div></div></div></div></div>
       <div class="step" id="s4"><button type="button" class="sh" data-go="4"><b>4</b><span class="tt">Ваши контакты</span></button>
-        <div class="body"><div class="in"><form class="f" id="form" novalidate>
+        <div class="body"><div class="in"><form class="f" id="form" novalidate><p class="ask" style="margin:0">Имя и телефон. По этому номеру вы потом найдёте свою запись.</p>
           <input id="name" autocomplete="name" placeholder="Имя" aria-label="Имя">
           <input id="phone" type="tel" autocomplete="tel" placeholder="Телефон, по нему найдёте запись" aria-label="Телефон">
           <textarea id="comment" placeholder="Комментарий, если нужно" aria-label="Комментарий"></textarea>
@@ -286,7 +299,7 @@ const DEFAULT_SHOP = {
   step: 30, daysAhead: 14, demoBusy: true, showFind: true, theme: "leather", font: "forum",
   texts: { h1: "Барбершоп на Юбилейной, 13", lead: "Запись за минуту, звонить не нужно.", address: "Верхняя Пышма, Юбилейная улица, 13", phone: "", outro: "До встречи на Юбилейной" },
   masters: [
-    { id: "ivan", name: "Иван", role: "Бренд-барбер", photo: "img/ivan.jpg", hours: WEEK },
+    { id: "ivan", name: "Иван", role: "Бренд-барбер", photo: "img/ivan.jpg", pos: 92, hours: WEEK },
     { id: "andrey", name: "Андрей", role: "Барбер", photo: "img/andrey.jpg", hours: WEEK }
   ],
   // Исключения из графика: { date, master: "all" или id, off: true } или с часами { from, to }
@@ -360,7 +373,7 @@ const ANY = `<img src="img/scis.webp" alt="" style="width:80%;object-fit:contain
 function drawMasters() {
   const list = [...SHOP.masters, { id: "any", name: "Любой", role: "Кто свободен в это время" }];
   $("masters").innerHTML = list.map(m => `<button type="button" class="m" data-id="${m.id}" aria-pressed="${st.master === m.id}">
-    ${m.photo ? `<img src="${m.photo}" alt="${esc(m.name)}" loading="lazy">` : `<div class="any">${ANY}</div>`}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></button>`).join("");
+    ${m.photo ? `<img src="${m.photo}" alt="${esc(m.name)}" loading="lazy" style="object-position:50% ${m.pos == null ? 50 : m.pos}%">` : `<div class="any">${ANY}</div>`}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></button>`).join("");
 }
 function drawSvcs() {
   const ids = mastersFor(), list = SHOP.services.filter(s => s.who.some(w => ids.includes(w)));
@@ -402,6 +415,7 @@ function reach() { return !st.master ? 1 : !st.svc.size ? 2 : st.time == null ? 
 function show(n) {
   cur = Math.min(n, reach());
   if (cur === 3 && !st.date) { const f = document.querySelector(".d:not(:disabled)"); if (f) { st.date = f.dataset.d; drawDays(); drawTimes(); } } // сразу ближайший свободный день
+  [...$("prog").children].forEach((x, i) => x.classList.toggle("on", i < cur));
   for (let i = 1; i <= 4; i++) $("s" + i).className = "step" + (i < cur ? " was" : i === cur ? " now" : i === cur + 1 ? " soon" : "");
   const top = $("book").getBoundingClientRect().top;
   if (top < 50 || top > innerHeight * .4) $("book").scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
@@ -505,7 +519,7 @@ function showDone(r) {
   $("book").scrollIntoView({ block: "start" });
 }
 function drawInfo() {
-  $("teamlist").innerHTML = SHOP.masters.map(m => `<figure><img src="${m.photo}" alt="${m.name}" loading="lazy"><figcaption><b>${esc(m.name)}</b><span>${esc(m.role)}</span></figcaption></figure>`).join("");
+  $("teamlist").innerHTML = SHOP.masters.map(m => `<figure><img src="${m.photo}" alt="${esc(m.name)}" loading="lazy" style="object-position:50% ${m.pos == null ? 50 : m.pos}%"><figcaption><b>${esc(m.name)}</b><span>${esc(m.role)}</span></figcaption></figure>`).join("");
 }
 // Оформление: готовые сочетания цветов и шрифтов (выбираются в админке)
 const THEMES = {
@@ -587,7 +601,7 @@ var drum = (function () {
   let pos = 0, from = 0, to = 0, t0 = 0, raf = 0, hold = 0, drag = null, visible = false;
   function build() {
     Q = SHOP.quick.map(([id, mid]) => ({ s: SHOP.services.find(x => x.id === id), m: SHOP.masters.find(x => x.id === mid) })).filter(q => q.s && q.m); n = Q.length;
-    box.innerHTML = Q.map((q, i) => `<button type="button" class="qc" data-i="${i}"><span class="qm"><img src="${q.m.photo}" alt="">${esc(q.m.name)}</span>
+    box.innerHTML = Q.map((q, i) => `<button type="button" class="qc" data-i="${i}"><span class="qm"><img src="${q.m.photo}" alt="" style="object-position:50% ${q.m.pos == null ? 50 : q.m.pos}%">${esc(q.m.name)}</span>
       <b class="qt">${esc(q.s.t)}</b><span class="qd">${dur(q.s.m)}</span><span class="qp">${rub(q.s.p)}</span><span class="qb">Записаться</span></button>`).join("");
     $("dots").innerHTML = Q.map(() => "<i></i>").join("");
     cards = [...box.children]; dots = [...$("dots").children]; pos = from = to = 0; if (n) paint();

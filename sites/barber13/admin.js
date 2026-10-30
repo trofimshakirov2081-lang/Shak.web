@@ -127,8 +127,9 @@ window.B13Admin = (function () {
       <div><label class="f">Дней вперёд</label><input type="number" min="3" max="60" data-act="daysAhead" value="${SHOP.daysAhead}"></div></div>
       <label class="line" style="margin-top:12px"><input type="checkbox" data-act="demoBusy" ${SHOP.demoBusy ? "checked" : ""}> Показывать пример занятого времени (для демонстрации, в рабочей версии выключить)</label></div>`;
 
-  V.masters = () => SHOP.masters.map((m, i) => `<div class="card"><div class="line"><img class="ph" src="${m.photo || "img/scis.webp"}" alt="">
+  V.masters = () => SHOP.masters.map((m, i) => `<div class="card"><div class="line"><img class="ph" src="${m.photo || "img/scis.webp"}" alt="" style="object-position:50% ${m.pos == null ? 50 : m.pos}%">
       <div style="flex:1;min-width:160px"><input data-act="mName" data-i="${i}" value="${esc(m.name)}" placeholder="Имя"><input data-act="mRole" data-i="${i}" value="${esc(m.role)}" placeholder="Должность" style="margin-top:6px"></div></div>
+      <label class="f">Лицо на фото: двигайте, чтобы лицо было по центру</label><input type="range" min="0" max="100" data-act="mPos" data-i="${i}" value="${m.pos == null ? 50 : m.pos}" style="width:100%">
       <div class="line" style="margin-top:10px">${photoInput("mPhoto", i)}<button class="sm del" data-act="mDel" data-i="${i}">Удалить мастера</button></div></div>`).join("") +
     `<button class="add" data-act="mAdd">+ Добавить мастера</button><p class="hint">Часы работы нового мастера настраиваются в разделе «Расписание», услуги в «Услугах и ценах».</p>`;
 
@@ -267,6 +268,7 @@ window.B13Admin = (function () {
     daysAhead(el) { SHOP.daysAhead = Math.max(3, Math.min(60, +el.value || 14)); changed(); },
     demoBusy(el) { SHOP.demoBusy = el.checked; changed(); },
     mName(el) { SHOP.masters[+el.dataset.i].name = el.value; changed(); },
+    mPos(el) { SHOP.masters[+el.dataset.i].pos = +el.value; changed(); const ph = el.closest(".card").querySelector(".ph"); if (ph) ph.style.objectPosition = `50% ${el.value}%`; },
     mRole(el) { SHOP.masters[+el.dataset.i].role = el.value; changed(); },
     mPhoto(el) { el.files[0] && readPhoto(el.files[0], u => { SHOP.masters[+el.dataset.i].photo = u; changed(); render(); }); },
     sT(el) { SHOP.services[+el.dataset.i].t = el.value; changed(); },
