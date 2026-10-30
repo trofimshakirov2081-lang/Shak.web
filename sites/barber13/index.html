@@ -52,6 +52,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .hero{padding:22px 0 0;display:grid;grid-template-columns:1fr;gap:6px}
 .hero h1{font-size:clamp(38px,10.5vw,72px);line-height:1;margin:0}
 .hero h1 em{font-style:normal}
+.hero .change{margin-top:14px;justify-self:start}
 .hero p{margin:8px 0 0;color:var(--smoke);max-width:40ch}
 .hero{position:relative}
 /* фоновые предметы у заголовков: целиком в экране, чуть приглушены */
@@ -145,7 +146,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .mine p{margin:0 0 10px}
 .mine .row .btn{padding:9px 14px}
 .find{display:grid;gap:8px;margin-top:10px}
-.code{font:400 40px/1 "Forum";letter-spacing:.25em;margin:4px 0 0}
 .done{padding:24px 16px}
 .done h2{font-size:38px;margin:0 0 6px;line-height:1}
 .ticket{background:rgba(255,255,255,.04);border-radius:14px;padding:14px 16px;margin:14px 0;line-height:1.65;border-left:2px solid var(--gold)}
@@ -231,6 +231,7 @@ body.entering main{transform:translateY(60px)}
   <div class="hero">
     <h1>Барбершоп на <em class="foil">Юбилейной, 13</em></h1>
     <p>Запись за минуту, звонить не нужно.</p>
+    <button class="btn line change" type="button" id="openfind2">Перенести или отменить запись</button>
     <div id="mine"></div>
   </div>
 
@@ -247,7 +248,7 @@ body.entering main{transform:translateY(60px)}
       <div class="step" id="s4"><button type="button" class="sh" data-go="4"><b>4</b><span class="tt">Ваши контакты</span></button>
         <div class="body"><div class="in"><form class="f" id="form" novalidate>
           <input id="name" autocomplete="name" placeholder="Имя" aria-label="Имя">
-          <input id="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-label="Телефон">
+          <input id="phone" type="tel" autocomplete="tel" placeholder="Телефон, по нему найдёте запись" aria-label="Телефон">
           <textarea id="comment" placeholder="Комментарий, если нужно" aria-label="Комментарий"></textarea>
           <p class="err" id="err"></p>
           <button class="btn go" id="go" type="submit" disabled>Записаться</button>
@@ -399,8 +400,7 @@ $("form").addEventListener("submit", e => {
   $("err").textContent = "";
   const who = st.master === "any" ? slots(st.date).find(([m]) => m === st.time)[1] : st.master;
   const t = total(), list = load(), old = st.edit && list.find(b => b.id === st.edit);
-  const rec = { id: old ? old.id : Math.random().toString(36).slice(2, 10), code: old ? old.code : String(1000 + Math.floor(Math.random() * 9000)),
-    master: who, date: st.date, start: st.time, len: t.m, svc: chosen().map(s => s.t), svcIds: [...st.svc], price: t.p, name, phone, comment: $("comment").value.trim(), at: Date.now(), status: old ? "moved" : "new" };
+  const rec = { id: old ? old.id : Math.random().toString(36).slice(2, 10), master: who, date: st.date, start: st.time, len: t.m, svc: chosen().map(s => s.t), svcIds: [...st.svc], price: t.p, name, phone, comment: $("comment").value.trim(), at: Date.now(), status: old ? "moved" : "new" };
   if (old) list.splice(list.indexOf(old), 1, rec); else list.push(rec);
   save(list); st.edit = null; drawMine();
   // Здесь в рабочей версии запись уходит в таблицу и мастеру в Telegram.
@@ -430,31 +430,33 @@ $("mine").addEventListener("click", e => {
     $("flow").hidden = false; $("done").hidden = true; show(3);
   }
   if (e.target.id === "findgo") {
-    const ph = $("fphone").value.replace(/\D/g, "").slice(-10), cd = $("fcode").value.trim();
-    // В рабочей версии поиск идёт по таблице записей, а не по этому браузеру.
-    const found = list.filter(b => b.status !== "cancelled" && b.phone.replace(/\D/g, "").slice(-10) === ph && b.code === cd);
-    if (found.length) drawMine(found); else $("ferr").textContent = "Запись не найдена. Проверьте номер и код или напишите мастеру.";
+    // Запись ищется по номеру телефона, который указали при записи. В рабочей версии поиск идёт по таблице записей.
+    const ph = $("fphone").value.replace(/\D/g, "").slice(-10), now = ymd(new Date());
+    if (ph.length < 10) { $("ferr").textContent = "Введите номер полностью, 10-11 цифр."; return; }
+    const found = list.filter(b => b.status !== "cancelled" && b.date >= now && b.phone.replace(/\D/g, "").slice(-10) === ph);
+    if (found.length) drawMine(found); else $("ferr").textContent = "На этот номер записей нет. Проверьте номер или запишитесь заново.";
   }
 });
-$("openfind").addEventListener("click", e => {
+function openFind(e) {
   e.preventDefault();
-  $("mine").innerHTML = `<div class="mine"><h3>Найти запись</h3><p>Введите номер телефона и код из подтверждения.</p>
-    <div class="find"><input id="fphone" type="tel" placeholder="+7 900 000-00-00" aria-label="Телефон"><input id="fcode" inputmode="numeric" maxlength="4" placeholder="Код, 4 цифры" aria-label="Код записи">
-    <p class="err" id="ferr"></p><button class="btn" id="findgo" type="button">Найти</button></div></div>`;
-  $("fphone").focus();
-});
+  $("mine").innerHTML = `<div class="mine"><h3>Перенести или отменить</h3><p>Введите номер телефона, который указывали при записи.</p>
+    <div class="find"><input id="fphone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-label="Телефон">
+    <p class="err" id="ferr"></p><button class="btn" id="findgo" type="button">Найти мою запись</button></div></div>`;
+  $("fphone").addEventListener("keydown", k => { if (k.key === "Enter") $("findgo").click(); });
+  $("mine").scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "center" }); $("fphone").focus({ preventScroll: true });
+}
+$("openfind").addEventListener("click", openFind); $("openfind2").addEventListener("click", openFind);
 function ics(r) {
   const p = n => String(n).padStart(2, "0"), d = r.date.replace(/-/g, "");
   const a = `${d}T${p(Math.floor(r.start / 60))}${p(r.start % 60)}00`, b = `${d}T${p(Math.floor((r.start + r.len) / 60))}${p((r.start + r.len) % 60)}00`;
-  return "data:text/calendar;charset=utf-8," + encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;TZID=Asia/Yekaterinburg:${a}\nDTEND;TZID=Asia/Yekaterinburg:${b}\nSUMMARY:BARBER 13: ${r.svc.join(", ")}\nDESCRIPTION:Код записи ${r.code}. Перенести или отменить: ${link(r)}\nURL:${link(r)}\nLOCATION:Верхняя Пышма, Юбилейная, 13\nEND:VEVENT\nEND:VCALENDAR`);
+  return "data:text/calendar;charset=utf-8," + encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;TZID=Asia/Yekaterinburg:${a}\nDTEND;TZID=Asia/Yekaterinburg:${b}\nSUMMARY:BARBER 13: ${r.svc.join(", ")}\nDESCRIPTION:Перенести или отменить: зайдите на сайт и введите свой номер телефона. ${link(r)}\nURL:${link(r)}\nLOCATION:Верхняя Пышма, Юбилейная, 13\nEND:VEVENT\nEND:VCALENDAR`);
 }
 function showDone(r) {
   const m = SHOP.masters.find(x => x.id === r.master);
   $("flow").hidden = true; $("done").hidden = false;
   $("done").innerHTML = `<h2>${r.status === "moved" ? "Запись перенесена" : "Вы записаны"}</h2><p>Ждём вас на Юбилейной, 13.</p>
     <div class="ticket"><b>${niceDate(r.date)}, ${hm(r.start)}</b><br>Мастер: ${m.name}<br>${r.svc.join(", ")}<br>${dur(r.len)}, ${rub(r.price)}</div>
-    <p style="margin:0">Код записи (СМС не будет, сохраните его)</p><p class="code foil">${r.code}</p>
-    <p class="note" style="margin:4px 0 14px">Чтобы перенести или отменить, зайдите на сайт: с этого телефона запись откроется сама, с другого нажмите «Моя запись» и введите номер и код. Код и ссылка сохранятся в событии календаря.</p>
+    <p class="note" style="margin:4px 0 14px">Перенести или отменить можно в любой момент: нажмите «Перенести или отменить запись» вверху сайта и введите номер ${r.phone}. Можно с любого телефона.</p>
     <div class="row"><a class="btn line" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn line" type="button" id="again">Записать ещё кого-то</button></div>`;
   $("again").onclick = () => { st.edit = null; st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); show(1); };
   $("book").scrollIntoView({ block: "start" });
