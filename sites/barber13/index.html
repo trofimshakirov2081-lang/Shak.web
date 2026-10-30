@@ -58,68 +58,89 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .hero{position:relative}
 .props{position:relative;height:200px;margin:-6px 0 4px}
 .props img{position:absolute;filter:drop-shadow(0 22px 22px rgba(0,0,0,.55));will-change:transform}
-.props .pr1{width:46%;max-width:260px;left:2%;top:0;transform:rotate(-28deg)}
-.props .pr2{width:56%;max-width:320px;right:-4%;top:30px;transform:rotate(10deg)}
-.side{position:absolute;pointer-events:none;z-index:0;opacity:.9;filter:drop-shadow(0 20px 20px rgba(0,0,0,.5));will-change:transform}
+.props .pr1{width:40%;max-width:230px;left:6%;top:6px;transform:rotate(-28deg)}
+.props .pr2{width:46%;max-width:280px;right:4%;top:56px;transform:rotate(-14deg);transform-origin:54.5% 54.7%}
+/* фоновые предметы у заголовков: целиком в экране, чуть приглушены */
+.side{position:absolute;right:4px;pointer-events:none;z-index:0;opacity:.8;filter:drop-shadow(0 16px 16px rgba(0,0,0,.55));will-change:transform}
+.buzz{animation:buzz 70ms linear infinite}
+@keyframes buzz{25%{translate:.8px -.6px}50%{translate:-.7px .5px}75%{translate:.6px .8px}}
+.hair{position:absolute;width:1px;height:9px;border-radius:1px;background:var(--gold-lo);pointer-events:none;z-index:0;animation:fall 1.4s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--dx),70px) rotate(var(--r));opacity:0}}
 @media (min-width:760px){.props{position:absolute;right:-40px;top:20px;width:380px;height:300px;margin:0}.hero h1,.hero p,.facts{max-width:60%}}
 
-/* запись: светлый бланк на тёмном */
-.book{background:var(--ivory);color:var(--ink);border-radius:20px;margin:22px 0 10px;overflow:hidden;box-shadow:0 0 0 1px var(--gold),0 0 0 6px rgba(14,12,11,.9),0 0 0 7px var(--line),0 40px 70px -30px rgba(0,0,0,.85)}
-.step{padding:18px 16px;border-top:1px solid #D6D0C6}
+/* запись: тёмная панель, шаги раскрываются по одному */
+.book{background:linear-gradient(180deg,rgba(30,25,22,.9),rgba(14,12,11,.92));border:1px solid var(--line);border-radius:20px;margin:22px 0 10px;overflow:hidden;scroll-margin-top:70px;
+  box-shadow:inset 0 1px 0 rgba(241,221,174,.1),0 30px 60px -30px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.step{display:none;border-top:1px solid var(--line)}
 .step:first-child{border-top:0}
-.step h2{display:flex;align-items:baseline;gap:10px;font-size:27px;margin:0 0 12px;line-height:1}
-.step h2 b{font:400 15px "Forum";color:var(--gold-lo);min-width:1.2em}
-.step.locked{opacity:.4;pointer-events:none}
-.pick{font:600 15px "Ysabeau Office";color:#6A5326;margin-left:auto}
+.step.was,.step.now,.step.soon{display:block}
+.sh{display:flex;align-items:baseline;gap:10px;width:100%;background:none;border:0;text-align:left;padding:14px 16px;cursor:pointer;color:var(--ivory)}
+.sh b{font:400 15px "Forum";color:var(--gold);min-width:1.1em}
+.sh .tt{font:400 20px/1 "Forum";white-space:nowrap;letter-spacing:.02em;transition:font-size .35s}
+.pick{font-weight:600;font-size:15px;color:var(--gold);margin-left:auto;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chg{font-size:13px;color:var(--smoke);text-decoration:underline;text-underline-offset:3px;flex:none}
+.step.now .sh{pointer-events:none;padding-top:18px}
+.step.now .sh .tt{font-size:28px}
+.step.now .chg,.step.soon .chg,.step.soon .pick{display:none}
+.step.soon{opacity:.35}
+.step.soon .sh{pointer-events:none;cursor:default}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.6,0,.2,1)}
+.step.now .body{grid-template-rows:1fr}
+.in{overflow:hidden;min-height:0}
+.in>div,.in>form{padding:0 16px 18px}
+.nav{display:flex;align-items:center;gap:10px;margin-top:14px}
+.nav .btn{flex:1}
+.back{background:none;border:1px solid var(--line);color:var(--ivory);border-radius:999px;padding:10px 16px;cursor:pointer;flex:none}
 
 .masters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.m{border:2px solid transparent;border-radius:16px;padding:6px 6px 10px;background:#fff;cursor:pointer;text-align:left;transition:border-color .15s,transform .15s}
+.m{border:1px solid var(--line);border-radius:16px;padding:6px 6px 10px;background:rgba(255,255,255,.03);cursor:pointer;text-align:left;transition:border-color .15s,transform .15s}
 .m img,.m .any{width:100%;aspect-ratio:1;border-radius:11px;object-fit:cover;display:block;background:var(--onyx)}
-.m .any{display:grid;place-items:center;background:var(--onyx)}
+.m .any{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#2A231E,var(--onyx))}
 .m b{display:block;margin-top:8px;font-size:17px;line-height:1.1}
-.m span{font-size:13px;color:#6E747C;line-height:1.25;display:block}
-.m[aria-pressed=true]{border-color:var(--gold);box-shadow:0 8px 18px -10px rgba(138,106,58,.8);transform:translateY(-2px)}
+.m span{font-size:13px;color:var(--smoke);line-height:1.25;display:block}
+.m[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 10px 22px -12px rgba(201,160,99,.7);transform:translateY(-2px)}
 
 .svc{list-style:none;margin:0;padding:0}
-.svc li+li{border-top:1px solid #E2DCD2}
-.svc label{display:flex;align-items:center;gap:12px;padding:11px 2px;cursor:pointer}
-.svc input{width:22px;height:22px;accent-color:var(--gold-lo);flex:none}
+.svc li+li{border-top:1px solid rgba(201,160,99,.14)}
+.svc label{display:flex;align-items:center;gap:12px;padding:10px 2px;cursor:pointer}
+.svc input{width:21px;height:21px;accent-color:var(--gold);flex:none}
 .svc .n{flex:1}
-.svc .n small{display:block;color:#6E747C;font-size:14px}
+.svc .n small{display:block;color:var(--smoke);font-size:14px}
 .svc .p{font-weight:800;white-space:nowrap}
-.grp{font-weight:800;font-size:14px;color:#6E747C;margin:12px 0 0}
-.sum{display:flex;justify-content:space-between;font-weight:800;margin-top:10px;padding-top:10px;border-top:2px solid var(--ink)}
+.grp{font-weight:800;font-size:14px;color:var(--smoke);margin:12px 0 0}
+.sum{display:flex;justify-content:space-between;font-weight:800;margin-top:10px;padding-top:10px;border-top:1px solid var(--gold)}
 
-.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.d{flex:none;width:58px;border:0;border-radius:14px;background:#fff;padding:7px 0;text-align:center;cursor:pointer;scroll-snap-align:start}
-.d small{display:block;font-size:12px;color:#6E747C}
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.d{flex:none;width:58px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);padding:7px 0;text-align:center;cursor:pointer;scroll-snap-align:start}
+.d small{display:block;font-size:12px;color:var(--smoke)}
 .d b{display:block;font-size:21px;line-height:1.1}
-.d[aria-pressed=true]{background:var(--ink);color:var(--ivory)}
-.d[aria-pressed=true] small{color:var(--gold)}
+.d[aria-pressed=true]{background:var(--foil);border-color:transparent;color:var(--ink)}
+.d[aria-pressed=true] small{color:var(--ink)}
 .d:disabled{opacity:.3;cursor:not-allowed}
 .times{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.t{border:0;border-radius:12px;background:#fff;padding:10px 0;font-weight:800;cursor:pointer}
-.t[aria-pressed=true]{background:var(--foil);color:var(--ink)}
-.empty{color:#6E747C;margin:4px 0}
+.t{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);padding:10px 0;font-weight:800;cursor:pointer}
+.t[aria-pressed=true]{background:var(--foil);border-color:transparent;color:var(--ink)}
+.empty{color:var(--smoke);margin:4px 0}
 
 .f{display:grid;gap:10px}
-.f input,.f textarea{width:100%;border:0;border-radius:12px;padding:13px;background:#fff}
-.f textarea{min-height:70px;resize:vertical}
-.err{color:#A3122F;font-weight:600;font-size:15px;min-height:1em;margin:0}
-.go{width:100%;padding:16px;font-size:18px;margin-top:4px;background:var(--ink);color:var(--ivory);box-shadow:none}
-.note{font-size:14px;color:#6E747C;margin:8px 0 0}
+.f input,.f textarea,.find input{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;background:rgba(255,255,255,.04);color:var(--ivory)}
+.f input:focus,.f textarea:focus,.find input:focus{border-color:var(--gold);outline:0}
+::placeholder{color:var(--smoke);opacity:1}
+.f textarea{min-height:64px;resize:vertical}
+.err{color:#FF9A8A;font-weight:600;font-size:15px;min-height:1em;margin:0}
+.go{width:100%;padding:15px;font-size:17px}
+.note{font-size:14px;color:var(--smoke);margin:8px 0 0}
+.btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px var(--gold)}
 
 .mine{background:rgba(26,22,20,.9);border:1px solid var(--gold);border-radius:18px;padding:14px 16px;margin:18px 0 0}
 .mine h3{font:400 24px "Forum";margin:0 0 4px;color:var(--gold)}
 .mine p{margin:0 0 10px}
 .mine .row .btn{padding:9px 14px}
-.mine .btn.line{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 2px var(--line)}
 .find{display:grid;gap:8px;margin-top:10px}
-.find input{border:0;border-radius:12px;padding:12px;background:#fff;color:var(--ink);width:100%}
-.code{font:400 40px/1 "Forum";letter-spacing:.25em;color:var(--ink)}
+.code{font:400 40px/1 "Forum";letter-spacing:.25em;margin:4px 0 0}
 .done{padding:24px 16px}
 .done h2{font-size:38px;margin:0 0 6px;line-height:1}
-.ticket{background:#fff;border-radius:14px;padding:14px 16px;margin:14px 0;line-height:1.65;border-left:4px solid var(--gold)}
+.ticket{background:rgba(255,255,255,.04);border-radius:14px;padding:14px 16px;margin:14px 0;line-height:1.65;border-left:3px solid var(--gold)}
 .ticket b{font-weight:800}
 .row{display:flex;flex-wrap:wrap;gap:8px}
 
@@ -204,7 +225,7 @@ body.entering main{transform:translateY(60px)}
 
 <main class="wrap">
   <div class="hero">
-    <div class="props" aria-hidden="true"><img class="pr1" src="img/clip.webp" alt=""><img class="pr2" src="img/scis.webp" alt=""></div>
+    <div class="props" aria-hidden="true"><img class="pr1" src="img/clip.webp" alt=""><img class="pr2" src="img/scis_h.webp" alt=""></div>
     <h1>Барбершоп на <em class="foil">Юбилейной, 13</em></h1>
     <p>Выберите мастера, услугу и свободное время. Запись занимает минуту, звонить не нужно.</p>
     <div class="facts"><span>Верхняя Пышма</span><span>Стрижка от 1 000 ₽</span><a href="#map" style="text-decoration:none"><span>Как пройти</span></a><a href="#" id="openfind" style="text-decoration:none"><span>Моя запись</span></a></div>
@@ -213,29 +234,33 @@ body.entering main{transform:translateY(60px)}
 
   <div class="book" id="book" aria-live="polite">
     <div id="flow">
-      <div class="step" id="s1"><h2><b>1</b>Мастер <span class="pick" id="p1"></span></h2><div class="masters" id="masters"></div></div>
-      <div class="step locked" id="s2"><h2><b>2</b>Услуги <span class="pick" id="p2"></span></h2><div id="svcs"></div></div>
-      <div class="step locked" id="s3"><h2><b>3</b>Дата и время <span class="pick" id="p3"></span></h2><div class="days" id="days"></div><div class="times" id="times"></div></div>
-      <div class="step locked" id="s4"><h2><b>4</b>Ваши контакты</h2>
-        <form class="f" id="form" novalidate>
+      <div class="step now" id="s1"><button type="button" class="sh" data-go="1"><b>1</b><span class="tt">Мастер</span><span class="pick" id="p1"></span><span class="chg">изменить</span></button>
+        <div class="body"><div class="in"><div><div class="masters" id="masters"></div></div></div></div></div>
+      <div class="step soon" id="s2"><button type="button" class="sh" data-go="2"><b>2</b><span class="tt">Услуги</span><span class="pick" id="p2"></span><span class="chg">изменить</span></button>
+        <div class="body"><div class="in"><div><div id="svcs"></div>
+          <div class="nav"><button type="button" class="back" data-go="1">Назад</button><button type="button" class="btn" id="next2" disabled>Выбрать время</button></div></div></div></div></div>
+      <div class="step" id="s3"><button type="button" class="sh" data-go="3"><b>3</b><span class="tt">Дата и время</span><span class="pick" id="p3"></span><span class="chg">изменить</span></button>
+        <div class="body"><div class="in"><div><div class="days" id="days"></div><div class="times" id="times"></div>
+          <div class="nav"><button type="button" class="back" data-go="2">Назад</button></div></div></div></div></div>
+      <div class="step" id="s4"><button type="button" class="sh" data-go="4"><b>4</b><span class="tt">Ваши контакты</span></button>
+        <div class="body"><div class="in"><form class="f" id="form" novalidate>
           <input id="name" autocomplete="name" placeholder="Имя" aria-label="Имя">
           <input id="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-label="Телефон">
           <textarea id="comment" placeholder="Комментарий, если нужно" aria-label="Комментарий"></textarea>
           <p class="err" id="err"></p>
           <button class="btn go" id="go" type="submit" disabled>Записаться</button>
-          <p class="note">Мастер подтвердит запись сообщением. Если планы поменяются, отменить или перенести можно по ссылке в подтверждении.</p>
-        </form>
-      </div>
+          <div class="nav" style="margin-top:0"><button type="button" class="back" data-go="3">Назад</button><p class="note" style="margin:0">Мастер подтвердит запись. Перенести или отменить можно здесь же на сайте.</p></div>
+        </form></div></div></div>
     </div>
     <div class="done" id="done" hidden></div>
   </div>
 
-  <section class="block" id="team"><h2>Мастера</h2><div class="team" id="teamlist"></div></section>
-  <section class="block" id="prices" style="position:relative"><img class="side" data-par=".12" src="img/razor1.webp" alt="" aria-hidden="true" style="width:62%;max-width:380px;right:-24%;top:6px;transform:rotate(-8deg);opacity:.9"><h2 style="position:relative;z-index:1">Цены</h2><div class="price" id="price" style="position:relative;z-index:1"></div></section>
-  <section class="block" id="map"><h2>Адрес</h2>
+  <section class="block" id="team" style="position:relative"><img class="side snip" src="img/scis_h.webp" alt="" aria-hidden="true" style="width:40%;max-width:250px;top:-4px;transform-origin:54.5% 54.7%"><h2 style="position:relative;z-index:1">Мастера</h2><div class="team" id="teamlist" style="position:relative;z-index:1"></div></section>
+  <section class="block" id="prices" style="position:relative"><img class="side shave" src="img/razor1.webp" alt="" aria-hidden="true" style="width:46%;max-width:300px;top:12px"><h2 style="position:relative;z-index:1">Цены</h2><div class="price" id="price" style="position:relative;z-index:1"></div></section>
+  <section class="block" id="map" style="position:relative"><img class="side vib" src="img/clip_h.webp" alt="" aria-hidden="true" style="width:42%;max-width:260px;top:-6px"><h2 style="position:relative;z-index:1">Адрес</h2>
     <div class="map">
-      <iframe title="BARBER 13 на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?oid=21368857117&amp;z=16"></iframe>
-      <div>Верхняя Пышма, Юбилейная улица, 13</div>
+      <iframe title="BARBER 13 на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=60.557931%2C56.978845&amp;mode=search&amp;oid=21368857117&amp;ol=biz&amp;z=17"></iframe>
+      <div>Верхняя Пышма, Юбилейная улица, 13. <a href="https://yandex.ru/maps/org/21368857117/" target="_blank" rel="noopener" style="color:var(--gold)">Открыть в Яндекс Картах</a></div>
     </div>
   </section>
 
@@ -295,7 +320,6 @@ function slots(date) {
 }
 
 const ANY = `<img src="img/scis.webp" alt="" style="width:80%;object-fit:contain;background:none;transform:rotate(-30deg)">`;
-function lock(n, on) { $("s" + n).classList.toggle("locked", on); }
 function drawMasters() {
   const list = [...SHOP.masters, { id: "any", name: "Любой", role: "Кто свободен в это время" }];
   $("masters").innerHTML = list.map(m => `<button type="button" class="m" data-id="${m.id}" aria-pressed="${st.master === m.id}">
@@ -329,18 +353,28 @@ function niceDate(k) { const x = new Date(k + "T12:00"); return `${x.getDate()} 
 function refresh() {
   const m = SHOP.masters.find(x => x.id === st.master);
   $("p1").textContent = st.master ? (m ? m.name : "Любой") : "";
-  $("p2").textContent = st.svc.size ? rub(total().p) : "";
-  $("p3").textContent = st.date && st.time != null ? `${niceDate(st.date)}, ${hm(st.time)}` : "";
-  lock(2, !st.master); lock(3, !st.svc.size); lock(4, st.time == null);
+  $("p3").textContent = st.date && st.time != null ? `${niceDate(st.date).split(",")[0]}, ${hm(st.time)}` : "";
+  $("p2").textContent = st.svc.size ? `${st.svc.size} ${st.svc.size === 1 ? "услуга" : st.svc.size < 5 ? "услуги" : "услуг"}, ${rub(total().p)}` : "";
+  $("next2").disabled = !st.svc.size;
   $("go").disabled = st.time == null;
   $("go").textContent = st.time == null ? "Записаться" : `Записаться на ${niceDate(st.date).split(",")[0]}, ${hm(st.time)}`;
 }
-function goStep(n) { setTimeout(() => $("s" + n).scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" }), 60); }
+// Шаги: пройденные свёрнуты в строку сверху, текущий открыт, следующий виден бледно, остальные скрыты
+let cur = 1;
+function reach() { return !st.master ? 1 : !st.svc.size ? 2 : st.time == null ? 3 : 4; }
+function show(n) {
+  cur = Math.min(n, reach());
+  for (let i = 1; i <= 4; i++) $("s" + i).className = "step" + (i < cur ? " was" : i === cur ? " now" : i === cur + 1 ? " soon" : "");
+  const top = $("book").getBoundingClientRect().top;
+  if (top < 50 || top > innerHeight * .4) $("book").scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+}
+$("flow").addEventListener("click", e => { const g = e.target.closest("[data-go]"); if (g) show(+g.dataset.go); });
+$("next2").addEventListener("click", () => show(3));
 
 $("masters").addEventListener("click", e => {
   const b = e.target.closest(".m"); if (!b) return;
-  st.master = b.dataset.id; st.svc.clear(); st.date = null; st.time = null;
-  drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh(); goStep(2);
+  if (st.master !== b.dataset.id) { st.master = b.dataset.id; st.svc.clear(); st.date = null; st.time = null; }
+  drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh(); setTimeout(() => show(2), 180);
 });
 $("svcs").addEventListener("change", e => {
   const id = +e.target.value; e.target.checked ? st.svc.add(id) : st.svc.delete(id);
@@ -348,7 +382,7 @@ $("svcs").addEventListener("change", e => {
   drawSvcs(); drawDays(); drawTimes(); refresh();
 });
 $("days").addEventListener("click", e => { const b = e.target.closest(".d"); if (!b || b.disabled) return; st.date = b.dataset.d; st.time = null; drawDays(); drawTimes(); refresh(); });
-$("times").addEventListener("click", e => { const b = e.target.closest(".t"); if (!b) return; st.time = +b.dataset.t; drawTimes(); refresh(); goStep(4); });
+$("times").addEventListener("click", e => { const b = e.target.closest(".t"); if (!b) return; st.time = +b.dataset.t; drawTimes(); refresh(); setTimeout(() => show(4), 220); });
 
 $("form").addEventListener("submit", e => {
   e.preventDefault();
@@ -387,7 +421,7 @@ $("mine").addEventListener("click", e => {
     const r = list.find(b => b.id === mv); st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
     $("name").value = r.name; $("phone").value = r.phone; $("comment").value = r.comment || "";
     drawMasters(); drawSvcs(); drawDays(); drawTimes(); refresh();
-    $("flow").hidden = false; $("done").hidden = true; goStep(3);
+    $("flow").hidden = false; $("done").hidden = true; show(3);
   }
   if (e.target.id === "findgo") {
     const ph = $("fphone").value.replace(/\D/g, "").slice(-10), cd = $("fcode").value.trim();
@@ -400,7 +434,7 @@ $("openfind").addEventListener("click", e => {
   e.preventDefault();
   $("mine").innerHTML = `<div class="mine"><h3>Найти запись</h3><p>Введите номер телефона и код из подтверждения.</p>
     <div class="find"><input id="fphone" type="tel" placeholder="+7 900 000-00-00" aria-label="Телефон"><input id="fcode" inputmode="numeric" maxlength="4" placeholder="Код, 4 цифры" aria-label="Код записи">
-    <p class="err" id="ferr" style="color:#FF8A8A"></p><button class="btn" id="findgo" type="button">Найти</button></div></div>`;
+    <p class="err" id="ferr"></p><button class="btn" id="findgo" type="button">Найти</button></div></div>`;
   $("fphone").focus();
 });
 function ics(r) {
@@ -413,10 +447,10 @@ function showDone(r) {
   $("flow").hidden = true; $("done").hidden = false;
   $("done").innerHTML = `<h2>${r.status === "moved" ? "Запись перенесена" : "Вы записаны"}</h2><p>Ждём вас на Юбилейной, 13.</p>
     <div class="ticket"><b>${niceDate(r.date)}, ${hm(r.start)}</b><br>Мастер: ${m.name}<br>${r.svc.join(", ")}<br>${dur(r.len)}, ${rub(r.price)}</div>
-    <p style="margin:0">Код записи</p><p class="code">${r.code}</p>
+    <p style="margin:0">Код записи</p><p class="code foil">${r.code}</p>
     <p class="note" style="margin:4px 0 14px">Чтобы перенести или отменить, зайдите на сайт: с этого телефона запись откроется сама, с другого нажмите «Моя запись» и введите номер и код. Код и ссылка сохранятся в событии календаря.</p>
-    <div class="row"><a class="btn dark" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn ghost" type="button" id="again">Записать ещё кого-то</button></div>`;
-  $("again").onclick = () => { st.edit = null; st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); goStep(1); };
+    <div class="row"><a class="btn line" href="${ics(r)}" download="barber13.ics">Добавить в календарь</a><button class="btn line" type="button" id="again">Записать ещё кого-то</button></div>`;
+  $("again").onclick = () => { st.edit = null; st.svc.clear(); st.date = null; st.time = null; $("done").hidden = true; $("flow").hidden = false; drawSvcs(); drawDays(); drawTimes(); refresh(); show(1); };
   $("book").scrollIntoView({ block: "start" });
 }
 function drawInfo() {
@@ -440,16 +474,49 @@ drawMasters(); drawSvcs(); drawDays(); drawTimes(); drawInfo(); refresh();
   el.addEventListener("click", () => { clearTimeout(t); close(); });
 })();
 
-// Фон: ножницы поворачиваются от прокрутки, очень медленно
+// Фон от прокрутки: ножницы щёлкают, машинка дрожит, бритва делает проходы. Только пока предмет на экране.
 (function bg() {
   if (calm) return;
-  let raf = 0;
-  const p1 = document.querySelector(".pr1"), p2 = document.querySelector(".pr2"), sides = [...document.querySelectorAll("[data-par]")];
-  const upd = () => { raf = 0; const y = scrollY;
-    if (y < 900) { p1.style.transform = `translateY(${y * 0.18}px) rotate(${-28 + y * 0.03}deg)`; p2.style.transform = `translateY(${y * 0.1}px) rotate(${10 - y * 0.02}deg)`; }
-    sides.forEach(el => { const r = el.parentElement.getBoundingClientRect(); el.style.translate = `0 ${(r.top - innerHeight / 2) * -el.dataset.par}px`; });
+  const q = c => [...document.querySelectorAll(c)];
+  const p1 = document.querySelector(".pr1"), p2 = document.querySelector(".pr2");
+  const snips = [p2, ...q(".snip")], vibs = [p1, ...q(".vib")], shaves = q(".shave");
+  const seen = el => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+  const ease = t => t * t * (3 - 2 * t);
+  let raf = 0, idle = 0, lastSnip = 0;
+  const hair = el => {
+    // пара срезанных волосков падает от кончиков ножниц
+    const box = el.offsetParent, r = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+    for (let i = 0; i < 2; i++) {
+      const h = document.createElement("i"); h.className = "hair";
+      h.style.left = (r.right - b.left - r.width * (.12 + Math.random() * .1)) + "px"; h.style.top = (r.top - b.top + r.height * .5) + "px";
+      h.style.setProperty("--dx", (Math.random() * 24 - 12) + "px"); h.style.setProperty("--r", (Math.random() * 160 - 80) + "deg");
+      box.appendChild(h); setTimeout(() => h.remove(), 1500);
+    }
   };
-  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); upd();
+  const upd = () => {
+    raf = 0; const y = scrollY;
+    if (y < 900) p1.style.transform = `translateY(${y * 0.16}px) rotate(${-28 + y * 0.025}deg)`;
+    snips.forEach((el, i) => {
+      if (!seen(el)) return;
+      // каждые 130 px прокрутки ножницы смыкаются и раскрываются
+      const ph = ((y + i * 50) % 130) / 130, k = ph < .3 ? Math.sin(ph / .3 * Math.PI) : 0;
+      const base = el === p2 ? `translateY(${Math.min(y, 900) * 0.09}px) rotate(-14deg)` : "rotate(-8deg)";
+      el.style.transform = `${base} scaleY(${1 - .42 * k})`;
+      if (k > .95 && Date.now() - lastSnip > 300) { lastSnip = Date.now(); hair(el); }
+    });
+    shaves.forEach(el => {
+      if (!seen(el)) return;
+      // проход бритвой вперёд, потом приподнять и вернуть
+      const ph = (y % 160) / 160, f = ph < .7 ? ease(ph / .7) : 1 - ease((ph - .7) / .3);
+      el.style.transform = `rotate(-6deg) translate(${-18 + f * 22}px, ${ph < .7 ? 0 : -6}px)`;
+    });
+  };
+  addEventListener("scroll", () => {
+    if (!raf) raf = requestAnimationFrame(upd);
+    vibs.forEach(el => el.classList.add("buzz")); clearTimeout(idle);
+    idle = setTimeout(() => vibs.forEach(el => el.classList.remove("buzz")), 160);
+  }, { passive: true });
+  upd();
 })();
 
 // Финал: машинка проезжает и «сбривает» надпись, когда до неё долистали
