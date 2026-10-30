@@ -224,7 +224,6 @@ body.entering main{transform:translateY(60px)}
 </div>
 
 
-<div class="demo">Черновой пример от shak.web: записи пока сохраняются только в этом браузере</div>
 <header><div class="pole"></div><div class="wrap">
   <a class="logo" href="#">BARBER <span class="foil">13</span></a>
   <a class="btn line" href="#" id="openfind">Моя запись</a>
@@ -310,7 +309,7 @@ const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const st = { master: null, svc: new Set(), date: null, time: null, edit: null };
 
 // Ссылка на Google-таблицу (база записей и настроек). Пусто: черновой режим, всё хранится в этом браузере.
-const API = "";
+const API = "https://script.google.com/macros/s/AKfycbxMAuPaPKwbOx0YGaechmJkoGxPb4iCDmtbe2q3Q26NP91Y2HV4z981-5sf9bSvPafKMA/exec";
 let BUSY = null, BOT = "";
 const api = q => fetch(API, { method: "POST", body: JSON.stringify(q) }).then(r => r.json());
 const apiGet = q => fetch(API + "?" + new URLSearchParams(q)).then(r => r.json());
