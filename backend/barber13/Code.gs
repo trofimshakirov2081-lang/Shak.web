@@ -156,17 +156,64 @@ function onText(m) {
   if ((mt = text.match(/^\/admin\s+(.+)/))) {
     if (mt[1].trim() !== (P.getProperty("pass") || "barber13")) return say("Пароль не подошёл.");
     const a = admins(); if (!a.includes(chat)) { a.push(chat); P.setProperty("admins", JSON.stringify(a)); }
-    return say("Готово, сюда будут приходить записи, переносы и отмены.\n\n/записи: записи на сегодня и завтра\n/расписание: выходной или другие часы на любой день");
+    return say("Готово, сюда будут приходить записи, переносы и отмены.\n\n/записи: записи на сегодня и завтра\n/график: какое сейчас расписание\n/расписание: поменять расписание");
   }
   if (isAdmin && /^\/(записи|zapisi)/i.test(text)) {
     const t = today(), tm = Utilities.formatDate(new Date(Date.now() + 864e5), TZ, "yyyy-MM-dd");
     const l = rows().filter(b => b.status !== "cancelled" && (b.date === t || b.date === tm)).sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
     return say(l.length ? l.map(b => `${nice(b.date)}, ${hm(b.start)}, ${b.masterName}: ${b.svc.join(", ")}. ${b.name}, ${b.phone}`).join("\n") : "На сегодня и завтра записей нет.");
   }
-  if (isAdmin && /^\/(расписание|raspisanie|schedule)/i.test(text)) return say("На какой день поменять расписание?", dayButtons());
+  if (isAdmin && /^\/(расписание|raspisanie|schedule)/i.test(text)) return say(HELP_SCHED, dayButtons());
+  if (isAdmin && /^\/(график|grafik)/i.test(text)) return say(showSchedule(getCfg()));
+  if (isAdmin && !text.startsWith("/")) {
+    const cfg = getCfg(), res = parseSchedule(text, cfg);
+    if (res.length) { setCfg(cfg); return say("Готово, на сайте уже обновилось:\n" + res.join("\n") + "\n\nПроверить: /график"); }
+    return say("Не понял. " + HELP_SCHED);
+  }
   if (/^\/start/.test(text)) return say("Здравствуйте! Это бот барбершопа BARBER 13. Записаться можно на сайте, а здесь я напомню о визите.");
   if (!isAdmin) return say("Я умею только напоминать о записи. Записаться, перенести или отменить можно на сайте.");
-  return say("Команды: /записи, /расписание");
+  return say("Команды: /записи, /график, /расписание");
+}
+// ---------- расписание одним сообщением ----------
+const HELP_SCHED = "Напишите расписание одним сообщением, можно сразу на всю неделю:\n\n10-21  (каждый день)\nпн-пт 10-21, сб 11-19, вс выходной\nбудни 10-20\n31.10 выходной\n2.11 12-18\nИван: сб 12-20  (только для Ивана)\n\nИли нажмите день ниже, чтобы поставить выходной или другие часы.";
+const DMAP = { "пн": 1, "вт": 2, "ср": 3, "чт": 4, "пт": 5, "сб": 6, "вс": 0 }, DNAME = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+function parseSchedule(text, cfg) {
+  const masters = cfg.masters || [], out = [], all = masters.map(m => m.id);
+  String(text).split(/[\n;,]+/).forEach(part => {
+    let p = part.trim().toLowerCase().replace(/\u2014|\u2013/g, "-"); if (!p) return;
+    let who = all; const mm = masters.find(m => p.startsWith(m.name.toLowerCase()));
+    if (mm) { who = [mm.id]; p = p.slice(mm.name.length).replace(/^[\s:]+/, ""); }
+    const whoName = mm ? mm.name : "все";
+    let date = null; const dm = p.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?/);
+    if (dm) { const y = dm[3] ? (dm[3].length === 2 ? "20" + dm[3] : dm[3]) : Utilities.formatDate(new Date(), TZ, "yyyy"); date = `${y}-${dm[2].padStart(2, "0")}-${dm[1].padStart(2, "0")}`; p = p.replace(dm[0], " "); }
+    const off = /выходн|не работ/.test(p);
+    const hm2 = p.match(/(\d{1,2})(?::(\d\d))?\s*(?:-|до)\s*(\d{1,2})(?::(\d\d))?/);
+    const hours = hm2 ? [+hm2[1] * 60 + +(hm2[2] || 0), +hm2[3] * 60 + +(hm2[4] || 0)] : null;
+    if (!off && (!hours || hours[1] <= hours[0])) return;
+    const label = off ? "выходной" : hm(hours[0]) + "-" + hm(hours[1]);
+    if (date) {
+      const ids = who === all ? ["all"] : who;
+      cfg.exceptions = (cfg.exceptions || []).filter(x => !(x.date === date && ids.includes(x.master)));
+      ids.forEach(id => cfg.exceptions.push(off ? { date, master: id, off: true } : { date, master: id, from: hours[0], to: hours[1] }));
+      out.push(`${nice(date)}, ${whoName}: ${label}`); return;
+    }
+    let days = [];
+    if (/будн/.test(p)) days = [1, 2, 3, 4, 5];
+    const rg = p.match(/(пн|вт|ср|чт|пт|сб|вс)\s*-\s*(пн|вт|ср|чт|пт|сб|вс)/);
+    if (rg) { let d = DMAP[rg[1]]; const e = DMAP[rg[2]]; for (let k = 0; k < 7; k++) { days.push(d); if (d === e) break; d = (d + 1) % 7; } p = p.replace(rg[0], " "); }
+    (p.match(/пн|вт|ср|чт|пт|сб|вс/g) || []).forEach(t => days.push(DMAP[t]));
+    if (!days.length) days = [1, 2, 3, 4, 5, 6, 0]; // часы без дней: каждый день
+    masters.filter(m => who.includes(m.id)).forEach(m => { m.hours = m.hours || {}; days.forEach(d => m.hours[d] = off ? null : hours.slice()); });
+    out.push(`${days.length === 7 ? "каждый день" : days.map(d => DNAME[d]).join(", ")}, ${whoName}: ${label}`);
+  });
+  return out;
+}
+function showSchedule(cfg) {
+  const order = [1, 2, 3, 4, 5, 6, 0], t = today();
+  const wk = (cfg.masters || []).map(m => m.name + ":\n" + order.map(d => { const h = m.hours && m.hours[d]; return DNAME[d] + " " + (h ? hm(h[0]) + "-" + hm(h[1]) : "выходной"); }).join(", ")).join("\n\n");
+  const ex = (cfg.exceptions || []).filter(x => x.date >= t).sort((a, b) => a.date.localeCompare(b.date))
+    .map(x => `${nice(x.date)}, ${x.master === "all" ? "все" : ((cfg.masters || []).find(m => m.id === x.master) || {}).name}: ${x.off ? "выходной" : hm(x.from) + "-" + hm(x.to)}`);
+  return wk + (ex.length ? "\n\nОсобые дни:\n" + ex.join("\n") : "") + "\n\nПоменять: /расписание";
 }
 function dayButtons() {
   const kb = [];

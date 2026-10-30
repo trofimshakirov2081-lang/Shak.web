@@ -178,17 +178,64 @@ function onText(m) {
   if ((mt = text.match(/^\/admin\s+(.+)/))) {
     if (mt[1].trim() !== (P.getProperty(&quot;pass&quot;) || &quot;barber13&quot;)) return say(&quot;Пароль не подошёл.&quot;);
     const a = admins(); if (!a.includes(chat)) { a.push(chat); P.setProperty(&quot;admins&quot;, JSON.stringify(a)); }
-    return say(&quot;Готово, сюда будут приходить записи, переносы и отмены.\n\n/записи: записи на сегодня и завтра\n/расписание: выходной или другие часы на любой день&quot;);
+    return say(&quot;Готово, сюда будут приходить записи, переносы и отмены.\n\n/записи: записи на сегодня и завтра\n/график: какое сейчас расписание\n/расписание: поменять расписание&quot;);
   }
   if (isAdmin &amp;&amp; /^\/(записи|zapisi)/i.test(text)) {
     const t = today(), tm = Utilities.formatDate(new Date(Date.now() + 864e5), TZ, &quot;yyyy-MM-dd&quot;);
     const l = rows().filter(b =&gt; b.status !== &quot;cancelled&quot; &amp;&amp; (b.date === t || b.date === tm)).sort((a, b) =&gt; (a.date + a.start).localeCompare(b.date + b.start));
     return say(l.length ? l.map(b =&gt; `${nice(b.date)}, ${hm(b.start)}, ${b.masterName}: ${b.svc.join(&quot;, &quot;)}. ${b.name}, ${b.phone}`).join(&quot;\n&quot;) : &quot;На сегодня и завтра записей нет.&quot;);
   }
-  if (isAdmin &amp;&amp; /^\/(расписание|raspisanie|schedule)/i.test(text)) return say(&quot;На какой день поменять расписание?&quot;, dayButtons());
+  if (isAdmin &amp;&amp; /^\/(расписание|raspisanie|schedule)/i.test(text)) return say(HELP_SCHED, dayButtons());
+  if (isAdmin &amp;&amp; /^\/(график|grafik)/i.test(text)) return say(showSchedule(getCfg()));
+  if (isAdmin &amp;&amp; !text.startsWith(&quot;/&quot;)) {
+    const cfg = getCfg(), res = parseSchedule(text, cfg);
+    if (res.length) { setCfg(cfg); return say(&quot;Готово, на сайте уже обновилось:\n&quot; + res.join(&quot;\n&quot;) + &quot;\n\nПроверить: /график&quot;); }
+    return say(&quot;Не понял. &quot; + HELP_SCHED);
+  }
   if (/^\/start/.test(text)) return say(&quot;Здравствуйте! Это бот барбершопа BARBER 13. Записаться можно на сайте, а здесь я напомню о визите.&quot;);
   if (!isAdmin) return say(&quot;Я умею только напоминать о записи. Записаться, перенести или отменить можно на сайте.&quot;);
-  return say(&quot;Команды: /записи, /расписание&quot;);
+  return say(&quot;Команды: /записи, /график, /расписание&quot;);
+}
+// ---------- расписание одним сообщением ----------
+const HELP_SCHED = &quot;Напишите расписание одним сообщением, можно сразу на всю неделю:\n\n10-21  (каждый день)\nпн-пт 10-21, сб 11-19, вс выходной\nбудни 10-20\n31.10 выходной\n2.11 12-18\nИван: сб 12-20  (только для Ивана)\n\nИли нажмите день ниже, чтобы поставить выходной или другие часы.&quot;;
+const DMAP = { &quot;пн&quot;: 1, &quot;вт&quot;: 2, &quot;ср&quot;: 3, &quot;чт&quot;: 4, &quot;пт&quot;: 5, &quot;сб&quot;: 6, &quot;вс&quot;: 0 }, DNAME = [&quot;вс&quot;, &quot;пн&quot;, &quot;вт&quot;, &quot;ср&quot;, &quot;чт&quot;, &quot;пт&quot;, &quot;сб&quot;];
+function parseSchedule(text, cfg) {
+  const masters = cfg.masters || [], out = [], all = masters.map(m =&gt; m.id);
+  String(text).split(/[\n;,]+/).forEach(part =&gt; {
+    let p = part.trim().toLowerCase().replace(/\u2014|\u2013/g, &quot;-&quot;); if (!p) return;
+    let who = all; const mm = masters.find(m =&gt; p.startsWith(m.name.toLowerCase()));
+    if (mm) { who = [mm.id]; p = p.slice(mm.name.length).replace(/^[\s:]+/, &quot;&quot;); }
+    const whoName = mm ? mm.name : &quot;все&quot;;
+    let date = null; const dm = p.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?/);
+    if (dm) { const y = dm[3] ? (dm[3].length === 2 ? &quot;20&quot; + dm[3] : dm[3]) : Utilities.formatDate(new Date(), TZ, &quot;yyyy&quot;); date = `${y}-${dm[2].padStart(2, &quot;0&quot;)}-${dm[1].padStart(2, &quot;0&quot;)}`; p = p.replace(dm[0], &quot; &quot;); }
+    const off = /выходн|не работ/.test(p);
+    const hm2 = p.match(/(\d{1,2})(?::(\d\d))?\s*(?:-|до)\s*(\d{1,2})(?::(\d\d))?/);
+    const hours = hm2 ? [+hm2[1] * 60 + +(hm2[2] || 0), +hm2[3] * 60 + +(hm2[4] || 0)] : null;
+    if (!off &amp;&amp; (!hours || hours[1] &lt;= hours[0])) return;
+    const label = off ? &quot;выходной&quot; : hm(hours[0]) + &quot;-&quot; + hm(hours[1]);
+    if (date) {
+      const ids = who === all ? [&quot;all&quot;] : who;
+      cfg.exceptions = (cfg.exceptions || []).filter(x =&gt; !(x.date === date &amp;&amp; ids.includes(x.master)));
+      ids.forEach(id =&gt; cfg.exceptions.push(off ? { date, master: id, off: true } : { date, master: id, from: hours[0], to: hours[1] }));
+      out.push(`${nice(date)}, ${whoName}: ${label}`); return;
+    }
+    let days = [];
+    if (/будн/.test(p)) days = [1, 2, 3, 4, 5];
+    const rg = p.match(/(пн|вт|ср|чт|пт|сб|вс)\s*-\s*(пн|вт|ср|чт|пт|сб|вс)/);
+    if (rg) { let d = DMAP[rg[1]]; const e = DMAP[rg[2]]; for (let k = 0; k &lt; 7; k++) { days.push(d); if (d === e) break; d = (d + 1) % 7; } p = p.replace(rg[0], &quot; &quot;); }
+    (p.match(/пн|вт|ср|чт|пт|сб|вс/g) || []).forEach(t =&gt; days.push(DMAP[t]));
+    if (!days.length) days = [1, 2, 3, 4, 5, 6, 0]; // часы без дней: каждый день
+    masters.filter(m =&gt; who.includes(m.id)).forEach(m =&gt; { m.hours = m.hours || {}; days.forEach(d =&gt; m.hours[d] = off ? null : hours.slice()); });
+    out.push(`${days.length === 7 ? &quot;каждый день&quot; : days.map(d =&gt; DNAME[d]).join(&quot;, &quot;)}, ${whoName}: ${label}`);
+  });
+  return out;
+}
+function showSchedule(cfg) {
+  const order = [1, 2, 3, 4, 5, 6, 0], t = today();
+  const wk = (cfg.masters || []).map(m =&gt; m.name + &quot;:\n&quot; + order.map(d =&gt; { const h = m.hours &amp;&amp; m.hours[d]; return DNAME[d] + &quot; &quot; + (h ? hm(h[0]) + &quot;-&quot; + hm(h[1]) : &quot;выходной&quot;); }).join(&quot;, &quot;)).join(&quot;\n\n&quot;);
+  const ex = (cfg.exceptions || []).filter(x =&gt; x.date &gt;= t).sort((a, b) =&gt; a.date.localeCompare(b.date))
+    .map(x =&gt; `${nice(x.date)}, ${x.master === &quot;all&quot; ? &quot;все&quot; : ((cfg.masters || []).find(m =&gt; m.id === x.master) || {}).name}: ${x.off ? &quot;выходной&quot; : hm(x.from) + &quot;-&quot; + hm(x.to)}`);
+  return wk + (ex.length ? &quot;\n\nОсобые дни:\n&quot; + ex.join(&quot;\n&quot;) : &quot;&quot;) + &quot;\n\nПоменять: /расписание&quot;;
 }
 function dayButtons() {
   const kb = [];

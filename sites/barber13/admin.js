@@ -64,6 +64,40 @@ window.B13Admin = (function () {
   .adm .err{min-height:1.2em}
   `;
 
+  // ---------- график одной строкой (тот же разбор, что в боте) ----------
+  const DMAP = { "пн": 1, "вт": 2, "ср": 3, "чт": 4, "пт": 5, "сб": 6, "вс": 0 }, DNAME = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+  function parseSchedule(text) {
+    const masters = SHOP.masters, out = [], all = masters.map(m => m.id);
+    String(text).split(/[\n;,]+/).forEach(part => {
+      let p = part.trim().toLowerCase().replace(/\u2014|\u2013/g, "-"); if (!p) return;
+      let who = all; const mm = masters.find(m => p.startsWith(m.name.toLowerCase()));
+      if (mm) { who = [mm.id]; p = p.slice(mm.name.length).replace(/^[\s:]+/, ""); }
+      const whoName = mm ? mm.name : "все";
+      let date = null; const dm = p.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?/);
+      if (dm) { const y = dm[3] ? (dm[3].length === 2 ? "20" + dm[3] : dm[3]) : String(new Date().getFullYear()); date = `${y}-${dm[2].padStart(2, "0")}-${dm[1].padStart(2, "0")}`; p = p.replace(dm[0], " "); }
+      const off = /выходн|не работ/.test(p);
+      const h = p.match(/(\d{1,2})(?::(\d\d))?\s*(?:-|до)\s*(\d{1,2})(?::(\d\d))?/);
+      const hours = h ? [+h[1] * 60 + +(h[2] || 0), +h[3] * 60 + +(h[4] || 0)] : null;
+      if (!off && (!hours || hours[1] <= hours[0])) return;
+      const label = off ? "выходной" : hm(hours[0]) + "-" + hm(hours[1]);
+      if (date) {
+        const ids = who === all ? ["all"] : who;
+        SHOP.exceptions = SHOP.exceptions.filter(x => !(x.date === date && ids.includes(x.master)));
+        ids.forEach(id => SHOP.exceptions.push(off ? { date, master: id, off: true } : { date, master: id, from: hours[0], to: hours[1] }));
+        out.push(`${niceDate(date)}, ${whoName}: ${label}`); return;
+      }
+      let days = [];
+      if (/будн/.test(p)) days = [1, 2, 3, 4, 5];
+      const rg = p.match(/(пн|вт|ср|чт|пт|сб|вс)\s*-\s*(пн|вт|ср|чт|пт|сб|вс)/);
+      if (rg) { let d = DMAP[rg[1]]; const e = DMAP[rg[2]]; for (let k = 0; k < 7; k++) { days.push(d); if (d === e) break; d = (d + 1) % 7; } p = p.replace(rg[0], " "); }
+      (p.match(/пн|вт|ср|чт|пт|сб|вс/g) || []).forEach(t => days.push(DMAP[t]));
+      if (!days.length) days = [1, 2, 3, 4, 5, 6, 0];
+      masters.filter(m => who.includes(m.id)).forEach(m => { m.hours = clone(m.hours || WEEK); days.forEach(d => m.hours[d] = off ? null : hours.slice()); });
+      out.push(`${days.length === 7 ? "каждый день" : days.map(d => DNAME[d]).join(", ")}, ${whoName}: ${label}`);
+    });
+    return out;
+  }
+
   // ---------- общие кусочки ----------
   function toast(t) { const x = document.createElement("div"); x.className = "toast"; x.textContent = t; root.appendChild(x); setTimeout(() => x.remove(), 1800); }
   function changed() { dirty = true; drawAll(); top(); }
@@ -107,12 +141,15 @@ window.B13Admin = (function () {
         : `<div class="card">Пока записей нет. Как только кто-то запишется на сайте, запись появится здесь.</div>`);
   };
 
-  V.schedule = () => SHOP.masters.map((m, i) => `<h3>${esc(m.name)}</h3><div class="card"><div class="wk">${DAYS.map(([d, l]) => {
+  V.schedule = () => `<h3>Быстро заполнить</h3><div class="card">
+      <p class="hint" style="margin-top:0">Напишите график одной строкой, как в боте. Например: <b>пн-пт 10-21, сб 11-19, вс выходной</b>, или просто <b>10-21</b> на каждый день, или <b>31.10 выходной</b>. Для одного мастера: <b>Иван: сб 12-20</b>.</p>
+      <input id="qsched" placeholder="пн-пт 10-21, сб 11-19, вс выходной"><button class="btn" data-act="quickSched" style="width:100%;margin-top:10px">Применить</button><p class="hint" id="qschedMsg"></p></div>` +
+    SHOP.masters.map((m, i) => `<h3>${esc(m.name)}</h3><div class="card"><div class="wk">${DAYS.map(([d, l]) => {
       const h = m.hours && m.hours[d];
       return `<span>${l}</span><input type="checkbox" data-act="dayOn" data-i="${i}" data-d="${d}" ${h ? "checked" : ""} aria-label="${l}: работает">
         <input type="time" step="1800" data-act="dayFrom" data-i="${i}" data-d="${d}" value="${toHM(h ? h[0] : 600)}" ${h ? "" : "disabled"}>
         <input type="time" step="1800" data-act="dayTo" data-i="${i}" data-d="${d}" value="${toHM(h ? h[1] : 1260)}" ${h ? "" : "disabled"}>`; }).join("")}</div>
-      <p class="hint" style="margin-bottom:0">Галочка снята: выходной.</p></div>`).join("") +
+      <p class="hint" style="margin-bottom:0">Галочка снята: выходной.</p>${SHOP.masters.length > 1 ? `<button class="sm" data-act="copySched" data-i="${i}" style="margin-top:10px">Такой же график всем мастерам</button>` : ""}</div>`).join("") +
     `<h3>Выходные и особые дни</h3><p class="hint">Отпуск, больничный, короткий день. Это важнее обычного графика.</p>` +
     SHOP.exceptions.slice().sort((a, b) => a.date.localeCompare(b.date)).map(x => `<div class="card line" style="justify-content:space-between">
       <span><b>${niceDate(x.date)}</b>, ${esc(mName(x.master))}: ${x.off ? "выходной" : hm(x.from) + "-" + hm(x.to)}</span>
@@ -223,6 +260,12 @@ window.B13Admin = (function () {
     },
     moveBooking(el) { const r = bookings().find(b => b.id === el.dataset.id); A.close(); st.edit = r.id; st.master = r.master; st.svc = new Set(r.svcIds || []); st.date = null; st.time = null;
       $("name").value = r.name; $("phone").value = r.phone; $("comment").value = r.comment || ""; $("flow").hidden = false; $("done").hidden = true; drawAll(); show(3); },
+    quickSched() {
+      const res = parseSchedule(root.querySelector("#qsched").value), msg = root.querySelector("#qschedMsg");
+      if (!res.length) { msg.textContent = "Не понял. Пример: пн-пт 10-21, сб 11-19, вс выходной"; return; }
+      changed(); render(); root.querySelector("#qschedMsg").textContent = "Готово: " + res.join("; ") + ". Не забудьте «Сохранить».";
+    },
+    copySched(el) { const h = SHOP.masters[+el.dataset.i].hours; SHOP.masters.forEach(m => m.hours = clone(h)); changed(); render(); toast("График скопирован"); },
     addEx() { const kind = root.querySelector("[name=exKind]:checked").value, x = { date: root.querySelector("#exDate").value, master: root.querySelector("#exWho").value };
       if (!x.date) return; if (kind === "off") x.off = true; else { x.from = toMin(root.querySelector("#exFrom").value); x.to = toMin(root.querySelector("#exTo").value); if (x.to <= x.from) return alert("Конец должен быть позже начала."); }
       SHOP.exceptions.push(x); changed(); render(); },
@@ -299,7 +342,7 @@ window.B13Admin = (function () {
     });
     root.addEventListener("input", e => { const f = F[e.target.dataset.act]; if (f && e.target.type !== "checkbox" && e.target.type !== "file" && e.target.tagName !== "SELECT") f(e.target); });
     root.addEventListener("change", e => { const f = F[e.target.dataset.act]; if (f && (e.target.type === "checkbox" || e.target.type === "file" || e.target.tagName === "SELECT")) f(e.target); });
-    root.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "pw") A.login(); });
+    root.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "pw") A.login(); if (e.key === "Enter" && e.target.id === "qsched") A.quickSched(); });
   }
   return { open };
 })();
