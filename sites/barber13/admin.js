@@ -16,7 +16,7 @@ window.B13Admin = (function () {
   const uid = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
 
   const css = `
-  .adm{position:fixed;inset:0;z-index:100;background:rgba(8,7,6,.7);display:flex;justify-content:center;overflow:auto;-webkit-overflow-scrolling:touch}
+  .adm{position:fixed;inset:0;z-index:100;background:rgba(8,7,6,.7);display:flex;justify-content:center;align-items:flex-start;overflow:auto;-webkit-overflow-scrolling:touch}
   .adm .pan{width:100%;max-width:720px;min-height:100%;background:var(--onyx);border-left:1px solid var(--line);border-right:1px solid var(--line)}
   .adm .top{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:12px 16px;background:rgba(14,12,11,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .adm .top b{font:400 20px var(--fh,"Forum");min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -37,6 +37,7 @@ window.B13Admin = (function () {
   .adm select option{background:var(--onyx)}
   .adm textarea{min-height:90px;resize:vertical}
   .adm input[type=checkbox],.adm input[type=radio]{width:20px;height:20px;accent-color:var(--gold);flex:none}
+  .adm input[type=range]{accent-color:var(--gold)}
   .adm .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .adm .line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .adm .line+.line{margin-top:8px}
