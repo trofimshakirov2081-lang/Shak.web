@@ -1,0 +1,130 @@
+{
+  "slug": "torty-eleny-tmn",
+  "name": "Торты Елены",
+  "niche": "кондитерская",
+  "city": "Тюмень",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#C0567B",
+    "accent": "#FFD9E6",
+    "bg": "#FDF6F8",
+    "text": "#2C1A22"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Десерты от Елены, которые хочется заказать снова",
+    "text": "Начинку и надпись напишите в комментарии, я отвечу и всё согласую.",
+    "cta": "Собрать заказ",
+    "photo": "files/torty-eleny-tmn/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Елена",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Елена, я пеку торты и десерты на заказ в Тюмени. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Тюмень",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/torty-eleny-tmn/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/torty-eleny-tmn/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/torty-eleny-tmn/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/torty-eleny-tmn/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/torty-eleny-tmn/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/torty-eleny-tmn/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/torty-eleny-tmn/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с рисунком",
+      "price": 3900,
+      "desc": "Нарисую по вашему фото",
+      "photo": "files/torty-eleny-tmn/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 982 571-60-97",
+    "whatsapp": "79825716097",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#EADFF6",
+      "pist": "#DDF0E3",
+      "butter": "#FFEFCF"
+    }
+  },
+  "credits": "остальные фото: Pexels, для примера",
+  "source": "https://club230434703.orgs.biz/",
+  "telegram_lead": "Lenusya_tmn"
+}

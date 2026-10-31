@@ -1,0 +1,67 @@
+{
+  "slug": "banya-karelia",
+  "name": "Баня в Карелии",
+  "niche": "banya",
+  "city": "Терваярви",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#C8773A",
+    "accent": "#7C8B4F",
+    "bg": "#1A1614",
+    "text": "#EDE7DF"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Настоящий пар без очереди",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/banya-karelia/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Баня в Карелии: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Пар для двух женщин",
+      "price": 8000,
+      "desc": "Бережное парение",
+      "photo": "files/banya-karelia/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Пар для пар",
+      "price": 20000,
+      "desc": "Индивидуальная программа",
+      "photo": "files/banya-karelia/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Групповая баня по-чёрному",
+      "price": 6500,
+      "desc": "До 8 человек",
+      "photo": "files/banya-karelia/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 779-75-53",
+    "whatsapp": "79217797553",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#241E1B",
+      "wood": "#33291F"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club225195858.orgs.biz/",
+  "contact_lead": "tg:Karina_Plachkova"
+}

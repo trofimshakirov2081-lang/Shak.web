@@ -1,0 +1,68 @@
+{
+  "slug": "ufo-volgograd",
+  "name": "Туры и экскурсии ЮФО",
+  "niche": "tury",
+  "city": "Волгоград",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/ufo-volgograd/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Туры и экскурсии ЮФО: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Тур выходного дня",
+      "price": 15000,
+      "desc": "2 дня, транспорт и гид",
+      "photo": "files/ufo-volgograd/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Однодневная экскурсия",
+      "price": 4500,
+      "desc": "Целый день, обед включён",
+      "photo": "files/ufo-volgograd/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Авторский тур",
+      "price": 45000,
+      "desc": "5 дней, малая группа",
+      "photo": "files/ufo-volgograd/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 917 330-02-57",
+    "whatsapp": "79173300257",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Волгоград",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://ttk-ufo-volgograd.orgs.biz/",
+  "contact_lead": "em:ufo.volga@yandex.ru"
+}

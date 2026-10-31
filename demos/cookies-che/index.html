@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru" data-fonts="Unbounded|Nunito">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+  <title>Cookies.Che | Десерты на заказ</title>
+  <meta name="description" content="Cookies.Che, Череповец. Начинку и надпись напишите в комментарии, я отвечу и всё согласую.">
+  <meta property="og:title" content="Cookies.Che">
+  <meta property="og:description" content="Начинку и надпись напишите в комментарии, я отвечу и всё согласую.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600&family=Nunito:wght@400;600;800&display=swap">
+  <style>
+    :root { --main: #D6336C; --accent: #F9D9E0; --bg: #EEF3E6; --text: #3A2620; --pist: #D7E6C3; --butter: #FBEBC0; --lilac: #E4DDF4; --white: #FFFDFB; --c-radius: 16px; --c-surface: var(--white); --spring: cubic-bezier(.34, 1.56, .64, 1); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--font-body); }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 600; letter-spacing: -.02em; margin: 0; }
+    .wrap { width: min(1120px, 100% - 20px); margin: 0 auto; }
+
+    .top { position: sticky; top: 0; z-index: 30; padding: 10px 0; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .top .wrap { display: flex; align-items: center; gap: 10px; }
+    .logo { margin-right: auto; display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 15px/1.1 var(--font-head); }
+    .logo i { width: 38px; height: 38px; border-radius: 13px; background: var(--main); color: #fff; display: grid; place-items: center; font: 600 17px var(--font-head); font-style: normal; transform: rotate(-6deg); }
+    .logo small { display: block; font: 600 12px var(--font-body); opacity: .6; letter-spacing: 0; }
+    .cart { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 16px; padding: 10px 10px 10px 16px; background: var(--text); color: var(--white); font: 800 14px var(--font-body); cursor: pointer; }
+    .cart b { min-width: 24px; height: 24px; border-radius: 9px; background: rgba(255,255,255,.18); display: grid; place-items: center; font-size: 12px; }
+    .cart b.has { background: var(--main); }
+    .cart.bump { animation: bump .5s var(--spring); }
+    @keyframes bump { 40% { transform: scale(1.1); } }
+
+    /* Первый экран: сетка-бенто, плитки по очереди «выпрыгивают» */
+    .hero { padding: 6px 0 20px; }
+    .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .t { border-radius: 26px; padding: 20px; animation: pop .8s var(--spring) both; }
+    .t:nth-child(2) { animation-delay: .08s; } .t:nth-child(3) { animation-delay: .16s; } .t:nth-child(4) { animation-delay: .24s; } .t:nth-child(5) { animation-delay: .32s; }
+    @keyframes pop { from { opacity: 0; transform: scale(.88) translateY(14px); } }
+    .t-main { grid-column: span 2; background: var(--lilac); padding: 26px 22px 24px; }
+    .t-main h1 { font-size: clamp(27px, 7.4vw, 50px); line-height: 1.08; }
+    .t-main p { margin: 12px 0 20px; max-width: 40ch; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border-radius: 16px; border: 0; background: var(--main); color: #fff; font: 800 16px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .3s var(--spring); }
+    .btn:hover { transform: scale(1.03); }
+    .t-photo { grid-column: span 2; padding: 0; overflow: hidden; aspect-ratio: 4 / 3.4; background: var(--accent); position: relative; }
+    .t-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .t-photo .float { position: absolute; right: 14px; bottom: 14px; background: var(--white); border-radius: 16px; padding: 10px 14px; font-weight: 800; font-size: 14px; box-shadow: 0 10px 24px -12px rgba(58,38,32,.5); animation: drift 5s ease-in-out infinite; }
+    @keyframes drift { 50% { transform: translateY(-6px); } }
+    .t-small { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 140px; }
+    .t-small strong { font: 600 15px/1.2 var(--font-head); }
+    .t-small span { font-size: 14px; line-height: 1.35; opacity: .8; }
+    .t-small .ic { font-size: 26px; }
+    .tiles .t-small:last-child { grid-column: span 2; min-height: 0; flex-direction: row; align-items: center; justify-content: flex-start; }
+    .c1 { background: var(--butter); } .c2 { background: var(--pist); } .c3 { background: var(--accent); }
+
+    /* Каталог: плитки разного цвета */
+    .menu { padding: 44px 0 20px; }
+    .menu h2, .hi h2, .find h2 { font-size: clamp(26px, 6.6vw, 42px); line-height: 1.1; }
+    .lead { margin: 10px 0 22px; max-width: 46ch; opacity: .8; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .item { border-radius: 24px; padding: 8px 8px 14px; display: flex; flex-direction: column; gap: 4px; transition: transform .4s var(--spring); }
+    .item:hover { transform: translateY(-3px) rotate(-.4deg); }
+    .item:nth-child(4n+1) { background: var(--accent); } .item:nth-child(4n+2) { background: var(--pist); } .item:nth-child(4n+3) { background: var(--butter); } .item:nth-child(4n) { background: var(--lilac); }
+    .item .ph { aspect-ratio: 1; border-radius: 18px; overflow: hidden; background: var(--white); margin-bottom: 6px; position: relative; }
+    .item .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .item .noimg { display: grid; place-items: center; height: 100%; font-size: 52px; }
+    .item .tag { position: absolute; top: 8px; left: 8px; background: var(--white); border-radius: 10px; padding: 3px 9px; font-size: 12px; font-weight: 800; }
+    .item h3 { font: 600 14px/1.25 var(--font-head); padding: 0 6px; }
+    .item p { margin: 0; padding: 0 6px; font-size: 13px; line-height: 1.35; opacity: .75; }
+    .item .row { margin-top: auto; padding: 8px 6px 0; display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+    .price { font: 800 16px var(--font-body); }
+    .add { border: 0; border-radius: 12px; background: var(--white); color: var(--text); font: 800 13px var(--font-body); padding: 9px 12px; cursor: pointer; transition: transform .3s var(--spring), background .3s; }
+    .add:active { transform: scale(.92); }
+    .add.done { background: var(--text); color: var(--white); }
+    .item.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; column-gap: 12px; }
+    .item.wide .ph { aspect-ratio: auto; min-height: 190px; grid-row: span 4; margin: 0; }
+    .item.wide .ph img { position: absolute; inset: 0; }
+    .item.wide h3 { padding-top: 10px; font-size: 16px; }
+
+    .hi { padding: 30px 0; }
+    .hi .wrap { display: grid; }
+    .hi .t { animation: none; }
+    .hi .me { background: var(--white); padding: 28px 22px; }
+    .hi p { margin: 12px 0 0; max-width: 56ch; }
+    .find { padding: 0 0 40px; }
+    .find .box { background: var(--text); color: var(--white); border-radius: 28px; padding: 30px 22px; display: grid; gap: 20px; }
+    .rows > * { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.14); text-decoration: none; }
+    .rows small { opacity: .6; }
+    .rows strong { text-align: right; font-weight: 600; }
+    .acts { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn.ghost { background: rgba(255,255,255,.12); }
+    footer { padding: 0 0 28px; font-size: 13px; opacity: .7; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+    .c-drawer { border-radius: 26px 0 0 26px; }
+    .c-drawer h3 { font-weight: 600; font-size: 20px; }
+
+    @media (min-width: 820px) {
+      .tiles { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto; gap: 14px; }
+      .t-main { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; }
+      .t-photo { grid-column: span 2; aspect-ratio: auto; min-height: 320px; }
+      .t-small { grid-column: span 1; }
+      .tiles .t-small:last-child { display: none; }
+      .item.wide { align-content: center; }
+      .item.wide .row { margin-top: 8px; }
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .item h3 { font-size: 15px; }
+      .item.wide { grid-column: span 2; }
+      .find .box { grid-template-columns: 1fr 1fr; padding: 44px; }
+    }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, x = Core.x, n = D.items.length;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var name = D.brand.name.split(/\s+[-,]\s+/);
+    var colors = ["c1", "c2", "c3"];
+
+    var small = D.features.map(function (f, k) {
+      return '<div class="t t-small ' + colors[k % 3] + '"><span class="ic" aria-hidden="true">' + e(f.icon) + '</span><div><strong>' + e(f.title) + '</strong><br><span>' + e(f.text) + '</span></div></div>';
+    }).join("");
+
+    var items = D.items.map(function (i, k) {
+      var wide = k === n - 1 && n % 2 === 1;
+      return '<article class="item' + (wide ? " wide" : "") + '"><div class="ph">' + Core.pic(i) + (i.tag ? '<span class="tag">' + e(i.tag) + '</span>' : '') + '</div>' +
+        '<h3>' + e(i.name) + '</h3>' + (i.desc ? '<p>' + e(i.desc) + '</p>' : '') +
+        '<div class="row"><span class="price">' + Core.money(i.price) + '</span><button class="add" data-add="' + e(i.id) + '">' + e(D.sections.addLabel || "Добавить") + '</button></div></article>';
+    }).join("");
+
+    var rows = Core.contacts().map(function (r) {
+      var inner = '<small>' + e(r[0]) + '</small><strong>' + e(r[1]) + '</strong>';
+      return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>';
+    }).join("");
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top"><i>' + e(D.brand.name.trim().charAt(0)) + '</i><span>' + e(name[0]) + (name[1] ? '<small>' + e(name[1]) + '</small>' : '') + '</span></a>' +
+        '<button class="cart" data-open-cart>' + e(D.sections.cartLabel || "Корзина") + '<b data-count>0</b></button></div></header>' +
+      '<main id="top"><section class="hero"><div class="wrap"><div class="tiles">' +
+        '<div class="t t-main"><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><div><a class="btn" href="#menu">' + e(D.hero.cta) + '</a></div></div>' +
+        '<div class="t t-photo">' + (hp ? '<img src="' + e(hp) + '" alt="' + e(D.brand.name) + '">' : '') + (D.items[0] ? '<span class="float">' + e(x.fromLabel || "Десерты от") + ' ' + Core.money(Math.min.apply(null, D.items.map(function (i) { return i.price; }))) + '</span>' : '') + '</div>' +
+        small + '</div></div></section>' +
+      '<section class="menu" id="menu"><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="lead">' + e(D.sections.catalogText) + '</p><div class="grid">' + items + '</div></div></section>' +
+      '<section class="hi"><div class="wrap"><div class="t me"><h2>' + e(D.sections.aboutTitle) + '</h2><p>' + e(D.sections.aboutText) + '</p></div>' +
+        '</div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>' + e(x.orderTitle || "Заказать") + '</h2><p style="opacity:.75;margin:10px 0 20px">' + e(x.orderText || "Напишите дату и повод, я отвечу и всё уточню.") + '</p><div class="acts">' +
+        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa(x.orderMsg || "Здравствуйте! Хочу заказать десерт") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
+        (D.contacts.phone ? '<a class="btn ghost" href="tel:' + e(D.contacts.phone.replace(/[^\d+]/g, "")) + '">Позвонить</a>' : '') + '</div></div><div class="rows">' + rows + '</div></div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    document.addEventListener("core:add", function () {
+      var c = document.querySelector(".cart"); c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump");
+    });
+  })();
+  </script>
+</body>
+</html>

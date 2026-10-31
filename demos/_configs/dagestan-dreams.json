@@ -1,0 +1,68 @@
+{
+  "slug": "dagestan-dreams",
+  "name": "Dagestan Dreams",
+  "niche": "tury",
+  "city": "Дагестан",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/dagestan-dreams/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Назим, я сам веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Нетипичный Дагестан",
+      "price": 45000,
+      "desc": "4 дня, горы и аулы",
+      "photo": "files/dagestan-dreams/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сулакский каньон",
+      "price": 4500,
+      "desc": "1 день из Махачкалы",
+      "photo": "files/dagestan-dreams/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гуниб и Салтинский водопад",
+      "price": 5000,
+      "desc": "1 день",
+      "photo": "files/dagestan-dreams/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 713-50-14",
+    "whatsapp": "79817135014",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Дагестан",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://dagestandreams.orgs.biz/",
+  "contact_lead": "tg:dagestanetz"
+}

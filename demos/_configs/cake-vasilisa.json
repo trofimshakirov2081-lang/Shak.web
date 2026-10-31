@@ -1,0 +1,126 @@
+{
+  "slug": "cake-vasilisa",
+  "name": "CAKEvasilisa",
+  "niche": "кондитерская",
+  "city": "Любино",
+  "custom": "yulya-konditer",
+  "tagline": "Торты в Любино",
+  "colors": {
+    "main": "#1E847F",
+    "accent": "#FFDCC2",
+    "bg": "#F4FAF9",
+    "text": "#13302E"
+  },
+  "fonts": {
+    "head": "Jura",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Сладкие шедевры ручной работы",
+    "text": "Торты, бенто, чизкейки и капкейки в Любинском районе. За отзыв скидка 10% на следующий заказ.",
+    "cta": "Собрать заказ",
+    "photo": "files/cake-vasilisa/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Обо мне",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Создаю торты и десерты в Любинском районе, которые покоряют с первого взгляда. Капкейки можно получить уже в день заказа.",
+  "features": [
+    {
+      "icon": "🎁",
+      "title": "Скидка 10% за отзыв",
+      "text": "На следующий заказ."
+    },
+    {
+      "icon": "⚡",
+      "title": "Капкейки день в день",
+      "text": "Если нужно срочно."
+    },
+    {
+      "icon": "🎂",
+      "title": "Торт от 1 кг",
+      "text": "Декор включён в цену."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бисквитный торт",
+      "price": 2500,
+      "desc": "За 1 кг с декором",
+      "photo": "files/cake-vasilisa/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с тонкими коржами",
+      "price": 2500,
+      "desc": "За 1 кг с декором",
+      "photo": "files/cake-vasilisa/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1400,
+      "desc": "Мини-набор",
+      "photo": "files/cake-vasilisa/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейки",
+      "price": 1550,
+      "desc": "Цельные и нарезные",
+      "photo": "files/cake-vasilisa/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Меренговый рулет",
+      "price": 2000,
+      "desc": "Два размера",
+      "photo": "files/cake-vasilisa/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Муссовые десерты",
+      "price": 1300,
+      "desc": "Игра текстур",
+      "photo": "files/cake-vasilisa/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Cake to go и трайфлы",
+      "price": 1400,
+      "desc": "Набор",
+      "photo": "files/cake-vasilisa/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки",
+      "price": 1000,
+      "desc": "Набор",
+      "photo": "files/cake-vasilisa/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 913 661-07-77",
+    "whatsapp": "79136610777",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#F4E0E6",
+      "pist": "#D6EEE9",
+      "butter": "#FFEACC"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://artortvm.orgs.biz/"
+}

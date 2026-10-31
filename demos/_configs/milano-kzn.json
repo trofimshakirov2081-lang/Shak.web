@@ -1,0 +1,132 @@
+{
+  "slug": "milano-kzn",
+  "name": "Студия красоты Milano",
+  "niche": "брови",
+  "city": "Казань",
+  "custom": "browlash",
+  "tagline": "Студия красоты",
+  "colors": {
+    "main": "#4A7FA5",
+    "accent": "#D6E4EE",
+    "bg": "#F1F4F6",
+    "text": "#1B2530"
+  },
+  "fonts": {
+    "head": "Spectral",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Красота в приятной обстановке",
+    "text": "Брови, ресницы и уход в центре Казани. Выберите процедуру и запишитесь в WhatsApp.",
+    "cta": "Выбрать услугу",
+    "photo": "files/milano-kzn/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Популярные услуги",
+    "catalogText": "Отметьте услуги, и заявка уйдёт в WhatsApp. Подберём время.",
+    "aboutTitle": "О студии",
+    "orderTitle": "Ваша запись",
+    "addLabel": "Записаться"
+  },
+  "about": "Студия красоты Milano: мастера с качественной работой и хорошим настроением в приятной обстановке.",
+  "features": [
+    {
+      "icon": "✨",
+      "title": "Опытные мастера",
+      "text": "Качественная работа."
+    },
+    {
+      "icon": "☕",
+      "title": "Уютная студия",
+      "text": "Отдохните у нас."
+    },
+    {
+      "icon": "📍",
+      "title": "Центр Казани",
+      "text": "Бутлерова / Курашова."
+    }
+  ],
+  "items": [
+    {
+      "name": "Оформление бровей",
+      "price": 900,
+      "desc": "Коррекция и окрашивание",
+      "photo": "files/milano-kzn/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Ламинирование ресниц",
+      "price": 1800,
+      "desc": "Изгиб на 6-8 недель",
+      "photo": "files/milano-kzn/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Окрашивание ресниц",
+      "price": 500,
+      "desc": "Глубокий цвет",
+      "photo": "files/milano-kzn/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Восковая депиляция",
+      "price": 400,
+      "desc": "Зона лица",
+      "photo": "files/milano-kzn/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 917 933-93-52",
+    "whatsapp": "79179339352",
+    "address": "ул. Бутлерова / Курашова, 20",
+    "hours": ""
+  },
+  "extra": {
+    "plainLevels": true,
+    "cards": [
+      [
+        "#1B2530",
+        "#F1F4F6"
+      ],
+      [
+        "#D6E4EE",
+        "#1B2530"
+      ],
+      [
+        "#4A7FA5",
+        "#FFFFFF"
+      ],
+      [
+        "#FFFFFF",
+        "#1B2530"
+      ],
+      [
+        "#8FB3CC",
+        "#1B2530"
+      ]
+    ],
+    "services": [
+      "Брови",
+      "Ресницы",
+      "Депиляция",
+      "Уход за лицом"
+    ],
+    "levelDefault": "Услуга",
+    "lines": false,
+    "heroAlt": "Студия красоты Milano",
+    "cartBtn": "Запись",
+    "svcTitle": "Ещё услуги",
+    "svcLink": "Все услуги",
+    "findText": "Напишите в WhatsApp, подберём удобное время.",
+    "sendLabel": "Отправить запись в WhatsApp",
+    "addedLabel": "Выбрано",
+    "commentHint": "Удобные дата и время",
+    "orderIntro": "Здравствуйте! Хочу записаться:",
+    "emptyText": "Пока ничего не выбрано. Отметьте услугу.",
+    "emptyToast": "Сначала выберите услугу"
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://milanosalon.orgs.biz/",
+  "email": "milano_kzn@mail.ru"
+}

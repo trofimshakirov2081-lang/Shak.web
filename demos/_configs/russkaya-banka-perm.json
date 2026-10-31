@@ -1,0 +1,67 @@
+{
+  "slug": "russkaya-banka-perm",
+  "name": "Русская банька",
+  "niche": "banya",
+  "city": "Пермь",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Парная, купель и тишина",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/russkaya-banka-perm/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Русская банька: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Русская баня на дровах",
+      "price": 2000,
+      "desc": "До 8 человек, купель",
+      "photo": "files/russkaya-banka-perm/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Финская сауна",
+      "price": 1700,
+      "desc": "До 6 человек",
+      "photo": "files/russkaya-banka-perm/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Большой зал",
+      "price": 3500,
+      "desc": "До 15 человек, бассейн и караоке",
+      "photo": "files/russkaya-banka-perm/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 902 637-20-26",
+    "whatsapp": "79026372026",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://bankarus59.orgs.biz/",
+  "contact_lead": "em:maks.bragin.15@mail.ru"
+}

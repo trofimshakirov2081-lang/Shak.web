@@ -1,0 +1,73 @@
+{
+  "slug": "florencia-novgorod",
+  "name": "Флоренция",
+  "niche": "masterskaya",
+  "city": "Великий Новгород",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Кухня, сделанная под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/florencia-novgorod/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Флоренция: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня «Винтаж»",
+      "price": 72000,
+      "desc": "‼Самое очаровательное предложение‼ Продается образец…",
+      "photo": "files/florencia-novgorod/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Угловая кухня",
+      "price": 75900,
+      "desc": "Фасады пластик высокого давления цвета \"Белый\" и \"Имбирь\"…",
+      "photo": "files/florencia-novgorod/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прямая кухня",
+      "price": 58000,
+      "desc": "Кухня с фасадами МДФ в пленке ПВХ цвет \"Морская волна…",
+      "photo": "files/florencia-novgorod/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кухня в светлых тонах",
+      "price": 38000,
+      "desc": "фасады ЛДСП Премиум цвет \"Белый\" и \"Лайм зеленый\".…",
+      "photo": "files/florencia-novgorod/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 911 617-74-61",
+    "whatsapp": "79116177461",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club76290303.orgs.biz/",
+  "contact_lead": "em:flornov@mail.ru"
+}

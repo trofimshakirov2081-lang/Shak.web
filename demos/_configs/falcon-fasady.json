@@ -1,0 +1,73 @@
+{
+  "slug": "falcon-fasady",
+  "name": "ФАЛЬКОН",
+  "niche": "masterskaya",
+  "city": "Челябинск",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#3D5A80",
+    "accent": "#B98A5A",
+    "bg": "#F2F0EA",
+    "text": "#23262B"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/falcon-fasady/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "ФАЛЬКОН: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня",
+      "price": 28000,
+      "desc": "Под потолок, фурнитура Blum",
+      "photo": "files/falcon-fasady/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шкаф-купе",
+      "price": 19000,
+      "desc": "Зеркало или ЛДСП",
+      "photo": "files/falcon-fasady/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гардеробная",
+      "price": 16000,
+      "desc": "Открытые системы",
+      "photo": "files/falcon-fasady/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 15000,
+      "desc": "С банкеткой и зеркалом",
+      "photo": "files/falcon-fasady/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 919 301-83-86",
+    "whatsapp": "79193018386",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FBFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://83falcon.orgs.biz/",
+  "contact_lead": "em:falcon-83@mail.ru"
+}

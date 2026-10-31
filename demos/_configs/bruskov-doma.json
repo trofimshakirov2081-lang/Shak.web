@@ -1,0 +1,74 @@
+{
+  "slug": "bruskov-doma",
+  "name": "Брусков",
+  "niche": "masterskaya",
+  "city": "Москва",
+  "custom": "stolyar",
+  "tagline": "Строительство домов",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Дом, который строят под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/bruskov-doma/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Брусков: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Одноэтажный дом 58 м2 + 16 м2 терраса",
+      "price": 3200000,
+      "desc": "Одноэтажный дом м582 с террасой 16 м2, 2 спальнями.…",
+      "photo": "files/bruskov-doma/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Одноэтажный дом 80 м2 + 15 м2 терраса",
+      "price": 3800000,
+      "desc": "Одноэтажный дом 80 м2 с террасой 15 м2, 3 спальнями.…",
+      "photo": "files/bruskov-doma/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Двухэтажный дом 120 м2 + терраса 25 м2",
+      "price": 4300000,
+      "desc": "Двухэтажный дом 120 м2 + терраса 25 м2 с 4 спальнями.…",
+      "photo": "files/bruskov-doma/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Просторный двухэтажный дом 224 м2 + 37 м2",
+      "price": 6500000,
+      "desc": "Двухэтажный дом 224 м2 + терраса 37 м2 с 5 спальнями.…",
+      "photo": "files/bruskov-doma/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 985 162-55-87",
+    "whatsapp": "79851625587",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://bruskov-doma.orgs.biz/",
+  "contact_lead": "em:info@bruskov-doma.ru"
+}

@@ -1,0 +1,127 @@
+{
+  "slug": "taniart",
+  "name": "TaniArt",
+  "niche": "цветы",
+  "city": "Санкт-Петербург",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#D7A8C2",
+    "accent": "#3A3358",
+    "bg": "#1D1B2E",
+    "text": "#EFEAF5"
+  },
+  "fonts": {
+    "head": "Playfair Display",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Флористика и декор для ваших лучших моментов",
+    "text": "Букеты, оформление праздников и свадеб. Раскрасим лучшие моменты вашей жизни.",
+    "cta": "Выбрать букет",
+    "photo": "files/taniart/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "TaniArt: студия декора и флористики. Наша команда воплощает ваши идеи в цветах и декоре.",
+  "features": [
+    {
+      "icon": "💐",
+      "title": "Авторские букеты",
+      "text": "Под ваш повод."
+    },
+    {
+      "icon": "🎉",
+      "title": "Декор праздников",
+      "text": "Свадьбы и события."
+    },
+    {
+      "icon": "🎨",
+      "title": "Ваши идеи",
+      "text": "Воплотим в цветах."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/taniart/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/taniart/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/taniart/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/taniart/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/taniart/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/taniart/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/taniart/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/taniart/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 180-54-00",
+    "whatsapp": "79811805400",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Цветы, которые раскрашивают праздник",
+    "vars": {
+      "deep": "#14121F",
+      "c-surface": "#1D1B2E"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://taniart-spb.orgs.biz/",
+  "email": "taniart_spb@list.ru"
+}

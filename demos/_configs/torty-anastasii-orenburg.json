@@ -1,0 +1,130 @@
+{
+  "slug": "torty-anastasii-orenburg",
+  "name": "Торты Анастасии",
+  "niche": "кондитерская",
+  "city": "Оренбург",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#E06C3C",
+    "accent": "#FFE1CF",
+    "bg": "#FFF8F2",
+    "text": "#33190E"
+  },
+  "fonts": {
+    "head": "Rubik",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Домашние торты в Оренбурге",
+    "text": "Выберите десерт, добавьте в заказ, и он уйдёт мне в WhatsApp. Оренбург.",
+    "cta": "Собрать заказ",
+    "photo": "files/torty-anastasii-orenburg/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Анастасия",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Анастасия, я пеку торты и десерты на заказ в Оренбурге. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Оренбург",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Медовик",
+      "price": 1400,
+      "desc": "Нежные, пропитанные коржи Сливочный крем И тот самый вкус,…",
+      "photo": "files/torty-anastasii-orenburg/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Меренговый рулет",
+      "price": 850,
+      "desc": "Меренговый рулет — десерт, который сочетает воздушную…",
+      "photo": "files/torty-anastasii-orenburg/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто торт",
+      "price": 850,
+      "desc": "Торт небольшого размера на двоих Есть 2 варианта:…",
+      "photo": "files/torty-anastasii-orenburg/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/torty-anastasii-orenburg/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/torty-anastasii-orenburg/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/torty-anastasii-orenburg/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/torty-anastasii-orenburg/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/torty-anastasii-orenburg/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 909 618-80-99",
+    "whatsapp": "79096188099",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F7E0E8",
+      "pist": "#E3EFD6",
+      "butter": "#FFEBC2"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club232064014.orgs.biz/",
+  "telegram_lead": "a_smirnova056"
+}

@@ -1,0 +1,73 @@
+{
+  "slug": "avtospa-piter",
+  "name": "АвтоСпа",
+  "niche": "detailing",
+  "city": "Санкт-Петербург",
+  "custom": "glyanec",
+  "tagline": "Детейлинг",
+  "colors": {
+    "main": "#3FA7D6",
+    "accent": "#F2C14E",
+    "bg": "#1A1D21",
+    "text": "#EEF1F4"
+  },
+  "fonts": {
+    "head": "Akt",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Блеск, который держится годами",
+    "text": "Выберите класс машины и услуги: цена посчитается сразу, а запись уйдёт нам в WhatsApp.",
+    "photo": "files/avtospa-piter/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Услуги и цены",
+    "catalogText": "Цены для седана, для других классов переключите выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "АвтоСпа: работаем аккуратно, показываем результат до и после.",
+  "items": [
+    {
+      "name": "Детейлинг химчистка салона",
+      "price": 8000,
+      "desc": "Химчистка салона – советы АвтоСпа по чистке салона…",
+      "photo": "files/avtospa-piter/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Ceramic + Керамическое покрытие",
+      "price": 27000,
+      "desc": "«Керамик+» Новейшее поколение защитных покрытий в…",
+      "photo": "files/avtospa-piter/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Антигравийные пленки",
+      "price": 7000,
+      "desc": "Каждый водитель сталкивался с проблемой образования…",
+      "photo": "files/avtospa-piter/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Защита кожи",
+      "price": 3000,
+      "desc": "На автомобильные сиденья часто приходится садиться в…",
+      "photo": "files/avtospa-piter/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 904 649-39-34",
+    "whatsapp": "79046493934",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "graphite": "#272C33"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://avtospapiter.orgs.biz/",
+  "contact_lead": "em:avtospa-piter@mail.ru"
+}

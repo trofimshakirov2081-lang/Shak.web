@@ -1,0 +1,68 @@
+{
+  "slug": "uznai-krym",
+  "name": "Узнай Крым",
+  "niche": "tury",
+  "city": "Севастополь",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/uznai-krym/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Узнай Крым: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Звездный тур по Крыму",
+      "price": 28900,
+      "desc": "Длительность: 8 дней/7 ночей Маршрут тура: От 28900 руб.…",
+      "photo": "files/uznai-krym/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "ГРАНД ТУР – Крымская Кругосветка",
+      "price": 33900,
+      "desc": "Длительность: 8 дней / 7 ночей. Еженедельно по субботам…",
+      "photo": "files/uznai-krym/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Особенности национальной кухни» №1",
+      "price": 12500,
+      "desc": "Маршрут тура: г.Симферополь – г.Бахчисарай – г.Инкерман –…",
+      "photo": "files/uznai-krym/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 978 059-20-92",
+    "whatsapp": "79780592092",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Севастополь",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://uznai--krym.orgs.biz/",
+  "contact_lead": "em:uznai.krym@yandex.ru"
+}

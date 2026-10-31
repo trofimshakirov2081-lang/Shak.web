@@ -1,0 +1,136 @@
+{
+  "slug": "kofein-podgornaya",
+  "name": "КофеИН",
+  "niche": "кофейня",
+  "city": "Подгорная",
+  "custom": "altynnur",
+  "tagline": "Кофе",
+  "colors": {
+    "main": "#3B4A8C",
+    "accent": "#F2B880",
+    "bg": "#F4F5FA",
+    "text": "#141A33"
+  },
+  "fonts": {
+    "head": "Unbounded",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Закажите заранее и заберите без очереди",
+    "text": "КофеИН в Подгорной. Соберите заказ на сайте и заберите его, когда удобно.",
+    "cta": "Смотреть меню",
+    "photo": "files/kofein-podgornaya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Меню",
+    "catalogText": "Добавьте позиции в заказ и отправьте нам.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "КофеИН: кофе и выпечка в Подгорной. Готовим с любовью и ждём вас каждый день.",
+  "features": [
+    {
+      "icon": "☕",
+      "title": "Свежий кофе",
+      "text": "Каждый день."
+    },
+    {
+      "icon": "🥐",
+      "title": "Выпечка",
+      "text": "К кофе и с собой."
+    },
+    {
+      "icon": "📍",
+      "title": "Подгорная",
+      "text": "Ждём в гости."
+    }
+  ],
+  "items": [
+    {
+      "name": "Латте 300мл",
+      "price": 170,
+      "desc": "Молоко с кофе и нежной пенкой",
+      "photo": "files/kofein-podgornaya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Латте 250мл",
+      "price": 150,
+      "desc": "Молоко с кофе и нежной пенкой",
+      "photo": "files/kofein-podgornaya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капучино 300мл",
+      "price": 170,
+      "desc": "Кофе с молоком",
+      "photo": "files/kofein-podgornaya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капучино 250мл",
+      "price": 150,
+      "desc": "Кофе с молоком",
+      "photo": "files/kofein-podgornaya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Раф 300мл",
+      "price": 190,
+      "desc": "Кофе со сливками",
+      "photo": "files/kofein-podgornaya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Раф250мл",
+      "price": 170,
+      "desc": "Кофе Раф на сливках",
+      "photo": "files/kofein-podgornaya/item-6.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 928 351-37-83",
+    "whatsapp": "79283513783",
+    "address": "ул. Ленина, 55а",
+    "hours": ""
+  },
+  "extra": {
+    "groups": [
+      [
+        "Кофе",
+        "кофе|капучин|латте|раф|флэт|американо|эспрессо|зерн|колумб|эфиоп|бразил|кения|дрип"
+      ],
+      [
+        "Другое",
+        "матча|какао|чай"
+      ],
+      [
+        "Выпечка",
+        "круассан|хлеб|булоч|пирог|багет|выпеч"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Всё меню",
+    "orderTitle": "Заказать заранее",
+    "orderText": "Соберите заказ на сайте и заберите его без очереди.",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки подготовить, пожелания",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой.",
+    "emptyToast": "Сначала выберите позицию",
+    "vars": {
+      "deep": "#141A33",
+      "glow": "#5B6FD6",
+      "glow2": "#E58A4E",
+      "sky": "#E6E9F7",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club227857962.orgs.biz/",
+  "vk_lead": "https://vk.me/club227857962"
+}

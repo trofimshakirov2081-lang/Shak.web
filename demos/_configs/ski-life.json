@@ -1,0 +1,74 @@
+{
+  "slug": "ski-life",
+  "name": "SKI-LIFE",
+  "niche": "sport",
+  "city": "Санкт-Петербург",
+  "custom": "start",
+  "tagline": "Горнолыжная школа",
+  "colors": {
+    "main": "#2353C9",
+    "accent": "#F2B705",
+    "bg": "#F3F4F7",
+    "text": "#121826"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "На склон уверенно с первого сезона",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/ski-life/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "SKI-LIFE: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пакет \"Начинающий",
+      "price": 8000,
+      "desc": "Групповой месячный Абонемент в зимний период. 2…",
+      "photo": "files/ski-life/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Пакет \"Я в детском спорт",
+      "price": 10000,
+      "desc": "Групповые тренировки зимой и в межсезонье. 3 тренировки в…",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Групповые тренировки по роликовым конькам",
+      "price": 8000,
+      "desc": "Ежемесячный абонемент на групповые тренировки по…",
+      "photo": "files/ski-life/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуальная тренировка",
+      "price": 2000,
+      "desc": "Привет! Меня зовут Георгий Корнилов! ❄ мастер спорта по…",
+      "photo": "files/ski-life/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 995 595-00-95",
+    "whatsapp": "79955950095",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E1E5EE"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://school-ski-life.orgs.biz/",
+  "contact_lead": "em:rfsoorollerlo@mail.ru"
+}

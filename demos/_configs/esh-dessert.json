@@ -1,0 +1,130 @@
+{
+  "slug": "esh-dessert",
+  "name": "Десерты Завьялово",
+  "niche": "кондитерская",
+  "city": "Завьялово",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#C0567B",
+    "accent": "#FFD9E6",
+    "bg": "#FDF6F8",
+    "text": "#2C1A22"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Бенто, моти и торты к любому празднику",
+    "text": "Торты, бенто, торт в кружке, моти и макаронс рядом с Ижевском. Соберите заказ, и я отвечу в WhatsApp.",
+    "cta": "Собрать заказ",
+    "photo": "files/esh-dessert/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Делаю десерты на заказ: от бенто до кэнди-бара и подарочных коробочек с цветами. Воплощаю ваши идеи в сладкой форме.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Торты и бенто",
+      "text": "На любой повод."
+    },
+    {
+      "icon": "🍡",
+      "title": "Моти и макаронс",
+      "text": "Попробуйте новинки."
+    },
+    {
+      "icon": "🎁",
+      "title": "Подарочные коробки",
+      "text": "С десертами и цветами."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/esh-dessert/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/esh-dessert/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/esh-dessert/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/esh-dessert/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/esh-dessert/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/esh-dessert/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/esh-dessert/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с рисунком",
+      "price": 3900,
+      "desc": "Нарисую по вашему фото",
+      "photo": "files/esh-dessert/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 912 743-18-89",
+    "whatsapp": "79127431889",
+    "address": "ул. Малиновая, 70",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#EADFF6",
+      "pist": "#DDF0E3",
+      "butter": "#FFEFCF"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://esh-dessert.orgs.biz/",
+  "email": "shilko_desserts@mail.ru"
+}

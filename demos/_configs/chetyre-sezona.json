@@ -1,0 +1,63 @@
+{
+  "slug": "chetyre-sezona",
+  "name": "Четыре сезона",
+  "niche": "otdyh",
+  "city": "Мурадымово",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#24352B",
+    "accent": "#D9692E",
+    "bg": "#F2EFE6",
+    "text": "#1B241E"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Выходные, после которых не хочется обратно",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/chetyre-sezona/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Четыре сезона: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Дом №1",
+      "price": 8000,
+      "desc": "Будни - 8 000 ₽/сутки Выходные/праздничные дни - 10 000…",
+      "photo": "files/chetyre-sezona/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Дом №2",
+      "price": 8000,
+      "desc": "Будни - 8 000 ₽/сутки Выходные/праздничные дни - 10 000…",
+      "photo": "files/chetyre-sezona/item-2.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 937 354-53-33",
+    "whatsapp": "79373545333",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#9DB7B5",
+      "paper": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://4sezona-bazaa.orgs.biz/",
+  "contact_lead": "tg:Kvadromuradym"
+}

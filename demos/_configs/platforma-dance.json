@@ -1,0 +1,74 @@
+{
+  "slug": "platforma-dance",
+  "name": "Платформа",
+  "niche": "sport",
+  "city": "Санкт-Петербург",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#2353C9",
+    "accent": "#F2B705",
+    "bg": "#F3F4F7",
+    "text": "#121826"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/platforma-dance/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Платформа: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "High Heels",
+      "price": 500,
+      "desc": "Пробное занятие",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Акробатика",
+      "price": 500,
+      "desc": "Пробное занятие",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Танцы 18+",
+      "price": 900,
+      "desc": "Разовое занятие",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Первый абонемент",
+      "price": 2720,
+      "desc": "8 занятий",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 047-52-06",
+    "whatsapp": "79810475206",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E1E5EE"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://studio-platforma.orgs.biz/",
+  "contact_lead": "tg:studio_Platforma"
+}

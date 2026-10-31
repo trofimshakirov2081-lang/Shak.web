@@ -1,0 +1,74 @@
+{
+  "slug": "bochky-tver",
+  "name": "Бани-Bochky",
+  "niche": "masterskaya",
+  "city": "Тверь",
+  "custom": "stolyar",
+  "tagline": "Бани под ключ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Своя баня под ключ",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/bochky-tver/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Бани-Bochky: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "БАНЯ-ОВАЛБОЧКА «4Х3",
+      "price": 219900,
+      "desc": "Баня-овалбочка «4×3» имеет два больших помещения и с…",
+      "photo": "files/bochky-tver/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "БАНЯ-ОВАЛБОЧКА «4×4.5",
+      "price": 309900,
+      "desc": "Баня-овалбочка «4×4.5» имеет три больших помещения и с…",
+      "photo": "files/bochky-tver/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гриль домик «Кодума» 3,7х3,7м",
+      "price": 294900,
+      "desc": "Гриль домик «Кодума» это быстровозводимая конструкция,…",
+      "photo": "files/bochky-tver/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "КУПЕЛЬ ИЗ ЛИСТВЕННИЦЫ ДИАМЕТРОМ 2,0М",
+      "price": 75000,
+      "desc": "Основной материал: Лиственница Диаметр: 200 см Глубина:…",
+      "photo": "files/bochky-tver/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 904 023-00-23",
+    "whatsapp": "79040230023",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://bochky69.orgs.biz/",
+  "contact_lead": "em:tver@bochky.ru"
+}

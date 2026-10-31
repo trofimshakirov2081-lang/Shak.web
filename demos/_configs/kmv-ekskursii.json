@@ -1,0 +1,75 @@
+{
+  "slug": "kmv-ekskursii",
+  "name": "Экскурсии КМВ",
+  "niche": "tury",
+  "city": "Ессентуки",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/kmv-ekskursii/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Экскурсии КМВ: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Верхний Чегем,Эль Тюбю, термы \"Гедуко",
+      "price": 2800,
+      "desc": "Отправьтесь в одно из самых атмосферных ущелий Кавказа!…",
+      "photo": "files/kmv-ekskursii/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Премиум джип-тур ДВА УЩЕЛЬЯ КАБАРДИНО-БАЛКАРИИ",
+      "price": 7000,
+      "desc": "🔍 ОПИСАНИЕ ТУРА Вас ждет погружение в мир горных…",
+      "photo": "files/kmv-ekskursii/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Игристые истории. Вечер с Лермонтовым",
+      "price": 1500,
+      "desc": "Театрализованная экскурсия «Игристые истории. Вечер с…",
+      "photo": "files/kmv-ekskursii/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Лермонтов.Дуэль",
+      "price": 1800,
+      "desc": "Театрализованная экскурсия: Лермонтов. Дуэль Хотите не…",
+      "photo": "files/kmv-ekskursii/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 961 444-92-04",
+    "whatsapp": "79614449204",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Ессентуки",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://ekskursiyaessentuki.orgs.biz/",
+  "contact_lead": "em:essentuki-v@yandex.ru"
+}

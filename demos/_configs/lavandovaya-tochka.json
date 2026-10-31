@@ -1,0 +1,120 @@
+{
+  "slug": "lavandovaya-tochka",
+  "name": "Лавандовая точка",
+  "niche": "цветы",
+  "city": "Москва",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#C9B27C",
+    "accent": "#2C4A3D",
+    "bg": "#14261F",
+    "text": "#EEF0E6"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Свежие цветы и букеты под ваш повод",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/lavandovaya-tochka/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Лавандовая точка: цветы в Москве. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Москве к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет лаванда",
+      "price": 700,
+      "desc": "Букет лаванда",
+      "photo": "files/lavandovaya-tochka/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Композиция интерьерная",
+      "price": 2300,
+      "desc": "Композиция интерьерная",
+      "photo": "files/lavandovaya-tochka/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет из сухоцветов интерьерный",
+      "price": 2700,
+      "desc": "Букет из сухоцветов интерьерный",
+      "photo": "files/lavandovaya-tochka/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Арома композиция из мыльных роз",
+      "price": 1700,
+      "desc": "Арома композиция из мыльных роз",
+      "photo": "files/lavandovaya-tochka/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет Лето",
+      "price": 500,
+      "desc": "Букет Лето",
+      "photo": "files/lavandovaya-tochka/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет Нежный",
+      "price": 1900,
+      "desc": "Букет Нежный",
+      "photo": "files/lavandovaya-tochka/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет из лаванды и сухоцветов",
+      "price": 2300,
+      "desc": "Букет из лаванды и сухоцветов",
+      "photo": "files/lavandovaya-tochka/item-7.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 916 632-82-98",
+    "whatsapp": "79166328298",
+    "address": "Можайское ш.",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу заказать букет",
+    "commentHint": "Кому букет, адрес, дата и время",
+    "emptyText": "Пока пусто. Выберите букет.",
+    "orderText": "Напишите, кому букет и к какому времени. Пришлём фото до отправки.",
+    "vars": {
+      "deep": "#0D1A15",
+      "c-surface": "#14261F"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club229878309.orgs.biz/",
+  "vk_lead": "https://vk.me/club229878309"
+}

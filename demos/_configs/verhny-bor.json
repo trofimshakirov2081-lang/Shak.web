@@ -1,0 +1,70 @@
+{
+  "slug": "verhny-bor",
+  "name": "База отдыха Верхний Бор",
+  "niche": "otdyh",
+  "city": "Тюмень",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Тишина, лес и тёплый дом",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/verhny-bor/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "База отдыха Верхний Бор: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Домик у воды",
+      "price": 6500,
+      "desc": "До 4 гостей, своя терраса",
+      "photo": "files/verhny-bor/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Семейный коттедж",
+      "price": 12000,
+      "desc": "До 8 гостей, кухня и мангал",
+      "photo": "files/verhny-bor/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Домик для двоих",
+      "price": 5500,
+      "desc": "Большое окно и завтрак",
+      "photo": "files/verhny-bor/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 345 238-35-53",
+    "whatsapp": "73452383553",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://vbor72.orgs.biz/",
+  "contact_lead": "em:bron@spa-tmn.ru"
+}

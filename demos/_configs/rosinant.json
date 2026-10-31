@@ -1,0 +1,74 @@
+{
+  "slug": "rosinant",
+  "name": "КСК «Росинант»",
+  "niche": "sport",
+  "city": "Рязань",
+  "custom": "start",
+  "tagline": "Конный клуб",
+  "colors": {
+    "main": "#2353C9",
+    "accent": "#F2B705",
+    "bg": "#F3F4F7",
+    "text": "#121826"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Верховая езда для всех",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/rosinant/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "КСК «Росинант»: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Обучение верховой езде",
+      "price": 1000,
+      "desc": "Обучение верховой езде на лошади - 25 или 50 минут.…",
+      "photo": "files/rosinant/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Подарочный сертификат на тренировку",
+      "price": 2000,
+      "desc": "У нас Вы можете приобрести Подарочный сертификат на…",
+      "photo": "files/rosinant/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Фотосессия с лошадью",
+      "price": 3500,
+      "desc": "Фотосессия с лошадью отличное разнообразие в вашем…",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Подарочный сертификат на фотосессию",
+      "price": 3500,
+      "desc": "Кроме подарочный сертификатов на тренировки, есть в…",
+      "photo": "files/rosinant/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 910 902-33-44",
+    "whatsapp": "79109023344",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E1E5EE"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://ksk-rosinant.orgs.biz/",
+  "contact_lead": "em:ksk-rosinant@mail.ru"
+}

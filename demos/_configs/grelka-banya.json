@@ -1,0 +1,67 @@
+{
+  "slug": "grelka-banya",
+  "name": "GRELKA",
+  "niche": "banya",
+  "city": "Красноярск",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#C8773A",
+    "accent": "#7C8B4F",
+    "bg": "#1A1614",
+    "text": "#EDE7DF"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Настоящий пар без очереди",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/grelka-banya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "GRELKA: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "ГРЕЛКА № 1",
+      "price": 2000,
+      "desc": "Банный комплекс GRELKA – жар, пар, полный релакс! В…",
+      "photo": "files/grelka-banya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "ГРЕЛКА № 2",
+      "price": 3000,
+      "desc": "Банный комплекс GRELKA – жар, пар, полный релакс! В…",
+      "photo": "files/grelka-banya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "ГРЕЛКА № 3",
+      "price": 3500,
+      "desc": "Банный комплекс GRELKA – жар, пар, полный релакс! В…",
+      "photo": "files/grelka-banya/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 923 303-00-14",
+    "whatsapp": "79233030014",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#241E1B",
+      "wood": "#33291F"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://grelka-krsk.orgs.biz/",
+  "contact_lead": "tg:GRELKABANIA"
+}

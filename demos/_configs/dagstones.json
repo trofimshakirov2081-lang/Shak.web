@@ -1,0 +1,68 @@
+{
+  "slug": "dagstones",
+  "name": "DagStones Tour",
+  "niche": "tury",
+  "city": "Дагестан",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/dagstones/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "DagStones Tour: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Сулакский каньон",
+      "price": 4500,
+      "desc": "Катер и смотровые",
+      "photo": "files/dagstones/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Аул-призрак Гамсутль",
+      "price": 5500,
+      "desc": "Целый день, джип",
+      "photo": "files/dagstones/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Дербент",
+      "price": 3500,
+      "desc": "Древний город и крепость",
+      "photo": "files/dagstones/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 964 006-06-64",
+    "whatsapp": "79640060664",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Дагестан",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://dagestan-trips.orgs.biz/",
+  "contact_lead": "em:dagstonestour@yandex.ru"
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "dusha-goroda",
+  "name": "Душа Города",
+  "niche": "tury",
+  "city": "Сочи",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/dusha-goroda/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Душа Города: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Тариф \"Базовый групповой взрослый\" 18+",
+      "price": 1300,
+      "desc": "Взрослый билет на Аудиоспектакль-прогулку \"Душа города\"…",
+      "photo": "files/dusha-goroda/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тариф \"Базовый групповой детский\" (7-16",
+      "price": 700,
+      "desc": "Детский билет на Аудиоспектакль-прогулку \"Душа города\" по…",
+      "photo": "files/dusha-goroda/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Серебряный возраст\" специальный тариф 18+",
+      "price": 900,
+      "desc": "Билет на Аудиоспектакль-прогулку \"Душа Города\" в…",
+      "photo": "files/dusha-goroda/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 988 234-22-44",
+    "whatsapp": "79882342244",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Сочи",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://soul-city-sochi.orgs.biz/",
+  "contact_lead": "em:info@soulcitysochi.ru"
+}

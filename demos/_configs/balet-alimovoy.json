@@ -1,0 +1,74 @@
+{
+  "slug": "balet-alimovoy",
+  "name": "Студия балета Александры Алимовой",
+  "niche": "sport",
+  "city": "Воронеж",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#2353C9",
+    "accent": "#F2B705",
+    "bg": "#F3F4F7",
+    "text": "#121826"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/balet-alimovoy/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "Обо мне"
+  },
+  "about": "Меня зовут Александра, я тренер. Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пробное занятие",
+      "price": 500,
+      "desc": "Взрослые с нуля",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абонемент на месяц",
+      "price": 4800,
+      "desc": "8 занятий у станка",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Детская группа",
+      "price": 4000,
+      "desc": "С 4 лет",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Растяжка",
+      "price": 600,
+      "desc": "Разовое занятие",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 903 420-52-54",
+    "whatsapp": "79034205254",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E1E5EE"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://aleksandraalimova88.orgs.biz/",
+  "contact_lead": "em:balletaleksandra@mail.ru"
+}

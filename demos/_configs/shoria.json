@@ -1,0 +1,68 @@
+{
+  "slug": "shoria",
+  "name": "Турклуб Шория",
+  "niche": "tury",
+  "city": "Томск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/shoria/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Турклуб Шория: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Зимние Поднебесные",
+      "price": 34000,
+      "desc": "4 дня, снегоступы",
+      "photo": "files/shoria/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шерегеш без лыж",
+      "price": 18000,
+      "desc": "2 дня, гора Зелёная",
+      "photo": "files/shoria/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Летняя Шория",
+      "price": 39000,
+      "desc": "5 дней, водопады",
+      "photo": "files/shoria/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 923 440-56-10",
+    "whatsapp": "79234405610",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Томск",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club212862638.orgs.biz/",
+  "contact_lead": "em:shortravel@yandex.ru"
+}

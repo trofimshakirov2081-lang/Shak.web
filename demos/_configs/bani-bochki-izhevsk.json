@@ -1,0 +1,74 @@
+{
+  "slug": "bani-bochki-izhevsk",
+  "name": "Мобильные бани",
+  "niche": "masterskaya",
+  "city": "Ижевск",
+  "custom": "stolyar",
+  "tagline": "Бани под ключ",
+  "colors": {
+    "main": "#3D5A80",
+    "accent": "#B98A5A",
+    "bg": "#F2F0EA",
+    "text": "#23262B"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Своя баня под ключ",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/bani-bochki-izhevsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Мобильные бани: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Баня из бруса",
+      "price": 32000,
+      "desc": "Под ключ, с печью",
+      "photo": "files/bani-bochki-izhevsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Баня-бочка",
+      "price": 18000,
+      "desc": "Готовая, с доставкой",
+      "photo": "files/bani-bochki-izhevsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Дом из бруса",
+      "price": 28000,
+      "desc": "Коробка под крышу",
+      "photo": "files/bani-bochki-izhevsk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Беседка",
+      "price": 15000,
+      "desc": "С мангальной зоной",
+      "photo": "files/bani-bochki-izhevsk/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 967 555-09-99",
+    "whatsapp": "79675550999",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FBFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://dachamobi.orgs.biz/",
+  "contact_lead": "em:9675550999@mail.ru"
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "turagent-yana",
+  "name": "Онлайн-турагент Яна",
+  "niche": "tury",
+  "city": "",
+  "custom": "marshrut",
+  "tagline": "Турагентство",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Отпуск, который подберут за вас",
+    "text": "Выберите направление, даты и сколько вас: цена посчитается сразу, заявка придёт в WhatsApp.",
+    "photo": "files/turagent-yana/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Онлайн-турагент Яна: подбираем туры под ваш бюджет и сопровождаем до возвращения домой.",
+  "items": [
+    {
+      "name": "Россия от",
+      "price": 8000,
+      "desc": "Россия — страна большая, поэтому определиться с тем, куда…",
+      "photo": "files/turagent-yana/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Турция от",
+      "price": 18000,
+      "desc": "Турция - это государство, возникшее после распада…",
+      "photo": "files/turagent-yana/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Египет от",
+      "price": 21000,
+      "desc": "Египет — государство в Северной Африке и на Синайском…",
+      "photo": "files/turagent-yana/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 902 562-79-94",
+    "whatsapp": "79025627994",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: ",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club211062755.orgs.biz/",
+  "contact_lead": "em:8333480@mail.ru"
+}

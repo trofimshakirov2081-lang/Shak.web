@@ -1,0 +1,126 @@
+{
+  "slug": "lina-rulety",
+  "name": "Рулеты и торты Лины",
+  "niche": "кондитерская",
+  "city": "Магнитогорск",
+  "custom": "yulya-konditer",
+  "tagline": "Рулеты и торты в Магнитогорске",
+  "colors": {
+    "main": "#8A6FB5",
+    "accent": "#FBE6EF",
+    "bg": "#FAF8FD",
+    "text": "#2A2238"
+  },
+  "fonts": {
+    "head": "Commissioner",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Меренговые рулеты и торты от технолога",
+    "text": "Лина, домашний кондитер с красным дипломом технолога. Фисташка-малина, Милка, Рафаэлло и трайфлы.",
+    "cta": "Собрать заказ",
+    "photo": "files/lina-rulety/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Лина",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Лина, я технолог общественного питания с красным дипломом. Делаю меренговые рулеты, трайфлы, бенто и торты.",
+  "features": [
+    {
+      "icon": "🎓",
+      "title": "Технолог с дипломом",
+      "text": "Знаю, что делаю."
+    },
+    {
+      "icon": "☁",
+      "title": "Меренговые рулеты",
+      "text": "Ягодный, шоколадный, Рафаэлло."
+    },
+    {
+      "icon": "🎉",
+      "title": "Ваш праздник",
+      "text": "Сделаю его сладким."
+    }
+  ],
+  "items": [
+    {
+      "name": "Фисташка-малина",
+      "price": 1800,
+      "desc": "Фисташковый бисквит",
+      "photo": "files/lina-rulety/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт «Милка»",
+      "price": 1800,
+      "desc": "Шоколадный бисквит и мусс",
+      "photo": "files/lina-rulety/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Мак-лимон",
+      "price": 1600,
+      "desc": "С лимонной кислинкой",
+      "photo": "files/lina-rulety/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ягодный меренговый рулет",
+      "price": 1500,
+      "desc": "Ягодное облако",
+      "photo": "files/lina-rulety/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шоколадный меренговый рулет",
+      "price": 1700,
+      "desc": "С ганашем",
+      "photo": "files/lina-rulety/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Рулет «Рафаэлло»",
+      "price": 1600,
+      "desc": "Сливочный крем",
+      "photo": "files/lina-rulety/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сникерс",
+      "price": 1500,
+      "desc": "Арахис в карамели",
+      "photo": "files/lina-rulety/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Трайфлы",
+      "price": 250,
+      "desc": "За штуку",
+      "photo": "files/lina-rulety/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 912 323-27-05",
+    "whatsapp": "79123232705",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#ECE5F8",
+      "pist": "#E1F1EA",
+      "butter": "#FFF0D3"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://club232315114.orgs.biz/"
+}

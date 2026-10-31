@@ -1,0 +1,73 @@
+{
+  "slug": "profmastermebel",
+  "name": "ПрофМастерМебель",
+  "niche": "masterskaya",
+  "city": "Тверь",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/profmastermebel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "ПрофМастерМебель: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня",
+      "price": 28000,
+      "desc": "Под потолок, фурнитура Blum",
+      "photo": "files/profmastermebel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шкаф-купе",
+      "price": 19000,
+      "desc": "Зеркало или ЛДСП",
+      "photo": "files/profmastermebel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гардеробная",
+      "price": 16000,
+      "desc": "Открытые системы",
+      "photo": "files/profmastermebel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 15000,
+      "desc": "С банкеткой и зеркалом",
+      "photo": "files/profmastermebel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 905 128-57-77",
+    "whatsapp": "79051285777",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://v-tveri-mebel-na-zakaz.orgs.biz/",
+  "contact_lead": "em:nikolaev0576@yandex.ru"
+}

@@ -1,0 +1,91 @@
+{
+  "slug": "tonus-kite",
+  "name": "Tonus Kite",
+  "niche": "prokat",
+  "city": "Анапа",
+  "custom": "volna",
+  "tagline": "Кайт-школа",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Lunasima",
+    "body": "Akt"
+  },
+  "hero": {
+    "title": "Встать на доску за один сезон",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/tonus-kite/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Обучение",
+    "catalogText": "Цены указаны за услугу.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Tonus Kite: всё готово к вашему приезду, инструктаж короткий и понятный. Встречает Антон.",
+  "items": [
+    {
+      "name": "Обучение кайтсерфингу в группе (2 человека)",
+      "price": 4500,
+      "desc": "В стоимость обучения входит все необходимое оборудование,…",
+      "photo": "files/tonus-kite/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Гидрофойл обучение",
+      "price": 6000,
+      "desc": "Как отдельный вид кайт-искусства. Гидрофойл дает…",
+      "photo": "files/tonus-kite/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Полный курс обучения кайтсерфингу, 10 часов",
+      "price": 50000,
+      "desc": "Индивидуальное обучение кайту, 10 часов. Теория,…",
+      "photo": "files/tonus-kite/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Protune (фристайл)",
+      "price": 6000,
+      "desc": "Тренировки для продвинутых кайтеров. Базовый уровень…",
+      "photo": "files/tonus-kite/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 926 647-30-67",
+    "whatsapp": "79266473067",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 1,
+    "hourLabel": "Цена",
+    "dayLabel": "Компанией",
+    "steps": [
+      [
+        "Бронируете здесь",
+        "Выберите и отправьте заявку."
+      ],
+      [
+        "Подтверждаем",
+        "Созваниваемся и уточняем детали."
+      ],
+      [
+        "Встречаемся",
+        "Всё готово к вашему приезду."
+      ]
+    ],
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://tonuskite.orgs.biz/",
+  "contact_lead": "tg:Tonuskite"
+}

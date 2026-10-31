@@ -1,0 +1,131 @@
+{
+  "slug": "buketoliya",
+  "name": "Букетолия",
+  "niche": "цветы",
+  "city": "Краснодар",
+  "custom": "makov-cvet",
+  "tagline": "Авторские букеты в Краснодаре",
+  "colors": {
+    "main": "#7B4FA0",
+    "accent": "#E9DDF5",
+    "bg": "#FBF8FD",
+    "text": "#221830"
+  },
+  "fonts": {
+    "head": "Philosopher",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Авторские букеты без шаблонов",
+    "text": "Букеты в кружеве, лукошки и воздушные облака из цветов. Доставим по Краснодару вместе с открыткой или шаром.",
+    "cta": "Выбрать букет",
+    "photo": "files/buketoliya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Букетолия собирает авторские букеты из свежих цветов с любовью и без шаблонов. К букету можно добавить игрушку, шар или открытку.",
+  "features": [
+    {
+      "icon": "🌸",
+      "title": "Авторские букеты",
+      "text": "Каждый собираем с нуля."
+    },
+    {
+      "icon": "🎁",
+      "title": "Всё для подарка",
+      "text": "Игрушки, шары и открытки."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Краснодару к нужному времени."
+    }
+  ],
+  "items": [
+    {
+      "name": "Кружевное чудо",
+      "price": 4500,
+      "desc": "Тренд сезона: букет в кружеве",
+      "photo": "files/buketoliya/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букетная экзотика",
+      "price": 3350,
+      "desc": "С экзотическими цветами",
+      "photo": "files/buketoliya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Малиновое наслаждение",
+      "price": 4850,
+      "desc": "Кустовые пионовидные розы",
+      "photo": "files/buketoliya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет дня",
+      "price": 1000,
+      "desc": "Нежный комплимент, всегда в наличии",
+      "photo": "files/buketoliya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветочный бочонок",
+      "price": 2850,
+      "desc": "Круглый нежный букет",
+      "photo": "files/buketoliya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Трендовое лукошко",
+      "price": 3500,
+      "desc": "Композиция с бусами",
+      "photo": "files/buketoliya/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Воздушное облако",
+      "price": 2200,
+      "desc": "Стойкие хризантемы и зелень",
+      "photo": "files/buketoliya/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ажурное кружево",
+      "price": 3600,
+      "desc": "Французская роза",
+      "photo": "files/buketoliya/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 993 768-16-84",
+    "whatsapp": "79937681684",
+    "address": "Топольковый пер., 22",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "лукошк|бочон"
+      ]
+    ],
+    "vars": {
+      "soft": "#F0E8F7",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://buketoliya.orgs.biz/"
+}
