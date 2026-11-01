@@ -187,6 +187,7 @@ corner(closeB, 12)
 local body = new("ScrollingFrame", { BackgroundTransparency = 1, BorderSizePixel = 0, Position = UDim2.fromOffset(14, 70), Size = UDim2.new(1, -28, 1, -84), ScrollBarThickness = 6, AutomaticCanvasSize = Enum.AutomaticSize.Y, CanvasSize = UDim2.new(), ZIndex = 6 }, panel)
 
 local openKind = nil
+local lastIdx = -1
 local renderers = {}
 local function clearBody()
 	for _, c in ipairs(body:GetChildren()) do c:Destroy() end
@@ -308,12 +309,14 @@ renderers.codes = function()
 end
 
 renderers.index = function()
+	lastIdx = 0
+	for _ in pairs(St.idx or {}) do lastIdx = lastIdx + 1 end
 	local total, found = #C.Clients, 0
 	for cid in ipairs(C.Clients) do
 		if St.idx[tostring(cid)] then found = found + 1 end
 	end
 	label(body, { Text = tr("found", found, total), TextColor3 = GOLD, Size = UDim2.new(1, -8, 0, 26), LayoutOrder = 0, ZIndex = 7 })
-	local grid = new("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, -8, 0, 0), AutomaticSize = Enum.AutomaticSize.Y, LayoutOrder = 1, ZIndex = 6 }, body)
+	local grid = new("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, -8, 0, 0), AutomaticSize = Enum.AutomaticSize.Y, LayoutOrder = 10, ZIndex = 6 }, body)
 	new("UIListLayout", { Padding = UDim.new(0, 8), SortOrder = Enum.SortOrder.LayoutOrder }, body)
 	new("UIGridLayout", { CellSize = UDim2.fromOffset(118, 92), CellPadding = UDim2.fromOffset(8, 8), SortOrder = Enum.SortOrder.LayoutOrder }, grid)
 	local hyb, hybN = {}, 0
@@ -380,7 +383,13 @@ Net.OnClientEvent:Connect(function(kind, a, b, c)
 	if kind == "state" then
 		St = a
 		refreshHUD()
-		if openKind then render() end
+		if openKind == "upgrades" or openKind == "rebirth" or openKind == "shop" then
+			render()
+		elseif openKind == "index" then
+			local n = 0
+			for _ in pairs(St.idx or {}) do n = n + 1 end
+			if n ~= lastIdx then render() end
+		end
 	elseif kind == "toast" then
 		local col = BLUE
 		if a == "cutRes" then

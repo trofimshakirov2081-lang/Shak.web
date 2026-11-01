@@ -577,7 +577,7 @@ local function sendState(p)
 	})
 	local ls = p:FindFirstChild("leaderstats")
 	if ls then
-		ls.Cash.Value = "$" .. C.fmt(d.cash)
+		ls.Cash.Value = math.floor(math.min(d.cash, 9e15))
 		ls.Rebirths.Value = d.rebirths
 	end
 end
@@ -646,12 +646,15 @@ local function onSeatPrompt(o, kind, p)
 			local seat = a.seat
 			local mut = (mutMult(a) >= mutMult(o)) and a.mut or o.mut
 			local ca, cb = a.cid, o.cid
+			local g = math.max(a.grow, o.grow)
 			st.seats[a.seat] = nil
 			st.seats[o.seat] = nil
 			local pos = a.root.Position
 			destroyObj(a)
 			destroyObj(o)
 			local h = newObj(ca, mut, cb)
+			h.owner = p
+			setGrow(h, g)
 			seatObj(h, p, seat)
 			burst(pos + Vector3.new(0, 3, 0), Color3.fromRGB(120, 255, 160), 20)
 			toast(p, "fused", ca, cb)
@@ -933,6 +936,8 @@ local function removeBoss()
 	end
 end
 
+local pendingRush = 0
+local startEvent -- объявим ниже
 local function endEvent()
 	Ev = nil
 	CC.TintColor = Color3.new(1, 1, 1)
@@ -940,6 +945,10 @@ local function endEvent()
 	if Boss then
 		removeBoss()
 		Net:FireAllClients("toast", "bossLeft")
+	end
+	if pendingRush > 0 then
+		pendingRush = pendingRush - 1
+		task.defer(function() startEvent("rush", C.PaidRushDur) end)
 	end
 end
 
@@ -1028,7 +1037,7 @@ local function hitBoss(p)
 	if Boss.hp <= 0 then bossDown() end
 end
 
-local function startEvent(id, dur)
+startEvent = function(id, dur)
 	local e = C.Events[id]
 	if not e then return end
 	dur = dur or e.dur
@@ -1111,7 +1120,14 @@ local function shave(p, q)
 	local hum = char and char:FindFirstChildOfClass("Humanoid")
 	local head = char and char:FindFirstChild("Head")
 	if not qs or not hum or not head then return end
-	if os.clock() < (qs.immuneUntil or 0) then toast(p, "shaveImmune", q.DisplayName) return end
+	if os.clock() < (qs.immuneUntil or 0) then
+		local ps = S[p]
+		if ps and os.clock() - (ps.immT or 0) > 4 then
+			ps.immT = os.clock()
+			toast(p, "shaveImmune", q.DisplayName)
+		end
+		return
+	end
 	qs.immuneUntil = os.clock() + C.ShavedTime + C.ShaveImmune
 	local stored = {}
 	for _, a in ipairs(char:GetChildren()) do
@@ -1247,6 +1263,7 @@ local function onCharacter(p, char)
 	task.wait(0.1)
 	char:PivotTo(st.plot.cf * CFrame.new(0, 4, -10))
 	hum.Died:Connect(function() dropCarry(p, false) end)
+	st.immuneUntil = math.max(st.immuneUntil or 0, os.clock() + 10) -- 10 секунд защиты после появления
 	giveTool(p)
 end
 
@@ -1265,7 +1282,7 @@ local function onJoin(p)
 
 	local ls = Instance.new("Folder")
 	ls.Name = "leaderstats"
-	local cv = Instance.new("StringValue")
+	local cv = Instance.new("IntValue")
 	cv.Name = "Cash"
 	cv.Parent = ls
 	local rv = Instance.new("IntValue")
@@ -1290,7 +1307,7 @@ local function onJoin(p)
 	setChairs(plot, chairsAvail(st))
 
 	for _, e in ipairs(d.seats or {}) do
-		if C.Clients[e.c] and (not e.c2 or C.Clients[e.c2]) and e.s and e.s <= chairsAvail(st) and not st.seats[e.s] then
+		if C.Clients[e.c] and (not e.c2 or C.Clients[e.c2]) and e.s and e.s >= 1 and e.s <= #SEATS and not st.seats[e.s] then
 			local o = newObj(e.c, (e.m and C.Mutations[e.m]) and e.m or "none", e.c2)
 			o.cut = e.k and true or false
 			o.owner = p
@@ -1309,6 +1326,10 @@ local function onJoin(p)
 	end
 	if p.Character then task.spawn(onCharacter, p, p.Character) end
 	sendState(p)
+	if st.wantReady then
+		st.wantReady = nil
+		Fn.onReady(p)
+	end
 end
 
 local function onLeave(p)
@@ -1319,6 +1340,7 @@ local function onLeave(p)
 	for _, o in pairs(Objs) do
 		if o.from == p then
 			o.from = nil
+			o.paid = 0 -- вор не должен получить чужие деньги в виде возврата
 			if o.tbPrompt then o.tbPrompt:Destroy() o.tbPrompt = nil end
 		end
 	end
@@ -1492,20 +1514,29 @@ task.spawn(function()
 end)
 
 ---------------------------------------------------------------- действия из интерфейса
+local function onReady(p)
+	local st = S[p]
+	sendState(p)
+	if Ev then Net:FireClient(p, "event", Ev.id, Ev.ends) end
+	if st.offline then
+		toast(p, "offline", C.fmt(st.offline))
+		st.offline = nil
+	end
+	if st.noSave then toast(p, "nosave") end
+end
+
+Fn.onReady = onReady
+
 Net.OnServerEvent:Connect(function(p, kind, a)
 	local st = S[p]
+	if st and not st.data and kind == "ready" then st.wantReady = true return end
 	if not st or not st.data then return end
 	if os.clock() - st.lastAct < 0.25 then return end
 	st.lastAct = os.clock()
 	local d = st.data
 	if kind == "ready" then
-		sendState(p)
-		if Ev then Net:FireClient(p, "event", Ev.id, Ev.ends) end
-		if st.offline then
-			toast(p, "offline", C.fmt(st.offline))
-			st.offline = nil
-		end
-		if st.noSave then toast(p, "nosave") end
+		onReady(p)
+		return
 	elseif kind == "upgrade" then
 		if a == "chairs" then
 			if d.chairs >= C.MaxChairs then toast(p, "maxed") return end
@@ -1533,6 +1564,7 @@ Net.OnServerEvent:Connect(function(p, kind, a)
 				destroyObj(o)
 			else
 				o.from = nil
+				o.paid = 0
 				if o.tbPrompt then o.tbPrompt:Destroy() o.tbPrompt = nil end
 			end
 		end
@@ -1635,8 +1667,11 @@ MPS.ProcessReceipt = function(info)
 		d.luckUntil = math.max(d.luckUntil or 0, os.time()) + 600
 		toast(p, "luckOn")
 	elseif key == "rush" then
-		if Ev then endEvent() end
-		startEvent("rush", C.PaidRushDur)
+		if Ev then
+			pendingRush = pendingRush + 1 -- начнётся сразу после текущего события
+		else
+			startEvent("rush", C.PaidRushDur)
+		end
 		Net:FireAllClients("toast", "paidRush", p.DisplayName)
 	end
 	table.insert(d.rec, info.PurchaseId)
