@@ -1,4 +1,4 @@
-# Собирает BarbershopChaos.rbxlx из src/*.lua: python3 build.py
+# Собирает MutantBarber.rbxlx из src/*.lua: python3 build.py
 import os
 D = os.path.dirname(os.path.abspath(__file__))
 src = lambda n: open(os.path.join(D, "src", n), encoding="utf-8").read()
@@ -17,6 +17,6 @@ xml = ['<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http:
     svc("ServerScriptService", script("Script", "GameServer", src("GameServer.server.lua"))),
     svc("StarterPlayer", svc("StarterPlayerScripts", script("LocalScript", "ClientUI", src("ClientUI.client.lua")))),
     '</roblox>']
-out = os.path.join(D, "BarbershopChaos.rbxlx")
+out = os.path.join(D, "MutantBarber.rbxlx")
 open(out, "w", encoding="utf-8").write("\n".join(xml))
 print("ok", out, os.path.getsize(out))

@@ -29,6 +29,12 @@ local TX = {
 		codeUsed = "Код уже использован", thanks = "Спасибо за покупку!", paidRush = "%s включил Час пик для всего сервера!",
 		carryDrop = "Клиент вернулся в твой барбершоп", refund = "Клиент ушёл, деньги вернулись",
 		luckOn = "Удача x3 на 10 минут!", cash = "Начислено $%s",
+		fuse = "Скрестить", trim = "Срезать причёску",
+		fuseSel = "Выбран: %s. Теперь нажми «Скрестить» на втором клиенте", fused = "Новый гибрид: %s!", fuseCancel = "Скрещивание отменено",
+		trimOk = "Срезал чужую причёску: +$%s", trimmed = "%s срезал причёску твоему клиенту!",
+		shaveOk = "Ты побрил %s налысо!", shaved = "%s побрил тебя налысо!", shaveImmune = "%s недавно побрили, волосы ещё не отросли",
+		bossDown = "%s добил Йети и забрал его себе!", bossLeft = "Йети ушёл нестриженым", bossReward = "Награда за Йети: +$%s",
+		bald = "ЛЫСЫЙ", yeti = "ЙЕТИ", hybrid = "Гибрид", hybrids = "Гибриды: %s из %s",
 		perSec = "+$%s/сек", shop = "Магазин", upgrades = "Улучшения", index = "Коллекция", codes = "Коды",
 		rebirth = "Перерождение", chairs = "Кресла", chairsD = "Сейчас %s. Больше кресел, больше клиентов",
 		lockT = "Дверь", lockD = "Защита от воров: %s сек", priceBtn = "$%s", max = "Максимум",
@@ -36,7 +42,7 @@ local TX = {
 		enter = "Введи код", redeem = "Активировать",
 		rebD = "Сбрасывает деньги и клиентов. Кресла и дверь остаются.\nДоход навсегда: x%s → x%s",
 		rebBtn = "Переродиться за $%s", owned = "Куплено", robux = "Купить", found = "Найдено %s из %s",
-		hint = "Купи клиента на улице, отнеси в свой барбершоп и подстриги. Деньги копятся на зелёной кассе",
+		hint = "Купи клиента на улице и отнеси к себе. Скрещивай клиентов, расти им причёски, а воров брей машинкой ✂",
 		carryHint = "Неси клиента в свой барбершоп", luckLeft = "Удача x3: %s", amount = "+$%s",
 	},
 	en = {
@@ -54,6 +60,12 @@ local TX = {
 		codeUsed = "Code already used", thanks = "Thanks for the purchase!", paidRush = "%s started Rush Hour for the whole server!",
 		carryDrop = "The client went back to your shop", refund = "The client left, cash refunded",
 		luckOn = "3x Luck for 10 minutes!", cash = "Added $%s",
+		fuse = "Fuse", trim = "Trim hair",
+		fuseSel = "Selected: %s. Now press Fuse on a second client", fused = "New hybrid: %s!", fuseCancel = "Fusion cancelled",
+		trimOk = "You trimmed someone's hair: +$%s", trimmed = "%s trimmed your client's hair!",
+		shaveOk = "You shaved %s bald!", shaved = "%s shaved you bald!", shaveImmune = "%s was shaved recently, no hair left yet",
+		bossDown = "%s finished the Yeti and took him home!", bossLeft = "The Yeti left unshaved", bossReward = "Yeti reward: +$%s",
+		bald = "BALD", yeti = "YETI", hybrid = "Hybrid", hybrids = "Hybrids: %s of %s",
 		perSec = "+$%s/s", shop = "Shop", upgrades = "Upgrades", index = "Collection", codes = "Codes",
 		rebirth = "Rebirth", chairs = "Chairs", chairsD = "Now %s. More chairs, more clients",
 		lockT = "Door", lockD = "Thief protection: %s s", priceBtn = "$%s", max = "Max",
@@ -61,7 +73,7 @@ local TX = {
 		enter = "Enter code", redeem = "Redeem",
 		rebD = "Resets cash and clients. Chairs and door stay.\nIncome forever: x%s → x%s",
 		rebBtn = "Rebirth for $%s", owned = "Owned", robux = "Buy", found = "Found %s of %s",
-		hint = "Buy a client on the street, carry them to your shop and give a haircut. Cash piles up on the green till",
+		hint = "Buy a client on the street and carry them home. Fuse clients, grow their hair, shave thieves with your clipper ✂",
 		carryHint = "Carry the client to your shop", luckLeft = "3x Luck: %s", amount = "+$%s",
 	},
 }
@@ -304,6 +316,19 @@ renderers.index = function()
 	local grid = new("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, -8, 0, 0), AutomaticSize = Enum.AutomaticSize.Y, LayoutOrder = 1, ZIndex = 6 }, body)
 	new("UIListLayout", { Padding = UDim.new(0, 8), SortOrder = Enum.SortOrder.LayoutOrder }, body)
 	new("UIGridLayout", { CellSize = UDim2.fromOffset(118, 92), CellPadding = UDim2.fromOffset(8, 8), SortOrder = Enum.SortOrder.LayoutOrder }, grid)
+	local hyb, hybN = {}, 0
+	for k in pairs(St.idx) do
+		local x, y = string.match(k, "^h:(%d+):(%d+)$")
+		if x then
+			hybN = hybN + 1
+			table.insert(hyb, C.name(tonumber(x), tonumber(y), RU))
+		end
+	end
+	table.sort(hyb)
+	label(body, { Text = tr("hybrids", hybN, total * total), TextColor3 = Color3.fromRGB(120, 255, 160), Size = UDim2.new(1, -8, 0, 26), LayoutOrder = 2, ZIndex = 7 })
+	if hybN > 0 then
+		label(body, { Text = table.concat(hyb, ", "), Font = BODYF, TextScaled = false, TextSize = 16, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left, AutomaticSize = Enum.AutomaticSize.Y, Size = UDim2.new(1, -8, 0, 20), LayoutOrder = 3, ZIndex = 7 })
+	end
 	for cid, d in ipairs(C.Clients) do
 		local rar = C.Rarities[d.r]
 		local has = St.idx[tostring(cid)]
@@ -361,6 +386,15 @@ Net.OnClientEvent:Connect(function(kind, a, b, c)
 		if a == "cutRes" then
 			b = nm(C.Mutations[b] or C.Mutations.none)
 			col = GOLD
+		elseif a == "fuseSel" then
+			b = C.name(b, nil, RU)
+		elseif a == "fused" then
+			b = C.name(b, c, RU)
+			col = MONEY
+		elseif a == "shaveOk" or a == "trimOk" or a == "bossReward" or a == "bossDown" then
+			col = MONEY
+		elseif a == "shaved" or a == "trimmed" then
+			col = RED
 		elseif a == "collect" or a == "sold" or a == "cash" or a == "stealOk" or a == "placed" then
 			col = MONEY
 		elseif a == "stolen" or a == "beingStolen" or a == "noMoney" or a == "locked" or a == "stealFail" then
@@ -387,14 +421,16 @@ local rainbow = {}
 local function decorate(m)
 	local root = m:WaitForChild("Root", 5)
 	local cid = m:GetAttribute("Cid")
+	local cid2 = m:GetAttribute("Cid2")
 	local d = cid and C.Clients[cid]
-	if not root or not d then return end
-	local rar = C.Rarities[d.r]
-	local s = d.scale or 1
+	if not root or not d or (cid2 and not C.Clients[cid2]) then return end
+	local _, inc, r = C.stats(cid, cid2)
+	local rar = C.Rarities[r]
+	local s = cid2 and (((d.scale or 1) + (C.Clients[cid2].scale or 1)) / 2) or (d.scale or 1)
 	local bb = new("BillboardGui", { Name = "Tag", Size = UDim2.fromOffset(220, 76), StudsOffset = Vector3.new(0, 3.9 * s + 1.4, 0), MaxDistance = 70, LightInfluence = 0, Adornee = root }, root)
-	local nameL = label(bb, { Text = nm(d), Font = TXTF, TextColor3 = rar.color, Size = UDim2.new(1, 0, 0, 28) })
+	local nameL = label(bb, { Text = C.name(cid, cid2, RU), Font = TXTF, TextColor3 = rar.color, Size = UDim2.new(1, 0, 0, 28) })
 	stroke(nameL, 2)
-	if d.r == 6 then
+	if r == 6 then
 		new("UIGradient", { Color = ColorSequence.new({
 			ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 80, 80)), ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 230, 80)),
 			ColorSequenceKeypoint.new(0.66, Color3.fromRGB(80, 220, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(220, 90, 255)) }) }, nameL)
@@ -407,13 +443,15 @@ local function decorate(m)
 		local mut = m:GetAttribute("Mut") or "none"
 		local md = C.Mutations[mut] or C.Mutations.none
 		local state = m:GetAttribute("State")
-		midL.Text = (mut ~= "none" and (nm(md) .. " · ") or "") .. nm(rar)
+		local g = m:GetAttribute("Grow") or 0
+		bb.StudsOffset = Vector3.new(0, 3.9 * s + 1.4 + g * 0.45 * s, 0)
+		midL.Text = (mut ~= "none" and (nm(md) .. " · ") or "") .. (cid2 and (tr("hybrid") .. " · ") or "") .. nm(rar)
 		midL.TextColor3 = mut ~= "none" and md.color or Color3.fromRGB(220, 224, 236)
 		if state == "street" then
 			lowL.Text = "$" .. C.fmt(m:GetAttribute("Price") or d.price)
 			lowL.TextColor3 = GOLD
 		elseif state == "seat" then
-			lowL.Text = tr("perSec", C.fmt(d.inc * md.mult))
+			lowL.Text = tr("perSec", C.fmt(inc * md.mult * C.growMult(g)))
 			lowL.TextColor3 = MONEY
 		else
 			lowL.Text = ""
@@ -448,8 +486,15 @@ local function fixPrompt(pp)
 	pp.AttributeChanged:Connect(upd)
 end
 workspace.DescendantAdded:Connect(function(o)
-	if o:IsA("ProximityPrompt") then fixPrompt(o) end
+	if o:IsA("ProximityPrompt") then
+		fixPrompt(o)
+	elseif o:IsA("TextLabel") and o:GetAttribute("L") then
+		o.Text = tr(o:GetAttribute("L"))
+	end
 end)
+for _, o in ipairs(workspace:GetDescendants()) do
+	if o:IsA("TextLabel") and o:GetAttribute("L") then o.Text = tr(o:GetAttribute("L")) end
+end
 for _, o in ipairs(workspace:GetDescendants()) do
 	if o:IsA("ProximityPrompt") then fixPrompt(o) end
 end

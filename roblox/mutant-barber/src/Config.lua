@@ -1,5 +1,5 @@
 -- Config (ModuleScript в ReplicatedStorage)
--- Все цифры и тексты игры «Барбершоп Хаос». Меняйте здесь, код трогать не нужно.
+-- Все цифры и тексты игры «Барбер-мутант» (Mutant Barber). Меняйте здесь, код трогать не нужно.
 
 local C = {}
 
@@ -23,47 +23,87 @@ local TAN = Color3.fromRGB(196, 136, 98)
 
 -- Клиенты. r: номер редкости, price: цена, inc: доход в секунду, style: причёска
 C.Clients = {
-	{ ru = "Школьник Петя", en = "Schoolboy Pete", r = 1, price = 15, inc = 1, scale = 0.85,
+	{ rp = "Пет", rs = "петя", ep = "Pe", es = "pete", ru = "Школьник Петя", en = "Schoolboy Pete", r = 1, price = 15, inc = 1, scale = 0.85,
 		skin = LIGHT, shirt = Color3.fromRGB(70, 130, 220), pants = Color3.fromRGB(40, 50, 80), hair = Color3.fromRGB(120, 80, 40), style = { "short" } },
-	{ ru = "Офисный Олег", en = "Office Oleg", r = 1, price = 40, inc = 2,
+	{ rp = "Оле", rs = "олег", ep = "Ole", es = "oleg", ru = "Офисный Олег", en = "Office Oleg", r = 1, price = 40, inc = 2,
 		skin = LIGHT, shirt = Color3.fromRGB(235, 235, 240), pants = Color3.fromRGB(50, 50, 60), hair = Color3.fromRGB(40, 30, 25), style = { "pomp" } },
-	{ ru = "Бабушка с химией", en = "Granny Perm", r = 1, price = 75, inc = 4, scale = 0.9,
+	{ rp = "Бабу", rs = "бушка", ep = "Gran", es = "granny", ru = "Бабушка с химией", en = "Granny Perm", r = 1, price = 75, inc = 4, scale = 0.9,
 		skin = LIGHT, shirt = Color3.fromRGB(200, 120, 170), pants = Color3.fromRGB(90, 60, 100), hair = Color3.fromRGB(205, 195, 235), style = { "afro" } },
-	{ ru = "Тиктокер", en = "TikToker", r = 1, price = 120, inc = 6,
+	{ rp = "Тикто", rs = "токер", ep = "Tik", es = "tokker", ru = "Тиктокер", en = "TikToker", r = 1, price = 120, inc = 6,
 		skin = TAN, shirt = Color3.fromRGB(25, 25, 30), pants = Color3.fromRGB(45, 45, 50), hair = Color3.fromRGB(255, 90, 170), style = { "spikes" } },
-	{ ru = "Хипстер", en = "Hipster", r = 2, price = 350, inc = 15,
+	{ rp = "Хип", rs = "пстер", ep = "Hip", es = "ster", ru = "Хипстер", en = "Hipster", r = 2, price = 350, inc = 15,
 		skin = LIGHT, shirt = Color3.fromRGB(190, 90, 60), pants = Color3.fromRGB(60, 80, 120), hair = Color3.fromRGB(110, 70, 40), style = { "bun", "beard" } },
-	{ ru = "Рокер", en = "Rocker", r = 2, price = 600, inc = 24,
+	{ rp = "Ро", rs = "рокер", ep = "Ro", es = "rocker", ru = "Рокер", en = "Rocker", r = 2, price = 600, inc = 24,
 		skin = LIGHT, shirt = Color3.fromRGB(20, 20, 20), pants = Color3.fromRGB(30, 30, 60), hair = Color3.fromRGB(20, 20, 20), style = { "long" } },
-	{ ru = "Футболист", en = "Footballer", r = 2, price = 900, inc = 35,
+	{ rp = "Футбо", rs = "болист", ep = "Foot", es = "baller", ru = "Футболист", en = "Footballer", r = 2, price = 900, inc = 35,
 		skin = TAN, shirt = Color3.fromRGB(230, 40, 50), pants = Color3.fromRGB(245, 245, 245), hair = Color3.fromRGB(240, 210, 120), style = { "mohawk" } },
-	{ ru = "Стример", en = "Streamer", r = 2, price = 1500, inc = 55,
+	{ rp = "Стри", rs = "ример", ep = "Strea", es = "streamer", ru = "Стример", en = "Streamer", r = 2, price = 1500, inc = 55,
 		skin = LIGHT, shirt = Color3.fromRGB(120, 60, 220), pants = Color3.fromRGB(30, 30, 40), hair = Color3.fromRGB(60, 220, 240), style = { "spikes" } },
-	{ ru = "Качок", en = "Gym Bro", r = 3, price = 5000, inc = 150, scale = 1.3,
+	{ rp = "Кача", rs = "качок", ep = "Gym", es = "bro", ru = "Качок", en = "Gym Bro", r = 3, price = 5000, inc = 150, scale = 1.3,
 		skin = TAN, shirt = Color3.fromRGB(240, 240, 240), pants = Color3.fromRGB(30, 30, 30), hair = Color3.fromRGB(30, 20, 15), style = { "short" } },
-	{ ru = "Викинг", en = "Viking", r = 3, price = 9000, inc = 260, scale = 1.2,
+	{ rp = "Вики", rs = "кинг", ep = "Vi", es = "king", ru = "Викинг", en = "Viking", r = 3, price = 9000, inc = 260, scale = 1.2,
 		skin = LIGHT, shirt = Color3.fromRGB(110, 80, 50), pants = Color3.fromRGB(70, 55, 40), hair = Color3.fromRGB(230, 120, 40), style = { "long", "beard" } },
-	{ ru = "Самурай", en = "Samurai", r = 3, price = 15000, inc = 400,
+	{ rp = "Саму", rs = "мурай", ep = "Samu", es = "rai", ru = "Самурай", en = "Samurai", r = 3, price = 15000, inc = 400,
 		skin = LIGHT, shirt = Color3.fromRGB(40, 40, 90), pants = Color3.fromRGB(30, 30, 50), hair = Color3.fromRGB(15, 15, 15), style = { "bun" } },
-	{ ru = "Клоун", en = "Clown", r = 3, price = 22000, inc = 560,
+	{ rp = "Кло", rs = "лоун", ep = "Clo", es = "clown", ru = "Клоун", en = "Clown", r = 3, price = 22000, inc = 560,
 		skin = Color3.fromRGB(250, 245, 240), shirt = Color3.fromRGB(250, 220, 40), pants = Color3.fromRGB(40, 120, 230), hair = Color3.fromRGB(255, 60, 60), style = { "afro" } },
-	{ ru = "Космонавт", en = "Astronaut", r = 4, price = 80000, inc = 1800,
+	{ rp = "Космо", rs = "навт", ep = "Astro", es = "naut", ru = "Космонавт", en = "Astronaut", r = 4, price = 80000, inc = 1800,
 		skin = LIGHT, shirt = Color3.fromRGB(240, 240, 245), pants = Color3.fromRGB(230, 230, 235), hair = Color3.fromRGB(90, 60, 30), style = { "short", "helmet" } },
-	{ ru = "Кот-барин", en = "Sir Cat", r = 4, price = 140000, inc = 3000, scale = 0.85,
+	{ rp = "Кото", rs = "кот", ep = "Cat", es = "cat", ru = "Кот-барин", en = "Sir Cat", r = 4, price = 140000, inc = 3000, scale = 0.85,
 		skin = Color3.fromRGB(240, 150, 60), shirt = Color3.fromRGB(120, 30, 40), pants = Color3.fromRGB(40, 30, 30), hair = Color3.fromRGB(240, 150, 60), style = { "ears" } },
-	{ ru = "Робо-барбер", en = "Robo-Barber", r = 4, price = 220000, inc = 4500,
+	{ rp = "Робо", rs = "бот", ep = "Robo", es = "bot", ru = "Робо-барбер", en = "Robo-Barber", r = 4, price = 220000, inc = 4500,
 		skin = Color3.fromRGB(170, 175, 185), shirt = Color3.fromRGB(90, 95, 110), pants = Color3.fromRGB(60, 65, 75), hair = Color3.fromRGB(255, 80, 60), style = { "mohawk" } },
-	{ ru = "Динозавр в парике", en = "Wig Dino", r = 5, price = 1200000, inc = 22000, scale = 1.35,
+	{ rp = "Дино", rs = "завр", ep = "Dino", es = "saur", ru = "Динозавр в парике", en = "Wig Dino", r = 5, price = 1200000, inc = 22000, scale = 1.35,
 		skin = Color3.fromRGB(110, 190, 80), shirt = Color3.fromRGB(110, 190, 80), pants = Color3.fromRGB(90, 160, 60), hair = Color3.fromRGB(250, 230, 150), style = { "long" } },
-	{ ru = "Пришелец", en = "Alien", r = 5, price = 2500000, inc = 42000,
+	{ rp = "Прише", rs = "шелец", ep = "Ali", es = "lien", ru = "Пришелец", en = "Alien", r = 5, price = 2500000, inc = 42000,
 		skin = Color3.fromRGB(140, 255, 140), shirt = Color3.fromRGB(50, 50, 70), pants = Color3.fromRGB(40, 40, 60), hair = Color3.fromRGB(140, 255, 140), style = { "antenna" } },
-	{ ru = "Ёж-панк", en = "Punk Hedgehog", r = 5, price = 4000000, inc = 65000, scale = 0.9,
+	{ rp = "Ежо", rs = "ёж", ep = "Hedge", es = "hog", ru = "Ёж-панк", en = "Punk Hedgehog", r = 5, price = 4000000, inc = 65000, scale = 0.9,
 		skin = Color3.fromRGB(150, 110, 80), shirt = Color3.fromRGB(30, 30, 30), pants = Color3.fromRGB(70, 30, 30), hair = Color3.fromRGB(60, 40, 30), style = { "spikesBig" } },
-	{ ru = "Лысый король", en = "Bald King", r = 6, price = 25000000, inc = 350000,
+	{ rp = "Лысо", rs = "король", ep = "Bald", es = "king", ru = "Лысый король", en = "Bald King", r = 6, price = 25000000, inc = 350000,
 		skin = LIGHT, shirt = Color3.fromRGB(150, 20, 40), pants = Color3.fromRGB(60, 10, 20), hair = Color3.fromRGB(255, 200, 40), style = { "bald", "crown" } },
-	{ ru = "Тот самый барбер", en = "The Barber", r = 6, price = 60000000, inc = 800000, scale = 1.1,
+	{ rp = "Барбе", rs = "барбер", ep = "Barb", es = "barber", ru = "Тот самый барбер", en = "The Barber", r = 6, price = 60000000, inc = 800000, scale = 1.1,
 		skin = TAN, shirt = Color3.fromRGB(250, 250, 250), pants = Color3.fromRGB(30, 30, 30), hair = Color3.fromRGB(20, 20, 20), style = { "pomp", "beard" } },
+	-- босс: на улице не появляется, достаётся тому, кто больше всех стриг Йети
+	{ rp = "Йе", rs = "йети", ep = "Ye", es = "yeti", ru = "Йети", en = "Yeti", r = 6, price = 40000000, inc = 500000, scale = 1.2, boss = true,
+		skin = Color3.fromRGB(225, 240, 255), shirt = Color3.fromRGB(235, 245, 255), pants = Color3.fromRGB(210, 225, 245), hair = Color3.fromRGB(250, 252, 255), style = { "afro", "beard" } },
 }
+
+-- Скрещивание: голова и причёска от первого, тело от второго, доход суммы x1.5
+C.FusionBonus = 1.5
+function C.stats(cid, cid2)
+	local a = C.Clients[cid]
+	if not cid2 then return a.price, a.inc, a.r end
+	local b = C.Clients[cid2]
+	return math.floor((a.price + b.price) * C.FusionBonus), math.floor((a.inc + b.inc) * C.FusionBonus), math.max(a.r, b.r)
+end
+function C.name(cid, cid2, ru)
+	local a = C.Clients[cid]
+	if not cid2 then return ru and a.ru or a.en end
+	local b = C.Clients[cid2]
+	return ru and (a.rp .. b.rs) or (a.ep .. b.es)
+end
+
+-- Растущие причёски: раз в GrowEvery секунд +1 уровень, доход и размер растут
+C.GrowEvery = 30
+C.GrowMax = 20
+C.TrimMin = 5          -- с какого уровня чужую причёску можно срезать
+C.TrimSeconds = 120    -- срезавший получает доход клиента за столько секунд
+function C.growMult(g) return 1 + 0.1 * (g or 0) end
+function C.growSize(g) return 1 + 0.2 * (g or 0) end
+
+-- Машинка: бреет игроков налысо
+C.ShaveCooldown = 1.2
+C.ShaveRange = 8
+C.ShavedTime = 25      -- сколько секунд игрок ходит лысым
+C.ShaveImmune = 20     -- потом столько секунд его нельзя побрить снова
+C.ShaveSlowTime = 5
+C.ShaveSlowSpeed = 9
+
+-- Босс Йети
+C.BossHpPerPlayer = 50
+C.BossMinHp = 60
+C.BossRange = 16
+C.BossMinHits = 3
 
 -- Мутации: выпадают при стрижке (chance) и иногда на улице. mult: множитель дохода
 C.Mutations = {
@@ -86,11 +126,13 @@ C.MaxStreet = 18
 C.WalkSpeed = 7
 
 -- События сервера
-C.EventEvery = 600 -- раз в 10 минут
+C.EventEvery = 480 -- раз в 8 минут
+C.EventOrder = { "boss", "rush", "boss", "balm", "boss", "star" }
 C.Events = {
 	rush = { dur = 180, ru = "Час пик! Клиенты валят толпой, редкие чаще", en = "Rush hour! Crowds of clients, rare ones more often" },
 	balm = { dur = 180, ru = "Ливень бальзама! Весь доход x2", en = "Balm rain! All income x2" },
 	star = { dur = 60,  ru = "Звёздный клиент на улице! Успей купить", en = "A star client is on the street! Grab it" },
+	boss = { dur = 150, ru = "Йети пришёл стричься! Бейте его машинкой всем сервером", en = "The Yeti wants a haircut! Hit him with your clippers together" },
 }
 C.PaidRushDur = 300
 
