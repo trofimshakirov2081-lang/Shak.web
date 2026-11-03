@@ -11,3 +11,4 @@ td.n{white-space:nowrap;text-align:right}tr.sum td{font-weight:800;border-top:2p
 @media(max-width:600px){.price{grid-template-columns:1fr}table{font-size:14px;display:block;overflow-x:auto}td,th{padding:8px 6px}}
 ol li,ul li{margin:6px 0}code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:15px}
 .toc a{color:var(--pri)}@media print{h2{break-before:auto}.box,table,tr{break-inside:avoid}}
+.price .big{background:none;padding:0;border-radius:0}
