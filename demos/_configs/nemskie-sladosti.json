@@ -1,0 +1,127 @@
+{
+  "slug": "nemskie-sladosti",
+  "name": "Немские сладости",
+  "niche": "кондитерская",
+  "city": "Нема",
+  "custom": "yulya-konditer",
+  "tagline": "Домашняя кондитерская",
+  "colors": {
+    "main": "#A0522D",
+    "accent": "#F5DEB3",
+    "bg": "#FBF7F0",
+    "text": "#2E1F14"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Пироги, торты и сладости по-домашнему",
+    "text": "Домашняя кондитерская в Неме: меренговые торты, чак-чак, губадия и пироги разных размеров. В сладком деле больше 15 лет.",
+    "cta": "Собрать заказ",
+    "photo": "files/nemskie-sladosti/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что испечём",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О кондитерской",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Торты, меренговые рулеты, печенье, капкейки и пироги. В сладком деле больше 15 лет, к каждому заказу подходим индивидуально.",
+  "features": [
+    {
+      "icon": "🥧",
+      "title": "Пироги от 18 см",
+      "text": "Выберите размер."
+    },
+    {
+      "icon": "🕰",
+      "title": "15 лет опыта",
+      "text": "Проверенные рецепты."
+    },
+    {
+      "icon": "🏠",
+      "title": "Самовывоз и доставка",
+      "text": "По пгт Нема."
+    }
+  ],
+  "items": [
+    {
+      "name": "Меренговый торт",
+      "price": 1200,
+      "desc": "С кремом и ягодным конфи",
+      "photo": "files/nemskie-sladosti/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Меренговый бенто",
+      "price": 600,
+      "desc": "Мини-торт",
+      "tag": "",
+      "photo": "files/nemskie-sladosti/item-2.jpg"
+    },
+    {
+      "name": "Чак-чак",
+      "price": 1000,
+      "desc": "Медовый",
+      "photo": "files/nemskie-sladosti/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Губадия",
+      "price": 450,
+      "desc": "От 18 см",
+      "photo": "files/nemskie-sladosti/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Царский пирог",
+      "price": 350,
+      "desc": "От 18 см",
+      "photo": "files/nemskie-sladosti/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пирог с малиной",
+      "price": 300,
+      "desc": "От 18 см",
+      "photo": "files/nemskie-sladosti/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пирог с капустой и яйцом",
+      "price": 300,
+      "desc": "От 18 см",
+      "photo": "files/nemskie-sladosti/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Свадебный каравай",
+      "price": 900,
+      "desc": "28-30 см",
+      "photo": "files/nemskie-sladosti/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 912 726-51-07",
+    "whatsapp": "79127265107",
+    "address": "ул. Колхозная, 36/1",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Сладости от",
+    "orderMsg": "Здравствуйте! Хочу заказать",
+    "vars": {
+      "lilac": "#F1E2D3",
+      "pist": "#E3EBD3",
+      "butter": "#F9E7C0"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://tort--nema.orgs.biz/"
+}

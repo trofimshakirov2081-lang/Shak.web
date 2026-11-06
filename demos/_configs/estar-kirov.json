@@ -1,0 +1,73 @@
+{
+  "slug": "estar-kirov",
+  "name": "Эстар",
+  "niche": "masterskaya",
+  "city": "Киров",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/estar-kirov/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Эстар: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "ПАРТА РАСТУЩАЯ RIFFORMA-35 (MULTICOLOR)",
+      "price": 24990,
+      "desc": "Мебель сертифицирована и абсолютно безопасна для детей.…",
+      "photo": "files/estar-kirov/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Растущая парта Mealux Alberto с надстройкой",
+      "price": 26800,
+      "desc": "Создайте эргономичное, креативное рабочее пространство…",
+      "photo": "files/estar-kirov/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Растущая парта Mealux-EVO Diego",
+      "price": 20990,
+      "desc": "Столешница изготовлена из натурального дерева, матовое…",
+      "photo": "files/estar-kirov/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "PARTA ECO/75-40 (массив)",
+      "price": 31600,
+      "desc": "Размер стола: 1200x550 мм; Высота стола: 530-815 мм (рост…",
+      "photo": "files/estar-kirov/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 912 826-20-16",
+    "whatsapp": "79128262016",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://estar-mebel.orgs.biz/",
+  "contact_lead": "em:dinver@bk.ru"
+}

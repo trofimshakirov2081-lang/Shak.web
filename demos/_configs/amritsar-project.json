@@ -1,0 +1,74 @@
+{
+  "slug": "amritsar-project",
+  "name": "Amritsar Project",
+  "niche": "sport",
+  "city": "Москва",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/amritsar-project/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Amritsar Project: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Болливуд. Разовое групповое занятие",
+      "price": 400,
+      "desc": "Курс по индийским танцам Присоединяйтесь к Amritsar…",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Болливуд. Абонемент на 8 занятий",
+      "price": 3600,
+      "desc": "Курс по индийским танцам Присоединяйтесь к Amritsar…",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Детская группа (индийские танцы)",
+      "price": 300,
+      "desc": "Как говорится, чтобы уберечь от плохого,надо…",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Свадебный танец в индийском стиле",
+      "price": 10000,
+      "desc": "Что может быть уникальнее и прекраснне,чем свадебный…",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 903 524-34-89",
+    "whatsapp": "79035243489",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://amritsarproject.orgs.biz/",
+  "contact_lead": "em:amritsarmoscow@gmail.com"
+}

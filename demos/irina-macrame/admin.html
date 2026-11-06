@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪡</text></svg>">
+  <title>Админка: Ирина</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&family=Arsenal:wght@400;700&display=swap">
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <style>
+    /* Пульт сайта мастера: всё управление с телефона, крупно и по-человечески */
+    :root { --velvet: #4A1022; --velvet2: #2B0913; --gold: #D9B45A; --bg: #F3EAE6; --paper: #FFFCFA; --ink: #23161A; --mut: #7A6A6E; --line: #E7DAD5; --ok: #2F6B4F; --tg: #2AABEE; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.5 Arsenal, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Viaoda Libre", Georgia, serif; font-weight: 400; margin: 0; letter-spacing: -.01em; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(720px, 100% - 28px); margin: 0 auto; }
+    [hidden] { display: none !important; }
+
+    /* Вход */
+    .login { min-height: 100svh; display: grid; place-items: center; padding: 24px; background: var(--velvet2); color: #fff; }
+    .login form { width: min(360px, 100%); text-align: center; }
+    .login h1 { font-size: 44px; line-height: 1; margin: 10px 0 8px; }
+    .login p { color: rgba(255,255,255,.7); margin: 0 0 22px; }
+    .login input { width: 100%; padding: 16px; border-radius: 14px; border: 0; background: rgba(255,255,255,.1); color: #fff; text-align: center; font-size: 24px; letter-spacing: .3em; }
+    .login .go { width: 100%; margin-top: 12px; }
+    .login .hint { font-size: 14px; margin-top: 14px; color: var(--gold); }
+    .knot { width: 46px; height: 46px; margin: 0 auto; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--gold); display: grid; place-items: center; font: 26px "Viaoda Libre", serif; color: var(--gold); }
+
+    /* Шапка и вкладки */
+    .bar { position: sticky; top: 0; z-index: 20; background: var(--velvet2); color: #fff; }
+    .bar .row { display: flex; align-items: center; gap: 10px; padding: 12px 0 8px; }
+    .bar h1 { font-size: 26px; margin-right: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .bar h1 small { font: 400 14px Arsenal, sans-serif; opacity: .65; margin-left: 6px; }
+    .view { flex-shrink: 0; text-decoration: none; padding: 9px 14px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 15px; }
+    .tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 4px 14px 12px; margin: 0 -14px; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs button { flex-shrink: 0; border: 0; padding: 9px 14px; border-radius: 999px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.85); font-weight: 700; font-size: 15px; white-space: nowrap; }
+    .tabs button.on { background: #fff; color: var(--ink); }
+    .demo-note { background: var(--gold); color: var(--ink); font-size: 14px; padding: 8px 0; }
+
+    main { padding: 22px 0 60px; }
+    .h { font-size: 34px; line-height: 1.05; margin-bottom: 6px; }
+    .sub { color: var(--mut); margin: 0 0 18px; }
+    .card { background: var(--paper); border-radius: 18px; padding: 16px; box-shadow: 0 1px 0 rgba(35,22,26,.04), 0 10px 24px -20px rgba(35,22,26,.45); }
+    .card + .card { margin-top: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 14px; padding: 14px 18px; background: var(--velvet); color: #fff; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .btn.gold { background: var(--gold); color: var(--ink); }
+    .btn.soft { background: #F1E5E0; color: var(--ink); }
+    .btn.wide { width: 100%; }
+    .btn.tg { background: var(--tg); }
+    label.l { display: block; font-size: 14px; color: var(--mut); margin: 12px 0 6px; }
+    input.f, textarea.f { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: #fff; font-size: 17px; }
+    textarea.f { resize: vertical; }
+    input.f:focus, textarea.f:focus { outline: 2px solid var(--gold); outline-offset: 0; border-color: transparent; }
+
+    /* Работы */
+    .add-big { width: 100%; padding: 18px; border: 2px dashed #CDB3AA; border-radius: 18px; background: transparent; font-weight: 700; font-size: 18px; color: var(--velvet); margin-bottom: 14px; }
+    .item { display: grid; grid-template-columns: 76px 1fr; gap: 12px; }
+    .item.off { opacity: .55; }
+    .thumb { position: relative; width: 76px; height: 95px; border-radius: 10px; overflow: hidden; background: #E9DCD6; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb label { position: absolute; inset: auto 0 0 0; background: rgba(35,22,26,.62); color: #fff; font-size: 12px; text-align: center; padding: 3px 0; cursor: pointer; }
+    .thumb input { display: none; }
+    .item .nm { width: 100%; border: 0; background: transparent; font: 22px/1.15 "Viaoda Libre", serif; padding: 0; }
+    .item .nm:focus { outline: none; box-shadow: 0 1.5px 0 var(--gold); }
+    .pr { display: flex; align-items: center; gap: 6px; margin: 6px 0 10px; }
+    .pr input { width: 110px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); font-weight: 700; font-size: 17px; }
+    .pr span { color: var(--mut); }
+    .seg { display: flex; gap: 4px; flex-wrap: wrap; }
+    .seg button { border: 0; padding: 7px 11px; border-radius: 999px; background: #F1E5E0; font-size: 14px; font-weight: 700; }
+    .seg button.on { background: var(--ink); color: #fff; }
+    .tools { grid-column: 1 / -1; display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 2px; }
+    .tools button { border: 0; background: transparent; padding: 6px 10px; border-radius: 10px; font-size: 15px; color: var(--mut); }
+    .tools button:hover { background: #F1E5E0; }
+    .tools .del { margin-left: auto; color: #A33; }
+
+    /* Лист новой работы */
+    .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(35,22,26,.45); display: grid; align-items: end; }
+    .sheet .in { background: var(--paper); border-radius: 22px 22px 0 0; padding: 20px 16px 28px; max-height: 92svh; overflow: auto; animation: rise .35s cubic-bezier(.2,.8,.2,1); }
+    @keyframes rise { from { transform: translateY(40%); opacity: .4; } }
+    .drop { display: grid; place-items: center; height: 180px; border-radius: 16px; background: #F1E5E0; color: var(--velvet); font-weight: 700; text-align: center; cursor: pointer; overflow: hidden; }
+    .drop img { width: 100%; height: 100%; object-fit: cover; }
+    .drop input { display: none; }
+
+    /* Приём заказов */
+    .switch { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .switch b { font-size: 19px; }
+    .tog { position: relative; width: 62px; height: 36px; flex-shrink: 0; border-radius: 999px; border: 0; background: #D7C6C0; transition: background .25s; }
+    .tog::after { content: ""; position: absolute; top: 4px; left: 4px; width: 28px; height: 28px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); transition: transform .25s; }
+    .tog.on { background: var(--ok); }
+    .tog.on::after { transform: translateX(26px); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chips button { border: 0; padding: 10px 14px; border-radius: 999px; background: #F1E5E0; font-weight: 700; }
+    .chips button.on { background: var(--velvet); color: #fff; }
+    .preview { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: var(--gold); font-weight: 700; font-size: 15px; text-align: center; }
+
+    /* Ссылка */
+    .link { display: flex; gap: 8px; align-items: center; padding: 12px 14px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-weight: 700; overflow: hidden; }
+    .link span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .qr { display: grid; place-items: center; padding: 16px; background: #fff; border-radius: 16px; margin-top: 12px; }
+    .qr img, .qr canvas { width: 180px !important; height: 180px !important; }
+    ol.how { margin: 8px 0 0; padding-left: 22px; }
+    ol.how li { margin: 6px 0; }
+    .reply { display: flex; gap: 10px; align-items: flex-start; }
+    .reply p { margin: 0; flex: 1; }
+    .reply .q { display: block; font-size: 14px; color: var(--mut); margin-bottom: 4px; }
+
+    /* Оформление */
+    .pals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pal { border: 0; padding: 0; border-radius: 16px; overflow: hidden; background: #fff; text-align: left; box-shadow: inset 0 0 0 2px transparent; }
+    .pal.on { box-shadow: inset 0 0 0 3px var(--gold); }
+    .pal i { display: block; height: 70px; }
+    .pal span { display: block; padding: 8px 10px; font-weight: 700; font-size: 15px; }
+
+    /* Telegram-бот: живой пример */
+    .phone { background: #E6EBEE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23cfd8dc'/%3E%3C/svg%3E"); border-radius: 22px; overflow: hidden; border: 6px solid var(--ink); }
+    .phone .hd { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #fff; border-bottom: 1px solid #e3e7ea; }
+    .phone .av { width: 38px; height: 38px; border-radius: 50%; background: var(--velvet); color: var(--gold); display: grid; place-items: center; font: 20px "Viaoda Libre", serif; }
+    .phone .hd b { display: block; line-height: 1.1; }
+    .phone .hd small { color: #8a9aa5; font-size: 13px; }
+    .chat { height: 430px; overflow-y: auto; padding: 14px 10px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
+    .msg { max-width: 82%; padding: 9px 12px; border-radius: 16px; font-size: 16px; line-height: 1.35; background: #fff; align-self: flex-start; box-shadow: 0 1px 1px rgba(0,0,0,.06); animation: pop .3s cubic-bezier(.2,.8,.2,1); white-space: pre-line; }
+    .msg.me { align-self: flex-end; background: #DCF8C6; }
+    .msg img { display: block; width: 160px; border-radius: 10px; margin-bottom: 4px; }
+    @keyframes pop { from { transform: translateY(8px) scale(.96); opacity: 0; } }
+    .typing { align-self: flex-start; background: #fff; border-radius: 16px; padding: 10px 14px; }
+    .typing i { display: inline-block; width: 7px; height: 7px; margin: 0 2px; border-radius: 50%; background: #9fb0bb; animation: dot 1s infinite; }
+    .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes dot { 50% { transform: translateY(-4px); opacity: .5; } }
+    .kb { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 8px; background: #fff; border-top: 1px solid #e3e7ea; }
+    .kb button { border: 0; padding: 11px 8px; border-radius: 10px; background: #EEF3F6; color: #1c6a95; font-weight: 700; font-size: 15px; }
+    .kb button:disabled { opacity: .45; }
+
+    /* Зачем сайт */
+    .why { display: grid; gap: 12px; }
+    .why .card { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+    .why .ic { width: 44px; height: 44px; border-radius: 50%; background: var(--velvet); color: var(--gold); display: grid; place-items: center; font-size: 20px; }
+    .why b { display: block; font: 22px/1.15 "Viaoda Libre", serif; margin-bottom: 4px; }
+    .why span { color: var(--mut); }
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .vs div { padding: 14px; border-radius: 16px; font-size: 15px; }
+    .vs .was { background: #EBDDD8; }
+    .vs .now { background: var(--velvet); color: #fff; }
+    .vs b { display: block; font: 20px "Viaoda Libre", serif; margin-bottom: 6px; }
+    .vs ul { margin: 0; padding-left: 18px; }
+
+    .toast { position: fixed; left: 50%; top: 14px; z-index: 60; transform: translate(-50%, -160%); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 14px; font-weight: 700; transition: transform .3s; max-width: calc(100% - 28px); }
+    .toast.show { transform: translate(-50%, 0); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <div class="login" id="login">
+    <form id="loginForm">
+      <div class="knot" id="mono">И</div>
+      <h1 id="hello">Пульт сайта</h1>
+      <p>Здесь вы сами меняете работы, цены и всё, что видят клиентки.</p>
+      <input id="pin" type="password" inputmode="numeric" placeholder="PIN" autocomplete="current-password" aria-label="PIN-код">
+      <button class="btn gold go" type="submit">Войти</button>
+      <p class="hint" id="pinHint"></p>
+      <p class="hint" id="pinErr" hidden style="color:#ffb3b3">Неверный PIN</p>
+    </form>
+  </div>
+
+  <div id="app" hidden>
+    <header class="bar"><div class="wrap">
+      <div class="row"><h1 id="title">Пульт</h1><a class="view" href="index.html" target="_blank" rel="noopener">Открыть сайт</a></div>
+      <nav class="tabs" id="tabs">
+        <button data-t="why">Зачем сайт</button>
+        <button data-t="items">Работы</button>
+        <button data-t="orders">Приём заказов</button>
+        <button data-t="link">Ссылка для TikTok</button>
+        <button data-t="bot">Telegram-бот</button>
+        <button data-t="look">Оформление</button>
+      </nav>
+    </div></header>
+    <div class="demo-note" id="demoNote" hidden><div class="wrap">Это демо: изменения видны только на этом телефоне. На вашем сайте их сразу увидят все.</div></div>
+    <main><div class="wrap" id="panel"></div></main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+  (function () {
+    var S = window.Store, esc = S.esc;
+    var data = S.load();
+    data.extra = data.extra || {};
+    var X = data.extra;
+    var tab = "why";
+    var SITE = location.href.replace(/admin\.html.*$/, "");
+    var first = data.brand.name;
+
+    // Вход по PIN
+    document.getElementById("mono").textContent = first.charAt(0);
+    document.getElementById("hello").textContent = first + ", здравствуйте";
+    if (data.demo && data.demo.banner) document.getElementById("pinHint").textContent = "Это демо, PIN: " + data.demo.pin;
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (document.getElementById("pin").value === String(data.demo.pin)) { try { sessionStorage.setItem(S.KEY + ":in", "1"); } catch (er) {} open(); }
+      else document.getElementById("pinErr").hidden = false;
+    });
+    try { if (sessionStorage.getItem(S.KEY + ":in")) open(); } catch (er) {}
+
+    function open() {
+      document.getElementById("login").hidden = true;
+      document.getElementById("app").hidden = false;
+      document.getElementById("title").innerHTML = esc(first) + '<small>пульт сайта</small>';
+      document.getElementById("demoNote").hidden = !(data.demo && data.demo.banner);
+      render();
+    }
+
+    function save(msg) { S.save(data); toast(msg || "Сохранено, сайт обновился"); }
+    function toast(t) { var el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("show"); }, 2000); }
+    function money(n) { return Number(n || 0).toLocaleString("ru-RU"); }
+    function copy(t, msg) {
+      function ok() { toast(msg || "Скопировано"); }
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, fb); else fb();
+      function fb() { var a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (e) {} a.remove(); ok(); }
+    }
+    var GROUPS = (X.filters || []).map(function (f) { return f[0]; });
+    function nextId() { var m = 0; data.items.forEach(function (i) { var n = +String(i.id).replace(/\D/g, ""); if (n > m) m = n; }); return "i" + (m + 1); }
+
+    // Фото с телефона: уменьшаем до 900px, чтобы сайт открывался быстро
+    function readPhoto(file, cb) {
+      var r = new FileReader();
+      r.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+          var k = Math.min(1, 900 / Math.max(img.width, img.height)), c = document.createElement("canvas");
+          c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          cb(c.toDataURL("image/jpeg", .82));
+        };
+        img.src = r.result;
+      };
+      r.readAsDataURL(file);
+    }
+
+    /* ---------- Вкладки ---------- */
+    var T = {};
+
+    T.why = function () {
+      return '<h2 class="h">Зачем вам сайт, если есть TikTok</h2><p class="sub">У вас тысячи зрителей. Сайт превращает просмотры в заказы и забирает переписку на себя.</p>' +
+        '<div class="why">' +
+        [["🔗", "Одна ссылка вместо «пишите в личку»", "Ставите ссылку в шапку TikTok и Instagram. Зрительница сама смотрит все работы и цены, без вопросов «сколько стоит?» в комментариях."],
+         ["🧾", "Заказ приходит готовым", "В Telegram сразу приходит: какое изделие, имя, телефон, мерки и к какой дате. Не нужно переспрашивать и искать фото в переписке."],
+         ["📱", "Новая работа на сайте за минуту", "Сфотографировали, открыли этот пульт, нажали «Добавить работу». Или просто отправили фото Telegram-боту."],
+         ["⏸", "Перерыв одной кнопкой", "Уезжаете или много заказов: включаете перерыв, на сайте появляется плашка. Включаете очередь: клиентки видят срок заранее."],
+         ["✨", "Вас воспринимают как бренд", "Сайт с вашим именем выглядит дороже, чем «пишите в директ». Цены выше принимают спокойнее, когда есть витрина."]
+        ].map(function (r) { return '<div class="card"><div class="ic">' + r[0] + '</div><div><b>' + r[1] + '</b><span>' + r[2] + '</span></div></div>'; }).join("") + '</div>' +
+        '<div class="vs"><div class="was"><b>Сейчас</b><ul><li>В комментариях «цена?»</li><li>Каждой отвечаете вручную</li><li>Фото работ теряются в ленте</li><li>Мерки и детали в разных сообщениях</li></ul></div>' +
+        '<div class="now"><b>С сайтом</b><ul><li>Ссылка в шапке профиля</li><li>Цены и работы на одной странице</li><li>Заказ приходит одним сообщением</li><li>Всё меняете сами с телефона</li></ul></div></div>' +
+        '<p style="margin-top:20px"><button class="btn wide" data-go="items">Посмотреть, как это работает</button></p>';
+    };
+
+    T.items = function () {
+      return '<h2 class="h">Работы</h2><p class="sub">Всё, что видят клиентки. Меняйте прямо здесь, сохраняется само.</p>' +
+        '<button class="add-big" data-new>＋ Добавить работу</button>' +
+        data.items.map(function (i, n) {
+          var st = i.status || "order";
+          return '<div class="card item' + (i.hidden ? ' off' : '') + '" data-n="' + n + '">' +
+            '<div class="thumb">' + (i.photo ? '<img src="' + esc(i.photo) + '" alt="">' : '') + '<label>Фото<input type="file" accept="image/*" data-photo="' + n + '"></label></div>' +
+            '<div><input class="nm" data-name="' + n + '" value="' + esc(i.name) + '" aria-label="Название">' +
+            '<div class="pr"><span>от</span><input inputmode="numeric" data-price="' + n + '" value="' + esc(i.price) + '" aria-label="Цена"><span>₽</span></div>' +
+            '<div class="seg">' + [["order", "Под заказ"], ["stock", "В наличии"], ["sold", "Продано"]].map(function (o) { return '<button data-st="' + n + ':' + o[0] + '" class="' + (st === o[0] ? 'on' : '') + '">' + o[1] + '</button>'; }).join("") + '</div></div>' +
+            '<div class="tools"><button data-up="' + n + '" aria-label="Выше">↑ Выше</button><button data-down="' + n + '" aria-label="Ниже">↓ Ниже</button><button data-hide="' + n + '">' + (i.hidden ? 'Показать' : 'Скрыть') + '</button><button class="del" data-del="' + n + '">Удалить</button></div></div>';
+        }).join("");
+    };
+
+    T.orders = function () {
+      var p = X.pause || {};
+      var Q = ["1 неделя", "2-3 недели", "месяц"];
+      return '<h2 class="h">Приём заказов</h2><p class="sub">То, что клиентки видят до того, как напишут вам.</p>' +
+        '<div class="card"><div class="switch"><div><b>' + (p.on ? 'Сейчас перерыв' : 'Принимаю заказы') + '</b><div class="sub" style="margin:2px 0 0">' + (p.on ? 'На сайте висит плашка, заказы можно оставить в очередь' : 'Кнопки «В заказ» работают как обычно') + '</div></div>' +
+        '<button class="tog' + (p.on ? '' : ' on') + '" data-pause aria-label="Принимаю заказы"></button></div>' +
+        (p.on ? '<label class="l">Что написать на сайте</label><input class="f" data-pausetext value="' + esc(p.text || "Я в отпуске до 15 ноября. Заказы принимаю в очередь.") + '">' +
+          '<div class="preview">' + esc(p.text || "Я в отпуске до 15 ноября. Заказы принимаю в очередь.") + '</div>' : '') + '</div>' +
+        '<div class="card"><b style="font-size:19px">Сколько сейчас ждать</b><div class="sub" style="margin:2px 0 0">Покажется в блоке «Как заказать»</div><div class="chips">' +
+        ['<button data-q="" class="' + (!X.queue ? 'on' : '') + '">Не показывать</button>'].concat(Q.map(function (q) { return '<button data-q="' + q + '" class="' + (X.queue === q ? 'on' : '') + '">' + q + '</button>'; })).join("") + '</div></div>' +
+        '<div class="card"><b style="font-size:19px">Куда приходят заказы</b><p class="sub" style="margin:4px 0 10px">Клиентка нажимает «Отправить заказ», и у вас в Telegram готовое сообщение: изделие, имя, телефон, мерки.</p>' +
+        '<label class="l">Ваш Telegram</label><input class="f" data-tg value="@' + esc(String(data.contacts.telegram || "").replace(/^@/, "")) + '"></div>';
+    };
+
+    T.link = function () {
+      var replies = X.replies || [
+        ["Цена?", "Все модели и цены здесь: " + SITE + " Выбирайте, заказ придёт мне в Telegram 🤍"],
+        ["Сплетёте на меня?", "Да, плету по вашим меркам. Выберите модель на сайте и напишите мерки в заказе: " + SITE],
+        ["Сколько ждать?", "Сейчас очередь " + (X.queue || "2-3 недели") + ". Оформить заказ можно здесь: " + SITE],
+        ["Есть в наличии?", "Что есть в наличии, отмечено на сайте: " + SITE]
+      ];
+      return '<h2 class="h">Ссылка для TikTok</h2><p class="sub">Один раз ставите в шапку профиля, и каждый зритель может заказать.</p>' +
+        '<div class="card"><div class="link"><span>' + esc(SITE) + '</span></div><p style="margin:10px 0 0;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-copy="' + esc(SITE) + '">Скопировать ссылку</button><a class="btn soft" href="' + esc(SITE) + '" target="_blank" rel="noopener">Открыть</a></p>' +
+        '<div class="qr" id="qr" aria-label="QR-код сайта"></div><p class="sub" style="text-align:center;margin:8px 0 0">QR-код для визиток, бирок на изделиях и ярмарок</p></div>' +
+        '<div class="card"><b style="font-size:19px">Как поставить в TikTok</b><ol class="how"><li>Профиль, кнопка «Изменить профиль».</li><li>Поле «Сайт»: вставьте ссылку.</li><li>Нажмите «Сохранить». Ссылка появится под описанием.</li></ol>' +
+        '<b style="font-size:19px;display:block;margin-top:12px">В Instagram</b><ol class="how"><li>«Редактировать профиль», затем «Ссылки».</li><li>«Добавить внешнюю ссылку», вставьте и сохраните.</li></ol>' +
+        '<p class="sub" style="margin:10px 0 0">И в описании роликов: «Все модели и цены по ссылке в профиле».</p></div>' +
+        '<h3 style="font-size:26px;margin:24px 0 10px">Готовые ответы на комментарии</h3><p class="sub">Нажали, скопировали, вставили в ответ. Больше не нужно писать одно и то же.</p>' +
+        replies.map(function (r) { return '<div class="card reply"><p><span class="q">На вопрос «' + esc(r[0]) + '»</span>' + esc(r[1]) + '</p><button class="btn soft" data-copy="' + esc(r[1]) + '">Копировать</button></div>'; }).join("");
+    };
+
+    var PALS = [
+      { n: "Бархат", c: { main: "#7A1E36", accent: "#D9B45A", bg: "#F3EAE6", text: "#23161A" }, v: { velvet: "#4A1022", velvet2: "#2B0913" } },
+      { n: "Изумруд", c: { main: "#165A46", accent: "#D9B45A", bg: "#EDF1EC", text: "#14211C" }, v: { velvet: "#0F3B2E", velvet2: "#08231B" } },
+      { n: "Полночь", c: { main: "#2B3A66", accent: "#C9CED8", bg: "#EEF0F4", text: "#161B2B" }, v: { velvet: "#1B2440", velvet2: "#0E1426" } }
+    ];
+    T.look = function () {
+      var cur = (X.vars && X.vars.velvet) || "#4A1022";
+      return '<h2 class="h">Оформление</h2><p class="sub">Цвет занавеса и главные тексты сайта.</p>' +
+        '<div class="pals">' + PALS.map(function (p, k) { return '<button class="pal' + (p.v.velvet === cur ? ' on' : '') + '" data-pal="' + k + '"><i style="background:linear-gradient(90deg,' + p.v.velvet2 + ',' + p.v.velvet + ' 60%,' + p.c.accent + ' 60% 72%,' + p.c.bg + ' 72%)"></i><span>' + p.n + '</span></button>'; }).join("") + '</div>' +
+        '<div class="card" style="margin-top:14px"><label class="l" style="margin-top:0">Главная фраза на сцене</label><input class="f" data-k="hero.title" value="' + esc(data.hero.title) + '">' +
+        '<label class="l">Под ней</label><textarea class="f" rows="3" data-k="hero.text">' + esc(data.hero.text) + '</textarea>' +
+        '<label class="l">О себе</label><textarea class="f" rows="5" data-k="sections.aboutText">' + esc(data.sections.aboutText) + '</textarea></div>';
+    };
+
+    T.bot = function () {
+      return '<h2 class="h">Управление из Telegram</h2><p class="sub">Не хочется заходить в пульт? Пишете боту, и сайт меняется. Нажимайте кнопки внизу, это работает по-настоящему: изменения появятся на сайте.</p>' +
+        '<div class="phone"><div class="hd"><div class="av">' + esc(first.charAt(0)) + '</div><div><b>Сайт ' + esc(first) + '</b><small>бот</small></div></div><div class="chat" id="chat"></div><div class="kb" id="kb"></div></div>' +
+        '<p class="sub" style="margin-top:12px">Бот подключается к сайту отдельно. Сюда же приходят заказы с кнопками «Принять» и «Написать клиентке».</p>';
+    };
+
+    /* ---------- Бот: сценарии ---------- */
+    var busy = false;
+    function say(text, me, img) {
+      var c = document.getElementById("chat"); if (!c) return;
+      var m = document.createElement("div"); m.className = "msg" + (me ? " me" : "");
+      m.innerHTML = (img ? '<img src="' + esc(img) + '" alt="">' : '') + esc(text);
+      c.appendChild(m); c.scrollTop = c.scrollHeight;
+    }
+    function botSay(text, cb, img) {
+      var c = document.getElementById("chat"); if (!c) return;
+      var t = document.createElement("div"); t.className = "typing"; t.innerHTML = "<i></i><i></i><i></i>"; c.appendChild(t); c.scrollTop = c.scrollHeight;
+      setTimeout(function () { t.remove(); say(text, false, img); if (cb) cb(); }, 700 + Math.min(900, text.length * 8));
+    }
+    function keys(list) {
+      var k = document.getElementById("kb"); if (!k) return;
+      k.innerHTML = list.map(function (b, n) { return '<button data-kb="' + n + '">' + esc(b[0]) + '</button>'; }).join("");
+      k._list = list;
+    }
+    function menu() {
+      keys([["➕ Новая работа", newWork], ["💰 Изменить цену", price], [((X.pause || {}).on ? "▶️ Снять перерыв" : "⏸ Перерыв"), pause], ["🔔 Пример заказа", order]]);
+    }
+    function step(me, text, then, img) { keys([]); say(me, true, img); botSay(text, then); }
+    function newWork() {
+      var pics = data.items.filter(function (i) { return i.photo; }), pic = X.hands || (pics[0] && pics[0].photo);
+      step("➕ Новая работа", "Пришлите фото работы", function () {
+        keys([["📷 Отправить фото", function () {
+          keys([]); say("", true, pic);
+          botSay("Красиво! Как назвать?", function () {
+            keys([["Пояс «Мёд»", function () {
+              step("Пояс «Мёд»", "Цена от, в рублях?", function () {
+                keys([["6 500", function () {
+                  keys([]); say("6 500", true);
+                  data.items.unshift({ id: nextId(), name: "Пояс «Мёд»", desc: "Макраме, золотые бусины", price: 6500, photo: pic, tag: "Новинка", emoji: "", group: 0 });
+                  S.save(data);
+                  botSay("Готово ✨ Пояс «Мёд» уже первым на сайте. Посмотреть: " + SITE.replace(/^https?:\/\//, ""), menu);
+                }]]);
+              });
+            }]]);
+          });
+        }]]);
+      });
+    }
+    function price() {
+      step("💰 Изменить цену", "Какую работу?", function () {
+        keys(data.items.slice(0, 4).map(function (i, n) {
+          return [i.name, function () {
+            step(i.name, "Сейчас от " + money(i.price) + " ₽. Новая цена?", function () {
+              var np = Math.round(i.price * 1.1 / 500) * 500;
+              keys([[money(np), function () { keys([]); say(money(np), true); i.price = np; S.save(data); botSay("Обновил. На сайте теперь от " + money(np) + " ₽", menu); }]]);
+            });
+          }];
+        }));
+      });
+    }
+    function pause() {
+      X.pause = X.pause || {};
+      var on = !X.pause.on;
+      step(on ? "⏸ Перерыв" : "▶️ Снять перерыв", on ? "До какого числа?" : "Снял перерыв. Кнопки заказа снова работают ✅", on ? function () {
+        keys([["До 15 ноября", function () { keys([]); say("До 15 ноября", true); X.pause = { on: true, text: "Я в отпуске до 15 ноября. Заказы принимаю в очередь." }; S.save(data); botSay("Включил. На сайте висит плашка: «Я в отпуске до 15 ноября»", menu); }]]);
+      } : function () { X.pause.on = false; S.save(data); menu(); });
+    }
+    function order() {
+      step("🔔 Пример заказа", "🛍 Новый заказ с сайта\n\nПлатье «Жемчуг», от 24 000 ₽\nАнна, +7 9•• •••-••-12\nМерки: ОГ 88, ОТ 66, ОБ 94, рост 168\nК 20 декабря", function () {
+        keys([["✅ Принять", function () { step("✅ Принять", "Принято. Анне ушло сообщение: «Ирина взяла ваш заказ, скоро напишет» 🤍", menu); }], ["💬 Написать клиентке", function () { step("💬 Написать клиентке", "Открываю чат с Анной в Telegram", menu); }]]);
+      });
+    }
+    function botStart() {
+      var c = document.getElementById("chat"); if (!c || c.childElementCount) return;
+      botSay(first + ", здравствуйте! Что меняем на сайте?", menu);
+    }
+
+    /* ---------- Отрисовка и события ---------- */
+    function render() {
+      document.getElementById("panel").innerHTML = T[tab]();
+      [].forEach.call(document.querySelectorAll("#tabs button"), function (b) { b.classList.toggle("on", b.dataset.t === tab); if (b.dataset.t === tab && b.scrollIntoView) b.scrollIntoView({ inline: "center", block: "nearest" }); });
+      if (tab === "link") qr();
+      if (tab === "bot") botStart();
+    }
+    function qr() {
+      var box = document.getElementById("qr"); if (!box) return;
+      if (window.QRCode) new QRCode(box, { text: SITE, width: 360, height: 360, colorDark: "#23161A", colorLight: "#ffffff" });
+      else setTimeout(qr, 300);
+    }
+    function go(t) { tab = t; render(); scrollTo(0, 0); }
+
+    document.getElementById("tabs").addEventListener("click", function (e) { var b = e.target.closest("[data-t]"); if (b) go(b.dataset.t); });
+    var panel = document.getElementById("panel");
+    panel.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var d = b.dataset, it;
+      if (d.go) go(d.go);
+      else if (d.kb != null) { var l = document.getElementById("kb")._list; if (l && l[d.kb]) l[d.kb][1](); }
+      else if (d.copy) copy(d.copy);
+      else if ("new" in d) sheet();
+      else if (d.st) { var p = d.st.split(":"); data.items[+p[0]].status = p[1]; save(p[1] === "sold" ? "Отмечено «Продано», вместо заказа кнопка «Повторить»" : null); render(); }
+      else if (d.up) { var n = +d.up; if (n > 0) { it = data.items.splice(n, 1)[0]; data.items.splice(n - 1, 0, it); save("Порядок на сайте изменён"); render(); } }
+      else if (d.down) { n = +d.down; if (n < data.items.length - 1) { it = data.items.splice(n, 1)[0]; data.items.splice(n + 1, 0, it); save("Порядок на сайте изменён"); render(); } }
+      else if (d.hide) { it = data.items[+d.hide]; it.hidden = !it.hidden; save(it.hidden ? "Скрыто с сайта" : "Снова на сайте"); render(); }
+      else if (d.del) { it = data.items[+d.del]; if (confirm("Удалить «" + it.name + "» с сайта?")) { data.items.splice(+d.del, 1); save("Удалено"); render(); } }
+      else if ("pause" in d) { X.pause = X.pause || {}; X.pause.on = !X.pause.on; if (X.pause.on && !X.pause.text) X.pause.text = "Я в отпуске до 15 ноября. Заказы принимаю в очередь."; save(X.pause.on ? "Перерыв включён, на сайте плашка" : "Снова принимаете заказы"); render(); }
+      else if (d.q != null) { X.queue = d.q; save(d.q ? "На сайте: очередь " + d.q : "Срок скрыт"); render(); }
+      else if (d.pal) { var P = PALS[+d.pal]; data.colors = Object.assign({}, data.colors, P.c); X.vars = Object.assign({}, X.vars, P.v); save("Цвет «" + P.n + "» на сайте"); render(); }
+    });
+    // Текстовые поля сохраняются сами, через полсекунды после ввода
+    var tm;
+    panel.addEventListener("input", function (e) {
+      var t = e.target, d = t.dataset;
+      if (d.name) data.items[+d.name].name = t.value;
+      else if (d.price) data.items[+d.price].price = Number(t.value.replace(/\D/g, "")) || 0;
+      else if ("pausetext" in d) { X.pause.text = t.value; var pv = panel.querySelector(".preview"); if (pv) pv.textContent = t.value; }
+      else if ("tg" in d) data.contacts.telegram = t.value.replace(/^@/, "").trim();
+      else if (d.k) { var ks = d.k.split("."); data[ks[0]][ks[1]] = t.value; }
+      else return;
+      clearTimeout(tm); tm = setTimeout(function () { save(); }, 600);
+    });
+    panel.addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.dataset.photo && t.files[0]) readPhoto(t.files[0], function (url) { data.items[+t.dataset.photo].photo = url; save("Фото заменено"); render(); });
+    });
+
+    // Новая работа: фото, название, цена, группа
+    function sheet() {
+      var s = document.createElement("div"); s.className = "sheet";
+      s.innerHTML = '<div class="in"><h2 class="h" style="font-size:30px">Новая работа</h2><p class="sub">Появится на сайте первой.</p>' +
+        '<label class="drop" id="drop"><span>📷 Выбрать фото из галереи<br><small style="font-weight:400">или сфотографировать</small></span><input type="file" accept="image/*" id="nf"></label>' +
+        '<label class="l">Название</label><input class="f" id="nn" placeholder="Например, платье «Мёд»">' +
+        '<label class="l">Цена от, ₽</label><input class="f" id="np" inputmode="numeric" placeholder="18 000">' +
+        '<label class="l">Пара слов</label><input class="f" id="nd" placeholder="Цвет, материал, длина">' +
+        (GROUPS.length ? '<label class="l">Раздел</label><div class="chips" id="ng">' + GROUPS.map(function (g, k) { return '<button type="button" data-g="' + k + '" class="' + (k ? '' : 'on') + '">' + esc(g) + '</button>'; }).join("") + '</div>' : '') +
+        '<p style="display:flex;gap:8px;margin:20px 0 0"><button class="btn soft" data-x style="flex:1">Отмена</button><button class="btn" data-ok style="flex:2">Добавить на сайт</button></p></div>';
+      document.body.appendChild(s);
+      var photo = "", g = 0;
+      s.querySelector("#nf").addEventListener("change", function (e) { if (e.target.files[0]) readPhoto(e.target.files[0], function (u) { photo = u; s.querySelector("#drop").innerHTML = '<img src="' + u + '" alt="">'; }); });
+      s.addEventListener("click", function (e) {
+        if (e.target === s || e.target.closest("[data-x]")) s.remove();
+        var gb = e.target.closest("[data-g]"); if (gb) { g = +gb.dataset.g; [].forEach.call(s.querySelectorAll("[data-g]"), function (x) { x.classList.toggle("on", x === gb); }); }
+        if (e.target.closest("[data-ok]")) {
+          var name = s.querySelector("#nn").value.trim(), pr = Number(s.querySelector("#np").value.replace(/\D/g, ""));
+          if (!name) { toast("Напишите название"); return; }
+          if (!pr) { toast("Укажите цену"); return; }
+          data.items.unshift({ id: nextId(), name: name, price: pr, desc: s.querySelector("#nd").value.trim(), photo: photo, tag: "Новинка", emoji: "", group: g });
+          save("«" + name + "» уже на сайте"); s.remove(); tab = "items"; render();
+        }
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

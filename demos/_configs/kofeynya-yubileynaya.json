@@ -1,0 +1,150 @@
+{
+  "slug": "kofeynya-yubileynaya",
+  "name": "Кофейня на Юбилейной",
+  "niche": "кофейня",
+  "city": "Гвардейск",
+  "custom": "altynnur",
+  "tagline": "Кофе",
+  "colors": {
+    "main": "#3B4A8C",
+    "accent": "#F2B880",
+    "bg": "#F4F5FA",
+    "text": "#141A33"
+  },
+  "fonts": {
+    "head": "Unbounded",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Закажите заранее и заберите без очереди",
+    "text": "Кофейня на Юбилейной в Гвардейске. Соберите заказ на сайте и заберите его, когда удобно.",
+    "cta": "Смотреть меню",
+    "photo": "files/kofeynya-yubileynaya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Меню",
+    "catalogText": "Добавьте позиции в заказ и отправьте нам.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Кофейня на Юбилейной: кофе и выпечка в Гвардейске. Готовим с любовью и ждём вас каждый день.",
+  "features": [
+    {
+      "icon": "☕",
+      "title": "Свежий кофе",
+      "text": "Каждый день."
+    },
+    {
+      "icon": "🥐",
+      "title": "Выпечка",
+      "text": "К кофе и с собой."
+    },
+    {
+      "icon": "📍",
+      "title": "Гвардейск",
+      "text": "Ждём в гости."
+    }
+  ],
+  "items": [
+    {
+      "name": "Капучино",
+      "price": 190,
+      "desc": "250/350 мл",
+      "photo": "files/kofeynya-yubileynaya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Латте",
+      "price": 210,
+      "desc": "300/400 мл",
+      "photo": "files/kofeynya-yubileynaya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Раф ванильный",
+      "price": 260,
+      "desc": "300 мл",
+      "photo": "files/kofeynya-yubileynaya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Флэт уайт",
+      "price": 220,
+      "desc": "200 мл",
+      "photo": "files/kofeynya-yubileynaya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Американо",
+      "price": 160,
+      "desc": "250/350 мл",
+      "photo": "files/kofeynya-yubileynaya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Матча латте",
+      "price": 280,
+      "desc": "300 мл",
+      "photo": "files/kofeynya-yubileynaya/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Какао с маршмеллоу",
+      "price": 220,
+      "desc": "300 мл",
+      "photo": "files/kofeynya-yubileynaya/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Круассан",
+      "price": 150,
+      "desc": "Свежий, с маслом",
+      "photo": "files/kofeynya-yubileynaya/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 967 353-54-35",
+    "whatsapp": "79673535435",
+    "address": "ул. Юбилейная, 2",
+    "hours": ""
+  },
+  "extra": {
+    "groups": [
+      [
+        "Кофе",
+        "кофе|капучин|латте|раф|флэт|американо|эспрессо|зерн|колумб|эфиоп|бразил|кения|дрип"
+      ],
+      [
+        "Другое",
+        "матча|какао|чай"
+      ],
+      [
+        "Выпечка",
+        "круассан|хлеб|булоч|пирог|багет|выпеч"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Всё меню",
+    "orderTitle": "Заказать заранее",
+    "orderText": "Соберите заказ на сайте и заберите его без очереди.",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки подготовить, пожелания",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой.",
+    "emptyToast": "Сначала выберите позицию",
+    "vars": {
+      "deep": "#141A33",
+      "glow": "#5B6FD6",
+      "glow2": "#E58A4E",
+      "sky": "#E6E9F7",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "остальные фото: Pexels, для примера",
+  "source": "https://club228243782.orgs.biz/",
+  "vk_lead": "https://vk.me/club228243782"
+}

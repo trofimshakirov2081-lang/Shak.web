@@ -1,0 +1,73 @@
+{
+  "slug": "kolibry-krd",
+  "name": "Колибри",
+  "niche": "masterskaya",
+  "city": "Краснодар",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Кухня, сделанная под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/kolibry-krd/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Колибри: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня и мебель \"Кадоро",
+      "price": 45000,
+      "desc": "Роскошная кухня и мебель Veneto Кадоро - для истинных…",
+      "photo": "files/kolibry-krd/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Кухня «Тетрис Viola",
+      "price": 80000,
+      "desc": "Кухня «Тетрис Viola» внесёт в любой дом особое…",
+      "photo": "files/kolibry-krd/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кухня «Нова",
+      "price": 58800,
+      "desc": "Кухня \"Нова\" - красота и качество за разумные деньги!…",
+      "photo": "files/kolibry-krd/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кухня «Капри",
+      "price": 117100,
+      "desc": "Современная и функциональная кухня Капри гармонично…",
+      "photo": "files/kolibry-krd/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 988 243-04-20",
+    "whatsapp": "79882430420",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://kolibry-krasnodar.orgs.biz/",
+  "contact_lead": "em:salon@kolibry-mebel.ru"
+}

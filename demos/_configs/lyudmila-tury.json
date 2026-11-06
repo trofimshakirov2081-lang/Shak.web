@@ -1,0 +1,68 @@
+{
+  "slug": "lyudmila-tury",
+  "name": "Туры с Людмилой",
+  "niche": "tury",
+  "city": "Санкт-Петербург",
+  "custom": "marshrut",
+  "tagline": "Турагентство",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Море, горы или город: подберём",
+    "text": "Выберите направление, даты и сколько вас: цена посчитается сразу, заявка придёт в WhatsApp.",
+    "photo": "files/lyudmila-tury/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Туры с Людмилой: подбираем туры под ваш бюджет и сопровождаем до возвращения домой.",
+  "items": [
+    {
+      "name": "Турция, всё включено",
+      "price": 85000,
+      "desc": "7 ночей, перелёт и трансфер",
+      "photo": "files/lyudmila-tury/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абхазия у моря",
+      "price": 32000,
+      "desc": "Неделя, проживание и экскурсии",
+      "photo": "files/lyudmila-tury/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Горящий тур",
+      "price": 40000,
+      "desc": "Подберём за день под ваш бюджет",
+      "photo": "files/lyudmila-tury/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 743-14-02",
+    "whatsapp": "79817431402",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Санкт-Петербург",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club213619368.orgs.biz/",
+  "contact_lead": "em:luda.ruskom@yandex.ru"
+}

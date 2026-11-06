@@ -1,0 +1,73 @@
+{
+  "slug": "simbirsk-mebel",
+  "name": "Симбирская мебельная компания",
+  "niche": "masterskaya",
+  "city": "Ульяновск",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Кухня, сделанная под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/simbirsk-mebel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Симбирская мебельная компания: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня",
+      "price": 28000,
+      "desc": "Под потолок, фурнитура Blum",
+      "photo": "files/simbirsk-mebel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шкаф-купе",
+      "price": 19000,
+      "desc": "Зеркало или ЛДСП",
+      "photo": "files/simbirsk-mebel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гардеробная",
+      "price": 16000,
+      "desc": "Открытые системы",
+      "photo": "files/simbirsk-mebel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 15000,
+      "desc": "С банкеткой и зеркалом",
+      "photo": "files/simbirsk-mebel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 842 263-33-66",
+    "whatsapp": "78422633366",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://simbirskmebel.orgs.biz/",
+  "contact_lead": "em:opt@simbirskmebel.ru"
+}

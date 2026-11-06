@@ -1,0 +1,68 @@
+{
+  "slug": "tury-v-kareliyu",
+  "name": "Туры в Карелию",
+  "niche": "tury",
+  "city": "Санкт-Петербург",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/tury-v-kareliyu/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Туры в Карелию: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "5-ти часовая прогулка",
+      "price": 3500,
+      "desc": "🖇5-ти часовая прогулка: о. Валаам Подарите себе и своим…",
+      "photo": "files/tury-v-kareliyu/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "6-ти часовая прогулка",
+      "price": 4000,
+      "desc": "🖇6-ти часовая прогулка: о. Валаам + Ладожские шхеры…",
+      "photo": "files/tury-v-kareliyu/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуальная 2-х часовая прогулка",
+      "price": 14000,
+      "desc": "🖇Индивидуальная 2-х часовая прогулка: Ладожские Шхеры…",
+      "photo": "files/tury-v-kareliyu/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 911 700-04-89",
+    "whatsapp": "79117000489",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Санкт-Петербург",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://tour--karelia.orgs.biz/",
+  "contact_lead": "em:turkarelia@gmail.com"
+}

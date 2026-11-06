@@ -1,0 +1,130 @@
+{
+  "slug": "cookies-che",
+  "name": "Cookies.Che",
+  "niche": "кондитерская",
+  "city": "Череповец",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#3A7CA5",
+    "accent": "#F7C6D0",
+    "bg": "#F2F7FA",
+    "text": "#1A2B36"
+  },
+  "fonts": {
+    "head": "Forum",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Торты, которые сначала фотографируют, а потом съедают",
+    "text": "Начинку и надпись напишите в комментарии, я отвечу и всё согласую.",
+    "cta": "Собрать заказ",
+    "photo": "files/cookies-che/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Евгения",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Евгения, я пеку торты и десерты на заказ в Череповце. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Череповец",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Cookies с шоколадной пастой",
+      "price": 200,
+      "desc": "Классическое тесто и нежная шоколадная паста внутри.",
+      "photo": "files/cookies-che/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Cookies Банановый чизкейк",
+      "price": 200,
+      "desc": "Шоколадное печенье с нежным банановым чизкейком.",
+      "photo": "files/cookies-che/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/cookies-che/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/cookies-che/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/cookies-che/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/cookies-che/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/cookies-che/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/cookies-che/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 546-33-67",
+    "whatsapp": "79215463367",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F6DDE5",
+      "pist": "#D7EAF3",
+      "butter": "#FCEBC5"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club229433171.orgs.biz/",
+  "telegram_lead": "Kvaakva9"
+}

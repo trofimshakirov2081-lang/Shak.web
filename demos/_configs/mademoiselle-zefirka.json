@@ -1,0 +1,116 @@
+{
+  "slug": "mademoiselle-zefirka",
+  "name": "Мадмуазель Зефирка",
+  "niche": "кондитерская",
+  "city": "Санкт-Петербург",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#B23A48",
+    "accent": "#F7D6C9",
+    "bg": "#FBF6F2",
+    "text": "#3B2420"
+  },
+  "fonts": {
+    "head": "Playfair Display",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Капкейки, брауни и чизкейки с доставкой",
+    "text": "Кондитерская на заказ в Петербурге: подарочные наборы, тортики, зефир и трубочки.",
+    "cta": "Собрать заказ",
+    "photo": "files/mademoiselle-zefirka/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Мадмуазель Зефирка готовит настоящие десерты на заказ. Привезём по Петербургу, а соберём хоть в любую точку вселенной.",
+  "features": [
+    {
+      "icon": "🧁",
+      "title": "Капкейки",
+      "text": "Сладкие и даже не сладкие."
+    },
+    {
+      "icon": "🎁",
+      "title": "Подарочные наборы",
+      "text": "Красиво дарить."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Петербургу."
+    }
+  ],
+  "items": [
+    {
+      "name": "Трубочки",
+      "price": 100,
+      "desc": "Состав и цена трубочки Безе -100₽ Белковый крем -120₽…",
+      "photo": "files/mademoiselle-zefirka/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тортики",
+      "price": 1500,
+      "desc": "Торт по заявке заказчика",
+      "photo": "files/mademoiselle-zefirka/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Не сладкие капкейки",
+      "price": 180,
+      "desc": "Кекс: 1) с оливками или маслинами 2) ветчиной и сыром 3)сыр…",
+      "photo": "files/mademoiselle-zefirka/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки с ягодами",
+      "price": 180,
+      "desc": "Бисквит 1. Ванильный 2. Шоколадный 3. Красный бархат 4.…",
+      "photo": "files/mademoiselle-zefirka/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Брауни бар",
+      "price": 5000,
+      "desc": "Оригинальная подача, 6 видов брауни на ваш выбор. 3 кг…",
+      "photo": "files/mademoiselle-zefirka/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Печенье набор",
+      "price": 500,
+      "desc": "Набор печенюшек 3 вида 500 гр",
+      "photo": "files/mademoiselle-zefirka/item-6.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 151-94-81",
+    "whatsapp": "79811519481",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F2DCE0",
+      "pist": "#E9EFDF",
+      "butter": "#F9E3C4"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://madmuazelzefirka.orgs.biz/",
+  "email": "madmuazelzefirka@yandex.ru"
+}

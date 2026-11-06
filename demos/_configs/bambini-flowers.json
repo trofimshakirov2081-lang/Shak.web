@@ -1,0 +1,114 @@
+{
+  "slug": "bambini-flowers",
+  "name": "Bambini Flowers",
+  "niche": "цветы",
+  "city": "Реутов",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#6E8B5E",
+    "accent": "#F1D6D0",
+    "bg": "#F4F6F1",
+    "text": "#1F2A1C"
+  },
+  "fonts": {
+    "head": "Lora",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Букеты с доставкой по Реутову",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/bambini-flowers/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Bambini Flowers: цветы в Реутове. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Реутову к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Брызги цвета",
+      "price": 1390,
+      "desc": "Гипсофила крашеная - 5 шт. Дизайнерская упаковка - 2 шт.…",
+      "photo": "files/bambini-flowers/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Цветочная радость",
+      "price": 2450,
+      "desc": "Роза кустовая пионовидная- 5 шт. Упаковка дизайнерская…",
+      "photo": "files/bambini-flowers/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Розовый шарм",
+      "price": 2490,
+      "desc": "Тишью - 3 шт. Фоамиран - 1 шт. Роза маритим 50 см - 9 шт.…",
+      "photo": "files/bambini-flowers/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Розовый сад",
+      "price": 1590,
+      "desc": "Гипсофила - 2 шт. Хризантема кустовая - 3 шт. Коробка…",
+      "photo": "files/bambini-flowers/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Радуга в коробке",
+      "price": 2490,
+      "desc": "Шляпная коробка - 1 шт. Гипсофила крашеная - 9 шт. Губка…",
+      "photo": "files/bambini-flowers/item-5.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 996 713-22-82",
+    "whatsapp": "79967132282",
+    "address": "ул. Ленина, 4",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#E8EDE3",
+      "ok": "#6E8B5E"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club231863905.orgs.biz/",
+  "telegram_lead": "bambini_admin"
+}

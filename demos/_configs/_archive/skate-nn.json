@@ -1,0 +1,74 @@
+{
+  "slug": "skate-nn",
+  "name": "SKATE NN",
+  "niche": "sport",
+  "city": "Нижний Новгород",
+  "custom": "start",
+  "tagline": "Фигурное катание",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "На лёд с первого занятия",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/skate-nn/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "SKATE NN: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Дети с 3 лет",
+      "price": 5000,
+      "desc": "Первые шаги на льду",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Начальная подготовка",
+      "price": 6000,
+      "desc": "6-10 лет",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Взрослые с нуля",
+      "price": 5500,
+      "desc": "Вечерние группы",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуально",
+      "price": 2500,
+      "desc": "Занятие с тренером",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 920 296-99-20",
+    "whatsapp": "79202969920",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://skatenn52.orgs.biz/",
+  "contact_lead": "em:skate.nn@mail.ru"
+}

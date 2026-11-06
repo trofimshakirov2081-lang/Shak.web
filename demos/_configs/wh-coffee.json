@@ -1,0 +1,109 @@
+{
+  "slug": "wh-coffee",
+  "name": "Кофейня WH",
+  "niche": "кофейня",
+  "city": "Каспийск",
+  "tagline": "Coffee bar в сердце шопинга",
+  "logo": "files/wh-coffee/logo.png",
+  "colors": [
+    "#5A2A1C",
+    "#A8612F",
+    "#F3EDE2",
+    "#2B1710"
+  ],
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Холодный кофе, ради которого стоит зайти",
+    "text": "Айс латте, эспрессо тоник, бамбл, смузи и свежие фреши. Закажите заранее и заберите без очереди между покупками.",
+    "cta": "Смотреть меню",
+    "photo": "files/wh-coffee/hero.jpg"
+  },
+  "about": "Кофе-бар на улице Ленина, 39а, в самом центре шопинга Каспийска. Варим классику и авторские напитки, делаем смузи, фреши и молочные коктейли. Заходите на пару минут или садитесь отдохнуть с чашкой рафа.",
+  "features": [
+    {
+      "icon": "🧊",
+      "title": "Холодный кофе",
+      "text": "Айс латте, тоник и бамбл на любой вкус."
+    },
+    {
+      "icon": "🍓",
+      "title": "Смузи и фреши",
+      "text": "Готовим из фруктов и ягод."
+    },
+    {
+      "icon": "🛍️",
+      "title": "Рядом с магазинами",
+      "text": "Закажите заранее и заберите по пути."
+    }
+  ],
+  "items": [
+    {
+      "name": "Айс латте, 350 мл",
+      "price": 280,
+      "desc": "Эспрессо, молоко и много льда",
+      "emoji": "🧊",
+      "tag": "Хит",
+      "photo": "files/wh-coffee/ais-latte.jpg"
+    },
+    {
+      "name": "Эспрессо тоник, 350 мл",
+      "price": 350,
+      "desc": "Бодрит и освежает в жару",
+      "emoji": "🥤",
+      "photo": "files/wh-coffee/espresso-tonik.jpg"
+    },
+    {
+      "name": "Бамбл, 350 мл",
+      "price": 350,
+      "desc": "Эспрессо на апельсиновом соке",
+      "emoji": "🍊",
+      "photo": "files/wh-coffee/bambl.jpg"
+    },
+    {
+      "name": "Айс Фьюри, 350 мл",
+      "price": 400,
+      "desc": "Густой холодный кофейный напиток",
+      "emoji": "☕",
+      "tag": "Новинка",
+      "photo": "files/wh-coffee/ais-fyuri.jpg"
+    },
+    {
+      "name": "Смузи клубника-маракуйя",
+      "price": 430,
+      "desc": "350 мл, яркий и кисло-сладкий",
+      "emoji": "🍓",
+      "photo": "files/wh-coffee/smuzi-klubnika.jpg"
+    },
+    {
+      "name": "Смузи Berry, 350 мл",
+      "price": 400,
+      "desc": "Насыщенный ягодный микс",
+      "emoji": "🫐",
+      "photo": "files/wh-coffee/smuzi-berry.jpg"
+    },
+    {
+      "name": "Банановый коктейль",
+      "price": 300,
+      "desc": "350 мл, молочный и нежный",
+      "emoji": "🍌",
+      "photo": "files/wh-coffee/banan.jpg"
+    },
+    {
+      "name": "Фреш апельсин, 250 мл",
+      "price": 300,
+      "desc": "Свежевыжатый, без добавок",
+      "emoji": "🍊",
+      "photo": "files/wh-coffee/fresh-apelsin.jpg"
+    }
+  ],
+  "contacts": {
+    "phone": "",
+    "hours": "",
+    "instagram": "wh_coffee_",
+    "address": "ул. Ленина, 39а"
+  },
+  "credits": "Фото: Кофейня WH"
+}

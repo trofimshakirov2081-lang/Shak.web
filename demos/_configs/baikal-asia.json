@@ -1,0 +1,68 @@
+{
+  "slug": "baikal-asia",
+  "name": "Байкал Азия Туристик",
+  "niche": "tury",
+  "city": "Иркутск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/baikal-asia/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Байкал Азия Туристик: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Рыбалка на Малом море",
+      "price": 36000,
+      "desc": "2 дня, лодка и уха",
+      "photo": "files/baikal-asia/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Иркутские окна",
+      "price": 1800,
+      "desc": "Городской тур, 3 часа",
+      "photo": "files/baikal-asia/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Ольхон",
+      "price": 28000,
+      "desc": "3 дня, мыс Хобой",
+      "photo": "files/baikal-asia/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 902 577-26-18",
+    "whatsapp": "79025772618",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Иркутск",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://baikalvariant.orgs.biz/",
+  "contact_lead": "em:abnata@inbox.ru"
+}

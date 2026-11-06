@@ -1,0 +1,74 @@
+{
+  "slug": "evers-volgograd",
+  "name": "Эверс",
+  "niche": "sport",
+  "city": "Волгоград",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/evers-volgograd/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Эверс: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Младшая группа, 3-4 года",
+      "price": 2400,
+      "desc": "⏱ Длительность занятия 50 минут 2 раза в неделю ✅ Занятия…",
+      "photo": "files/evers-volgograd/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Подготовительная, 5-7 лет",
+      "price": 3600,
+      "desc": "⏱ Длительность занятия 50 минут. 3 раза в неделю ✅…",
+      "photo": "files/evers-volgograd/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Основная группа, 7-12 лет",
+      "price": 3600,
+      "desc": "⏱ Длительность занятия 50 минут. 3 раза в неделю ✅…",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Группа мальчиков, 4-12 лет",
+      "price": 2000,
+      "desc": "⏱ Длительность занятия 60 минут 2 раза в неделю ✅ Занятия…",
+      "photo": "files/evers-volgograd/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 844 257-57-59",
+    "whatsapp": "78442575759",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://eversschool.orgs.biz/",
+  "contact_lead": "em:eversschool34@yandex.ru"
+}

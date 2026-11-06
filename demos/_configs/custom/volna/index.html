@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru" data-fonts="Lunasima|Akt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+  <title>Сайт</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&family=Akt:wght@400;700&display=swap">
+  <style>
+    /* «Волна»: прокат. Фото обрезано живой волной, снаряжение висит бирками, цены переключаются час/день */
+    :root { --bg: #F4E9D8; --text: #0B2234; --main: #0A3D62; --accent: #FF6B35; --lagoon: #2EC4B6; --foam: #FFFAF2; --c-radius: 14px; --c-surface: var(--foam); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 800; margin: 0; letter-spacing: -.03em; line-height: 1; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 66%, transparent); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 -76px; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--foam) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 800 18px/1 var(--font-head); text-decoration: none; letter-spacing: -.02em; }
+    .cta { background: var(--accent); color: #fff; border-radius: 999px; padding: 10px 18px; font-weight: 700; font-size: 15px; text-decoration: none; }
+
+    .hero { position: relative; height: 84svh; min-height: 520px; color: #fff; background: var(--main); overflow: hidden; }
+    .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10, 61, 98, .5), rgba(10, 61, 98, 0) 35%, rgba(10, 61, 98, .25) 65%, rgba(10, 61, 98, .7)); }
+    .hero > .wrap { position: absolute; left: 0; right: 0; bottom: 92px; z-index: 2; }
+    .hero h1 { font-size: clamp(42px, 11vw, 110px); max-width: 10ch; }
+    .hero p { max-width: 38ch; margin: 14px 0 0; font-size: 17px; }
+    /* Волна внизу фото медленно бежит вбок: две копии подряд, сдвиг на ширину одной */
+    .wave { position: absolute; left: 0; bottom: -1px; width: 200%; height: 70px; z-index: 3; display: flex; animation: drift 14s linear infinite; }
+    .wave svg { width: 50%; height: 100%; flex: none; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+
+    section { padding: 56px 0 0; }
+    h2 { font-size: clamp(32px, 7vw, 58px); }
+    .bar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+    .seg { display: inline-flex; background: var(--foam); border-radius: 999px; padding: 4px; }
+    .seg button { border: 0; background: none; border-radius: 999px; padding: 9px 18px; font-weight: 700; cursor: pointer; }
+    .seg button.on { background: var(--main); color: #fff; }
+
+    /* Бирки: дырочка и шнурок сверху, лёгкий наклон через одну */
+    .tags { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 12px; padding-top: 14px; }
+    .tag { position: relative; background: var(--foam); border-radius: 16px 16px 18px 18px; padding: 26px 12px 12px; transform: rotate(var(--r, -1.2deg)); transition: transform .3s var(--ease); display: flex; flex-direction: column; }
+    .tag:nth-child(even) { --r: 1.4deg; }
+    .tag::before { content: ""; position: absolute; top: 9px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .2); }
+    .tag::after { content: ""; position: absolute; top: -16px; left: 50%; width: 2px; height: 30px; background: var(--main); transform: rotate(var(--r, -1.2deg)) translateX(-50%); transform-origin: bottom; opacity: .5; }
+    .tag.has { transform: rotate(0) translateY(-4px); box-shadow: 0 0 0 2px var(--accent); }
+    .tag .ph { aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: color-mix(in srgb, var(--lagoon) 30%, var(--foam)); margin-bottom: 10px; }
+    .tag .ph img, .tag .ph .noimg { width: 100%; height: 100%; object-fit: cover; display: grid; place-items: center; font-size: 52px; }
+    .tag h3 { font: 700 16px/1.2 var(--font-body); letter-spacing: 0; }
+    .tag p { margin: 4px 0 8px; font-size: 13px; }
+    .tag .row { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; }
+    .tag .price { font: 800 18px var(--font-head); letter-spacing: -.02em; }
+    .tag .price small { font: 500 12px var(--font-body); color: color-mix(in srgb, var(--text) 60%, transparent); }
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qty button { width: 32px; height: 32px; border-radius: 50%; border: 0; background: var(--main); color: #fff; font-size: 18px; cursor: pointer; }
+    .qty button[data-q="-1"] { background: color-mix(in srgb, var(--main) 12%, transparent); color: var(--main); }
+    .qty b { min-width: 1ch; text-align: center; }
+
+    .order { background: var(--main); color: #fff; border-radius: 24px; padding: 22px 18px; margin-top: 30px; display: grid; gap: 14px; }
+    .order h3 { font-size: 26px; }
+    .order .line { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; opacity: .9; }
+    .order .sum { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255, 255, 255, .2); padding-top: 12px; }
+    .order .sum b { font: 800 30px var(--font-head); }
+    .order > *, .order .fields > * { min-width: 0; }
+    .order .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .order input { font: 16px var(--font-body); padding: 13px; border-radius: 12px; border: 0; width: 100%; min-height: 48px; color: var(--text); background: var(--foam); }
+    .order input.wide { grid-column: 1 / -1; }
+    .order .send { border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: 700 17px var(--font-body); padding: 16px; cursor: pointer; }
+    .empty { opacity: .75; font-size: 15px; margin: 0; }
+
+    .how { display: grid; gap: 12px; counter-reset: s; }
+    .how div { background: var(--foam); border-radius: 18px; padding: 18px; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; }
+    .how div::before { counter-increment: s; content: counter(s); grid-row: span 2; width: 40px; height: 40px; border-radius: 50%; background: var(--lagoon); color: var(--main); display: grid; place-items: center; font: 800 18px var(--font-head); }
+    .how strong { font-size: 18px; }
+    .about { font: 600 clamp(22px, 5vw, 34px)/1.25 var(--font-head); letter-spacing: -.02em; margin: 0; max-width: 28ch; }
+
+    .find { padding-bottom: 36px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 55%, transparent); padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .tags { grid-template-columns: repeat(4, 1fr); gap: 34px 22px; }
+      .how { grid-template-columns: repeat(3, 1fr); }
+      .order { grid-template-columns: 1fr 1fr; align-items: start; padding: 28px; column-gap: 32px; }
+      .order > h3, .order .send { grid-column: 1 / -1; }
+    }
+    @media (prefers-reduced-motion: reduce) { .wave { animation: none; } }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var dayK = Number(X.dayFactor || 4);
+    var waveSvg = '<svg viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34 C 75 6 150 6 225 34 S 375 62 450 34 S 600 6 600 34 V70 H0Z" fill="var(--bg)"/></svg>';
+
+    var tags = D.items.map(function (i) {
+      return '<article class="tag" data-tag="' + e(i.id) + '"><div class="ph">' + Core.pic(i) + '</div><h3>' + e(i.name) + '</h3><p class="mute">' + e(i.desc || "") + '</p>' +
+        '<div class="row"><span class="price" data-price="' + e(i.id) + '"></span><span class="qty"><button data-q="-1" data-id="' + e(i.id) + '" aria-label="Убрать">−</button><b data-n="' + e(i.id) + '">0</b><button data-q="1" data-id="' + e(i.id) + '" aria-label="Добавить">+</button></span></div></article>';
+    }).join("");
+    var steps = X.steps || [["Бронируете здесь", "Выберите снаряжение и время, мы подтвердим."], ["Приезжаете к старту", "Всё готово и ждёт у воды."], ["Инструктаж и вперёд", "Пять минут, и вы на воде."]];
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+
+    Core.mount(
+            '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#gear">' + e(X.bookBtn || "Забронировать") + '</a></div></header>' + '<main id="top"><section class="hero" style="padding:0">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') +
+        '<div class="wrap"><p style="margin:0 0 10px;opacity:.9">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p><h1>' + e(X.heroTitle || D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p></div>' +
+        '<div class="wave">' + waveSvg + waveSvg + '</div></section>' +
+      '<section id="gear" style="padding-top:28px"><div class="wrap"><div class="bar"><div><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:10px 0 0">' + e(D.sections.catalogText) + '</p></div>' +
+        '<div class="seg" role="group" aria-label="Срок"><button class="on" data-mode="h">' + e(X.hourLabel || "Час") + '</button><button data-mode="d">' + e(X.dayLabel || "Весь день") + '</button></div></div>' +
+        '<div class="tags">' + tags + '</div>' +
+        '<form class="order" onsubmit="return false"><h3>' + e(X.orderTitle || "Ваша бронь") + '</h3><div data-lines><p class="empty">Нажмите «+» на бирке, чтобы добавить.</p></div>' +
+        '<div><div class="fields"><input type="date" data-date aria-label="Дата"><input type="time" data-time value="11:00" step="1800" aria-label="Время"><input class="wide" data-who placeholder="Имя и телефон" autocomplete="name"></div>' +
+        '<div class="sum" style="margin-top:12px"><span data-mode-text></span><b data-sum>0 ' + e(D.currency || "") + '</b></div></div>' +
+        '<button class="send" data-send>' + e(X.sendLabel || "Забронировать в WhatsApp") + '</button></form></div></section>' +
+      '<section><div class="wrap"><h2 style="margin-bottom:20px">' + e(X.howTitle || "Как это работает") + '</h2><div class="how">' + steps.map(function (s) { return '<div><strong>' + e(s[0]) + '</strong><span class="mute">' + e(s[1]) + '</span></div>'; }).join("") + '</div></div></section>' +
+      '<section><div class="wrap"><p class="about">' + e(D.sections.aboutText || "") + '</p></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2 style="margin-bottom:14px">' + e(X.findTitle || "Где старт") + '</h2><div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var mode = "h", pick = {}, $ = function (s) { return document.querySelector(s); };
+    var dt = new Date(); dt.setDate(dt.getDate() + 1);
+    $("[data-date]").value = dt.toISOString().slice(0, 10);
+    function price(i) { return mode === "h" ? i.price : Math.round(i.price * dayK / 10) * 10; }
+    function render() {
+      D.items.forEach(function (i) { var el = document.querySelector('[data-price="' + i.id + '"]'); if (el) el.innerHTML = Core.money(price(i)) + ' <small>' + (mode === "h" ? "/час" : "/день") + '</small>'; });
+      var lines = [], total = 0;
+      for (var id in pick) { var i = Core.item(id); if (!i || !pick[id]) continue; total += price(i) * pick[id]; lines.push('<div class="line"><span>' + e(i.name) + (pick[id] > 1 ? " × " + pick[id] : "") + '</span><span>' + Core.money(price(i) * pick[id]) + '</span></div>'); }
+      $("[data-lines]").innerHTML = lines.join("") || '<p class="empty">Нажмите «+» на бирке, чтобы добавить.</p>';
+      $("[data-sum]").textContent = Core.money(total);
+      $("[data-mode-text]").textContent = mode === "h" ? "за час" : "за весь день";
+      [].forEach.call(document.querySelectorAll("[data-tag]"), function (t) { t.classList.toggle("has", !!pick[t.dataset.tag]); });
+      return total;
+    }
+    document.addEventListener("click", function (ev) {
+      var m = ev.target.closest("[data-mode]");
+      if (m) { mode = m.dataset.mode; [].forEach.call(document.querySelectorAll("[data-mode]"), function (b) { b.classList.toggle("on", b === m); }); render(); return; }
+      var q = ev.target.closest("[data-q]");
+      if (q) { var id = q.dataset.id; pick[id] = Math.max(0, (pick[id] || 0) + Number(q.dataset.q)); document.querySelector('[data-n="' + id + '"]').textContent = pick[id]; render(); return; }
+      if (ev.target.closest("[data-send]")) {
+        var total = render(); if (!total) { Core.toast("Добавьте снаряжение"); return; }
+        var list = []; for (var id2 in pick) if (pick[id2]) list.push("• " + Core.item(id2).name + (pick[id2] > 1 ? " × " + pick[id2] : ""));
+        var d = $("[data-date]").value.split("-"), who = $("[data-who]").value.trim();
+        window.open(Core.wa("Здравствуйте! Хочу взять " + (mode === "h" ? "на время" : "на весь день") + ":\n" + list.join("\n") + "\n" + (d[2] ? d[2] + "." + d[1] + " " : "") + "старт в " + $("[data-time]").value + "\nПо сайту выходит " + Core.money(total) + (mode === "h" ? " за час" : "") + (who ? "\n" + who : "")), "_blank");
+      }
+    });
+    render();
+  })();
+  </script>
+</body>
+</html>

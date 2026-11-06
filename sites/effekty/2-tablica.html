@@ -1,0 +1,46 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Записи заполняются сами</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#f4f4f2;color:#16181d;min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:80px 16px 60px}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin-bottom:8px}
+.sub{color:#6f737e;margin-bottom:24px}
+.tw{overflow-x:auto}.box{position:relative;background:#fff;border-radius:22px;padding:18px 18px 120px;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{color:#a0a4ad;font-weight:600;text-align:left;padding:8px 6px;border-bottom:1px solid #eee;font-size:12px}
+td{padding:9px 6px;border-bottom:1px solid #f0f0f0;height:38px}
+td .sk{display:block;height:9px;border-radius:5px;background:#eee}
+td.n{color:#c2c5cc;width:26px;font-size:12px}
+.new td{animation:pop .45s ease both}
+@media(max-width:520px){td,th{font-size:12px;padding:7px 4px}td:nth-child(4),th:nth-child(4),td.n,th:first-child{display:none}}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+.tag{font-size:12px;padding:3px 8px;border-radius:99px;font-weight:600}
+.prompt{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:min(92%,460px);background:#fff;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.14);padding:14px 14px 12px}
+.prompt p{font-size:15px;min-height:46px}
+.prompt .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.plus{width:34px;height:34px;border-radius:50%;border:1px solid #e3e3e3;display:grid;place-items:center;color:#777}
+button.go{background:#232323;color:#fff;border:0;border-radius:99px;padding:10px 18px;font:600 15px 'Ysabeau Office',sans-serif;cursor:pointer}
+.caret{display:inline-block;width:2px;height:1em;background:#16181d;vertical-align:-2px;animation:bl 1s steps(1) infinite}@keyframes bl{50%{opacity:0}}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a>
+<div class="wrap">
+  <h1>Записи сами падают в таблицу</h1>
+  <p class="sub">Барбершоп «Брат»: клиенты записываются на сайте, а вы видите всё в одной таблице. Попросите показать нужное своими словами.</p>
+  <div class="box">
+    <div class="tw"><table><thead><tr><th></th><th>Клиент</th><th>Услуга</th><th>Мастер</th><th>Время</th><th>Сумма</th></tr></thead><tbody id="tb"></tbody></table></div>
+    <div class="prompt"><p id="pt"></p><div class="row"><span class="plus">+</span><button class="go" id="go">Показать</button></div></div>
+  </div>
+</div>
+<script>
+const Q='Покажи все записи на субботу: клиент, услуга, мастер, время и сумма.';
+const ROWS=[['Илья К.','Стрижка + борода','Тимур','10:00','2 200 ₽','#e7f5ec','#1f9d55'],['Артём','Фейд','Руслан','11:00','1 600 ₽','#eef2ff','#3b5bdb'],['Максим Л.','Отец + сын','Тимур','12:30','2 800 ₽','#fff4e6','#e8590c'],['Даниил','Борода','Слава','13:00','900 ₽','#f3f0ff','#7048e8'],['Сергей','Стрижка','Руслан','14:00','1 400 ₽','#eef2ff','#3b5bdb'],['Никита В.','Камуфляж седины','Слава','15:30','1 800 ₽','#f3f0ff','#7048e8'],['Олег','Стрижка + борода','Тимур','16:00','2 200 ₽','#e7f5ec','#1f9d55'],['Глеб','Королевское бритьё','Слава','17:30','2 500 ₽','#f3f0ff','#7048e8']];
+const tb=document.getElementById('tb'),pt=document.getElementById('pt');
+function empty(){tb.innerHTML=Array.from({length:10},(_,i)=>`<tr><td class="n">${i+1}</td>${[0,1,2,3,4].map(()=>`<td><span class="sk" style="width:${50+Math.random()*40}%"></span></td>`).join('')}</tr>`).join('')}
+let typing;
+function type(cb){let i=0;clearInterval(typing);typing=setInterval(()=>{pt.innerHTML=Q.slice(0,++i)+'<span class="caret"></span>';if(i>=Q.length){clearInterval(typing);setTimeout(cb,500)}},28)}
+function fill(){const trs=tb.children;ROWS.forEach((r,i)=>setTimeout(()=>{trs[i].className='new';trs[i].innerHTML=`<td class="n">${i+1}</td><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><span class="tag" style="background:${r[5]};color:${r[6]}">${r[4]}</span></td>`},i*180))}
+function run(){empty();pt.textContent='';type(fill)}
+document.getElementById('go').onclick=run;run();
+</script></body></html>

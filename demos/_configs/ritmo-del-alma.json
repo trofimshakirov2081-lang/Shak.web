@@ -1,0 +1,74 @@
+{
+  "slug": "ritmo-del-alma",
+  "name": "RITMO DEL ALMA",
+  "niche": "sport",
+  "city": "Челябинск",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/ritmo-del-alma/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "RITMO DEL ALMA: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пробное занятие",
+      "price": 700,
+      "desc": "Пробное занятие",
+      "photo": "files/ritmo-del-alma/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абонемент на 4 занятия",
+      "price": 2200,
+      "desc": "Детально разберем и отработаем базовые элементы, научимся…",
+      "photo": "files/ritmo-del-alma/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуальное занятие",
+      "price": 2000,
+      "desc": "Индивидуальное обучение танцам — это лучший способ быстро…",
+      "photo": "files/ritmo-del-alma/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Постановка свадебного танца",
+      "price": 8000,
+      "desc": "Постановка свадебного танца от профессионального…",
+      "photo": "files/ritmo-del-alma/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 951 110-55-43",
+    "whatsapp": "79511105543",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://ritmodelalma.orgs.biz/",
+  "contact_lead": "em:olesika271@ya.ru"
+}

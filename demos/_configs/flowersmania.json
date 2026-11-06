@@ -1,0 +1,135 @@
+{
+  "slug": "flowersmania",
+  "name": "Flowersmania",
+  "niche": "цветы",
+  "city": "Санкт-Петербург",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#C8241B",
+    "accent": "#EF7A63",
+    "bg": "#F9E6E1",
+    "text": "#2B1513"
+  },
+  "fonts": {
+    "head": "Geologica",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Розы и букеты с доставкой по Петербургу",
+    "text": "От 101 розы до небольших букетов. Доставка по Петербургу и области.",
+    "cta": "Выбрать букет",
+    "photo": "files/flowersmania/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Flowersmania доставляет цветы, букеты и сувениры по Санкт-Петербургу и Ленинградской области.",
+  "features": [
+    {
+      "icon": "🌹",
+      "title": "101 роза",
+      "text": "И другие большие букеты."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "Город и область."
+    },
+    {
+      "icon": "🎁",
+      "title": "Сувениры",
+      "text": "Дополните подарок."
+    }
+  ],
+  "items": [
+    {
+      "name": "101 роза красная",
+      "price": 12990,
+      "desc": "Букет из 101 красной розы. Доставка бесплатная в пределах…",
+      "photo": "files/flowersmania/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/flowersmania/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/flowersmania/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/flowersmania/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/flowersmania/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/flowersmania/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/flowersmania/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/flowersmania/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 947-60-80",
+    "whatsapp": "79219476080",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#F3E9E4",
+      "ok": "#2E5A3A"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://flowersmaniaspb.orgs.biz/",
+  "email": "fm.flowersmania@mail.ru"
+}

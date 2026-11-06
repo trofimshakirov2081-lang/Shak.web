@@ -1,0 +1,127 @@
+{
+  "slug": "your-glass-and-roses",
+  "name": "Your Glass and Roses",
+  "niche": "цветы",
+  "city": "Москва",
+  "custom": "luxe",
+  "tagline": "Цветочная студия",
+  "colors": {
+    "main": "#D9B48F",
+    "accent": "#5A2228",
+    "bg": "#2A1215",
+    "text": "#F1E7DA"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Розы в колбе в 10 цветах",
+    "text": "Vip-розы в колбе: фуксия, тиффани, голубая, чёрная. Бесплатная доставка, оплата после получения.",
+    "cta": "Выбрать букет",
+    "photo": "files/your-glass-and-roses/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Your Glass and Roses: эксклюзивные цветы в Москве. Розы в колбе стоят годами и не требуют ухода.",
+  "features": [
+    {
+      "icon": "🌹",
+      "title": "10 оттенков",
+      "text": "От тиффани до чёрной."
+    },
+    {
+      "icon": "🚚",
+      "title": "Бесплатная доставка",
+      "text": "По Москве."
+    },
+    {
+      "icon": "💳",
+      "title": "Оплата после получения",
+      "text": "Без риска."
+    }
+  ],
+  "items": [
+    {
+      "name": "Роза в колбе Vip Фуксия",
+      "price": 3480,
+      "desc": "Роза в колбе фуксия размера Vip Размер колбы: высота 27 см,…",
+      "photo": "files/your-glass-and-roses/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Голубая Роза в колбе Vip",
+      "price": 3480,
+      "desc": "Голубая роза в колбе размера Vip Размер колбы: высота 27…",
+      "photo": "files/your-glass-and-roses/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Синяя Роза в колбе Vip",
+      "price": 3480,
+      "desc": "Синяя роза в колбе размера Vip Размер колбы: высота 27 см,…",
+      "photo": "files/your-glass-and-roses/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Белая Роза в колбе Vip",
+      "price": 3480,
+      "desc": "Белая роза в колбе размера Vip Размер колбы: высота 27 см,…",
+      "photo": "files/your-glass-and-roses/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Красная Роза в колбе Vip",
+      "price": 3480,
+      "desc": "Красная роза в колбе размера Vip Размер колбы: высота 27…",
+      "photo": "files/your-glass-and-roses/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Белая роза в Колбе Премиум",
+      "price": 2980,
+      "desc": "🌹Белая Роза в Колбе Размер колбы: Диаметр 15 см, высота 27…",
+      "photo": "files/your-glass-and-roses/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Лазурная КОРОЛЕВСКАЯ роза в колбе",
+      "price": 3980,
+      "desc": "🌹Лазурная Роза в Колбе Размер колбы: Диаметр 20 см, высота…",
+      "photo": "files/your-glass-and-roses/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Мишка Розовый 40 см",
+      "price": 2490,
+      "desc": "Розовый мишка из розочек легко заменяет собой стандартный…",
+      "photo": "files/your-glass-and-roses/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 916 116-67-20",
+    "whatsapp": "79161166720",
+    "address": "ул. Героев Панфиловцев, 1/2",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Роза под стеклом на годы",
+    "vars": {
+      "deep": "#1F0C0F",
+      "c-surface": "#2A1215"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://buyyourflower.orgs.biz/",
+  "email": "yourglassandroses@gmail.com"
+}

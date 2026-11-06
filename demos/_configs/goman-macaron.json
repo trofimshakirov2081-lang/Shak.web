@@ -1,0 +1,112 @@
+{
+  "slug": "goman-macaron",
+  "name": "Goman Dream Desserts",
+  "niche": "кондитерская",
+  "city": "Липецк",
+  "custom": "yulya-konditer",
+  "tagline": "Macaron в Липецке",
+  "colors": {
+    "main": "#C0567B",
+    "accent": "#FFD9E6",
+    "bg": "#FDF6F8",
+    "text": "#2C1A22"
+  },
+  "fonts": {
+    "head": "Unbounded",
+    "body": "Inter"
+  },
+  "hero": {
+    "title": "Macaron, в который влюбляешься с первого укуса",
+    "text": "Торты-кубы и сеты из macaron в Липецке. Красиво дарить и невозможно не съесть.",
+    "cta": "Собрать заказ",
+    "photo": "files/goman-macaron/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Торты-кубы и сеты",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Алина",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Я Алина и делаю премиальные macaron. Здесь эстетика десерта, наличие и специальные предложения к праздникам.",
+  "features": [
+    {
+      "icon": "💝",
+      "title": "Красиво дарить",
+      "text": "Торты-кубы и сеты в коробках."
+    },
+    {
+      "icon": "✨",
+      "title": "Премиальный вкус",
+      "text": "Нежная текстура macaron."
+    },
+    {
+      "icon": "📍",
+      "title": "Липецк",
+      "text": "Ул. Неделина, 12."
+    }
+  ],
+  "items": [
+    {
+      "name": "Торт-куб из 27 macaron",
+      "price": 5200,
+      "desc": "Большой куб для праздника",
+      "photo": "files/goman-macaron/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт-куб из 12 macaron",
+      "price": 2400,
+      "desc": "Средний куб",
+      "photo": "files/goman-macaron/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт-куб из 8 macaron",
+      "price": 1600,
+      "desc": "Маленький куб",
+      "photo": "files/goman-macaron/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сет из 15 macaron",
+      "price": 2700,
+      "desc": "Ассорти вкусов",
+      "photo": "files/goman-macaron/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сет из 10 macaron",
+      "price": 1800,
+      "desc": "Ассорти вкусов",
+      "photo": "files/goman-macaron/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сет из 5 macaron",
+      "price": 900,
+      "desc": "Небольшой комплимент",
+      "photo": "files/goman-macaron/item-6.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 961 600-10-09",
+    "whatsapp": "79616001009",
+    "address": "ул. Неделина, 12",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Macaron от",
+    "vars": {
+      "lilac": "#EADFF6",
+      "pist": "#DDF0E3",
+      "butter": "#FFEFCF"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://goman-dreamdesserts.orgs.biz/"
+}

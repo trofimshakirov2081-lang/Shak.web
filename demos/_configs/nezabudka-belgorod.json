@@ -1,0 +1,135 @@
+{
+  "slug": "nezabudka-belgorod",
+  "name": "Незабудка",
+  "niche": "цветы",
+  "city": "Белгород",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#6E8B5E",
+    "accent": "#F1D6D0",
+    "bg": "#F4F6F1",
+    "text": "#1F2A1C"
+  },
+  "fonts": {
+    "head": "Lora",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Букеты с доставкой по Белгороду",
+    "text": "Соберём букет под ваш бюджет и привезём вовремя.",
+    "cta": "Выбрать букет",
+    "photo": "files/nezabudka-belgorod/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Незабудка: цветы в Белгороде. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Белгороду к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Расцветающий рай",
+      "price": 1600,
+      "desc": "Рай цветов",
+      "photo": "files/nezabudka-belgorod/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Нежное свидание ( аволанж 5шт и 7 белоснеж",
+      "price": 1900,
+      "desc": "Сделано под заказ",
+      "photo": "files/nezabudka-belgorod/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Летняя нежность (7 розовых альстромерий+ 3",
+      "price": 1500,
+      "desc": "Сочетание + нежность",
+      "photo": "files/nezabudka-belgorod/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Свадебный букет из бордовых пионов фисташк",
+      "price": 6800,
+      "desc": "Бордовое сочетание",
+      "photo": "files/nezabudka-belgorod/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция",
+      "price": 1350,
+      "desc": "Разнообразие цвета",
+      "photo": "files/nezabudka-belgorod/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Летнее цветение",
+      "price": 800,
+      "desc": "Необычно и просто",
+      "photo": "files/nezabudka-belgorod/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2300,
+      "desc": "Классический стиль",
+      "photo": "files/nezabudka-belgorod/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Альстромерия",
+      "price": 1400,
+      "desc": "Розовый букетик",
+      "photo": "files/nezabudka-belgorod/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 910 369-82-10",
+    "whatsapp": "79103698210",
+    "address": "бул. Юности, 35б",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#E8EDE3",
+      "ok": "#6E8B5E"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club231683628.orgs.biz/",
+  "vk_lead": "https://vk.me/club231683628"
+}
