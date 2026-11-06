@@ -91,6 +91,18 @@
   .fxc span { display: block; color: var(--mut); font-size: 14px; line-height: 1.45; margin-top: 2px; }
   .fxall { display: inline-block; margin-top: 22px; padding: 12px 20px; border-radius: 99px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; }
   .usual { border-top: 1px solid var(--line); margin-top: 10px; }
+
+  .fxg { display: grid; }
+  .fxw .phone { position: relative; cursor: pointer; }
+  .play { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(22,24,29,.85); color: #fff; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 99px; pointer-events: none; }
+  .lb { position: fixed; inset: 0; z-index: 100; background: rgba(12,13,16,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 14px; }
+  .lb.on { display: flex; }
+  .lb .fr { position: relative; width: min(420px, 100%); height: min(860px, 100%); background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: lbin .35s cubic-bezier(.2,.9,.2,1); }
+  .lb.wide .fr { width: min(1180px, 100%); }
+  .lb iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .lb .x { position: absolute; top: 10px; right: 10px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #16181D; color: #fff; font-size: 20px; cursor: pointer; }
+  .lb .full { position: absolute; top: 10px; right: 58px; z-index: 2; height: 40px; padding: 0 14px; border-radius: 99px; background: #fff; color: #16181D; font-size: 13px; font-weight: 700; display: flex; align-items: center; text-decoration: none; box-shadow: 0 0 0 1px #ddd; }
+  @keyframes lbin { from { transform: translateY(24px) scale(.97); opacity: 0; } }
 </style>
 </head>
 <body>
@@ -109,7 +121,7 @@
   <section class="wrap fx" id="effekty">
     <h2>Современные эффекты</h2>
     <p>Приёмы лучших сайтов мира, собранные под малый бизнес. Откройте и потрогайте: любой из них встрою в ваш сайт, админка останется.</p>
-    <div class="fxg" id="fxg"></div>
+    <div class="row fxg" id="fxg"></div>
     <a class="fxall" href="../sites/effekty/">Все эффекты</a>
   </section>
   <div class="wrap usual" id="obychnye">
@@ -134,6 +146,7 @@
   </div>
 </div></section>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Сайт в окне"><div class="fr"><button class="x" id="lbx" aria-label="Закрыть">✕</button><a class="full" id="lbf" target="_blank" rel="noopener">На весь экран</a><iframe id="lbi" title="Сайт" loading="lazy"></iframe></div></div>
 <script src="../sites/effekty/list.js"></script>
 <script>
 var STYLES = [
@@ -178,7 +191,7 @@ var STYLES = [
 ];
 function e(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 function dots(sw) { return "<i>" + sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</i>"; }
-document.getElementById("fxg").innerHTML = EFFEKTY.map(function (f) { return '<a class="fxc" href="../sites/effekty/' + f[0] + '.html"><div class="im"><img loading="lazy" src="../sites/effekty/img/' + f[0] + '.jpg" alt="' + e(f[1]) + '"></div><b>' + e(f[1]) + '</b><small>' + e(f[2]) + '</small><span>' + e(f[3]) + '</span></a>'; }).join("");
+document.getElementById("fxg").innerHTML = EFFEKTY.map(function (f) { var u = "../sites/effekty/" + f[0] + ".html"; return '<article class="work fxw"><div class="phone" data-live="' + u + '"><video muted loop playsinline preload="none" poster="../sites/effekty/img/' + f[0] + '.jpg" aria-label="Видео эффекта ' + e(f[1]) + '"><source src="../sites/effekty/v/' + f[0] + '.mp4" type="video/mp4"></video><span class="play">Потрогать</span></div><h3>' + e(f[1]) + '</h3><p class="niche">' + e(f[2]) + '</p><p class="live">' + e(f[3]) + '</p><a class="open" href="' + u + '">Открыть здесь</a></article>'; }).join("");
 document.getElementById("nav").innerHTML = '<a href="#effekty">Эффекты</a><a href="#obychnye">Обычные</a>';
 document.getElementById("jump").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + dots(s.sw) + e(s.name) + "</a>"; }).join("");
 document.getElementById("styles").innerHTML = STYLES.map(function (s) {
@@ -202,6 +215,19 @@ var io = new IntersectionObserver(function (list) {
   });
 }, { threshold: .35 });
 document.querySelectorAll("video").forEach(function (v) { io.observe(v); if (reduce) v.controls = true; });
+
+// Сайты открываются прямо здесь, в окне поверх страницы
+var lb = document.getElementById("lb"), lbi = document.getElementById("lbi");
+function openLb(u, wide) { lbi.src = u; document.getElementById("lbf").href = u; lb.classList.toggle("wide", !!wide); lb.classList.add("on"); document.body.style.overflow = "hidden"; }
+function closeLb() { lb.classList.remove("on"); lbi.src = "about:blank"; document.body.style.overflow = ""; }
+document.getElementById("lbx").onclick = closeLb;
+lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
+addEventListener("keydown", function (ev) { if (ev.key === "Escape") closeLb(); });
+document.addEventListener("click", function (ev) {
+  var a = ev.target.closest("a.open"), ph = ev.target.closest("[data-live]");
+  if (a) { ev.preventDefault(); openLb(a.getAttribute("href"), !!a.closest(".wide") && innerWidth > 700); }
+  else if (ph) { openLb(ph.getAttribute("data-live"), false); }
+});
 </script>
 </body>
 </html>
