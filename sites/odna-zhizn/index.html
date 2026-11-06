@@ -80,7 +80,7 @@ canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
 <script>
 const $=id=>document.getElementById(id);
 const cv=$('cv'),cx=cv.getContext('2d');
-let C=[],T=0,run=null,R=Math.random;
+let C=[],T=0,run=null;const R=()=>Math.random();
 const pick=a=>a[Math.floor(R()*a.length)];
 function wpick(items){let s=0;for(const [w] of items)s+=w;let r=R()*s;for(const [w,v] of items){if((r-=w)<=0)return v}return items[0][1]}
 function gauss(){let u=0,v=0;while(!u)u=R();while(!v)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
@@ -98,8 +98,8 @@ function makeLife(){
   // death age
   let death, cause;
   if(R()*100<c.cm){death=Math.floor(Math.pow(R(),2.2)*5);
-    cause=wpick([[4,'осложнения после родов'],[3,'пневмония'],[2,'кишечная инфекция'],[c.cm>5?3:0.2,'малярия'],[1,'недоедание']]);}
-  else{death=Math.round(c.le+4+gauss()*12);death=Math.max(6,Math.min(104,death));
+    cause=wpick([[death==0?5:0,'осложнения после родов'],[3,'пневмония'],[2,'кишечная инфекция'],[c.cm>5?3:0.2,'малярия'],[1,'недоедание']]);}
+  else{death=Math.round(c.le+2+gauss()*11);death=Math.max(6,Math.min(101,death));
     if(death<30)cause=wpick([[4,'ДТП'],[2,'утонул'],[2,'инфекция'],[1,'несчастный случай на работе'],[c.cm>5?3:0.5,'туберкулёз']]);
     else if(death<60)cause=wpick([[4,'инфаркт'],[3,'рак'],[2,'инсульт'],[2,'ДТП'],[1,'цирроз печени'],[c.cm>5?2:0.3,'туберкулёз'],[1,'диабет']]);
     else cause=wpick([[6,'инфаркт'],[4,'инсульт'],[4,'рак'],[2,'болезнь лёгких'],[2,'пневмония'],[1,'диабет'],[1,'деменция'],[death>85?4:1,'тихо, во сне']]);}
@@ -150,6 +150,7 @@ function person(x,age,L,f,dead){
   const s=L.skin,h=L.hair,m=L.male,g=age>=65?'#d8d8d8':h;
   const bob=dead?0:(f%2);
   if(dead){ // lying
+    if(age<7){px(x-6,130,12,4,'#ffffff');px(x+5,129,5,5,s);px(x+5,128,5,2,h);return}
     px(x-12,128,24,6,m?'#3b6fd6':'#d63b6f');px(x+10,127,7,7,s);px(x+11,126,6,3,g);return}
   if(age<2){px(x-10,132,20,4,'#8a5a2b');px(x-10,124,2,10,'#8a5a2b');px(x+8,124,2,10,'#8a5a2b');
     px(x-6,126-bob,10,6,'#ffffff');px(x+2,124-bob,6,6,s);px(x+3,123-bob,4,2,h);return}
