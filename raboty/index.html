@@ -78,6 +78,19 @@
   .note { font-size: 14px; color: #9AA0AB; margin-top: 18px; }
   @media (max-width: 760px) { .end .wrap { grid-template-columns: 1fr; } }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  .fx { padding: 10px 0 40px; }
+  .fx h2, .usual h2 { font-size: clamp(30px, 4.5vw, 44px); margin: 18px 0 6px; }
+  .fx > p, .usual > p { color: var(--mut); max-width: 640px; margin: 0 0 22px; }
+  .fxg { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 22px; }
+  .fxc { text-decoration: none; color: inherit; }
+  .fxc .im { aspect-ratio: 1/2; border-radius: 24px; overflow: hidden; border: 7px solid var(--ink); background: #000; }
+  .fxc img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .fxc b { display: block; font-family: "Brygada 1918", Georgia, serif; font-weight: 500; font-size: 20px; margin-top: 10px; }
+  .fxc small { color: var(--blue); font-weight: 700; font-size: 13px; }
+  .fxc span { display: block; color: var(--mut); font-size: 14px; line-height: 1.45; margin-top: 2px; }
+  .fxall { display: inline-block; margin-top: 22px; padding: 12px 20px; border-radius: 99px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; }
+  .usual { border-top: 1px solid var(--line); margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -92,6 +105,16 @@
   <div class="wrap intro">
     <h1>Сайты, разные <i>как сами бизнесы</i></h1>
     <p>Видео сняты прямо с экрана: так сайт увидит ваш клиент. В каждом есть <b>админка</b>, цены, фото и тексты владелец меняет сам.</p>
+  </div>
+  <section class="wrap fx" id="effekty">
+    <h2>Современные эффекты</h2>
+    <p>Приёмы лучших сайтов мира, собранные под малый бизнес. Откройте и потрогайте: любой из них встрою в ваш сайт, админка останется.</p>
+    <div class="fxg" id="fxg"></div>
+    <a class="fxall" href="../sites/effekty/">Все эффекты</a>
+  </section>
+  <div class="wrap usual" id="obychnye">
+    <h2>Обычные сайты</h2>
+    <p>Готовые демо по стилям: от строгих до ярких. Видео сняты прямо с экрана.</p>
   </div>
   <div class="wrap jump" id="jump"></div>
   <div id="styles"></div>
@@ -111,6 +134,7 @@
   </div>
 </div></section>
 
+<script src="../sites/effekty/list.js"></script>
 <script>
 var STYLES = [
   { id: "kino", name: "Кинематографичные", wide: true, sw: ["#0E0B09", "#C27A45", "#FF7A2E", "#EFE3D3"],
@@ -154,7 +178,8 @@ var STYLES = [
 ];
 function e(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 function dots(sw) { return "<i>" + sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</i>"; }
-document.getElementById("nav").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + e(s.name.split(" ")[0]) + "</a>"; }).join("");
+document.getElementById("fxg").innerHTML = EFFEKTY.map(function (f) { return '<a class="fxc" href="../sites/effekty/' + f[0] + '.html"><div class="im"><img loading="lazy" src="../sites/effekty/img/' + f[0] + '.jpg" alt="' + e(f[1]) + '"></div><b>' + e(f[1]) + '</b><small>' + e(f[2]) + '</small><span>' + e(f[3]) + '</span></a>'; }).join("");
+document.getElementById("nav").innerHTML = '<a href="#effekty">Эффекты</a><a href="#obychnye">Обычные</a>';
 document.getElementById("jump").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + dots(s.sw) + e(s.name) + "</a>"; }).join("");
 document.getElementById("styles").innerHTML = STYLES.map(function (s) {
   return '<section class="style wrap" id="' + s.id + '"><div class="style-head"><h2>' + e(s.name) + '</h2><div class="swatch" aria-hidden="true">' +

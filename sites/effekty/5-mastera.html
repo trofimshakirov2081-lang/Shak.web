@@ -1,0 +1,38 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Энциклопедия мастеров</title>
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:wght@500&family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#f2f2ef;color:#16181d;min-height:100vh;overflow-x:hidden}
+.top{max-width:620px;margin:0 auto;padding:90px 16px 0;text-align:center}
+h1{font-family:'Brygada 1918',serif;font-weight:500;font-size:clamp(42px,8vw,72px);line-height:.98;letter-spacing:-.02em}
+.sub{color:#6f737e;margin:12px 0 18px}
+.search{display:flex;gap:8px;max-width:420px;margin:0 auto;border-bottom:1px solid #cfd0c8;padding:6px 2px}
+.search input{flex:1;border:0;background:none;font:16px 'Ysabeau Office',sans-serif;outline:none}
+.search button{width:34px;height:34px;border-radius:50%;border:1px solid #cfd0c8;background:#fff;cursor:pointer}
+.stage{position:relative;height:420px;perspective:900px;margin-top:20px}
+.blur{position:absolute;left:-12%;top:20px;width:42%;height:360px;border-radius:50%;background:radial-gradient(#3a5a40,#c9a96e 45%,transparent 70%);filter:blur(40px);opacity:.75;pointer-events:none}
+.c{position:absolute;top:50%;left:50%;width:120px;height:160px;border-radius:6px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s;cursor:pointer;display:flex;flex-direction:column}
+.c .ph{flex:1;border-radius:3px;display:grid;place-items:center;font:500 34px 'Brygada 1918',serif;color:rgba(0,0,0,.55);background-blend-mode:multiply}
+.c b{font-size:11px;margin-top:6px;line-height:1.2}.c small{font-size:9px;opacity:.7}
+.c i{position:absolute;top:6px;right:8px;font-size:9px;font-style:normal;opacity:.6}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a>
+<div class="top">
+  <h1>Мастера<br>студии</h1>
+  <p class="sub">Студия красоты «Ирис»: все мастера в одной ленте. Найдите своего по имени или услуге.</p>
+  <div class="search"><input id="q" placeholder="Например: маникюр или Алина"><button id="go" aria-label="Найти">›</button></div>
+</div>
+<div class="stage" id="st"><div class="blur"></div></div>
+<script>
+const M=[['Алина','маникюр','#f3b38f'],['Ирина','брови','#f0d27a'],['Ксения','стрижки','#a9c8a0'],['Мадина','окрашивание','#e6a3b7'],['Ольга','массаж','#9ec4da'],['Вера','ресницы','#c7b3e6'],['Диана','макияж','#f2a48a'],['Лейла','педикюр','#b5d6b0'],['Софья','укладки','#f6c98f'],['Наталья','маникюр','#d8b4a0'],['Ева','брови','#a7c7e7'],['Тимур','барбер','#c0c0a8']];
+const st=document.getElementById('st');let focus=4;
+const els=M.map((m,i)=>{const d=document.createElement('div');d.className='c';d.style.background=m[2];d.innerHTML=`<i>№ ${String(i+1).padStart(2,'0')}</i><div class="ph" style="background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(0,0,0,.08))">${m[0][0]}</div><b>${m[0]}</b><small>${m[1]}</small>`;d.onclick=()=>{focus=i;lay()};st.appendChild(d);return d});
+function lay(){els.forEach((d,i)=>{const k=i-focus;const x=k*92,z=-Math.abs(k)*90+(k===0?120:0),y=-k*22,ry=k*-8;
+  d.style.transform=`translate(-50%,-50%) translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg) scale(${k===0?1.25:1})`;d.style.zIndex=100-Math.abs(k);d.style.opacity=Math.abs(k)>6?0:1;d.style.filter=k<-1?`blur(${Math.min(6,(-k-1)*2)}px)`:'none'})}
+lay();
+function find(){const q=document.getElementById('q').value.toLowerCase().trim();if(!q)return;const i=M.findIndex(m=>m[0].toLowerCase().includes(q)||m[1].includes(q));if(i>=0){focus=i;lay()}}
+document.getElementById('go').onclick=find;document.getElementById('q').onkeydown=e=>{if(e.key==='Enter')find()};
+let auto=setInterval(()=>{focus=(focus+1)%M.length;lay()},2200);st.onmouseenter=()=>clearInterval(auto);
+let sx=0;st.ontouchstart=e=>sx=e.touches[0].clientX;st.ontouchend=e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>30){clearInterval(auto);focus=Math.max(0,Math.min(M.length-1,focus+(dx<0?1:-1)));lay()}};
+</script></body></html>

@@ -1,0 +1,55 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пока вы спите</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#fff;color:#16181d}
+.wrap{max-width:1040px;margin:0 auto;padding:90px 20px 60px;display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.12;font-weight:700;letter-spacing:-.01em;margin-bottom:34px}
+.list{border-top:1px solid #ececec}
+.it{border-bottom:1px solid #ececec;padding:14px 14px;border-radius:14px;cursor:pointer;transition:background .3s}
+.it h3{font-size:17px;font-weight:600;color:#9a9da6;transition:color .3s}
+.it p{max-height:0;overflow:hidden;color:#80848f;font-size:15px;transition:max-height .5s ease,margin .5s}
+.it.on{background:#f3f3f1}.it.on h3{color:#16181d}.it.on p{max-height:120px;margin-top:6px}
+.bar{height:2px;background:#16181d;width:0;margin-top:10px;border-radius:2px}
+.it.on .bar{animation:fill 4s linear forwards}@keyframes fill{to{width:100%}}
+.pane{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;transition:background .6s}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(78%,320px);background:#fff;border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.15);transition:opacity .35s,transform .35s}
+.card.out{opacity:0;transform:translate(-50%,-38%)}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none}
+.card b{display:block;font-size:15px}.card small{color:#8b8f99;font-size:12px}
+.card .sum{margin-left:auto;font-weight:700;font-size:15px;white-space:nowrap}
+.pill{position:absolute;left:50%;top:calc(50% - 58px);transform:translateX(-50%);background:#fff;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;color:#1f9d6b;white-space:nowrap;transition:opacity .35s}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;gap:28px;padding-top:70px}.pane{order:-1}}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a>
+<div class="wrap">
+  <div>
+    <h1>Всё происходит, пока вы не смотрите.</h1>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="pane" id="pane"><canvas id="cv"></canvas><div class="pill" id="pill"></div><div class="card" id="card"></div></div>
+</div>
+<script>
+const F=[
+ {h:'Заявка ночью',p:'Клиент записался в 2:14, пока вы спали. Утром запись уже в Telegram, время занято на сайте.',bg:'#239b8a',pill:'+ запись на субботу',a:'А',ac:'#7a3b1e',n:'Анна',s:'Стрижка · сб, 11:00',sum:'1 500 ₽'},
+ {h:'Цены за минуту',p:'Поменяли цену в админке с телефона, на сайте она обновилась сразу. Без программиста.',bg:'#3b5bdb',pill:'цена обновлена',a:'₽',ac:'#1d2b6b',n:'Капучино',s:'было 260 ₽',sum:'290 ₽'},
+ {h:'Отзывы сами',p:'После визита клиенту приходит ссылка, отзыв появляется на сайте после вашего одобрения.',bg:'#e8590c',pill:'★ новый отзыв',a:'М',ac:'#5c2a06',n:'Марина',s:'«Лучший раф в городе»',sum:'5,0'},
+ {h:'Безопасно тратить',p:'Видно, сколько пришло заявок за неделю и с какой рекламы. Понятно, что работает.',bg:'#7048e8',pill:'+38% к прошлой неделе',a:'↗',ac:'#2b1a66',n:'Заявки за неделю',s:'из Яндекс Карт: 21',sum:'47'},
+ {h:'В любое время',p:'Сайт работает 24/7, не болеет и не уходит в отпуск. А вы отдыхаете.',bg:'#1c7ed6',pill:'онлайн 24/7',a:'✓',ac:'#0b3a66',n:'Сайт работает',s:'без выходных',sum:'365 дн.'}];
+const list=document.getElementById('list'),pane=document.getElementById('pane'),card=document.getElementById('card'),pill=document.getElementById('pill');
+list.innerHTML=F.map((f,i)=>`<div class="it" data-i="${i}"><h3>${f.h}</h3><p>${f.p}</p><div class="bar"></div></div>`).join('');
+let cur=0,timer;
+function show(i){cur=i;[...list.children].forEach((el,j)=>{el.classList.toggle('on',j===i);const b=el.querySelector('.bar');b.style.animation='none';b.offsetWidth;b.style.animation=''});
+  const f=F[i];pane.style.background=f.bg;card.classList.add('out');pill.style.opacity=0;
+  setTimeout(()=>{card.innerHTML=`<div class="av" style="background:${f.ac}">${f.a}</div><div><b>${f.n}</b><small>${f.s}</small></div><div class="sum">${f.sum}</div>`;pill.textContent=f.pill;card.classList.remove('out');pill.style.opacity=1},350);
+  clearTimeout(timer);timer=setTimeout(()=>show((cur+1)%F.length),4000)}
+list.onclick=e=>{const it=e.target.closest('.it');if(it)show(+it.dataset.i)};
+// particles flowing around the edges
+const cv=document.getElementById('cv'),cx=cv.getContext('2d');let P=[];
+function rs(){const r=pane.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;P=Array.from({length:140},()=>({t:Math.random(),s:.0004+Math.random()*.0012,o:(Math.random()-.5)*.12,r:1+Math.random()*2.2,c:Math.random()<.6?'#fff':'#b9d7ff'}))}
+function edge(t,o){t=(t%1+1)%1;const m=.1+o;const s=t*4;if(s<1)return[m+(1-2*m)*s,m];if(s<2)return[1-m,m+(1-2*m)*(s-1)];if(s<3)return[1-m-(1-2*m)*(s-2),1-m];return[m,1-m-(1-2*m)*(s-3)]}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);for(const p of P){p.t+=p.s;const[x,y]=edge(p.t,p.o);cx.globalAlpha=.85;cx.fillStyle=p.c;cx.beginPath();cx.arc(x*cv.width,y*cv.height,p.r*devicePixelRatio,0,7);cx.fill()}requestAnimationFrame(loop)}
+addEventListener('resize',rs);rs();loop();show(0);
+</script></body></html>

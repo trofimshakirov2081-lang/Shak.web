@@ -1,0 +1,38 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пекарня как биржа</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#000;color:#fff;min-height:100vh}
+.back{background:rgba(255,255,255,.12);color:#fff}
+.wrap{max-width:520px;margin:0 auto;padding:90px 16px 60px}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.15;margin-bottom:8px}
+.sub{color:#8d919c;margin-bottom:26px;font-size:15px}
+.t{display:flex;align-items:center;gap:12px;background:linear-gradient(#141414,#0c0c0c);border:1px solid #232323;border-radius:16px;padding:12px 14px;margin-bottom:10px;position:relative;overflow:hidden;cursor:pointer;transition:transform .25s,border-color .25s}
+.t:hover{transform:scale(1.02);border-color:#3a3a3a}
+.ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:19px;flex:none}
+.t b{display:block;font-size:15px}.t small{color:#8d919c;font-size:13px}
+.t small em{font-style:normal;color:#fff;font-weight:700;margin-right:6px}
+.up{color:#2fd27a}.dn{color:#ff5b5b}
+svg{position:absolute;right:0;top:0;height:100%;width:52%;opacity:.95}
+svg path.l{fill:none;stroke-width:1.6;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.note{color:#6c707b;font-size:13px;margin-top:16px}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a>
+<div class="wrap">
+  <h1>Пекарня «Хлеб & Соль» как биржа</h1>
+  <p class="sub">Что сегодня берут лучше всего: продажи с утра, обновляются из админки. Нажмите на позицию, график перерисуется.</p>
+  <div id="list"></div>
+  <p class="note">Такой блок показывает гостю, что популярно прямо сейчас, и сам подталкивает к покупке.</p>
+</div>
+<script>
+const I=[['🥐','Круассан','KRSN',129,4.2,'#e8590c'],['🍞','Бородинский','BRDN',96,1.8,'#7048e8'],['🥨','Крендель','KRND',41,-2.4,'#1c7ed6'],['🍰','Медовик','MDVK',58,6.9,'#d6336c'],['☕','Капучино','CPCN',210,3.1,'#2b8a3e']];
+const list=document.getElementById('list');
+function spark(up,col){let y=26,d='M0 '+y,pts=[];for(let x=0;x<=200;x+=10){y+=(Math.random()-.5+(up?-.12:.12))*9;y=Math.max(6,Math.min(46,y));pts.push([x,y])}d+=pts.map(p=>` L${p[0]} ${p[1].toFixed(1)}`).join('');
+  return `<svg viewBox="0 0 200 52" preserveAspectRatio="none"><defs><linearGradient id="g${col.slice(1)}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${up?'#2fd27a':'#ff5b5b'}" stop-opacity=".35"/><stop offset="1" stop-opacity="0"/></linearGradient></defs><path d="${d} L200 52 L0 52Z" fill="url(#g${col.slice(1)})"/><path class="l" d="${d}" stroke="${up?'#2fd27a':'#ff5b5b'}"/></svg>`}
+function render(){list.innerHTML=I.map((r,i)=>`<div class="t" data-i="${i}"><div class="ic" style="background:${r[5]}">${r[0]}</div><div><b>${r[1]}</b><small>${r[2]} <em>${r[3]} шт.</em><span class="${r[4]>0?'up':'dn'}">${r[4]>0?'+':''}${String(r[4]).replace('.',',')}%</span></small></div>${spark(r[4]>0,r[5])}</div>`).join('')}
+render();
+list.onclick=e=>{const t=e.target.closest('.t');if(!t)return;const r=I[+t.dataset.i];r[3]+=Math.round(Math.random()*6);r[4]=+(r[4]+(Math.random()-.4)*2).toFixed(1);render()};
+setInterval(()=>{const r=I[Math.floor(Math.random()*I.length)];r[3]+=1;render()},3500);
+</script></body></html>

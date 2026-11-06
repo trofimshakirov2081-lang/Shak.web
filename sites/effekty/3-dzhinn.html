@@ -1,0 +1,48 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Окна сворачиваются в док</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:radial-gradient(circle at 50% 30%,#fbfbfd,#eef0f5);color:#16181d;min-height:100vh;overflow:hidden}
+.desk{position:relative;height:100vh;max-width:900px;margin:0 auto}
+h1{position:absolute;top:70px;left:0;right:0;text-align:center;font-size:clamp(22px,3.5vw,32px);padding:0 16px}
+.sub{position:absolute;top:118px;left:0;right:0;text-align:center;color:#7a7e89;font-size:15px;padding:0 16px}
+.win{position:absolute;width:min(78vw,420px);background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(30,40,80,.18);overflow:hidden;transform-origin:50% 100%}
+.win .tb{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid #f0f0f0;align-items:center}
+.win .tb i{width:11px;height:11px;border-radius:50%;background:#ddd;cursor:pointer}
+.win .tb i:nth-child(1){background:#ff5f57}.win .tb i:nth-child(2){background:#febc2e}.win .tb i:nth-child(3){background:#28c840}
+.win .tb span{font-size:13px;color:#888;margin-left:8px}
+.win .bd{padding:14px 16px}
+.win .bd .ph{height:110px;border-radius:10px;margin-bottom:10px}
+.win .bd p{font-size:14px;color:#555}
+.dock{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;gap:10px;padding:10px 12px;background:rgba(255,255,255,.7);backdrop-filter:blur(14px);border-radius:20px;box-shadow:0 8px 30px rgba(30,40,80,.12)}
+.dock button{width:50px;height:50px;border-radius:13px;border:0;cursor:pointer;font-size:22px;position:relative;transition:transform .2s}
+.dock button:hover{transform:translateY(-6px) scale(1.08)}
+.dock button.dot:after{content:'';position:absolute;bottom:-7px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#555}
+.genie{animation:genie .6s cubic-bezier(.6,0,.4,1) forwards}
+@keyframes genie{0%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}45%{clip-path:polygon(0 0,100% 0,62% 100%,38% 100%);transform:translate(var(--dx),calc(var(--dy)*.3)) scale(1,.9)}100%{clip-path:polygon(40% 0,60% 0,52% 100%,48% 100%);transform:translate(var(--dx),var(--dy)) scale(.12,.05);opacity:.2}}
+.ungenie{animation:genie .55s cubic-bezier(.6,0,.4,1) reverse forwards}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a>
+<div class="desk" id="desk">
+  <h1>Каждый раздел сайта как окно</h1>
+  <p class="sub">Нажмите жёлтую кнопку: окно свернётся в док. Нажмите иконку внизу: развернётся обратно.</p>
+  <div class="dock" id="dock"></div>
+</div>
+<script>
+const W=[{t:'Меню',ic:'☕',c:'#fff4e6',ph:'linear-gradient(135deg,#c27a45,#5a3220)',p:'Капучино 290 ₽ · Раф 340 ₽ · Флэт уайт 280 ₽',x:-120,y:180},
+ {t:'Запись',ic:'📅',c:'#e7f5ec',ph:'linear-gradient(135deg,#2fb37a,#0d5c3b)',p:'Свободно сегодня: 15:00, 16:30, 18:00',x:0,y:230},
+ {t:'Отзывы',ic:'⭐',c:'#fff9db',ph:'linear-gradient(135deg,#ffd43b,#e67700)',p:'4,9 на Яндекс Картах, 312 отзывов',x:120,y:280}];
+const desk=document.getElementById('desk'),dock=document.getElementById('dock');
+W.forEach((w,i)=>{
+  const el=document.createElement('div');el.className='win';const k=Math.min(1,innerWidth/760);el.style.left=`calc(50% - min(39vw,210px) + ${w.x*k}px)`;el.style.top=(w.y-(innerWidth<600?20:0)+(i*(innerWidth<600?10:0)))+'px';el.style.zIndex=10+i;
+  el.innerHTML=`<div class="tb"><i></i><i title="Свернуть"></i><i></i><span>${w.t}</span></div><div class="bd"><div class="ph" style="background:${w.ph}"></div><p>${w.p}</p></div>`;
+  desk.appendChild(el);
+  const b=document.createElement('button');b.style.background=w.c;b.textContent=w.ic;b.className='dot';b.title=w.t;dock.appendChild(b);
+  const min=()=>{const r=el.getBoundingClientRect(),d=b.getBoundingClientRect();el.style.setProperty('--dx',(d.left+d.width/2-(r.left+r.width/2))+'px');el.style.setProperty('--dy',(d.top-(r.top+r.height))+'px');el.classList.remove('ungenie');el.classList.add('genie');b.classList.remove('dot')};
+  const max=()=>{if(!el.classList.contains('genie'))return;el.classList.remove('genie');el.offsetWidth;el.classList.add('ungenie');b.classList.add('dot');el.style.zIndex=20+Date.now()%1000};
+  el.querySelectorAll('.tb i')[1].onclick=min;el.querySelectorAll('.tb i')[0].onclick=min;b.onclick=max;
+  el.onmousedown=()=>el.style.zIndex=20+Date.now()%1000;
+  setTimeout(min,1600+i*700);setTimeout(max,4200+i*500);
+});
+</script></body></html>
