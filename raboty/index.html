@@ -11,7 +11,7 @@
 <style>
   :root { --paper: #F3F3EF; --ink: #16181D; --mut: #5D636E; --line: #D9DAD3; --blue: #1F6BFF; --card: #FFFFFF; }
   * { box-sizing: border-box; }
-  html { background: var(--paper); -webkit-text-size-adjust: 100%; }
+  html { background: var(--paper); overflow-x: hidden; -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 "Ysabeau Office", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
   .wrap { width: min(1180px, 100% - 32px); margin: 0 auto; }
@@ -49,10 +49,13 @@
 
   .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px; }
   @media (max-width: 640px) {
-    .row { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: none; }
-    .row::-webkit-scrollbar { display: none; }
-    .work { flex: 0 0 74%; scroll-snap-align: center; }
-    .work.wide { flex-basis: 100%; }
+    .row { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+    .work .live { display: none; }
+    .work h3 { font-size: 16px; margin-top: 10px; }
+    .work .niche { font-size: 13px; }
+    .phone { border-radius: 22px; padding: 5px; } .phone video, .phone img { border-radius: 18px; }
+    .style { padding-top: 30px; margin-top: 24px; }
+    .style-head { margin-bottom: 16px; }
   }
   .work { min-width: 0; }
   .work.wide { grid-column: 1 / -1; max-width: 980px; }
@@ -97,12 +100,17 @@
   .play { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(22,24,29,.85); color: #fff; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 99px; pointer-events: none; }
   .lb { position: fixed; inset: 0; z-index: 100; background: rgba(12,13,16,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 14px; }
   .lb.on { display: flex; }
-  .lb .fr { position: relative; width: min(420px, 100%); height: min(860px, 100%); background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: lbin .35s cubic-bezier(.2,.9,.2,1); }
+  .lb .fr { position: relative; width: min(420px, 100%); height: min(860px, calc(100% - 56px)); margin-top: 56px; background: #fff; border-radius: 28px; overflow: visible; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: lbin .35s cubic-bezier(.2,.9,.2,1); }
   .lb.wide .fr { width: min(1180px, 100%); }
-  .lb iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .lb .x { position: absolute; top: 10px; right: 10px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #16181D; color: #fff; font-size: 20px; cursor: pointer; }
-  .lb .full { position: absolute; top: 10px; right: 58px; z-index: 2; height: 40px; padding: 0 14px; border-radius: 99px; background: #fff; color: #16181D; font-size: 13px; font-weight: 700; display: flex; align-items: center; text-decoration: none; box-shadow: 0 0 0 1px #ddd; }
+  .lb iframe { width: 100%; height: 100%; border: 0; display: block; border-radius: 28px; background:#fff; }
+  .lb .x { position: absolute; top: -52px; right: 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #16181D; color: #fff; font-size: 20px; cursor: pointer; }
+  .lb .full { position: absolute; top: -52px; right: 48px; z-index: 2; height: 40px; padding: 0 14px; border-radius: 99px; background: #fff; color: #16181D; font-size: 13px; font-weight: 700; display: flex; align-items: center; text-decoration: none; box-shadow: 0 0 0 1px #ddd; }
   @keyframes lbin { from { transform: translateY(24px) scale(.97); opacity: 0; } }
+  .jump button { font: 600 15px "Ysabeau Office", sans-serif; padding: 8px 14px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink); }
+  .jump button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .jump { position: sticky; top: 56px; z-index: 9; background: var(--paper); padding: 10px 16px; }
+  @media (max-width: 640px) { .jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0; width: 100%; box-sizing: border-box; max-width: 100vw; } .jump::-webkit-scrollbar { display: none; } .jump button { flex: none; } }
+  .style.hid { display: none; }
 </style>
 </head>
 <body>
@@ -117,16 +125,6 @@
   <div class="wrap intro">
     <h1>Сайты, разные <i>как сами бизнесы</i></h1>
     <p>Видео сняты прямо с экрана: так сайт увидит ваш клиент. В каждом есть <b>админка</b>, цены, фото и тексты владелец меняет сам.</p>
-  </div>
-  <section class="wrap fx" id="effekty">
-    <h2>Современные эффекты</h2>
-    <p>Приёмы лучших сайтов мира, собранные под малый бизнес. Откройте и потрогайте: любой из них встрою в ваш сайт, админка останется.</p>
-    <div class="row fxg" id="fxg"></div>
-    <a class="fxall" href="../sites/effekty/">Все эффекты</a>
-  </section>
-  <div class="wrap usual" id="obychnye">
-    <h2>Обычные сайты</h2>
-    <p>Готовые демо по стилям: от строгих до ярких. Видео сняты прямо с экрана.</p>
   </div>
   <div class="wrap jump" id="jump"></div>
   <div id="styles"></div>
@@ -147,9 +145,16 @@
 </div></section>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Сайт в окне"><div class="fr"><button class="x" id="lbx" aria-label="Закрыть">✕</button><a class="full" id="lbf" target="_blank" rel="noopener">На весь экран</a><iframe id="lbi" title="Сайт" loading="lazy"></iframe></div></div>
-<script src="../sites/effekty/list.js"></script>
 <script>
 var STYLES = [
+  { id: "novye", name: "Новые 2026", sw: ["#FFFFFF", "#1D1D1F", "#6F7BF7", "#F2A541"],
+    text: "Сайты в стиле лучших мировых лендингов. В каждом живая деталь: чек печатается, расписание заполняется само, услуги складываются в панель записи.",
+    works: [
+      ["novye-utro", "Утро", "Кофейня, Казань", "Заказ печатается чеком, кнопка перетекает за пальцем, живая карточка «что сейчас в кофейне».", "../sites/novye/utro/"],
+      ["novye-brat", "Брат", "Барбершоп, Казань", "Расписание заполняется на глазах, бегущая строка свободных окон, шторка с Telegram-ботом.", "../sites/novye/brat/"],
+      ["novye-iris", "Ирис", "Студия красоты, Казань", "Лента мастеров с поиском, услуги складываются в панель записи, как окна в док.", "../sites/novye/iris/"],
+      ["novye-svet", "Свет", "Фотограф, Казань", "Мягкий градиент на первом экране, человечек ведёт по работам, цены в виде газеты.", "../sites/novye/svet/"]
+    ] },
   { id: "kino", name: "Кинематографичные", wide: true, sw: ["#0E0B09", "#C27A45", "#FF7A2E", "#EFE3D3"],
     text: "Анимация идёт за прокруткой: листаете, и на экране всё двигается. Для бизнеса, которому важно запомниться с первого экрана.",
     works: [
@@ -191,14 +196,17 @@ var STYLES = [
 ];
 function e(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 function dots(sw) { return "<i>" + sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</i>"; }
-document.getElementById("fxg").innerHTML = EFFEKTY.map(function (f) { var u = "../sites/effekty/" + f[0] + ".html"; return '<article class="work fxw"><div class="phone" data-live="' + u + '"><video muted loop playsinline preload="none" poster="../sites/effekty/img/' + f[0] + '.jpg" aria-label="Видео эффекта ' + e(f[1]) + '"><source src="../sites/effekty/v/' + f[0] + '.mp4" type="video/mp4"></video><span class="play">Потрогать</span></div><h3>' + e(f[1]) + '</h3><p class="niche">' + e(f[2]) + '</p><p class="live">' + e(f[3]) + '</p><a class="open" href="' + u + '">Открыть здесь</a></article>'; }).join("");
-document.getElementById("nav").innerHTML = '<a href="#effekty">Эффекты</a><a href="#obychnye">Обычные</a>';
-document.getElementById("jump").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + dots(s.sw) + e(s.name) + "</a>"; }).join("");
+document.getElementById("nav").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + e(s.name.split(" ")[0]) + "</a>"; }).join("");
+document.getElementById("jump").innerHTML = '<button class="on" data-f="all">Все</button>' + STYLES.map(function (s) { return '<button data-f="' + s.id + '">' + dots(s.sw) + e(s.name) + "</button>"; }).join("");
+document.getElementById("jump").addEventListener("click", function (ev) { var b = ev.target.closest("button"); if (!b) return; var f = b.getAttribute("data-f");
+  document.querySelectorAll("#jump button").forEach(function (x) { x.classList.toggle("on", x === b); });
+  document.querySelectorAll(".style").forEach(function (sec) { sec.classList.toggle("hid", f !== "all" && sec.id !== f); });
+  var j = document.getElementById("jump"); scrollTo({ top: j.offsetTop - 60, behavior: "smooth" }); });
 document.getElementById("styles").innerHTML = STYLES.map(function (s) {
   return '<section class="style wrap" id="' + s.id + '"><div class="style-head"><h2>' + e(s.name) + '</h2><div class="swatch" aria-hidden="true">' +
     s.sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</div><p>" + e(s.text) + '</p></div><div class="row">' +
     s.works.map(function (w) {
-      var url = "../demos/" + w[0] + "/";
+      var url = w[4] || ("../demos/" + w[0] + "/");
       if (s.wide) return '<article class="work wide"><div class="laptop"><div class="scr"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div><div class="base"></div></div>' +
         "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
       return '<article class="work"><div class="phone"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div>' +
