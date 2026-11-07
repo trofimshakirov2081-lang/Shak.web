@@ -1,0 +1,41 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Утренний вестник</title>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#e9e7e1;min-height:100vh;color:#1b1b1b;perspective:1400px}
+.paper{max-width:640px;margin:70px auto 60px;background:#f4f1e8;padding:26px 26px 30px;box-shadow:0 30px 60px rgba(0,0,0,.18);transform-origin:0 50%;animation:open 1.2s cubic-bezier(.2,.8,.2,1) both;
+ background-image:radial-gradient(rgba(0,0,0,.04) 1px,transparent 1px);background-size:3px 3px}
+@keyframes open{from{transform:rotateY(-70deg);opacity:0}}
+.meta{display:flex;justify-content:space-between;font:11px 'PT Mono',monospace;border-bottom:1px solid #1b1b1b;padding-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+h1{font-family:'Old Standard TT',serif;font-size:clamp(46px,11vw,92px);line-height:.95;margin:14px 0 10px;letter-spacing:-.02em}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #1b1b1b;border-bottom:1px solid #1b1b1b;font:10px 'PT Mono',monospace}
+.stats div{padding:6px 8px;border-right:1px solid #1b1b1b}.stats div:last-child{border:0}
+.stats b{display:block;font-size:14px;font-weight:400}
+h2{font-family:'Old Standard TT',serif;font-size:clamp(26px,5vw,36px);line-height:1.08;margin:16px 0 6px}
+.lead{font:italic 18px/1.4 'Old Standard TT',serif;margin-bottom:10px}
+.by{font:10px 'PT Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.cols{columns:2;column-gap:22px;column-rule:1px solid #cfcac0;font:15px/1.5 'Old Standard TT',serif;text-align:justify;hyphens:auto}
+.cols p:first-child:first-letter{float:left;font-size:54px;line-height:.9;padding:4px 6px 0 0;font-weight:700}
+.cols p{margin-bottom:8px}
+.ad{border:2px solid #1b1b1b;padding:10px;margin-top:14px;text-align:center;font:11px 'PT Mono',monospace;text-transform:uppercase}
+.ad b{display:block;font:700 22px 'Old Standard TT',serif;text-transform:none;margin:4px 0}
+.ad a{color:#1b1b1b}
+@media(max-width:520px){.cols{columns:1}.stats{grid-template-columns:repeat(2,1fr)}.stats div:nth-child(2){border-right:0}}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a><script>if(window.top!==window)document.currentScript.previousElementSibling.style.display="none"/*inframe*/</script>
+<article class="paper">
+  <div class="meta"><span>Выпуск № 1 · Казань</span><span>«Без сахара, но с правдой»</span></div>
+  <h1>Утренний вестник</h1>
+  <div class="stats"><div>Чашек вчера<b>412</b></div><div>Свежих круассанов<b>96</b></div><div>Новых зёрен<b>2</b></div><div>Пустых столиков<b>0</b></div></div>
+  <h2>Кофейня «Чернила» снова открылась в 8 утра. Очевидцы ожидают того же завтра</h2>
+  <p class="lead">Уже 1 314-й день подряд бариста включает кофемашину ровно в восемь. Никто не может объяснить, почему это до сих пор радует.</p>
+  <p class="by">Репортаж утренней смены</p>
+  <div class="cols">
+    <p>Раф с халвой был замечен на стойке в 8:04 и исчез к 8:06. Свидетели утверждают, что видели, как его забирал постоянный гость, имя которого бариста знают наизусть, а заказ помнят ещё лучше.</p>
+    <p>Тем временем из Эфиопии прибыла новая партия зерна: ягодная кислинка, нотки жасмина. Обжарщик называет её «лучшей за сезон» и просит не путать с прошлым сезоном, который тоже был лучшим.</p>
+    <p>Редакция напоминает: столик у окна свободен только до 9:00. Дальше его занимает человек с ноутбуком и одним американо на четыре часа.</p>
+  </div>
+  <div class="ad">Объявление<b>Капучино + круассан = 390 ₽</b>до 11:00 каждый будний день · <a href="#">забронировать столик</a></div>
+</article>
+</body></html>

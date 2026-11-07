@@ -1,0 +1,42 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Прогулка по работам</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&family=PT+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#fafaf8;color:#16181d}
+.hd{position:fixed;top:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:54px 20px 0;font:11px/1.5 'PT Mono',monospace;text-transform:uppercase;z-index:5;pointer-events:none}
+.hd b{display:block;color:#16181d}
+.track{height:520vh}
+.sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.row{position:absolute;top:50%;left:0;display:flex;gap:9vw;transform:translateY(-50%);padding-left:60vw;will-change:transform}
+.panel{flex:none;width:min(62vw,340px);aspect-ratio:4/3;border-radius:6px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:700;font-size:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);transform:perspective(800px) rotateY(-14deg)}
+.panel small{display:block;font:11px 'PT Mono',monospace;font-weight:400;opacity:.85}
+canvas{position:absolute;left:50%;top:50%;width:132px;height:176px;transform:translate(-50%,-38%);image-rendering:pixelated;z-index:3}
+.foot{position:absolute;bottom:22px;left:20px;right:20px;display:flex;justify-content:space-between;font:11px 'PT Mono',monospace;text-transform:uppercase;color:#888}
+.floor{position:absolute;left:0;right:0;top:calc(50% + 92px);height:1px;background:#e3e3df}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a><script>if(window.top!==window)document.currentScript.previousElementSibling.style.display="none"/*inframe*/</script>
+<div class="hd"><div><b>Тимур Ахметов</b>фотограф, Казань</div><div>Свадьбы, портреты<br>и предметка для бизнеса</div><div><b>Записаться</b>t.me/…</div></div>
+<div class="track" id="tr"><div class="sticky">
+  <div class="floor"></div>
+  <div class="row" id="row"></div>
+  <canvas id="cv" width="33" height="44"></canvas>
+  <div class="foot"><span>Листайте вниз: я провожу по работам</span><span id="ix">01 / 06</span></div>
+</div></div>
+<script>
+const P=[['Свадьба на Волге','2026 · 340 кадров','linear-gradient(135deg,#d9a98a,#6b4a3a)'],['Кофейня «Чернила»','предметка · меню','linear-gradient(135deg,#3a2a20,#c27a45)'],['Портреты в студии','чёрно-белое','linear-gradient(135deg,#222,#999)'],['Цветочный магазин','каталог · 120 букетов','linear-gradient(135deg,#f4b6c2,#9b5de5)'],['Выпускной 11 «А»','репортаж','linear-gradient(135deg,#4cc3ff,#1d3557)'],['Детейлинг','до / после','linear-gradient(135deg,#0e0b09,#ff7a2e)']];
+const row=document.getElementById('row');row.innerHTML=P.map(p=>`<div class="panel" style="background:${p[2]}"><div>${p[0]}<small>${p[1]}</small></div></div>`).join('');
+const cv=document.getElementById('cv'),cx=cv.getContext('2d');
+function px(x,y,w,h,c){cx.fillStyle=c;cx.fillRect(x,y,w,h)}
+function walker(f,moving){cx.clearRect(0,0,33,44);const st=moving?(f%4<2?1:-1):0,b=moving?f%2:0;
+  px(11,2-b,10,3,'#111');px(10,4-b,13,2,'#111'); // cap
+  px(12,6-b,8,7,'#d9a17b');px(13,9-b,1,1,'#000');px(18,9-b,1,1,'#000');
+  px(10,13-b,12,13,'#1d1d1f');px(8,14-b+st,2,10,'#1d1d1f');px(22,14-b-st,2,10,'#1d1d1f');px(8,24-b+st,2,2,'#d9a17b');px(22,24-b-st,2,2,'#d9a17b');
+  px(11+st*2,26,4,13,'#2a2a2e');px(17-st*2,26,4,13,'#2a2a2e');px(10+st*2,39,6,3,'#fff');px(16-st*2,39,6,3,'#fff')}
+let last=0,lastY=0,f=0,moving=false;
+function tick(t){const y=scrollY,max=document.getElementById('tr').offsetHeight-innerHeight,k=Math.min(1,y/Math.max(1,max));
+  const w=row.scrollWidth-innerWidth*0.4;row.style.transform=`translate(${-k*w}px,-50%)`;
+  moving=Math.abs(y-lastY)>0.5;lastY=y;if(t-last>110){f++;last=t}walker(f,moving);
+  document.getElementById('ix').textContent=String(Math.min(P.length,1+Math.floor(k*P.length))).padStart(2,'0')+' / 0'+P.length;requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+</script></body></html>
