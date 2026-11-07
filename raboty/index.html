@@ -102,6 +102,11 @@
   .lb.on { display: flex; }
   .lb .fr { position: relative; width: min(420px, 100%); height: min(860px, calc(100% - 56px)); margin-top: 56px; background: #fff; border-radius: 28px; overflow: visible; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: lbin .35s cubic-bezier(.2,.9,.2,1); }
   .lb.wide .fr { width: min(1180px, 100%); }
+  .lb video#lbv { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; border-radius: 28px; background: #0E0B09; transition: opacity .5s; z-index: 1; }
+  .lb video#lbv.gone { opacity: 0; pointer-events: none; }
+  .lbload { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2; background: rgba(22,24,29,.85); color: #fff; font-size: 13px; font-weight: 700; padding: 8px 14px; border-radius: 99px; transition: opacity .4s; white-space: nowrap; }
+  .lbload.gone { opacity: 0; }
+  .work video { cursor: pointer; }
   .lb iframe { width: 100%; height: 100%; border: 0; display: block; border-radius: 28px; background:#fff; }
   .lb .x { position: absolute; top: -52px; right: 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #16181D; color: #fff; font-size: 20px; cursor: pointer; }
   .lb .full { position: absolute; top: -52px; right: 48px; z-index: 2; height: 40px; padding: 0 14px; border-radius: 99px; background: #fff; color: #16181D; font-size: 13px; font-weight: 700; display: flex; align-items: center; text-decoration: none; box-shadow: 0 0 0 1px #ddd; }
@@ -144,7 +149,7 @@
   </div>
 </div></section>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Сайт в окне"><div class="fr"><button class="x" id="lbx" aria-label="Закрыть">✕</button><a class="full" id="lbf" target="_blank" rel="noopener">На весь экран</a><iframe id="lbi" title="Сайт" loading="lazy"></iframe></div></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Сайт в окне"><div class="fr"><button class="x" id="lbx" aria-label="Закрыть">✕</button><a class="full" id="lbf" target="_blank" rel="noopener">На весь экран</a><iframe id="lbi" title="Сайт"></iframe><video id="lbv" muted loop playsinline aria-hidden="true"></video><span class="lbload" id="lbl">Загружаю сайт…</span></div></div>
 <script>
 var STYLES = [
   { id: "kino", name: "Кинематографичные", wide: true, sw: ["#0E0B09", "#C27A45", "#FF7A2E", "#EFE3D3"],
@@ -207,34 +212,41 @@ document.getElementById("styles").innerHTML = STYLES.map(function (s) {
     s.sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</div><p>" + e(s.text) + '</p></div><div class="row">' +
     s.works.map(function (w) {
       var url = w[4] || ("../demos/" + w[0] + "/");
-      if (s.wide) return '<article class="work wide"><div class="laptop"><div class="scr"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div><div class="base"></div></div>' +
+      if (s.wide) return '<article class="work wide"><div class="laptop"><div class="scr"><video muted loop playsinline autoplay preload="auto" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div><div class="base"></div></div>' +
         "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
-      return '<article class="work"><div class="phone"><video muted loop playsinline preload="none" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div>' +
+      return '<article class="work"><div class="phone"><video muted loop playsinline autoplay preload="auto" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div>' +
         "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
     }).join("") + "</div></section>";
 }).join("");
-// Видео играет, только пока его видно: так страница не тормозит и не тратит трафик
+// Все видео играют сразу и по кругу
 var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-var io = new IntersectionObserver(function (list) {
-  list.forEach(function (en) {
-    var v = en.target;
-    if (en.isIntersecting && !reduce) { if (v.preload !== "auto") v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-    else v.pause();
-  });
-}, { threshold: .35 });
-document.querySelectorAll("video").forEach(function (v) { io.observe(v); if (reduce) v.controls = true; });
+var vids = [].slice.call(document.querySelectorAll(".work video"));
+function playAll() { vids.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
+if (reduce) vids.forEach(function (v) { v.removeAttribute("autoplay"); v.controls = true; }); else { playAll(); addEventListener("touchstart", playAll, { once: true, passive: true }); }
 
-// Сайты открываются прямо здесь, в окне поверх страницы
-var lb = document.getElementById("lb"), lbi = document.getElementById("lbi");
-function openLb(u, wide) { lbi.src = u; document.getElementById("lbf").href = u; lb.classList.toggle("wide", !!wide); lb.classList.add("on"); document.body.style.overflow = "hidden"; }
-function closeLb() { lb.classList.remove("on"); lbi.src = "about:blank"; document.body.style.overflow = ""; }
+// Сайт открывается прямо здесь. Пока он грузится, в окне уже идёт его видео
+var lb = document.getElementById("lb"), lbi = document.getElementById("lbi"), lbv = document.getElementById("lbv"), lbl = document.getElementById("lbl"), cur = "", hideT;
+function reveal() { clearTimeout(hideT); hideT = setTimeout(function () { lbv.classList.add("gone"); lbl.classList.add("gone"); lbv.pause(); }, 900); }
+lbi.addEventListener("load", function () { if (lbi.src !== "about:blank" && lb.classList.contains("on")) reveal(); });
+function openLb(u, wide, vsrc, poster) {
+  document.getElementById("lbf").href = u; lb.classList.toggle("wide", !!wide); lb.classList.add("on"); document.body.style.overflow = "hidden";
+  if (cur === u) return;                       // тот же сайт: уже загружен, не грузим заново
+  cur = u; clearTimeout(hideT);
+  if (vsrc) { lbv.poster = poster || ""; lbv.src = vsrc; lbv.classList.remove("gone"); lbl.classList.remove("gone"); var p = lbv.play(); if (p && p.catch) p.catch(function () {}); }
+  else { lbv.classList.add("gone"); lbl.classList.add("gone"); }
+  lbi.src = u;
+}
+function closeLb() { lb.classList.remove("on"); document.body.style.overflow = ""; }
 document.getElementById("lbx").onclick = closeLb;
 lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
 addEventListener("keydown", function (ev) { if (ev.key === "Escape") closeLb(); });
 document.addEventListener("click", function (ev) {
-  var a = ev.target.closest("a.open"), ph = ev.target.closest("[data-live]");
-  if (a) { ev.preventDefault(); openLb(a.getAttribute("href"), !!a.closest(".wide") && innerWidth > 700); }
-  else if (ph) { openLb(ph.getAttribute("data-live"), false); }
+  var w = ev.target.closest(".work"), a = ev.target.closest("a.open"), onVid = ev.target.closest(".phone, .laptop");
+  if (w && (a || onVid)) {
+    ev.preventDefault();
+    var link = w.querySelector("a.open"), v = w.querySelector("video");
+    openLb(link.getAttribute("href"), !!w.classList.contains("wide") && innerWidth > 700, v && v.querySelector("source").getAttribute("src"), v && v.poster);
+  }
 });
 </script>
 </body>
