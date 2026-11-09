@@ -9,6 +9,7 @@ const P = PropertiesService.getScriptProperties();
 const OWNER = 1971837615; // Трофим: сюда приходят сообщения, которые люди пишут боту
 const APP = "https://trofimshakirov2081-lang.github.io/Shak.web/app/";
 const BRIEF = "https://trofimshakirov2081-lang.github.io/Shak.web/brief/?from=bot";
+const COVER = "https://trofimshakirov2081-lang.github.io/Shak.web/app/cover.jpg";
 
 function api(method, body) {
   const r = UrlFetchApp.fetch("https://api.telegram.org/bot" + P.getProperty("TOKEN") + "/" + method, {
@@ -19,9 +20,9 @@ function api(method, body) {
 
 function card(chat, name) {
   const hi = name ? name + ", здравствуйте!" : "Здравствуйте!";
-  api("sendMessage", {
-    chat_id: chat, parse_mode: "HTML",
-    text: hi + " Это <b>shak.web</b>: делаю сайты под ключ для малого бизнеса.\n\n" +
+  api("sendPhoto", {
+    chat_id: chat, parse_mode: "HTML", photo: COVER,
+    caption: hi + " Это <b>shak.web</b>: делаю сайты под ключ для малого бизнеса.\n\n" +
       "В каждом сайте есть админка: цены, тексты и фото вы меняете сами, без программиста. " +
       "Заявки приходят в Telegram, WhatsApp или на почту.\n\n" +
       "👇 Посмотрите работы или соберите свой сайт за 10 минут",
@@ -36,6 +37,10 @@ function card(chat, name) {
 function doPost(e) {
   try {
     const u = JSON.parse(e.postData.contents), m = u.message;
+    // Google отвечает Telegram переадресацией, и Telegram повторяет сообщения: отвечаем на каждое только раз
+    const cache = CacheService.getScriptCache(), key = "u" + u.update_id;
+    if (cache.get(key)) return ok();
+    cache.put(key, "1", 21600);
     if (!m || !m.chat || m.chat.type !== "private") return ok();
     const text = m.text || "";
     card(m.chat.id, m.from && m.from.first_name);
