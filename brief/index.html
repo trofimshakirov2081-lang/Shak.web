@@ -27,12 +27,6 @@
   --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
   --grad:linear-gradient(120deg,#6d5dfc 0%,#b65cf0 50%,#ff7a59 100%); --blob:.3;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#121215; --card:#1b1b20; --text:#f1f1f4; --muted:#a0a0ab; --line:#2c2c34;
-    --accent:#8a7dff; --accent-soft:#25223f; --ok:#3ccf91; --shadow:0 8px 24px rgba(0,0,0,.35); --blob:.16;
-  }
-}
 :root[data-theme="dark"]{
   --bg:#121215; --card:#1b1b20; --text:#f1f1f4; --muted:#a0a0ab; --line:#2c2c34;
   --accent:#8a7dff; --accent-soft:#25223f; --ok:#3ccf91; --shadow:0 8px 24px rgba(0,0,0,.35); --blob:.16;
@@ -52,7 +46,7 @@ header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--b
 .progress{flex:1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s}
 .stepnum{font-size:13px;color:var(--muted);white-space:nowrap}
-.theme-btn{border:1px solid var(--line);background:var(--card);border-radius:10px;width:36px;height:36px;cursor:pointer}
+.theme-btn{border:1px solid var(--line);background:var(--card);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:17px;line-height:1;padding:0}
 
 /* шаг */
 main{padding:32px 0 120px}
@@ -362,7 +356,7 @@ html,body{overflow-x:clip}
     <div class="brand" id="brandName">Бриф на сайт<small id="brandSub"></small></div>
     <div class="progress"><i id="bar"></i></div>
     <div class="stepnum" id="stepnum"></div>
-    <button class="theme-btn" id="themeBtn" title="Тема">◐</button>
+    <button class="theme-btn" id="themeBtn" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема">🌙</button>
   </div>
 </header>
 
@@ -1374,11 +1368,14 @@ document.addEventListener('click', e => {
 (function(){
   let th = null; try{ th = localStorage.getItem('brief-theme'); }catch(e){}
   if(th) document.documentElement.dataset.theme = th;
+  const ico = () => { $('#themeBtn').textContent = document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙'; };
+  ico();
   $('#themeBtn').onclick = () => {
-    const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const cur = document.documentElement.dataset.theme || 'light';
     const nx = cur === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = nx;
     try{ localStorage.setItem('brief-theme', nx); }catch(e){}
+    ico();
   };
 })();
 
