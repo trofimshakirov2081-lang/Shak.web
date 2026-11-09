@@ -7,7 +7,7 @@
 
 const P = PropertiesService.getScriptProperties();
 const OWNER = 1971837615; // Трофим: сюда приходят сообщения, которые люди пишут боту
-const APP = "https://trofimshakirov2081-lang.github.io/Shak.web/app/";
+const APP = "https://trofimshakirov2081-lang.github.io/Shak.web/app/?v=20261109"; // меняйте v, чтобы Telegram не показывал старую версию
 const BRIEF = "https://trofimshakirov2081-lang.github.io/Shak.web/brief/?from=bot";
 const COVER = "https://trofimshakirov2081-lang.github.io/Shak.web/app/cover.jpg";
 
@@ -48,6 +48,9 @@ function doPost(e) {
       // Человек написал что-то сам: пересылаем Трофиму, чтобы не потерять
       api("forwardMessage", { chat_id: OWNER, from_chat_id: m.chat.id, message_id: m.message_id });
     }
+    // Google отвечает Telegram переадресацией 302, Telegram считает это ошибкой и начинает
+    // тормозить следующие сообщения. Сбрасываем очередь: это сообщение уже обработано.
+    api("setWebhook", { url: ScriptApp.getService().getUrl(), allowed_updates: ["message"], drop_pending_updates: true });
   } catch (err) { console.error(err); }
   return ok();
 }
