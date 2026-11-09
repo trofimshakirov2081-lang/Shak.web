@@ -21,6 +21,8 @@ const SITE = "https://trofimshakirov2081-lang.github.io/Shak.web/";
 const APP = SITE + "app/?v=" + VER;
 const RABOTY = SITE + "raboty/";
 const COVER = SITE + "app/cover.jpg?v=" + VER;
+const CARD_VIDEO = SITE + "app/card.mp4?v=" + VER;   // живая карточка: в телефоне листается сайт
+const CONFETTI = "5046509860389126442";              // эффект 🎉 при первом входе
 const CHANNEL = "https://t.me/shak_web";
 const HOOK_URL = "";                 // можно вставить ссылку /exec, тогда setWebhook() возьмёт её отсюда
 
@@ -61,13 +63,13 @@ const CAPTION = function (name) {
     "👇 Посмотрите работы или соберите свой сайт за 10 минут";
 };
 const ANSWERS = {
-  price: "<b>Цены</b>\n\n" +
-    "• <b>Старт</b>, 10 000 ₽: наш готовый дизайн в ваших цветах, админка, заявки в одно место.\n" +
-    "• <b>Под ключ</b>, 15 500 ₽: дизайн с нуля под вас, полная админка, заявки куда угодно, 2 недели поддержки.\n" +
-    "• <b>Всё за вас</b>, 18 000 ₽: «Под ключ» плюс сам покупаю и настраиваю домен и хостинг, Метрику и Вебмастер, месяц поддержки.\n\n" +
-    "Сэкономить до 3 000 ₽: 1 200 ₽ за пройденный бриф или 3 000 ₽ за готовое ТЗ и брендбук.\n\n" +
-    "<b>Сроки:</b> 7-14 дней от материалов.\n<b>Оплата:</b> заранее ничего не платите. Половина, когда сайт готов и всё нравится, остальное после запуска.\n" +
-    "Домен и хостинг оплачиваете сами, обычно около 3 000 ₽ в год.",
+  price: "<b>💰 Цены</b>\n\n" +
+    "<b>Старт · 10 000 ₽</b>\n<blockquote expandable>Наш готовый дизайн в ваших цветах. Админка: цены, тексты и фото. Заявки в одно место.</blockquote>\n" +
+    "<b>Под ключ · 15 500 ₽</b> ⭐️ выбирают чаще всего\n<blockquote expandable>Дизайн с нуля под вас, полная админка (меняется всё, даже цвета и шрифты), заявки куда угодно, 2 недели поддержки.</blockquote>\n" +
+    "<b>Всё за вас · 18 000 ₽</b>\n<blockquote expandable>«Под ключ» плюс сам покупаю и настраиваю домен и хостинг, Яндекс Метрику и Вебмастер, месяц поддержки.</blockquote>\n" +
+    "🎁 Сэкономить до 3 000 ₽: 1 200 ₽ за пройденный бриф или 3 000 ₽ за готовое ТЗ и брендбук.\n\n" +
+    "🗓 <b>Сроки:</b> 7-14 дней от материалов.\n🤝 <b>Оплата:</b> заранее ничего не платите. Половина, когда сайт готов и всё нравится, остальное после запуска.\n" +
+    "🌐 Домен и хостинг около 3 000 ₽ в год, оплачиваете сами.",
   admin: "<b>Админка</b> это ваш пульт управления сайтом. Без программиста вы сами:\n\n" +
     "• меняете цены, тексты и фото за минуту\n• добавляете и убираете товары, услуги, разделы и страницы\n" +
     "• правите контакты, адрес и график\n• меняете цвета, шрифты и оформление\n" +
@@ -140,7 +142,7 @@ function route(u) {
   if (u.my_chat_member) {
     const m = u.my_chat_member;
     if (m.chat.type === "private" && m.new_chat_member && m.new_chat_member.status === "kicked") markBlocked(m.chat.id);
-    if (m.chat.type === "private" && m.new_chat_member && m.new_chat_member.status === "member") touchUser(m.from, null, "вернулся");
+    if (m.chat.type === "private" && m.new_chat_member && m.new_chat_member.status === "member") safeTouch(m.from, null, "вернулся");
   }
 }
 
@@ -161,14 +163,16 @@ function onMessage(m) {
 
   if (cmd[1] === "start") {
     const src = (cmd[2] || "").replace(/[^\w-]/g, "").slice(0, 40);
-    const isNew = touchUser(m.from, src || "бот", "start");
-    sendCard(m.chat.id, m.from, src);
+    api("sendChatAction", { chat_id: m.chat.id, action: "upload_video" });
+    const isNew = safeTouch(m.from, src || "бот", "start");
+    sendCard(m.chat.id, m.from, src, isNew);
     if (isNew && m.chat.id !== OWNER) {
       send(OWNER, "🆕 Новый человек в боте: " + who(m.from) + (src ? "\nОткуда: <b>" + esc(src) + "</b>" : ""));
     }
     return;
   }
-  touchUser(m.from, null, text ? "сообщение" : "файл");
+  safeTouch(m.from, null, text ? "сообщение" : "файл");
+  if (cmd[1]) api("sendChatAction", { chat_id: m.chat.id, action: "typing" });
   if (cmd[1] === "price") return send(m.chat.id, ANSWERS.price, afterAnswerKb());
   if (cmd[1] === "faq" || cmd[1] === "help") return send(m.chat.id, "Частые вопросы. Нажмите на нужный:", faqKb());
   if (cmd[1] === "works") return send(m.chat.id, "Работы удобнее смотреть в мини-приложении, там же можно открыть любой сайт.", [[{ text: "📱 Смотреть работы", web_app: { url: APP } }], [{ text: "🌐 Открыть в браузере", url: RABOTY }]]);
@@ -176,8 +180,9 @@ function onMessage(m) {
   if (cmd[1] === "contact") return send(m.chat.id, "Пишите прямо сюда, сообщение сразу придёт Трофиму. Или в личку: @" + OWNER_NICK, [[{ text: "💬 Написать Трофиму", url: "https://t.me/" + OWNER_NICK }]]);
   if (cmd[1]) return sendCard(m.chat.id, m.from, "");
 
-  // Человек написал сам: передаём Трофиму, ему коротко отвечаем
+  // Человек написал сам: передаём Трофиму, ставим 👀, коротко отвечаем
   relayToOwner(m);
+  api("setMessageReaction", { chat_id: m.chat.id, message_id: m.message_id, reaction: [{ type: "emoji", emoji: "👀" }] });
   const c = CacheService.getScriptCache(), k = "ack" + m.chat.id;
   if (!c.get(k)) {
     c.put(k, "1", 1800);
@@ -188,8 +193,11 @@ function onMessage(m) {
   }
 }
 
-function sendCard(chat, from, src) {
-  const j = api("sendPhoto", { chat_id: chat, photo: COVER, caption: CAPTION(from && from.first_name), parse_mode: "HTML", reply_markup: { inline_keyboard: cardKb(src) } });
+function sendCard(chat, from, src, isNew) {
+  const base = { chat_id: chat, caption: CAPTION(from && from.first_name), parse_mode: "HTML", reply_markup: { inline_keyboard: cardKb(src) } };
+  if (isNew) base.message_effect_id = CONFETTI;
+  let j = api("sendAnimation", Object.assign({ animation: CARD_VIDEO }, base));
+  if (!j.ok && j.error_code !== 403) { delete base.message_effect_id; j = api("sendPhoto", Object.assign({ photo: COVER }, base)); }
   if (!j.ok) {
     if (j.error_code === 403) return markBlocked(chat);
     send(chat, CAPTION(from && from.first_name), cardKb(src));   // если картинка не загрузилась, хотя бы текст
@@ -242,7 +250,7 @@ function onCallback(q) {
   const chat = q.message && q.message.chat.id;
   if (!chat) return;
   if (d === "q:menu") return send(chat, "Частые вопросы. Нажмите на нужный:", faqKb());
-  if (d.indexOf("q:") === 0 && ANSWERS[d.slice(2)]) { touchUser(q.from, null, "вопрос " + d.slice(2)); return send(chat, ANSWERS[d.slice(2)], afterAnswerKb()); }
+  if (d.indexOf("q:") === 0 && ANSWERS[d.slice(2)]) { safeTouch(q.from, null, "вопрос " + d.slice(2)); return send(chat, ANSWERS[d.slice(2)], afterAnswerKb()); }
   if (q.from.id !== OWNER) return;
   if (d === "bc:yes") return broadcastRun(chat, q.message.message_id);
   if (d === "bc:no") { P.deleteProperty("bc"); return api("editMessageText", { chat_id: chat, message_id: q.message.message_id, text: "Рассылка отменена." }); }
@@ -262,6 +270,8 @@ function sheet() {
   }
   return ss.getSheetByName("люди") || ss.getSheets()[0];
 }
+// Таблица не должна мешать ответу: если она недоступна, бот всё равно отвечает
+function safeTouch(f, src, action) { try { return touchUser(f, src, action); } catch (e) { console.error("sheet", e); return false; } }
 // Возвращает true, если человек новый
 function touchUser(f, src, action) {
   if (!f || f.is_bot) return false;
