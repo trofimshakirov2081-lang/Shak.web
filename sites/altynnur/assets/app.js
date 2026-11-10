@@ -18,7 +18,7 @@
     <img src="${R}${src}-1280.webp" srcset="${R}${src}-640.webp 640w, ${R}${src}-1280.webp 1280w${o.big ? `, ${R}${src}-1600.webp 1600w` : ""}" sizes="${o.sizes || "(max-width: 760px) 100vw, 50vw"}" alt="${esc(alt)}" ${o.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
     ${o.cap && S.preview ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
   const ILL = "Иллюстрация";
-  const crumbs = (items) => `<nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
+  const crumbs = (items) => `<button class="back" data-back type="button"><i aria-hidden="true"></i>Назад</button><nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
 
   /* ---------- цвет и шрифт: ?theme= и ?font=, затем выбор посетителя, затем значения по умолчанию из данных ---------- */
   const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
@@ -173,7 +173,7 @@
       <section class="sec" style="padding-top:0"><div class="wrap rail-head"><h2 class="rv-t">Другие курсы</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
         <div class="rail">${others.map((o) => `<a class="rcard" href="${cURL(o)}">${ph(o.photo, o.alt, { sizes: "(max-width: 760px) 70vw, 26vw" })}<span class="rcard__cat">${esc(cat(o.cat).name)}</span><h3>${esc(o.name)}</h3><span class="price">${rub(o.price)}</span></a>`).join("")}</div></section>`;
   };
-  P.about = () => `<div class="wrap phead">${crumbs([{ t: "Об академии" }])}<h1>${esc(S.org.name)}</h1><p class="lead">${esc(S.org.meaning[0].toUpperCase() + S.org.meaning.slice(1))}. ${esc(S.about.lead)}</p></div>
+  P.about = () => `<div class="wrap phead">${crumbs([{ t: "Об академии" }])}<h1>${esc(S.org.name)}</h1><p class="lead">Название значит ${esc(S.org.meaning)}. ${esc(S.about.lead)}</p></div>
     <section class="sec" style="padding-top:0"><div class="wrap collage">${S.about.collage.map((p, i) => ph(p.src, p.alt, { sizes: i ? "(max-width: 760px) 60vw, 50vw" : "40vw", cap: i ? "" : ILL })).join("")}</div></section>
     <section class="sec" style="padding-top:0"><div class="wrap"><p class="big rv-t">Профессии осваивают руками. Поэтому у нас теория всегда рядом с практикой, а преподаватель рядом с ученицей.</p>
       <ul class="approach" style="margin-top:clamp(48px,6vw,90px)">${S.about.approach.map((a) => `<li><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></li>`).join("")}</ul>
@@ -360,6 +360,18 @@
   filters("#spreads", ".spread"); filters("#gal", "button"); lightbox();
 
   const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // «Назад»: возвращает туда, откуда пришли, на то же место страницы
+  const KEY = "altyn-scroll:" + location.pathname + location.search;
+  const save = () => { try { sessionStorage.setItem(KEY, String(scrollY)); } catch (e) {} };
+  addEventListener("pagehide", save);
+  document.addEventListener("click", (e) => { if (e.target.closest("a[href]")) save(); }, true);
+  const nav = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0]) || {};
+  if (nav.type === "back_forward") { try { const y = +sessionStorage.getItem(KEY); if (y) { history.scrollRestoration = "manual"; requestAnimationFrame(() => scrollTo(0, y)); setTimeout(() => scrollTo(0, y), 250); } } catch (e) {} }
+  document.querySelectorAll("[data-back]").forEach((b) => b.addEventListener("click", () => {
+    let same = false; try { same = document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+    if (same && history.length > 1) history.back(); else location.href = R || "./";
+  }));
+
   // карусель курсов: ближняя карточка в центре, соседние уходят по дуге назад
   const flow = document.querySelector(".flow");
   if (flow) {
@@ -400,13 +412,36 @@
     addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
     move();
   }
-  const zoom = document.querySelector(".zoom");
+  const zoom = document.querySelector("section.zoom");
   if (zoom && !RM) {
     const st = zoom.querySelector(".zoom__stick"); let zq = 0;
     const zmove = () => { zq = 0; const r = zoom.getBoundingClientRect(), span = r.height - innerHeight; if (r.bottom < 0 || r.top > innerHeight) return;
       const p = Math.max(0, Math.min(1, -r.top / span)); st.style.setProperty("--p", p.toFixed(4)); st.classList.toggle("is-open", p > 0.82); };
     addEventListener("scroll", () => { if (!zq) zq = requestAnimationFrame(zmove); }, { passive: true }); addEventListener("resize", zmove); zmove();
   } else if (zoom) zoom.classList.add("is-static");
+  /* ---------- спокойные анимации ---------- */
+  // заголовки секций проявляются по словам, снизу из-под маски
+  document.querySelectorAll(".phead h1, .chero h1").forEach((h) => h.classList.add("rv-t"));
+  document.querySelectorAll("h2.rv-t, h1.rv-t").forEach((h) => { let i = 0; h.innerHTML = h.textContent.split(" ").map((w) => `<span class="w"><span style="--i:${i++}">${esc(w)}</span></span>`).join(" "); h.classList.add("rv-w"); });
+  // плитки в сетках появляются по очереди
+  document.querySelectorAll(".dirs, .why, .ctiles, .masonry, .approach, .steps, .who, .collage, .rail").forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty("--d", i * 110 + "ms")));
+  if (!RM) {
+    // фото внутри плиток чуть медленнее страницы: лёгкая глубина
+    const par = [...document.querySelectorAll(".hero__ph, .dir .ph, .why .ph, .etile .ph, .ctile .ph, .chero__ph, .spread__ph .ph, .pair .ph, .collage .ph")];
+    par.forEach((el) => el.classList.add("par"));
+    // шапка прячется, когда листают вниз, и возвращается, когда листают вверх; тонкая полоска показывает, сколько прочитано
+    const hdr = document.querySelector(".hdr"); let lastY = scrollY, pq = 0;
+    const tick = () => { pq = 0; const vh = innerHeight;
+      par.forEach((el) => { const r = el.getBoundingClientRect(); if (r.bottom < -50 || r.top > vh + 50) return; const k = (r.top + r.height / 2 - vh / 2) / vh; el.style.setProperty("--py", (k * -7).toFixed(2) + "%"); });
+      const y = scrollY, max = document.documentElement.scrollHeight - vh;
+      hdr.style.setProperty("--sp", max > 0 ? (y / max).toFixed(4) : 0);
+      if (!html.classList.contains("menu-open")) hdr.classList.toggle("is-hidden", y > lastY && y > 320);
+      lastY = y; };
+    addEventListener("scroll", () => { if (!pq) pq = requestAnimationFrame(tick); }, { passive: true }); tick();
+  }
+  document.querySelectorAll(".acc").forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty("--d", i * 60 + "ms")));
+  const seen = [...document.querySelectorAll(".steps>li, .approach>li, .who>div, .acc details, .spread>div:last-child")];
+  if ("IntersectionObserver" in window) { const so = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-seen"); so.unobserve(en.target); } }), { rootMargin: "0px 0px -6% 0px" }); seen.forEach((el) => so.observe(el)); } else seen.forEach((el) => el.classList.add("is-seen"));
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".rv, .rv-t").forEach((el) => io.observe(el));

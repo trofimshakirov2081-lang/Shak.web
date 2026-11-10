@@ -510,7 +510,7 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 @media (max-width:760px){.etile::after{background:linear-gradient(180deg,rgba(30,23,20,.1),rgba(30,23,20,.75) 70%)}}
 
 /* фото раскрывается при прокрутке */
-.zoom{height:250svh;position:relative}
+section.zoom{height:250svh;position:relative}
 .zoom__stick{--p:0;position:sticky;top:0;height:100svh;overflow:hidden}
 .zoom__c{position:absolute;inset:0;transform:scale(calc(.42 + var(--p) * .58));border-radius:calc((1 - var(--p)) * 18px);overflow:hidden;will-change:transform}
 .zoom__c img{width:100%;height:100%;object-fit:cover}
@@ -525,8 +525,8 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 .zoom__t h2{color:#FBF6EF;font-size:clamp(2rem,1.4rem + 3vw,4.4rem);max-width:14ch}
 .is-open .zoom__t{opacity:1;transform:none}
 @media (max-width:760px){.zoom__s{width:34vw}.zoom__c{transform:scale(calc(.5 + var(--p) * .5))}}
-.zoom.is-static{height:auto}.zoom.is-static .zoom__stick{position:relative;height:80svh}.zoom.is-static .zoom__c{transform:none}.zoom.is-static .zoom__s{display:none}.zoom.is-static .zoom__t{opacity:1;transform:none}
-.zoom+section{padding-top:var(--sec)!important}
+section.zoom.is-static{height:auto}sectionsection.zoom.is-static .zoom__stick{position:relative;height:80svh}section.zoom.is-static .zoom__c{transform:none}section.zoom.is-static .zoom__s{display:none}section.zoom.is-static .zoom__t{opacity:1;transform:none}
+section.zoom+section{padding-top:var(--sec)!important}
 
 /* почему АлтынНур: плитки как у направлений */
 .why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(170px,19vw,270px);gap:clamp(10px,1.4vw,18px)}
@@ -540,3 +540,48 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 .why .dir__t h3{font-size:clamp(1.15rem,1rem + .7vw,1.6rem)}
 .why__p .dir__t h3{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.6rem)}
 @media (max-width:760px){.why{grid-template-columns:1fr 1fr;grid-auto-rows:clamp(150px,44vw,220px)}.why__p{grid-column:span 2;grid-row:span 2}}
+
+/* кнопка «Назад» на внутренних страницах */
+.back{align-self:flex-start;width:max-content;display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px 0 12px;margin-bottom:16px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-size:.92rem;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s}
+.back:hover{border-color:var(--ink);background:var(--parchment)}
+.back i{width:14px;height:1.5px;background:currentColor;position:relative;transition:width .25s var(--ease)}
+.back i::before{content:"";position:absolute;left:0;top:-3.5px;width:7px;height:7px;border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}
+.back:hover i{width:20px}
+.chero--cover .back{color:#FBF6EF;border-color:rgba(251,246,239,.5)}
+.chero--cover .back:hover{background:rgba(251,246,239,.12)}
+
+/* ===== спокойные анимации ===== */
+/* заголовки по словам */
+.js .rv-t.rv-w{opacity:1;transform:none}
+.rv-w .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.js .rv-w .w>span{display:inline-block;transform:translateY(105%);transition:transform .9s var(--ease);transition-delay:calc(var(--i) * 70ms)}
+.js .rv-w.is-in .w>span{transform:none}
+/* плитки по очереди */
+.js .ph.rv::before{transition-delay:var(--d,0ms)}
+.dirs>*,.why>*,.ctiles>*{--d:0ms}
+.dirs>* .ph.rv::before,.why>* .ph.rv::before,.ctiles>* .ph.rv::before{transition-delay:var(--d)}
+/* глубина: фото внутри плитки движется медленнее страницы */
+.par{overflow:hidden}
+.par img{transform:translate3d(0,var(--py,0),0) scale(1.14)!important;transition:none!important}
+.hero__ph.par img{animation:none}
+/* подписи на плитках: стрелка сдвигается при наведении, плитка чуть уменьшается при нажатии */
+.dir,.why__p,.why__a,.ctile,.etile,.fcard{transition:transform .35s var(--ease)}
+.dir:active,.why__p:active,.ctile:active{transform:scale(.985)}
+.dir:hover .link i,.why__p:hover .link i,.ctile:hover .link i{width:28px}
+.btn:active{transform:scale(.97)}
+/* шапка: прячется при прокрутке вниз, полоска прочитанного */
+.hdr{transition:transform .35s var(--ease)}
+.hdr.is-hidden{transform:translateY(-100%)}
+.hdr::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);transform-origin:0 50%;transform:scaleX(var(--sp,0));opacity:.85}
+/* цена в карусели: ближняя карточка мягко подсвечивает цену */
+.fcard .price{transition:transform .4s var(--ease),opacity .4s}
+.fcard:not(.is-cur) .price{opacity:.55}
+.fcard.is-cur .price{transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.js .rv-w .w>span{transform:none}.par img{transform:none!important}.hdr.is-hidden{transform:none}}
+
+/* внутренние страницы: этапы, подход и вопросы появляются по очереди */
+.js .steps>li,.js .approach>li,.js .who>div,.js .acc details,.js .spread>div:last-child{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.js .is-seen{opacity:1!important;transform:none!important}
+.masonry>*{--d:0ms}
+.js .masonry .ph.rv::before{transition-delay:var(--d)}
+@media (prefers-reduced-motion:reduce){.js .steps>li,.js .approach>li,.js .who>div,.js .acc details,.js .spread>div:last-child{opacity:1;transform:none}}
