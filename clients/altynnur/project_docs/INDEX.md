@@ -32,7 +32,7 @@ START_HERE → Часть 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 
 | Файл | Статус |
 |---|---|
 | `PROGRESS.md` | ведётся |
-| `MASTER_REQUIREMENTS.md` | пусто, заполняется после всех конспектов |
-| `OPEN_QUESTIONS.md` | пусто, заполняется по ходу чтения |
-| `PART_01.md` … `PART_11.md` | ещё не созданы |
-| `DEVELOPMENT_PLAN.md` | ещё не создан |
+| `MASTER_REQUIREMENTS.md` | готово: сводные требования по 22 направлениям |
+| `OPEN_QUESTIONS.md` | готово: конфликты и решения |
+| `PART_01.md` … `PART_11.md` | готово |
+| `DEVELOPMENT_PLAN.md` | готово: 16 этапов, 3 фазы |
