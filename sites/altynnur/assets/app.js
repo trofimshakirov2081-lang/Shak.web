@@ -24,9 +24,12 @@
   const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
     { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
-  const FONTS = [{ id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "forum", name: "Forum", ff: "'Forum'" }, { id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }];
+  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }];
   const pick = (key, list, def) => { let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
-  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "cormorant");
+  const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
+  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow");
+  let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = MODE === "dark" ? "dark" : "light";
+  document.documentElement.dataset.mode = MODE;
   const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
   document.documentElement.dataset.theme = THEME; document.documentElement.dataset.font = FONT;
 
@@ -40,7 +43,7 @@
     instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + v.replace(/^@/, ""), show: (v) => "@" + v.replace(/^@/, "") },
     email: { t: "Почта", href: (v) => "mailto:" + v, show: (v) => v }
   };
-  const contactRows = () => S.contacts.filter((c) => c.on && (has(c.value) || S.preview)).map((c) => {
+  const contactRows = () => S.contacts.filter((c) => c.on && has(c.value)).map((c) => {
     const k = CH[c.type]; if (!k) return "";
     return has(c.value) ? `<li><span>${k.t}</span><a href="${esc(k.href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(k.show(c.value))}</a></li>`
       : `<li class="is-empty"><span>${k.t}</span><em>добавится в админке</em></li>`;
@@ -60,11 +63,13 @@
   /* ---------- шапка и подвал ---------- */
   const header = () => `${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       <div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
-      <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span></div></div></div>` : ""}
+      <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>
+      ${PAGE === "home" ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div></div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
         <div class="nav__extra"><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></nav>
+      <button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
       <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
       <button class="btn btn--accent" data-enroll>Записаться</button>
     </div></header>`;
@@ -81,8 +86,7 @@
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   H.hero = () => `<section class="hero">
       <div class="hero__ph"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 55vw" alt="${esc(S.hero.alt)}" fetchpriority="high">${S.preview ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
-      <div class="hero__t"><p class="hero__kicker">${esc(S.org.kind)} в ${esc(S.org.cityIn)}</p>
-        <h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.text)}</p>
+      <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
     </section>`;
   // манифест: маленькие фото прямо внутри фразы, они раскрываются при прокрутке
@@ -99,35 +103,36 @@
         return `<a class="dir" href="${R}courses/?cat=${c.id}">${ph(c.photo, c.alt, { sizes: i ? "(max-width: 760px) 50vw, 40vw" : "(max-width: 760px) 100vw, 58vw" })}
           <div class="dir__t"><h3>${esc(c.name)}</h3><p>${esc(c.text)}</p><span class="link">${arrow(`${n} ${plural(n, "курс", "курса", "курсов")}`)}</span></div></a>`;
       }).join("")}</div></div></section>`;
-  // курсы: карусель по дуге, как барабан таймера, но по горизонтали
+  // курсы: «по дуге» (карусель) или «плиткой», вариант выбирается в админке
   H.featured = () => {
     const list = S.featured.map(course).filter(Boolean);
+    if (VIEW === "tiles") return `<section class="sec" style="padding-top:0"><div class="wrap">
+      <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
+      <div class="ctiles">${S.courses.map((c) => `<a class="ctile" href="${cURL(c)}">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}<div class="ctile__t"><span class="ctile__n">${esc(c.name)}</span><span class="chip-price">${rub(c.price)}</span></div></a>`).join("")}</div></div></section>`;
     return `<section class="sec flow-sec" style="padding-top:0">
       <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
       <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
         <span class="fcard__cat">${esc(cat(c.cat).name)}</span><span class="fcard__t">${esc(c.name)}</span><span class="price">${rub(c.price)}</span></a>`).join("")}</div>
       <div class="wrap flow-foot"><span class="swipe-hint" aria-hidden="true"><i></i>Листайте</span><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div></section>`;
   };
-  H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="enroll-card">
-      <div><h2>Запишитесь на консультацию</h2><p class="muted">Подскажем, какой курс подойдёт, и сообщим ближайшие даты.</p></div>
-      <form class="quick form" data-quick novalidate>
-        <div class="fld"><label for="qName">Имя</label><input id="qName" name="name" autocomplete="name" maxlength="80"><span class="err"></span></div>
-        <div class="fld"><label for="qPhone">Телефон</label><input id="qPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" maxlength="20"><span class="err"></span></div>
-        <button class="btn btn--accent" type="submit">Записаться</button>
-      </form></div></div></section>`;
-  // лента фото: два ряда едут навстречу друг другу, пока страницу прокручивают
-  H.ribbon = () => {
-    const rows = S.ribbon;
-    return `<section class="ribbon" aria-label="Фото направлений">${rows.map((row, r) => `<div class="ribbon__row" data-dir="${r ? 1 : -1}">${row.concat(row).map((p) => `<span class="ribbon__ph"><img src="${R}${p}-640.webp" alt="" loading="lazy"></span>`).join("")}</div>`).join("")}
-      ${S.preview ? `<p class="wrap cap" style="margin-top:12px">Иллюстрации направлений. Заменим на фото ваших учениц и занятий.</p>` : ""}</section>`;
-  };
-  H.teacher = () => `<section class="sec teach-sec"><div class="wrap teacher">
-      <div class="portrait">${has(S.teacher.photo) ? `<img src="${R}${S.teacher.photo}" alt="${esc(S.teacher.name)}" loading="lazy">` : S.preview ? `<span class="portrait__ph">Здесь будет ваш портрет</span>` : ""}
-        <div class="portrait__cap"><span>Ваш преподаватель</span><b>${esc(S.teacher.name)}</b></div></div>
-      <div class="teacher__t"><p class="muted">${esc(S.teacher.role)}</p>${has(S.teacher.bio) ? `<p class="lead">${esc(S.teacher.bio)}</p>` : ""}
-        <ul class="adv">${S.advantages.map((a) => `<li><h3>${esc(a.t)}</h3><p>${esc(a.d)}</p></li>`).join("")}</ul>
-        <a class="link" href="${R}about/">${arrow("Об Айгуль и академии")}</a></div>
+  // запись: такая же фото-плитка, как направления, с двумя кнопками
+  H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="etile">${ph(S.enroll.photo, S.enroll.alt, { sizes: "100vw" })}
+      <div class="etile__t"><h2>Запишитесь на консультацию</h2><p>Подскажем курс и ближайшие даты</p>
+        <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button><a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></div></div></div></section>`;
+  // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
+  H.zoom = () => `<section class="zoom" aria-label="Обучение на практике"><div class="zoom__stick">
+      ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p}-640.webp" alt="" loading="lazy"></span>`).join("")}
+      <div class="zoom__c"><img ${srcset(S.zoom.main)} sizes="100vw" alt="${esc(S.zoom.alt)}" loading="lazy">
+        <div class="zoom__t"><h2>${esc(S.zoom.title)}</h2><a class="btn btn--glass" href="${R}works/">Смотреть работы</a></div></div>
     </div></section>`;
+  // преподаватель и преимущества: плитки с фото и короткими подписями
+  H.teacher = () => `<section class="sec" style="padding-top:0"><div class="wrap">
+      <h2 class="rv-t sec__h">Почему АлтынНур</h2>
+      <div class="why">
+        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${S.teacher.photo}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${S.preview ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
+          <div class="dir__t"><span class="why__k">Ваш преподаватель</span><h3>${esc(S.teacher.name)}</h3><span class="link">${arrow("Об академии")}</span></div></a>
+        ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short)}</h3></div></div>`).join("")}
+      </div></div></section>`;
 
   /* ---------- страницы ---------- */
   const P = {};
@@ -333,6 +338,9 @@
     const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
     if (th) { apply("theme", th.dataset.themeSet); return; }
     if (fo) { apply("font", fo.dataset.fontSet); return; }
+    const vw = e.target.closest("[data-view-set]");
+    if (vw) { try { localStorage.setItem("altyn-view", vw.dataset.viewSet); } catch (er) {} return; }
+    if (e.target.closest("[data-mode-toggle]")) { MODE = MODE === "dark" ? "light" : "dark"; document.documentElement.dataset.mode = MODE; try { localStorage.setItem("altyn-mode", MODE); } catch (er) {} return; }
     const en = e.target.closest("[data-enroll]");
     if (en) { e.preventDefault(); html.classList.remove("menu-open"); openForm(en.dataset.enroll || ""); return; }
     if (e.target.closest("[data-quiz]")) {
@@ -392,6 +400,13 @@
     addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
     move();
   }
+  const zoom = document.querySelector(".zoom");
+  if (zoom && !RM) {
+    const st = zoom.querySelector(".zoom__stick"); let zq = 0;
+    const zmove = () => { zq = 0; const r = zoom.getBoundingClientRect(), span = r.height - innerHeight; if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = Math.max(0, Math.min(1, -r.top / span)); st.style.setProperty("--p", p.toFixed(4)); st.classList.toggle("is-open", p > 0.82); };
+    addEventListener("scroll", () => { if (!zq) zq = requestAnimationFrame(zmove); }, { passive: true }); addEventListener("resize", zmove); zmove();
+  } else if (zoom) zoom.classList.add("is-static");
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".rv, .rv-t").forEach((el) => io.observe(el));
