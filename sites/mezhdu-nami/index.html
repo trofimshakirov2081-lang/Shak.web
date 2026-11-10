@@ -79,6 +79,8 @@ h1,h2,h3{font-family:'Prata',Georgia,serif;font-weight:400;margin:0;line-height:
 .pose .ff polyline{stroke:var(--she)}.pose .ff circle{fill:var(--she)}
 .legend{display:flex;gap:14px;justify-content:center;font-size:.76rem;color:var(--ink2);margin-top:2px}
 .legend span{display:inline-flex;align-items:center;gap:5px}
+.tip{margin-top:14px;padding:12px 14px;border-radius:16px;background:#EFE3DA;color:#5A4350;font-size:.95rem}
+.tip b{display:block;font-size:.76rem;color:#8A6F7B;margin-bottom:2px}
 .meta{margin-top:auto;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap;font-size:.84rem;color:var(--ink2)}
 .acts{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:8px;margin-top:14px}
 .acts button{border:0;border-radius:18px;min-height:56px;font-weight:700;font-size:.98rem;transition:transform .15s}
@@ -123,6 +125,8 @@ h1,h2,h3{font-family:'Prata',Georgia,serif;font-weight:400;margin:0;line-height:
 .sw[aria-checked="true"]{background:var(--acc)}
 .sw[aria-checked="true"]::after{transform:translateX(20px);background:#2A1B24}
 .note{font-size:.8rem;color:var(--text2);margin:8px 2px 0}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.presets button{border:1px solid var(--line);background:var(--surf);border-radius:12px;padding:9px 12px;font-size:.85rem;font-weight:600}
 .danger{border:1px solid rgba(255,126,107,.4);background:none;color:var(--acc2);border-radius:14px;padding:12px;font-weight:600;width:100%;margin-top:10px}
 .toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 16px);transform:translate(-50%,-20px);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;font-size:.9rem;opacity:0;transition:opacity .25s,transform .25s var(--ease);z-index:50;pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -141,6 +145,7 @@ h1,h2,h3{font-family:'Prata',Georgia,serif;font-weight:400;margin:0;line-height:
 <div class="toast" id="toast"></div>
 <script src="poses.js"></script>
 <script src="cards.js"></script>
+<script src="intim.js"></script>
 <script src="figures.js"></script>
 <script src="app.js"></script>
 </body>

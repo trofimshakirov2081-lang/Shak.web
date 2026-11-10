@@ -8,16 +8,20 @@
 
   /* ---------- все карточки ---------- */
   const ALL = [];
-  POSES.forEach((p, i) => ALL.push({ id: "poses:" + i, cat: "poses", t: p[0], base: p[1], prop: p[2], d: p[3], tags: p[4] || [], who: "both", dur: 2 }));
-  Object.entries(CARDS).forEach(([cat, list]) => list.forEach((c, i) => ALL.push({ id: cat + ":" + i, cat, t: c[0], d: c[1], who: c[2], dur: c[3], tags: c[4] || [] })));
+  POSES.forEach((p, i) => ALL.push({ id: "poses:" + i, cat: "poses", t: p[0], base: p[1], prop: p[2], d: p[3], tags: p[4] || [], who: "both", dur: 2, tip: (window.POSE_TIPS || {})[p[1]] || "" }));
+  Object.entries(CARDS).forEach(([cat, list]) => list.forEach((c, i) => ALL.push({ id: cat + ":" + i, cat, t: c[0], d: c[1], who: c[2], dur: c[3], tags: c[4] || [], tip: c[5] || "" })));
   const BYID = Object.fromEntries(ALL.map((c) => [c.id, c]));
-  const TAGS = [...new Set(ALL.flatMap((c) => c.tags))].sort((a, b) => a.localeCompare(b, "ru"));
+  const PRACT = ["оральные ласки", "анальный секс", "страпон", "игрушки", "БДСМ", "связывание", "шлепки", "доминирование", "раздевание", "повязка на глаза"];
+  const TAGS = [...new Set(ALL.flatMap((c) => c.tags))].filter((t) => !PRACT.includes(t)).sort((a, b) => a.localeCompare(b, "ru"));
+  const SOFT = ["анальный секс", "страпон", "БДСМ", "связывание", "шлепки", "доминирование", "акробатика"];
 
   /* ---------- хранение ---------- */
   const KEY = "mezhdu-nami-v1";
   const def = () => ({ adult: false, cats: Object.fromEntries(CATS.map((c) => [c.id, true])), exTags: [], exCards: [], who: "both", dur: 3, favs: [], hist: [], bags: {}, lead: "she" });
   let S;
   try { S = Object.assign(def(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) { S = def(); }
+  CATS.forEach((c) => { if (S.cats[c.id] === undefined) S.cats[c.id] = true; });
+  Object.keys(S.cats).forEach((k) => { if (!CATS.some((c) => c.id === k)) delete S.cats[k]; });
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
   /* ---------- случайность без повторов ---------- */
@@ -98,9 +102,12 @@
       <div class="seg">${[["both", "Оба"], ["she", "Она"], ["he", "Он"]].map(([v, n]) => `<button data-who="${v}" aria-pressed="${S.who === v}">${n}</button>`).join("")}</div>
       <p class="sub">Длительность заданий</p>
       <div class="seg">${[[1, "до 5 мин"], [2, "до 20 мин"], [3, "любые"]].map(([v, n]) => `<button data-dur="${v}" aria-pressed="${S.dur === v}">${n}</button>`).join("")}</div>
-      <p class="sub">Исключить темы</p>
+      <p class="sub">Практики: что исключить</p>
+      <div class="presets"><button data-preset="soft">Только нежно</button><button data-preset="all">Разрешить всё</button></div>
+      ${PRACT.map((t) => `<div class="row"><span>${esc(t[0].toUpperCase() + t.slice(1))}<br><small class="note" style="margin:0">${ALL.filter((c) => c.tags.includes(t)).length} карточек</small></span><button class="sw" role="switch" aria-checked="${!S.exTags.includes(t)}" data-tag="${esc(t)}" aria-label="${esc(t)}"></button></div>`).join("")}
+      <p class="sub">Другие темы</p>
       <div class="chips">${TAGS.map((t) => `<button class="chip ex" data-tag="${esc(t)}" aria-pressed="${S.exTags.includes(t)}">${esc(t)}</button>`).join("")}</div>
-      <p class="note">Зачёркнутые темы не выпадут ни в одном режиме.</p>
+      <p class="note">Выключенные практики и зачёркнутые темы не выпадут ни в одном режиме, включая позы.</p>
       ${S.exCards.length ? `<p class="sub">Скрытые карточки</p><div class="chips">${S.exCards.map((id) => BYID[id] ? `<button class="chip" data-unhide="${id}">↺ ${esc(BYID[id].t)}</button>` : "").join("")}</div><p class="note">Нажмите, чтобы вернуть карточку.</p>` : ""}
       <button class="danger" data-clear="all">Сбросить всё: настройки, избранное, историю</button>`;
 
@@ -140,6 +147,7 @@
         <div class="ctag"><span class="pill">${esc(CATN[c.cat])}</span><span class="pill who">${whoTxt}</span></div>
         ${c.cat === "poses" ? `<div class="art">${poseSVG(c.base, c.prop)}<div class="legend"><span><i class="dot" style="background:var(--she)"></i>она</span><span><i class="dot" style="background:var(--he)"></i>он</span></div></div>` : ""}
         <h2>${esc(fill(c.t, L))}</h2><p class="d">${esc(fill(c.d, L))}</p>
+        ${c.tip ? `<div class="tip"><b>${c.cat === "poses" ? "Как устроиться" : "Совет"}</b>${esc(fill(c.tip, L))}</div>` : ""}
         <div class="meta"><span>⏱ ${DUR[c.dur]}</span>${c.tags.length ? `<span>· ${c.tags.map(esc).join(", ")}</span>` : ""}</div>
       </article></div>
       ${readonly ? `<div class="acts" style="grid-template-columns:1fr auto"><button class="b-done" data-close>Готово</button><button class="b-fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="В избранное">${fav ? "♥" : "♡"}</button></div>`
@@ -186,6 +194,7 @@
     if ((b = t("[data-who]"))) { S.who = b.dataset.who; save(); render(); return; }
     if ((b = t("[data-dur]"))) { S.dur = +b.dataset.dur; save(); render(); return; }
     if ((b = t("[data-tag]"))) { const g = b.dataset.tag, i = S.exTags.indexOf(g); if (i >= 0) S.exTags.splice(i, 1); else S.exTags.push(g); save(); render(); return; }
+    if ((b = t("[data-preset]"))) { S.exTags = b.dataset.preset === "soft" ? [...new Set(S.exTags.concat(SOFT))] : S.exTags.filter((x) => !PRACT.includes(x) && x !== "акробатика"); save(); render(); toast(b.dataset.preset === "soft" ? "Включён нежный режим" : "Все практики разрешены"); return; }
     if ((b = t("[data-unhide]"))) { S.exCards = S.exCards.filter((x) => x !== b.dataset.unhide); save(); render(); return; }
     if ((b = t("[data-clear]"))) {
       if (b.dataset.clear === "hist") { if (confirm("Очистить историю?")) { S.hist = []; save(); render(); } return; }
@@ -200,7 +209,7 @@
   render();
   if (!S.adult) {
     const g = document.createElement("div"); g.className = "gate"; g.id = "gate";
-    g.innerHTML = `<div class="gate-in"><h1>Между нами</h1><p>Игра для пары: идеи, задания, вопросы и позы, чтобы разнообразить время вдвоём.</p><p>Только для взрослых. Все задания добровольные, любое можно пропустить.</p><button class="big" data-adult>Мне есть 18, начать</button><small>Настройки, избранное и история хранятся только на этом телефоне.</small></div>`;
+    g.innerHTML = `<div class="gate-in"><h1>Между нами</h1><p>Интимная игра для пары: позы, ласки, игрушки, ролевые сценарии и откровенные вопросы.</p><p>Только для взрослых. Всё по взаимному согласию: любую карточку можно пропустить, а ненужные практики выключить в настройках.</p><button class="big" data-adult>Мне есть 18, начать</button><small>Настройки, избранное и история хранятся только на этом телефоне.</small></div>`;
     document.body.appendChild(g);
   }
 })();
