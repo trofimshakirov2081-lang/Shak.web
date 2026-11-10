@@ -4,13 +4,26 @@
    Фото: иллюстрации Unsplash, не работы центра. Заменяются в админке. */
 window.SITE = {
   preview: true,
-  theme: "gold", // вариант по умолчанию: палитра из брифа Айгуль
+  theme: "gold", // цвет по умолчанию: палитра из брифа Айгуль
+  font: "cormorant", // шрифт заголовков по умолчанию: из брифа
   org: {
     name: "АлтынНур", meaning: "«золотой свет» по-башкирски", kind: "Учебный центр бьюти-профессий",
     city: "Туймазы", cityIn: "Туймазах", region: "Республика Башкортостан", owner: "Айгуль Алтынбаева",
     phone: "+7 927 636-32-30", wa: "79276363230", vk: "https://vk.ru/azolotaya82", vkLabel: "vk.ru/azolotaya82",
-    telegram: "", address: "", hours: ""
+    telegram: "", address: "", hours: "",
+    // карта: вставьте ссылку из Яндекс Карт, точка возьмётся из неё. Пока адреса нет, стоит временная точка в центре Туймазов
+    map: { link: "", lon: "53.7056", lat: "54.6031", zoom: 15 }
   },
+  // каналы связи: on = показывать на сайте, value = номер, ник или ссылка
+  contacts: [
+    { type: "phone", on: true, value: "+7 927 636-32-30" },
+    { type: "whatsapp", on: true, value: "79276363230" },
+    { type: "telegram", on: true, value: "" },
+    { type: "max", on: true, value: "" },
+    { type: "vk", on: true, value: "https://vk.ru/azolotaya82" },
+    { type: "instagram", on: true, value: "" },
+    { type: "email", on: true, value: "" }
+  ],
   nav: [
     { label: "Курсы", href: "courses/", page: "courses" },
     { label: "Обучение", href: "training/", page: "training" },
@@ -19,16 +32,20 @@ window.SITE = {
     { label: "Контакты", href: "contacts/", page: "contacts" }
   ],
   // блоки главной: порядок и видимость меняются в админке
-  home: ["hero", "manifest", "directions", "featured", "details", "teacher", "enroll"],
+  home: ["hero", "manifest", "directions", "featured", "enroll", "ribbon", "teacher"],
   hero: {
     title: "Освойте востребованную бьюти-профессию в Туймазах",
     text: "Практическое обучение с преподавателем, который помогает разобраться в профессии и получить первые профессиональные навыки.",
     photo: "ph/hero-eye", alt: "Крупный план глаза с длинными ресницами"
   },
   manifest: {
-    text: "АлтынНур по-башкирски значит «золотой свет». Мы учим профессиям, в которых важны точная рука, внимание к деталям и уважение к человеку в кресле.",
-    photo: "ph/brush", alt: "Кисть с пудрой на тёмном фоне"
+    text: "АлтынНур по-башкирски значит «золотой свет». Мы учим профессиям, где важны точная рука {1}, внимание к деталям {2} и уважение к человеку в кресле {3}.",
+    inline: [{ src: "ph/nails-3", alt: "Мастер наносит покрытие на ноготь" }, { src: "ph/lashes-3", alt: "Ресницы крупным планом" }, { src: "ph/face-1", alt: "Уходовая процедура для лица" }]
   },
+  ribbon: [
+    ["ph/lashes-2", "ph/nails-1", "ph/face-2", "ph/brows-eye", "ph/hair-1", "ph/lash-tools", "ph/nails-4"],
+    ["ph/palette", "ph/hair-3", "ph/manicure", "ph/face-4", "ph/lashes-1", "ph/pedi-1", "ph/brush"]
+  ],
   details: {
     title: "Профессия в деталях",
     text: "Пинцет, кисть, фрезер и пилка. В каждой программе вы учитесь работать с инструментом так, чтобы руки запомнили движение.",

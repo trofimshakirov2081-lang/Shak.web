@@ -20,81 +20,114 @@
   const ILL = "Иллюстрация";
   const crumbs = (items) => `<nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
 
-  /* ---------- цветовой вариант: ?theme=…, затем выбор посетителя, затем вариант по умолчанию из данных ---------- */
-  const THEMES = [{ id: "gold", name: "Слоновая кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
-    { id: "burgundy", name: "Слоновая кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
+  /* ---------- цвет и шрифт: ?theme= и ?font=, затем выбор посетителя, затем значения по умолчанию из данных ---------- */
+  const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
+    { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
-  let THEME = new URLSearchParams(location.search).get("theme");
-  try { THEME = THEME || localStorage.getItem("altyn-theme"); } catch (e) {}
-  if (!THEMES.some((t) => t.id === THEME)) THEME = S.theme || "gold";
-  const setTheme = (id) => { THEME = id; document.documentElement.dataset.theme = id; try { localStorage.setItem("altyn-theme", id); } catch (e) {} document.querySelectorAll("[data-theme-set]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.themeSet === id)); };
-  document.documentElement.dataset.theme = THEME;
+  const FONTS = [{ id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "forum", name: "Forum", ff: "'Forum'" }, { id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }];
+  const pick = (key, list, def) => { let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
+  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "cormorant");
+  const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
+  document.documentElement.dataset.theme = THEME; document.documentElement.dataset.font = FONT;
+
+  /* ---------- контакты: каждый канал включается и меняется в админке ---------- */
+  const CH = {
+    phone: { t: "Телефон", href: (v) => "tel:+" + v.replace(/\D/g, ""), show: (v) => v },
+    whatsapp: { t: "WhatsApp", href: (v) => `https://wa.me/${v.replace(/\D/g, "")}?text=${encodeURIComponent(WA_HELLO)}`, show: () => "Написать" },
+    telegram: { t: "Telegram", href: (v) => "https://t.me/" + v.replace(/^@|https?:\/\/t\.me\//g, ""), show: (v) => "@" + v.replace(/^@|https?:\/\/t\.me\//g, "") },
+    max: { t: "MAX", href: (v) => (/^https?:/.test(v) ? v : "https://max.ru/" + v.replace(/^@/, "")), show: () => "Написать" },
+    vk: { t: "ВКонтакте", href: (v) => (/^https?:/.test(v) ? v : "https://vk.ru/" + v), show: (v) => v.replace(/^https?:\/\//, "") },
+    instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + v.replace(/^@/, ""), show: (v) => "@" + v.replace(/^@/, "") },
+    email: { t: "Почта", href: (v) => "mailto:" + v, show: (v) => v }
+  };
+  const contactRows = () => S.contacts.filter((c) => c.on && (has(c.value) || S.preview)).map((c) => {
+    const k = CH[c.type]; if (!k) return "";
+    return has(c.value) ? `<li><span>${k.t}</span><a href="${esc(k.href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(k.show(c.value))}</a></li>`
+      : `<li class="is-empty"><span>${k.t}</span><em>добавится в админке</em></li>`;
+  }).join("");
+  // карта: из ссылки Яндекс.Карт берём координаты (ll=, pt= или whatshere), иначе запасная точка
+  const mapCoords = () => {
+    const m = S.org.map || {}, l = m.link || "";
+    const g = l.match(/(?:ll|pt|whatshere%5Bpoint%5D|whatshere\[point\])=([\d.]+)(?:%2C|,)([\d.]+)/);
+    return g ? { lon: g[1], lat: g[2], z: m.zoom || 16 } : { lon: m.lon, lat: m.lat, z: m.zoom || 15 };
+  };
+  const mapHTML = () => {
+    const c = mapCoords(), open = S.org.map.link || `https://yandex.ru/maps/?pt=${c.lon},${c.lat}&z=${c.z}&l=map`;
+    return `<div class="map"><iframe title="Карта" src="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm" loading="lazy" allowfullscreen></iframe>
+      <div class="map__bar"><span>${esc(S.org.address || `${S.org.city}, ${S.org.region}`)}${S.preview && !S.org.address ? " (точка временная)" : ""}</span><a href="${open}" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></div></div>`;
+  };
 
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${S.preview ? `<div class="draft"><div class="wrap">Черновик для согласования. Фото временные (иллюстрации), цены предварительные. Работы, отзывы и данные о преподавателе добавим после материалов от Айгуль. </div><div class="wrap" style="padding-top:0"><span>Цвет:</span><span class="themes" role="group" aria-label="Цветовой вариант">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span></div></div>` : ""}
+  const header = () => `${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+      <div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
+      <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span></div></div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
-      <nav class="nav" id="nav" aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
-        <div class="nav__extra"><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">Написать в WhatsApp</a></div></nav>
+      <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
+        <div class="nav__extra"><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></nav>
       <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
       <button class="btn btn--accent" data-enroll>Записаться</button>
     </div></header>`;
-  const footer = () => `<footer class="ftr"><div class="wrap">
+  const footer = () => `<footer class="ftr" id="contacts-ftr"><div class="wrap">
       <div class="ftr__grid">
-        <div class="ftr__brand"><b>${esc(S.org.name)}</b><p>${esc(S.org.kind)}. ${esc(S.org.city)}, ${esc(S.org.region)}. Название значит ${esc(S.org.meaning)}.</p></div>
-        <div><p class="ftr__h">Разделы</p><ul>${S.nav.map((n) => `<li><a href="${R}${n.href}">${esc(n.label)}</a></li>`).join("")}<li><a href="${R}faq/">Вопросы</a></li></ul></div>
-        <div><p class="ftr__h">Связаться</p><ul><li><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a></li><li><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="${S.org.vk}" target="_blank" rel="noopener">ВКонтакте</a></li></ul></div>
+        <div><h2 class="ftr__title">Связаться с нами</h2><ul class="ftr__contacts">${contactRows()}</ul></div>
+        ${mapHTML()}
       </div>
-      <div class="ftr__bottom"><span>© ${new Date().getFullYear()} ${esc(S.org.name)}</span><a href="${R}privacy/">Политика обработки персональных данных</a></div>
+      <div class="ftr__bottom"><nav aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}">${esc(n.label)}</a>`).join("")}<a href="${R}faq/">Вопросы</a><a href="${R}privacy/">Политика данных</a></nav><span>© ${new Date().getFullYear()} ${esc(S.org.name)}, ${esc(S.org.city)}</span></div>
     </div></footer>`;
 
   /* ---------- блоки главной ---------- */
   const H = {};
-  H.hero = () => {
-    const words = S.hero.title.split(" "), lines = [words.slice(0, 1), words.slice(1, 2), words.slice(2, 3), words.slice(3)].filter((l) => l.length);
-    return `<section class="hero"><div class="hero__bg"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="100vw" alt="${esc(S.hero.alt)}" fetchpriority="high"></div>
-      <div class="wrap hero__in"><div>
-        <h1>${lines.map((l) => `<span class="ln"><span>${esc(l.join(" "))}</span></span>`).join("")}</h1>
-        <p class="hero__text">${esc(S.hero.text)}</p>
-        <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать курс за 3 вопроса")}</button></div>
-      </div><span class="vlabel">${esc(S.org.city)}, ${esc(S.org.region)}</span></div></section>`;
+  const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
+  H.hero = () => `<section class="hero">
+      <div class="hero__ph"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 55vw" alt="${esc(S.hero.alt)}" fetchpriority="high">${S.preview ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
+      <div class="hero__t"><p class="hero__kicker">${esc(S.org.kind)} в ${esc(S.org.cityIn)}</p>
+        <h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.text)}</p>
+        <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
+    </section>`;
+  // манифест: маленькие фото прямо внутри фразы, они раскрываются при прокрутке
+  H.manifest = () => {
+    const pics = S.manifest.inline;
+    const html = esc(S.manifest.text).replace(/\{(\d)\}/g, (_, i) => { const p = pics[+i - 1]; return p ? `<span class="inl rv"><img ${srcset(p.src)} sizes="160px" alt="${esc(p.alt)}" loading="lazy"></span>` : ""; });
+    return `<section class="sec manifest"><div class="wrap"><p class="manifest__q">${html}</p>
+      <div class="manifest__sign"><span class="muted">${esc(S.org.owner)}, основательница</span><a class="link" href="${R}about/">${arrow("Об академии")}</a></div></div></section>`;
   };
-  H.manifest = () => `<section class="sec"><div class="wrap manifest">
-      <div><p class="manifest__q rv-t">${esc(S.manifest.text)}</p>
-        <div class="manifest__sign"><span class="muted">${esc(S.org.owner)}, основательница</span><a class="link" href="${R}about/">${arrow("Об академии")}</a></div></div>
-      ${ph(S.manifest.photo, S.manifest.alt, { cls: "manifest__ph", sizes: "(max-width: 760px) 62vw, 30vw", cap: ILL })}
-    </div></section>`;
   H.directions = () => `<section class="sec" style="padding-top:0"><div class="wrap">
-      <div class="rail-head"><h2 class="rv-t">Три направления</h2><a class="link" href="${R}courses/">${arrow(`Все ${S.courses.length} курсов`)}</a></div>
+      <h2 class="rv-t sec__h">Направления обучения</h2>
       <div class="dirs">${S.categories.map((c, i) => {
         const n = S.courses.filter((x) => x.cat === c.id).length;
         return `<a class="dir" href="${R}courses/?cat=${c.id}">${ph(c.photo, c.alt, { sizes: i ? "(max-width: 760px) 50vw, 40vw" : "(max-width: 760px) 100vw, 58vw" })}
           <div class="dir__t"><h3>${esc(c.name)}</h3><p>${esc(c.text)}</p><span class="link">${arrow(`${n} ${plural(n, "курс", "курса", "курсов")}`)}</span></div></a>`;
       }).join("")}</div></div></section>`;
-  H.featured = () => `<section class="sec" style="padding-top:0">
-      <div class="wrap rail-head"><div><h2 class="rv-t">Курсы</h2><p class="lead" style="margin-top:12px">Цена за весь курс. Листайте, чтобы посмотреть все.</p></div><a class="link" href="${R}courses/">${arrow("Каталог")}</a></div>
-      <div class="rail">${S.featured.map(course).filter(Boolean).map((c) => `<a class="rcard" href="${cURL(c)}">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 70vw, 26vw" })}
-        <span class="rcard__cat">${esc(cat(c.cat).name)}</span><h3>${esc(c.name)}</h3><span class="price">${rub(c.price)}</span></a>`).join("")}</div></section>`;
-  H.details = () => `<section class="sec" style="padding-top:0"><div class="wrap details">
-      <div class="details__text"><h2 class="rv-t">${esc(S.details.title)}</h2><p class="lead">${esc(S.details.text)}</p></div>
-      ${S.details.photos.map((p, i) => ph(p.src, p.alt, { cls: "d" + (i + 1), sizes: i === 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 58vw", cap: i === 0 ? ILL : "" })).join("")}
-    </div></section>`;
-  H.teacher = () => `<div class="fade-in" aria-hidden="true"></div><section class="dark" style="padding:clamp(20px,4vw,60px) 0 var(--sec)"><div class="wrap">
-      <div class="teacher">
-        <div class="portrait">${has(S.teacher.photo) ? `<img src="${R}${S.teacher.photo}" alt="${esc(S.teacher.name)}" loading="lazy">` : S.preview ? "Здесь будет портрет Айгуль" : ""}</div>
-        <div><p class="muted">Ваш преподаватель</p><p class="teacher__name">${esc(S.teacher.name)}</p><p class="muted">${esc(S.teacher.role)}</p>
-          ${has(S.teacher.bio) ? `<p class="lead" style="margin-top:22px">${esc(S.teacher.bio)}</p>` : ""}
-          <div class="hero__row" style="color:inherit"><a class="btn btn--line" href="${R}about/">Об Айгуль и академии</a></div></div>
-      </div>
-      <ul class="adv">${S.advantages.map((a) => `<li><h3>${esc(a.t)}</h3><p>${esc(a.d)}</p></li>`).join("")}</ul>
-    </div></section><div class="fade-out" aria-hidden="true"></div>`;
-  H.enroll = () => `<section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap enroll__in">
-      <div><h2 class="rv-t">${esc(S.enroll.title)}</h2><p class="lead" style="margin-top:20px">${esc(S.enroll.text)}</p></div>
+  // курсы: карусель по дуге, как барабан таймера, но по горизонтали
+  H.featured = () => {
+    const list = S.featured.map(course).filter(Boolean);
+    return `<section class="sec flow-sec" style="padding-top:0">
+      <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
+      <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
+        <span class="fcard__cat">${esc(cat(c.cat).name)}</span><span class="fcard__t">${esc(c.name)}</span><span class="price">${rub(c.price)}</span></a>`).join("")}</div>
+      <div class="wrap flow-foot"><span class="swipe-hint" aria-hidden="true"><i></i>Листайте</span><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div></section>`;
+  };
+  H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="enroll-card">
+      <div><h2>Запишитесь на консультацию</h2><p class="muted">Подскажем, какой курс подойдёт, и сообщим ближайшие даты.</p></div>
       <form class="quick form" data-quick novalidate>
         <div class="fld"><label for="qName">Имя</label><input id="qName" name="name" autocomplete="name" maxlength="80"><span class="err"></span></div>
         <div class="fld"><label for="qPhone">Телефон</label><input id="qPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" maxlength="20"><span class="err"></span></div>
-        <button class="btn btn--accent" type="submit">Оставить заявку</button>
-      </form></div></section>`;
+        <button class="btn btn--accent" type="submit">Записаться</button>
+      </form></div></div></section>`;
+  // лента фото: два ряда едут навстречу друг другу, пока страницу прокручивают
+  H.ribbon = () => {
+    const rows = S.ribbon;
+    return `<section class="ribbon" aria-label="Фото направлений">${rows.map((row, r) => `<div class="ribbon__row" data-dir="${r ? 1 : -1}">${row.concat(row).map((p) => `<span class="ribbon__ph"><img src="${R}${p}-640.webp" alt="" loading="lazy"></span>`).join("")}</div>`).join("")}
+      ${S.preview ? `<p class="wrap cap" style="margin-top:12px">Иллюстрации направлений. Заменим на фото ваших учениц и занятий.</p>` : ""}</section>`;
+  };
+  H.teacher = () => `<section class="sec teach-sec"><div class="wrap teacher">
+      <div class="portrait">${has(S.teacher.photo) ? `<img src="${R}${S.teacher.photo}" alt="${esc(S.teacher.name)}" loading="lazy">` : S.preview ? `<span class="portrait__ph">Здесь будет ваш портрет</span>` : ""}
+        <div class="portrait__cap"><span>Ваш преподаватель</span><b>${esc(S.teacher.name)}</b></div></div>
+      <div class="teacher__t"><p class="muted">${esc(S.teacher.role)}</p>${has(S.teacher.bio) ? `<p class="lead">${esc(S.teacher.bio)}</p>` : ""}
+        <ul class="adv">${S.advantages.map((a) => `<li><h3>${esc(a.t)}</h3><p>${esc(a.d)}</p></li>`).join("")}</ul>
+        <a class="link" href="${R}about/">${arrow("Об Айгуль и академии")}</a></div>
+    </div></section>`;
 
   /* ---------- страницы ---------- */
   const P = {};
@@ -297,8 +330,9 @@
   const html = document.documentElement, burger = document.querySelector(".burger");
   burger.addEventListener("click", () => { const o = html.classList.toggle("menu-open"); burger.setAttribute("aria-expanded", o); html.style.overflow = o ? "hidden" : ""; });
   document.addEventListener("click", (e) => {
-    const th = e.target.closest("[data-theme-set]");
-    if (th) { setTheme(th.dataset.themeSet); return; }
+    const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
+    if (th) { apply("theme", th.dataset.themeSet); return; }
+    if (fo) { apply("font", fo.dataset.fontSet); return; }
     const en = e.target.closest("[data-enroll]");
     if (en) { e.preventDefault(); html.classList.remove("menu-open"); openForm(en.dataset.enroll || ""); return; }
     if (e.target.closest("[data-quiz]")) {
@@ -317,6 +351,47 @@
   const qb = document.getElementById("qbox"); if (qb) quiz(qb);
   filters("#spreads", ".spread"); filters("#gal", "button"); lightbox();
 
+  const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // карусель курсов: ближняя карточка в центре, соседние уходят по дуге назад
+  const flow = document.querySelector(".flow");
+  if (flow) {
+    const cards = [...flow.querySelectorAll(".fcard")], count = document.querySelector(".flow-count");
+    let cur = 0;
+    const paint = () => {
+      const mid = flow.scrollLeft + flow.clientWidth / 2;
+      let best = 0, bd = 1e9;
+      cards.forEach((c, i) => {
+        const d = (c.offsetLeft + c.offsetWidth / 2 - mid) / c.offsetWidth, a = Math.min(Math.abs(d), 2.2);
+        if (Math.abs(d) < bd) { bd = Math.abs(d); best = i; }
+        if (RM) return;
+        c.style.transform = `translateZ(${-a * 140}px) rotateY(${Math.max(-50, Math.min(50, -d * 32))}deg) scale(${1 - a * 0.06})`;
+        c.style.opacity = String(1 - Math.min(a, 1.6) * 0.38);
+        c.style.zIndex = String(10 - Math.round(a * 3));
+      });
+      if (best !== cur || !count.dataset.init) { cur = best; count.dataset.init = 1; count.textContent = `${cur + 1} / ${cards.length}`; cards.forEach((c, i) => c.classList.toggle("is-cur", i === cur)); }
+    };
+    let raf = 0;
+    flow.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(); }); }, { passive: true });
+    addEventListener("resize", paint);
+    const go = (i) => { i = Math.max(0, Math.min(cards.length - 1, i)); const c = cards[i]; flow.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - flow.clientWidth / 2, behavior: RM ? "auto" : "smooth" }); };
+    document.querySelectorAll("[data-flow]").forEach((b) => b.addEventListener("click", () => go(cur + +b.dataset.flow)));
+    flow.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); } });
+    paint();
+    // подсказка «листайте»: один раз слегка качнём карусель, когда она появится на экране
+    if (!RM && "IntersectionObserver" in window) {
+      const hint = new IntersectionObserver((es) => { if (es[0].isIntersecting) { hint.disconnect(); setTimeout(() => { flow.scrollBy({ left: 70, behavior: "smooth" }); setTimeout(() => flow.scrollBy({ left: -70, behavior: "smooth" }), 650); }, 400); } }, { threshold: 0.6 });
+      hint.observe(flow);
+    }
+  }
+  // лента фото: ряды сдвигаются навстречу друг другу вместе с прокруткой страницы
+  const ribbon = document.querySelector(".ribbon");
+  if (ribbon && !RM) {
+    const rows = [...ribbon.querySelectorAll(".ribbon__row")];
+    let rq = 0;
+    const move = () => { rq = 0; const r = ribbon.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; const p = (innerHeight - r.top) / (innerHeight + r.height); rows.forEach((row) => { const max = row.scrollWidth / 2 - innerWidth * 0.6; row.style.transform = `translate3d(${(row.dataset.dir > 0 ? -max + p * max * 0.9 : -p * max * 0.9)}px,0,0)`; }); };
+    addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
+    move();
+  }
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".rv, .rv-t").forEach((el) => io.observe(el));

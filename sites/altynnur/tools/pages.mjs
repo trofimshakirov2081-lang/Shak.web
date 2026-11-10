@@ -9,7 +9,7 @@ const head = (title, desc, rootRel) => `<!doctype html><html lang="ru"><head><me
 <title>${title}</title><meta name="description" content="${desc}">
 <meta property="og:title" content="${title}"><meta property="og:description" content="${desc}"><meta property="og:type" content="website"><meta property="og:image" content="${rootRel}ph/hero-eye-1280.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Ysabeau+Office:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Forum&family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600&family=Finlandica:wght@400;500;600&family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${rootRel}assets/site.css"></head>`;
 const page = (dir, pg, title, desc, extra = "", ld = "") => {
   const depth = dir ? dir.split("/").length : 0, r = "../".repeat(depth);
