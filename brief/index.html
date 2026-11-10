@@ -176,6 +176,7 @@ main{padding:32px 0 120px}
 .wform{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);max-width:520px}
 .wform .field{margin-bottom:12px}
 .wform .btn{width:100%;padding:15px;font-size:17px}
+.wform .werr{margin:-4px 0 12px;color:#e5484d;font-size:14px;font-weight:600}
 .wform small{display:block;color:var(--muted);font-size:12.5px;margin-top:10px;text-align:center}
 .stack{position:relative;height:400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .stack .sp{position:absolute;left:0;right:0;top:56px;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s;box-shadow:0 30px 60px -24px rgba(20,20,50,.45)}
@@ -832,7 +833,8 @@ const R = {
         <div class="wform" id="wform">
           ${input('name','Как к вам обращаться?','Например, Анна')}
           ${input('contact','Куда вам ответить?','Телефон, Telegram или Instagram')}
-          <button class="btn primary" data-start="1">Начать →</button>
+          <p class="werr" id="werr" role="alert" hidden></p>
+          <button class="btn primary" type="button" data-start="1">Начать →</button>
           <small>🔒 Контакт увидит только дизайнер. Без спама и рассылок.</small>
         </div>
       </div>
@@ -1180,13 +1182,22 @@ function checkContact(v){
   if(/^https?:\/\/[^\s.]+\.\S{2,}$/i.test(s)) return '';
   return 'Напишите телефон (+7 900 123-45-67), ник (@shak.web) или ссылку (t.me/ваш_ник)';
 }
+// Подсказки клавиатуры и автозаполнение в телефоне иногда не присылают событие ввода: берём значения прямо из полей
+function syncFields(){
+  document.querySelectorAll('input[data-k], textarea[data-k]').forEach(el => { if(typeof A[el.dataset.k] === 'string' || A[el.dataset.k] == null) A[el.dataset.k] = el.value; });
+  save();
+}
 function start(){
+  syncFields();
   const bad = checkContact(A.contact);
+  const er = $('#werr');
   if(bad){
     const f = $('#wform'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+    if(er){ er.textContent = bad; er.hidden = false; }
     $('#wform [data-k="contact"]').focus(); toast(bad);
     return;
   }
+  if(er) er.hidden = true;
   if(!S.startSent){
     S.startSent = true;
     botMsg(`👋 Новый клиент открыл анкету\n\nИмя: ${A.name || '-'}\nКонтакт: ${A.contact}${A.niches.length ? '\nСфера: ' + nicheName() : ''}`);
@@ -1288,6 +1299,7 @@ function bindSwipe(){
   el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
 }
 function go(n){
+  syncFields();
   const was = S.step;
   S.step = Math.max(0, Math.min(STEPS.length-1, n)); ANIM = true; render(); window.scrollTo({top:0, behavior:'smooth'});
   if(STEPS[S.step].id === 'result' && was !== S.step) confetti();
@@ -1351,6 +1363,7 @@ document.addEventListener('change', e => {
   if(big.length) toast('Слишком большие (больше 20 МБ): ' + big.join(', '));
   render();
 });
+document.addEventListener('change', e => { const k = e.target.dataset && e.target.dataset.k; if(k && typeof e.target.value === 'string'){ A[k] = e.target.value; save(); } });
 document.addEventListener('input', e => {
   if(e.target.id === 'sample'){ SAMPLE = e.target.value; document.querySelectorAll('.fontprev .big').forEach(b => b.textContent = SAMPLE || A.company || 'Ваш бренд'); return; }
   const k = e.target.dataset.k; if(!k) return;
