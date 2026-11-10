@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>window.BUILD = "__BUILD__";</script>
+<script>
+// Если на телефоне что-то сломается, бриф сам пришлёт текст ошибки дизайнеру (не больше 3 за открытие)
+window.ERRS = [];
+window.addEventListener('error', function (e) { window.ERRS.push((e.message || 'error') + ' @' + (e.lineno || '?') + ':' + (e.colno || '?')); setTimeout(function(){ window.reportErrs && window.reportErrs(); }, 50); });
+window.addEventListener('unhandledrejection', function (e) { window.ERRS.push('promise: ' + (e.reason && (e.reason.message || e.reason))); setTimeout(function(){ window.reportErrs && window.reportErrs(); }, 50); });
+</script>
 <title>Бриф на сайт</title>
 <meta name="description" content="Выберите стиль, цвета, шрифты и структуру будущего сайта - ТЗ соберётся автоматически">
 <meta name="theme-color" content="#6d5dfc">
@@ -180,6 +186,7 @@ main{padding:32px 0 120px}
 .wform{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);max-width:520px}
 .wform .field{margin-bottom:12px}
 .wform .btn{width:100%;padding:15px;font-size:17px}
+.resume{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 14px;padding:10px 14px;border-radius:14px;background:var(--accent-soft);font-size:14px}
 .wform .werr{margin:-4px 0 12px;color:#e5484d;font-size:14px;font-weight:600}
 .wform small{display:block;color:var(--muted);font-size:12.5px;margin-top:10px;text-align:center}
 .stack{position:relative;height:400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -667,7 +674,7 @@ function shortList(key, all, rec){
   const rest = order.length - shown.length;
   return {items: shown.map(id => all.find(x => x.id === id)), more: rest > 0 ? `<button class="btn more-btn" data-more="${key}">Показать ещё ${rest}</button>` : ''};
 }
-let ANIM = true, JUST = null, STACK_T = null, PV = 0, SAMPLE = '';
+let ANIM = true, JUST = null, STACK_T = null, PV = 0, SAMPLE = '', RESUMED = false;
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(!VIEW) try{
   const raw = localStorage.getItem(KEY);
@@ -675,6 +682,7 @@ if(!VIEW) try{
     const p = JSON.parse(raw), b = blank().a;
     S = Object.assign(blank(), p, {a:Object.assign(b, p.a||{})});
     for(const k in b) if(Array.isArray(b[k]) && !Array.isArray(S.a[k])) S.a[k] = b[k];
+    RESUMED = S.step > 0;
   }
 }catch(e){}
 // префилл из ссылки: index.html?name=Анна&niche=beauty
@@ -1186,6 +1194,12 @@ function botMsg(text, beacon){
   if(beacon && navigator.sendBeacon && navigator.sendBeacon(url, fd)) return;
   fetch(url, {method:'POST', body:fd, keepalive:true}).catch(() => {});
 }
+let ERR_SENT = 0;
+window.reportErrs = function(){
+  if(VIEW || ERR_SENT >= 3 || !window.ERRS.length) return;
+  const list = window.ERRS.splice(0); ERR_SENT++;
+  botMsg(`⚠️ Ошибка в брифе (версия ${window.BUILD})\nШаг: ${S.step}\n${list.join('\n').slice(0, 1500)}\n\n${navigator.userAgent}${window.Telegram && Telegram.WebApp && Telegram.WebApp.platform ? '\nTelegram: ' + Telegram.WebApp.platform + ' ' + Telegram.WebApp.version : ''}`);
+};
 // Контакт: телефон, @ник или ссылка
 function checkContact(v){
   const s = String(v || '').trim();
@@ -1265,7 +1279,8 @@ async function send(kind){
 function render(){
   const st = STEPS[S.step];
   clearInterval(STACK_T);
-  $('#app').innerHTML = `<div class="${ANIM ? 'stage' : ''}">${R[st.id]()}</div>`;
+  const resumeBar = RESUMED && S.step > 0 && !VIEW ? `<div class="resume">Вы продолжаете с шага ${S.step}, ответы сохранены. <button class="btn sm" data-restart="1">Начать заново</button></div>` : '';
+  $('#app').innerHTML = resumeBar + `<div class="${ANIM ? 'stage' : ''}">${R[st.id]()}</div>`;
   ANIM = false;
   if(JUST){ document.querySelector(JUST)?.classList.add('just'); JUST = null; }
   $('#bar').style.width = (S.step / (STEPS.length-1) * 100) + '%';
@@ -1316,6 +1331,7 @@ function bindSwipe(){
 }
 function go(n){
   syncFields();
+  if(n !== S.step) RESUMED = false;
   const was = S.step;
   S.step = Math.max(0, Math.min(STEPS.length-1, n)); ANIM = true; render(); window.scrollTo({top:0, behavior:'smooth'});
   if(STEPS[S.step].id === 'result' && was !== S.step) confetti();
@@ -1398,10 +1414,11 @@ document.addEventListener('keydown', e => {
 document.addEventListener('click', async e => {
   if(e.target.closest('[data-copysite]')){ toast(await copyText(siteLink()) ? 'Ссылка на ваш сайт скопирована' : 'Не удалось скопировать'); return; }
   if(e.target.id === 'modal'){ closePeek(); return; }
-  const t = e.target.closest('[data-more],[data-go],[data-start],[data-peek],[data-chip],[data-niche],[data-pick],[data-blk],[data-auto],[data-send],[data-swipe],[data-hint],[data-rmfile]');
+  const t = e.target.closest('[data-more],[data-go],[data-start],[data-restart],[data-peek],[data-chip],[data-niche],[data-pick],[data-blk],[data-auto],[data-send],[data-swipe],[data-hint],[data-rmfile]');
   if(!t) return;
   const d = t.dataset;
   if(d.start){ start(); return; }
+  if(d.restart){ const keep = {name: A.name, contact: A.contact}; const b = blank(); Object.keys(A).forEach(k => delete A[k]); Object.assign(A, b.a, keep); S.step = 0; S.startSent = false; RESUMED = false; save(); go(0); return; }
   if(d.more){ MORE[d.more] = true; render(); return; }
   if(d.peek){ if(d.peek === 'close') closePeek(); else { PV += d.peek === 'next' ? 1 : -1; drawPeek(); } return; }
   const q = v => `"${CSS.escape(v)}"`;
