@@ -723,7 +723,7 @@ function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add(
 /* =====================================================================
    РЕНДЕР ШАГОВ
    ===================================================================== */
-function head(title, text){ return `<div class="step-head"><h1>${title}</h1><p>${text}</p></div>`; }
+function stepHead(title, text){ return `<div class="step-head"><h1>${title}</h1><p>${text}</p></div>`; }
 function helper(text, action){ return `<div class="helper"><p>🤔 ${text}</p><button class="btn primary sm" data-auto="${action}">Подобрать за меня</button></div>`; }
 function input(key, label, ph='', type='text'){ return `<div class="field"><label>${label}</label><input type="${type}" data-k="${key}" enterkeyhint="${key === 'contact' ? 'go' : 'next'}" value="${esc(A[key])}" placeholder="${esc(ph)}"></div>`; }
 function area(key, label, ph=''){ return `<div class="field"><label>${label}</label><textarea data-k="${key}" placeholder="${esc(ph)}">${esc(A[key])}</textarea></div>`; }
@@ -876,7 +876,7 @@ const R = {
     </div>`;
   },
   about(){
-    return head('Расскажите о проекте','Пара слов - этого достаточно. Всё, что не знаете, можно пропустить.')
+    return stepHead('Расскажите о проекте','Пара слов - этого достаточно. Всё, что не знаете, можно пропустить.')
     + sec('Ваша сфера','Можно выбрать несколько - от этого зависят подсказки на следующих шагах',
       `<div class="chips">${NICHES.map(n => `<div class="chip ${A.niches.includes(n.id)?'on':''}" data-niche="${n.id}">${n.name}</div>`).join('')}</div>`
       + (A.niches.includes('other') ? `<div style="margin-top:12px">${input('nicheOther','Какая сфера?','')}</div>` : ''))
@@ -891,7 +891,7 @@ const R = {
   taste(){
     ensureDeck();
     const left = A.deck.slice(A.swipeIdx);
-    const h = head('Нравится или нет?','Смахните вправо, если нравится, влево, если нет.');
+    const h = stepHead('Нравится или нет?','Смахните вправо, если нравится, влево, если нет.');
     if(!left.length){
       const names = ids => ids.map(id => (STYLES.find(s => s.id === id)||{}).name).filter(Boolean);
       return h + `<div class="doc" style="text-align:center">
@@ -905,7 +905,7 @@ const R = {
   },
   style(){
     const rec = niche().styles;
-    return head('Какой стиль вам ближе?','Отметьте все варианты, которые «цепляют», - сколько угодно. Это не окончательный дизайн, а направление.')
+    return stepHead('Какой стиль вам ближе?','Отметьте все варианты, которые «цепляют», - сколько угодно. Это не окончательный дизайн, а направление.')
     + helper('Не уверены? Подберём 2–3 стиля, которые обычно хорошо работают в вашей сфере.','styles')
     + `<div class="cards">${shortList('styles', STYLES, rec).items.map(s => `<div class="card ${A.styles.includes(s.id)?'on':''} ${rec.includes(s.id)?'is-reco':''}" data-pick="styles" data-v="${s.id}">
         <span class="tick">✓</span><span class="reco">Подходит вам</span>${mockHTML(s.m)}<h4>${s.name}</h4><p>${s.desc}</p></div>`).join('')}</div>${shortList('styles', STYLES, rec).more}`
@@ -913,7 +913,7 @@ const R = {
   },
   colors(){
     const rec = niche().pals;
-    return head('Выберите цвета','Отметьте все палитры, которые нравятся. Оттенки потом подстроим под ваш бренд.')
+    return stepHead('Выберите цвета','Отметьте все палитры, которые нравятся. Оттенки потом подстроим под ваш бренд.')
     + helper('Подберём палитры, которые вызывают доверие именно в вашей нише.','palettes')
     + `<div class="cards">${shortList('palettes', PALETTES, rec).items.map(p => `<div class="card ${A.palettes.includes(p.id)?'on':''} ${rec.includes(p.id)?'is-reco':''}" data-pick="palettes" data-v="${p.id}">
         <span class="tick">✓</span><span class="reco">Подходит вам</span><div class="pal">${p.c.map(c=>`<i style="background:${c}"></i>`).join('')}</div><h4>${p.name}</h4></div>`).join('')}</div>${shortList('palettes', PALETTES, rec).more}`
@@ -922,7 +922,7 @@ const R = {
   fonts(){
     const rec = niche().fonts;
     const name = esc(SAMPLE || A.company || 'Ваш бренд');
-    return head('Какие шрифты нравятся?','Шрифт задаёт характер сайта не меньше, чем цвет. Отметьте все, что нравятся.')
+    return stepHead('Какие шрифты нравятся?','Шрифт задаёт характер сайта не меньше, чем цвет. Отметьте все, что нравятся.')
     + helper('Подберём шрифты под ваш стиль и нишу.','fonts')
     + `<div class="field"><label>Напишите свой текст - посмотрите, как он выглядит</label><input id="sample" value="${esc(SAMPLE)}" placeholder="${esc(A.company || 'Например, название бренда')}"></div>`
     + `<div class="cards">${shortList('fonts', FONTS, rec).items.map(f => `<div class="card simple fontprev ${A.fonts.includes(f.id)?'on':''} ${rec.includes(f.id)?'is-reco':''}" data-pick="fonts" data-v="${f.id}">
@@ -932,7 +932,7 @@ const R = {
         <h4>${f.name}</h4><p>${f.desc} · ${f.h} + ${f.b}</p></div>`).join('')}</div>${shortList('fonts', FONTS, rec).more}`;
   },
   mood(){
-    return head('Настроение и бренд','Какие эмоции должен вызывать сайт и что нужно по фирменному стилю.')
+    return stepHead('Настроение и бренд','Какие эмоции должен вызывать сайт и что нужно по фирменному стилю.')
     + sec('Какие ощущения должен вызывать сайт?','Отметьте все подходящие слова', chips('moods', MOODS, true, true))
     + sec('Как общаться с клиентом в текстах?','', chips('tone', TONES, true, true))
     + sec('Что с логотипом?','', chips('logo', ['Есть, всё устраивает','Есть, но хочу обновить','Есть только название шрифтом','Нет, нужно создать','Нужен простой знак','Нужно несколько вариантов на выбор','Не нужен'], true, true))
@@ -940,7 +940,7 @@ const R = {
   },
   structure(){
     const goalRec = new Set(A.goals.flatMap(g => GOAL_BLOCKS[g]||[]));
-    return head('Из каких блоков будет лендинг?','Отметьте, что должно быть на сайте. Значок «рекомендуем» - подсказка по вашей цели.')
+    return stepHead('Из каких блоков будет лендинг?','Отметьте, что должно быть на сайте. Значок «рекомендуем» - подсказка по вашей цели.')
     + helper('Соберём структуру, которая лучше всего подходит под вашу цель.','blocks')
     + `<div class="blocks">${BLOCKS.map(b => `<div class="blk ${A.blocks.includes(b.id)?'on':''}" data-blk="${b.id}">
         <div class="box">${A.blocks.includes(b.id)?'✓':''}</div>
@@ -948,7 +948,7 @@ const R = {
     + `<div class="section">${area('blocksExtra','Чего-то не хватает?','Опишите свой блок')}</div>`;
   },
   features(){
-    return head('Функции и материалы','Что должно уметь сайт и что у вас уже есть для наполнения.')
+    return stepHead('Функции и материалы','Что должно уметь сайт и что у вас уже есть для наполнения.')
     + sec('Какие функции нужны?','', chips('features', FEATURES, true, true))
     + sec('Тексты для сайта','', chips('texts', ['Есть готовые','Есть частично','Нужен копирайтер','Помогите сформулировать оффер','Сгенерировать с ИИ и отредактировать','Нужны тексты для SEO'], true, true))
     + sec('Фото и видео','', chips('photos', ['Есть свои качественные','Есть, но не очень','Нужна фотосъёмка','Подойдут стоки','Можно сгенерировать ИИ','Нужны иллюстрации','Нужна 3D-графика','Нужно видео'], true, true))
@@ -959,7 +959,7 @@ const R = {
        ${FILES.length ? '<p class="hint" style="margin-top:8px">Файлы хранятся только в этой вкладке - не закрывайте её до отправки.</p>' : ''}`);
   },
   terms(){
-    return head('Сроки и пожелания','Последний шаг - и ТЗ готово.')
+    return stepHead('Сроки и пожелания','Последний шаг - и ТЗ готово.')
     + sec('Когда нужен сайт?','', chips('deadline', ['Срочно, за неделю','2–3 недели','Месяц','Не горит','К конкретной дате (напишу ниже)','Можно запускать по частям'], true, true))
     + sec('Какой бюджет комфортен?','Поможет предложить реальный вариант, а не самый дорогой', chips('budget', BUDGETS, false))
     + sec('Что для вас важнее всего?','Отметьте всё, что важно', chips('priorities', PRIORITIES, true, true))
@@ -977,9 +977,9 @@ const R = {
     if(CONFIG.whatsapp) send.push(`<button class="btn primary" data-send="wa">Отправить в WhatsApp</button>`);
     if(CONFIG.email) send.push(`<button class="btn" data-send="mail">Отправить на почту</button>`);
     const top = VIEW
-      ? head(`Бриф${A.company ? ': ' + esc(A.company) : ''}`, `${esc(A.name || 'Клиент')}${A.contact ? ' · ' + esc(A.contact) : ''}`)
+      ? stepHead(`Бриф${A.company ? ': ' + esc(A.company) : ''}`, `${esc(A.name || 'Клиент')}${A.contact ? ' · ' + esc(A.contact) : ''}`)
         + `<div class="send no-print"><button class="btn primary" data-send="copy">Скопировать текст ТЗ</button><button class="btn" data-send="print">Сохранить PDF</button></div>`
-      : head('Готово! Вот ваше ТЗ 🎉', `Проверьте, всё ли верно. Изменить ответы можно кнопкой «Назад» - обновлённая версия тоже уйдёт дизайнеру.`)
+      : stepHead('Готово! Вот ваше ТЗ 🎉', `Проверьте, всё ли верно. Изменить ответы можно кнопкой «Назад» - обновлённая версия тоже уйдёт дизайнеру.`)
         + `<div class="sendbox no-print" id="sendbox">${sendboxHTML()}</div>`
         + `<p class="hint no-print" style="margin:0 0 8px;font-size:14px;color:var(--muted)">Хотите написать лично? Отправьте ТЗ в мессенджер:</p>`
         + `<div class="send no-print" style="margin-top:0">${send.join('')}</div>${CONFIG.instagram ? `<p class="hint no-print" style="margin:-8px 0 16px;font-size:13px;color:var(--muted)">Instagram не умеет вставлять текст сам: мы скопируем ТЗ - просто нажмите «Вставить» в открывшемся чате.</p>` : ''}<div class="send no-print"><button class="btn" data-send="copy">Скопировать текст</button><button class="btn" data-send="link">Ссылка на бриф</button><button class="btn" data-send="file">Скачать файл</button><button class="btn" data-send="print">Сохранить PDF</button></div>`;
@@ -1478,7 +1478,7 @@ document.addEventListener('click', async e => {
 if(VIEW){
   S.step = STEPS.findIndex(x => x.id === 'result');
   readBrief().then(data => { Object.assign(A, data); render(); })
-    .catch(() => { $('#app').innerHTML = head('Ссылка повреждена', 'Не удалось открыть бриф - попросите прислать ссылку ещё раз.'); });
+    .catch(() => { $('#app').innerHTML = stepHead('Ссылка повреждена', 'Не удалось открыть бриф - попросите прислать ссылку ещё раз.'); });
 } else render();
 </script>
 </body>
