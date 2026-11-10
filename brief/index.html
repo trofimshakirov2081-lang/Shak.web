@@ -224,6 +224,12 @@ main{padding:32px 0 120px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .empty{color:var(--muted);font-style:italic}
 
+/* черновик сайта в телефоне */
+.mysite{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin:6px 0 24px}
+.mysite .phone{width:270px;height:560px;border-radius:38px;padding:9px;background:#111;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.mysite iframe{width:100%;height:100%;border:0;border-radius:30px;background:#fff}
+.mysite-t{display:grid;justify-items:start}
+@media (max-width:640px){.mysite{grid-template-columns:1fr;justify-items:center;text-align:center}.mysite-t{justify-items:center}.mysite .phone{width:min(290px,86vw);height:580px}}
 /* живое превью сайта */
 .sp{border-radius:14px;overflow:hidden;display:flex;flex-direction:column;position:relative;line-height:1.3;border:1px solid rgba(127,127,127,.18)}
 .sp-hero{position:relative;padding:14px 16px 22px;display:flex;flex-direction:column;gap:8px;min-height:210px}
@@ -737,6 +743,32 @@ const ctaText = () => {
   return 'Оставить заявку';
 };
 const cut = (t, n) => { t = String(t||'').trim().split('\n')[0]; return t.length > n ? t.slice(0, n-1).trim() + '…' : t; };
+// Цвета, шрифты и форма кнопок варианта: общие для маленького превью и для черновика сайта (site.html)
+function siteTokens(styleId, palId, fontId){
+  const st = STYLES.find(x => x.id === styleId) || STYLES[0], m = st.m;
+  const pal = PALETTES.find(x => x.id === palId), f = FONTS.find(x => x.id === fontId);
+  let bg = m.bg, fg = m.fg, ac = m.ac, btn = m.btn, btnfg = m.btnfg, card = 'rgba(127,127,127,.12)';
+  if(pal){
+    const c = [...pal.c].sort((a,b) => lum(a) - lum(b));
+    const mid = c.slice(1,4).sort((a,b) => sat(b) - sat(a))[0];
+    const accent = sat(mid) > .25 ? mid : (sat(c[4]) > .25 ? c[4] : sat(c[0]) > .25 ? c[0] : mid);
+    if(darkStyle(m)){ bg = c[0]; fg = c[4]; card = c[1]; ac = accent; btn = lum(accent) > .2 ? accent : c[4]; }
+    else { bg = c[4]; fg = c[0]; card = c[3]; ac = accent; btn = lum(accent) < .75 ? accent : c[0]; }
+    btnfg = lum(btn) > .6 ? c[0] : '#fff';
+    if(btn === 'transparent') btn = ac;
+  }
+  if(!/^#/.test(bg)) bg = darkStyle(m) ? '#111114' : '#ffffff';
+  if(btn === 'transparent' || !btn) btn = ac;
+  if(!/^#/.test(card)) card = darkStyle(m) ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.05)';
+  return {bg, fg, ac, btn, btnfg, card, r: m.r, lay: m.lay || '', fh: f ? f.h : m.font, fb: f ? f.b : m.font, hw: f ? f.hw : m.w, up: f ? !!f.up : !!m.up, name: vcap({s:styleId, p:palId, f:fontId})};
+}
+// Ссылка на черновик сайта: ответы упакованы в адрес, сервер не нужен
+function siteLink(embed){
+  const data = {c: A.company, p: A.product, u: A.usp, au: A.audience, n: (A.niches.find(id => id !== 'other') || 'other'),
+    b: blockList().map(b => b.id), cta: ctaText(), v: variants().slice(0,3).map(x => siteTokens(x.s, x.p, x.f))};
+  const raw = btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  return new URL('site.html' + (embed ? '?embed=1' : ''), location.href).href.split('#')[0] + '#s=' + raw;
+}
 function sitePreview(styleId, palId, fontId, generic){
   const st = STYLES.find(x => x.id === styleId) || STYLES[0], m = st.m;
   const pal = PALETTES.find(x => x.id === palId), f = FONTS.find(x => x.id === fontId);
@@ -928,6 +960,16 @@ const R = {
     return top
     + `<div class="doc">
       ${priceHTML()}
+      <h2>Ваш сайт: черновик, его можно листать</h2>
+      <p class="hint" style="margin:-4px 0 14px;color:var(--muted);font-size:14px">Собрали по вашим ответам: ваши тексты, разделы, стиль, цвета и шрифты. Фото и цены примерные, финальный дизайн будет детальнее.</p>
+      <div class="mysite no-print">
+        <div class="phone"><iframe src="${esc(siteLink(true))}" title="Черновик вашего сайта" loading="lazy"></iframe></div>
+        <div class="mysite-t">
+          <p style="margin:0 0 12px">Листайте прямо в телефоне или откройте на весь экран. Если выбрали несколько стилей, вверху можно переключать варианты 1, 2, 3.</p>
+          <a class="btn primary" href="${esc(siteLink())}" target="_blank" rel="noopener">Открыть мой сайт ↗</a>
+          <button class="btn" data-copysite style="margin-top:8px">Скопировать ссылку</button>
+        </div>
+      </div>
       <h2>Так может выглядеть ваш сайт</h2>
       <p class="hint" style="margin:-4px 0 14px;color:var(--muted);font-size:14px">Черновые варианты по вашим ответам - финальный дизайн будет детальнее.</p>
       <div class="previews">${variants().map(v => `<figure>${sitePreview(v.s, v.p, v.f)}<figcaption>${vcap(v)}</figcaption></figure>`).join('')}</div>
@@ -1029,7 +1071,8 @@ function buildText(){
     + `\n\n■ СТРУКТУРА ЛЕНДИНГА\n` + (blockList().map((b,i)=>`${i+1}. ${b.name}`).join('\n') || '-') + (A.blocksExtra ? `\n+ ${A.blocksExtra}` : '')
     + sect('Функции и контент', D.features())
     + sect('Сроки и пожелания', D.terms())
-    + `\n\n■ ОРИЕНТИР ПО ЦЕНЕ\n${rub(PRICE.dev + PRICE.setup - PRICE.briefOff)} со скидкой за бриф, 7-14 дней`;
+    + `\n\n■ ОРИЕНТИР ПО ЦЕНЕ\n${rub(PRICE.dev + PRICE.setup - PRICE.briefOff)} со скидкой за бриф, 7-14 дней`
+    + `\n\n■ ЧЕРНОВИК САЙТА (можно листать)\n${siteLink()}`;
 }
 
 /* =====================================================================
@@ -1267,7 +1310,7 @@ function drawPeek(){
   m.innerHTML = `<div class="box"><div class="mh"><b>Ваш сайт сейчас</b><button class="btn sm" data-peek="close" aria-label="Закрыть">✕</button></div>
     ${sitePreview(x.s, x.p, x.f)}
     <div class="nav2"><button class="btn sm" data-peek="prev" ${v.length < 2 ? 'disabled' : ''}>‹</button><small>${vcap(x)}${v.length > 1 ? ' · ' + (PV + 1) + ' из ' + v.length : ''}</small><button class="btn sm" data-peek="next" ${v.length < 2 ? 'disabled' : ''}>›</button></div>
-    <p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Превью меняется, когда вы выбираете стиль, цвета и шрифты.</p></div>`;
+    <p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Превью меняется, когда вы выбираете стиль, цвета и шрифты.</p><a class="btn primary" style="margin-top:12px;display:inline-flex" href="${esc(siteLink())}" target="_blank" rel="noopener">Открыть сайт целиком ↗</a></div>`;
 }
 const closePeek = () => $('#modal')?.remove();
 $('#peek').onclick = () => { PV = 0; drawPeek(); };
@@ -1317,7 +1360,8 @@ document.addEventListener('keydown', e => {
   if(e.key === 'Enter' && e.target.tagName === 'INPUT' && S.step === 0) start();
   if(e.key === 'Escape') closePeek();
 });
-document.addEventListener('click', e => {
+document.addEventListener('click', async e => {
+  if(e.target.closest('[data-copysite]')){ toast(await copyText(siteLink()) ? 'Ссылка на ваш сайт скопирована' : 'Не удалось скопировать'); return; }
   if(e.target.id === 'modal'){ closePeek(); return; }
   const t = e.target.closest('[data-more],[data-go],[data-start],[data-peek],[data-chip],[data-niche],[data-pick],[data-blk],[data-auto],[data-send],[data-swipe],[data-hint],[data-rmfile]');
   if(!t) return;
