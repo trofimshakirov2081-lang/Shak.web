@@ -8,6 +8,12 @@ cp -r "$ROOT/index.html" "$ROOT/landing.css" "$ROOT/brief" "$ROOT/tz" "$ROOT/rab
 [ -d "$ROOT/sites" ] && cp -r "$ROOT/sites" "$OUT/"
 rm -rf "$OUT/demos/_configs" "$OUT/demos/КАК-СДЕЛАТЬ-ДЕМО.md" "$OUT/raboty/videos.json"
 touch "$OUT/.nojekyll"
+# Номер сборки: страница сверяет его с version.txt и сама открывает свежую версию, если Telegram показал старую копию
+BUILD=$(date +%Y%m%d%H%M%S)
+for d in brief app; do
+  printf "%s" "$BUILD" > "$OUT/$d/version.txt"
+  sed -i "s/__BUILD__/$BUILD/" "$OUT/$d/index.html"
+done
 cd "$OUT"
 git init -q -b gh-pages
 git add -A

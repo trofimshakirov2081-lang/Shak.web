@@ -6,6 +6,7 @@
 <title>shak.web</title>
 <meta name="description" content="Сайты под ключ с админкой: цены, тексты и фото меняете сами.">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>window.BUILD = "__BUILD__";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -158,7 +159,7 @@ if (tg && tg.initData !== undefined) {
   try { tg.setHeaderColor("#FFFFFF"); tg.setBackgroundColor("#FFFFFF"); } catch (e) {}
   tg.MainButton.setParams({ text: "Собрать свой сайт за 10 минут", color: "#16181D", text_color: "#FFFFFF" });
   tg.MainButton.show();
-  tg.MainButton.onClick(function () { location.href = "../brief/?from=miniapp"; });
+  tg.MainButton.onClick(function () { tg.MainButton.hide(); location.href = "../brief/?from=miniapp&v=" + window.BUILD; });
   function tme(id, url) { var a = document.getElementById(id); a.addEventListener("click", function (e) { e.preventDefault(); tg.openTelegramLink(url); }); }
   tme("write", "https://t.me/SHAKIROVtrofim"); tme("write2", "https://t.me/SHAKIROVtrofim"); tme("chan", "https://t.me/shak_web");
   document.getElementById("list").addEventListener("click", function (e) {
@@ -167,6 +168,17 @@ if (tg && tg.initData !== undefined) {
     tg.openLink(a.getAttribute("data-url"), { try_instant_view: false });
   });
 }
+
+/* свежая версия: Telegram держит старую копию страницы */
+(function () {
+  if (!/^\d/.test(window.BUILD || "")) return;
+  ["briefTop", "briefBottom"].forEach(function (id) { var a = document.getElementById(id); if (a) a.href = "../brief/?from=miniapp&v=" + window.BUILD; });
+  fetch("version.txt?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (v) {
+    v = (v || "").trim(); if (!v || v === window.BUILD) return;
+    try { if (sessionStorage.getItem("app-reload") === v) return; sessionStorage.setItem("app-reload", v); } catch (e) { return; }
+    var u = new URL(location.href); u.searchParams.set("v", v); location.replace(u.toString());
+  }).catch(function () {});
+})();
 
 /* живая админка: цены меняются, как будто их правят */
 var P = [["p1", ["220 ₽", "240 ₽", "250 ₽", "220 ₽"]], ["p2", ["1 800 ₽", "1 900 ₽", "2 000 ₽", "1 800 ₽"]]], k = 0;

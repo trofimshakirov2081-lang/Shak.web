@@ -2,7 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>window.BUILD = "__BUILD__";</script>
 <title>Бриф на сайт</title>
 <meta name="description" content="Выберите стиль, цвета, шрифты и структуру будущего сайта - ТЗ соберётся автоматически">
 <meta name="theme-color" content="#6d5dfc">
@@ -35,6 +37,8 @@
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font:16px/1.5 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font:inherit;color:inherit}
+button,a,.btn,[data-start],[data-go],.chip,.card{touch-action:manipulation}
+.field input,.field textarea,.field select{font-size:16px}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
 
@@ -221,7 +225,7 @@ main{padding:32px 0 120px}
 .bb .sw i{display:block;height:56px;border-radius:12px;border:1px solid var(--line)}
 .bb .sw small{display:block;font-size:11px;color:var(--muted);margin-top:4px;font-family:ui-monospace,monospace}
 .send{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
-.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:12px 20px;border-radius:12px;opacity:0;transition:all .25s;pointer-events:none;z-index:20;font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(110px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:12px 20px;border-radius:12px;opacity:0;transition:all .25s;pointer-events:none;z-index:20;font-size:14px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .empty{color:var(--muted);font-style:italic}
 
@@ -684,6 +688,18 @@ try{
 const save = () => { if(VIEW) return; try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 
 const A = S.a;
+// Внутри Telegram: прячем кнопку мини-приложения (она перекрывала низ экрана и перезагружала бриф), разворачиваем окно
+try{ const tg = window.Telegram && Telegram.WebApp; if(tg && tg.initData !== undefined){ tg.ready(); tg.expand(); tg.MainButton.hide(); tg.SecondaryButton && tg.SecondaryButton.hide(); tg.disableVerticalSwipes && tg.disableVerticalSwipes(); } }catch(e){}
+// Telegram и браузер держат старую копию страницы: сверяем с сервером и при необходимости открываем свежую
+(function(){
+  if(!/^\d/.test(window.BUILD || '')) return;
+  fetch('version.txt?t=' + Date.now(), {cache:'no-store'}).then(r => r.ok ? r.text() : '').then(v => {
+    v = (v || '').trim();
+    if(!v || v === window.BUILD) return;
+    try{ if(sessionStorage.getItem('brief-reload') === v) return; sessionStorage.setItem('brief-reload', v); }catch(e){ return; }
+    const u = new URL(location.href); u.searchParams.set('v', v); location.replace(u.toString());
+  }).catch(() => {});
+})();
 const $ = s => document.querySelector(s);
 const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // рекомендации по всем выбранным нишам (по очереди берём лучшие варианты каждой)
