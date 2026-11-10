@@ -701,7 +701,7 @@ function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add(
    ===================================================================== */
 function head(title, text){ return `<div class="step-head"><h1>${title}</h1><p>${text}</p></div>`; }
 function helper(text, action){ return `<div class="helper"><p>🤔 ${text}</p><button class="btn primary sm" data-auto="${action}">Подобрать за меня</button></div>`; }
-function input(key, label, ph='', type='text'){ return `<div class="field"><label>${label}</label><input type="${type}" data-k="${key}" value="${esc(A[key])}" placeholder="${esc(ph)}"></div>`; }
+function input(key, label, ph='', type='text'){ return `<div class="field"><label>${label}</label><input type="${type}" data-k="${key}" enterkeyhint="${key === 'contact' ? 'go' : 'next'}" value="${esc(A[key])}" placeholder="${esc(ph)}"></div>`; }
 function area(key, label, ph=''){ return `<div class="field"><label>${label}</label><textarea data-k="${key}" placeholder="${esc(ph)}">${esc(A[key])}</textarea></div>`; }
 function chips(key, list, multi=true, idk=false){
   const val = A[key];
@@ -1369,6 +1369,12 @@ document.addEventListener('input', e => {
   const k = e.target.dataset.k; if(!k) return;
   A[k] = e.target.value; save();
 });
+// В Telegram и на телефоне первое касание может только закрыть клавиатуру, страница сдвигается, и клик уходит мимо.
+// Поэтому «Начать» срабатывает уже на касании, а не только на клике.
+document.addEventListener('pointerdown', e => {
+  if(S.step !== 0 || !e.target.closest('[data-start]')) return;
+  e.preventDefault(); start();
+}, true);
 document.addEventListener('keydown', e => {
   if(e.key === 'Enter' && e.target.tagName === 'INPUT' && S.step === 0) start();
   if(e.key === 'Escape') closePeek();

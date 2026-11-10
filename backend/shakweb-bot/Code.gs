@@ -16,7 +16,7 @@
 const TOKEN = PropertiesService.getScriptProperties().getProperty("TOKEN") || "ВСТАВЬТЕ_ТОКЕН";
 const OWNER = 1971837615;            // Трофим
 const OWNER_NICK = "SHAKIROVtrofim";
-const VER = "20261109";              // меняйте, чтобы Telegram не показывал старое мини-приложение и обложку
+const VER = "20261110";              // меняйте, чтобы Telegram не показывал старое мини-приложение и обложку
 const SITE = "https://trofimshakirov2081-lang.github.io/Shak.web/";
 const APP = SITE + "app/?v=" + VER;
 const RABOTY = SITE + "raboty/";
@@ -47,7 +47,7 @@ function send(chat, text, kb, extra) {
 }
 
 /* ---------- Тексты ---------- */
-function briefUrl(src) { return SITE + "brief/?from=" + encodeURIComponent("bot" + (src ? "-" + src : "")); }
+function briefUrl(src) { return SITE + "brief/?v=" + VER + "&from=" + encodeURIComponent("bot" + (src ? "-" + src : "")); }
 function cardKb(src) {
   return [
     [{ text: "📱 Смотреть работы", web_app: { url: APP } }],
