@@ -2,9 +2,9 @@
 :root{
   --ivory:#F3EDE4; --parchment:#E7DDD0; --sand:#D9C8B6; --taupe:#8B7466;
   --espresso:#2B2224; --espresso-2:#3A2F30;
-  --ink:#2B2523; --ink-2:#6F625A; --line:rgba(43,37,35,.14);
+  --ink:#2B2523; --ink-2:#6F625A; --line:rgba(43,37,35,.14); --line-strong:rgba(43,37,35,.3);
   --on-dark:#F1E9DE; --on-dark-2:#BFAFA2; --line-dark:rgba(241,233,222,.16);
-  --accent:#7A2E3A; --accent-hover:#68242F; --on-accent:#F8F1E9;
+  --accent:#7A2E3A; --accent-hover:#68242F; --on-accent:#F8F1E9; --accent-text:#7A2E3A;
   --error:#A3392F;
   --f-head:'Playfair Display',Georgia,serif; --f-body:'Ysabeau Office',system-ui,sans-serif;
   --fs-display:clamp(2.1rem,1.2rem + 4.8vw,6.4rem); --fs-h1:clamp(2.4rem,1.5rem + 3.6vw,4.8rem);
@@ -40,7 +40,7 @@ p{margin:0}
 .btn--accent{background:var(--accent);color:var(--on-accent)}
 .btn--accent:hover{background:var(--accent-hover)}
 .btn--accent:active{transform:scale(.98)}
-.btn--line{border-color:rgba(43,37,35,.35);color:var(--ink);background:transparent}
+.btn--line{border-color:var(--line-strong);color:var(--ink);background:transparent}
 .btn--line:hover{border-color:var(--ink)}
 .dark .btn--line{border-color:rgba(241,233,222,.4);color:var(--on-dark)}
 .dark .btn--line:hover{border-color:var(--on-dark)}
@@ -152,7 +152,7 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 .rcard .ph{aspect-ratio:4/5;border-radius:var(--r)}
 .rcard__cat{font-size:var(--fs-small);color:var(--ink-2)}
 .rcard h3{font-size:clamp(1.25rem,1.1rem + .5vw,1.55rem)}
-.price{font-family:var(--f-head);color:var(--accent);font-size:clamp(1.25rem,1.1rem + .5vw,1.6rem);white-space:nowrap}
+.price{font-family:var(--f-head);color:var(--accent-text);font-size:clamp(1.25rem,1.1rem + .5vw,1.6rem);white-space:nowrap}
 
 /* профессия в деталях */
 .details{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(10px,1.4vw,18px);align-items:end}
@@ -190,7 +190,7 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 /* поля */
 .fld{display:grid;gap:6px}
 .fld label{font-size:.9rem;color:var(--ink-2)}
-.fld input,.fld select,.fld textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--ivory);border:1px solid rgba(43,37,35,.22);border-radius:var(--r);padding:13px 14px;min-height:52px;width:100%;transition:border-color .2s}
+.fld input,.fld select,.fld textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--ivory);border:1px solid var(--line-strong);border-radius:var(--r);padding:13px 14px;min-height:52px;width:100%;transition:border-color .2s}
 .fld textarea{min-height:96px;resize:vertical}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--ink)}
 .fld.has-err input{border-color:var(--error)}
@@ -225,7 +225,7 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 
 /* каталог: развороты */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
-.chip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(43,37,35,.25);background:none;cursor:pointer;color:var(--ink-2);transition:all .25s var(--ease)}
+.chip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line-strong);background:none;cursor:pointer;color:var(--ink-2);transition:all .25s var(--ease)}
 .chip:hover{color:var(--ink);border-color:var(--ink)}
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .spread{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,6vw,110px);align-items:center;padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);transition:opacity .4s var(--ease),transform .4s var(--ease)}
@@ -332,8 +332,8 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 @keyframes qin{from{opacity:0;transform:translateX(16px)}}
 .qstep h3{margin-bottom:22px}
 .qopts{display:grid;gap:10px}
-.qopt{display:flex;align-items:center;gap:14px;min-height:56px;padding:12px 18px;border-radius:var(--r);border:1px solid rgba(43,37,35,.18);background:transparent;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
-.qopt::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(43,37,35,.4);transition:all .2s}
+.qopt{display:flex;align-items:center;gap:14px;min-height:56px;padding:12px 18px;border-radius:var(--r);border:1px solid var(--line-strong);background:transparent;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.qopt::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line-strong);transition:all .2s}
 .qopt:hover{border-color:var(--ink)}
 .qopt[aria-pressed="true"]{border-color:var(--accent);background:rgba(122,46,58,.05)}
 .qopt[aria-pressed="true"]::before{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3px var(--ivory)}
@@ -388,3 +388,33 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
   .js .ph.rv img{transform:none}.js .ph.rv::before{display:none}
   .js .rv-t{opacity:1;transform:none}
 }
+
+/* ===== Цветовые варианты (переключатель в плашке черновика, в рабочей версии выбирается в админке) ===== */
+/* 1. Из брифа Айгуль: слоновая кость, графит, благородное золото; неоклассика, Cormorant Garamond */
+[data-theme="gold"]{
+  --ivory:#F8F4E9; --parchment:#EFE8D8; --sand:#DCCFB4; --taupe:#8C8270; --espresso:#1A1A1A; --espresso-2:#262626;
+  --ink:#1A1A1A; --ink-2:#5F5A50; --line:rgba(26,26,26,.13); --line-strong:rgba(26,26,26,.3);
+  --on-dark:#F8F4E9; --on-dark-2:#B9B2A3; --line-dark:rgba(248,244,233,.16);
+  --accent:#D4AF37; --accent-hover:#C29E2C; --on-accent:#1A1A1A; --accent-text:#8A6D1B;
+  --f-head:'Cormorant Garamond',Georgia,serif;
+}
+[data-theme="gold"] h1,[data-theme="gold"] h2,[data-theme="gold"] h3,[data-theme="gold"] .manifest__q,[data-theme="gold"] .teacher__name,[data-theme="gold"] .big,[data-theme="gold"] .learn li,[data-theme="gold"] .logo b,[data-theme="gold"] .ftr__brand b,[data-theme="gold"] .price{font-weight:600;letter-spacing:-.005em}
+[data-theme="gold"] .hero h1{font-weight:500}
+[data-theme="gold"] .portrait{background:linear-gradient(170deg,#3A3631,#1F1E1C)}
+/* 3. «Ночное золото» из ТЗ, смягчённое: тёмный графит вместо чистого чёрного */
+[data-theme="night"]{
+  --ivory:#151413; --parchment:#1F1D1B; --sand:#4A4338; --taupe:#3A352E; --espresso:#0F0E0D; --espresso-2:#1A1917;
+  --ink:#F3EDE1; --ink-2:#B5AC9E; --line:rgba(243,237,225,.13); --line-strong:rgba(243,237,225,.3);
+  --on-dark:#F3EDE1; --on-dark-2:#B5AC9E; --line-dark:rgba(243,237,225,.14);
+  --accent:#C9A45C; --accent-hover:#D6B36D; --on-accent:#151413; --accent-text:#D2B06B; --error:#E08B7E;
+}
+[data-theme="night"] .hdr{background:rgba(21,20,19,.82)}
+[data-theme="night"] .fade-in{background:linear-gradient(180deg,var(--ivory),var(--espresso))}
+[data-theme="night"] .fade-out{background:linear-gradient(180deg,var(--espresso),var(--parchment))}
+[data-theme="night"] .portrait{background:linear-gradient(170deg,#2A2622,#151413)}
+[data-theme="night"] .burger span,[data-theme="night"] .burger span::before,[data-theme="night"] .burger span::after{background:var(--ink)}
+[data-theme="night"] .menu-open .burger span{background:transparent}
+.themes{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-left:6px}
+.themes button{min-height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-size:.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.themes button i{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.themes button[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink)}

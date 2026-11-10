@@ -20,8 +20,18 @@
   const ILL = "Иллюстрация";
   const crumbs = (items) => `<nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
 
+  /* ---------- цветовой вариант: ?theme=…, затем выбор посетителя, затем вариант по умолчанию из данных ---------- */
+  const THEMES = [{ id: "gold", name: "Слоновая кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
+    { id: "burgundy", name: "Слоновая кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
+    { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
+  let THEME = new URLSearchParams(location.search).get("theme");
+  try { THEME = THEME || localStorage.getItem("altyn-theme"); } catch (e) {}
+  if (!THEMES.some((t) => t.id === THEME)) THEME = S.theme || "gold";
+  const setTheme = (id) => { THEME = id; document.documentElement.dataset.theme = id; try { localStorage.setItem("altyn-theme", id); } catch (e) {} document.querySelectorAll("[data-theme-set]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.themeSet === id)); };
+  document.documentElement.dataset.theme = THEME;
+
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${S.preview ? `<div class="draft"><div class="wrap">Черновик для согласования. Фото временные (иллюстрации), цены предварительные. Работы, отзывы и данные о преподавателе добавим после материалов от Айгуль. <a href="${R}palettes.html">Цветовые варианты</a></div></div>` : ""}
+  const header = () => `${S.preview ? `<div class="draft"><div class="wrap">Черновик для согласования. Фото временные (иллюстрации), цены предварительные. Работы, отзывы и данные о преподавателе добавим после материалов от Айгуль. </div><div class="wrap" style="padding-top:0"><span>Цвет:</span><span class="themes" role="group" aria-label="Цветовой вариант">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span></div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
       <nav class="nav" id="nav" aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
@@ -287,6 +297,8 @@
   const html = document.documentElement, burger = document.querySelector(".burger");
   burger.addEventListener("click", () => { const o = html.classList.toggle("menu-open"); burger.setAttribute("aria-expanded", o); html.style.overflow = o ? "hidden" : ""; });
   document.addEventListener("click", (e) => {
+    const th = e.target.closest("[data-theme-set]");
+    if (th) { setTheme(th.dataset.themeSet); return; }
     const en = e.target.closest("[data-enroll]");
     if (en) { e.preventDefault(); html.classList.remove("menu-open"); openForm(en.dataset.enroll || ""); return; }
     if (e.target.closest("[data-quiz]")) {
