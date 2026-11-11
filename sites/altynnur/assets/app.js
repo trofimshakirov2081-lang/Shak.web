@@ -27,7 +27,9 @@
   const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }];
   const pick = (key, list, def) => { let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
   const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
-  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow");
+  const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
+  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
+  document.documentElement.dataset.anim = ANIM;
   let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = MODE === "dark" ? "dark" : "light";
   document.documentElement.dataset.mode = MODE;
   const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
@@ -64,6 +66,7 @@
   const header = () => `${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       <div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
       <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>
+      <span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>
       ${PAGE === "home" ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div></div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
@@ -121,9 +124,9 @@
         <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button><a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></div></div></div></section>`;
   // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
   H.zoom = () => `<section class="zoom" aria-label="Обучение на практике"><div class="zoom__stick">
-      ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p}-640.webp" alt="" loading="lazy"></span>`).join("")}
-      <div class="zoom__c"><img ${srcset(S.zoom.main)} sizes="100vw" alt="${esc(S.zoom.alt)}" loading="lazy">
-        <div class="zoom__t"><h2>${esc(S.zoom.title)}</h2><a class="btn btn--glass" href="${R}works/">Смотреть работы</a></div></div>
+      ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p.src}-640.webp" alt="" loading="lazy"><em>${esc(p.cap)}</em></span>`).join("")}
+      <div class="zoom__c"><img ${srcset(S.zoom.main)} sizes="100vw" alt="${esc(S.zoom.alt)}" loading="lazy"></div>
+      <div class="zoom__t"><span class="zoom__k">${esc(S.zoom.kicker)}</span><h2>${esc(S.zoom.title)}</h2><a class="btn btn--glass zoom__btn" href="${R}works/">Смотреть работы</a></div>
     </div></section>`;
   // преподаватель и преимущества: плитки с фото и короткими подписями
   H.teacher = () => `<section class="sec" style="padding-top:0"><div class="wrap">
@@ -338,6 +341,8 @@
     const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
     if (th) { apply("theme", th.dataset.themeSet); return; }
     if (fo) { apply("font", fo.dataset.fontSet); return; }
+    const an = e.target.closest("[data-anim-set]");
+    if (an) { try { localStorage.setItem("altyn-anim", an.dataset.animSet); } catch (er) {} return; }
     const vw = e.target.closest("[data-view-set]");
     if (vw) { try { localStorage.setItem("altyn-view", vw.dataset.viewSet); } catch (er) {} return; }
     if (e.target.closest("[data-mode-toggle]")) { MODE = MODE === "dark" ? "light" : "dark"; document.documentElement.dataset.mode = MODE; try { localStorage.setItem("altyn-mode", MODE); } catch (er) {} return; }
@@ -416,7 +421,7 @@
   if (zoom && !RM) {
     const st = zoom.querySelector(".zoom__stick"); let zq = 0;
     const zmove = () => { zq = 0; const r = zoom.getBoundingClientRect(), span = r.height - innerHeight; if (r.bottom < 0 || r.top > innerHeight) return;
-      const p = Math.max(0, Math.min(1, -r.top / span)); st.style.setProperty("--p", p.toFixed(4)); st.classList.toggle("is-open", p > 0.82); };
+      const p = Math.max(0, Math.min(1, -r.top / span)); st.style.setProperty("--p", p.toFixed(4)); st.classList.toggle("is-open", p > 0.55); };
     addEventListener("scroll", () => { if (!zq) zq = requestAnimationFrame(zmove); }, { passive: true }); addEventListener("resize", zmove); zmove();
   } else if (zoom) zoom.classList.add("is-static");
   /* ---------- спокойные анимации ---------- */
@@ -442,6 +447,11 @@
   document.querySelectorAll(".acc").forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty("--d", i * 60 + "ms")));
   const seen = [...document.querySelectorAll(".steps>li, .approach>li, .who>div, .acc details, .spread>div:last-child")];
   if ("IntersectionObserver" in window) { const so = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-seen"); so.unobserve(en.target); } }), { rootMargin: "0px 0px -6% 0px" }); seen.forEach((el) => so.observe(el)); } else seen.forEach((el) => el.classList.add("is-seen"));
+  // «Живая»: плитки всплывают, когда попадают в экран
+  if (ANIM === "live" && "IntersectionObserver" in window) {
+    const po = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-pop"); po.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".dirs>*, .why>*, .ctiles>*, .masonry>*").forEach((el) => po.observe(el));
+  } else document.querySelectorAll(".dirs>*, .why>*, .ctiles>*, .masonry>*").forEach((el) => el.classList.add("is-pop"));
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".rv, .rv-t").forEach((el) => io.observe(el));
