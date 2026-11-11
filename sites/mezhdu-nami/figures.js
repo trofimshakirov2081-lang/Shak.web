@@ -55,10 +55,10 @@
     edge: `<rect class="pr" x="6" y="71" width="104" height="9" rx="3"/><rect class="pr" x="12" y="80" width="5" height="30"/><rect class="pr" x="98" y="80" width="5" height="30"/><rect class="pr" x="6" y="110" width="188" height="4" rx="2"/>`,
     chair: `<rect class="pr" x="104" y="74" width="40" height="6" rx="2"/><rect class="pr" x="140" y="30" width="5" height="50" rx="2"/><rect class="pr" x="106" y="80" width="4" height="30"/><rect class="pr" x="138" y="80" width="4" height="30"/><rect class="pr" x="6" y="110" width="188" height="4" rx="2"/>`
   };
-  window.poseSVG = (base, prop) => {
+  window.poseSVG = (base, prop, swap) => {
     const b = F[base] || F.mis, list = (prop || "").split(" ").filter(Boolean);
     const under = list.filter((x) => x !== "pillow").map((x) => props[x] || "").join("");
     const pillow = list.includes("pillow") ? props.pillow : "";
-    return `<svg class="pose" viewBox="0 0 200 122" role="img" aria-hidden="true">${under}${pillow}${fig(b.m, "fm")}${fig(b.f, "ff")}</svg>`;
+    return `<svg class="pose" viewBox="0 0 200 122" role="img" aria-hidden="true">${under}${pillow}${fig(b.m, swap ? "ff" : "fm")}${fig(b.f, swap ? "fm" : "ff")}</svg>`;
   };
 })();

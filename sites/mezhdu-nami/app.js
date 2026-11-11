@@ -8,8 +8,10 @@
 
   /* ---------- все карточки ---------- */
   const ALL = [];
-  POSES.forEach((p, i) => ALL.push({ id: "poses:" + i, cat: "poses", t: p[0], base: p[1], prop: p[2], d: p[3], tags: p[4] || [], who: "both", dur: 2, tip: (window.POSE_TIPS || {})[p[1]] || "" }));
-  Object.entries(CARDS).forEach(([cat, list]) => list.forEach((c, i) => ALL.push({ id: cat + ":" + i, cat, t: c[0], d: c[1], who: c[2], dur: c[3], tags: c[4] || [], tip: c[5] || "" })));
+  // карточки, где важна анатомия: кто ведёт (A) всегда этот партнёр
+  const LOCK = { "oral|Куннилингус классика": "he", "oral|Минет классика": "she", "toys|Эрекционное кольцо": "she", "toys|Страпон: первое знакомство": "she", "toys|Страпон сверху": "she", "toys|Страпон: он сверху": "she", "toys|Страпон сзади": "she", "toys|Шарики": "he", "toys|Мастурбатор для него": "she", "anal|Ложечки анально": "he", "anal|{B} сверху": "he", "anal|Сзади на коленях": "he", "anal|Массаж простаты": "she", "anal|Расслабление": "he", "anal|Совмещение": "he", "anal|Медленный вход": "he", "toys|Вибро-трусики": "he" };
+  POSES.forEach((p, i) => ALL.push({ id: "poses:" + i, cat: "poses", t: p[0], base: p[1], prop: p[2], d: p[3], tags: p[4] || [], who: "both", dur: 2, tip: (window.POSE_TIPS || {})[p[1]] || "", swap: (window.POSE_SWAP || []).includes(p[0]) }));
+  Object.entries(CARDS).forEach(([cat, list]) => list.forEach((c, i) => ALL.push({ id: cat + ":" + i, cat, t: c[0], d: c[1], who: c[2], dur: c[3], tags: c[4] || [], tip: c[5] || "", lock: LOCK[cat + "|" + c[0]] || null })));
   const BYID = Object.fromEntries(ALL.map((c) => [c.id, c]));
   const PRACT = ["оральные ласки", "анальный секс", "страпон", "игрушки", "БДСМ", "связывание", "шлепки", "доминирование", "раздевание", "повязка на глаза"];
   const TAGS = [...new Set(ALL.flatMap((c) => c.tags))].filter((t) => !PRACT.includes(t)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -28,12 +30,12 @@
   const rnd = (n) => { if (window.crypto && crypto.getRandomValues) { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; } return Math.floor(Math.random() * n); };
   const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   // подходит ли карточка под фильтры
-  const allowed = (c, scope) => (scope ? c.cat === scope : S.cats[c.cat]) && !S.exCards.includes(c.id) && !c.tags.some((t) => S.exTags.includes(t)) && c.dur <= S.dur;
+  const allowed = (c, scope) => (scope ? c.cat === scope : S.cats[c.cat]) && !S.exCards.includes(c.id) && !c.tags.some((t) => S.exTags.includes(t)) && c.dur <= S.dur && !(c.lock && (S.who === "he" || S.who === "she") && c.lock !== S.who);
   const pool = (scope) => ALL.filter((c) => allowed(c, scope));
   // «мешок»: карточки выпадают по одной, пока все не выпадут, потом мешок перемешивается заново
   function draw(scope, avoid = []) {
     const p = pool(scope); if (!p.length) return null;
-    const sig = (scope || "all") + "|" + S.dur + "|" + S.exTags.join(",") + "|" + Object.keys(S.cats).filter((k) => S.cats[k]).join(",");
+    const sig = (scope || "all") + "|" + S.who + "|" + S.dur + "|" + S.exTags.join(",") + "|" + Object.keys(S.cats).filter((k) => S.cats[k]).join(",");
     const ids = new Set(p.map((c) => c.id));
     let bag = (S.bags[sig] || []).filter((id) => ids.has(id));
     if (!bag.length) { bag = shuffle(p.map((c) => c.id)); const last = S.hist[0] && S.hist[0].id; if (bag.length > 1 && bag[bag.length - 1] === last) bag.unshift(bag.pop()); }
@@ -52,7 +54,9 @@
     if (mode === "turns") { S.lead = other(S.lead); save(); return S.lead; }
     return rnd(2) ? "he" : "she";
   }
+  // {A:он-форма|она-форма} и {B:...}: слово в роде того, о ком речь
   const fill = (txt, L) => { const A = NAMES[L], B = NAMES[other(L)];
+    txt = txt.replace(/\{(A|B):([^|}]*)\|([^}]*)\}/g, (_, w, m, f) => ((w === "A" ? L : other(L)) === "he" ? m : f));
     return txt.replace(/\{(A|a|B|b|bd|ba|bi|ad|aa)\}/g, (_, k) => ({ A: A.N, a: A.n, B: B.N, b: B.n, bd: B.d, ba: B.a, bi: B.i, ad: A.d, aa: A.a })[k]); };
 
   /* ---------- общий интерфейс ---------- */
@@ -64,7 +68,15 @@
   function render() {
     app.innerHTML = header() + `<div class="view">${V[TAB]()}</div>`;
   }
-  const mini = (c) => c.cat === "poses" ? `<span class="mini">${poseSVG(c.base, c.prop)}</span>` : "";
+  const mini = (c) => c.cat === "poses" ? `<span class="mini">${poseSVG(c.base, c.prop, c.swap)}</span>` : "";
+  const defL = () => (S.who === "he" ? "he" : "she");
+  const ttl = (c, L) => fill(c.t, c.lock || L || defL());
+  /* ---------- словарь для новичков ---------- */
+  const GL = window.GLOSS || [];
+  const glossFor = (c) => { const txt = [c.t, c.d, c.tip, c.tags.join(" ")].join(" ");
+    return GL.filter((g) => g[1].test(txt)).sort((x, y) => (x[0] === "Смазка") - (y[0] === "Смазка")).slice(0, 3); };
+  const vids = (q) => `<span class="vl"><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">▶ Видео на YouTube</a><a href="https://yandex.ru/video/search?text=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">▶ Видео в Яндексе</a></span>`;
+  const glossItem = (g, open) => `<details class="gl"${open ? " open" : ""}><summary>${esc(g[0])}</summary><p>${esc(g[2])}</p>${vids(g[3])}</details>`;
 
   /* ---------- экраны ---------- */
   const V = {};
@@ -82,18 +94,19 @@
       <p class="sub">Только одна категория</p>
       <div class="cats">${CATS.map((c) => `<button class="cat${S.cats[c.id] ? "" : " off"}" data-cat="${c.id}"><b>${esc(c.name)}</b><span>${esc(c.hint)}</span></button>`).join("")}</div>
       <div class="lead-info"><span class="dot" style="background:${S.who === "he" ? "var(--he)" : S.who === "she" ? "var(--she)" : "linear-gradient(90deg,var(--he) 50%,var(--she) 50%)"}"></span>Задания ведёт: ${S.who === "he" ? "он" : S.who === "she" ? "она" : "оба по жребию"} · длительность ${DUR[S.dur]}. Изменить в настройках.</div>
+      <button class="dict-btn" data-dict><b>Словарь для новичков</b><span>Что такое римминг, пеггинг, эджинг, где простата, какая нужна смазка. С видео.</span></button>
       <p class="note">Любую карточку можно пропустить. Делайте только то, что приятно и комфортно обоим.</p>`;
   };
   V.favs = () => {
     const list = S.favs.map((id) => BYID[id]).filter(Boolean);
     if (!list.length) return `<div class="empty">Здесь появятся карточки, которые вы отметите сердечком ♡</div>`;
-    return `<div class="list">${list.map((c) => `<button class="item" data-open="${c.id}"><span><b>${esc(c.t)}</b><small>${esc(CATN[c.cat])}</small></span>${mini(c)}</button>`).join("")}</div>`;
+    return `<div class="list">${list.map((c) => `<button class="item" data-open="${c.id}"><span><b>${esc(ttl(c))}</b><small>${esc(CATN[c.cat])}</small></span>${mini(c)}</button>`).join("")}</div>`;
   };
   V.hist = () => {
     if (!S.hist.length) return `<div class="empty">Здесь будут недавние карточки</div>`;
     const lab = { done: ["Выполнено", "ok"], skip: ["Пропущено", ""], seen: ["Показано", ""] };
     return `<div class="list">${S.hist.slice(0, 80).map((h) => { const c = BYID[h.id]; if (!c) return ""; const [l, cl] = lab[h.s] || lab.seen;
-      return `<button class="item" data-open="${c.id}"><span><b>${esc(c.t)}</b><small>${esc(CATN[c.cat])} · ${new Date(h.at).toLocaleDateString("ru-RU", { day: "numeric", month: "short" })}</small></span><span class="st ${cl}">${l}</span></button>`; }).join("")}</div>
+      return `<button class="item" data-open="${c.id}"><span><b>${esc(ttl(c))}</b><small>${esc(CATN[c.cat])} · ${new Date(h.at).toLocaleDateString("ru-RU", { day: "numeric", month: "short" })}</small></span><span class="st ${cl}">${l}</span></button>`; }).join("")}</div>
       <button class="danger" data-clear="hist">Очистить историю</button>`;
   };
   V.set = () => `<p class="sub" style="margin-top:0">Категории</p>
@@ -108,7 +121,7 @@
       <p class="sub">Другие темы</p>
       <div class="chips">${TAGS.map((t) => `<button class="chip ex" data-tag="${esc(t)}" aria-pressed="${S.exTags.includes(t)}">${esc(t)}</button>`).join("")}</div>
       <p class="note">Выключенные практики и зачёркнутые темы не выпадут ни в одном режиме, включая позы.</p>
-      ${S.exCards.length ? `<p class="sub">Скрытые карточки</p><div class="chips">${S.exCards.map((id) => BYID[id] ? `<button class="chip" data-unhide="${id}">↺ ${esc(BYID[id].t)}</button>` : "").join("")}</div><p class="note">Нажмите, чтобы вернуть карточку.</p>` : ""}
+      ${S.exCards.length ? `<p class="sub">Скрытые карточки</p><div class="chips">${S.exCards.map((id) => BYID[id] ? `<button class="chip" data-unhide="${id}">↺ ${esc(ttl(BYID[id]))}</button>` : "").join("")}</div><p class="note">Нажмите, чтобы вернуть карточку.</p>` : ""}
       <button class="danger" data-clear="all">Сбросить всё: настройки, избранное, историю</button>`;
 
   /* ---------- игра ---------- */
@@ -133,21 +146,24 @@
     const L = G.mode === "offer" ? leaderFor("random") : G.mode;
     const opts = []; for (let k = 0; k < 3; k++) { const c = draw(G.scope, G.shown.concat(opts.map((o) => o.id))); if (c && !opts.includes(c)) opts.push(c); }
     const who = G.mode === "offer" ? `${NAMES[L].N} предлагает, ${NAMES[other(L)].n} выбирает` : `Выбирает ${NAMES[L].n}`;
-    stage(`${sbar(MODEN[G.mode])}<p class="chooser">${esc(who)}</p><div class="pick">${opts.map((c) => `<button data-pickc="${c.id}"><span><b>${esc(c.t)}</b><small>${esc(CATN[c.cat])}</small></span>${mini(c)}</button>`).join("")}</div>
+    stage(`${sbar(MODEN[G.mode])}<p class="chooser">${esc(who)}</p><div class="pick">${opts.map((c) => `<button data-pickc="${c.id}"><span><b>${esc(ttl(c, G.mode === "offer" ? other(L) : L))}</b><small>${esc(CATN[c.cat])}</small></span>${mini(c)}</button>`).join("")}</div>
       <div class="more"><button data-reroll>Другие варианты</button></div>`);
     G.opts = opts; G.L = G.mode === "offer" ? other(L) : L;
   }
   function show(c, L, readonly) {
+    if (c.lock) L = c.lock;
     if (G && !readonly) { G.cur = c; G.L = L; G.shown.push(c.id); G.i++; addHist(c.id, "seen"); }
     const fav = S.favs.includes(c.id);
-    const whoTxt = c.cat === "poses" ? "Вдвоём" : c.who === "both" ? "Вместе" : `Ведёт ${NAMES[L].n}`;
+    const whoTxt = c.cat === "poses" ? "Вдвоём" : c.cat === "questions" ? `Спрашивает ${NAMES[L].n}` : c.who === "both" && !c.lock ? "Вместе" : `Ведёт ${NAMES[L].n}`;
+    const gl = glossFor(c);
     const prog = G && G.mode === "series" ? `<div class="prog"><i style="width:${(G.i / G.n) * 100}%"></i></div>` : "";
     const title = G ? (G.mode === "series" ? `Серия · ${G.i} из ${G.n}` : G.scope ? CATN[G.scope] : MODEN[G.mode] || "Карточка") : "Карточка";
     stage(`${sbar(title)}${prog}<div class="cardwrap"><article class="card" id="card">
         <div class="ctag"><span class="pill">${esc(CATN[c.cat])}</span><span class="pill who">${whoTxt}</span></div>
-        ${c.cat === "poses" ? `<div class="art">${poseSVG(c.base, c.prop)}<div class="legend"><span><i class="dot" style="background:var(--she)"></i>она</span><span><i class="dot" style="background:var(--he)"></i>он</span></div></div>` : ""}
+        ${c.cat === "poses" ? `<div class="art">${poseSVG(c.base, c.prop, c.swap)}<div class="legend"><span><i class="dot" style="background:var(--she)"></i>она</span><span><i class="dot" style="background:var(--he)"></i>он</span></div></div>` : ""}
         <h2>${esc(fill(c.t, L))}</h2><p class="d">${esc(fill(c.d, L))}</p>
         ${c.tip ? `<div class="tip"><b>${c.cat === "poses" ? "Как устроиться" : "Совет"}</b>${esc(fill(c.tip, L))}</div>` : ""}
+        ${gl.length ? `<div class="newb"><b>Для новичков: что это и как</b>${gl.map((g) => glossItem(g)).join("")}</div>` : ""}
         <div class="meta"><span>⏱ ${DUR[c.dur]}</span>${c.tags.length ? `<span>· ${c.tags.map(esc).join(", ")}</span>` : ""}</div>
       </article></div>
       ${readonly ? `<div class="acts" style="grid-template-columns:1fr auto"><button class="b-done" data-close>Готово</button><button class="b-fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="В избранное">${fav ? "♥" : "♡"}</button></div>`
@@ -183,6 +199,7 @@
     if ((b = t("[data-series]"))) return start("series", { n: +b.dataset.series });
     if ((b = t("[data-cat]"))) { if (!S.cats[b.dataset.cat]) { S.cats[b.dataset.cat] = true; save(); } return start("random", { scope: b.dataset.cat }); }
     if ((b = t("[data-close]"))) return closeStage();
+    if ((b = t("[data-dict]"))) { G = null; return stage(`${sbar("Словарь для новичков")}<div class="dict"><p class="note" style="margin-top:0">Короткие объяснения без стеснения. Ссылки ведут на поиск видео по теме: выбирайте ролики сексологов и врачей.</p>${GL.map((g) => glossItem(g)).join("")}</div>`); }
     if ((b = t("[data-act]"))) return act(b.dataset.act);
     if ((b = t("[data-pickc]"))) { const c = BYID[b.dataset.pickc]; G.shown.push(...G.opts.map((o) => o.id).filter((id) => id !== c.id)); return show(c, G.L); }
     if ((b = t("[data-reroll]"))) { G.shown.push(...G.opts.map((o) => o.id)); return choose(); }

@@ -81,6 +81,17 @@ h1,h2,h3{font-family:'Prata',Georgia,serif;font-weight:400;margin:0;line-height:
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .tip{margin-top:14px;padding:12px 14px;border-radius:16px;background:#EFE3DA;color:#5A4350;font-size:.95rem}
 .tip b{display:block;font-size:.76rem;color:#8A6F7B;margin-bottom:2px}
+.newb{margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid #E3D3C8}
+.newb>b{display:block;font-size:.76rem;color:#8A6F7B;margin-bottom:4px}
+.gl{border-top:1px solid #EADBD1;padding:8px 0}.gl:first-of-type{border-top:0}
+.gl summary{cursor:pointer;font-weight:700;color:#4B3742;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.gl summary::-webkit-details-marker{display:none}.gl summary::after{content:"+";color:#8A6F7B}.gl[open] summary::after{content:"−"}
+.gl p{margin:6px 0 8px;font-size:.93rem;color:#5A4350;line-height:1.5}
+.vl{display:flex;flex-wrap:wrap;gap:8px}.vl a{font-size:.84rem;font-weight:700;color:#7A3E55;background:#F3E6DE;border-radius:999px;padding:7px 12px;text-decoration:none}
+.dict-btn{display:block;width:100%;margin-top:18px;border:1px solid var(--line);background:var(--bg2);color:var(--text);border-radius:18px;padding:14px;text-align:left}
+.dict-btn b{font-family:'Prata',serif;font-weight:400;font-size:1.08rem;display:block;margin-bottom:4px}.dict-btn span{font-size:.84rem;color:var(--text2)}
+.dict{overflow:auto;background:var(--card);color:var(--ink);border-radius:24px;padding:16px 18px;flex:1;min-height:0}
+.dict .note{color:#6E5663}
 .meta{margin-top:auto;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap;font-size:.84rem;color:var(--ink2)}
 .acts{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:8px;margin-top:14px}
 .acts button{border:0;border-radius:18px;min-height:56px;font-weight:700;font-size:.98rem;transition:transform .15s}
@@ -146,6 +157,7 @@ h1,h2,h3{font-family:'Prata',Georgia,serif;font-weight:400;margin:0;line-height:
 <script src="poses.js"></script>
 <script src="cards.js"></script>
 <script src="intim.js"></script>
+<script src="gloss.js"></script>
 <script src="figures.js"></script>
 <script src="app.js"></script>
 </body>
