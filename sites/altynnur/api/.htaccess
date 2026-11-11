@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "^(config\.php|lib\.php|seed\.json)$">
+  Require all denied
+</FilesMatch>

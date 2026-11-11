@@ -2,9 +2,18 @@
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
+  // просмотр черновика из админки: открывается по ?draft=1 и действует только в этой вкладке
+  let DRAFT = false;
+  try {
+    if (/[?&]draft=1/.test(location.search)) sessionStorage.setItem("altyn-draft-on", "1");
+    if (/[?&]draft=0/.test(location.search)) sessionStorage.removeItem("altyn-draft-on");
+    const dj = sessionStorage.getItem("altyn-draft-on") && localStorage.getItem("altyn-admin-draft");
+    if (dj) { window.SITE = JSON.parse(dj); DRAFT = true; }
+  } catch (e) {}
   const S = window.SITE, D = document.body.dataset, R = D.root || "", PAGE = D.page || "home";
   const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const rub = (n) => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
+  const tph = (p) => (/\.\w{3,4}$/.test(p) ? p : p + "-1280.webp");
   const has = (v) => Array.isArray(v) ? v.length > 0 : v != null && v !== "";
   const cat = (id) => S.categories.find((c) => c.id === id) || {};
   const course = (slug) => S.courses.find((c) => c.slug === slug);
@@ -63,7 +72,7 @@
   };
 
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Просмотр черновика из админки. Посетители этого ещё не видят.</span><a href="?draft=0" style="color:inherit;white-space:nowrap">Закрыть просмотр</a></div></div>` : ""}${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       <div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
       <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>
       <span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>
@@ -132,7 +141,7 @@
   H.teacher = () => `<section class="sec" style="padding-top:0"><div class="wrap">
       <h2 class="rv-t sec__h">Почему АлтынНур</h2>
       <div class="why">
-        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${S.teacher.photo}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${S.preview ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
+        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${S.preview ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
           <div class="dir__t"><span class="why__k">Ваш преподаватель</span><h3>${esc(S.teacher.name)}</h3><span class="link">${arrow("Об академии")}</span></div></a>
         ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short)}</h3></div></div>`).join("")}
       </div></div></section>`;
@@ -250,6 +259,7 @@
     window.open(wa(text), "_blank", "noopener");
   }
   const okHTML = `<div class="ok"><div class="ok__mark" aria-hidden="true">✓</div><h3>Спасибо!</h3><p>Мы открыли WhatsApp с готовым сообщением, осталось нажать «Отправить». Мы свяжемся с вами по указанному номеру.</p></div>`;
+  const okSaved = `<div class="ok"><div class="ok__mark" aria-hidden="true">✓</div><h3>Спасибо, заявка у нас!</h3><p>Мы свяжемся с вами по указанному номеру и ответим на все вопросы.</p></div>`;
   let lastFocus = null;
   function openModal(title, html, onReady) {
     const m = document.getElementById("modal");
@@ -260,7 +270,20 @@
   }
   function closeModal() { document.getElementById("modal").classList.remove("is-open"); document.documentElement.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
   function bindForm(form, extra, target) {
-    form.addEventListener("submit", (e) => { e.preventDefault(); const d = validate(form, true); if (!d) return; send(d, extra); target.innerHTML = okHTML; });
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); const d = validate(form, true); if (!d) return;
+      if (S.preview || DRAFT) { send(d, extra); target.innerHTML = okHTML; return; }
+      // рабочая версия: заявка сохраняется на сервере. Если сервер не ответил, открываем WhatsApp, чтобы заявка не потерялась
+      const btn = form.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Отправляем…";
+      try {
+        const r = await fetch(R + "api/?r=lead", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: d.name, phone: d.phone, course: d.course || "", way: d.way || "", note: d.note || "", consent: !!d.consent, website: d.website || "", extra: (extra && extra.summary) || "", page: location.pathname }) });
+        const j = await r.json();
+        if (j.ok) { target.innerHTML = okSaved; return; }
+        if (r.status === 422 || r.status === 429) { btn.disabled = false; btn.textContent = "Отправить заявку"; form.querySelector("[data-cerr]").textContent = j.error; return; }
+        throw new Error("server");
+      } catch (er) { send(d, extra); target.innerHTML = okHTML; }
+    });
   }
   function openForm(slug, extra) {
     const c = slug && course(slug);
