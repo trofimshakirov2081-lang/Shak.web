@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Админка АлтынНур</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3EDE4;--paper:#FBF8F2;--ink:#2A2420;--ink2:#6F655C;--line:#E0D6C8;--acc:#B8902F;--acc-ink:#fff;--bad:#A8382B;--ok:#3F7A4E;--r:14px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 'Ysabeau Office',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bona Nova',Georgia,serif;font-weight:700;margin:0;line-height:1.15}
+h1{font-size:1.6rem}h2{font-size:1.35rem}h3{font-size:1.1rem}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+/* шапка: главное действие «Опубликовать» всегда наверху */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top__in{display:flex;align-items:center;gap:10px;padding:10px 16px;max-width:860px;margin:0 auto}
+.top__name{font-family:'Bona Nova',serif;font-weight:700;font-size:1.15rem;margin-right:auto;white-space:nowrap}
+.state{font-size:.8rem;color:var(--ink2);text-align:right;line-height:1.2}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 16px;min-height:42px;font-weight:600;white-space:nowrap}
+.btn--acc{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn--acc[disabled]{opacity:.45;cursor:default}
+.btn--bad{color:var(--bad);border-color:#E3C4BE}
+.btn--sm{padding:6px 12px;min-height:36px;font-size:.9rem}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 10px;max-width:860px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:8px 12px;border-radius:999px;font-weight:600;color:var(--ink2);white-space:nowrap}
+.tab[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.tab b{display:inline-block;min-width:20px;margin-left:6px;padding:0 6px;border-radius:999px;background:var(--acc);color:#fff;font-size:.78rem;line-height:20px;text-align:center}
+main{padding:20px 0 80px}
+.demo{background:#FFF4D6;border:1px solid #E9D38F;border-radius:var(--r);padding:10px 14px;margin-bottom:16px;font-size:.92rem}
+.sub{color:var(--ink2);margin:6px 0 18px}
+/* блоки формы */
+.box{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px}
+.box>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;font-family:'Bona Nova',serif;font-weight:700;font-size:1.1rem}
+.box>summary::-webkit-details-marker{display:none}
+.box>summary::after{content:"+";margin-left:auto;font-family:'Ysabeau Office';font-weight:400;color:var(--ink2);font-size:1.3rem;line-height:1}
+.box[open]>summary::after{content:"−"}
+.box>summary small{font:400 .85rem 'Ysabeau Office';color:var(--ink2)}
+.box__in{padding:2px 16px 16px;display:grid;gap:14px}
+.f{display:grid;gap:5px;min-width:0}
+.f>span{font-size:.86rem;font-weight:600;color:var(--ink2)}
+.f small{font-size:.8rem;color:var(--ink2)}
+.f input[type=text],.f input[type=number],.f input[type=password],.f input[type=email],.f select,.f textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;min-height:44px}
+.f textarea{min-height:92px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus,.btn:focus-visible,.tab:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.row2{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:640px){.row2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.chk{display:flex;align-items:center;gap:10px;min-height:44px}
+.chk input{width:22px;height:22px;accent-color:var(--acc);flex:none}
+.multi{display:flex;flex-wrap:wrap;gap:6px 16px}
+/* списки (курсы, вопросы, фото) */
+.item{border:1px solid var(--line);border-radius:12px;background:#fff}
+.item>summary{list-style:none;cursor:pointer;padding:10px 12px;display:flex;align-items:center;gap:8px;font-weight:600;min-height:48px}
+.item>summary::-webkit-details-marker{display:none}
+.item>summary .ttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item>summary .meta{color:var(--ink2);font-weight:400;font-size:.9rem;white-space:nowrap}
+.item__in{padding:4px 12px 14px;display:grid;gap:14px;border-top:1px solid var(--line)}
+.ord{display:flex;gap:4px}
+.ic{border:1px solid var(--line);background:var(--paper);border-radius:8px;width:34px;height:34px;display:grid;place-items:center;font-size:1rem;line-height:1;padding:0}
+.ic[disabled]{opacity:.3}
+.list{display:grid;gap:8px}
+.list,.box__in,.item__in,.login{grid-template-columns:minmax(0,1fr)}
+.item,.box,.f>*{min-width:0}
+.item>summary{flex-wrap:nowrap}
+.strs .srow{display:flex;gap:6px}
+.strs .srow input{flex:1;min-width:0}
+/* фото */
+.img{display:flex;gap:12px;align-items:center}
+.img__pv{width:84px;height:84px;border-radius:10px;background:var(--bg) center/cover;border:1px solid var(--line);flex:none}
+.img__b{display:flex;flex-wrap:wrap;gap:6px}
+/* заявки */
+.lead{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;display:grid;gap:8px}
+.lead.is-new{border-color:var(--acc)}
+.lead__h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.lead__h b{font-size:1.1rem}
+.lead__h time{color:var(--ink2);font-size:.85rem;margin-left:auto}
+.lead p{margin:0;overflow-wrap:anywhere}
+.lead__a{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lead__a select{border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:38px;background:#fff}
+.lead textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px;background:#fff}
+.empty{padding:40px 16px;text-align:center;color:var(--ink2);border:1px dashed var(--line);border-radius:var(--r)}
+/* вход */
+.login{max-width:400px;margin:12vh auto 0;padding:0 16px;display:grid;gap:14px}
+.login h1{font-size:2rem}
+.msg{color:var(--bad);min-height:1.4em;font-size:.92rem}
+.toast{position:fixed;left:50%;top:14px;transform:translate(-50%,-80px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;z-index:50;transition:transform .25s;max-width:calc(100vw - 32px);text-align:center;font-weight:600}
+.toast.on{transform:translate(-50%,0)}
+.toast.bad{background:var(--bad);color:#fff}
+.blocks .brow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.blocks .brow span{flex:1}
+.ver{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.ver span{flex:1}
+@media(max-width:520px){.state{display:none}.top__name{font-size:1rem}}
+@media(prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="admin.js"></script>
+</body>
+</html>
