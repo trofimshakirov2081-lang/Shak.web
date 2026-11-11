@@ -1,7 +1,7 @@
 // Собрано генератором shak.web из demos/_configs/ssk-krasnoyarsk.json. Правьте настройки и пересобирайте.
 window.SITE = {
   "id": "demo-ssk-krasnoyarsk",
-  "rev": "2026-10-31T06:40:54.100Z",
+  "rev": "2026-11-11T12:01:24.819Z",
   "brand": {
     "name": "Сибирский спортивный клуб",
     "tagline": "Спортивный клуб",

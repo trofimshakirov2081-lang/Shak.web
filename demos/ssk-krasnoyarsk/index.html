@@ -130,7 +130,7 @@
       '<main id="top"><section class="track" style="padding-top:26px"><div class="lanes" aria-hidden="true">' + lanes + '</div><div class="wrap hero2"><div><p style="margin:0 0 12px;font-weight:600">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p><h1>' + h1 + '</h1><p class="lead">' + e(D.hero.text) + '</p></div>' +
         '<div class="shot">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') + '<span class="finish" aria-hidden="true"></span></div></div></section>' +
       '<section id="schedule"><div class="wrap grid2"><div><h2>' + e(X.scheduleTitle || "Расписание") + '</h2><div class="days" role="group" aria-label="День недели">' + DN.map(function (d, k) { return '<button data-day="' + k + '"' + (k === today ? ' class="on"' : '') + '>' + d + '</button>'; }).join("") + '</div><div class="slots" data-slots></div></div>' +
-        '<form class="trial" onsubmit="return false"><h3>' + e(X.trialTitle || "Пробная бесплатно") + '</h3><p data-chosen>Выберите группу в расписании.</p>' +
+        '<form class="trial" onsubmit="return false"><h3>' + e(X.trialTitle || "Пробная бесплатно") + '</h3><p data-chosen>' + e(X.chooseHint || "Выберите группу в расписании.") + '</p>' +
         '<input data-who placeholder="Имя и телефон" autocomplete="name"><input data-age placeholder="' + e(X.ageHint || "Возраст или уровень (необязательно)") + '"><button class="go" data-go>' + e(X.sendLabel || "Записаться в WhatsApp") + '</button></form></div></section>' +
       '<section><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:0 0 18px">' + e(D.sections.catalogText) + '</p><div class="plans">' + plans + '</div></div></section>' +
       '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p><div class="why">' + why + '</div></div></section>' +
@@ -143,7 +143,7 @@
       var list = sched.filter(function (s) { return s[0] === day && D.items[s[2]]; }).sort(function (a, b) { return a[1].localeCompare(b[1], "ru", { numeric: true }); });
       $("[data-slots]").innerHTML = list.map(function (s) {
         var i = D.items[s[2]], key = s[0] + "|" + s[1] + "|" + s[2];
-        return '<div class="slot' + (chosen === key ? ' on' : '') + '"><time>' + e(s[1]) + '</time><div><strong>' + e(i.name) + '</strong><small>' + e(i.desc || "") + '</small></div><button data-slot="' + e(key) + '">' + (chosen === key ? "Выбрано" : "Пробная") + '</button></div>';
+        return '<div class="slot' + (chosen === key ? ' on' : '') + '"><time>' + e(s[1]) + '</time><div><strong>' + e(i.name) + '</strong><small>' + e(i.desc || "") + '</small></div><button data-slot="' + e(key) + '">' + (chosen === key ? "Выбрано" : (X.slotBtn || "Пробная")) + '</button></div>';
       }).join("") || '<p class="nothing mute">' + e(X.restText || "В этот день тренировок нет. Отдыхаем и восстанавливаемся.") + '</p>';
     }
     document.addEventListener("click", function (ev) {
