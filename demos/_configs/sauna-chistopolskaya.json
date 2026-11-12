@@ -1,0 +1,67 @@
+{
+  "slug": "sauna-chistopolskaya",
+  "name": "Сауна на Чистопольской",
+  "niche": "banya",
+  "city": "Нижнекамск",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Парная, купель и тишина",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/sauna-chistopolskaya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Сауна на Чистопольской: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Русская баня на дровах",
+      "price": 2000,
+      "desc": "До 8 человек, купель",
+      "photo": "files/sauna-chistopolskaya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Финская сауна",
+      "price": 1700,
+      "desc": "До 6 человек",
+      "photo": "files/sauna-chistopolskaya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Большой зал",
+      "price": 3500,
+      "desc": "До 15 человек, бассейн и караоке",
+      "photo": "files/sauna-chistopolskaya/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 917 290-02-99",
+    "whatsapp": "79172900299",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://saunachistopolskoj.orgs.biz/",
+  "contact_lead": "em:kliplenta-nk@mail.ru"
+}

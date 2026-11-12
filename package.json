@@ -1,0 +1,11 @@
+{
+  "name": "shak-web",
+  "private": true,
+  "description": "Сайты shak.web: продающая страница, бриф, шаблоны и демо",
+  "scripts": {
+    "demo": "node tools/make-demo.mjs",
+    "check": "node tools/check.mjs",
+    "check:all": "node tools/check.mjs --external",
+    "serve": "npx http-server . -p 8080 -c-1"
+  }
+}

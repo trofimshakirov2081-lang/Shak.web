@@ -1,0 +1,73 @@
+{
+  "slug": "venom-performance",
+  "name": "Venom Performance",
+  "niche": "detailing",
+  "city": "Москва",
+  "custom": "glyanec",
+  "tagline": "Тюнинг и сервис",
+  "colors": {
+    "main": "#E4572E",
+    "accent": "#7FB7D9",
+    "bg": "#1C1F24",
+    "text": "#E9ECEF"
+  },
+  "fonts": {
+    "head": "Akt",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Ваша машина, только лучше",
+    "text": "Выберите класс машины и услуги: цена посчитается сразу, а запись уйдёт нам в WhatsApp.",
+    "photo": "files/venom-performance/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Услуги и цены",
+    "catalogText": "Цены для седана, для других классов переключите выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Venom Performance: работаем аккуратно, показываем результат до и после.",
+  "items": [
+    {
+      "name": "Шумоизоляция",
+      "price": 18000,
+      "desc": "Двери и арки",
+      "photo": "files/venom-performance/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Автозвук",
+      "price": 25000,
+      "desc": "Под ключ, с настройкой",
+      "photo": "files/venom-performance/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Свет и линзы",
+      "price": 12000,
+      "desc": "Замена и регулировка",
+      "photo": "files/venom-performance/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Оклейка плёнкой",
+      "price": 60000,
+      "desc": "Цвет или защита",
+      "photo": "files/venom-performance/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 977 111-41-10",
+    "whatsapp": "79771114110",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "graphite": "#2A2F36"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://venom-performance.orgs.biz/",
+  "contact_lead": "em:venom_performance@mail.ru"
+}

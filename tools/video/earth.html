@@ -1,0 +1,51 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+@font-face{font-family:Akt;src:url(Akt.ttf)}@font-face{font-family:Fin;src:url(Finlandica.ttf)}
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#0B0D16;color:#F0F2F8;font-family:Fin,sans-serif}
+.top{position:absolute;top:120px;left:60px;right:60px;text-align:center}
+.top h1{font-family:Akt;font-size:74px;line-height:1.08}
+.top p{font-size:38px;color:#8E94AC;margin-top:18px}
+svg{position:absolute;left:90px;top:400px}
+.time{position:absolute;top:1330px;left:0;right:0;text-align:center;font-family:Akt;font-size:150px;letter-spacing:2px}
+.ev{position:absolute;top:1530px;left:70px;right:70px;text-align:center}
+.ev b{display:block;font-family:Akt;font-size:64px;line-height:1.1}
+.ev span{display:block;font-size:40px;color:#A9AFC6;margin-top:14px}
+.src{position:absolute;bottom:70px;left:0;right:0;text-align:center;font-size:30px;color:#5E6484}
+.fin{position:absolute;inset:0;background:rgba(8,9,14,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.fin h2{font-family:Akt;font-size:104px;line-height:1.06}
+.fin p{font-size:50px;color:#C9CEDF;margin-top:44px;line-height:1.3}
+.blue{color:#4C8DFF}
+</style></head><body><div id="root"></div><script>
+const AGE=4540; // млн лет
+const E=[[4540,'Появилась Земля','4,54 млрд лет назад','#8E94AC'],[3800,'Первая жизнь','бактерии в океане','#3DDC97'],[2400,'В воздухе появился кислород','его надышали микробы','#5BC0EB'],
+ [538,'Первые животные','кембрийский взрыв','#FFD23F'],[470,'Растения вышли на сушу','','#8AC926'],[230,'Динозавры','','#FF9F1C'],[66,'Динозавры вымерли','упал астероид','#FF4D4D'],[0.3,'Человек','за 6 секунд до полуночи','#4C8DFF']];
+E.forEach(e=>e.h=(AGE-e[0])/AGE*24);
+// расписание: до 21:00 быстро, последние 3 часа медленно, последняя минута отдельно
+const H=E.map(e=>e.h);
+const KEY=[[0,0],[1.6,0],[5,H[1]],[6.6,H[1]],[10,H[2]],[11.6,H[2]],[15.5,H[3]],[17,H[3]],[18.6,H[4]],[19.8,H[4]],[21.8,H[5]],[23,H[5]],[25,H[6]],[26.6,H[6]],[30,H[7]],[33.4,H[7]]];
+const hourAt=t=>{for(let i=1;i<KEY.length;i++)if(t<=KEY[i][0]){const a=KEY[i-1],b=KEY[i],k=(t-a[0])/(b[0]-a[0]||1),s=k*k*(3-2*k);return a[1]+(b[1]-a[1])*s}return KEY[KEY.length-1][1]};
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const fmt=h=>{const s=Math.min(86399,Math.floor(h*3600));const p=n=>String(n).padStart(2,'0');return p(Math.floor(s/3600))+':'+p(Math.floor(s%3600/60))+':'+p(s%60)};
+const root=document.getElementById('root'),R=380,CX=450,CY=450;
+const pt=(h,r)=>{const a=h/24*Math.PI*2-Math.PI/2;return [CX+Math.cos(a)*r,CY+Math.sin(a)*r]};
+window.DUR=38;
+window.seek=function(t){
+  const h=hourAt(t);let cur=E[0];E.forEach(e=>{if(e.h<=h+1e-6)cur=e});
+  const since=KEY.find(k=>Math.abs(k[1]-cur.h)<0.001);const kt=ease((t-(since?since[0]:0)+0.5)/0.6);
+  const end=pt(h,R),large=h>12?1:0;
+  let ticks='';for(let i=0;i<24;i++){const a=pt(i,R+26),b=pt(i,R+(i%6==0?62:44));ticks+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#2A2F45" stroke-width="${i%6==0?6:3}" stroke-linecap="round"/>`}
+  let lab='';[[0,'00'],[6,'06'],[12,'12'],[18,'18']].forEach(([i,s])=>{const p=pt(i,R-70);lab+=`<text x="${p[0]}" y="${p[1]+16}" text-anchor="middle" font-family="Akt" font-size="46" fill="#4A5070">${s}</text>`});
+  let dots='';E.forEach(e=>{if(e.h<=h+1e-6){const p=pt(e.h,R);dots+=`<circle cx="${p[0]}" cy="${p[1]}" r="20" fill="${e[3]}" stroke="#0B0D16" stroke-width="6"/>`}});
+  const hand=pt(h,R-110);
+  const fin=t>34.2?ease((t-34.2)/0.5):0;
+  root.innerHTML=`<div class="top"><h1>Вся история Земли<br>за <span class="blue">24 часа</span></h1><p>4,5 миллиарда лет сжали в одни сутки</p></div>
+  <svg width="900" height="900" viewBox="0 0 900 900"><circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="#171A28" stroke-width="34"/>
+   ${h>0.001?`<path d="M ${CX} ${CY-R} A ${R} ${R} 0 ${large} 1 ${end[0]} ${end[1]}" fill="none" stroke="#4C8DFF" stroke-width="34" stroke-linecap="round"/>`:''}
+   ${ticks}${lab}<line x1="${CX}" y1="${CY}" x2="${hand[0]}" y2="${hand[1]}" stroke="#F0F2F8" stroke-width="10" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="18" fill="#F0F2F8"/>${dots}</svg>
+  <div class="time">${fmt(h)}</div>
+  <div class="ev" style="opacity:${kt};transform:translateY(${(1-kt)*30}px)"><b style="color:${cur[3]}">${cur[1]}</b><span>${cur[2]}</span></div>
+  <div class="src">Даты: Международная хроностратиграфическая шкала и оценки учёных</div>
+  ${fin?`<div class="fin" style="opacity:${fin}"><h2>Человек появился<br>в <span class="blue">23:59:54</span></h2><p>Вся наша история уместилась<br>в последние 6 секунд суток</p><p style="font-size:42px;color:#8E94AC;opacity:${ease((t-35.6)/0.5)}">Что вас удивило больше всего?<br>Пишите в комментариях</p></div>`:''}`;
+};
+seek(0);
+</script></body></html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ru" data-fonts="Akt|Gidole">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <title>АвтоСпа | Детейлинг</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Akt:wght@400;700&family=Gidole:wght@400;700&display=swap">
+  <style>
+    /* «Глянец»: детейлинг. Шторка «до/после» на первом экране, цены считаются от класса машины */
+    :root { --bg: #1C1F24; --text: #E9ECEF; --main: #E4572E; --accent: #7FB7D9; --graphite: #2A2F36; --c-radius: 10px; --c-surface: var(--graphite); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 600; margin: 0; line-height: .96; letter-spacing: -.045em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 62%, transparent); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 0; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--graphite) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 14%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 20%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 700 19px/1 var(--font-head); text-decoration: none; }
+    .cta { background: var(--main); color: #fff; border-radius: 10px; padding: 10px 16px; font-weight: 700; font-size: 15px; text-decoration: none; }
+
+    .hero h1 { font-size: clamp(44px, 12vw, 112px); max-width: 11ch; margin-top: 10px; }
+    .hero .lead { max-width: 40ch; margin: 14px 0 20px; font-size: 17px; }
+    /* Шторка: снизу «до» (тусклое фото), сверху «после», граница тянется пальцем */
+    .ba { position: relative; height: 58svh; min-height: 340px; border-radius: 20px; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: ew-resize; --x: 50%; }
+    .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .ba .before { filter: saturate(.25) brightness(.62) contrast(.85) sepia(.35); }
+    .ba .after { clip-path: inset(0 0 0 var(--x)); filter: saturate(1.15) contrast(1.08); }
+    .ba .line { position: absolute; top: 0; bottom: 0; left: var(--x); width: 2px; margin-left: -1px; background: #fff; }
+    .ba .knob { position: absolute; top: 50%; left: var(--x); width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: #fff; color: var(--bg); display: grid; place-items: center; font: 700 18px var(--font-head); box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+    .ba .lbl { position: absolute; bottom: 14px; padding: 6px 10px; border-radius: 8px; background: rgba(0, 0, 0, .55); font-size: 13px; font-weight: 700; }
+    .ba .l1 { left: 14px; } .ba .l2 { right: 14px; }
+    .hint { font-size: 13px; margin: 10px 0 0; }
+
+    section { padding: 60px 0 0; }
+    h2 { font-size: clamp(34px, 8vw, 64px); margin-bottom: 12px; }
+
+    .cls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--graphite); padding: 5px; border-radius: 12px; margin: 18px 0 14px; }
+    .cls button { border: 0; background: none; border-radius: 9px; padding: 11px 4px; font-weight: 700; font-size: 14px; cursor: pointer; }
+    .cls button.on { background: var(--text); color: var(--bg); }
+    .svc { display: grid; gap: 8px; }
+    .s { display: grid; grid-template-columns: 26px 1fr auto; gap: 12px; align-items: center; padding: 14px; border-radius: 14px; background: var(--graphite); cursor: pointer; border: 1px solid transparent; }
+    .s input { width: 22px; height: 22px; accent-color: var(--main); margin: 0; }
+    .s:has(input:checked) { border-color: var(--main); }
+    .s strong { display: block; line-height: 1.25; }
+    .s small { color: color-mix(in srgb, var(--text) 58%, transparent); font-size: 13px; }
+    .s b { font: 700 18px var(--font-head); white-space: nowrap; }
+    .bill { margin-top: 14px; background: var(--text); color: var(--bg); border-radius: 18px; padding: 18px; display: grid; gap: 12px; }
+    .bill .sum { display: flex; justify-content: space-between; align-items: baseline; }
+    .bill .sum b { font: 700 34px var(--font-head); }
+    .bill .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bill input { font: 16px var(--font-body); padding: 13px; border-radius: 10px; border: 1px solid rgba(28, 31, 36, .2); width: 100%; min-width: 0; min-height: 48px; background: #fff; color: var(--bg); }
+    .bill input.wide { grid-column: 1 / -1; }
+    .bill .go { border: 0; border-radius: 12px; background: var(--main); color: #fff; font: 700 17px var(--font-body); padding: 16px; cursor: pointer; }
+
+    .works { display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .works::-webkit-scrollbar { display: none; }
+    .works figure { margin: 0; scroll-snap-align: start; }
+    .works img, .works .noimg { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; display: grid; place-items: center; font-size: 56px; background: var(--graphite); }
+    .works figcaption { font-size: 14px; margin-top: 8px; }
+
+    .feats { display: grid; gap: 10px; }
+    .feats div { padding: 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+    .feats strong { display: block; font: 700 20px var(--font-head); margin-bottom: 4px; color: var(--accent); }
+    .about { font-size: clamp(19px, 4.4vw, 26px); line-height: 1.45; max-width: 36ch; margin: 0 0 22px; }
+
+    .find { padding-bottom: 36px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 50%, transparent); padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .ba { height: 72svh; }
+      .grid2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: start; }
+      .bill { position: sticky; top: 20px; margin-top: 0; padding: 24px; }
+      .works { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; }
+      .feats { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var before = X.before || hp, after = X.after || hp;
+    var CL = X.classes || [["Седан", 1], ["Кроссовер", 1.2], ["Внедорожник", 1.4]];
+
+    var svc = D.items.map(function (i) {
+      return '<label class="s"><input type="checkbox" data-s="' + e(i.id) + '"><span><strong>' + e(i.name) + '</strong><small>' + e(i.desc || "") + (i.tag ? ". " + e(i.tag) : "") + '</small></span><b data-p="' + e(i.id) + '"></b></label>';
+    }).join("");
+    var works = D.items.filter(function (i) { return i.photo; }).map(function (i) { return '<figure>' + Core.pic(i) + '<figcaption class="mute">' + e(i.name) + '</figcaption></figure>'; }).join("");
+    var feats = D.features.map(function (f) { return '<div><strong>' + e(f.title) + '</strong><span class="mute">' + e(f.text) + '</span></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#price">' + e(X.bookBtn || "Записаться") + '</a></div></header>' +
+      '<main id="top"><section class="hero" style="padding-top:8px"><div class="wrap"><p class="mute" style="margin:0">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p><h1>' + e(X.heroTitle || D.hero.title) + '</h1><p class="lead mute">' + e(D.hero.text) + '</p>' +
+        (before ? '<div class="ba" data-ba aria-label="Сравнение до и после"><img class="before" src="' + e(before) + '" alt="До"><img class="after" src="' + e(after) + '" alt="После"><span class="line"></span><span class="knob" aria-hidden="true">⇆</span><span class="lbl l1">До</span><span class="lbl l2">После</span></div><p class="hint mute">Потяните, чтобы сравнить</p>' : '') + '</div></section>' +
+      '<section id="price"><div class="wrap grid2"><div><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:0">' + e(D.sections.catalogText) + '</p>' +
+        '<div class="cls" role="group" aria-label="Класс машины">' + CL.map(function (c, k) { return '<button data-cls="' + k + '"' + (k ? '' : ' class="on"') + '>' + e(c[0]) + '</button>'; }).join("") + '</div><div class="svc">' + svc + '</div></div>' +
+        '<form class="bill" onsubmit="return false"><div class="sum"><span data-cnt>Ничего не выбрано</span><b data-sum></b></div>' +
+        '<div class="fields"><input data-car class="wide" placeholder="Марка и модель"><input type="date" data-date aria-label="Дата"><input data-who placeholder="Имя, телефон" autocomplete="name"></div>' +
+        '<button class="go" data-go>' + e(X.sendLabel || "Записаться в WhatsApp") + '</button></form></div></section>' +
+      (works ? '<section><div class="wrap"><h2>' + e(X.worksTitle || "Наши работы") + '</h2><div class="works">' + works + '</div></div></section>' : '') +
+      '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p><div class="feats">' + feats + '</div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Где бокс") + '</h2><div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var $ = function (s) { return document.querySelector(s); }, cls = 0;
+    // Шторка: тянем пальцем или мышью, при загрузке один раз показываем, что она двигается
+    var ba = $("[data-ba]");
+    if (ba) {
+      var drag = false;
+      function setX(cx) { var r = ba.getBoundingClientRect(); ba.style.setProperty("--x", Math.max(4, Math.min(96, (cx - r.left) / r.width * 100)) + "%"); }
+      ba.addEventListener("pointerdown", function (ev) { drag = true; setX(ev.clientX); });
+      addEventListener("pointermove", function (ev) { if (drag) setX(ev.clientX); });
+      addEventListener("pointerup", function () { drag = false; });
+      if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+        var t0 = null;
+        requestAnimationFrame(function step(t) { if (drag) return; t0 = t0 || t; var k = (t - t0) / 1600; if (k > 1) return; ba.style.setProperty("--x", (50 + Math.sin(k * Math.PI * 2) * 28) + "%"); requestAnimationFrame(step); });
+      }
+    }
+    var dd = new Date(); dd.setDate(dd.getDate() + 1); $("[data-date]").value = dd.toISOString().slice(0, 10);
+    function p(i) { return Math.round(i.price * CL[cls][1] / 100) * 100; }
+    function calc() {
+      var t = 0, n = 0;
+      D.items.forEach(function (i) { var el = document.querySelector('[data-p="' + i.id + '"]'); if (el) el.textContent = Core.money(p(i)); });
+      [].forEach.call(document.querySelectorAll("[data-s]:checked"), function (c) { t += p(Core.item(c.dataset.s)); n++; });
+      $("[data-sum]").textContent = Core.money(t);
+      $("[data-cnt]").textContent = n ? CL[cls][0] + ", услуг: " + n : "Отметьте услуги";
+      return t;
+    }
+    document.addEventListener("click", function (ev) {
+      var c = ev.target.closest("[data-cls]");
+      if (c) { cls = +c.dataset.cls; [].forEach.call(document.querySelectorAll("[data-cls]"), function (b) { b.classList.toggle("on", b === c); }); calc(); return; }
+      if (ev.target.closest("[data-go]")) {
+        var t = calc(); if (!t) { Core.toast("Отметьте хотя бы одну услугу"); return; }
+        var list = [].map.call(document.querySelectorAll("[data-s]:checked"), function (x) { return "• " + Core.item(x.dataset.s).name; });
+        var d = $("[data-date]").value.split("-"), car = $("[data-car]").value.trim(), who = $("[data-who]").value.trim();
+        window.open(Core.wa("Здравствуйте! Хочу записаться (" + CL[cls][0].toLowerCase() + (car ? ", " + car : "") + "):\n" + list.join("\n") + "\n" + (d[2] ? "Дата: " + d[2] + "." + d[1] + "\n" : "") + "По сайту выходит " + Core.money(t) + (who ? "\n" + who : "")), "_blank");
+      }
+    });
+    document.addEventListener("change", function (ev) { if (ev.target.matches("[data-s]")) calc(); });
+    calc();
+  })();
+  </script>
+</body>
+</html>

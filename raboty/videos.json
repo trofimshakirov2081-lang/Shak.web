@@ -1,0 +1,201 @@
+[
+ {
+  "slug": "galant",
+  "steps": [
+   [
+    ".tabs button",
+    "click",
+    1
+   ],
+   [
+    ".row .add",
+    "click",
+    0
+   ]
+  ]
+ },
+ {
+  "slug": "starkwood",
+  "steps": [
+   [
+    ".len input",
+    "range",
+    0.85
+   ],
+   [
+    ".sw button",
+    "click",
+    2
+   ],
+   [
+    ".opts button",
+    "click",
+    1
+   ]
+  ]
+ },
+ {
+  "slug": "you-bloom",
+  "steps": [
+   [
+    ".seg button",
+    "click",
+    1
+   ],
+   [
+    ".panel .add",
+    "click",
+    0
+   ]
+  ]
+ },
+ {
+  "slug": "milano-kzn",
+  "steps": [
+   [
+    ".row .add",
+    "click",
+    0
+   ],
+   [
+    ".row .add",
+    "click",
+    2
+   ]
+  ]
+ },
+ {
+  "slug": "yummy-cake",
+  "steps": [
+   [
+    ".row .add",
+    "click",
+    0
+   ],
+   [
+    ".row .add",
+    "click",
+    3
+   ]
+  ]
+ },
+ {
+  "slug": "sea-breeze-anapa",
+  "steps": [
+   [
+    ".guests button",
+    "click",
+    1
+   ],
+   [
+    ".row .pick",
+    "click",
+    1
+   ]
+  ]
+ },
+ {
+  "slug": "dusha-altaya",
+  "steps": [
+   [
+    ".dates button",
+    "click",
+    2
+   ],
+   [
+    ".ppl button",
+    "click",
+    1
+   ],
+   [
+    ".ppl button",
+    "click",
+    1
+   ]
+  ]
+ },
+ {
+  "slug": "the-rose",
+  "steps": [
+   [
+    ".add",
+    "click",
+    1
+   ]
+  ]
+ },
+ {
+  "slug": "one-design",
+  "steps": [
+   [
+    ".ba",
+    "drag",
+    [
+     0.88,
+     0.12,
+     0.5
+    ]
+   ],
+   [
+    ".cls button",
+    "click",
+    2
+   ]
+  ]
+ },
+ {
+  "slug": "urman-kazan",
+  "steps": [
+   [
+    ".halls button",
+    "click",
+    1
+   ],
+   [
+    ".chips .chip",
+    "click",
+    5
+   ],
+   [
+    ".hours button",
+    "click",
+    1
+   ]
+  ]
+ },
+ {
+  "slug": "ski-life",
+  "steps": [
+   [
+    ".days button",
+    "click",
+    2
+   ],
+   [
+    ".days button",
+    "click",
+    4
+   ]
+  ]
+ },
+ {
+  "slug": "sup-anapa",
+  "steps": [
+   [
+    ".seg button",
+    "click",
+    1
+   ],
+   [
+    ".qty button",
+    "click",
+    1
+   ],
+   [
+    ".qty button",
+    "click",
+    3
+   ]
+  ]
+ }
+]

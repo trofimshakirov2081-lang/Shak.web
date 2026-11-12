@@ -1,0 +1,130 @@
+{
+  "slug": "desert-club",
+  "name": "Desert Club",
+  "niche": "кондитерская",
+  "city": "Смоленск",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#7A5AF8",
+    "accent": "#FCE3EC",
+    "bg": "#F6F3FF",
+    "text": "#2A2140"
+  },
+  "fonts": {
+    "head": "Comfortaa",
+    "body": "Mulish"
+  },
+  "hero": {
+    "title": "Большие праздничные торты в Смоленске",
+    "text": "Торты на свадьбу, юбилей и день рождения с доставкой по городу и ближайшим посёлкам.",
+    "cta": "Собрать заказ",
+    "photo": "files/desert-club/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Desert Club делает праздничные торты большого размера. Доставляем по Смоленску от 300 рублей и в ближайшие населённые пункты.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Большие торты",
+      "text": "Для праздника на всех."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По городу от 300 ₽."
+    },
+    {
+      "icon": "📞",
+      "title": "Заказ заранее",
+      "text": "Согласуем вкус и декор."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/desert-club/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/desert-club/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/desert-club/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/desert-club/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/desert-club/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/desert-club/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/desert-club/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с рисунком",
+      "price": 3900,
+      "desc": "Нарисую по вашему фото",
+      "photo": "files/desert-club/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 913 567-46-22",
+    "whatsapp": "79135674622",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#E7E0FF",
+      "pist": "#DFF3EA",
+      "butter": "#FFF1C9"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://tortismolensk1.orgs.biz/",
+  "email": "desert-club@bk.ru"
+}

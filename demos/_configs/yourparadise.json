@@ -1,0 +1,130 @@
+{
+  "slug": "yourparadise",
+  "name": "yourparadise",
+  "niche": "кондитерская",
+  "city": "Серпухов",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#B23A48",
+    "accent": "#F7D6C9",
+    "bg": "#FBF6F2",
+    "text": "#3B2420"
+  },
+  "fonts": {
+    "head": "Playfair Display",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Клубника в шоколаде и ягодные букеты",
+    "text": "Наборы из бельгийского шоколада, букеты из ягод и фруктов. Красиво дарить и вкусно есть.",
+    "cta": "Собрать заказ",
+    "photo": "files/yourparadise/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "yourparadise: домашняя кондитерская в Серпухове. Используем бельгийский шоколад и свежие ягоды.",
+  "features": [
+    {
+      "icon": "🍓",
+      "title": "Клубника в шоколаде",
+      "text": "Бельгийский шоколад."
+    },
+    {
+      "icon": "💐",
+      "title": "Ягодные букеты",
+      "text": "Фрукты и ягоды."
+    },
+    {
+      "icon": "🎁",
+      "title": "Подарочные наборы",
+      "text": "Для неё и для него."
+    }
+  ],
+  "items": [
+    {
+      "name": "Набор \"Наслаждение",
+      "price": 850,
+      "desc": "Плита шоколада и 12 медиантов (украшение и посыпки можно…",
+      "photo": "files/yourparadise/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Набор \"Нежность",
+      "price": 1100,
+      "desc": "Клубника в шоколаде. Шоколад: белый, розовый. Оформление:…",
+      "photo": "files/yourparadise/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"For men",
+      "price": 1160,
+      "desc": "Клубника в шоколаде + бананы в шоколаде + бутылочка…",
+      "photo": "files/yourparadise/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"Подарочный\"3",
+      "price": 2000,
+      "desc": "Клубника в шоколаде + голубика. Шоколад: белый, молочный.…",
+      "photo": "files/yourparadise/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"День и ночь",
+      "price": 1100,
+      "desc": "Клубника в шоколаде. Шоколад: белый, молочный. Оформление:…",
+      "photo": "files/yourparadise/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"Подарочный\" 2",
+      "price": 1500,
+      "desc": "клубника в шоколаде + медианты. Шоколад: белый, розовый.…",
+      "photo": "files/yourparadise/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"Ассорти",
+      "price": 1000,
+      "desc": "Кейк-попсы. Шоколад: белый, молочный. Оформление: дутый…",
+      "photo": "files/yourparadise/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Набор \"Вдохновение",
+      "price": 1280,
+      "desc": "клубника в шоколаде + бананы в шоколаде. Шоколад: белый,…",
+      "photo": "files/yourparadise/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 901 907-17-04",
+    "whatsapp": "79019071704",
+    "address": "Московское ш., 53",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Наборы от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласуем.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F2DCE0",
+      "pist": "#E9EFDF",
+      "butter": "#F9E3C4"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://sweetshopspv.orgs.biz/",
+  "email": "yourparadise.spv@gmail.com"
+}

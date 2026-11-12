@@ -1,0 +1,67 @@
+{
+  "slug": "efimovskie-bani",
+  "name": "Ефимовские бани",
+  "niche": "banya",
+  "city": "Дзержинск",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D9A35A",
+    "accent": "#6FA3A8",
+    "bg": "#15191A",
+    "text": "#E8ECEA"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Баня на дровах для вашей компании",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/efimovskie-bani/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Ефимовские бани: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Русская баня на дровах",
+      "price": 2000,
+      "desc": "До 8 человек, купель",
+      "photo": "files/efimovskie-bani/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Финская сауна",
+      "price": 1700,
+      "desc": "До 6 человек",
+      "photo": "files/efimovskie-bani/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Большой зал",
+      "price": 3500,
+      "desc": "До 15 человек, бассейн и караоке",
+      "photo": "files/efimovskie-bani/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 987 740-92-26",
+    "whatsapp": "79877409226",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#1F2526",
+      "wood": "#2A3233"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://efbani.orgs.biz/",
+  "contact_lead": "em:bani@efbani.ru"
+}

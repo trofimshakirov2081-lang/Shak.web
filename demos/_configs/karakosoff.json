@@ -1,0 +1,74 @@
+{
+  "slug": "karakosoff",
+  "name": "KARAKOSOFF",
+  "niche": "sport",
+  "city": "Москва",
+  "custom": "start",
+  "tagline": "Персональный тренер",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Тренировки, после которых видно результат",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/karakosoff/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "Обо мне"
+  },
+  "about": "Меня зовут Дмитрий, я тренер. Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Разовая тренировка",
+      "price": 2000,
+      "desc": "Знакомство и тест",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Месяц с тренером",
+      "price": 8000,
+      "desc": "План и разборы",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Лыжероллеры",
+      "price": 2500,
+      "desc": "Техника с нуля",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Подготовка к старту",
+      "price": 20000,
+      "desc": "8 недель к цели",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 993 963-29-02",
+    "whatsapp": "79939632902",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club228504699.orgs.biz/",
+  "contact_lead": "tg:KarakosovD"
+}

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ru" data-fonts="Lunasima|Finlandica">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Глазурь | Пончиковая</title>
+  <meta name="description" content="Глазурь, Екатеринбург. Жарим каждое утро с 7:00 и глазируем руками. К обеду самые вкусные обычно заканчиваются.">
+  <meta property="og:title" content="Глазурь">
+  <meta property="og:description" content="Жарим каждое утро с 7:00 и глазируем руками. К обеду самые вкусные обычно заканчиваются.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&family=Finlandica:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Глазурь: дружелюбный необрутализм. Крем, шоколадная обводка с жёсткой тенью, малиновая глазурь и ванильный жёлтый.
+       Запоминается коробкой, которую собираешь сам: пончики летят в ячейки. */
+    :root {
+      --main: #FF4F7B; --accent: #FFD84A; --bg: #FFF4E6; --text: #2A1712;
+      --mint: #7FE0C4; --kraft: #E8C38F; --kraft-d: #C99B5F; --card: #FFFFFF;
+      --font-head: 'Lunasima', 'Trebuchet MS', sans-serif; --font-body: 'Finlandica', system-ui, sans-serif;
+      --bd: 2.5px solid var(--text); --sh: 5px 5px 0 var(--text); --r: 22px;
+      --c-surface: var(--bg); --c-radius: 50%;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--bg); }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 500 17px/1.5 var(--font-body); overflow-x: clip; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    .wrap { width: min(1180px, 100% - 32px); margin: 0 auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 700; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+    :focus-visible { outline: 3px solid var(--main); outline-offset: 3px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: var(--bd); border-radius: 99px; background: var(--text); color: var(--bg); font-weight: 700; font-size: 17px; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 var(--main); transition: transform .15s, box-shadow .15s; }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--main); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--main); }
+    .btn.light { background: var(--card); color: var(--text); box-shadow: 4px 4px 0 var(--text); }
+    .sticker { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border: var(--bd); border-radius: 99px; background: var(--accent); font-weight: 700; font-size: 14px; box-shadow: 3px 3px 0 var(--text); white-space: nowrap; }
+
+    /* шапка */
+    .top { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: var(--bd); }
+    .top .wrap { display: flex; align-items: center; gap: 18px; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; font: 700 24px/1 var(--font-head); text-decoration: none; }
+    .ring { width: 30px; height: 30px; border-radius: 50%; border: 9px solid var(--main); box-shadow: 0 0 0 2.5px var(--text), inset 0 0 0 2.5px var(--text); }
+    .nav { display: flex; gap: 22px; margin-left: auto; }
+    .nav a { text-decoration: none; font-weight: 600; }
+    .nav a:hover { color: var(--main); }
+    .cart { margin-left: 8px; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border: var(--bd); border-radius: 99px; background: var(--card); font-weight: 700; cursor: pointer; box-shadow: 3px 3px 0 var(--text); }
+    .cart b { min-width: 24px; height: 24px; border-radius: 99px; display: grid; place-items: center; background: var(--text); color: var(--bg); font-size: 13px; padding: 0 6px; }
+    .cart b.has { background: var(--main); color: var(--text); }
+    @media (max-width: 760px) { .nav { display: none; } .cart { margin-left: auto; } }
+
+    /* первый экран */
+    .hero { position: relative; padding: 34px 0 56px; overflow: hidden; }
+    .drips { position: absolute; left: 0; right: 0; top: 0; height: 120px; pointer-events: none; z-index: 1; }
+    .drips path { fill: var(--main); stroke: var(--text); stroke-width: 2.5; }
+    .hero .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+    .hero h1 { font-size: clamp(44px, 6.2vw, 84px); line-height: .95; margin: 18px 0 18px; }
+    .hero h1 span { display: block; }
+    .hero h1 .b { color: var(--main); font-style: italic; -webkit-text-stroke: 2px var(--text); paint-order: stroke fill; }
+    .hero p { margin: 0 0 26px; font-size: 19px; max-width: 30em; }
+    .hero .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+    .frame { position: relative; aspect-ratio: 4 / 5; border: var(--bd); border-radius: 32px; box-shadow: 8px 8px 0 var(--text); background: var(--main); overflow: visible; }
+    .frame > img { width: 100%; height: 100%; object-fit: cover; border-radius: 29px; }
+    .frame .sticker { position: absolute; }
+    .frame .s1 { top: -16px; right: 18px; transform: rotate(5deg); }
+    .frame .s2 { bottom: 26px; left: -18px; transform: rotate(-6deg); background: var(--mint); }
+    .spin { position: absolute; width: 42%; right: -8%; bottom: -10%; filter: drop-shadow(5px 6px 0 var(--text)); z-index: 3; }
+    .spin img { width: 100%; border-radius: 50%; }
+    .sprinkles { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .sprinkles i { position: absolute; top: -20px; width: 8px; height: 22px; border-radius: 6px; border: 2px solid var(--text); animation: fall linear infinite; }
+    @keyframes fall { to { transform: translateY(115vh) rotate(540deg); } }
+    @media (max-width: 860px) {
+      .hero { padding-top: 26px; }
+      .hero .wrap { grid-template-columns: 1fr; gap: 34px; }
+      .frame { width: min(420px, 88%); margin: 0 auto 0 0; }
+      .spin { width: 46%; right: -14%; }
+    }
+
+    /* полоса с цифрами */
+    .stats { background: var(--text); color: var(--bg); border-block: var(--bd); }
+    .stats .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stats div { padding: 26px 10px; text-align: center; }
+    .stats div + div { border-left: 1.5px solid color-mix(in srgb, var(--bg) 22%, transparent); }
+    .stats b { display: block; font: 700 clamp(26px, 5vw, 46px)/1 var(--font-head); color: var(--accent); white-space: nowrap; }
+    .stats span { font-size: 15px; opacity: .85; }
+    @media (max-width: 560px) { .stats div { padding: 18px 4px; } .stats b { font-size: 25px; } .stats span { font-size: 13px; } }
+
+    .run { overflow: hidden; border-bottom: var(--bd); background: var(--accent); }
+    .run div { display: flex; gap: 28px; width: max-content; padding: 14px 0; font: 700 22px/1 var(--font-head); white-space: nowrap; animation: run 32s linear infinite; }
+    .run div span::after { content: "  ●"; color: var(--main); }
+    @keyframes run { to { transform: translateX(-50%); } }
+
+    section.block { padding: 72px 0; }
+    .head { display: grid; gap: 10px; margin-bottom: 30px; }
+    .head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; }
+    .head p { margin: 0; max-width: 36em; font-size: 18px; }
+    .kick { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    .kick::before { content: ""; width: 26px; height: 3px; border-radius: 3px; background: var(--main); }
+
+    /* коробка */
+    .builder { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
+    .box { position: relative; background: var(--kraft); border: var(--bd); border-radius: 26px; box-shadow: var(--sh); padding: 20px; }
+    .box .lid { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-weight: 700; }
+    .box .lid b { font: 700 22px/1 var(--font-head); }
+    .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .slot { aspect-ratio: 1; border-radius: 50%; border: 2.5px dashed var(--kraft-d); background: color-mix(in srgb, var(--kraft) 70%, #fff); display: grid; place-items: center; position: relative; cursor: default; padding: 0; }
+    .slot img { width: 100%; height: 100%; border-radius: 50%; }
+    .slot.full { border: 2.5px solid var(--text); cursor: pointer; background: var(--card); }
+    .slot.full::after { content: "×"; position: absolute; top: -6px; right: -6px; width: 24px; height: 24px; border-radius: 50%; background: var(--text); color: var(--bg); font-size: 16px; line-height: 22px; text-align: center; opacity: 0; transition: opacity .2s; }
+    .slot.full:hover::after, .slot.full:focus-visible::after { opacity: 1; }
+    .box .sum { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 2.5px dashed var(--kraft-d); flex-wrap: wrap; }
+    .box .sum strong { font: 700 28px/1 var(--font-head); }
+    .box .btn[disabled] { opacity: .45; pointer-events: none; }
+    .clear { background: none; border: 0; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 6px; }
+    .flavors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .fl { border: var(--bd); border-radius: 18px; background: var(--card); padding: 8px 6px 10px; display: grid; justify-items: center; gap: 4px; cursor: pointer; box-shadow: 3px 3px 0 var(--text); }
+    @media (hover: hover) { .fl { transition: transform .15s, box-shadow .15s; } }
+    .fl:hover { transform: translate(-2px, -2px) rotate(-2deg); box-shadow: 5px 5px 0 var(--text); }
+    .fl:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--text); }
+    .fl img { width: 76%; border-radius: 50%; }
+    .fl small { font-size: 12.5px; line-height: 1.15; text-align: center; font-weight: 600; }
+    .fl em { font-style: normal; font-size: 12.5px; opacity: .7; }
+    @media (max-width: 860px) {
+      .builder { grid-template-columns: 1fr; gap: 20px; }
+      .box { position: sticky; top: 74px; z-index: 5; padding: 12px 14px; border-radius: 20px; }
+      .box .lid { margin-bottom: 8px; } .box .lid b { font-size: 18px; }
+      .slots { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+      .box .sum { margin-top: 10px; padding-top: 10px; } .box .sum strong { font-size: 22px; } .box .sum small { display: none; } .box .sum br { display: none; }
+      .box .btn { min-height: 42px; padding: 0 16px; font-size: 15px; }
+    }
+    @media (max-width: 420px) { .flavors { gap: 8px; } .fl small { font-size: 11.5px; } }
+    .fly { position: fixed; z-index: 60; border-radius: 50%; pointer-events: none; }
+
+    /* каталог */
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card { border: var(--bd); border-radius: var(--r); background: var(--card); box-shadow: var(--sh); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+    .card .pic { position: relative; aspect-ratio: 1; background: var(--tint, var(--accent)); border-bottom: var(--bd); display: grid; place-items: center; }
+    .card .pic img { width: 78%; border-radius: 50%; filter: drop-shadow(4px 5px 0 rgba(42,23,18,.85)); transition: transform .5s cubic-bezier(.3,1.6,.5,1); }
+    .card:hover .pic img { transform: rotate(40deg) scale(1.05); }
+    .card .tag { position: absolute; top: 12px; left: 12px; transform: rotate(-4deg); font-size: 13px; padding: 4px 10px; }
+    .card .body { padding: 14px 14px 16px; display: grid; gap: 4px; flex: 1; }
+    .card h3 { font-size: 19px; line-height: 1.15; }
+    .card small { font-size: 14px; line-height: 1.35; opacity: .75; }
+    .card .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 10px; }
+    .card .price { font: 700 22px/1 var(--font-head); }
+    .add { min-height: 42px; padding: 0 14px; border: var(--bd); border-radius: 99px; background: var(--text); color: var(--bg); font-weight: 700; cursor: pointer; font-size: 15px; white-space: nowrap; }
+    .add:hover { background: var(--main); color: var(--text); }
+    .add.done { background: var(--mint); color: var(--text); }
+    @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+    @media (max-width: 420px) { .card .body { padding: 10px 10px 12px; } .card h3 { font-size: 16px; } .card small { display: none; } .card .row { flex-direction: column; align-items: stretch; } .add { width: 100%; } }
+
+    /* как это работает */
+    .how { background: var(--accent); border-block: var(--bd); }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .steps li { background: var(--card); border: var(--bd); border-radius: var(--r); box-shadow: var(--sh); padding: 22px; display: grid; gap: 8px; }
+    .steps li:nth-child(2) { transform: rotate(-1.5deg); }
+    .steps b { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; border: var(--bd); background: var(--main); font: 700 26px/1 var(--font-head); }
+    .steps li:nth-child(2) b { background: var(--mint); }
+    .steps li:nth-child(3) b { background: var(--bg); }
+    .steps h3 { font-size: 24px; }
+    .steps p { margin: 0; }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } .steps li:nth-child(2) { transform: none; } }
+
+    /* фото */
+    .shots { display: grid; grid-template-columns: 1.1fr .9fr 1fr; grid-template-rows: auto auto; gap: 18px; }
+    .shot { position: relative; border: var(--bd); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh); background: var(--main); }
+    .shot img { width: 100%; height: 100%; object-fit: cover; }
+    .shot.a { grid-row: span 2; aspect-ratio: 4 / 5.6; }
+    .shot.b { aspect-ratio: 1; transform: rotate(2deg); }
+    .shot.c { grid-row: span 2; aspect-ratio: 4 / 5.6; }
+    .shot.d { aspect-ratio: 1; transform: rotate(-2deg); }
+    .shot .sticker { position: absolute; left: 14px; bottom: 14px; transform: rotate(-4deg); }
+    @media (max-width: 760px) {
+      .shots { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .shot.a, .shot.c { grid-row: auto; aspect-ratio: 4 / 5; }
+      .shot.b, .shot.d { aspect-ratio: 4 / 5; }
+      .shot .sticker { font-size: 12px; padding: 5px 10px; left: 8px; bottom: 10px; }
+    }
+
+    /* вопросы */
+    .faq { display: grid; gap: 12px; max-width: 820px; }
+    .faq details { border: var(--bd); border-radius: 18px; background: var(--card); box-shadow: 3px 3px 0 var(--text); }
+    .faq summary { list-style: none; cursor: pointer; padding: 18px 20px; font-weight: 700; font-size: 18px; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; flex: none; width: 32px; height: 32px; border-radius: 50%; border: var(--bd); display: grid; place-items: center; background: var(--accent); font-size: 20px; line-height: 1; transition: transform .25s; }
+    .faq details[open] summary::after { transform: rotate(45deg); background: var(--main); }
+    .faq p { margin: 0; padding: 0 20px 18px; }
+
+    /* финал */
+    .final { background: var(--main); border-top: var(--bd); padding: 72px 0; position: relative; overflow: hidden; }
+    .final .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 34px; align-items: center; }
+    .final h2 { font-size: clamp(36px, 5.4vw, 64px); line-height: 1; }
+    .final .btn { margin-top: 24px; }
+    .rows { display: grid; gap: 10px; }
+    .rows a, .rows div { display: grid; gap: 2px; text-decoration: none; padding: 14px 18px; background: var(--card); border: var(--bd); border-radius: 16px; box-shadow: 3px 3px 0 var(--text); }
+    .rows small { font-size: 13px; opacity: .7; }
+    .final .bigring { position: absolute; width: 520px; height: 520px; right: -160px; bottom: -220px; border-radius: 50%; border: 120px solid color-mix(in srgb, var(--accent) 80%, transparent); }
+    @media (max-width: 860px) { .final .wrap { grid-template-columns: 1fr; } .final .bigring { width: 340px; height: 340px; border-width: 80px; right: -140px; bottom: -150px; } }
+
+    footer { padding: 26px 0 40px; font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+    /* корзина в стиле сайта */
+    .c-drawer { border-left: var(--bd); }
+    .c-drawer input, .c-drawer textarea { font: inherit; border: var(--bd); border-radius: 14px; padding: 12px 14px; background: var(--card); color: var(--text); width: 100%; }
+    .c-send { min-height: 52px; border: var(--bd); border-radius: 99px; background: var(--main); font-weight: 700; font-size: 17px; cursor: pointer; box-shadow: 3px 3px 0 var(--text); }
+    .c-thumb { background: var(--accent); }
+    .c-toast { border: var(--bd); }
+
+    [data-reveal] { transition: opacity .7s, transform .7s cubic-bezier(.2,.8,.2,1); }
+    .js [data-reveal]:not(.in) { opacity: 0; transform: translateY(40px); }
+    @media (prefers-reduced-motion: reduce) {
+      .run div, .sprinkles i { animation: none; }
+      .sprinkles { display: none; }
+      .js [data-reveal]:not(.in) { opacity: 1; transform: none; }
+    }
+  </style>
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x, S = D.sections;
+    var tints = X.tints || [];
+    var stk = X.stickers || [];
+    var heroWords = (D.hero.title || "").split(","), h1a = heroWords[0], h1b = heroWords.slice(1).join(",").trim();
+
+    var stats = (X.stats || []).map(function (s) { return '<div><b>' + e(s[0]) + '</b><span>' + e(s[1]) + '</span></div>'; }).join("");
+    var names = D.items.map(function (i) { return '<span>' + e(i.name) + '</span>'; }).join("");
+    var flv = D.items.map(function (i) {
+      return '<button class="fl" type="button" data-put="' + e(i.id) + '" aria-label="' + e("В коробку: " + i.name) + '"><img src="' + e(i.photo) + '" alt="" loading="lazy"><small>' + e(i.name) + '</small><em>' + Core.money(i.price) + '</em></button>';
+    }).join("");
+    var N = X.boxSize || 6, slots = "";
+    for (var s = 0; s < N; s++) slots += '<button class="slot" type="button" data-slot="' + s + '" aria-label="Пустая ячейка"></button>';
+    var cards = D.items.map(function (i, k) {
+      return '<article class="card" data-reveal style="--tint:' + e(tints[k % (tints.length || 1)] || "") + '"><div class="pic">' + Core.pic(i) + (i.tag ? '<span class="sticker tag">' + e(i.tag) + '</span>' : '') + '</div>' +
+        '<div class="body"><h3>' + e(i.name) + '</h3>' + (i.desc ? '<small>' + e(i.desc) + '</small>' : '') +
+        '<div class="row"><span class="price">' + Core.money(i.price) + '</span><button class="add" data-add="' + e(i.id) + '">' + e(S.addLabel || "в корзину") + '</button></div></div></article>';
+    }).join("");
+    var steps = (X.steps || []).map(function (s, k) { return '<li data-reveal><b>' + (k + 1) + '</b><h3>' + e(s[0]) + '</h3><p>' + e(s[1]) + '</p></li>'; }).join("");
+    var ph = [X.p1, X.p2, X.p3, X.p4];
+    var shots = ["a", "b", "c", "d"].map(function (c, k) { return ph[k] ? '<figure class="shot ' + c + '" style="margin:0">' + '<img src="' + e(ph[k]) + '" alt="" loading="lazy">' + (k === 1 && stk[2] ? '<span class="sticker">' + e(stk[2]) + '</span>' : '') + '</figure>' : ''; }).join("");
+    var faq = (X.faq || []).map(function (q) { return '<details><summary>' + e(q[0]) + '</summary><p>' + e(q[1]) + '</p></details>'; }).join("");
+    var rows = Core.contacts().map(function (r) {
+      var inner = '<small>' + e(r[0]) + '</small><strong>' + e(r[1]) + '</strong>';
+      return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>';
+    }).join("");
+    // капли глазури: волна с потёками разной длины
+    var drip = "M0 0 H1440 V38";
+    var xs = [1440, 1330, 1250, 1120, 1010, 900, 760, 640, 520, 400, 280, 160, 60, 0], lens = [0, 70, 30, 96, 44, 80, 36, 104, 52, 76, 40, 88, 34, 0];
+    for (var k = 1; k < xs.length; k++) {
+      var a = xs[k - 1], b = xs[k], m = (a + b) / 2, L = lens[k];
+      drip += " C" + (a - 20) + " 38 " + (m + 22) + " 40 " + (m + 16) + " " + (40 + L) + " A16 16 0 0 1 " + (m - 16) + " " + (40 + L) + " C" + (m - 22) + " 40 " + (b + 20) + " 38 " + b + " 38";
+    }
+    drip += " Z";
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top"><i class="ring"></i>' + e(D.brand.name.toLowerCase()) + '</a>' +
+        '<nav class="nav"><a href="#box">коробка</a><a href="#menu">вкусы</a><a href="#how">как заказать</a><a href="#faq">вопросы</a></nav>' +
+        '<button class="cart" data-open-cart>корзина <b data-count>0</b></button></div></header>' +
+      '<main id="top">' +
+      '<section class="hero"><svg class="drips" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true"><path d="' + drip + '"/></svg><div class="sprinkles" aria-hidden="true"></div>' +
+        '<div class="wrap"><div class="txt"><span class="sticker" data-h>🍩 ' + e(D.brand.tagline) + ' · ' + e(D.brand.city) + '</span>' +
+        '<h1><span data-h>' + e(h1a) + '</span>' + (h1b ? '<span class="b" data-h>' + e(h1b) + '</span>' : '') + '</h1>' +
+        '<p data-h>' + e(D.hero.text) + '</p><div class="acts" data-h><a class="btn" href="#box">' + e(D.hero.cta) + ' →</a><a class="btn light" href="#menu">все вкусы</a></div></div>' +
+        '<div class="frame" data-h>' + (D.hero.photo ? '<img src="' + e(D.hero.photo) + '" alt="Пончик с посыпкой">' : '') +
+          (stk[0] ? '<span class="sticker s1">' + e(stk[0]) + '</span>' : '') + (stk[1] ? '<span class="sticker s2">' + e(stk[1]) + '</span>' : '') +
+          (X.donutBig ? '<div class="spin"><img src="' + e(X.donutBig) + '" alt=""></div>' : '') + '</div></div></section>' +
+      (stats ? '<div class="stats"><div class="wrap">' + stats + '</div></div>' : '') +
+      '<div class="run" aria-hidden="true"><div>' + names + names + names + names + '</div></div>' +
+      '<section class="block" id="box"><div class="wrap"><div class="head"><span class="kick">конструктор</span><h2>' + e(X.boxTitle || "соберите коробку") + '</h2><p>' + e(X.boxText || "") + '</p></div>' +
+        '<div class="builder"><div class="box" data-reveal><div class="lid"><b>' + e(D.brand.name.toLowerCase()) + '</b><span data-fill>0 из ' + N + '</span></div><div class="slots">' + slots + '</div>' +
+          '<div class="sum"><div><small>итого за коробку</small><br><strong data-boxsum>' + Core.money(0) + '</strong></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="clear" type="button" data-clear>очистить</button><button class="btn" type="button" data-tobox disabled>' + e(X.boxBtn || "в корзину") + '</button></div></div></div>' +
+          '<div class="flavors" data-reveal>' + flv + '</div></div></div></section>' +
+      '<section class="block" id="menu" style="padding-top:0"><div class="wrap"><div class="head"><span class="kick">меню</span><h2>' + e(S.catalogTitle) + '</h2><p>' + e(S.catalogText) + '</p></div><div class="grid">' + cards + '</div></div></section>' +
+      '<section class="block how" id="how"><div class="wrap"><div class="head"><span class="kick">три шага</span><h2>' + e(S.aboutTitle) + '</h2><p>' + e(S.aboutText) + '</p></div><ol class="steps">' + steps + '</ol></div></section>' +
+      (shots ? '<section class="block"><div class="wrap"><div class="shots">' + shots + '</div></div></section>' : '') +
+      (faq ? '<section class="block" id="faq" style="padding-top:' + (shots ? '0' : '72px') + '"><div class="wrap"><div class="head"><span class="kick">частые вопросы</span><h2>всё, что хотели спросить</h2></div><div class="faq">' + faq + '</div></div></section>' : '') +
+      '<section class="final" id="contacts"><i class="bigring" aria-hidden="true"></i><div class="wrap"><div><h2>' + e(X.finalTitle || "заходите") + '</h2><button class="btn" data-open-cart>' + e(X.orderBtn || "собрать заказ") + '</button></div>' +
+        '<div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://trofimshakirov2081-lang.github.io/Shak.web/" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // посыпка падает на первом экране
+    var sp = document.querySelector(".sprinkles"), cols = ["var(--main)", "var(--accent)", "var(--mint)", "#9B7BFF", "#FFFFFF"];
+    if (!reduce) for (var q = 0; q < 22; q++) { var it = document.createElement("i"); var lx = Math.random(); it.style.left = (lx < .35 ? lx * 30 : 55 + (lx - .35) / .65 * 45) + "%"; it.style.background = cols[q % cols.length]; it.style.animationDuration = (7 + Math.random() * 8) + "s"; it.style.animationDelay = (-Math.random() * 12) + "s"; it.style.transform = "rotate(" + (Math.random() * 180) + "deg)"; sp.appendChild(it); }
+
+    // коробка
+    var box = [], byId = {};
+    D.items.forEach(function (i) { byId[i.id] = i; });
+    var slotEls = [].slice.call(document.querySelectorAll("[data-slot]")), sumEl = document.querySelector("[data-boxsum]"), fillEl = document.querySelector("[data-fill]"), toBox = document.querySelector("[data-tobox]");
+    function draw() {
+      var t = 0;
+      slotEls.forEach(function (el, k) {
+        var id = box[k];
+        if (id) { el.classList.add("full"); el.innerHTML = '<img src="' + e(byId[id].photo) + '" alt="">'; el.setAttribute("aria-label", "Убрать: " + byId[id].name); t += byId[id].price; }
+        else { el.classList.remove("full"); el.innerHTML = ""; el.setAttribute("aria-label", "Пустая ячейка"); }
+      });
+      sumEl.textContent = Core.money(t); fillEl.textContent = box.length + " из " + N; toBox.disabled = !box.length;
+    }
+    function put(id, from) {
+      if (box.length >= N) { Core.toast("Коробка полная: отправьте её в корзину"); return; }
+      box.push(id); var target = slotEls[box.length - 1];
+      if (reduce || !from || !window.gsap) { draw(); return; }
+      var a = from.getBoundingClientRect(), b = target.getBoundingClientRect();
+      var f = document.createElement("img"); f.className = "fly"; f.src = byId[id].photo;
+      f.style.cssText = "left:" + a.left + "px;top:" + a.top + "px;width:" + a.width + "px;height:" + a.width + "px";
+      document.body.appendChild(f);
+      gsap.to(f, { duration: .55, ease: "power2.inOut", left: b.left, top: b.top, width: b.width, height: b.height, rotation: 220,
+        onComplete: function () { f.remove(); draw(); gsap.fromTo(target, { scale: .8 }, { scale: 1, duration: .45, ease: "back.out(3)" }); } });
+    }
+    document.addEventListener("click", function (ev) {
+      var p = ev.target.closest("[data-put]"); if (p) { put(p.dataset.put, p.querySelector("img")); return; }
+      var sl = ev.target.closest("[data-slot]"); if (sl && box[+sl.dataset.slot]) { box.splice(+sl.dataset.slot, 1); draw(); return; }
+      if (ev.target.closest("[data-clear]")) { box = []; draw(); return; }
+      if (ev.target.closest("[data-tobox]") && box.length) {
+        // кладём каждый пончик коробки в общую корзину сайта
+        box.forEach(function (id) { var b = document.createElement("button"); b.dataset.add = id; b.hidden = true; document.body.appendChild(b); b.click(); b.remove(); });
+        Core.toast("Коробка в корзине: " + box.length + " шт."); box = []; draw();
+        var c = document.querySelector(".cart"); if (window.gsap && !reduce) gsap.fromTo(c, { scale: 1.25, rotate: -6 }, { scale: 1, rotate: 0, duration: .6, ease: "elastic.out(1,.4)" });
+      }
+    });
+    draw();
+
+    if (!window.gsap || reduce) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // первый экран: глазурь стекает, текст выпрыгивает, пончик крутится
+    gsap.from(".drips path", { scaleY: 0, transformOrigin: "50% 0%", duration: 1.4, ease: "elastic.out(1, .45)", delay: .1 });
+    gsap.from("[data-h]", { y: 50, opacity: 0, rotate: function (i) { return i % 2 ? 3 : -3; }, duration: .9, ease: "back.out(1.6)", stagger: .09, delay: .25 });
+    gsap.from(".spin", { scale: 0, rotate: -180, duration: 1.1, ease: "back.out(1.7)", delay: .8 });
+    gsap.to(".spin img", { rotate: 360, duration: 18, repeat: -1, ease: "none" });
+    gsap.to(".spin", { y: -90, rotate: 25, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    gsap.to(".frame .s1", { rotate: -4, y: -6, duration: 1.6, yoyo: true, repeat: -1, ease: "sine.inOut" });
+    gsap.to(".frame .s2", { rotate: 3, y: 6, duration: 1.9, yoyo: true, repeat: -1, ease: "sine.inOut" });
+    gsap.to(".hero .frame > img", { yPercent: 6, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+    // цифры в полосе выезжают
+    gsap.from(".stats b", { y: 30, opacity: 0, stagger: .12, duration: .7, ease: "back.out(2)", scrollTrigger: { trigger: ".stats", start: "top 85%" } });
+    // вкусы для коробки высыпаются
+    gsap.from(".fl", { y: 40, opacity: 0, rotate: function () { return (Math.random() - .5) * 30; }, stagger: .05, duration: .6, ease: "back.out(2)", clearProps: "transform", scrollTrigger: { trigger: ".flavors", start: "top 85%" } });
+    // фото слегка плывут
+    gsap.utils.toArray(".shot img").forEach(function (im, k) { gsap.fromTo(im, { yPercent: -6, scale: 1.12 }, { yPercent: 6, scale: 1.12, ease: "none", scrollTrigger: { trigger: im.parentNode, start: "top bottom", end: "bottom top", scrub: true } }); });
+    gsap.from(".final h2", { y: 60, opacity: 0, rotate: -3, duration: .9, ease: "back.out(1.6)", scrollTrigger: { trigger: ".final", start: "top 70%" } });
+    gsap.to(".final .bigring", { rotate: 120, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
+  })();
+  </script>
+</body>
+</html>

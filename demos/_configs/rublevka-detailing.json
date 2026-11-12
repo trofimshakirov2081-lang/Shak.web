@@ -1,0 +1,80 @@
+{
+  "slug": "rublevka-detailing",
+  "name": "Rublevka Detailing",
+  "niche": "detailing",
+  "city": "Москва",
+  "custom": "glyanec",
+  "tagline": "Детейлинг",
+  "colors": {
+    "main": "#E4572E",
+    "accent": "#7FB7D9",
+    "bg": "#1C1F24",
+    "text": "#E9ECEF"
+  },
+  "fonts": {
+    "head": "Akt",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Машина, как из салона",
+    "text": "Выберите класс машины и услуги: цена посчитается сразу, а запись уйдёт нам в WhatsApp.",
+    "photo": "files/rublevka-detailing/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Услуги и цены",
+    "catalogText": "Цены для седана, для других классов переключите выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Rublevka Detailing: работаем аккуратно, показываем результат до и после.",
+  "items": [
+    {
+      "name": "Полировка кузова",
+      "price": 14000,
+      "desc": "Двухэтапная",
+      "photo": "files/rublevka-detailing/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Керамика",
+      "price": 28000,
+      "desc": "2 слоя, гарантия год",
+      "photo": "files/rublevka-detailing/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Химчистка салона",
+      "price": 9000,
+      "desc": "Полная, с потолком",
+      "photo": "files/rublevka-detailing/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Защитная плёнка",
+      "price": 35000,
+      "desc": "Зоны риска",
+      "photo": "files/rublevka-detailing/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Детейлинг-мойка",
+      "price": 2500,
+      "desc": "Ручная, двухфазная",
+      "photo": "files/rublevka-detailing/item-5.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 925 031-02-01",
+    "whatsapp": "79250310201",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "graphite": "#2A2F36"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://rublevkadetailing.orgs.biz/",
+  "contact_lead": "em:rublevkadetailing@yandex.ru"
+}

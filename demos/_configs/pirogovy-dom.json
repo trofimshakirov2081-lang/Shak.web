@@ -1,0 +1,145 @@
+{
+  "slug": "pirogovy-dom",
+  "name": "Пироговый Дом",
+  "niche": "кофейня",
+  "city": "Магнитогорск",
+  "custom": "altynnur",
+  "tagline": "Кофейня",
+  "colors": {
+    "main": "#9C5B2E",
+    "accent": "#F2C46D",
+    "bg": "#FBF6EE",
+    "text": "#2A1A10"
+  },
+  "fonts": {
+    "head": "Vollkorn",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Вкусно, как дома",
+    "text": "Свежие домашние пироги по 1,2 кг каждый день: сладкие и сытные. Закажите заранее, и мы испечём к нужному времени.",
+    "cta": "Смотреть меню",
+    "photo": "files/pirogovy-dom/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Пироги",
+    "catalogText": "Каждый пирог весит 1,2 кг. Добавьте в заказ и отправьте нам.",
+    "aboutTitle": "О кофейне",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Пироговый Дом в Магнитогорске. Каждый день печём домашние пироги и выпечку из натуральных ингредиентов по проверенным рецептам.",
+  "features": [
+    {
+      "icon": "🥧",
+      "title": "Каждый день свежие",
+      "text": "Пироги по 1,2 кг."
+    },
+    {
+      "icon": "🌿",
+      "title": "Натуральные продукты",
+      "text": "Проверенные рецепты."
+    },
+    {
+      "icon": "🏠",
+      "title": "Как дома",
+      "text": "Тепло и уютно."
+    }
+  ],
+  "items": [
+    {
+      "name": "С яблоком и корицей",
+      "price": 700,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "С вишней",
+      "price": 900,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Творог и чёрная смородина",
+      "price": 900,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Творог и клубника",
+      "price": 800,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Грибы и картофель",
+      "price": 800,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Горбуша и картофель",
+      "price": 1000,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Картофель и фарш",
+      "price": 750,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капуста и яйцо",
+      "price": 650,
+      "desc": "1,2 кг",
+      "photo": "files/pirogovy-dom/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 982 300-36-96",
+    "whatsapp": "79823003696",
+    "address": "ул. Завенягина, 10а",
+    "hours": ""
+  },
+  "extra": {
+    "groups": [
+      [
+        "Сладкие",
+        "яблок|вишн|творог|кураг|конфит"
+      ],
+      [
+        "Сытные",
+        "гриб|горбуш|форел|фарш|капуст|лук"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Все пироги",
+    "orderTitle": "Заказать пироги",
+    "orderText": "Соберите заказ, и мы испечём пироги к нужному времени.",
+    "orderMsg": "Здравствуйте! Хочу заказать пироги",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки забрать, самовывоз или доставка",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой. Выберите пирог.",
+    "emptyToast": "Сначала выберите пирог",
+    "vars": {
+      "deep": "#3B2416",
+      "glow": "#D98C3A",
+      "glow2": "#6B3F22",
+      "sky": "#F3E6D6",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://pirogovy-dom.orgs.biz/"
+}

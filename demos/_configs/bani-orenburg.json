@@ -1,0 +1,74 @@
+{
+  "slug": "bani-orenburg",
+  "name": "Бани под ключ",
+  "niche": "masterskaya",
+  "city": "Оренбург",
+  "custom": "stolyar",
+  "tagline": "Бани под ключ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Своя баня под ключ",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/bani-orenburg/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Бани под ключ: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Баня из бруса",
+      "price": 32000,
+      "desc": "Под ключ, с печью",
+      "photo": "files/bani-orenburg/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Баня-бочка",
+      "price": 18000,
+      "desc": "Готовая, с доставкой",
+      "photo": "files/bani-orenburg/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Дом из бруса",
+      "price": 28000,
+      "desc": "Коробка под крышу",
+      "photo": "files/bani-orenburg/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Беседка",
+      "price": 15000,
+      "desc": "С мангальной зоной",
+      "photo": "files/bani-orenburg/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 919 869-17-63",
+    "whatsapp": "79198691763",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://stroitelstvoiotdelkaban.orgs.biz/",
+  "contact_lead": "em:stroitelstvobanorenburg@mail.ru"
+}

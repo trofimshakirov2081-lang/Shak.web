@@ -1,0 +1,73 @@
+{
+  "slug": "gracia-kemerovo",
+  "name": "Кухни Gracia",
+  "niche": "masterskaya",
+  "city": "Кемерово",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/gracia-kemerovo/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Кухни Gracia: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня",
+      "price": 28000,
+      "desc": "Под потолок, фурнитура Blum",
+      "photo": "files/gracia-kemerovo/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Шкаф-купе",
+      "price": 19000,
+      "desc": "Зеркало или ЛДСП",
+      "photo": "files/gracia-kemerovo/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гардеробная",
+      "price": 16000,
+      "desc": "Открытые системы",
+      "photo": "files/gracia-kemerovo/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 15000,
+      "desc": "С банкеткой и зеркалом",
+      "photo": "files/gracia-kemerovo/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 923 486-55-15",
+    "whatsapp": "79234865515",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://kuhnigracia.orgs.biz/",
+  "contact_lead": "em:kuhni-gracia@mail.ru"
+}

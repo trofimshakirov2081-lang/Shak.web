@@ -1,0 +1,126 @@
+{
+  "slug": "mila-feya",
+  "name": "Mila Feya",
+  "niche": "кондитерская",
+  "city": "Трёхгорный",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ в Трёхгорном",
+  "colors": {
+    "main": "#C2577A",
+    "accent": "#F8D7E2",
+    "bg": "#F4F7EF",
+    "text": "#2E2A24"
+  },
+  "fonts": {
+    "head": "Marmelad",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Торты и десерты, которые станут украшением праздника",
+    "text": "13 видов бисквитов и 13 начинок: соберём торт под ваш вкус. Трёхгорный, заказ в WhatsApp.",
+    "cta": "Собрать заказ",
+    "photo": "files/mila-feya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Обо мне",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Каждое изделие делаю с любовью и заботой о вкусе. Торты, бенто, трайфлы и пирожные к любому событию, с вашим любимым сочетанием вкусов.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "13 бисквитов",
+      "text": "И столько же начинок."
+    },
+    {
+      "icon": "🍓",
+      "title": "Свежие ягоды",
+      "text": "Клубника, вишня, смородина."
+    },
+    {
+      "icon": "🎉",
+      "title": "К любому событию",
+      "text": "От бенто до двухъярусного торта."
+    }
+  ],
+  "items": [
+    {
+      "name": "Торт «Ягодный поцелуй»",
+      "price": 1900,
+      "desc": "Коржи на миндальной муке",
+      "photo": "files/mila-feya/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1600,
+      "desc": "Чёрный лес, сникерс, ягоды",
+      "photo": "files/mila-feya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик, торт-цифра",
+      "price": 2600,
+      "desc": "Классический медовик",
+      "photo": "files/mila-feya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк «Нью-Йорк»",
+      "price": 2300,
+      "desc": "Нежный классический",
+      "photo": "files/mila-feya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт «Чёрный лес»",
+      "price": 1900,
+      "desc": "Шоколад и вишня",
+      "photo": "files/mila-feya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт «Шокобум»",
+      "price": 1700,
+      "desc": "Шоколадный с орехом",
+      "photo": "files/mila-feya/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Трайфлы",
+      "price": 300,
+      "desc": "За штуку",
+      "photo": "files/mila-feya/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки",
+      "price": 200,
+      "desc": "За штуку",
+      "photo": "files/mila-feya/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 982 363-89-05",
+    "whatsapp": "79823638905",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#EEDFF0",
+      "pist": "#DCE9CC",
+      "butter": "#FBEFD0"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://desert-trg-milafeya25.orgs.biz/"
+}

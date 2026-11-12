@@ -1,0 +1,81 @@
+{
+  "slug": "parim-cheboksary",
+  "name": "Парим и не паримся",
+  "niche": "banya",
+  "city": "Чебоксары",
+  "custom": "par",
+  "tagline": "Мастера пара",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Пар, после которого не паришься",
+    "text": "Выберите программу, день и время: сайт посчитает цену и отправит бронь нам в WhatsApp.",
+    "photo": "files/parim-cheboksary/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Программы и цены",
+    "catalogText": "Цена за час. Цены для примера, свои вы поставите в админке.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Мы Борис и Александр, мастера пара. Подбираем программу под каждого гостя: травы, веники, парение в четыре руки и ужин у костра. Постоянно учимся у мастеров со всей страны.",
+  "items": [
+    {
+      "name": "Индивидуальное парение",
+      "price": 2500,
+      "desc": "Программа под ваш запрос, травы и веники",
+      "photo": "files/parim-cheboksary/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Парение в четыре руки",
+      "price": 4000,
+      "desc": "Два мастера, глубокий прогрев",
+      "photo": "files/parim-cheboksary/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Баня для компании",
+      "price": 3500,
+      "desc": "Корпоративы и праздники, ужин на костре",
+      "photo": "files/parim-cheboksary/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 927 667-75-15",
+    "whatsapp": "79276677515",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    },
+    "extras": [
+      [
+        "Дубовый или можжевеловый веник",
+        500
+      ],
+      [
+        "Травяной чай и ужин у костра",
+        1500
+      ],
+      [
+        "Массаж после парения",
+        2000
+      ]
+    ]
+  },
+  "credits": "фото: свободные стоки, для примера",
+  "source": "https://t.me/parim_i_neparimsya",
+  "contact_lead": "tg:@borya_myasnikov"
+}

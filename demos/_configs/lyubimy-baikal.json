@@ -1,0 +1,77 @@
+{
+  "slug": "lyubimy-baikal",
+  "name": "Гостевой дом Любимый",
+  "niche": "otdyh",
+  "city": "Максимиха",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Уютные номера и честные цены",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/lyubimy-baikal/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Гостевой дом Любимый в Максимихе: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Стандарт",
+      "price": 3500,
+      "desc": "2 гостя, завтрак включён",
+      "photo": "files/lyubimy-baikal/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Комфорт",
+      "price": 4500,
+      "desc": "2-3 гостя, большая кровать",
+      "photo": "files/lyubimy-baikal/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Семейный номер",
+      "price": 6500,
+      "desc": "До 4 гостей, две комнаты",
+      "photo": "files/lyubimy-baikal/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Люкс",
+      "price": 8500,
+      "desc": "Гостиная и вид из окна",
+      "photo": "files/lyubimy-baikal/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 914 632-73-73",
+    "whatsapp": "79146327373",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://baikal-guesthouse.orgs.biz/",
+  "contact_lead": "em:baikalguesthouse@gmail.com"
+}

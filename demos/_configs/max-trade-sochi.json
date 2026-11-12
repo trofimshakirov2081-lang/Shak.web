@@ -1,0 +1,74 @@
+{
+  "slug": "max-trade-sochi",
+  "name": "Макс-Трейд",
+  "niche": "masterskaya",
+  "city": "Сочи",
+  "custom": "stolyar",
+  "tagline": "Бани под ключ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Своя баня под ключ",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/max-trade-sochi/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Макс-Трейд: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "КЕДРОВАЯ БАНЯ-БОЧКА \"ДОМОВОЙ\" 1,9 МЕТРА.",
+      "price": 167800,
+      "desc": "КЕДРОВАЯ БАНЯ-БОЧКА \"ДОМОВОЙ\" 1,9 МЕТРА Самая компактная…",
+      "photo": "files/max-trade-sochi/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "БАНЯ-БОЧКА ИЗ КЕДРА \"ЗАБАВА\" 2,3 МЕТРА.",
+      "price": 178500,
+      "desc": "БАНЯ-БОЧКА ИЗ КЕДРА \"ЗАБАВА\" 2,3 МЕТРА Компактная и…",
+      "photo": "files/max-trade-sochi/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БАНЯ-БОЧКА ИЗ КЕДРА \"ТАРА\" 2,6 МЕТРА",
+      "price": 188000,
+      "desc": "БАНЯ-БОЧКА ИЗ КЕДРА \"ТАРА\" 2,6 МЕТРА Компактная и в то же…",
+      "photo": "files/max-trade-sochi/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БАНЯ-БОЧКА ИЗ КЕДРА \"ВОЛЬГА\" 2,9 МЕТРА",
+      "price": 207300,
+      "desc": "БАНЯ-БОЧКА ИЗ КЕДРА \"ВОЛЬГА\" 2,9 МЕТРА Данная баня-бочка…",
+      "photo": "files/max-trade-sochi/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 983 523-87-78",
+    "whatsapp": "79835238778",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club167113356.orgs.biz/",
+  "contact_lead": "em:bath_barrels@bk.ru"
+}
