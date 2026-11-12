@@ -375,5 +375,41 @@
   "channel": "почта (адрес есть на их странице), письмо 11.11.2026",
   "demo": "demos/delfa-perm/",
   "next": "ждём ответ; через 4-5 дней одно короткое напоминание"
+ },
+ {
+  "name": "@Ksusha_102",
+  "niche": "сайт под рекламу в Директе",
+  "source": "Telegram-боты и канал заказов",
+  "found": "2026-11-11",
+  "status": "contacted",
+  "channel": "Telegram, личка 12.11.2026",
+  "next": "ждём ответ"
+ },
+ {
+  "name": "@chris_sssshhh",
+  "niche": "редизайн сайта турфирмы",
+  "source": "Telegram-боты и канал заказов",
+  "found": "2026-11-11",
+  "status": "contacted",
+  "channel": "Telegram, личка 12.11.2026",
+  "next": "ждём ответ"
+ },
+ {
+  "name": "@why1ive",
+  "niche": "нужен разработчик сайтов (AviLP)",
+  "source": "Telegram-боты и канал заказов",
+  "found": "2026-11-11",
+  "status": "contacted",
+  "channel": "Telegram, личка 12.11.2026",
+  "next": "ждём ответ"
+ },
+ {
+  "name": "@kate_isachenko",
+  "niche": "сайт для спектакля с виджетом билетов, назвали 15 500 ₽",
+  "source": "Telegram-боты и канал заказов",
+  "found": "2026-11-11",
+  "status": "contacted",
+  "channel": "Telegram, личка 12.11.2026",
+  "next": "ждём ответ"
  }
 ]
