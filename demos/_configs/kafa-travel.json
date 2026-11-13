@@ -1,0 +1,75 @@
+{
+  "slug": "kafa-travel",
+  "name": "Кафочкины путешествия",
+  "niche": "tury",
+  "city": "Москва",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/kafa-travel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Кафочкины путешествия: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Смоленск (3-4 дня)",
+      "price": 1490,
+      "desc": "Смоленск - щит России! За свою историю Смоленск четыре…",
+      "photo": "files/kafa-travel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Волоколамск (1-2 дня)",
+      "price": 990,
+      "desc": "Волоколамск - один из самых древних городов Московской…",
+      "photo": "files/kafa-travel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нижний Новгород (2-4 дня)",
+      "price": 990,
+      "desc": "Нижний Новгород - столица закатов и один из крупнейших…",
+      "photo": "files/kafa-travel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Воронеж (3-4 дня)",
+      "price": 1490,
+      "desc": "Воронеж - колыбель русского военно-морского флота. Пётр I…",
+      "photo": "files/kafa-travel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 977 639-20-69",
+    "whatsapp": "79776392069",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Москва",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://kafa-travel.orgs.biz/",
+  "contact_lead": "em:kafatravel@mail.ru"
+}

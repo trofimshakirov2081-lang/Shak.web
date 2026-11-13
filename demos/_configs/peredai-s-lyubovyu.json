@@ -1,0 +1,135 @@
+{
+  "slug": "peredai-s-lyubovyu",
+  "name": "Передай с любовью",
+  "niche": "цветы",
+  "city": "Пушкин",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#E23C7C",
+    "accent": "#FFD3E4",
+    "bg": "#FFF7FA",
+    "text": "#2B0F1B"
+  },
+  "fonts": {
+    "head": "Rubik",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Букеты с доставкой по Пушкину",
+    "text": "Свежие поставки, аккуратная сборка и доставка к нужному времени.",
+    "cta": "Выбрать букет",
+    "photo": "files/peredai-s-lyubovyu/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Передай с любовью: цветы в Пушкине. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Пушкину к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Тюльпаны на 8 марта",
+      "price": 2000,
+      "desc": "Тюльпаны — это весна в одном букете 🌿 Соберём свежий букет,…",
+      "photo": "files/peredai-s-lyubovyu/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букеты 5-8к",
+      "price": 6500,
+      "desc": "Более объёмный “вау-эффект”, богаче состав. Цена зависит от…",
+      "photo": "files/peredai-s-lyubovyu/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БУКЕТЫ 3-5к",
+      "price": 4000,
+      "desc": "Самый популярный формат: красиво и уместно. Цена зависит от…",
+      "photo": "files/peredai-s-lyubovyu/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "БУКЕТ до 3000",
+      "price": 3000,
+      "desc": "Подберём варианты в вашем городе под бюджет и повод. Цена…",
+      "photo": "files/peredai-s-lyubovyu/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/peredai-s-lyubovyu/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/peredai-s-lyubovyu/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/peredai-s-lyubovyu/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/peredai-s-lyubovyu/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 995 831-91-26",
+    "whatsapp": "79958319126",
+    "address": "ул. Парковая, 8",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#FBE5EE",
+      "ok": "#2F8F6A"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://peredai-chvetok.orgs.biz/",
+  "telegram_lead": "peredai_chvetok"
+}

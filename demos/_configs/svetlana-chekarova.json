@@ -1,0 +1,112 @@
+{
+  "slug": "svetlana-chekarova",
+  "name": "Десерты Светланы",
+  "niche": "кондитерская",
+  "city": "Челябинск",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты в Челябинске",
+  "colors": {
+    "main": "#B5243B",
+    "accent": "#FFD7DE",
+    "bg": "#FFF7F4",
+    "text": "#3A1E1A"
+  },
+  "fonts": {
+    "head": "Literata",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Клубника в шоколаде, моти и торты",
+    "text": "Работаю на дорогих качественных продуктах. Детские и бисквитные торты, бенто и меренговые рулеты.",
+    "cta": "Собрать заказ",
+    "photo": "files/svetlana-chekarova/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Светлана",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Светлана, занимаюсь десертами уже 3 года. Использую только качественные продукты, а декор обсуждаем индивидуально.",
+  "features": [
+    {
+      "icon": "🍓",
+      "title": "Клубника в шоколаде",
+      "text": "Коробки от 1 000 ₽."
+    },
+    {
+      "icon": "🍡",
+      "title": "Моти",
+      "text": "В том числе дубайские."
+    },
+    {
+      "icon": "🎂",
+      "title": "Торты",
+      "text": "Детские и бисквитные."
+    }
+  ],
+  "items": [
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1000,
+      "desc": "Квадратная коробка",
+      "photo": "files/svetlana-chekarova/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Моти",
+      "price": 200,
+      "desc": "За штуку",
+      "photo": "files/svetlana-chekarova/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1600,
+      "desc": "450 г",
+      "photo": "files/svetlana-chekarova/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Меренговый рулет",
+      "price": 2300,
+      "desc": "1 кг",
+      "photo": "files/svetlana-chekarova/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Детский торт",
+      "price": 2100,
+      "desc": "От 2 кг, цена за кг",
+      "photo": "files/svetlana-chekarova/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт 1 кг",
+      "price": 2500,
+      "desc": "Бисквитный",
+      "photo": "files/svetlana-chekarova/item-6.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 908 580-75-18",
+    "whatsapp": "79085807518",
+    "address": "ул. Чичерина, 47",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#F3DDE6",
+      "pist": "#E4EFDF",
+      "butter": "#FBE8CB"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://club232076121.orgs.biz/"
+}

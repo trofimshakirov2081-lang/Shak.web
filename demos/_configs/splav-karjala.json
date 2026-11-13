@@ -1,0 +1,75 @@
+{
+  "slug": "splav-karjala",
+  "name": "Сплавы Карелия",
+  "niche": "prokat",
+  "city": "Петрозаводск",
+  "custom": "volna",
+  "tagline": "Сплавы на каяках",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Lunasima",
+    "body": "Akt"
+  },
+  "hero": {
+    "title": "Река, каяк и никакой спешки",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/splav-karjala/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно взять",
+    "catalogText": "Цены за час, на весь день дешевле.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Сплавы Карелия: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "Каяк одноместный",
+      "price": 500,
+      "desc": "Весло и жилет",
+      "photo": "files/splav-karjala/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Каяк двухместный",
+      "price": 800,
+      "desc": "Для пары или с ребёнком",
+      "photo": "files/splav-karjala/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сплав с инструктором",
+      "price": 2500,
+      "desc": "Полдня, всё снаряжение",
+      "photo": "files/splav-karjala/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гермомешок и насос",
+      "price": 150,
+      "desc": "Для своего снаряжения",
+      "photo": "files/splav-karjala/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 981 402-43-92",
+    "whatsapp": "79814024392",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 4,
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://splav-karjala.orgs.biz/",
+  "contact_lead": "em:tour@runa-land.ru"
+}

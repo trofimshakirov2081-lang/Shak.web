@@ -1,0 +1,126 @@
+{
+  "slug": "sladkoe-korolevstvo",
+  "name": "Сладкое Королевство",
+  "niche": "кондитерская",
+  "city": "Зеленоградск",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#3A7CA5",
+    "accent": "#F7C6D0",
+    "bg": "#F2F7FA",
+    "text": "#1A2B36"
+  },
+  "fonts": {
+    "head": "Forum",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Бенто, моти и пирожные у моря",
+    "text": "Кондитерская Киры в Зеленоградске: муссовые бенто, торты от 1,5 кг, ПП-торты, моти и NY кукис.",
+    "cta": "Собрать заказ",
+    "photo": "files/sladkoe-korolevstvo/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Кира",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Кира. Делаю десерты на заказ в Зеленоградске: и классические торты, и необычные моти и мадлены.",
+  "features": [
+    {
+      "icon": "🌊",
+      "title": "Зеленоградск",
+      "text": "Ул. Приморская, 21."
+    },
+    {
+      "icon": "🍰",
+      "title": "От пирожного до торта",
+      "text": "Есть ПП-торты."
+    },
+    {
+      "icon": "✨",
+      "title": "Новинки",
+      "text": "Регулярно добавляю вкусы."
+    }
+  ],
+  "items": [
+    {
+      "name": "Корпусные пирожные",
+      "price": 300,
+      "desc": "За штуку",
+      "photo": "files/sladkoe-korolevstvo/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Муссовые бенто-торты",
+      "price": 1400,
+      "desc": "Маленькие муссовые торты",
+      "photo": "files/sladkoe-korolevstvo/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торты",
+      "price": 1300,
+      "desc": "Классические бисквитные",
+      "photo": "files/sladkoe-korolevstvo/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торты от 1,5 кг",
+      "price": 2300,
+      "desc": "Для большого праздника",
+      "photo": "files/sladkoe-korolevstvo/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "ПП-торты",
+      "price": 2800,
+      "desc": "Сладко и полезно",
+      "tag": "",
+      "photo": "files/sladkoe-korolevstvo/item-5.jpg"
+    },
+    {
+      "name": "Моти",
+      "price": 130,
+      "desc": "За штуку",
+      "photo": "files/sladkoe-korolevstvo/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "NY кукис",
+      "price": 170,
+      "desc": "За штуку",
+      "photo": "files/sladkoe-korolevstvo/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пирожное «Мадлен»",
+      "price": 140,
+      "desc": "За штуку",
+      "photo": "files/sladkoe-korolevstvo/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 902 421-45-90",
+    "whatsapp": "79024214590",
+    "address": "ул. Приморская, 21",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#F6DDE5",
+      "pist": "#D7EAF3",
+      "butter": "#FCEBC5"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://sladkoekorolevstvo39.orgs.biz/"
+}

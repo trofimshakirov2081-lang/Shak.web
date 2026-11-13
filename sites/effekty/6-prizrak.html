@@ -1,0 +1,38 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Призрак-загрузка</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#fff;color:#16181d;min-height:100vh;display:grid;place-items:center;overflow:hidden}
+.box{text-align:center}
+.ghost{width:110px;height:130px;margin:0 auto;position:relative;animation:fly 2.4s ease-in-out infinite}
+.ghost .b{position:absolute;inset:0;background:#1d1d1f;border-radius:55px 55px 0 0;clip-path:polygon(0 0,100% 0,100% 100%,87% 88%,75% 100%,62% 88%,50% 100%,37% 88%,25% 100%,12% 88%,0 100%)}
+.ghost .e{position:absolute;top:46px;width:14px;height:20px;background:#fff;border-radius:50%;animation:blink 3s infinite}
+.ghost .e:nth-of-type(2){left:34px}.ghost .e:nth-of-type(3){right:34px}
+.ghost .m{position:absolute;top:76px;left:50%;width:18px;height:10px;margin-left:-9px;border:3px solid #fff;border-top:0;border-radius:0 0 14px 14px;transition:all .3s}
+.shadow{width:70px;height:12px;margin:18px auto 0;border-radius:50%;background:rgba(0,0,0,.12);animation:sh 2.4s ease-in-out infinite}
+@keyframes fly{50%{transform:translateY(-22px) rotate(-4deg)}}
+@keyframes sh{50%{transform:scale(.7);opacity:.6}}
+@keyframes blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+h1{font-size:clamp(24px,4vw,32px);margin-top:30px}
+p{color:#7a7e89;margin-top:6px}
+.bar{width:220px;height:4px;background:#eee;border-radius:4px;margin:18px auto 0;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#1d1d1f;border-radius:4px;animation:load 3.2s ease forwards}
+@keyframes load{to{width:100%}}
+.done{display:none;margin-top:18px}
+.done a{display:inline-block;background:#1d1d1f;color:#fff;text-decoration:none;padding:12px 22px;border-radius:99px;font-weight:600}
+.boo .m{width:26px;height:22px;margin-left:-13px;border-radius:50%;border:3px solid #fff}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a><script>if(window.top!==window)document.currentScript.previousElementSibling.style.display="none"/*inframe*/</script>
+<div class="box" id="box">
+  <div class="ghost" id="g"><div class="b"></div><span class="e"></span><span class="e"></span><span class="m"></span></div>
+  <div class="shadow"></div>
+  <h1 id="h">Достаём пирожные из печи…</h1>
+  <p id="p">Кондитерская «Сахар» готовит хэллоуинский сет</p>
+  <div class="bar"><i></i></div>
+  <div class="done" id="done"><a href="#" onclick="location.reload();return false">Смотреть сет «Бу!» · 990 ₽</a></div>
+</div>
+<script>
+setTimeout(()=>{document.getElementById('g').classList.add('boo');document.getElementById('h').textContent='Бу! Готово.';document.getElementById('p').textContent='6 пирожных-призраков, тыквенный чизкейк и печенье-кости';document.getElementById('done').style.display='block'},3400);
+document.getElementById('g').onclick=e=>e.currentTarget.classList.toggle('boo');
+</script></body></html>

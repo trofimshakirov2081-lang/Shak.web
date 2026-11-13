@@ -1,0 +1,70 @@
+{
+  "slug": "lavanda-beach",
+  "name": "Lavanda Beach",
+  "niche": "otdyh",
+  "city": "Заводское",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#24352B",
+    "accent": "#D9692E",
+    "bg": "#F2EFE6",
+    "text": "#1B241E"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Выходные, после которых не хочется обратно",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/lavanda-beach/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Lavanda Beach: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Место для палатки",
+      "price": 800,
+      "desc": "У моря, за ночь",
+      "photo": "files/lavanda-beach/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Место для автодома",
+      "price": 1500,
+      "desc": "Электричество и вода",
+      "photo": "files/lavanda-beach/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Домик на двоих",
+      "price": 3500,
+      "desc": "Кровать, свет, терраса",
+      "photo": "files/lavanda-beach/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 978 567-00-80",
+    "whatsapp": "79785670080",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#9DB7B5",
+      "paper": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://lavanda-beach.orgs.biz/",
+  "contact_lead": "em:lavanda-beach@yandex.ru"
+}

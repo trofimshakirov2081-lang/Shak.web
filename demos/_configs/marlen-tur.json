@@ -1,0 +1,75 @@
+{
+  "slug": "marlen-tur",
+  "name": "Марлен Тур",
+  "niche": "tury",
+  "city": "Балабаново",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Путешествие, которое запомнится",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/marlen-tur/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Марлен Тур: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Золотое кольцо России",
+      "price": 22400,
+      "desc": "👨‍👩‍👧‍👦Увлекательное путешествие «ЗОЛОТОЕ КОЛЬЦО РОССИИ»…",
+      "photo": "files/marlen-tur/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Карелия",
+      "price": 22100,
+      "desc": "🔥🔥🔥Увлекательный тур \"Знакомство с Карелией!!! \" 📅16.…",
+      "photo": "files/marlen-tur/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Три дня с Петербургом",
+      "price": 17300,
+      "desc": "🚌🚌🚌 Увлекательное путешествие в Санкт-Петербург. ♦️Тур…",
+      "photo": "files/marlen-tur/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Владимир-Суздаль",
+      "price": 15200,
+      "desc": "👨‍👩‍👧‍👦 Владимир-Боголюбово-Суздаль ♦️ ТУР «Путешествие в…",
+      "photo": "files/marlen-tur/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 953 315-56-70",
+    "whatsapp": "79533155670",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Балабаново",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://marlen-40.orgs.biz/",
+  "contact_lead": "em:marlen.40@mail.ru"
+}

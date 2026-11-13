@@ -1,0 +1,63 @@
+{
+  "slug": "bereg-kazan",
+  "name": "Мини-отель На Набережной",
+  "niche": "otdyh",
+  "city": "Казань",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#24352B",
+    "accent": "#D9692E",
+    "bg": "#F2EFE6",
+    "text": "#1B241E"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Номер на ваши даты за минуту",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/bereg-kazan/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Мини-отель На Набережной в Казани: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Недорогие номера комфорт в \"Мини-отель на",
+      "price": 1600,
+      "desc": "Недорогие номера комфорт в \"Мини-отель на Набережной\".…",
+      "photo": "files/bereg-kazan/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Номер Эконом в \"Мини-отель на Набережной",
+      "price": 1300,
+      "desc": "Недорогие номера эконом в \"Мини-отель на Набережной\".…",
+      "photo": "files/bereg-kazan/item-2.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 960 048-61-63",
+    "whatsapp": "79600486163",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#9DB7B5",
+      "paper": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://miniotelbereg.orgs.biz/",
+  "contact_lead": "em:bereg.kzn@mail.ru"
+}

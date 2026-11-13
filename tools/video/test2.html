@@ -1,0 +1,67 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+@font-face{font-family:Akt;src:url(Akt.ttf);font-weight:100 900}@font-face{font-family:Fin;src:url(Finlandica.ttf);font-weight:100 900}
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#0E1018;color:#F0F2F8;font-family:Fin,sans-serif}
+.s{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 80px;text-align:center}
+h1{font-family:Akt;font-size:118px;line-height:1.05;font-weight:700}
+.blue{color:#4C8DFF}.dim{color:#8E94AC}
+.sub{font-size:52px;line-height:1.3;margin-top:40px;color:#C9CEDF}
+.num{font-family:Akt;font-size:44px;color:#4C8DFF;letter-spacing:2px;position:absolute;top:210px;left:0;right:0}
+.q{font-size:72px;line-height:1.25;font-weight:600}
+.q b{color:#fff;font-family:Akt;font-weight:700}
+.ask{font-family:Akt;font-size:84px;margin-top:60px;color:#fff}
+.timer{position:absolute;bottom:330px;left:140px;right:140px;height:22px;border-radius:11px;background:#1F2333;overflow:hidden}
+.timer i{display:block;height:100%;background:#4C8DFF;border-radius:11px}
+.tnum{position:absolute;bottom:380px;left:0;right:0;font-family:Akt;font-size:96px;color:#4C8DFF}
+.ans{position:absolute;left:70px;right:70px;bottom:250px;background:#171A28;border:4px solid #4C8DFF;border-radius:40px;padding:50px 40px}
+.ans .big{font-family:Akt;font-size:130px;color:#fff;line-height:1}
+.ans .why{font-size:44px;line-height:1.3;color:#C9CEDF;margin-top:24px}
+.ans .trap{font-size:40px;color:#FF6B6B;margin-top:18px}
+.dots{position:absolute;top:120px;left:0;right:0;display:flex;gap:18px;justify-content:center}
+.dots span{width:150px;height:12px;border-radius:6px;background:#1F2333}.dots span.on{background:#4C8DFF}
+.src{position:absolute;bottom:110px;left:0;right:0;font-size:32px;color:#6A7090}
+.chips{display:flex;gap:30px;margin-top:90px}.chips span{width:180px;height:180px;border-radius:40px;background:#1F2333;display:flex;align-items:center;justify-content:center;font-family:Akt;font-size:100px;font-weight:700}.chips span.hl{background:#4C8DFF}
+.bar{display:flex;align-items:flex-end;gap:36px;height:520px;margin-top:70px}
+.bar div{width:190px;border-radius:20px 20px 0 0;background:#262B40;position:relative}
+.bar div.hl{background:#4C8DFF}
+.bar div b{position:absolute;top:-70px;left:0;right:0;font-family:Akt;font-size:54px}
+.bar div u{position:absolute;bottom:-64px;left:-20px;right:-20px;font-size:36px;color:#8E94AC;text-decoration:none}
+</style></head><body><div id="root"></div><script>
+const Q=[
+ {q:'Иван выпивает бочку воды за <b>6&nbsp;дней</b>, а Маша за <b>12&nbsp;дней</b>.',ask:'За сколько дней они выпьют бочку вместе?',a:'4 дня',trap:'Хочется ответить 9',why:'За день Иван пьёт 2/12 бочки, Маша 1/12. Вместе 3/12, то есть четверть.'},
+ {q:'Петя в своём классе <b>15-й</b> по оценкам с начала списка и <b>15-й</b>&nbsp;с конца.',ask:'Сколько учеников в&nbsp;классе?',a:'29',trap:'Первым в голову приходит 30',why:'14 выше Пети, 14 ниже и он сам.'},
+ {q:'Купил велосипед за <b>6&nbsp;000&nbsp;₽</b>, продал за <b>7&nbsp;000</b>, выкупил за <b>8&nbsp;000</b> и снова продал за <b>9&nbsp;000</b>.',ask:'Сколько он заработал?',a:'2&nbsp;000&nbsp;₽',trap:'Рука тянется написать 1&nbsp;000',why:'Потратил 6 000 + 8&nbsp;000 = 14&nbsp;000, получил 7&nbsp;000 + 9&nbsp;000 = 16&nbsp;000.'}];
+const INTRO=3.4,QT=6.4,AT=3.6,STEP=QT+AT,END0=INTRO+3*STEP;   // всего около 37,5 с
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const fade=(t,a,b,d=0.35)=>Math.max(0,Math.min(1,(t-a)/d,(b-t)/d));
+const root=document.getElementById('root');
+window.DUR=END0+4.6;
+window.seek=function(t){
+  let h='';
+  if(t<INTRO){const o=fade(t,0,INTRO,0.3),k=ease(t/0.6);
+    h=`<div class="s" style="opacity:${o}"><h1 style="transform:translateY(${(1-k)*60}px)">Тест из <span class="blue">3</span> вопросов.<br>Часть 2</h1>
+      <p class="sub" style="opacity:${ease((t-0.8)/0.5)}">Задачу про мяч и ракетку узнали все.<br>Учёные придумали <b style="color:#fff">посложнее</b></p>
+      <p class="sub dim" style="opacity:${ease((t-1.8)/0.5)}">На каждый вопрос 5 секунд</p></div>`;
+  } else if(t<END0){
+    const i=Math.min(2,Math.floor((t-INTRO)/STEP)),lt=t-INTRO-i*STEP,q=Q[i];
+    const o=fade(lt,0,STEP,0.3),kq=ease(lt/0.5),left=Math.max(0,5-(lt-1.2)),inQ=lt<QT;
+    const ka=ease((lt-QT)/0.45);
+    h=`<div class="s" style="opacity:${o};justify-content:flex-start;padding-top:330px">
+      <div class="dots">${[0,1,2].map(j=>`<span class="${j<=i?'on':''}"></span>`).join('')}</div>
+      <div class="num">ВОПРОС ${i+1} ИЗ 3</div>
+      <p class="q" style="opacity:${kq};transform:translateY(${(1-kq)*40}px)">${q.q}</p>
+      <p class="ask" style="opacity:${ease((lt-0.7)/0.5)}">${q.ask}</p>
+      ${inQ&&lt>1.2?`<div class="tnum">${Math.ceil(left)}</div><div class="timer"><i style="width:${left/5*100}%"></i></div>`:''}
+      ${!inQ?`<div class="ans" style="opacity:${ka};transform:translateY(${(1-ka)*80}px) scale(${0.94+0.06*ka})"><div class="big">${q.a}</div><div class="why">${q.why}</div><div class="trap">${q.trap}</div></div>`:''}
+    </div>`;
+  } else {
+    const lt=t-END0,o=ease(lt/0.4),g=ease((lt-0.5)/1.0);
+    h=`<div class="s" style="opacity:${o}"><h1 style="font-size:92px">Сколько у вас<br>из трёх?</h1>
+      <div class="chips">${['0','1','2','3'].map((c,j)=>`<span style="opacity:${ease((lt-0.5-j*0.2)/0.4)};transform:scale(${0.8+0.2*ease((lt-0.5-j*0.2)/0.4)})" class="${j==3?'hl':''}">${c}</span>`).join('')}</div>
+      <p class="sub" style="margin-top:90px;opacity:${ease((lt-1.6)/0.5)}">Пишите результат в комментариях</p>
+      <div class="src">Расширенный тест когнитивной рефлексии.<br>Топлак, Уэст и Станович, 2014</div></div>`;
+  }
+  root.innerHTML=h;
+};
+seek(0);
+</script></body></html>

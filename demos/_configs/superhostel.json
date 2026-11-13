@@ -1,0 +1,70 @@
+{
+  "slug": "superhostel",
+  "name": "СуперХостел",
+  "niche": "otdyh",
+  "city": "Санкт-Петербург",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Уютные номера и честные цены",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/superhostel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "СуперХостел в Петербурге: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Одноместный комфорт",
+      "price": 999,
+      "desc": "Стандартный номер для одного гостя. Душ и сан/узел в…",
+      "photo": "files/superhostel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Двухместный Комфорт",
+      "price": 1200,
+      "desc": "Улучшенный номер для двоих гостей. Душ и сан/узел в…",
+      "photo": "files/superhostel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Трёхместный Эконом",
+      "price": 1100,
+      "desc": "Бюджетный номер с общими удобствами на Пушкинской 14. Душ…",
+      "photo": "files/superhostel/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 812 309-74-03",
+    "whatsapp": "78123097403",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://superhostel.orgs.biz/",
+  "contact_lead": "em:vk_office@superhostel.ru"
+}

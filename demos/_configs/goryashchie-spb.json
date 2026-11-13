@@ -1,0 +1,68 @@
+{
+  "slug": "goryashchie-spb",
+  "name": "Горящие туры",
+  "niche": "tury",
+  "city": "Санкт-Петербург",
+  "custom": "marshrut",
+  "tagline": "Турагентство",
+  "colors": {
+    "main": "#2A6F4E",
+    "accent": "#E9A23B",
+    "bg": "#EEF0E8",
+    "text": "#17251E"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Туры на любой бюджет",
+    "text": "Выберите направление, даты и сколько вас: цена посчитается сразу, заявка придёт в WhatsApp.",
+    "photo": "files/goryashchie-spb/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Горящие туры: подбираем туры под ваш бюджет и сопровождаем до возвращения домой.",
+  "items": [
+    {
+      "name": "Тур выходного дня",
+      "price": 15000,
+      "desc": "2 дня, транспорт и гид",
+      "photo": "files/goryashchie-spb/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Однодневная экскурсия",
+      "price": 4500,
+      "desc": "Целый день, обед включён",
+      "photo": "files/goryashchie-spb/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Авторский тур",
+      "price": 45000,
+      "desc": "5 дней, малая группа",
+      "photo": "files/goryashchie-spb/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 437-83-86",
+    "whatsapp": "79214378386",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Санкт-Петербург",
+    "vars": {
+      "forest": "#1D5A7A",
+      "card": "#FAFBF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club157032444.orgs.biz/",
+  "contact_lead": "em:yasminspb@mail.ru"
+}

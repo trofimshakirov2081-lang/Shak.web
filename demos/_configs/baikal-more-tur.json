@@ -1,0 +1,75 @@
+{
+  "slug": "baikal-more-tur",
+  "name": "Байкал Море Тур",
+  "niche": "tury",
+  "city": "Иркутск",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/baikal-more-tur/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Байкал Море Тур: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Однодневный тур на Ольхон",
+      "price": 16000,
+      "desc": "- Выезд из Иркутска в 7:00 на микроавтобусе с остановок…",
+      "photo": "files/baikal-more-tur/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Однодневный летний тур в бухты Песчаная,",
+      "price": 7000,
+      "desc": "Набираем группы для поездки в бухты Синичка, Песчаная,…",
+      "photo": "files/baikal-more-tur/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Однодневный тур на мыс Саган-Заба",
+      "price": 9000,
+      "desc": "- Выезд из Иркутска в 8:00 на микроавтобусе с остановок…",
+      "photo": "files/baikal-more-tur/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Однодневная экскурсия в Большое Голоустное",
+      "price": 4000,
+      "desc": "Давно ищите возможность разнообразить свои выходные?…",
+      "photo": "files/baikal-more-tur/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 950 070-28-19",
+    "whatsapp": "79500702819",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Иркутск",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club213898653.orgs.biz/",
+  "contact_lead": "em:makura_plus@mail.ru"
+}
