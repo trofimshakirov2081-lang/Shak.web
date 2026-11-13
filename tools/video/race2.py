@@ -20,7 +20,7 @@ PAL = ["#4C7DFF", "#FF4D4D", "#FF9F1C", "#F25C9A", "#FFD23F", "#7B61FF", "#2EC4B
        "#FEE440", "#00F5D4", "#FF8C42", "#8AC926", "#FF924C", "#1982C4", "#6A4C93", "#C5283D", "#E9724C", "#52B788", "#80ED99", "#48CAE4", "#E63946", "#06D6A0", "#FFB703", "#43AA8B", "#F9844A"]
 COL = {k: C.get("colors", {}).get(k, PAL[i % len(PAL)]) for i, k in enumerate(C["keys"])}
 hexc = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
-V = C["values"]; T = C["total"]; LAB = C["labels"]; NS = len(LAB); FST = C["fps_step"]; unit = C["unit"]
+V = C["values"]; T = C.get("total"); LAB = C["labels"]; NS = len(LAB); FST = C["fps_step"]; unit = C["unit"]
 
 def sp(x, a, b, c):  # число с пробелами между тысячами
     return f"{x:,.{a}f}".replace(",", " ").replace(".", ",")
@@ -30,6 +30,8 @@ def fmt(x):
         if x >= 1e9: return "$" + sp(x / 1e9, 0, 0, 0) + " млрд"
         return "$" + sp(x / 1e6, 0, 0, 0) + " млн"
     if unit == "count":
+        if x >= 1e9: return sp(x / 1e9, 2, 0, 0) + " млрд"
+        if x >= 1e8: return sp(x / 1e6, 0, 0, 0) + " млн"
         if x >= 1e6: return sp(x / 1e6, 1, 0, 0) + " млн"
         if x >= 1e4: return sp(x / 1e3, 0, 0, 0) + " тыс."
         return sp(round(x, -1) if x >= 100 else round(x), 0, 0, 0)
@@ -38,6 +40,7 @@ def fmt(x):
     return sp(x / 1e3, 0, 0, 0) + " тыс."
 def gfmt(x):
     if unit == "count":
+        if x >= 1e9: return f"{x / 1e9:g}".replace(".", ",") + " млрд"
         if x >= 1e6: return f"{x / 1e6:g}".replace(".", ",") + " млн"
         if x >= 1e3: return f"{x / 1e3:g}".replace(".", ",") + " тыс."
         return f"{x:g}"
@@ -50,6 +53,7 @@ def val(k, s):  # s: дробный шаг
     i = min(int(s), NS - 2); f = min(1, s - i)
     return V[k][i] + (V[k][i + 1] - V[k][i]) * f
 def tot(s):
+    if not T: return None
     i = min(int(s), NS - 2); f = min(1, s - i); return T[i] + (T[i + 1] - T[i]) * f
 
 X0, BAR_H, GAP, Y_TOP = 60, 190, 50, 380
@@ -91,8 +95,9 @@ for n in range(N):
     big, small = (lab.split("|") + [""])[:2]
     d.text((W - 50, 1690), big, font=FBIG, fill=(78, 84, 110), anchor="rm")
     if small: d.text((W - 60, 1580), small, font=FM, fill=(110, 116, 140), anchor="rm")
-    d.text((X0, 1640), C["total_label"], font=FS, fill=(120, 126, 150), anchor="lm")
-    d.text((X0, 1700), fmt(tot(s)), font=FB, fill=(225, 228, 238), anchor="lm")
+    if T:
+        d.text((X0, 1640), C["total_label"], font=FS, fill=(120, 126, 150), anchor="lm")
+        d.text((X0, 1700), fmt(tot(s)), font=FB, fill=(225, 228, 238), anchor="lm")
     d.text((W // 2, H - 125), C["src"], font=FS, fill=(90, 96, 118), anchor="mm")
     if C.get("src2"): d.text((W // 2, H - 80), C["src2"], font=FS, fill=(90, 96, 118), anchor="mm")
     E = C.get("end"); k2 = (n - (NS - 1) * FST - FPS) / (FPS * 0.6)

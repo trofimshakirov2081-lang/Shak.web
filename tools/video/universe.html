@@ -1,0 +1,86 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+@font-face{font-family:Akt;src:url(Akt.ttf);font-weight:100 900}@font-face{font-family:Fin;src:url(Finlandica.ttf);font-weight:100 900}
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#0B0D16;color:#F0F2F8;font-family:Fin,sans-serif}
+.top{position:absolute;top:120px;left:60px;right:60px;text-align:center}
+.top h1{font-family:Akt;font-size:74px;line-height:1.08;font-weight:700}
+.top p{font-size:38px;color:#8E94AC;margin-top:18px}
+.grid{position:absolute;left:90px;right:90px;top:420px;display:grid;gap:22px}
+.m{height:180px;border-radius:26px;background:#151827;position:relative;overflow:hidden}
+.m i{position:absolute;left:0;top:0;bottom:0;background:#23356B}
+.m.cur i{background:#4C8DFF}
+.m span{position:absolute;left:24px;top:18px;font-family:Akt;font-size:36px;color:#8E94AC;font-weight:600}
+.m.cur span,.m.done span{color:#F0F2F8}
+.dot{position:absolute;width:30px;height:30px;border-radius:50%;border:6px solid #0B0D16;bottom:22px;transform:translateX(-50%)}
+.d{height:118px;border-radius:20px;background:#151827;position:relative;display:flex;align-items:center;justify-content:center;font-family:Akt;font-size:40px;color:#5A6080;font-weight:600}
+.d.done{background:#23356B;color:#C9D6FF}.d.cur{background:#4C8DFF;color:#fff}
+.d.evd{box-shadow:inset 0 0 0 6px var(--c)}
+.date{position:absolute;top:1330px;left:0;right:0;text-align:center;font-family:Akt;font-size:130px;font-weight:700;letter-spacing:1px}
+.ev{position:absolute;top:1520px;left:70px;right:70px;text-align:center}
+.ev b{display:block;font-family:Akt;font-size:64px;line-height:1.1;font-weight:700}
+.ev span{display:block;font-size:40px;color:#A9AFC6;margin-top:14px}
+.src{position:absolute;bottom:70px;left:0;right:0;text-align:center;font-size:30px;color:#5E6484}
+.clock{position:absolute;left:0;right:0;top:430px;text-align:center}
+.clock .day{font-family:Akt;font-size:64px;color:#8E94AC;font-weight:600}
+.clock .t{font-family:Akt;font-size:190px;font-weight:700;margin-top:30px;font-variant-numeric:tabular-nums}
+.track{position:absolute;left:90px;right:90px;top:1000px;height:34px;border-radius:17px;background:#151827}
+.track i{position:absolute;left:0;top:0;bottom:0;border-radius:17px;background:#4C8DFF}
+.tl{position:absolute;top:1060px;font-family:Akt;font-size:34px;color:#4A5070}
+.fin{position:absolute;inset:0;background:rgba(8,9,14,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.fin h2{font-family:Akt;font-size:96px;line-height:1.06;font-weight:700}
+.fin p{font-size:50px;color:#C9CEDF;margin-top:44px;line-height:1.3}
+.blue{color:#4C8DFF}
+</style></head><body><div id="root"></div><script>
+// 13,8 млрд лет = 365 дней. День = 37,8 млн лет, секунда = 437 лет
+const AGE=13800, Y=365, SPD=86400;
+const dayOf=ma=>(AGE-ma)/AGE*Y;
+const E=[
+ [0,'Большой взрыв','13,8 миллиарда лет назад','#8E94AC'],
+ [dayOf(13400),'Первые галактики','через 400 миллионов лет','#B79CFF'],
+ [dayOf(4560),'Солнце и Земля','4,5 миллиарда лет назад','#FFD23F'],
+ [dayOf(3800),'Первая жизнь','бактерии в океане','#3DDC97'],
+ [dayOf(2400),'Кислород в воздухе','его надышали микробы','#5BC0EB'],
+ [dayOf(538),'Первые животные','кембрийский взрыв','#FF9F1C'],
+ [dayOf(230),'Динозавры','','#8AC926'],
+ [dayOf(66),'Динозавры вымерли','упал астероид','#FF4D4D'],
+ [Y-0.3/AGE*Y,'Появился человек','300 тысяч лет назад','#4C8DFF'],
+ [Y-4500/437.6/SPD,'Пирамиды в Египте','4 500 лет назад','#FFD23F'],
+ [Y-2026/437.6/SPD,'Начало нашей эры','','#F0F2F8']];
+const H=E.map(e=>e[0]);
+const KEY=[[0,0],[2.6,0],[4.2,H[1]],[6,H[1]],[10.5,H[2]],[12.6,H[2]],[14,H[3]],[15.8,H[3]],[17.4,H[4]],[19.2,H[4]],[20.6,334],[21.4,334],
+ [23.6,H[5]],[25.4,H[5]],[27,H[6]],[28.8,H[6]],[30.2,H[7]],[32,H[7]],[33,364],[33.6,364],[36,H[8]],[38,H[8]],[40,H[9]],[41.6,H[9]],[42.6,H[10]],[44,H[10]],[45,Y]];
+const dayAt=t=>{for(let i=1;i<KEY.length;i++)if(t<=KEY[i][0]){const a=KEY[i-1],b=KEY[i],k=(t-a[0])/(b[0]-a[0]||1),s=k*k*(3-2*k);return a[1]+(b[1]-a[1])*s}return Y};
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+const MG=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const ML=[31,28,31,30,31,30,31,31,30,31,30,31],MS=ML.map((_,i)=>ML.slice(0,i).reduce((a,b)=>a+b,0));
+const md=d=>{let m=11;while(m>0&&MS[m]>d)m--;return [m,d-MS[m]]};
+const p2=n=>String(n).padStart(2,'0');
+const root=document.getElementById('root');
+window.DUR=50;
+window.seek=function(t){
+  const d=Math.min(dayAt(t),Y-1e-9);let ci=0;E.forEach((e,i)=>{if(e[0]<=d+1e-9)ci=i});const cur=E[ci];
+  const since=KEY.find(k=>Math.abs(k[1]-cur[0])<1e-9);const kt=ease((t-(since?since[0]:0)+0.5)/0.6);
+  const v1=1-ease((t-20.6)/0.8), v3=ease((t-33)/0.6), v2=1-v1-v3;
+  const [m,dm]=md(d);
+  let html=`<div class="top"><h1>Вся история Вселенной<br>за <span class="blue">1 год</span></h1><p>13,8 миллиарда лет сжали в один календарь</p></div>`;
+  if(v1>0){html+=`<div class="grid" style="grid-template-columns:repeat(3,1fr);opacity:${v1}">`+MN.map((n,i)=>{
+      const f=i<m?1:i>m?0:dm/ML[i];
+      const dots=E.filter(e=>e[0]<=d&&md(e[0])[0]===i).map(e=>`<b class="dot" style="left:${Math.max(8,Math.min(92,md(e[0])[1]/ML[i]*100))}%;background:${e[3]}"></b>`).join('');
+      return `<div class="m ${i<m?'done':i==m?'cur':''}"><i style="width:${f*100}%"></i><span>${n}</span>${dots}</div>`}).join('')+`</div>`}
+  if(v2>0.001){const dd=d-334;html+=`<div class="grid" style="grid-template-columns:repeat(7,1fr);gap:14px;opacity:${v2}">`+Array.from({length:31},(_,i)=>{
+      const ev=E.find(e=>e[0]<=d&&e[0]>=334+i&&e[0]<335+i);
+      return `<div class="d ${i<Math.floor(dd)?'done':i==Math.floor(dd)?'cur':''} ${ev?'evd':''}" style="${ev?'--c:'+ev[3]:''}">${i+1}</div>`}).join('')+`</div>`}
+  if(v3>0){const s=Math.min(SPD-1,Math.floor((d-364)*SPD));const f=Math.max(0,d-364);
+    html+=`<div class="clock" style="opacity:${v3}"><div class="day">31 декабря</div><div class="t">${p2(Math.floor(s/3600))}:${p2(Math.floor(s%3600/60))}:${p2(s%60)}</div></div>
+    <div class="track" style="opacity:${v3}"><i style="width:${Math.max(3,f*100)}%"></i></div>
+    <div class="tl" style="left:90px;opacity:${v3}">00:00</div><div class="tl" style="left:510px;opacity:${v3}">12:00</div><div class="tl" style="right:90px;opacity:${v3}">24:00</div>`}
+  if(v3<1){html+=`<div class="date" style="opacity:${1-v3}">${Math.floor(dm)+1} ${MG[m]}</div>`}
+  html+=`<div class="ev" style="opacity:${kt};transform:translateY(${(1-kt)*30}px)"><b style="color:${cur[3]}">${cur[1]}</b><span>${cur[2]}</span></div>
+  <div class="src">Космический календарь Карла Сагана, 1977. Даты по современным оценкам</div>`;
+  const fin=t>45.4?ease((t-45.4)/0.5):0;
+  if(fin)html+=`<div class="fin" style="opacity:${fin}"><h2>Вся история людей<br>за <span class="blue">12 секунд</span></h2><p>Первая письменность появилась<br>31 декабря в 23:59:48</p><p>Одна секунда = 437 лет</p><p style="font-size:42px;color:#8E94AC;opacity:${ease((t-47)/0.5)}">Сколько секунд длится ваша жизнь?<br>Пишите в комментариях</p></div>`;
+  root.innerHTML=html;
+};
+seek(0);
+</script></body></html>

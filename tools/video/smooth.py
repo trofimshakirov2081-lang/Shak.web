@@ -11,7 +11,7 @@ def pchip(y, n_per):
 def smooth_cfg(src, dst, n_per=30):
     C = json.load(open(src)); Y = C["labels"]
     C["values"] = {k: pchip(v, n_per).tolist() for k, v in C["values"].items()}
-    C["total"] = pchip(C["total"], n_per).tolist()
+    if C.get("total"): C["total"] = pchip(C["total"], n_per).tolist()
     C["labels"] = [Y[min((i + n_per // 2) // n_per, len(Y) - 1)] for i in range((len(Y) - 1) * n_per + 1)]
     C["fps_step"] = 1; json.dump(C, open(dst, "w"), ensure_ascii=False)
 if __name__ == "__main__": smooth_cfg(sys.argv[1], sys.argv[2])
