@@ -83,6 +83,7 @@ for n in range(N):
         fl = FLAGS.get(k); name = C["names"][k]
         if fl is not None: fl = fl.copy(); fl.thumbnail((84, 56))
         fw = fl.width if fl is not None else 0
+        if r > TOP - 0.75: continue
         if w > d.textlength(name, font=FN) + fw + 70:
             if fl is not None: im.paste(fl, (int(X0 + 18), int(y + (BAR_H - fl.height) / 2)), fl)
             d.text((X0 + 32 + fw, y + BAR_H / 2), name, font=FN, fill=(12, 14, 20), anchor="lm")

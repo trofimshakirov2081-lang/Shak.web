@@ -11,3 +11,4 @@
 - 13.11: `cfg_social.json` соцсети 2004-2025 (гонка без флагов и без строки «всего»: `total: null`), `universe.html` Вселенная за 1 год (календарь Сагана), `test2.html` тест, часть 2 (расширенный тест Топлак 2014).
 - Шрифты: raw.githubusercontent.com/google/fonts/main/ofl/akt/Akt%5Bwght%5D.ttf и ofl/finlandica/Finlandica%5Bwght%5D.ttf, сохранить как Akt.ttf и Finlandica.ttf.
 - Сборка: `ffmpeg -framerate 30 -i кадры/f%05d.jpg -i m.wav -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -shortest out.mp4`
+- 14.11: `cfg_companies.json` самые дорогие компании 2000-2025 (флаги us, cn, ru, sa), `users100m.html` кто быстрее набрал 100 млн пользователей, `test3.html` тест на внимательность.
