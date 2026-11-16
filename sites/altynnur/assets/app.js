@@ -25,8 +25,9 @@
   // фото: две ширины, ленивая загрузка ниже первого экрана, проявление маской
   const ph = (src, alt, o = {}) => `<div class="ph${o.reveal === false ? "" : " rv"}${o.cls ? " " + o.cls : ""}"${o.style ? ` style="${o.style}"` : ""}>
     <img src="${R}${src}-1280.webp" srcset="${R}${src}-640.webp 640w, ${R}${src}-1280.webp 1280w${o.big ? `, ${R}${src}-1600.webp 1600w` : ""}" sizes="${o.sizes || "(max-width: 760px) 100vw, 50vw"}" alt="${esc(alt)}" ${o.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
-    ${o.cap && S.preview ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
+    ${o.cap && S.preview && !REAL(src) ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
   const ILL = "Иллюстрация";
+  const REAL = (src) => /(^|\/)r-/.test(src || "");  // настоящие фото АлтынНур: ph/r-*, без подписи «Иллюстрация»
   const crumbs = (items) => `<button class="back" data-back type="button"><i aria-hidden="true"></i>Назад</button><nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
 
   /* ---------- цвет и шрифт: ?theme= и ?font=, затем выбор посетителя, затем значения по умолчанию из данных ---------- */
@@ -97,7 +98,7 @@
   const H = {};
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   H.hero = () => `<section class="hero">
-      <div class="hero__ph"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 55vw" alt="${esc(S.hero.alt)}" fetchpriority="high">${S.preview ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
+      <div class="hero__ph"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 55vw" alt="${esc(S.hero.alt)}" fetchpriority="high">${S.preview && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
       <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
     </section>`;
