@@ -216,7 +216,7 @@
     }; drawB();
     return [el("h1", { text: "Главная страница" }), el("p", { class: "sub", text: "Тексты и фото главной. Порядок блоков меняется стрелками." }),
       box("Первый экран", "заголовок и фото", [F.area("Заголовок", S.hero, "title", { max: 160 }), F.area("Короткий текст под заголовком", S.hero, "short", { max: 240 }), F.img("Главное фото", S.hero, "photo", "alt"),
-        el("div", { class: "f" }, el("span", { text: "Ещё фото: показываются по очереди после главного" }), F.list(Array.isArray(S.hero.more) ? S.hero.more : (S.hero.more = []), { title: (it) => it.alt, untitled: "Фото", fields: (it) => [F.img("Фото", it, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" }))], true),
+        el("div", { class: "f" }, el("span", { text: "Ещё два фото: стоят рядом с главным, как альбом" }), F.list(Array.isArray(S.hero.more) ? S.hero.more : (S.hero.more = []), { title: (it) => it.alt, untitled: "Фото", fields: (it) => [F.img("Фото", it, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" }))], true),
       box("Порядок блоков", "что и в каком порядке показывать", [bl]),
       box("Блок записи", null, [F.area("Заголовок", S.enroll, "title", { max: 160 }), F.area("Текст", S.enroll, "text", { max: 400 }), F.img("Фото", S.enroll, "photo", "alt")]),
       box("Фото-сцена «Как мы учим»", null, [F.text("Надпись над заголовком", S.zoom, "kicker"), F.text("Заголовок", S.zoom, "title"), F.img("Главное фото", S.zoom, "main", "alt"),

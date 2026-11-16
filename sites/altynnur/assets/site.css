@@ -620,7 +620,12 @@ img[src*="r-aigul"]{object-position:50% 12%}
 .hero__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(21,20,19,.18),rgba(21,20,19,0) 35%,rgba(21,20,19,.55))}
 [data-theme="night"] .hero__ph img{filter:brightness(.86) saturate(.92) contrast(1.04)}
 @media (max-width:860px){.hero__ph{margin:12px var(--gutter,16px) 0;border-radius:var(--r-l)}}
-/* главный экран: несколько фото сменяются плавно */
-.hero__ph--many .hs{opacity:0;transition:opacity 1.4s var(--ease)}
-.hero__ph--many .hs.on{opacity:1}
-.hero__ph--many .hs:not(:first-child){animation:none}
+/* главный экран: альбом, одно большое фото и два поменьше */
+.hero__ph--album{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr;gap:6px;background:none}
+.hero__ph--album .ha{position:relative;inset:auto;width:100%;height:100%;min-height:0;object-fit:cover;border-radius:calc(var(--r-l) - 8px)}
+.hero__ph--album .ha--1{grid-row:1 / 3}
+.hero__ph--album::after{display:none}
+@media (max-width:860px){.hero__ph--album{aspect-ratio:4/3.6;border-radius:0}}
+.hero__ph--album .ha,.hero__ph--album.par .ha{transform:none!important;animation:fadeUp .9s var(--ease) both;object-position:50% 45%}
+.hero__ph--album .ha--2{animation-delay:.12s}.hero__ph--album .ha--3{animation-delay:.24s}
+@media (min-width:861px){.hero__ph--album{padding:18px 18px 18px 0}}

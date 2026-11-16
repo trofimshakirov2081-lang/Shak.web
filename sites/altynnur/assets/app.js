@@ -2,6 +2,8 @@
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
+  // страховка: если скрипт где-то споткнулся, фото не остаются под заглушкой появления
+  addEventListener("error", () => document.documentElement.classList.remove("js"));
   // просмотр черновика из админки: открывается по ?draft=1 и действует только в этой вкладке
   let DRAFT = false;
   try {
@@ -97,10 +99,10 @@
   /* ---------- блоки главной ---------- */
   const H = {};
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
-  // главный экран: основное фото и дополнительные, сменяются по очереди
+  // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   H.hero = () => `<section class="hero">
-      <div class="hero__ph${heroSlides().length > 1 ? " hero__ph--many" : ""}">${heroSlides().map((h, i) => `<img${i ? ' class="hs"' : ' class="hs on"'} src="${R}${h.src}-1600.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w, ${R}${h.src}-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 55vw" alt="${i ? "" : esc(h.alt)}"${i ? ' aria-hidden="true" decoding="async"' : ' fetchpriority="high"'}>`).join("")}${S.preview && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
+      <div class="hero__ph${heroSlides().length > 2 ? " hero__ph--album" : ""}">${heroSlides().slice(0, 3).map((h, i) => `<img class="ha ha--${i + 1}" src="${R}${h.src}-${i ? 1280 : 1600}.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w${i ? "" : `, ${R}${h.src}-1600.webp 1600w`}" sizes="${i ? "(max-width: 860px) 40vw, 22vw" : "(max-width: 860px) 60vw, 33vw"}" alt="${esc(h.alt)}"${i ? ' decoding="async"' : ' fetchpriority="high"'}>`).join("")}${S.preview && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
       <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
     </section>`;
@@ -443,8 +445,6 @@
     addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
     move();
   }
-  const hs = document.querySelectorAll(".hero__ph .hs");
-  if (hs.length > 1 && !RM) { let hi = 0; setInterval(() => { if (document.hidden) return; hs[hi].classList.remove("on"); hi = (hi + 1) % hs.length; hs[hi].classList.add("on"); }, 4500); }
   const zoom = document.querySelector("section.zoom");
   if (zoom && !RM) {
     const st = zoom.querySelector(".zoom__stick"); let zq = 0;
