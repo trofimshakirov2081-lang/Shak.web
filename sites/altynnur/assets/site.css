@@ -620,3 +620,7 @@ img[src*="r-aigul"]{object-position:50% 12%}
 .hero__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(21,20,19,.18),rgba(21,20,19,0) 35%,rgba(21,20,19,.55))}
 [data-theme="night"] .hero__ph img{filter:brightness(.86) saturate(.92) contrast(1.04)}
 @media (max-width:860px){.hero__ph{margin:12px var(--gutter,16px) 0;border-radius:var(--r-l)}}
+/* главный экран: несколько фото сменяются плавно */
+.hero__ph--many .hs{opacity:0;transition:opacity 1.4s var(--ease)}
+.hero__ph--many .hs.on{opacity:1}
+.hero__ph--many .hs:not(:first-child){animation:none}
