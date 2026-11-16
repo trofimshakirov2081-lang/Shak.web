@@ -612,3 +612,7 @@ section.zoom+section{padding-top:var(--sec)!important}
 .js[data-anim="live"] .is-pop{opacity:1!important;transform:none!important}
 .js[data-anim="live"] .dir:hover,.js[data-anim="live"] .why__p:hover,.js[data-anim="live"] .ctile:hover{transform:translateY(-4px)!important}
 @media (prefers-reduced-motion:reduce){.js[data-anim] .rv-w .w>span{transform:none!important;opacity:1!important;filter:none!important}.js[data-anim] .ph.rv{opacity:1!important}.js[data-anim="live"] .dirs>*,.js[data-anim="live"] .why>*,.js[data-anim="live"] .ctiles>*,.js[data-anim="live"] .masonry>*{opacity:1;transform:none}}
+/* портрет Айгуль: не обрезать лоб */
+img[src*="r-aigul"]{object-position:50% 12%}
+/* «Как мы учим»: текст внизу, чтобы не закрывать лицо на фото */
+.zoom__t{justify-content:flex-end;padding-bottom:clamp(56px,11svh,120px);background:linear-gradient(180deg,transparent 45%,rgba(20,16,14,.55))}
