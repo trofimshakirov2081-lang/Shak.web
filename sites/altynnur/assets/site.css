@@ -10,7 +10,7 @@
   --fs-display:clamp(2.1rem,1.2rem + 4.8vw,6.4rem); --fs-h1:clamp(2.4rem,1.5rem + 3.6vw,4.8rem);
   --fs-h2:clamp(2rem,1.4rem + 2.4vw,3.4rem); --fs-h3:clamp(1.3rem,1.1rem + .7vw,1.75rem);
   --fs-body:clamp(1.02rem,.98rem + .2vw,1.14rem); --fs-small:.88rem;
-  --r:4px; --r-l:10px;
+  --r:14px; --r-l:22px;
   --container:1320px; --gutter:clamp(16px,4vw,56px); --sec:clamp(56px,8vw,130px);
   --ease:cubic-bezier(.22,.68,.18,1);
 }
@@ -616,3 +616,7 @@ section.zoom+section{padding-top:var(--sec)!important}
 img[src*="r-aigul"]{object-position:50% 12%}
 /* «Как мы учим»: текст внизу, чтобы не закрывать лицо на фото */
 .zoom__t{justify-content:flex-end;padding-bottom:clamp(56px,11svh,120px);background:linear-gradient(180deg,transparent 45%,rgba(20,16,14,.55))}
+/* главный экран: фото мягче вписано в тёмную тему */
+.hero__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(21,20,19,.18),rgba(21,20,19,0) 35%,rgba(21,20,19,.55))}
+[data-theme="night"] .hero__ph img{filter:brightness(.86) saturate(.92) contrast(1.04)}
+@media (max-width:860px){.hero__ph{margin:12px var(--gutter,16px) 0;border-radius:var(--r-l)}}
