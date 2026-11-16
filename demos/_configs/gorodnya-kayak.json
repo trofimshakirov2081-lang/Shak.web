@@ -1,0 +1,68 @@
+{
+  "slug": "gorodnya-kayak",
+  "name": "GorodnyaTravel",
+  "niche": "prokat",
+  "city": "Городня",
+  "custom": "volna",
+  "tagline": "Сплавы на каяках",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Lunasima",
+    "body": "Akt"
+  },
+  "hero": {
+    "title": "Река, каяк и никакой спешки",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/gorodnya-kayak/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно взять",
+    "catalogText": "Цены за час, на весь день дешевле.",
+    "aboutTitle": "О нас"
+  },
+  "about": "GorodnyaTravel: всё готово к вашему приезду, инструктаж короткий и понятный.",
+  "items": [
+    {
+      "name": "Сплав выходного дня",
+      "price": 6500,
+      "desc": "2 дня, Тверца, с инструктором",
+      "photo": "files/gorodnya-kayak/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Каяк на день",
+      "price": 1500,
+      "desc": "Весло, жилет, гермомешок",
+      "photo": "files/gorodnya-kayak/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прогулка по Волге",
+      "price": 2500,
+      "desc": "3 часа, для новичков",
+      "photo": "files/gorodnya-kayak/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 929 525-91-49",
+    "whatsapp": "79295259149",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 4,
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://gorodnyatravel.orgs.biz/",
+  "contact_lead": "tg:Ramold"
+}

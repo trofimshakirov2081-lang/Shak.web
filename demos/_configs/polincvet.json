@@ -1,0 +1,131 @@
+{
+  "slug": "polincvet",
+  "name": "ПолинЦвет",
+  "niche": "цветы",
+  "city": "Брянск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Брянске",
+  "colors": {
+    "main": "#8E2E5A",
+    "accent": "#F4CFDD",
+    "bg": "#FCF6F9",
+    "text": "#26101C"
+  },
+  "fonts": {
+    "head": "Kurale",
+    "body": "Mulish"
+  },
+  "hero": {
+    "title": "Цветы с доставкой по Брянску и области",
+    "text": "Кенийские розы, диантусы и композиции в шляпных коробках. Средство для продления жизни цветов в подарок.",
+    "cta": "Выбрать букет",
+    "photo": "files/polincvet/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "ПолинЦвет: служба доставки цветов в Брянске и области. Соберём букет по вашему желанию и учтём все пожелания.",
+  "features": [
+    {
+      "icon": "🎁",
+      "title": "Подкормка в подарок",
+      "text": "Цветы простоят дольше."
+    },
+    {
+      "icon": "🚚",
+      "title": "Брянск и область",
+      "text": "Доставка по договорённости."
+    },
+    {
+      "icon": "💐",
+      "title": "По вашему желанию",
+      "text": "Соберём любой букет."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букеты из гипсофилы",
+      "price": 3000,
+      "desc": "Лёгкие и воздушные",
+      "photo": "files/polincvet/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букеты из диантусов",
+      "price": 2500,
+      "desc": "Яркие и нежные",
+      "photo": "files/polincvet/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шляпная коробка",
+      "price": 3000,
+      "desc": "Эстетичная композиция",
+      "photo": "files/polincvet/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в сумочке",
+      "price": 1800,
+      "desc": "Мини-сумочка с цветами",
+      "photo": "files/polincvet/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кенийские розы",
+      "price": 3500,
+      "desc": "40-50 см",
+      "photo": "files/polincvet/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Белые розы",
+      "price": 5000,
+      "desc": "Шикарный букет",
+      "photo": "files/polincvet/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Красные розы",
+      "price": 5000,
+      "desc": "Символ любви",
+      "tag": "",
+      "photo": "files/polincvet/item-7.jpg"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 4500,
+      "desc": "По вашему желанию",
+      "photo": "files/polincvet/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 953 275-66-75",
+    "whatsapp": "79532756675",
+    "address": "ул. 22 Съезда КПСС, 74",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "коробк|сумоч"
+      ]
+    ],
+    "vars": {
+      "soft": "#F3E3EB",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://polincvet32.orgs.biz/"
+}

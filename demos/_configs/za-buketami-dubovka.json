@@ -1,0 +1,135 @@
+{
+  "slug": "za-buketami-dubovka",
+  "name": "За букетами",
+  "niche": "цветы",
+  "city": "Дубовка",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#E0673F",
+    "accent": "#FFD9C2",
+    "bg": "#FFF6F0",
+    "text": "#2A1712"
+  },
+  "fonts": {
+    "head": "Raleway",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Свежие цветы и букеты под ваш повод",
+    "text": "Выберите букет и отправьте заказ в WhatsApp. Пришлём фото перед доставкой.",
+    "cta": "Выбрать букет",
+    "photo": "files/za-buketami-dubovka/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "За букетами: цветы в Дубовке. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Дубовке к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет яркий",
+      "price": 3400,
+      "desc": "Состав букета может немного менять при заказе",
+      "photo": "files/za-buketami-dubovka/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет счастья",
+      "price": 3600,
+      "desc": "Соберем букет под ваши предпочтения * состав букета может…",
+      "photo": "files/za-buketami-dubovka/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный букет",
+      "price": 2800,
+      "desc": "Объемный букет, состав: кустовая хризантема, кустовая роза,…",
+      "photo": "files/za-buketami-dubovka/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет гигант из кустовой хризантемы (ромаш",
+      "price": 9200,
+      "desc": "Букет из 45 хризантем, количество можно менять",
+      "photo": "files/za-buketami-dubovka/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция Мах",
+      "price": 3500,
+      "desc": "Внимание состав цветка может измениться !",
+      "photo": "files/za-buketami-dubovka/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет в бежево-розовых оттенках",
+      "price": 3700,
+      "desc": "♥️",
+      "photo": "files/za-buketami-dubovka/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет",
+      "price": 3300,
+      "desc": "Наполнение можно изменить",
+      "photo": "files/za-buketami-dubovka/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто торт-букет",
+      "price": 800,
+      "desc": "Без свечей -800 Со свечами -1000",
+      "photo": "files/za-buketami-dubovka/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 995 026-74-84",
+    "whatsapp": "79950267484",
+    "address": "ул. Республиканская",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#FBE6DA",
+      "ok": "#3F7D58"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club231303190.orgs.biz/",
+  "vk_lead": "https://vk.me/club231303190"
+}

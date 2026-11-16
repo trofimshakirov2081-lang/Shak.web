@@ -1,0 +1,77 @@
+{
+  "slug": "sfera-na-dache",
+  "name": "Сфера на даче",
+  "niche": "otdyh",
+  "city": "Ленинградская область",
+  "custom": "tropa",
+  "tagline": "Загородный отдых",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Тишина, лес и тёплый дом",
+    "text": "Выберите даты и домик: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/sfera-na-dache/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Домики",
+    "catalogText": "Цена за ночь для всего домика, в пятницу и субботу чуть выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Сфера на даче: место, где можно выдохнуть. Домики, баня и природа рядом, а бронь занимает минуту.",
+  "items": [
+    {
+      "name": "Проживание Выходные",
+      "price": 7500,
+      "desc": "Проживание в сфере в выходные 7500 руб - цена указана за…",
+      "photo": "files/sfera-na-dache/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Проживание Будни",
+      "price": 6500,
+      "desc": "Проживание в сфере в будни 6500 руб - цена указана за…",
+      "photo": "files/sfera-na-dache/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Банька",
+      "price": 2000,
+      "desc": "Банька расположена у сферы#1 и относится индивидуально к…",
+      "photo": "files/sfera-na-dache/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Банный чан",
+      "price": 6000,
+      "desc": "Банный чан располагается между сферами и огорожен…",
+      "photo": "files/sfera-na-dache/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 781-79-78",
+    "whatsapp": "79217817978",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Домик",
+    "weekend": 15,
+    "ticketNote": "Оплата при заезде, бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://sfera-na-dache.orgs.biz/",
+  "contact_lead": "tg:sfera_na_dache"
+}

@@ -1,0 +1,74 @@
+{
+  "slug": "mir-gimnastiki",
+  "name": "Мир гимнастики",
+  "niche": "sport",
+  "city": "Самара",
+  "custom": "start",
+  "tagline": "Школа гимнастики",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Гибкость и смелость с трёх лет",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/mir-gimnastiki/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Мир гимнастики: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Малыши 3-5 лет",
+      "price": 4000,
+      "desc": "Гибкость и координация",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Дети 6-9 лет",
+      "price": 4500,
+      "desc": "Акробатика и растяжка",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Спортивная группа",
+      "price": 6000,
+      "desc": "Подготовка к соревнованиям",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Взрослые",
+      "price": 4500,
+      "desc": "Гибкость с нуля",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 917 103-53-02",
+    "whatsapp": "79171035302",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club225144233.orgs.biz/",
+  "contact_lead": "em:harmony-nv@yandex.ru"
+}

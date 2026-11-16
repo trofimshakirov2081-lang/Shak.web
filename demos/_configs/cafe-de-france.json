@@ -1,0 +1,128 @@
+{
+  "slug": "cafe-de-france",
+  "name": "Cafe de France",
+  "niche": "кондитерская",
+  "city": "Тула",
+  "custom": "luxe",
+  "tagline": "Кондитерская",
+  "colors": {
+    "main": "#D9B48F",
+    "accent": "#5A2228",
+    "bg": "#2A1215",
+    "text": "#F1E7DA"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Французская кондитерская в центре Тулы",
+    "text": "Торты, эклеры и макаронс по французским рецептам. Закажите заранее и заберите в Гостином Дворе.",
+    "cta": "Смотреть десерты",
+    "photo": "files/cafe-de-france/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Десерты",
+    "catalogText": "Добавляйте в заказ, он уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В заказ"
+  },
+  "about": "Cafe de France: французская кондитерская премиум-класса на первом этаже ТРЦ Гостиный Двор. Готовим торты и пирожные по классическим рецептам.",
+  "features": [
+    {
+      "icon": "🥐",
+      "title": "Французские рецепты",
+      "text": "Классика и сезонные новинки."
+    },
+    {
+      "icon": "🎂",
+      "title": "Торты на заказ",
+      "text": "К любому празднику."
+    },
+    {
+      "icon": "📍",
+      "title": "Центр Тулы",
+      "text": "Советская, 47."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/cafe-de-france/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/cafe-de-france/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/cafe-de-france/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/cafe-de-france/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/cafe-de-france/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/cafe-de-france/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/cafe-de-france/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт с рисунком",
+      "price": 3900,
+      "desc": "Нарисую по вашему фото",
+      "photo": "files/cafe-de-france/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 930 791-22-26",
+    "whatsapp": "79307912226",
+    "address": "ул. Советская, 47, ТРЦ Гостиный Двор",
+    "hours": ""
+  },
+  "extra": {
+    "orderTitle": "Заказать",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "commentHint": "Дата, время и пожелания",
+    "emptyText": "Пока пусто. Выберите позицию.",
+    "heroTitle": "Франция в каждом пирожном",
+    "orderText": "Напишите, какой десерт и к какому дню. Ответим и подтвердим заказ.",
+    "vars": {
+      "deep": "#1F0C0F",
+      "c-surface": "#2A1215"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://cafe-de-france-tula.orgs.biz/",
+  "email": "cafe.defrance.tula@gmail.com"
+}

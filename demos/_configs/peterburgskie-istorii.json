@@ -1,0 +1,75 @@
+{
+  "slug": "peterburgskie-istorii",
+  "name": "Петербургские истории",
+  "niche": "tury",
+  "city": "Санкт-Петербург",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/peterburgskie-istorii/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Петербургские истории: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Шедевры Эрмитажа (экскурсия в Эрмитаж)",
+      "price": 1850,
+      "desc": "Ваши ребята ещё не бывали в самом большом музее? А может,…",
+      "photo": "files/peterburgskie-istorii/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Царское село (Золотой Екатерининский дворец)",
+      "price": 1680,
+      "desc": "👑Едем в царскую резиденцию! На экскурсии ребята узнают…",
+      "photo": "files/peterburgskie-istorii/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нескучное знакомство с Петропавловской",
+      "price": 1200,
+      "desc": "🐇Где был основан Санкт-Петербург? 🐇Что было на первых…",
+      "photo": "files/peterburgskie-istorii/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Музей ЛЕГО",
+      "price": 2590,
+      "desc": "🤩Возможно, вы не задумывались о том, что в мире…",
+      "photo": "files/peterburgskie-istorii/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 911 102-11-42",
+    "whatsapp": "79111021142",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Санкт-Петербург",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://peterburgskieistorii.orgs.biz/",
+  "contact_lead": "em:peterburgskieistorii@mail.ru"
+}

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Работы shak.web: сайты по стилям</title>
+<meta name="description" content="Сайты с админкой для малого бизнеса: строгие, нежные, тёплые, тёмные и яркие. Смотрите видео прямо на странице.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,500;0,700;1,500&family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #F3F3EF; --ink: #16181D; --mut: #5D636E; --line: #D9DAD3; --blue: #1F6BFF; --card: #FFFFFF; }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 "Ysabeau Office", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { width: min(1180px, 100% - 32px); margin: 0 auto; }
+  h1, h2 { font-family: "Brygada 1918", Georgia, serif; font-weight: 500; letter-spacing: -.01em; margin: 0; }
+
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
+  .brand { font-weight: 700; font-size: 19px; text-decoration: none; min-width: 0; }
+  .brand span { color: var(--blue); }
+  .nav { display: flex; gap: 18px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+  .nav a { text-decoration: none; color: var(--mut); font-weight: 600; font-size: 15px; white-space: nowrap; }
+  .nav a:hover { color: var(--ink); }
+  .cta { margin-left: auto; flex-shrink: 0; background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 10px 16px; border-radius: 12px; white-space: nowrap; }
+  .nav + .cta { margin-left: 0; }
+  @media (max-width: 860px) { .nav { display: none; } }
+
+  .intro { padding: 56px 0 24px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; }
+  .intro h1 { font-size: clamp(40px, 7vw, 84px); line-height: .98; }
+  .intro h1 i { font-style: italic; color: var(--mut); }
+  .intro p { margin: 0; color: var(--mut); font-size: 18px; max-width: 460px; }
+  .intro p b { color: var(--ink); font-weight: 700; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0 8px; }
+  .jump a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; }
+  .jump a i { display: inline-flex; }
+  .jump a i b { width: 10px; height: 10px; border-radius: 50%; margin-right: -3px; border: 1.5px solid var(--card); }
+  @media (max-width: 760px) { .intro { grid-template-columns: 1fr; gap: 16px; padding-top: 32px; } }
+
+  .style { padding: 56px 0 8px; border-top: 1px solid var(--line); margin-top: 40px; scroll-margin-top: 60px; }
+  .style-head { display: grid; grid-template-columns: 1fr auto; gap: 8px 32px; align-items: end; margin-bottom: 28px; }
+  .style h2 { font-size: clamp(32px, 5vw, 56px); line-height: 1; }
+  .style-head p { grid-column: 1; margin: 6px 0 0; color: var(--mut); max-width: 560px; }
+  .swatch { grid-column: 2; grid-row: 1 / span 2; display: flex; border-radius: 14px; overflow: hidden; height: 56px; width: 168px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+  .swatch b { flex: 1; }
+  @media (max-width: 640px) { .style-head { grid-template-columns: 1fr; } .swatch { grid-column: 1; grid-row: auto; height: 14px; width: 100%; border-radius: 7px; margin-top: 10px; } }
+
+  .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px; }
+  @media (max-width: 640px) {
+    .row { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+    .work .live { display: none; }
+    .work h3 { font-size: 16px; margin-top: 10px; }
+    .work .niche { font-size: 13px; }
+    .phone { border-radius: 22px; padding: 5px; } .phone video, .phone img { border-radius: 18px; }
+    .style { padding-top: 30px; margin-top: 24px; }
+    .style-head { margin-bottom: 16px; }
+  }
+  .work { min-width: 0; }
+  .work.wide { grid-column: 1 / -1; max-width: 980px; }
+  .laptop { padding: 0 4%; }
+  .laptop .scr { aspect-ratio: 16 / 10; border-radius: 16px 16px 4px 4px; padding: 1.6% 1.6% 2.2%; background: var(--ink); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 30px 50px -30px rgba(22,24,29,.55); }
+  .laptop video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; background: #0E0B09; }
+  .laptop .base { height: 14px; margin: 0 -4%; border-radius: 0 0 14px 14px; background: linear-gradient(#cfd2d8, #9a9ea7); position: relative; }
+  .laptop .base::before { content: ""; position: absolute; left: 50%; top: 0; width: 16%; height: 5px; transform: translateX(-50%); border-radius: 0 0 6px 6px; background: #8a8e96; }
+  .phone { position: relative; aspect-ratio: 390 / 844; border-radius: 30px; padding: 7px; background: var(--ink); box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 24px 40px -24px rgba(22,24,29,.5); }
+  .phone video, .phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 24px; background: #2a2c31; }
+  .work h3 { margin: 16px 0 2px; font: 700 18px/1.3 "Ysabeau Office", sans-serif; }
+  .work .niche { margin: 0; color: var(--mut); font-size: 15px; }
+  .work .live { margin: 8px 0 10px; font-size: 15px; line-height: 1.45; }
+  .work a.open { font-weight: 700; font-size: 15px; color: var(--blue); text-decoration: none; border-bottom: 1.5px solid currentColor; }
+
+  .end { margin: 72px 0 0; padding: 56px 0 64px; background: var(--ink); color: #fff; }
+  .end .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; }
+  .end h2 { font-size: clamp(30px, 4.6vw, 50px); line-height: 1.05; }
+  .end p { margin: 0 0 18px; color: #C8CCD4; }
+  .end .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .end .btns a { text-decoration: none; font-weight: 700; padding: 14px 20px; border-radius: 14px; background: #fff; color: var(--ink); }
+  .end .btns a + a { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); }
+  .note { font-size: 14px; color: #9AA0AB; margin-top: 18px; }
+  @media (max-width: 760px) { .end .wrap { grid-template-columns: 1fr; } }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  .fx { padding: 10px 0 40px; }
+  .fx h2, .usual h2 { font-size: clamp(30px, 4.5vw, 44px); margin: 18px 0 6px; }
+  .fx > p, .usual > p { color: var(--mut); max-width: 640px; margin: 0 0 22px; }
+  .fxg { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 22px; }
+  .fxc { text-decoration: none; color: inherit; }
+  .fxc .im { aspect-ratio: 1/2; border-radius: 24px; overflow: hidden; border: 7px solid var(--ink); background: #000; }
+  .fxc img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .fxc b { display: block; font-family: "Brygada 1918", Georgia, serif; font-weight: 500; font-size: 20px; margin-top: 10px; }
+  .fxc small { color: var(--blue); font-weight: 700; font-size: 13px; }
+  .fxc span { display: block; color: var(--mut); font-size: 14px; line-height: 1.45; margin-top: 2px; }
+  .fxall { display: inline-block; margin-top: 22px; padding: 12px 20px; border-radius: 99px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; }
+  .usual { border-top: 1px solid var(--line); margin-top: 10px; }
+
+  .fxg { display: grid; }
+  .fxw .phone { position: relative; cursor: pointer; }
+  .play { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(22,24,29,.85); color: #fff; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 99px; pointer-events: none; }
+  .lb { position: fixed; inset: 0; z-index: 100; background: rgba(12,13,16,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 14px; }
+  .lb.on { display: flex; }
+  .lb .fr { position: relative; width: min(420px, 100%); height: min(860px, calc(100% - 56px)); margin-top: 56px; background: #fff; border-radius: 28px; overflow: visible; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: lbin .35s cubic-bezier(.2,.9,.2,1); }
+  .lb.wide .fr { width: min(1180px, 100%); }
+  .lb video#lbv { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; border-radius: 28px; background: #0E0B09; transition: opacity .5s; z-index: 1; }
+  .lb video#lbv.gone { opacity: 0; pointer-events: none; }
+  .lbload { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2; background: rgba(22,24,29,.85); color: #fff; font-size: 13px; font-weight: 700; padding: 8px 14px; border-radius: 99px; transition: opacity .4s; white-space: nowrap; }
+  .lbload.gone { opacity: 0; }
+  .work video { cursor: pointer; }
+  .lb iframe { width: 100%; height: 100%; border: 0; display: block; border-radius: 28px; background:#fff; }
+  .lb .x { position: absolute; top: -52px; right: 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #16181D; color: #fff; font-size: 20px; cursor: pointer; }
+  .lb .full { position: absolute; top: -52px; right: 48px; z-index: 2; height: 40px; padding: 0 14px; border-radius: 99px; background: #fff; color: #16181D; font-size: 13px; font-weight: 700; display: flex; align-items: center; text-decoration: none; box-shadow: 0 0 0 1px #ddd; }
+  @keyframes lbin { from { transform: translateY(24px) scale(.97); opacity: 0; } }
+  .jump button { font: 600 15px "Ysabeau Office", sans-serif; padding: 8px 14px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink); }
+  .jump button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .jump { position: sticky; top: 56px; z-index: 9; background: var(--paper); padding: 10px 16px; }
+  @media (max-width: 640px) { .jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0; width: 100%; box-sizing: border-box; max-width: 100vw; } .jump::-webkit-scrollbar { display: none; } .jump button { flex: none; } }
+  .style.hid { display: none; }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="../">shak<span>.</span>web</a>
+  <nav class="nav" aria-label="Стили" id="nav"></nav>
+  <a class="cta" href="../brief/?from=raboty">Собрать свой сайт</a>
+</div></header>
+
+<main>
+  <div class="wrap intro">
+    <h1>Сайты, разные <i>как сами бизнесы</i></h1>
+    <p>Видео сняты прямо с экрана: так сайт увидит ваш клиент. В каждом есть <b>админка</b>, цены, фото и тексты владелец меняет сам.</p>
+  </div>
+  <div class="wrap jump" id="jump"></div>
+  <div id="styles"></div>
+</main>
+
+<section class="end"><div class="wrap">
+  <div>
+    <h2>Сделаю так же под ваш бизнес</h2>
+  </div>
+  <div>
+    <p>Выберите стиль, который ближе, или пройдите бриф: за 10 минут соберёте свой сайт и получите скидку. Срок 7-14 дней, оплата после того, как сайт вас устроит.</p>
+    <div class="btns">
+      <a href="../brief/?from=raboty">Пройти бриф</a>
+      <a href="https://t.me/SHAKIROVtrofim">Написать в Telegram</a>
+    </div>
+    <p class="note">Это демо, которые я собрал для реальных бизнесов, чтобы показать, каким может быть их сайт. Ваш будет своим, под ваши задачи и ТЗ.</p>
+  </div>
+</div></section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Сайт в окне"><div class="fr"><button class="x" id="lbx" aria-label="Закрыть">✕</button><a class="full" id="lbf" target="_blank" rel="noopener">На весь экран</a><iframe id="lbi" title="Сайт"></iframe><video id="lbv" muted loop playsinline aria-hidden="true"></video><span class="lbload" id="lbl">Загружаю сайт…</span></div></div>
+<script>
+var STYLES = [
+  { id: "kino", name: "Анимированные", wide: true, sw: ["#FF4F7B", "#FFD84A", "#0E0B09", "#C27A45"],
+    text: "Сайты, которые двигаются: глазурь стекает, пончики летят в коробку, зерно жарится при прокрутке. Для бизнеса, которому важно запомниться с первого экрана.",
+    works: [
+      ["glazur-ponchiki", "Глазурь", "Пончиковая, концепт", "Глазурь стекает по экрану, вкусы сами летят в коробку, которую собираете пальцем. Яркий стиль с наклейками, как у модных брендов."],
+      ["med-obzharka", "Медь", "Обжарка кофе, концепт", "Листаете, и зерно прожаривается на глазах: темнеет, температура растёт от 165 до 228 градусов, этапы обжарки переключаются."],
+      ["zerkalo-detailing", "Зеркало", "Детейлинг, концепт", "Заставка со счётчиком, название улетает в шапку, кадры процесса сменяются шторками, блеск растёт от 0 до 100% по полосе «до / после»."]
+    ] },
+  { id: "novye", name: "Новые 2026", sw: ["#FFFFFF", "#1D1D1F", "#6F7BF7", "#F2A541"],
+    text: "Сайты в стиле лучших мировых лендингов. В каждом живая деталь: чек печатается, расписание заполняется само, услуги складываются в панель записи.",
+    works: [
+      ["novye-utro", "Утро", "Кофейня, Казань", "Заказ печатается чеком, кнопка перетекает за пальцем, живая карточка «что сейчас в кофейне».", "../sites/novye/utro/"],
+      ["novye-brat", "Брат", "Барбершоп, Казань", "Расписание заполняется на глазах, бегущая строка свободных окон, шторка с Telegram-ботом.", "../sites/novye/brat/"],
+      ["novye-iris", "Ирис", "Студия красоты, Казань", "Лента мастеров с поиском, услуги складываются в панель записи, как окна в док.", "../sites/novye/iris/"],
+      ["novye-svet", "Свет", "Фотограф, Казань", "Мягкий градиент на первом экране, человечек ведёт по работам, цены в виде газеты.", "../sites/novye/svet/"]
+    ] },
+  { id: "strogie", name: "Строгие и лаконичные", sw: ["#EDE6DA", "#1C1410", "#3D5A80", "#F2F0EA"],
+    text: "Много воздуха, крупный шрифт, ничего лишнего. Подходит кофейням, производству, архитектуре: всем, кто продаёт качество, а не скидки.",
+    works: [
+      ["galant", "Галант", "Кофейня, Курск", "Меню по вкладкам, заказ сразу в WhatsApp, фото растёт на весь экран при прокрутке."],
+      ["starkwood", "Starkwood", "Дома и бани, Москва", "Живой чертёж: двигаете площадь и материал, дом перерисовывается, цена считается сразу."]
+    ] },
+  { id: "nezhnye", name: "Светлые и нежные", sw: ["#FBF6F3", "#F4D3CC", "#E4DDF4", "#B4566E"],
+    text: "Пастель, мягкие формы, крупные фото товара. Для цветов, кондитерских и красоты, где покупают глазами.",
+    works: [
+      ["you-bloom", "You Bloom", "Цветы, Москва", "Букеты листаются пальцем, фильтр по видам, корзина с заказом в WhatsApp."],
+      ["milano-kzn", "Milano", "Студия красоты, Казань", "Услуги карточками, которые наслаиваются при прокрутке, запись в пару касаний."],
+      ["yummy-cake", "Yummy Cake", "Кондитерская, Ульяновск", "Плитки разного цвета, десерты добавляются в заказ, корзина подпрыгивает."]
+    ] },
+  { id: "teplye", name: "Природные и тёплые", sw: ["#F2EFE6", "#24352B", "#D9692E", "#9DB7B5"],
+    text: "Живые фото, бумажные фактуры, тёплые цвета. Для баз отдыха, гостиниц и туров: сайт продаёт ощущение места.",
+    works: [
+      ["sea-breeze-anapa", "Sea Breeze", "Гостиница, Анапа", "Бронь в виде билета: даты, гости, номер, на корешке сумма за все ночи."],
+      ["dusha-altaya", "Душа Алтая", "Туры, Алтай", "Фон как карта, маршрут прорисовывается при прокрутке, бронь с датой и числом людей."]
+    ] },
+  { id: "temnye", name: "Тёмные и премиальные", sw: ["#1A1614", "#2A1215", "#D9B48F", "#C8773A"],
+    text: "Тёмный фон, свет только на главном, дорогие детали. Для премиальных цветов, детейлинга, бань и всего, где важна атмосфера.",
+    works: [
+      ["the-rose", "The Rose", "Цветы, Уфа", "Букеты в арках, как в витрине, остальные позиции списком, как карта в ресторане."],
+      ["one-design", "One Design", "Детейлинг, Самара", "Шторка «до / после» тянется пальцем, цены пересчитываются от класса машины."],
+      ["urman-kazan", "Урман", "Баня, Казань", "Бронь по часам: зал, день, время (занятое зачёркнуто), допы вроде веника и чана."]
+    ] },
+  { id: "yarkie", name: "Яркие и энергичные", sw: ["#2B44D6", "#D7442E", "#FF6B35", "#2EC4B6"],
+    text: "Смелый цвет, крупный шрифт, движение. Для спорта, проката и событий: сайт должен заряжать с первого экрана.",
+    works: [
+      ["ski-life", "SKI-LIFE", "Горнолыжная школа, Санкт-Петербург", "Первый экран размечен как трасса, расписание по дням, запись на пробное."],
+      ["sup-anapa", "Go SUP", "Прокат сапов, Анапа", "Живая волна, снаряжение на бирках, переключатель «час / весь день» и цена сразу."]
+    ] }
+];
+function e(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function dots(sw) { return "<i>" + sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</i>"; }
+document.getElementById("nav").innerHTML = STYLES.map(function (s) { return '<a href="#' + s.id + '">' + e(s.name.split(" ")[0]) + "</a>"; }).join("");
+document.getElementById("jump").innerHTML = '<button class="on" data-f="all">Все</button>' + STYLES.map(function (s) { return '<button data-f="' + s.id + '">' + dots(s.sw) + e(s.name) + "</button>"; }).join("");
+document.getElementById("jump").addEventListener("click", function (ev) { var b = ev.target.closest("button"); if (!b) return; var f = b.getAttribute("data-f");
+  document.querySelectorAll("#jump button").forEach(function (x) { x.classList.toggle("on", x === b); });
+  document.querySelectorAll(".style").forEach(function (sec) { sec.classList.toggle("hid", f !== "all" && sec.id !== f); });
+  var j = document.getElementById("jump"); scrollTo({ top: j.offsetTop - 60, behavior: "smooth" }); });
+document.getElementById("styles").innerHTML = STYLES.map(function (s) {
+  return '<section class="style wrap" id="' + s.id + '"><div class="style-head"><h2>' + e(s.name) + '</h2><div class="swatch" aria-hidden="true">' +
+    s.sw.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join("") + "</div><p>" + e(s.text) + '</p></div><div class="row">' +
+    s.works.map(function (w) {
+      var url = w[4] || ("../demos/" + w[0] + "/");
+      if (s.wide) return '<article class="work wide"><div class="laptop"><div class="scr"><video muted loop playsinline autoplay preload="auto" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div><div class="base"></div></div>' +
+        "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
+      return '<article class="work"><div class="phone"><video muted loop playsinline autoplay preload="auto" poster="v/' + w[0] + '.jpg" aria-label="Видео сайта ' + e(w[1]) + '"><source src="v/' + w[0] + '.mp4" type="video/mp4"></video></div>' +
+        "<h3>" + e(w[1]) + '</h3><p class="niche">' + e(w[2]) + '</p><p class="live">' + e(w[3]) + '</p><a class="open" href="' + url + '">Открыть сайт</a></article>';
+    }).join("") + "</div></section>";
+}).join("");
+// Все видео играют сразу и по кругу
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var vids = [].slice.call(document.querySelectorAll(".work video"));
+function playAll() { vids.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
+if (reduce) vids.forEach(function (v) { v.removeAttribute("autoplay"); v.controls = true; }); else { playAll(); addEventListener("touchstart", playAll, { once: true, passive: true }); }
+
+// Сайт открывается прямо здесь. Пока он грузится, в окне уже идёт его видео
+var lb = document.getElementById("lb"), lbi = document.getElementById("lbi"), lbv = document.getElementById("lbv"), lbl = document.getElementById("lbl"), cur = "", hideT;
+function reveal() { clearTimeout(hideT); hideT = setTimeout(function () { lbv.classList.add("gone"); lbl.classList.add("gone"); lbv.pause(); }, 900); }
+lbi.addEventListener("load", function () { if (lbi.src !== "about:blank" && lb.classList.contains("on")) reveal(); });
+function openLb(u, wide, vsrc, poster) {
+  document.getElementById("lbf").href = u; lb.classList.toggle("wide", !!wide); lb.classList.add("on"); document.body.style.overflow = "hidden";
+  if (cur === u) return;                       // тот же сайт: уже загружен, не грузим заново
+  cur = u; clearTimeout(hideT);
+  if (vsrc) { lbv.poster = poster || ""; lbv.src = vsrc; lbv.classList.remove("gone"); lbl.classList.remove("gone"); var p = lbv.play(); if (p && p.catch) p.catch(function () {}); }
+  else { lbv.classList.add("gone"); lbl.classList.add("gone"); }
+  lbi.src = u;
+}
+function closeLb() { lb.classList.remove("on"); document.body.style.overflow = ""; }
+document.getElementById("lbx").onclick = closeLb;
+lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
+addEventListener("keydown", function (ev) { if (ev.key === "Escape") closeLb(); });
+document.addEventListener("click", function (ev) {
+  var w = ev.target.closest(".work"), a = ev.target.closest("a.open"), onVid = ev.target.closest(".phone, .laptop");
+  if (w && (a || onVid)) {
+    ev.preventDefault();
+    var link = w.querySelector("a.open"), v = w.querySelector("video");
+    openLb(link.getAttribute("href"), !!w.classList.contains("wide") && innerWidth > 700, v && v.querySelector("source").getAttribute("src"), v && v.poster);
+  }
+});
+</script>
+</body>
+</html>

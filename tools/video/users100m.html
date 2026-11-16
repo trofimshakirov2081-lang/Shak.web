@@ -1,0 +1,43 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+@font-face{font-family:Akt;src:url(Akt.ttf);font-weight:100 900}@font-face{font-family:Fin;src:url(Finlandica.ttf);font-weight:100 900}
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#0E1018;color:#F0F2F8;font-family:Fin,sans-serif}
+.top{position:absolute;top:110px;left:60px;right:60px;text-align:center}
+.top h1{font-family:Akt;font-size:70px;line-height:1.1;font-weight:700}
+.top p{font-size:40px;color:#8E94AC;margin-top:20px}
+.row{position:absolute;left:70px;right:70px;height:150px}
+.row .n{font-family:Akt;font-size:46px;font-weight:700}
+.row .n small{font-family:Fin;font-size:34px;color:#6A7090;font-weight:500;margin-left:14px}
+.row .b{position:absolute;left:0;top:66px;height:58px;border-radius:14px;background:#2A3150}
+.row .v{position:absolute;top:66px;height:58px;display:flex;align-items:center;font-family:Akt;font-size:44px;font-weight:700;white-space:nowrap}
+.row.hl .b{background:#4C8DFF}.row.hl .v{color:#4C8DFF}
+.fin{position:absolute;inset:0;background:rgba(10,12,18,.985);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.fin h2{font-family:Akt;font-size:100px;line-height:1.05;font-weight:700}
+.fin p{font-size:50px;color:#C9CEDF;margin-top:44px;line-height:1.3}
+.blue{color:#4C8DFF}.dim{color:#8E94AC}
+.src{position:absolute;bottom:80px;left:0;right:0;text-align:center;font-size:30px;color:#5E6484}
+</style></head><body><div id="root"></div><script>
+const R=[['Телефон',1876,75,'75 лет'],['Мобильный телефон',1983,16,'16 лет'],['Интернет',1990,7,'7 лет'],['Facebook',2004,4.5,'4,5 года'],
+ ['Instagram',2010,2.5,'2,5 года'],['TikTok',2017,0.75,'9 месяцев'],['ChatGPT',2022,2/12,'2 месяца'],['Threads',2023,5/365,'5 дней']];
+const INTRO=3.2,ST=2.5,END0=INTRO+R.length*ST,MAXW=760;
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const root=document.getElementById('root');
+window.DUR=END0+7.5;
+window.seek=function(t){
+  const ki=ease(t/0.6);
+  let h=`<div class="top" style="opacity:${ki}"><h1>Сколько времени нужно,<br>чтобы набрать<br><span class="blue">100 млн</span> пользователей</h1>
+   <p style="opacity:${ease((t-1.2)/0.5)}">Угадайте, кто быстрее всех</p></div>`;
+  R.forEach((r,i)=>{const a=INTRO+i*ST;if(t<a)return;const k=ease((t-a)/0.35),g=ease((t-a-0.3)/1.4);
+    const w=Math.max(10,MAXW*r[2]/75*g),hl=i==R.length-1&&t>a+1.5;
+    h+=`<div class="row ${hl?'hl':''}" style="top:${470+i*165}px;opacity:${k};transform:translateX(${(1-k)*-40}px)">
+      <div class="n">${r[0]}<small>${r[1]}</small></div><div class="b" style="width:${w}px"></div>
+      <div class="v" style="left:${w+22}px;opacity:${ease((t-a-1.2)/0.4)}">${r[3]}</div></div>`});
+  h+=`<div class="src">Данные UBS, Statista и Meta. Сроки примерные</div>`;
+  const f=t>END0+1.2?ease((t-END0-1.2)/0.5):0;
+  if(f)h+=`<div class="fin" style="opacity:${f}"><h2>Телефону нужно было<br><span class="dim">75 лет</span><br><span class="blue">Threads: 5 дней</span></h2>
+    <p style="opacity:${ease((t-END0-2.2)/0.5)}">Новое теперь приходит<br>больше чем в 5 000 раз быстрее</p>
+    <p style="font-size:42px;color:#8E94AC;opacity:${ease((t-END0-3.6)/0.5)}">Что наберёт 100 миллионов следующим?<br>Пишите в комментариях</p></div>`;
+  root.innerHTML=h;
+};
+seek(0);
+</script></body></html>

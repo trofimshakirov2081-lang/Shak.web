@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Брат · барбершоп</title>
+<meta name="description" content="Барбершоп «Брат» в Казани: запись онлайн за 30 секунд, свободные окна видно сразу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15171C;--panel:#1C1F26;--line:#2A2E37;--bone:#E8E4DC;--mut:#8A8F9C;--ind:#6F7BF7;--ind2:#9AA3FF;--ok:#4FD1A5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--bone);font:17px/1.55 'Ysabeau Office',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(21,23,28,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav .w{height:58px;display:flex;align-items:center;gap:26px;font-size:15px;color:var(--mut)}
+.nav b{font-family:'Lunasima';font-size:20px;color:var(--bone);margin-right:auto;letter-spacing:.02em}
+.nav a:hover{color:var(--bone)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--bone);color:#15171C;font-weight:700;padding:9px 16px;border-radius:10px;border:0;cursor:pointer;font:700 15px 'Ysabeau Office',sans-serif}
+.pill.ghost{background:rgba(255,255,255,.06);color:var(--bone);box-shadow:inset 0 0 0 1px var(--line)}
+@media(max-width:640px){.nav .hide{display:none}}
+.hero{position:relative;padding:90px 0 40px;text-align:center;overflow:hidden}
+.glow{position:absolute;left:50%;top:-240px;width:1100px;height:700px;margin-left:-550px;background:radial-gradient(closest-side,rgba(111,123,247,.35),transparent 70%);pointer-events:none}
+.hero h1{position:relative;font-family:'Lunasima';font-weight:700;font-size:clamp(44px,8vw,86px);line-height:1;letter-spacing:-.03em;background:linear-gradient(180deg,#fff 30%,#a9adc0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{position:relative;color:var(--mut);font-size:clamp(18px,2.2vw,21px);max-width:540px;margin:20px auto 0}
+.hero .ctas{position:relative;display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+/* app window with schedule */
+.app{position:relative;margin:56px auto 0;max-width:900px;border-radius:16px;background:linear-gradient(180deg,#1E2129,#181B21);box-shadow:0 0 0 1px var(--line),0 40px 120px rgba(0,0,0,.6),0 0 80px rgba(111,123,247,.15);text-align:left;overflow:hidden}
+.app .tb{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--mut)}
+.app .tb i{width:10px;height:10px;border-radius:50%;background:#3a3f4b}
+.app .tb span{margin-left:8px}
+.app .tb .q{margin-left:auto;background:#22262f;border-radius:8px;padding:5px 10px;font-size:13px;color:#c9cbd6;min-width:200px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+th{color:var(--mut);font-weight:500;text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px}
+td{padding:11px 14px;border-bottom:1px solid #22252d;height:44px}
+td .sk{display:block;height:8px;border-radius:4px;background:#262a33}
+tr.in td{animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(4px)}}
+.st{font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px}
+.st.ok{background:rgba(79,209,165,.12);color:var(--ok)}.st.wait{background:rgba(154,163,255,.14);color:var(--ind2)}
+.av{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;margin-right:8px;color:#15171C;vertical-align:-5px}
+/* ticker */
+.tick{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:80px;overflow:hidden;white-space:nowrap}
+.tick .tr{display:inline-flex;gap:14px;padding:16px 0;animation:mar 30s linear infinite}
+@keyframes mar{to{transform:translateX(-50%)}}
+.slot{display:inline-flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;cursor:pointer;transition:border-color .2s}
+.slot:hover{border-color:var(--ind)}
+.slot b{font-size:16px}.slot small{color:var(--mut)}
+.slot svg{width:70px;height:22px}
+/* features */
+.sec{padding:100px 0}
+.sec h2{font-family:'Lunasima';font-weight:700;font-size:clamp(32px,4.6vw,52px);line-height:1.05;letter-spacing:-.02em;max-width:640px}
+.sec .sub{color:var(--mut);font-size:19px;max-width:560px;margin-top:12px}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.b{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:230px;position:relative;overflow:hidden}
+.b h3{font-size:20px;font-weight:700}
+.b p{color:var(--mut);font-size:15px;margin-top:6px}
+.b .pr{position:absolute;left:22px;bottom:20px;font-family:'Lunasima';font-size:28px;font-weight:700}
+.b.big{grid-column:span 2}
+.b .ln{position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(rgba(111,123,247,.4),transparent 65%)}
+.masters{display:flex;gap:-10px;margin-top:14px}
+.masters span{width:38px;height:38px;border-radius:50%;border:2px solid var(--panel);margin-left:-8px;display:grid;place-items:center;font-weight:700;color:#15171C}
+.masters span:first-child{margin-left:0}
+@media(max-width:760px){.bento{grid-template-columns:1fr}.b.big{grid-column:span 1}}
+/* bottom sheet (inside page, not fixed) */
+.botsec{padding:90px 0 110px;text-align:center}
+.phone{position:relative;width:300px;height:560px;margin:40px auto 0;border-radius:44px;background:#000;padding:11px;box-shadow:0 0 0 1px #333,0 40px 100px rgba(0,0,0,.5)}
+.scr{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#101216;text-align:left}
+.scr .hd{padding:40px 18px 10px;font-weight:700}
+.scr .row{margin:8px 14px;padding:12px;border-radius:14px;background:#1a1d24;font-size:14px;color:var(--mut)}
+.scr .row b{display:block;color:var(--bone)}
+.sheet{position:absolute;left:8px;right:8px;bottom:8px;background:#1f2229;border-radius:26px;padding:16px 18px 18px;transform:translateY(110%);transition:transform .7s cubic-bezier(.2,.9,.2,1.05);box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+.sheet.on{transform:none}
+.blobs{position:relative;height:100px;margin:4px 0 8px}
+.bl{position:absolute;bottom:0;border-radius:46% 46% 40% 40%;display:flex;gap:4px;justify-content:center;padding-top:30%;animation:hop 1.8s ease-in-out infinite}
+.bl:before,.bl:after{content:'';width:5px;height:9px;background:#fff;border-radius:3px}
+@keyframes hop{50%{transform:translateY(-8px)}}
+.sheet h4{font-size:18px;text-align:center}
+.sheet p{color:var(--mut);font-size:13px;text-align:center;margin:6px 0 14px}
+.sheet button{width:100%}
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--mut);font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--ind2);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<nav class="nav"><div class="w"><b>БРАТ</b><a class="hide" href="#slots">Окна</a><a class="hide" href="#prices">Цены</a><a href="#bot">Бот</a><a class="pill" href="#slots">Записаться</a></div></nav>
+
+<header class="hero"><div class="glow"></div><div class="w">
+  <h1>Стрижка без звонков<br>и ожидания</h1>
+  <p>Барбершоп «Брат» на Пушкина, 12. Вся неделя мастеров открыта: выбираете окно и через 30 секунд записаны.</p>
+  <div class="ctas"><a class="pill" href="#slots">Выбрать время</a><a class="pill ghost" href="#prices">Цены</a></div>
+  <div class="app" aria-label="Расписание на субботу">
+    <div class="tb"><i></i><i></i><i></i><span>Расписание</span><div class="q" id="q"></div></div>
+    <div class="tw"><table><thead><tr><th>Клиент</th><th>Услуга</th><th>Мастер</th><th>Время</th><th>Статус</th></tr></thead><tbody id="tb"></tbody></table></div>
+  </div>
+</div></header>
+
+<div class="tick" id="slots" aria-label="Свободные окна сегодня"><div class="tr" id="tr"></div></div>
+
+<section class="sec" id="prices"><div class="w">
+  <h2>Три мастера, понятные цены</h2>
+  <p class="sub">Цены не меняются от того, кто стрижёт. Время указано честно, с мытьём головы.</p>
+  <div class="bento">
+    <div class="b big"><h3>Стрижка + борода</h3><p>Самое популярное. Машинка, ножницы, контур бороды, горячее полотенце.</p><div class="masters"><span style="background:#C9A27C">Т</span><span style="background:#9AA3FF">Р</span><span style="background:#4FD1A5">С</span></div><div class="pr">2 200 ₽</div><div class="ln"></div></div>
+    <div class="b"><h3>Мужская стрижка</h3><p>45 минут.</p><div class="pr">1 400 ₽</div></div>
+    <div class="b"><h3>Отец + сын</h3><p>Две стрижки одновременно, у соседних кресел.</p><div class="pr">2 600 ₽</div></div>
+    <div class="b"><h3>Борода</h3><p>30 минут.</p><div class="pr">900 ₽</div></div>
+    <div class="b"><h3>Королевское бритьё</h3><p>Опасная бритва и два полотенца.</p><div class="pr">2 500 ₽</div></div>
+  </div>
+</div></section>
+
+<section class="botsec" id="bot"><div class="w">
+  <h2 style="margin:0 auto">Бот напомнит о записи</h2>
+  <p class="sub" style="margin:12px auto 0">За день и за два часа. Перенести или отменить можно одной кнопкой в Telegram.</p>
+  <div class="phone"><div class="scr">
+    <div class="hd">Брат</div>
+    <div class="row"><b>Суббота, 11:00</b>Тимур · стрижка + борода</div>
+    <div class="row"><b>Пушкина, 12</b>вход со двора</div>
+    <div class="sheet" id="sheet"><div class="blobs" id="bls"></div><h4>Запись в Telegram</h4><p>Напоминания, перенос и отмена без звонков</p><button class="pill" id="botb">Подключить бота</button></div>
+  </div></div>
+</div></section>
+
+<footer><div class="w"><span>Барбершоп «Брат» · Казань, Пушкина, 12 · 10:00-21:00</span><span>Демо-сайт shak.web</span></div></footer>
+<script>
+const ROWS=[['Илья','Стрижка + борода','Тимур','10:00','#C9A27C','ok'],['Артём','Фейд','Руслан','11:00','#9AA3FF','ok'],['Максим','Отец + сын','Тимур','12:30','#C9A27C','wait'],['Даниил','Борода','Слава','13:00','#4FD1A5','ok'],['Сергей','Стрижка','Руслан','14:00','#9AA3FF','ok'],['Олег','Королевское бритьё','Слава','15:30','#4FD1A5','wait']];
+const tb=document.getElementById('tb'),q=document.getElementById('q');
+function empty(){tb.innerHTML=ROWS.map(()=>`<tr>${[60,80,50,40,45].map(w=>`<td><span class="sk" style="width:${w}%"></span></td>`).join('')}</tr>`).join('')}
+function run(){empty();const t='Покажи записи на субботу';let i=0;q.textContent='';const iv=setInterval(()=>{q.textContent=t.slice(0,++i);if(i>=t.length){clearInterval(iv);ROWS.forEach((r,k)=>setTimeout(()=>{const tr=tb.children[k];tr.className='in';tr.innerHTML=`<td><b>${r[0]}</b></td><td>${r[1]}</td><td><span class="av" style="background:${r[4]}">${r[2][0]}</span>${r[2]}</td><td>${r[3]}</td><td><span class="st ${r[5]}">${r[5]==='ok'?'Подтверждён':'Ждём ответ'}</span></td>`},300+k*220))}},45)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run();io.disconnect()}}),{threshold:.3});io.observe(tb);
+// ticker of free slots
+const S=[['15:00','Тимур',1],['16:30','Руслан',0],['17:00','Слава',1],['18:00','Тимур',1],['19:30','Руслан',0],['20:00','Слава',1]];
+function spark(up){let y=12,d='M0 '+y;for(let x=7;x<=70;x+=7){y=Math.max(3,Math.min(19,y+(Math.random()-.5+(up?-.2:.2))*8));d+=` L${x} ${y.toFixed(1)}`}return `<svg viewBox="0 0 70 22"><path d="${d}" fill="none" stroke="${up?'#4FD1A5':'#9AA3FF'}" stroke-width="1.5"/></svg>`}
+const one=S.map(s=>`<a class="slot" href="#slots"><b>${s[0]}</b><small>${s[1]}</small>${spark(s[2])}<small>${s[2]?'спрос растёт':'свободно'}</small></a>`).join('');
+document.getElementById('tr').innerHTML=one+one;
+// bot sheet
+const C=['#ff7a2e','#ffb020','#4FD1A5','#6F7BF7','#3b82f6','#ec4899','#C9A27C'];
+document.getElementById('bls').innerHTML=C.map((c,i)=>{const s=30+((i*7)%4)*7;return `<div class="bl" style="background:${c};width:${s}px;height:${s}px;left:${8+i*34}px;bottom:${(i%3)*10}px;animation-delay:${i*.15}s"></div>`}).join('');
+const sh=document.getElementById('sheet');new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setTimeout(()=>sh.classList.add('on'),400)}),{threshold:.4}).observe(document.querySelector('.phone'));
+document.getElementById('botb').onclick=e=>{e.target.textContent='Подключено ✓';setTimeout(()=>{sh.classList.remove('on');setTimeout(()=>{e.target.textContent='Подключить бота';sh.classList.add('on')},1400)},900)};
+</script></body></html>

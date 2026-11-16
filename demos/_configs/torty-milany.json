@@ -1,0 +1,130 @@
+{
+  "slug": "torty-milany",
+  "name": "Торты Миланы",
+  "niche": "кондитерская",
+  "city": "Дмитров",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#2D6A4F",
+    "accent": "#FFD6A5",
+    "bg": "#F7FAF5",
+    "text": "#1B2E24"
+  },
+  "fonts": {
+    "head": "Wix Madefor Display",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Торты, которые сначала фотографируют, а потом съедают",
+    "text": "Начинку и надпись напишите в комментарии, я отвечу и всё согласую.",
+    "cta": "Собрать заказ",
+    "photo": "files/torty-milany/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Милана",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Милана, я пеку торты и десерты на заказ в Дмитрове. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Дмитров",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Меренговый рулет",
+      "price": 1900,
+      "desc": "Лёгкая хрустящая меренга ✨ Воздушный крем 🍦 Клубничная…",
+      "photo": "files/torty-milany/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Торты от 2 кг",
+      "price": 2100,
+      "desc": "Бисквитные торты от 2 кг Покрытие крем-чиз от 2100 за кг…",
+      "photo": "files/torty-milany/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки",
+      "price": 200,
+      "desc": "Идут в наборе по 4, 6, 12 капкейков 1 шт - 200 рублей Вкусы…",
+      "photo": "files/torty-milany/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто торты",
+      "price": 1500,
+      "desc": "Небольшие тортики по 400-500 гр (d=10 см) Вкусы : ▪️Сникерс…",
+      "photo": "files/torty-milany/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/torty-milany/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/torty-milany/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/torty-milany/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/torty-milany/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 925 471-36-53",
+    "whatsapp": "79254713653",
+    "address": "ул. Космонавтов",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#F6D6DC",
+      "pist": "#D8EBDD",
+      "butter": "#FFE8C2"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://milana-konditer.orgs.biz/",
+  "telegram_lead": "milanaaaa_05"
+}

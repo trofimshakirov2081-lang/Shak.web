@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ирис · студия красоты</title>
+<meta name="description" content="Студия красоты «Ирис» в Казани: мастера, к которым возвращаются. Запись онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2F1EE;--ink:#151515;--mut:#6A6A6A;--line:#D9D7D1;--peach:#F3B38F;--lilac:#C7B3E6;--sage:#A9C8A0;--rose:#E6A3B7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 'Ysabeau Office',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+.nav .w{display:flex;justify-content:space-between;align-items:center;height:64px;font-size:15px}
+.nav b{font-family:'Bona Nova';font-size:24px;font-weight:400;display:flex;align-items:center;gap:8px}
+.nav b i{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink)}
+.tg{display:flex;background:#e4e2dc;border-radius:99px;padding:3px;font-size:13px}
+.tg button{border:0;background:none;padding:6px 12px;border-radius:99px;cursor:pointer;font:600 13px 'Ysabeau Office'}
+.tg button.on{background:var(--ink);color:#fff}
+.hero{text-align:center;padding:50px 0 0}
+.hero h1{font-family:'Bona Nova';font-weight:400;font-size:clamp(52px,10vw,120px);line-height:.92;letter-spacing:-.025em}
+.hero p{color:var(--mut);margin:16px auto 22px;max-width:460px}
+.search{display:flex;gap:10px;max-width:440px;margin:0 auto;border-bottom:1px solid #bdbab2;padding:8px 2px;align-items:center}
+.search input{flex:1;border:0;background:none;font:17px 'Ysabeau Office';outline:none;color:var(--ink)}
+.search button{width:38px;height:38px;border-radius:50%;border:1px solid #bdbab2;background:#fff;cursor:pointer;font-size:18px}
+.stage{position:relative;height:440px;perspective:1000px;margin-top:10px}
+.haze{position:absolute;left:-10%;top:40px;width:45%;height:340px;border-radius:50%;background:radial-gradient(#7b8f6a,#d9b48f 45%,transparent 70%);filter:blur(46px);opacity:.7;pointer-events:none}
+.c{position:absolute;top:50%;left:50%;width:132px;height:178px;border-radius:6px;padding:9px;box-shadow:0 10px 26px rgba(0,0,0,.12);transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .6s,opacity .6s;cursor:pointer;display:flex;flex-direction:column}
+.c .ph{flex:1;border-radius:3px;display:grid;place-items:center;font:400 46px 'Bona Nova';color:rgba(0,0,0,.5);background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(0,0,0,.06))}
+.c b{font-size:13px;margin-top:6px}.c small{font-size:11px;opacity:.7}
+.c em{position:absolute;top:7px;right:9px;font-size:10px;font-style:normal;opacity:.6}
+.who{text-align:center;min-height:56px;margin-top:-6px}
+.who b{font-family:'Bona Nova';font-size:26px;font-weight:400}.who span{display:block;color:var(--mut);font-size:15px}
+/* services as windows that fold into the dock */
+.sec{padding:90px 0}
+.sec h2{font-family:'Bona Nova';font-weight:400;font-size:clamp(36px,5.5vw,60px);line-height:1;letter-spacing:-.02em}
+.sec .sub{color:var(--mut);max-width:520px;margin-top:10px}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.win{background:#fff;border-radius:14px;box-shadow:0 1px 0 rgba(0,0,0,.05),0 20px 40px -20px rgba(0,0,0,.18);overflow:hidden;transform-origin:50% 100%}
+.win .tb{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid #f0efeb}
+.win .tb i{width:10px;height:10px;border-radius:50%;background:#e2dfd8}
+.win .bd{padding:16px}
+.win .sw{height:90px;border-radius:10px;margin-bottom:12px}
+.win h3{font-family:'Bona Nova';font-weight:400;font-size:24px}
+.win p{color:var(--mut);font-size:14px;margin:2px 0 12px}
+.win .row{display:flex;justify-content:space-between;align-items:center}
+.win .row b{font-size:18px}
+.win button{border:0;background:var(--ink);color:#fff;border-radius:99px;padding:8px 14px;font:600 14px 'Ysabeau Office';cursor:pointer}
+.genie{animation:genie .65s cubic-bezier(.6,0,.4,1) forwards}
+@keyframes genie{45%{clip-path:polygon(0 0,100% 0,64% 100%,36% 100%);transform:translate(var(--dx),calc(var(--dy)*.35)) scaleY(.9)}100%{clip-path:polygon(42% 0,58% 0,52% 100%,48% 100%);transform:translate(var(--dx),var(--dy)) scale(.1,.04);opacity:0}}
+.dockwrap{position:sticky;bottom:16px;display:flex;justify-content:center;margin-top:40px;pointer-events:none;z-index:10}
+.dock{pointer-events:auto;display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.12);min-height:62px}
+.dock .lbl{font-size:14px;color:var(--mut);margin-right:4px}
+.dock .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-family:'Bona Nova';font-size:20px;animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.2)}}
+.dock .go{border:0;background:var(--ink);color:#fff;border-radius:12px;padding:0 14px;height:42px;font:600 14px 'Ysabeau Office';cursor:pointer;margin-left:6px}
+@media(max-width:760px){.svc{grid-template-columns:1fr 1fr}.stage{height:360px}.c{width:110px;height:150px}}
+@media(max-width:480px){.svc{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--mut);font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<nav class="nav"><div class="w"><b><i></i>Ирис</b><div class="tg" role="group" aria-label="Город"><button class="on">Казань</button><button>Иннополис</button></div></div></nav>
+
+<header class="hero"><div class="w">
+  <h1>Мастера,<br>к которым<br>возвращаются</h1>
+  <p>Двенадцать мастеров студии в одной ленте. Найдите своего по имени или по услуге.</p>
+  <div class="search"><input id="q" placeholder="Например: ресницы или Алина" aria-label="Поиск мастера"><button id="go" aria-label="Найти">›</button></div>
+</div>
+<div class="stage" id="st"><div class="haze"></div></div>
+<div class="who" id="who"></div>
+</header>
+
+<section class="sec" id="svc"><div class="w">
+  <h2>Соберите визит</h2>
+  <p class="sub">Нажмите «В запись», и услуга сложится в панель внизу. Когда всё выбрано, отправьте заявку мастеру.</p>
+  <div class="svc" id="svcl"></div>
+  <div class="dockwrap"><div class="dock" id="dock"><span class="lbl" id="dl">Ваш визит пока пуст</span></div></div>
+</div></section>
+
+<footer><div class="w"><span>Студия красоты «Ирис» · Казань, Островского, 21 · 9:00-21:00</span><span>Демо-сайт shak.web</span></div></footer>
+<script>
+const M=[['Алина','маникюр','#F3B38F'],['Ирина','брови','#F0D27A'],['Ксения','стрижки','#A9C8A0'],['Мадина','окрашивание','#E6A3B7'],['Ольга','массаж','#9EC4DA'],['Вера','ресницы','#C7B3E6'],['Диана','макияж','#F2A48A'],['Лейла','педикюр','#B5D6B0'],['Софья','укладки','#F6C98F'],['Наталья','маникюр','#D8B4A0'],['Ева','брови','#A7C7E7'],['Камила','ресницы','#E3B5D0']];
+const st=document.getElementById('st'),who=document.getElementById('who');let focus=5;
+const els=M.map((m,i)=>{const d=document.createElement('div');d.className='c';d.style.background=m[2];d.innerHTML=`<em>№ ${String(i+1).padStart(2,'0')}</em><div class="ph">${m[0][0]}</div><b>${m[0]}</b><small>${m[1]}</small>`;d.onclick=()=>{focus=i;lay();stop()};st.appendChild(d);return d});
+function lay(){const s=innerWidth<600?.7:1;els.forEach((d,i)=>{const k=i-focus;d.style.transform=`translate(-50%,-50%) translate3d(${k*96*s}px,${-k*24*s}px,${-Math.abs(k)*100+(k?0:140)}px) rotateY(${-k*8}deg) scale(${k?1:1.25})`;d.style.zIndex=100-Math.abs(k);d.style.opacity=Math.abs(k)>6?0:1;d.style.filter=k<-1?`blur(${Math.min(6,(-k-1)*2)}px)`:'none'});
+ who.innerHTML=`<b>${M[focus][0]}</b><span>${M[focus][1]} · свободна завтра с 12:00</span>`}
+lay();addEventListener('resize',lay);
+let auto=setInterval(()=>{focus=(focus+1)%M.length;lay()},2600);function stop(){clearInterval(auto)}
+function find(){const v=document.getElementById('q').value.toLowerCase().trim();if(!v)return;const i=M.findIndex(m=>m[0].toLowerCase().includes(v)||m[1].includes(v));stop();if(i>=0){focus=i;lay()}else who.innerHTML='<b>Никого не нашли</b><span>Попробуйте услугу: маникюр, брови, ресницы</span>'}
+document.getElementById('go').onclick=find;document.getElementById('q').onkeydown=e=>{if(e.key==='Enter')find()};
+let sx=0;st.ontouchstart=e=>sx=e.touches[0].clientX;st.ontouchend=e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>30){stop();focus=Math.max(0,Math.min(M.length-1,focus+(dx<0?1:-1)));lay()}};
+// services fold into dock
+const S=[['Маникюр','с покрытием, 1 ч 30 мин',2200,'#F3B38F'],['Брови','коррекция и окрашивание',1400,'#F0D27A'],['Ресницы','наращивание 2D',2800,'#C7B3E6'],['Стрижка','с укладкой',2000,'#A9C8A0'],['Окрашивание','в один тон',4500,'#E6A3B7'],['Массаж','лица, 40 мин',1800,'#9EC4DA']];
+const svcl=document.getElementById('svcl'),dock=document.getElementById('dock'),dl=document.getElementById('dl');let picked=[];
+svcl.innerHTML=S.map((s,i)=>`<div class="win" data-i="${i}"><div class="tb"><i></i><i></i><i></i></div><div class="bd"><div class="sw" style="background:linear-gradient(135deg,${s[3]},#fff)"></div><h3>${s[0]}</h3><p>${s[1]}</p><div class="row"><b>${s[2].toLocaleString('ru-RU')} ₽</b><button>В запись</button></div></div></div>`).join('');
+svcl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const w=b.closest('.win'),i=+w.dataset.i;if(picked.includes(i))return;
+ const r=w.getBoundingClientRect(),d=dock.getBoundingClientRect();w.style.setProperty('--dx',(d.left+d.width/2-(r.left+r.width/2))+'px');w.style.setProperty('--dy',(d.top-(r.top+r.height))+'px');w.classList.add('genie');
+ setTimeout(()=>{picked.push(i);w.style.visibility='hidden';renderDock()},600)});
+function renderDock(){const sum=picked.reduce((s,i)=>s+S[i][2],0);dl.textContent=picked.length?`${sum.toLocaleString('ru-RU')} ₽`:'Ваш визит пока пуст';
+ dock.querySelectorAll('.ic,.go').forEach(n=>n.remove());picked.forEach(i=>{const ic=document.createElement('button');ic.className='ic';ic.style.background=S[i][3];ic.style.border='0';ic.style.cursor='pointer';ic.textContent=S[i][0][0];ic.title='Убрать: '+S[i][0];
+  ic.onclick=()=>{picked=picked.filter(x=>x!==i);const w=svcl.children[i];w.style.visibility='';w.classList.remove('genie');renderDock()};dock.appendChild(ic)});
+ if(picked.length){const g=document.createElement('button');g.className='go';g.textContent='Записаться';g.onclick=()=>{dl.textContent='Заявка отправлена мастеру';dock.querySelectorAll('.ic,.go').forEach(n=>n.remove())};dock.appendChild(g)}}
+document.querySelectorAll('.tg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tg button').forEach(x=>x.classList.toggle('on',x===b))});
+</script></body></html>

@@ -1,0 +1,133 @@
+{
+  "slug": "black-mint",
+  "name": "Black mint",
+  "niche": "брови",
+  "city": "Видное",
+  "custom": "browlash",
+  "tagline": "Студия красоты",
+  "colors": {
+    "main": "#A3794B",
+    "accent": "#EADBC8",
+    "bg": "#F7F2EB",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Уход, после которого хочется вернуться",
+    "text": "Выберите услугу и запишитесь в WhatsApp. Видное.",
+    "cta": "Выбрать услугу",
+    "photo": "files/black-mint/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Популярные услуги",
+    "catalogText": "Отметьте услуги, и заявка уйдёт в WhatsApp. Подберём время.",
+    "aboutTitle": "О студии",
+    "orderTitle": "Ваша запись",
+    "addLabel": "Записаться"
+  },
+  "about": "Black mint: аккуратная работа, стерильность и приятная атмосфера.",
+  "features": [
+    {
+      "icon": "✨",
+      "title": "Опытные мастера",
+      "text": "Аккуратно и качественно."
+    },
+    {
+      "icon": "🧼",
+      "title": "Стерильность",
+      "text": "Одноразовые расходники."
+    },
+    {
+      "icon": "📍",
+      "title": "Видное",
+      "text": "Удобно добираться."
+    }
+  ],
+  "items": [
+    {
+      "name": "Маникюр с покрытием",
+      "price": 2000,
+      "desc": "Аппаратный, гель-лак",
+      "emoji": "💅",
+      "tag": "Хит"
+    },
+    {
+      "name": "Стрижка и укладка",
+      "price": 2500,
+      "desc": "Любая длина",
+      "emoji": "💇‍♀️",
+      "tag": ""
+    },
+    {
+      "name": "Оформление бровей",
+      "price": 1200,
+      "desc": "Коррекция и окрашивание",
+      "emoji": "✨",
+      "tag": ""
+    },
+    {
+      "name": "Ламинирование ресниц",
+      "price": 2200,
+      "desc": "Изгиб на 6-8 недель",
+      "emoji": "👁",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 965 229-70-36",
+    "whatsapp": "79652297036",
+    "address": "ул. Берёзовая, 13",
+    "hours": ""
+  },
+  "extra": {
+    "plainLevels": true,
+    "cards": [
+      [
+        "#2A2018",
+        "#F7F2EB"
+      ],
+      [
+        "#EADBC8",
+        "#2A2018"
+      ],
+      [
+        "#A3794B",
+        "#FFFFFF"
+      ],
+      [
+        "#FFFFFF",
+        "#2A2018"
+      ],
+      [
+        "#CDB08C",
+        "#2A2018"
+      ]
+    ],
+    "services": [
+      "Маникюр",
+      "Стрижки и окрашивание",
+      "Брови",
+      "Ресницы",
+      "Подарочный сертификат"
+    ],
+    "levelDefault": "Услуга",
+    "lines": false,
+    "heroAlt": "Black mint",
+    "cartBtn": "Запись",
+    "svcTitle": "Ещё услуги",
+    "svcLink": "Все услуги",
+    "findText": "Напишите в WhatsApp, подберём удобное время.",
+    "sendLabel": "Отправить запись в WhatsApp",
+    "addedLabel": "Выбрано",
+    "commentHint": "Удобные дата и время",
+    "orderIntro": "Здравствуйте! Хочу записаться:",
+    "emptyText": "Пока ничего не выбрано. Отметьте услугу.",
+    "emptyToast": "Сначала выберите услугу"
+  },
+  "credits": "остальные фото: Pexels, для примера",
+  "source": "https://club120171755.orgs.biz/",
+  "vk_lead": "https://vk.me/club120171755"
+}

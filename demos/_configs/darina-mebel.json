@@ -1,0 +1,73 @@
+{
+  "slug": "darina-mebel",
+  "name": "Дарина Мебель",
+  "niche": "masterskaya",
+  "city": "Волгоград",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Кухня, сделанная под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/darina-mebel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Дарина Мебель: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня в голубых тонах",
+      "price": 139000,
+      "desc": "Изящная кухня на заказ от Дарина мебель 😍 Мягкий оттенок…",
+      "photo": "files/darina-mebel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Угловая кухня с матовыми фасадами Mattelux",
+      "price": 142000,
+      "desc": "Корпус: ЛДСП Egger. 🎨 Диамант серый Фасады: МДФ Mattelux…",
+      "photo": "files/darina-mebel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая",
+      "price": 115000,
+      "desc": "Прихожая на заказ по индивидуальным размерам, выполнена в…",
+      "photo": "files/darina-mebel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Встроенный шкаф",
+      "price": 46000,
+      "desc": "Шкаф встроенный в нишу Фасады МДФ эмаль с фрезеровкой",
+      "photo": "files/darina-mebel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 988 393-93-33",
+    "whatsapp": "79883939333",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://darinameb.orgs.biz/",
+  "contact_lead": "em:designer@darinamebel.ru"
+}

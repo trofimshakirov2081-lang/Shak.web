@@ -1,0 +1,48 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Шторка с ботом</title>
+<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#f3f3f1;min-height:100vh;display:grid;place-items:center;padding:70px 16px 30px}
+.phone{width:300px;height:620px;background:#000;border-radius:46px;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.25),0 0 0 2px #2a2a2a}
+.scr{position:relative;width:100%;height:100%;background:#0b0b0b;border-radius:36px;overflow:hidden;color:#fff}
+.isl{position:absolute;top:10px;left:50%;width:90px;height:26px;margin-left:-45px;background:#000;border-radius:20px;z-index:5}
+.st{display:flex;justify-content:space-between;padding:14px 22px 0;font-size:13px;font-weight:700}
+.app h3{text-align:center;font-size:15px;margin:14px 0 10px}
+.chat{display:flex;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid #1c1c1c}
+.chat i{width:36px;height:36px;border-radius:50%;flex:none}
+.chat b{display:block;font-size:14px}.chat small{color:#888;font-size:12px}
+.sheet{position:absolute;left:8px;right:8px;bottom:8px;background:#1c1c1e;border-radius:28px;padding:16px 18px 18px;transform:translateY(110%);transition:transform .6s cubic-bezier(.2,.9,.2,1.05)}
+.sheet.on{transform:none}
+.sheet .tt{font-size:13px;font-weight:700;display:flex;gap:6px;align-items:center}
+.blobs{position:relative;height:120px;margin:6px 0}
+.blob{position:absolute;bottom:0;border-radius:44% 44% 40% 40%;display:flex;gap:4px;justify-content:center;padding-top:30%;animation:hop 1.8s ease-in-out infinite}
+.blob:before,.blob:after{content:'';width:6px;height:10px;background:#fff;border-radius:3px}
+@keyframes hop{50%{transform:translateY(-10px)}}
+.sheet h4{font-size:19px;text-align:center}
+.sheet p{color:#9a9aa0;font-size:13px;text-align:center;margin:6px 0 14px}
+.sheet button{width:100%;padding:13px;border-radius:99px;border:0;background:#fff;color:#000;font:700 15px 'Ysabeau Office',sans-serif;cursor:pointer}
+.sheet small{display:block;color:#666;font-size:10px;text-align:center;margin-top:10px}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a><script>if(window.top!==window)document.currentScript.previousElementSibling.style.display="none"/*inframe*/</script>
+<div class="phone"><div class="scr"><div class="isl"></div><div class="st"><span>9:41</span><span>●●● 100%</span></div>
+ <div class="app"><h3>Барбершоп «Брат»</h3>
+  <div class="chat"><i style="background:#c27a45"></i><div><b>Ваша запись</b><small>Суббота, 11:00 · Тимур</small></div></div>
+  <div class="chat"><i style="background:#3b5bdb"></i><div><b>Услуги и цены</b><small>Стрижка от 1 400 ₽</small></div></div>
+  <div class="chat"><i style="background:#2b8a3e"></i><div><b>Отзывы</b><small>4,9 · 312 оценок</small></div></div>
+ </div>
+ <div class="sheet" id="sh">
+  <div class="tt">🤖 Бот-администратор</div>
+  <div class="blobs" id="bl"></div>
+  <h4>Запись прямо в Telegram</h4>
+  <p>Бот сам напомнит о визите за день и за 2 часа. Отменить или перенести можно в один тап.</p>
+  <button id="b">Подключить бота</button>
+  <small>Бот работает с сайтом: свободные окна у них общие</small>
+ </div>
+</div></div>
+<script>
+const C=['#ff7a2e','#ffb020','#2fb37a','#7048e8','#3b82f6','#ec4899','#8b5a2b','#6b7280'];
+document.getElementById('bl').innerHTML=C.map((c,i)=>{const s=34+((i*7)%4)*8;return `<div class="blob" style="background:${c};width:${s}px;height:${s}px;left:${10+i*30}px;bottom:${(i%3)*14}px;animation-delay:${i*.15}s;z-index:${i%3}"></div>`}).join('');
+const sh=document.getElementById('sh');setTimeout(()=>sh.classList.add('on'),900);
+document.getElementById('b').onclick=()=>{document.getElementById('b').textContent='Готово ✓';setTimeout(()=>{sh.classList.remove('on');setTimeout(()=>{document.getElementById('b').textContent='Подключить бота';sh.classList.add('on')},1600)},900)};
+</script></body></html>

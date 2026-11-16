@@ -1,0 +1,67 @@
+{
+  "slug": "urman-kazan",
+  "name": "Урман",
+  "niche": "banya",
+  "city": "Казань",
+  "custom": "par",
+  "tagline": "Баня",
+  "colors": {
+    "main": "#D46A4C",
+    "accent": "#9BA66B",
+    "bg": "#1E1717",
+    "text": "#F0E6E0"
+  },
+  "fonts": {
+    "head": "Dela Gothic One",
+    "body": "Finlandica"
+  },
+  "hero": {
+    "title": "Парная, купель и тишина",
+    "text": "Выберите зал, день и время: сайт посчитает цену и отправит бронь в WhatsApp.",
+    "photo": "files/urman-kazan/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Залы и цены",
+    "catalogText": "Цена за час, минимум 2 часа.",
+    "aboutTitle": "О бане"
+  },
+  "about": "Урман: баня, в которую хочется возвращаться. Топим заранее, встречаем и всё объясняем.",
+  "items": [
+    {
+      "name": "Аренда банного комплекса",
+      "price": 7500,
+      "desc": "К услугам гостей комплекса: - двухэтажный сруб (240 м2) и…",
+      "photo": "files/urman-kazan/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Парение Классическое",
+      "price": 6000,
+      "desc": "Парение — «главное блюдо» бани. Приятно, что оно может…",
+      "photo": "files/urman-kazan/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Оздоровительная программа \"БАЗОВАЯ",
+      "price": 11900,
+      "desc": "-Чайная церемония на протяжении всей программы…",
+      "photo": "files/urman-kazan/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 927 044-64-43",
+    "whatsapp": "79270446443",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "coal": "#2A2020",
+      "wood": "#382A27"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://urman-kazan.orgs.biz/",
+  "contact_lead": "tg:urman116"
+}

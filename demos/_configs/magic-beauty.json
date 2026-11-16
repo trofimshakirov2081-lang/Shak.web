@@ -1,0 +1,161 @@
+{
+  "slug": "magic-beauty",
+  "name": "Magic beauty",
+  "niche": "брови",
+  "city": "Якутск",
+  "custom": "browlash",
+  "tagline": "Студия красоты",
+  "colors": {
+    "main": "#A3794B",
+    "accent": "#EADBC8",
+    "bg": "#F7F2EB",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Cormorant Garamond",
+    "body": "Manrope"
+  },
+  "hero": {
+    "title": "Все бьюти-услуги в одной студии",
+    "text": "Парикмахер, визаж, косметология, брови, ногти и обучение мастеров в Якутске.",
+    "cta": "Выбрать услугу",
+    "photo": "files/magic-beauty/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Популярные услуги",
+    "catalogText": "Отметьте услуги, и заявка уйдёт в WhatsApp. Подберём время.",
+    "aboutTitle": "О студии",
+    "orderTitle": "Ваша запись",
+    "addLabel": "Записаться"
+  },
+  "about": "Студия красоты Magic beauty: парикмахерские услуги, макияж, косметология, татуаж, массаж и ногтевой сервис. Учим мастеров.",
+  "features": [
+    {
+      "icon": "💇‍♀️",
+      "title": "Все услуги",
+      "text": "От стрижки до массажа."
+    },
+    {
+      "icon": "🎓",
+      "title": "Обучение",
+      "text": "Курсы для мастеров."
+    },
+    {
+      "icon": "🎁",
+      "title": "Сертификаты",
+      "text": "Подарок, который точно пригодится."
+    }
+  ],
+  "items": [
+    {
+      "name": "Курс Наращивание волос",
+      "price": 15000,
+      "desc": "Продолжительность 1 день Отработка на манекене",
+      "photo": "files/magic-beauty/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Курс ИДЕАЛЬНЫЕ БРОВИ 5в1",
+      "price": 20000,
+      "desc": "Продолжительность 2 дня Отработка на моделях",
+      "photo": "files/magic-beauty/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курс ЛЭШМЕЙКЕР",
+      "price": 15000,
+      "desc": "Окрашивание, Ламинирование и завивка ресниц…",
+      "photo": "files/magic-beauty/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курс Колористика",
+      "price": 25000,
+      "desc": "Продолжительность 5 дней Отработка на моделях",
+      "photo": "files/magic-beauty/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курс Мастер Перманентного макияжа (брови",
+      "price": 50000,
+      "desc": "Аппаратная техника Продолжительность 2 дня Отработка на…",
+      "photo": "files/magic-beauty/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курсы по дизайну ногтей",
+      "price": 3000,
+      "desc": "Разнообразие дизайнов на ваш выбор Продолжительность 1 день…",
+      "photo": "files/magic-beauty/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курс Наращивание 5 форм",
+      "price": 10000,
+      "desc": "Салонное, сложное наращивание ногтей Продолжительность 1…",
+      "photo": "files/magic-beauty/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курс Моделирования ногтей",
+      "price": 30000,
+      "desc": "Продолжительность 10 дней Отработка на моделях",
+      "photo": "files/magic-beauty/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 914 274-57-99",
+    "whatsapp": "79142745799",
+    "address": "ул. Петра Алексеева, 83/9",
+    "hours": ""
+  },
+  "extra": {
+    "plainLevels": true,
+    "cards": [
+      [
+        "#2A2018",
+        "#F7F2EB"
+      ],
+      [
+        "#EADBC8",
+        "#2A2018"
+      ],
+      [
+        "#A3794B",
+        "#FFFFFF"
+      ],
+      [
+        "#FFFFFF",
+        "#2A2018"
+      ],
+      [
+        "#CDB08C",
+        "#2A2018"
+      ]
+    ],
+    "services": [
+      "Стрижка и окрашивание",
+      "Макияж",
+      "Брови",
+      "Ногтевой сервис",
+      "Массаж"
+    ],
+    "levelDefault": "Услуга",
+    "lines": false,
+    "heroAlt": "Magic beauty",
+    "cartBtn": "Запись",
+    "svcTitle": "Ещё услуги",
+    "svcLink": "Все услуги",
+    "findText": "Напишите в WhatsApp, подберём удобное время.",
+    "sendLabel": "Отправить запись в WhatsApp",
+    "addedLabel": "Выбрано",
+    "commentHint": "Удобные дата и время",
+    "orderIntro": "Здравствуйте! Хочу записаться:",
+    "emptyText": "Пока ничего не выбрано. Отметьте услугу.",
+    "emptyToast": "Сначала выберите услугу"
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels и Openverse, для примера",
+  "source": "https://magicbeautystudio.orgs.biz/",
+  "email": "magicbeautystudio@mail.ru"
+}

@@ -1,0 +1,130 @@
+{
+  "slug": "tulpan-str",
+  "name": "Зефирные цветы",
+  "niche": "кондитерская",
+  "city": "Стерлитамак",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#D6336C",
+    "accent": "#F9D9E0",
+    "bg": "#EEF3E6",
+    "text": "#3A2620"
+  },
+  "fonts": {
+    "head": "Unbounded",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Десерты от Дарьи, которые хочется заказать снова",
+    "text": "Бенто, торты и капкейки в Стерлитамаке. Соберите заказ за минуту.",
+    "cta": "Собрать заказ",
+    "photo": "files/tulpan-str/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Дарья",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Дарья, я пеку торты и десерты на заказ в Стерлитамаке. Подскажу с начинкой и сделаю дизайн под ваш праздник.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "Дизайн под праздник",
+      "text": "Надпись, рисунок, цвета."
+    },
+    {
+      "icon": "🌿",
+      "title": "Свежие продукты",
+      "text": "Готовлю под заказ."
+    },
+    {
+      "icon": "📍",
+      "title": "Стерлитамак",
+      "text": "Самовывоз или доставка."
+    }
+  ],
+  "items": [
+    {
+      "name": "Зефирный букет 16см",
+      "price": 1600,
+      "desc": "Подложка 16 см, сам букет смотрится больше за счёт…",
+      "photo": "files/tulpan-str/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Бенто-торт",
+      "price": 1800,
+      "desc": "На 1-2 человек, с надписью",
+      "photo": "files/tulpan-str/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт на праздник",
+      "price": 3600,
+      "desc": "От 1,5 кг, начинка на выбор",
+      "photo": "files/tulpan-str/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки, 6 шт",
+      "price": 1200,
+      "desc": "С кремовой шапочкой",
+      "photo": "files/tulpan-str/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Медовик",
+      "price": 2400,
+      "desc": "Тонкие медовые коржи",
+      "photo": "files/tulpan-str/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Макаронс, 12 шт",
+      "price": 1300,
+      "desc": "Ассорти вкусов",
+      "photo": "files/tulpan-str/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Клубника в шоколаде",
+      "price": 1500,
+      "desc": "Набор из 9 ягод",
+      "photo": "files/tulpan-str/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Чизкейк",
+      "price": 2200,
+      "desc": "Нью-Йорк, целый",
+      "photo": "files/tulpan-str/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 917 481-56-33",
+    "whatsapp": "79174815633",
+    "address": "ул. Щербакова, 10",
+    "hours": ""
+  },
+  "extra": {
+    "fromLabel": "Десерты от",
+    "orderTitle": "Заказать",
+    "orderText": "Напишите дату и повод, отвечу в WhatsApp и всё согласую.",
+    "orderMsg": "Здравствуйте! Хочу заказать десерт",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "vars": {
+      "lilac": "#E4DDF4",
+      "pist": "#D7E6C3",
+      "butter": "#FBEBC0"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://club230485555.orgs.biz/",
+  "vk_lead": "https://vk.me/club230485555"
+}

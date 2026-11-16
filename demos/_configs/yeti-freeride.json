@@ -1,0 +1,68 @@
+{
+  "slug": "yeti-freeride",
+  "name": "Йети Фрирайд",
+  "niche": "tury",
+  "city": "Шерегеш",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/yeti-freeride/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Вера, я сама веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Фрирайд на ратраке",
+      "price": 16000,
+      "desc": "1 день, гиды и обед",
+      "photo": "files/yeti-freeride/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Тур выходного дня",
+      "price": 32000,
+      "desc": "2 дня, база в лесу",
+      "photo": "files/yeti-freeride/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Обучение пухляку",
+      "price": 9000,
+      "desc": "Для уверенных райдеров",
+      "photo": "files/yeti-freeride/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 983 215-20-40",
+    "whatsapp": "79832152040",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Шерегеш",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://yetifreeride.orgs.biz/",
+  "contact_lead": "tg:vera_yeti"
+}

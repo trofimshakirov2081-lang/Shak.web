@@ -1,0 +1,74 @@
+{
+  "slug": "cenat-dance",
+  "name": "Школа танцев Ценат",
+  "niche": "sport",
+  "city": "Пятигорск",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#1F7A4D",
+    "accent": "#E94F37",
+    "bg": "#F4F6F1",
+    "text": "#14201A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/cenat-dance/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Школа танцев Ценат: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пробное занятие",
+      "price": 400,
+      "desc": "Групповые занятия",
+      "photo": "files/cenat-dance/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абонемент на 8 занятий",
+      "price": 3200,
+      "desc": "Групповые занятия",
+      "photo": "files/cenat-dance/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Абонемент на 12 занятий",
+      "price": 4200,
+      "desc": "Групповые занятия",
+      "photo": "files/cenat-dance/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Семейный абонемент на 8 занятий",
+      "price": 2400,
+      "desc": "Групповые занятия",
+      "photo": "files/cenat-dance/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 909 757-89-14",
+    "whatsapp": "79097578914",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E2E8DF"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://cenatdanceclub.orgs.biz/",
+  "contact_lead": "em:cenatdanceclub@mail.ru"
+}

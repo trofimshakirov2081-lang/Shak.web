@@ -1,0 +1,75 @@
+{
+  "slug": "sup-anapa",
+  "name": "Go SUP Анапа",
+  "niche": "prokat",
+  "city": "Анапа",
+  "custom": "volna",
+  "tagline": "Сапы и прогулки",
+  "colors": {
+    "main": "#0F5257",
+    "accent": "#FFB000",
+    "bg": "#EAF4F1",
+    "text": "#0C2B2D"
+  },
+  "fonts": {
+    "head": "Lunasima",
+    "body": "Akt"
+  },
+  "hero": {
+    "title": "Берите доску, остальное у нас",
+    "text": "Выберите, что берёте, дату и время. Сайт посчитает цену, бронь придёт нам в WhatsApp.",
+    "photo": "files/sup-anapa/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно взять",
+    "catalogText": "Цены за час, на весь день дешевле.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Go SUP Анапа: всё готово к вашему приезду, инструктаж короткий и понятный. Встречает Алексей.",
+  "items": [
+    {
+      "name": "Сап доски (Sup board)",
+      "price": 500,
+      "desc": "Надувная SUP-доска - это универсальная прогулочная…",
+      "photo": "files/sup-anapa/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Прогулки рассвет/закат",
+      "price": 1200,
+      "desc": "ПУТЕШЕСТВИЕ НА САПЕ ЗАРЯЖАЕТ ЭНЕРГИЕЙ И ДАРИТ…",
+      "photo": "files/sup-anapa/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тренировки с инструктором",
+      "price": 1200,
+      "desc": "Обучение сап-серфингу с нашего пляжа вдоль побережья…",
+      "photo": "files/sup-anapa/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Подарочный сертифика",
+      "price": 1200,
+      "desc": "Мы знаем, как порой сложно угадать с хорошим подарком,…",
+      "photo": "files/sup-anapa/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 977 344-86-71",
+    "whatsapp": "79773448671",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "dayFactor": 4,
+    "vars": {
+      "lagoon": "#7FD1C7",
+      "foam": "#FBFEFD"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://go-sup-anapa-prokat.orgs.biz/",
+  "contact_lead": "tg:go_sup_anapa"
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "kiara-fleur",
+  "name": "Kiara Fleur",
+  "niche": "цветы",
+  "city": "Южно-Сахалинск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Южно-Сахалинске",
+  "colors": {
+    "main": "#3F6E8C",
+    "accent": "#F5D6E0",
+    "bg": "#F4F7FA",
+    "text": "#172532"
+  },
+  "fonts": {
+    "head": "PT Serif",
+    "body": "PT Sans"
+  },
+  "hero": {
+    "title": "Букеты и корзины для особых случаев",
+    "text": "Монобукеты, сборные букеты с пионами и корзины из 101 розы. Салон на Космонавта Поповича.",
+    "cta": "Выбрать букет",
+    "photo": "files/kiara-fleur/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Kiara Fleur: салон цветов в Южно-Сахалинске. Соберём букет к любому поводу или поможем составить свой.",
+  "features": [
+    {
+      "icon": "💐",
+      "title": "Авторские букеты",
+      "text": "Сборные и монобукеты."
+    },
+    {
+      "icon": "🧺",
+      "title": "Корзины",
+      "text": "Для юбилеев и особых дат."
+    },
+    {
+      "icon": "📍",
+      "title": "Салон в центре",
+      "text": "Ул. Космонавта Поповича, 65."
+    }
+  ],
+  "items": [
+    {
+      "name": "Сборный букет",
+      "price": 6200,
+      "desc": "Стильный подарок",
+      "photo": "files/kiara-fleur/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет с пионами",
+      "price": 9500,
+      "desc": "Элегантный и ароматный",
+      "photo": "files/kiara-fleur/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Монобукет из кустовых роз",
+      "price": 7200,
+      "desc": "Романтичный",
+      "photo": "files/kiara-fleur/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы и диантусы",
+      "price": 3900,
+      "desc": "Дуобукет",
+      "photo": "files/kiara-fleur/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Монобукет из альстромерий",
+      "price": 5700,
+      "desc": "Лёгкий и воздушный",
+      "photo": "files/kiara-fleur/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборная корзинка",
+      "price": 6000,
+      "desc": "Универсальный подарок",
+      "photo": "files/kiara-fleur/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в коробке",
+      "price": 20000,
+      "desc": "Большая сборная",
+      "photo": "files/kiara-fleur/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Корзина 101 роза",
+      "price": 40000,
+      "desc": "Яркое признание",
+      "photo": "files/kiara-fleur/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 962 120-01-04",
+    "whatsapp": "79621200104",
+    "address": "ул. Космонавта Поповича, 65",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Корзины и коробки",
+        "корзин|коробк"
+      ]
+    ],
+    "vars": {
+      "soft": "#E5ECF2",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://kiara-fleur-sah.orgs.biz/"
+}

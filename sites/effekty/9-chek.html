@@ -1,0 +1,43 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Чек, который печатается</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=Ysabeau+Office:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:#1b1b1b;min-height:100vh;display:grid;place-items:center;padding:80px 16px 40px}
+.back{background:rgba(255,255,255,.12);color:#fff}
+.slot{width:260px;height:10px;background:#0c0c0c;border-radius:5px;box-shadow:inset 0 2px 4px #000;position:relative;z-index:2}
+.clip{width:236px;margin:-4px auto 0;overflow:hidden}
+.rc{background:#fbfbf7;color:#151515;font:12px/1.45 'PT Mono',monospace;padding:16px 16px 22px;transform:translateY(-100%);transition:transform 2.6s steps(26);
+ clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),95% 100%,90% calc(100% - 8px),85% 100%,80% calc(100% - 8px),75% 100%,70% calc(100% - 8px),65% 100%,60% calc(100% - 8px),55% 100%,50% calc(100% - 8px),45% 100%,40% calc(100% - 8px),35% 100%,30% calc(100% - 8px),25% 100%,20% calc(100% - 8px),15% 100%,10% calc(100% - 8px),5% 100%,0 calc(100% - 8px))}
+.rc.go{transform:translateY(0)}
+.rc.crump{animation:crump .7s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes crump{40%{transform:scale(.7,.55) rotate(8deg);filter:contrast(1.4) brightness(.9);border-radius:30%}100%{transform:translate(160px,420px) scale(.12) rotate(220deg);border-radius:50%;opacity:0}}
+.rc h2{text-align:center;font-size:18px;letter-spacing:.1em}
+.c{text-align:center;font-size:10px}
+.ln{border-top:1px dashed #999;margin:8px 0}
+.r{display:flex;justify-content:space-between}
+.tot{font-size:15px;font-weight:700}
+.bc{height:34px;margin-top:8px;background:repeating-linear-gradient(90deg,#151515 0 2px,transparent 2px 3px,#151515 3px 4px,transparent 4px 7px)}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:26px}
+.btns button{font:600 15px 'Ysabeau Office',sans-serif;padding:11px 18px;border-radius:99px;border:0;cursor:pointer}
+.b1{background:#fff;color:#151515}.b2{background:#333;color:#fff}
+</style></head><body>
+<a class="back" href="./">← Все эффекты</a><script>if(window.top!==window)document.currentScript.previousElementSibling.style.display="none"/*inframe*/</script>
+<div>
+  <div class="slot"></div>
+  <div class="clip"><div class="rc" id="rc"></div></div>
+  <div class="btns"><button class="b1" id="again">Новый заказ</button><button class="b2" id="cr">Скомкать</button></div>
+</div>
+<script>
+const MENU=[['Капучино 0,3',290],['Раф лаванда',340],['Круассан с сёмгой',390],['Чизкейк баскский',360],['Флэт уайт',280],['Матча латте',320],['Медовик',320],['Эспрессо',160]];
+const rc=document.getElementById('rc');
+function print(){rc.className='rc';const n=3+Math.floor(Math.random()*3),it=[...MENU].sort(()=>Math.random()-.5).slice(0,n).map(m=>[1+(Math.random()<.25?1:0),...m]);
+  const sub=it.reduce((s,[q,,p])=>s+q*p,0);const d=new Date();
+  rc.innerHTML=`<h2>ЧЕРНИЛА</h2><div class="c">КОФЕЙНЯ · УЛ. БАУМАНА, 12<br>КАЗАНЬ · ЗАКАЗ №${1000+Math.floor(Math.random()*9000)}</div><div class="ln"></div>
+  ${it.map(([q,t,p])=>`<div class="r"><span>${q} × ${t}</span><span>${q*p}</span></div>`).join('')}<div class="ln"></div>
+  <div class="r tot"><span>ИТОГО</span><span>${sub} ₽</span></div><div class="r"><span>СБП</span><span>ОДОБРЕНО</span></div><div class="ln"></div>
+  <div class="c">${d.toLocaleDateString('ru-RU')} ${d.toTimeString().slice(0,5)}<br>СПАСИБО! ЗАХОДИТЕ ЕЩЁ ☕</div><div class="bc"></div>`;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>rc.classList.add('go')))}
+document.getElementById('again').onclick=print;document.getElementById('cr').onclick=()=>{rc.classList.add('crump')};
+print();
+</script></body></html>
