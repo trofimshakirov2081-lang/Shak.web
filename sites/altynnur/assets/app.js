@@ -35,7 +35,7 @@
     { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
   const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }];
-  const pick = (key, list, def) => { let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
+  const pick = (key, list, def) => { if (S.pickers === false) return def; let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
   const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
   const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
   let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
@@ -74,10 +74,10 @@
 
   /* ---------- шапка и подвал ---------- */
   const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Просмотр черновика из админки. Посетители этого ещё не видят.</span><a href="?draft=0" style="color:inherit;white-space:nowrap">Закрыть просмотр</a></div></div>` : ""}${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
-      <div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
+      ${S.pickers === false ? "" : `<div class="pickers"><span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>
       <span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>
       <span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>
-      ${PAGE === "home" ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div></div></div>` : ""}
+      ${PAGE === "home" ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div>`}</div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
