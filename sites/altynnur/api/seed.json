@@ -1,7 +1,10 @@
 {
  "preview": true,
  "theme": "night",
- "pickers": false,
+ "pickers": [
+  "font",
+  "view"
+ ],
  "font": "bona",
  "anim": "calm",
  "coursesView": "flow",
