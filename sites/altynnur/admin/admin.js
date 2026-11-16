@@ -7,6 +7,8 @@
   const app = $("#app");
   let S = null;          // данные сайта (черновик)
   let DEMO = false, CSRF = null, USER = null;
+  const GHM = !!window.GH;  // сайт на GitHub Pages: данные и фото хранятся в репозитории
+  const GKEY = "altyn-gh-draft", IMG = {};
   let TAB = "leads", LEADS = [], META = { draft_at: null, published_at: null };
   let dirty = false, unpublished = false, saveT = null, saving = false;
 
@@ -59,6 +61,7 @@
     saving = true; clearTimeout(saveT); beforeSave();
     try {
       if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); }
+      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); localStorage.setItem(GKEY, JSON.stringify({ site: S, at: META.draft_at })); }
       else META.draft_at = (await api("draft", { site: S })).draft_at;
       dirty = false;
     } catch (e) { toast(e.message, true); }
@@ -68,7 +71,11 @@
     clearTimeout(saveT); beforeSave();
     if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); toast("Пробный режим: на сервере это опубликует сайт"); return; }
     const b = $("#pubBtn"); b.disabled = true; b.textContent = "Публикуем…";
-    try { META.published_at = (await api("publish", { site: S })).published_at; dirty = false; unpublished = false; toast("Опубликовано. Сайт обновлён"); }
+    try {
+      if (GHM) { await GH.publish(S); META.published_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.removeItem(GKEY); } catch (e) {} toast("Опубликовано. Сайт обновится примерно через минуту"); }
+      else { META.published_at = (await api("publish", { site: S })).published_at; toast("Опубликовано. Сайт обновлён"); }
+      dirty = false; unpublished = false;
+    }
     catch (e) { toast(e.message, true); }
     b.textContent = "Опубликовать"; paintState();
   }
@@ -79,7 +86,7 @@
   }
   function paintState() {
     const st = $("#state"), b = $("#pubBtn"); if (!st) return;
-    st.textContent = dirty ? "Сохраняем…" : unpublished ? "Черновик сохранён. На сайте ещё старая версия" : META.published_at ? "Опубликовано " + hhmm(META.published_at) : "Ещё не опубликовано";
+    st.textContent = dirty ? "Сохраняем…" : unpublished ? (GHM ? "Черновик сохранён на этом устройстве. На сайте ещё старая версия" : "Черновик сохранён. На сайте ещё старая версия") : META.published_at ? "Опубликовано " + hhmm(META.published_at) : "Ещё не опубликовано";
     if (b) b.disabled = !unpublished && !!META.published_at;
   }
   window.addEventListener("beforeunload", (e) => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
@@ -96,10 +103,15 @@
     el("label", { class: "chk" }, el("input", { type: "checkbox", checked: o[k].includes(v), onchange: (e) => { o[k] = e.target.checked ? [...new Set([...o[k], v])] : o[k].filter((x) => x !== v); touch(); } }), el("span", { text: n }))))); };
   F.img = (label, o, k, altKey) => {
     const pv = el("div", { class: "img__pv" });
-    const paint = () => { pv.style.backgroundImage = o[k] ? `url("../${String(o[k]).replace(/"/g, "")}-640.webp")` : "none"; };
+    const paint = () => { pv.style.backgroundImage = o[k] ? `url("${IMG[o[k]] || "../" + String(o[k]).replace(/"/g, "") + "-640.webp"}")` : "none"; };
     const file = el("input", { type: "file", accept: "image/jpeg,image/png,image/webp", style: "display:none", onchange: async (e) => {
       const f = e.target.files[0]; if (!f) return;
       if (DEMO) return toast("Пробный режим: загрузка фото работает на сервере", true);
+      if (GHM) {
+        toast("Загружаем фото…");
+        try { const r = await GH.uploadPhoto(f); IMG[r.src] = r.preview; o[k] = r.src; paint(); touch(); toast("Фото загружено"); } catch (er) { toast(er.message, true); }
+        e.target.value = ""; return;
+      }
       const fd = new FormData(); fd.append("file", f); toast("Загружаем фото…");
       try { o[k] = (await api("upload", fd, true)).src; paint(); touch(); toast("Фото загружено"); } catch (er) { toast(er.message, true); }
       e.target.value = "";
@@ -145,6 +157,7 @@
   const V = {};
   const STATUS = [["new", "Новая"], ["work", "В работе"], ["done", "Записалась"], ["refuse", "Отказ"]];
   V.leads = () => {
+    if (GHM) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Заявки с сайта приходят вам сразу в WhatsApp: имя, телефон и выбранный курс. Здесь они не хранятся, поэтому отвечайте прямо в мессенджере." })];
     if (DEMO) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Здесь появляются заявки с сайта: имя, телефон, выбранный курс. В пробном режиме список пуст, на сервере он будет наполняться сам." }), el("div", { class: "empty", text: "Заявок пока нет" })];
     const list = el("div");
     const draw = () => list.replaceChildren(...(LEADS.length ? LEADS.map((l) => {
@@ -242,9 +255,19 @@
       F.sel("Анимация", S, "anim", [["calm", "Спокойная"], ["soft", "Мягкая"], ["live", "Живая"]]),
       F.sel("Курсы на главной", S, "coursesView", [["flow", "По дуге (карусель)"], ["tiles", "Плиткой"]])], true),
     box("Режим черновика", null, [F.bool("Сайт в режиме черновика", S, "preview"),
-      el("small", { style: "color:var(--ink2)", text: "Пока включено: посетители видят панель выбора оформления, поисковики сайт не показывают, а заявка открывает WhatsApp. Перед запуском выключите: заявки начнут сохраняться в раздел «Заявки», а сайт появится в поиске." })], true)];
+      el("small", { style: "color:var(--ink2)", text: GHM ? "Пока включено: посетители видят панель выбора оформления, поисковики сайт не показывают. Перед запуском выключите, и сайт появится в поиске." : "Пока включено: посетители видят панель выбора оформления, поисковики сайт не показывают, а заявка открывает WhatsApp. Перед запуском выключите: заявки начнут сохраняться в раздел «Заявки», а сайт появится в поиске." })], true)];
 
   V.set = () => {
+    if (GHM) {
+      const pw = { old: "", n1: "", n2: "" }, vbox = el("div", {}, el("small", { text: "Загружаем…" }));
+      GH.history().then((items) => vbox.replaceChildren(...(items.length ? items.map((v) => el("div", { class: "ver" }, el("span", { text: hhmm(v.date.slice(0, 19).replace("T", " ")) }),
+        el("button", { class: "btn btn--sm", text: "Вернуть", onclick: async () => { if (!confirm("Вернуть эту версию в черновик? Сайт изменится после публикации")) return; try { S = await GH.loadSite(v.sha); unpublished = true; touch(); render(); toast("Версия возвращена в черновик"); } catch (e) { toast(e.message, true); } } }))) : [el("small", { text: "Версии появятся после первой публикации" })]))).catch((e) => vbox.replaceChildren(el("small", { text: e.message })));
+      return [el("h1", { text: "Настройки" }),
+        box("История версий", "последние 30 публикаций", [vbox], true),
+        box("Сменить пароль", null, [F.text("Текущий пароль", pw, "old", { type: "password", quiet: true }), F.text("Новый пароль (от 8 символов)", pw, "n1", { type: "password", quiet: true }), F.text("Новый пароль ещё раз", pw, "n2", { type: "password", quiet: true }),
+          el("button", { class: "btn", style: "justify-self:start", text: "Сменить пароль", onclick: async () => { if (pw.n1 !== pw.n2) return toast("Новые пароли не совпадают", true); try { await GH.changePassword(pw.old, pw.n1); toast("Пароль изменён"); } catch (e) { toast(e.message, true); } } })]),
+        el("button", { class: "btn", text: "Выйти", onclick: async () => { await saveDraft(); GH.forget(); screenLoginGH(); } })];
+    }
     if (DEMO) return [el("h1", { text: "Настройки" }), el("p", { class: "sub", text: "На сервере здесь меняется пароль, включаются уведомления о заявках и хранится история версий сайта." }),
       el("button", { class: "btn btn--bad", text: "Сбросить пробные изменения", onclick: () => { if (confirm("Вернуть всё как было?")) { localStorage.removeItem(DKEY); location.reload(); } } })];
     const pw = { old: "", n1: "", n2: "" }, nt = { tg_token: "", tg_chat: "", email: "" };
@@ -293,6 +316,21 @@
       inp("Адрес базы", "db_host", "text", "На Beget обычно localhost"), inp("Имя базы", "db_name"), inp("Пользователь базы", "db_user"), inp("Пароль базы", "db_pass", "password"), inp("Адрес сайта", "base_url", "text", "Например: https://altynnur.ru"),
       inp("Логин для админки", "login", "text", "Латинскими буквами"), inp("Пароль для админки", "pass", "password", "Не короче 10 символов"), m, el("button", { class: "btn btn--acc", text: "Установить" })));
   }
+  function screenLoginGH(msg) {
+    const d = { pass: "", keep: true }, m = el("div", { class: "msg", text: msg || "" });
+    const go = async (e) => { e.preventDefault(); m.textContent = ""; const b = e.target.querySelector("button"); b.disabled = true; b.textContent = "Входим…";
+      try { await GH.login(d.pass, d.keep); await bootGH(); } catch (er) { m.textContent = er.message; b.disabled = false; b.textContent = "Войти"; } };
+    app.replaceChildren(el("form", { class: "login", onsubmit: go }, el("h1", { text: "АлтынНур" }), el("p", { class: "sub", style: "margin:0", text: "Вход в админку сайта" }),
+      F.wrap("Пароль", el("input", { type: "password", autocomplete: "current-password", required: true, oninput: (e) => (d.pass = e.target.value) })),
+      F.bool("Запомнить на этом устройстве", d, "keep"), m, el("button", { class: "btn btn--acc", text: "Войти" })));
+  }
+  async function bootGH() {
+    const pub = await GH.loadSite();
+    let local = null; try { local = JSON.parse(localStorage.getItem(GKEY) || "null"); } catch (e) {}
+    S = local ? local.site : pub; META = { draft_at: local ? local.at : null, published_at: null };
+    unpublished = !!local; LEADS = []; TAB = "courses"; render();
+    if (local) toast("Открыт ваш неопубликованный черновик");
+  }
   async function boot2() {
     const j = await api("draft"); S = j.site; META = { draft_at: j.draft_at, published_at: j.published_at };
     unpublished = !j.published_at || (j.draft_at && j.draft_at > j.published_at);
@@ -300,6 +338,7 @@
     TAB = LEADS.some((l) => l.status === "new") ? "leads" : "courses"; render();
   }
   (async function boot() {
+    if (GHM) { if (!GH.restore()) return screenLoginGH(); return bootGH().catch((e) => screenLoginGH(e.message)); }
     let p = null;
     try { const r = await fetch(API + "?r=ping", { credentials: "same-origin" }); p = await r.json(); } catch (e) {}
     if (!p || p.ok !== true) { DEMO = true; S = await demoLoad(); TAB = "courses"; return render(); }

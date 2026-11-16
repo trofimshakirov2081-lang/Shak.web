@@ -239,7 +239,7 @@
       <div class="hp" aria-hidden="true"><label>Не заполняйте <input name="website" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent"><input type="checkbox" name="consent"><span>Согласна на обработку персональных данных по <a href="${R}privacy/" target="_blank">политике</a>.</span></label><span class="err" data-cerr></span>
       <button class="btn btn--accent" type="submit">Отправить заявку</button>
-      ${S.preview ? `<p class="cap">В черновике заявка уходит через WhatsApp. В рабочей версии она сначала сохранится в админке, а Айгуль получит уведомление.</p>` : ""}</form>`;
+      ${S.preview ? `<p class="cap">Заявка открывает WhatsApp с готовым сообщением для Айгуль.</p>` : ""}</form>`;
   function validate(form, needConsent) {
     const d = Object.fromEntries(new FormData(form));
     if (d.website) return null;
@@ -272,7 +272,7 @@
   function bindForm(form, extra, target) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault(); const d = validate(form, true); if (!d) return;
-      if (S.preview || DRAFT) { send(d, extra); target.innerHTML = okHTML; return; }
+      if (S.preview || DRAFT || S.mode === "static") { send(d, extra); target.innerHTML = okHTML; return; }
       // рабочая версия: заявка сохраняется на сервере. Если сервер не ответил, открываем WhatsApp, чтобы заявка не потерялась
       const btn = form.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Отправляем…";
       try {
