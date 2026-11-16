@@ -252,7 +252,7 @@
   V.look = () => [el("h1", { text: "Оформление" }), el("p", { class: "sub", text: "Общий вид сайта. Изменения видны после публикации, заранее посмотреть можно кнопкой «Посмотреть»." }),
     box("Цвет, шрифт и движение", null, [
       F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]]),
-      F.sel("Шрифт заголовков", S, "font", [["bona", "Bona Nova"], ["prata", "Prata"], ["cormorant", "Cormorant"]]),
+      F.sel("Шрифт заголовков", S, "font", [["arsenal", "Arsenal (простой)"], ["bona", "Bona Nova"], ["prata", "Prata"], ["cormorant", "Cormorant"]]),
       F.sel("Анимация", S, "anim", [["calm", "Спокойная"], ["soft", "Мягкая"], ["live", "Живая"]]),
       F.sel("Курсы на главной", S, "coursesView", [["flow", "По дуге (карусель)"], ["tiles", "Плиткой"]])], true),
     box("Режим черновика", null, [F.bool("Сайт в режиме черновика", S, "preview"),

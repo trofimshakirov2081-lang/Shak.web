@@ -27,24 +27,26 @@
   // фото: две ширины, ленивая загрузка ниже первого экрана, проявление маской
   const ph = (src, alt, o = {}) => `<div class="ph${o.reveal === false ? "" : " rv"}${o.cls ? " " + o.cls : ""}"${o.style ? ` style="${o.style}"` : ""}>
     <img src="${R}${src}-1280.webp" srcset="${R}${src}-640.webp 640w, ${R}${src}-1280.webp 1280w${o.big ? `, ${R}${src}-1600.webp 1600w` : ""}" sizes="${o.sizes || "(max-width: 760px) 100vw, 50vw"}" alt="${esc(alt)}" ${o.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
-    ${o.cap && S.preview && !REAL(src) ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
+    ${o.cap && NOTE && !REAL(src) ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
   const ILL = "Иллюстрация";
   const REAL = (src) => /(^|\/)r-/.test(src || "");  // настоящие фото АлтынНур: ph/r-*, без подписи «Иллюстрация»
   const crumbs = (items) => `<button class="back" data-back type="button"><i aria-hidden="true"></i>Назад</button><nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
 
   /* ---------- цвет и шрифт: ?theme= и ?font=, затем выбор посетителя, затем значения по умолчанию из данных ---------- */
   // какие переключатели показывать на черновике: true все, false ни одного, массив ["font", "view"] только эти
+  // тексты-заглушки черновика (подписи «Иллюстрация», «цена предварительная» и т.п.): S.notes = false их прячет
+  const NOTE = !!S.preview && S.notes !== false;
   const PK = (k) => S.pickers === undefined || S.pickers === true || (Array.isArray(S.pickers) && S.pickers.includes(k));
   const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
     { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
-  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }];
+  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }];
   const pick = (key, list, def) => { if (!PK(key)) return def; let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
   const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
   const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
   let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
   document.documentElement.dataset.anim = ANIM;
-  let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = MODE === "dark" ? "dark" : "light";
+  let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = S.modeToggle === false ? "light" : MODE === "dark" ? "dark" : "light";
   document.documentElement.dataset.mode = MODE;
   const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
   document.documentElement.dataset.theme = THEME; document.documentElement.dataset.font = FONT;
@@ -71,13 +73,13 @@
     return g ? { lon: g[1], lat: g[2], z: m.zoom || 16 } : { lon: m.lon, lat: m.lat, z: m.zoom || 15 };
   };
   const mapHTML = () => {
-    const c = mapCoords(), open = S.org.map.link || `https://yandex.ru/maps/?pt=${c.lon},${c.lat}&z=${c.z}&l=map`;
-    return `<div class="map"><iframe title="Карта" src="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm" loading="lazy" allowfullscreen></iframe>
-      <div class="map__bar"><span>${esc(S.org.address || `${S.org.city}, ${S.org.region}`)}${S.preview && !S.org.address ? " (точка временная)" : ""}</span><a href="${open}" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></div></div>`;
+    const c = mapCoords(), open = S.org.map.link || `https://yandex.ru/maps/?pt=${c.lon},${c.lat}&z=${c.z}&l=sat%2Cskl`;
+    return `<div class="map"><iframe title="Карта" src="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm&l=sat%2Cskl" loading="lazy" allowfullscreen></iframe>
+      <div class="map__bar"><span>${esc(S.org.address || `${S.org.city}, ${S.org.region}`)}${NOTE && !S.org.address ? " (точка временная)" : ""}</span><a href="${open}" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></div></div>`;
   };
 
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Просмотр черновика из админки. Посетители этого ещё не видят.</span><a href="?draft=0" style="color:inherit;white-space:nowrap">Закрыть просмотр</a></div></div>` : ""}${S.preview ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Просмотр черновика из админки. Посетители этого ещё не видят.</span><a href="?draft=0" style="color:inherit;white-space:nowrap">Закрыть просмотр</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       ${!["theme", "font", "anim", "view"].some(PK) ? "" : `<div class="pickers">${PK("theme") ? `<span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>` : ""}
       ${PK("font") ? `<span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>` : ""}
       ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
@@ -86,7 +88,7 @@
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
         <div class="nav__extra"><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></nav>
-      <button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+      ${S.modeToggle === false ? "" : `<button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>`}
       <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
       <button class="btn btn--accent" data-enroll>Записаться</button>
     </div></header>`;
@@ -104,7 +106,7 @@
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   H.hero = () => `<section class="hero">
-      <div class="hero__ph${heroSlides().length > 2 ? " hero__ph--album" : ""}">${heroSlides().slice(0, 3).map((h, i) => `<img class="ha ha--${i + 1}" src="${R}${h.src}-${i ? 1280 : 1600}.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w${i ? "" : `, ${R}${h.src}-1600.webp 1600w`}" sizes="${i ? "(max-width: 860px) 40vw, 22vw" : "(max-width: 860px) 60vw, 33vw"}" alt="${esc(h.alt)}"${i ? ' decoding="async"' : ' fetchpriority="high"'}>`).join("")}${S.preview && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
+      <div class="hero__ph${heroSlides().length > 2 ? " hero__ph--album" : ""}">${heroSlides().slice(0, 3).map((h, i) => `<img class="ha ha--${i + 1}" src="${R}${h.src}-${i ? 1280 : 1600}.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w${i ? "" : `, ${R}${h.src}-1600.webp 1600w`}" sizes="${i ? "(max-width: 860px) 40vw, 22vw" : "(max-width: 860px) 60vw, 33vw"}" alt="${esc(h.alt)}"${i ? ' decoding="async"' : ' fetchpriority="high"'}>`).join("")}${NOTE && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
       <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
     </section>`;
@@ -148,7 +150,7 @@
   H.teacher = () => `<section class="sec" style="padding-top:0"><div class="wrap">
       <h2 class="rv-t sec__h">Почему АлтынНур</h2>
       <div class="why">
-        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${S.preview ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
+        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${NOTE ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
           <div class="dir__t"><span class="why__k">Ваш преподаватель</span><h3>${esc(S.teacher.name)}</h3><span class="link">${arrow("Об академии")}</span></div></a>
         ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short)}</h3></div></div>`).join("")}
       </div></div></section>`;
@@ -172,7 +174,7 @@
     document.title = `${c.name}: обучение в Туймазах | ${S.org.name}`;
     const L = c.layout || "split", cr = crumbs([{ t: "Курсы", href: `${R}courses/` }, { t: c.name }]);
     const text = `${cr}<span class="${L === "cover" ? "muted" : "cap"}">${esc(cat(c.cat).name)}</span><h1>${esc(c.name)}</h1><p class="${L === "cover" ? "" : "lead"}" style="max-width:46ch">${esc(c.short)}</p>
-      <div class="chero__price"><span class="price">${rub(c.price)}</span><span class="${L === "cover" ? "muted" : "cap"}">за весь курс${S.preview ? ", цена предварительная" : ""}</span></div>
+      <div class="chero__price"><span class="price">${rub(c.price)}</span><span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
       <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button><a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a></div>`;
     const heroPh = ph(c.photo, c.alt, { reveal: false, eager: true, sizes: L === "cover" ? "100vw" : "(max-width: 860px) 100vw, 50vw", cap: ILL, style: L === "split" ? "height:100%" : "" });
     const hero = L === "cover" ? `<section class="chero chero--cover">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="wrap chero__t">${text}</div></section>`
@@ -183,7 +185,7 @@
     const others = S.courses.filter((x) => x.slug !== c.slug).sort((a, b) => (b.cat === c.cat) - (a.cat === c.cat)).slice(0, 4);
     return `${hero}
       <section class="sec"><div class="wrap learn"><h2 class="rv-t">Что изучите</h2><div><ul>${c.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-        ${facts.length ? `<div class="facts" style="margin-top:40px">${facts.map((f) => `<div><span class="cap">${f[0]}</span><b>${esc(f[1])}</b></div>`).join("")}</div>` : S.preview ? `<p class="note">Программа по модулям, длительность, практика на моделях, материалы и документ после обучения появятся, когда Айгуль их подтвердит. Пока на сайте их нет: мы не придумываем условия.</p>` : ""}</div></div></section>
+        ${facts.length ? `<div class="facts" style="margin-top:40px">${facts.map((f) => `<div><span class="cap">${f[0]}</span><b>${esc(f[1])}</b></div>`).join("")}</div>` : NOTE ? `<p class="note">Программа по модулям, длительность, практика на моделях, материалы и документ после обучения появятся, когда Айгуль их подтвердит. Пока на сайте их нет: мы не придумываем условия.</p>` : ""}</div></div></section>
       <div class="pair">${c.photos.map((p, i) => ph(p.src, p.alt, { sizes: "(max-width: 700px) 50vw, 50vw", cap: i ? "" : ILL })).join("")}</div>
       <section class="sec"><div class="wrap">
         <div class="batch"><div><h2 style="font-size:var(--fs-h3)">Ближайшие даты</h2><p class="muted" style="margin-top:8px">${has(S.batches) ? "" : "Даты набора на этот курс уточняются. Оставьте заявку, и мы сообщим о старте."}</p></div><button class="btn btn--accent" data-enroll="${c.slug}">Узнать о наборе</button></div>
@@ -196,7 +198,7 @@
     <section class="sec" style="padding-top:0"><div class="wrap collage">${S.about.collage.map((p, i) => ph(p.src, p.alt, { sizes: i ? "(max-width: 760px) 60vw, 50vw" : "40vw", cap: i ? "" : ILL })).join("")}</div></section>
     <section class="sec" style="padding-top:0"><div class="wrap"><p class="big rv-t">Профессии осваивают руками. Поэтому у нас теория всегда рядом с практикой, а преподаватель рядом с ученицей.</p>
       <ul class="approach" style="margin-top:clamp(48px,6vw,90px)">${S.about.approach.map((a) => `<li><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></li>`).join("")}</ul>
-      ${S.preview ? `<p class="note">Тексты о подходе предварительные, утвердим с Айгуль.</p>` : ""}</div></section>
+      ${NOTE ? `<p class="note">Тексты о подходе предварительные, утвердим с Айгуль.</p>` : ""}</div></section>
     ${H.teacher()}
     <section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap"><div class="help" style="background:var(--ivory)"><div><h3>Посмотрите программы</h3><p class="muted" style="margin-top:8px">${S.courses.length} курсов: брови и ресницы, ногти, лицо и волосы.</p></div><a class="btn btn--accent" href="${R}courses/">Все курсы</a></div></div></section>`;
   P.works = () => {
@@ -206,7 +208,7 @@
       <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
       <section class="wrap" style="padding-bottom:var(--sec)">
       ${has(S.works) ? "" : `<div class="empty-works"><div><h2 style="font-size:var(--fs-h3)">Галерея работ появится после съёмки</h2><p class="muted" style="margin-top:12px">Здесь будут только настоящие работы учениц и преподавателя, подписанные и с согласия авторов:</p><ul><li>брови, ресницы, ногти, педикюр, уход, волосы;</li><li>сравнения «до и после»;</li><li>процесс обучения.</li></ul></div>
-        <div><p class="muted">${S.preview ? "Ниже иллюстрации направлений, чтобы показать, как будет работать галерея. Это не работы АлтынНур." : ""}</p></div></div>`}
+        <div><p class="muted">${NOTE ? "Ниже иллюстрации направлений, чтобы показать, как будет работать галерея. Это не работы АлтынНур." : ""}</p></div></div>`}
       <div class="masonry" id="gal">${items.map((p, i) => `<button data-cat="${p.cat}" data-i="${i}" aria-label="Открыть фото: ${esc(p.alt)}">${ph(p.src, p.alt, { sizes: "(max-width: 760px) 100vw, 33vw", cap: has(S.works) ? "" : ILL })}</button>`).join("")}</div>
       </section>
       <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото"><button class="lb-btn lb-x" data-lb="x" aria-label="Закрыть">×</button><button class="lb-btn lb-p" data-lb="p" aria-label="Предыдущее">‹</button><figure style="margin:0"><img alt=""><p></p></figure><button class="lb-btn lb-n" data-lb="n" aria-label="Следующее">›</button></div>`;
@@ -246,7 +248,7 @@
       <div class="hp" aria-hidden="true"><label>Не заполняйте <input name="website" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent"><input type="checkbox" name="consent"><span>Согласна на обработку персональных данных по <a href="${R}privacy/" target="_blank">политике</a>.</span></label><span class="err" data-cerr></span>
       <button class="btn btn--accent" type="submit">Отправить заявку</button>
-      ${S.preview ? `<p class="cap">Заявка открывает WhatsApp с готовым сообщением для Айгуль.</p>` : ""}</form>`;
+      ${NOTE ? `<p class="cap">Заявка открывает WhatsApp с готовым сообщением для Айгуль.</p>` : ""}</form>`;
   function validate(form, needConsent) {
     const d = Object.fromEntries(new FormData(form));
     if (d.website) return null;
@@ -367,6 +369,8 @@
 
   const html = document.documentElement, burger = document.querySelector(".burger");
   burger.addEventListener("click", () => { const o = html.classList.toggle("menu-open"); burger.setAttribute("aria-expanded", o); html.style.overflow = o ? "hidden" : ""; });
+  // открытое меню закрывается нажатием в любое место экрана, кроме самих пунктов меню
+  document.addEventListener("click", (e) => { if (!html.classList.contains("menu-open") || e.target.closest(".burger") || e.target.closest(".nav a")) return; html.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; }, true);
   document.addEventListener("click", (e) => {
     const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
     if (th) { apply("theme", th.dataset.themeSet); return; }

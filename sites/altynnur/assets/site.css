@@ -333,6 +333,7 @@ a:hover .ph img,.zoom:hover img{transform:scale(1.03)}
 /* шрифты заголовков (переключатель в плашке, в рабочей версии выбор в админке) */
 [data-font="cormorant"]{--f-head:'Cormorant Garamond',Georgia,serif;--f-body:'Ysabeau Office',system-ui,sans-serif}
 [data-font="prata"]{--f-head:'Prata',Georgia,serif;--f-body:'Ysabeau Office',system-ui,sans-serif}
+[data-font="arsenal"]{--f-head:'Arsenal',system-ui,sans-serif;--f-body:'Ysabeau Office',system-ui,sans-serif}
 [data-font="bona"]{--f-head:'Bona Nova',Georgia,serif;--f-body:'Arsenal',system-ui,sans-serif}
 [data-font="cormorant"] h1,[data-font="cormorant"] h2,[data-font="cormorant"] h3,[data-font="cormorant"] .manifest__q,[data-font="cormorant"] .price,[data-font="cormorant"] .fcard__t,[data-font="cormorant"] .logo b,[data-font="cormorant"] .portrait__cap b{font-weight:600}
 [data-font="prata"] h1{line-height:1.1}

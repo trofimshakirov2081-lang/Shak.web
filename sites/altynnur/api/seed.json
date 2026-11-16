@@ -1,13 +1,12 @@
 {
  "preview": true,
  "theme": "night",
- "pickers": [
-  "font",
-  "view"
- ],
- "font": "bona",
+ "pickers": false,
+ "notes": false,
+ "modeToggle": false,
+ "font": "arsenal",
  "anim": "calm",
- "coursesView": "flow",
+ "coursesView": "tiles",
  "org": {
   "name": "АлтынНур",
   "meaning": "«золотой свет» по-башкирски",
