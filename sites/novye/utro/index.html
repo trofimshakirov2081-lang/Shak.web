@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Утро · кофейня</title>
+<meta name="description" content="Кофейня «Утро» в Казани: кофе к 8:00, заказ с собой без очереди.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Finlandica:wght@400;500;600;700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1D1D1F;--mut:#6E6E73;--paper:#FFFFFF;--soft:#F5F5F7;--roast:#6B3E26;--cherry:#C8302E;--line:#E5E5EA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 'Finlandica',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.78);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav .in{max-width:1040px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:22px;font-size:14px}
+.nav b{font-size:18px;font-weight:700;margin-right:auto}
+.nav a{text-decoration:none;color:var(--mut)}.nav a:hover{color:var(--ink)}
+.nav .buy{background:var(--ink);color:#fff;padding:6px 14px;border-radius:99px;font-weight:600}
+@media(max-width:600px){.nav .hide{display:none}}
+section{padding:96px 20px}
+.w{max-width:1040px;margin:0 auto}
+.hero{text-align:center;padding-top:72px;padding-bottom:40px}
+.hero h1{font-size:clamp(46px,9vw,96px);line-height:.98;font-weight:700;letter-spacing:-.035em}
+.hero p{font-size:clamp(19px,2.4vw,24px);color:var(--mut);margin:18px auto 0;max-width:560px}
+.hero .ctas{display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.link{color:#0066CC;text-decoration:none;font-size:19px}
+.cup{width:min(340px,70vw);margin:44px auto 0;display:block}
+.steam path{fill:none;stroke:#c9c4bd;stroke-width:5;stroke-linecap:round;stroke-dasharray:60 200;animation:steam 3.4s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.6s}.steam path:nth-child(3){animation-delay:1.2s}
+@keyframes steam{0%{stroke-dashoffset:60;opacity:0}30%{opacity:.9}100%{stroke-dashoffset:-200;opacity:0}}
+/* liquid button */
+.lq{position:relative;display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;background:var(--cherry);color:#fff;font:600 17px 'Finlandica',sans-serif;padding:14px 26px;border-radius:99px;overflow:hidden;isolation:isolate}
+.lq:before{content:'';position:absolute;left:var(--x,50%);top:var(--y,50%);width:0;height:0;border-radius:50%;background:#1D1D1F;transform:translate(-50%,-50%);transition:width .5s cubic-bezier(.3,1.4,.5,1),height .5s cubic-bezier(.3,1.4,.5,1);z-index:-1}
+.lq:hover:before{width:260px;height:260px}
+.lq:focus-visible{outline:3px solid #0066CC;outline-offset:3px}
+/* live */
+.live{background:var(--soft)}
+.live .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.live h2,.menu h2,.order h2{font-size:clamp(34px,5vw,56px);line-height:1.04;font-weight:700;letter-spacing:-.025em}
+.live .lst{margin-top:26px}
+.live .it{padding:14px 0;border-top:1px solid var(--line);cursor:pointer}
+.live .it h3{font-size:19px;font-weight:600;color:#a1a1a6;transition:color .3s}
+.live .it p{color:var(--mut);max-height:0;overflow:hidden;transition:max-height .45s,margin .45s;font-size:16px}
+.live .it.on h3{color:var(--ink)}.live .it.on p{max-height:90px;margin-top:4px}
+.pane{position:relative;aspect-ratio:1;border-radius:30px;background:linear-gradient(160deg,#7a4a30,#3b2416);overflow:hidden}
+.pane canvas{position:absolute;inset:0;width:100%;height:100%}
+.card{position:absolute;left:50%;top:50%;width:min(80%,320px);transform:translate(-50%,-50%);background:#fff;border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 20px 40px rgba(0,0,0,.25);transition:opacity .35s,transform .35s}
+.card.out{opacity:0;transform:translate(-50%,-40%)}
+.card i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:20px;background:var(--soft);flex:none}
+.card b{display:block;font-size:16px}.card small{color:var(--mut);font-size:13px}
+.card em{margin-left:auto;font-style:normal;font-weight:700;white-space:nowrap}
+/* menu bento */
+.menu .sub{color:var(--mut);font-size:20px;margin-top:10px;max-width:560px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:40px}
+.tile{position:relative;border-radius:26px;padding:24px;min-height:220px;background:var(--soft);overflow:hidden;display:flex;flex-direction:column}
+.tile h3{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.tile p{color:var(--mut);font-size:15px;margin-top:4px;max-width:260px}
+.tile .pr{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:18px}
+.tile .pr b{font-size:20px}
+.add{width:38px;height:38px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:22px;cursor:pointer;transition:transform .2s}
+.add:active{transform:scale(.88)}
+.t1{grid-column:span 4;background:linear-gradient(135deg,#2b1a12,#6b3e26);color:#fff;min-height:300px}.t1 p{color:#e8d8c8}.t1 .add{background:#fff;color:var(--ink)}
+.t2{grid-column:span 2}.t3,.t4,.t5{grid-column:span 2}
+.t3{background:#EEF3EA}.t4{background:#F7EFE6}.t5{background:#EFEFF4}
+.blob{position:absolute;right:-30px;bottom:-30px;width:180px;height:180px;border-radius:50%;opacity:.9}
+@media(max-width:760px){.live .grid{grid-template-columns:1fr;gap:28px}.bento{grid-template-columns:1fr 1fr}.t1{grid-column:span 2}.t2,.t3,.t4,.t5{grid-column:span 1;min-height:200px}.tile{padding:18px}.tile h3{font-size:19px}}
+/* order + receipt */
+.order{background:#111;color:#f5f5f7}
+.order .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.order p.sub{color:#a1a1a6;font-size:19px;margin-top:12px}
+.order .steps{margin-top:26px;color:#d2d2d7;font-size:17px;line-height:1.8}
+.printer{justify-self:center;width:290px}
+.slot{height:14px;background:#2c2c2e;border-radius:8px;box-shadow:inset 0 3px 6px #000}
+.paper{margin:-6px 14px 0;background:#fbfbf7;color:#151515;font:13px/1.5 'PT Mono',monospace;padding:16px 16px 22px;transform-origin:top;clip-path:polygon(0 0,100% 0,100% calc(100% - 7px),94% 100%,88% calc(100% - 7px),82% 100%,76% calc(100% - 7px),70% 100%,64% calc(100% - 7px),58% 100%,52% calc(100% - 7px),46% 100%,40% calc(100% - 7px),34% 100%,28% calc(100% - 7px),22% 100%,16% calc(100% - 7px),10% 100%,4% calc(100% - 7px),0 100%)}
+.paper h4{text-align:center;font-size:16px;letter-spacing:.12em}
+.paper .c{text-align:center;font-size:11px;color:#555}
+.paper hr{border:0;border-top:1px dashed #aaa;margin:8px 0}
+.paper .r{display:flex;justify-content:space-between;animation:feed .35s steps(4)}
+@keyframes feed{from{opacity:0;transform:translateY(-6px)}}
+.paper .tot{font-weight:700;font-size:15px}
+.paper .empty{color:#888;text-align:center;padding:10px 0}
+.paper.crump{animation:crump .7s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes crump{50%{transform:scale(.6,.5) rotate(10deg);border-radius:30%}100%{transform:translate(120px,320px) scale(.1) rotate(220deg);opacity:0}}
+.pact{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.pact button{font:600 15px 'Finlandica',sans-serif;border-radius:99px;padding:10px 16px;border:0;cursor:pointer}
+.pact .clear{background:#2c2c2e;color:#fff}
+@media(max-width:760px){.order .grid{grid-template-columns:1fr;gap:34px}}
+footer{padding:40px 20px 60px;color:var(--mut);font-size:14px;border-top:1px solid var(--line)}
+footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;top:70px;transform:translate(-50%,-20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:99px;font-size:14px;opacity:0;transition:all .3s;z-index:30;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<nav class="nav"><div class="in"><b>Утро</b><a class="hide" href="#live">Сейчас</a><a href="#menu">Меню</a><a class="hide" href="#order">С собой</a><a class="buy" href="#order">Заказать</a></div></nav>
+
+<section class="hero"><div class="w">
+  <h1>Кофе к 8:00.<br>Каждый день.</h1>
+  <p>Маленькая кофейня у метро «Кремлёвская». Закажите заранее и заберите без очереди по дороге на работу.</p>
+  <div class="ctas"><button class="lq" onclick="location.hash='order'">Заказать с собой</button><a class="link" href="#menu">Смотреть меню ›</a></div>
+  <svg class="cup" viewBox="0 0 340 300" aria-hidden="true">
+    <g class="steam"><path d="M130 110 C120 80 145 70 135 40"/><path d="M170 105 C160 75 185 65 175 30"/><path d="M210 110 C200 80 225 70 215 40"/></g>
+    <ellipse cx="170" cy="280" rx="130" ry="14" fill="#efefef"/>
+    <path d="M70 130 H270 L254 250 Q250 272 228 272 H112 Q90 272 86 250 Z" fill="#fff" stroke="#1D1D1F" stroke-width="4"/>
+    <path d="M270 150 Q312 152 306 192 Q300 226 258 224" fill="none" stroke="#1D1D1F" stroke-width="4"/>
+    <ellipse cx="170" cy="132" rx="100" ry="14" fill="#6B3E26" stroke="#1D1D1F" stroke-width="4"/>
+    <path d="M150 130 q20 -10 40 0 q-20 8 -40 0" fill="#EFE3D3"/>
+  </svg>
+</div></section>
+
+<section class="live" id="live"><div class="w grid">
+  <div>
+    <h2>Что происходит в кофейне прямо сейчас</h2>
+    <div class="lst" id="lst"></div>
+  </div>
+  <div class="pane" id="pane"><canvas id="cv"></canvas><div class="card" id="card"></div></div>
+</div></section>
+
+<section class="menu" id="menu"><div class="w">
+  <h2>Меню, которое помещается на одну полку</h2>
+  <p class="sub">Шесть напитков и выпечка из соседней пекарни. Нажмите плюс, и позиция появится в чеке ниже.</p>
+  <div class="bento">
+    <div class="tile t1"><h3>Капучино</h3><p>Зерно из Эфиопии, обжарка в Казани. Наш главный напиток, его заказывают 6 из 10 гостей.</p><div class="pr"><b>290 ₽</b><button class="add" data-n="Капучино" data-p="290" aria-label="Добавить капучино">+</button></div><span class="blob" style="background:radial-gradient(#EFE3D3,#c8a27c)"></span></div>
+    <div class="tile t2"><h3>Раф с халвой</h3><p>Сладкий, но не приторный.</p><div class="pr"><b>340 ₽</b><button class="add" data-n="Раф с халвой" data-p="340" aria-label="Добавить раф">+</button></div></div>
+    <div class="tile t3"><h3>Матча</h3><p>На овсяном молоке.</p><div class="pr"><b>320 ₽</b><button class="add" data-n="Матча" data-p="320" aria-label="Добавить матчу">+</button></div></div>
+    <div class="tile t4"><h3>Круассан</h3><p>Привозят в 7:30.</p><div class="pr"><b>190 ₽</b><button class="add" data-n="Круассан" data-p="190" aria-label="Добавить круассан">+</button></div></div>
+    <div class="tile t5"><h3>Эспрессо</h3><p>Для тех, кто опаздывает.</p><div class="pr"><b>160 ₽</b><button class="add" data-n="Эспрессо" data-p="160" aria-label="Добавить эспрессо">+</button></div></div>
+  </div>
+</div></section>
+
+<section class="order" id="order"><div class="w grid">
+  <div>
+    <h2>Заказ печатается, пока вы идёте</h2>
+    <p class="sub">Добавьте напитки из меню. Чек справа соберётся сам, а бариста увидит заказ в Telegram.</p>
+    <div class="steps">Оплатите по СБП.<br>Назовите имя на кассе.<br>Заберите стакан, он уже ждёт.</div>
+    <button class="lq" id="send" style="margin-top:26px">Отправить заказ</button>
+  </div>
+  <div class="printer"><div class="slot"></div><div class="paper" id="paper"></div>
+    <div class="pact"><button class="clear" id="clear">Скомкать чек</button></div></div>
+</div></section>
+
+<footer><div class="w"><span>Кофейня «Утро» · Казань, ул. Баумана, 3 · с 7:30 до 21:00</span><span>Демо-сайт shak.web</span></div></footer>
+<div class="toast" id="toast"></div>
+<script>
+// liquid button follows the cursor
+document.querySelectorAll('.lq').forEach(b=>b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.setProperty('--x',(e.clientX-r.left)+'px');b.style.setProperty('--y',(e.clientY-r.top)+'px')}));
+// live section
+const F=[{h:'Очередь',p:'Перед вами 2 человека. Если заказать с сайта, ждать не придётся.',i:'👥',n:'Очередь сейчас',s:'обновлено минуту назад',v:'2 чел.'},
+ {h:'Свежая выпечка',p:'Круассаны привезли в 7:30, осталось 14 штук.',i:'🥐',n:'Круассаны',s:'из пекарни «Хлебница»',v:'14 шт.'},
+ {h:'Зерно недели',p:'Эфиопия Иргачеффе: жасмин, бергамот, ягоды.',i:'☕',n:'Иргачеффе',s:'обжарка 3 ноября',v:'новое'},
+ {h:'Свободные места',p:'Столик у окна свободен до 9:00.',i:'🪑',n:'Столики',s:'из 8 занято 5',v:'3 своб.'}];
+const lst=document.getElementById('lst'),card=document.getElementById('card');
+lst.innerHTML=F.map((f,i)=>`<div class="it" data-i="${i}"><h3>${f.h}</h3><p>${f.p}</p></div>`).join('');
+let cur=0,tm;function show(i){cur=i;[...lst.children].forEach((e,j)=>e.classList.toggle('on',j===i));card.classList.add('out');
+ setTimeout(()=>{const f=F[i];card.innerHTML=`<i>${f.i}</i><div><b>${f.n}</b><small>${f.s}</small></div><em>${f.v}</em>`;card.classList.remove('out')},300);
+ clearTimeout(tm);tm=setTimeout(()=>show((cur+1)%F.length),3600)}
+lst.onclick=e=>{const it=e.target.closest('.it');if(it)show(+it.dataset.i)};show(0);
+const cv=document.getElementById('cv'),cx=cv.getContext('2d'),pane=document.getElementById('pane');let P=[];
+function rs(){const r=pane.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;P=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:1+Math.random()*3,s:.0004+Math.random()*.001}))}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);for(const p of P){p.y-=p.s;if(p.y<0)p.y=1;cx.globalAlpha=.35;cx.fillStyle='#EFE3D3';cx.beginPath();cx.arc(p.x*cv.width,p.y*cv.height,p.r*devicePixelRatio,0,7);cx.fill()}requestAnimationFrame(loop)}
+addEventListener('resize',rs);rs();loop();
+// receipt
+const paper=document.getElementById('paper');let items={};
+function draw(newKey){const keys=Object.keys(items);const sum=keys.reduce((s,k)=>s+items[k].q*items[k].p,0);
+ paper.innerHTML=`<h4>УТРО</h4><div class="c">КОФЕЙНЯ · БАУМАНА, 3</div><hr>`+(keys.length?keys.map(k=>`<div class="r"${k===newKey?'':' style="animation:none"'}><span>${items[k].q} × ${k}</span><span>${items[k].q*items[k].p}</span></div>`).join(''):'<div class="empty">Добавьте напиток из меню</div>')+`<hr><div class="r tot" style="animation:none"><span>ИТОГО</span><span>${sum} ₽</span></div><div class="c">${new Date().toLocaleDateString('ru-RU')} · ЗАБРАТЬ ЧЕРЕЗ 10 МИН</div>`}
+draw();
+document.querySelectorAll('.add').forEach(b=>b.onclick=()=>{const n=b.dataset.n;items[n]=items[n]||{q:0,p:+b.dataset.p};items[n].q++;paper.classList.remove('crump');draw(n);toast(`${n} в чеке`)});
+document.getElementById('clear').onclick=()=>{paper.classList.add('crump');setTimeout(()=>{items={};paper.classList.remove('crump');draw()},750)};
+document.getElementById('send').onclick=()=>toast(Object.keys(items).length?'Заказ отправлен бариста':'Сначала добавьте напиток из меню');
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1600)}
+</script></body></html>

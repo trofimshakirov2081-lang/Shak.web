@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BARBER 13: вариант с анимацией</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Ysabeau+Office:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--onyx:#0E0C0B;--ivory:#EFE7DA;--smoke:#9A9087;--brass:#C9A063;--brass-hi:#F1DDAE;--line:rgba(239,231,218,.14)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--onyx);color:var(--ivory);overflow-x:clip}
+body{font:400 17px/1.55 "Ysabeau Office",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 70% at 50% 0%,rgba(14,12,11,.3),rgba(14,12,11,.9) 70%),url(../barber13/img/leather.jpg) center/cover}
+h1,h2,h3,.serif{font-family:Forum,serif;font-weight:400;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--ivory);color:#1E1915;font-weight:800;padding:14px 26px;border-radius:999px;text-decoration:none}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:linear-gradient(180deg,rgba(14,12,11,.85),rgba(14,12,11,0))}
+header .logo{font:400 21px Forum;letter-spacing:.2em}
+header .logo span{color:var(--brass)}
+header .btn{padding:9px 16px;font-size:15px;background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px rgba(239,231,218,.45)}
+.prog{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);transform-origin:0 50%;transform:scaleX(0);z-index:21}
+
+/* 1. заставка: буквы из глубины, инструменты по орбите */
+.s1{height:100vh;position:relative;display:grid;place-items:center;overflow:hidden;perspective:800px}
+.word{display:flex;gap:.04em;font:400 clamp(64px,19vw,150px)/1 Forum;letter-spacing:.06em}
+.word span{display:inline-block;will-change:transform,filter,opacity}
+.word .n{color:var(--brass)}
+.s1 .tool{position:absolute;width:44vw;max-width:260px;filter:drop-shadow(0 18px 18px rgba(0,0,0,.6));will-change:transform}
+.s1 .sub{position:absolute;bottom:16vh;left:0;right:0;text-align:center;color:var(--smoke);letter-spacing:.3em;font-size:13px}
+.s1 .hint{position:absolute;bottom:5vh;left:0;right:0;text-align:center;font-size:13px;color:var(--smoke)}
+.s1 .hint i{display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--brass),transparent);animation:drip 1.6s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* 2. машинка в центре, слова меняются */
+.s2{height:100vh;position:relative;overflow:hidden}
+.s2 .clip{position:absolute;left:50%;top:50%;width:70vw;max-width:420px;transform:translate(-50%,-50%);filter:drop-shadow(0 30px 30px rgba(0,0,0,.7))}
+.s2 .w{position:absolute;left:0;right:0;text-align:center;font:400 clamp(54px,15vw,110px)/1 Forum;top:16vh;opacity:0}
+.s2 .note{position:absolute;left:0;right:0;bottom:12vh;text-align:center;color:var(--smoke);padding:0 24px}
+.s2 .hair{position:absolute;width:2px;height:16px;background:#D9CFC1;border-radius:2px;opacity:0}
+
+/* 3. услуги едут вбок */
+.s3{height:100vh;position:relative;overflow:hidden}
+.s3 h2{position:absolute;top:13vh;left:16px;font-size:clamp(46px,12vw,84px);line-height:1}
+.track{position:absolute;top:34vh;left:0;display:flex;gap:16px;padding:0 16px;will-change:transform}
+.card{flex:none;width:72vw;max-width:300px;height:46vh;border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,rgba(34,29,25,.95),rgba(16,14,12,.97));border:1px solid var(--line);position:relative;overflow:hidden}
+.card .num{position:absolute;top:10px;right:16px;font:400 90px/1 Forum;color:rgba(201,160,99,.16)}
+.card b{font:400 34px/1.05 Forum}
+.card span{color:var(--smoke)}
+.card .p{font-weight:800;font-size:22px;margin-top:8px;color:var(--brass-hi)}
+
+/* 4. мастера: фото раскрываются кругом */
+.s4{padding:16vh 16px 10vh}
+.s4 h2{font-size:clamp(46px,12vw,84px);margin-bottom:24px}
+.m{position:relative;margin:0 0 9vh}
+.m .ph{width:100%;aspect-ratio:4/5;border-radius:24px;overflow:hidden;clip-path:circle(0% at 50% 50%)}
+.m img{width:100%;height:120%;object-fit:cover;display:block;will-change:transform}
+.m h3{font-size:clamp(56px,16vw,110px);line-height:.9;margin:-.5em 0 0 10px;position:relative;display:flex;overflow:hidden}
+.m h3 span{display:inline-block;transform:translateY(110%)}
+.m p{margin:8px 10px 0;color:var(--smoke)}
+
+/* 5. бегущие строки от скорости прокрутки */
+.s5{padding:6vh 0;overflow:hidden}
+.row{white-space:nowrap;font:400 clamp(60px,17vw,130px)/1.1 Forum;will-change:transform}
+.row.o{color:transparent;-webkit-text-stroke:1px rgba(239,231,218,.5)}
+.row b{font-weight:400;color:var(--brass)}
+
+/* 6. цифры */
+.s6{padding:12vh 16px;display:grid;gap:7vh}
+.st{border-top:1px solid var(--line);padding-top:16px}
+.st b{display:block;font:400 clamp(80px,24vw,160px)/1 Forum;color:var(--ivory)}
+.st span{color:var(--smoke)}
+
+/* 7. бритва открывает надпись */
+.s7{height:100vh;position:relative;overflow:hidden;display:grid;place-items:center;text-align:center}
+.s7 .big{font:400 clamp(58px,16vw,120px)/1 Forum;clip-path:inset(0 100% 0 0)}
+.s7 .razor{position:absolute;top:44%;left:-40vw;width:38vw;max-width:220px;filter:drop-shadow(0 18px 18px rgba(0,0,0,.6))}
+.s7 .cta{opacity:0;transform:translateY(30px);margin-top:28px}
+.s7 small{display:block;color:var(--smoke);margin-top:12px}
+footer{padding:20px 16px 40px;color:var(--smoke);font-size:14px;text-align:center}
+@media (prefers-reduced-motion:reduce){.s1 .hint i{animation:none}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<header><span class="logo">BARBER <span>13</span></span><a class="btn" href="../barber13/#book">Записаться</a></header>
+
+<section class="s1" id="s1">
+  <img class="tool t1" src="../barber13/img/clip_h.webp" alt="">
+  <img class="tool t2" src="../barber13/img/scis_h.webp" alt="">
+  <img class="tool t3" src="../barber13/img/razor1.webp" alt="">
+  <img class="tool t4" src="../barber13/img/comb.webp" alt="">
+  <h1 class="word" id="word"><span>B</span><span>A</span><span>R</span><span>B</span><span>E</span><span>R</span><span class="n">&nbsp;13</span></h1>
+  <div class="sub">ВЕРХНЯЯ ПЫШМА, ЮБИЛЕЙНАЯ, 13</div>
+  <div class="hint">листайте<i></i></div>
+</section>
+
+<section class="s2" id="s2">
+  <div class="w">Фейд</div><div class="w">Борода</div><div class="w">Стрижка</div><div class="w">Уход</div>
+  <img class="clip" src="../barber13/img/clip_h.webp" alt="">
+  <p class="note">Каждая стрижка у Ивана и Андрея: запись онлайн за минуту.</p>
+</section>
+
+<section class="s3" id="s3">
+  <h2>Услуги</h2>
+  <div class="track" id="track"></div>
+</section>
+
+<section class="s4" id="s4">
+  <h2>Мастера</h2>
+  <div class="m"><div class="ph"><img src="../barber13/img/ivan2.jpg" alt="Иван"></div><h3>Иван</h3><p>Бренд-барбер. Фейды, бороды, авторские стрижки.</p></div>
+  <div class="m"><div class="ph"><img src="../barber13/img/andrey.jpg" alt="Андрей"></div><h3>Андрей</h3><p>Барбер. Мужские и детские стрижки, «Отец и сын».</p></div>
+</section>
+
+<section class="s5" id="s5">
+  <div class="row" data-dir="-1">Стрижка <b>·</b> Борода <b>·</b> Фейд <b>·</b> Стрижка <b>·</b> Борода <b>·</b></div>
+  <div class="row o" data-dir="1">Юбилейная 13 <b>·</b> Верхняя Пышма <b>·</b> Юбилейная 13 <b>·</b></div>
+  <div class="row" data-dir="-1">Отец и сын <b>·</b> Уход <b>·</b> Камуфляж седины <b>·</b> Отец и сын <b>·</b></div>
+</section>
+
+<section class="s6" id="s6">
+  <div class="st"><b data-to="20">0</b><span>услуг в прайсе</span></div>
+  <div class="st"><b data-to="2">0</b><span>мастера</span></div>
+  <div class="st"><b data-to="60">0</b><span>секунд на запись, без звонков</span></div>
+</section>
+
+<section class="s7" id="s7">
+  <img class="razor" src="../barber13/img/razor1.webp" alt="">
+  <div><div class="big">До встречи<br>на Юбилейной</div>
+  <div class="cta"><a class="btn" href="../barber13/#book">Записаться онлайн</a><small>Вариант оформления с анимацией. Запись и админка те же.</small></div></div>
+</section>
+<footer>BARBER 13, Верхняя Пышма. Сайт сделан на shak.web.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const SV = [["Мужская стрижка", "75 мин", 1700], ["Фейд", "60 мин", 1500], ["Стрижка и борода", "1 ч 30 мин", 2300], ["Оформление бороды", "45 мин", 1300], ["Отец и сын", "2 ч 30 мин", 2700], ["Премиум-комплекс", "2 ч 15 мин", 3400]];
+document.getElementById("track").innerHTML = SV.map((s, i) => `<div class="card"><span class="num">${String(i + 1).padStart(2, "0")}</span><b>${s[0]}</b><span>${s[1]}</span><div class="p">${s[2].toLocaleString("ru-RU")} ₽</div></div>`).join("");
+
+gsap.registerPlugin(ScrollTrigger);
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+gsap.to("#prog", { scaleX: 1, ease: "none", scrollTrigger: { scrub: true, start: 0, end: "max" } });
+
+// 1. буквы влетают из глубины, инструменты кружат, потом всё разлетается
+const L = gsap.utils.toArray("#word span");
+gsap.from(L, { z: -900, opacity: 0, filter: "blur(14px)", rotateX: 70, duration: 1.4, ease: "expo.out", stagger: .07 });
+gsap.from(".s1 .sub", { opacity: 0, y: 20, delay: 1, duration: 1 });
+const tools = gsap.utils.toArray(".s1 .tool");
+tools.forEach((t, i) => {
+  const a = i / tools.length * Math.PI * 2;
+  gsap.set(t, { x: Math.cos(a) * 150, y: Math.sin(a) * 230, rotate: a * 57, scale: .7, opacity: 0 });
+  gsap.to(t, { opacity: .85, duration: 1, delay: .4 + i * .15 });
+});
+const t1 = gsap.timeline({ scrollTrigger: { trigger: "#s1", start: "top top", end: "+=110%", scrub: 1, pin: true } });
+tools.forEach((t, i) => { const a = i / tools.length * Math.PI * 2 + Math.PI; t1.to(t, { x: Math.cos(a) * 420, y: Math.sin(a) * 600, rotate: "+=320", scale: 1.4, ease: "power2.in" }, 0); });
+L.forEach((s, i) => t1.to(s, { y: (i % 2 ? 1 : -1) * (160 + i * 30), x: (i - 3.5) * 40, rotate: (i - 3.5) * 22, opacity: s.classList.contains("n") ? 1 : 0, filter: "blur(6px)", ease: "power2.in" }, 0));
+t1.to(".word .n", { scale: 3.2, x: -40, y: 0, rotate: 0, filter: "blur(0px)", color: "#F1DDAE", ease: "power3.inOut" }, .2)
+  .to(".word .n", { opacity: 0, scale: 7, ease: "power2.in" }, .85)
+  .to(".s1 .sub,.s1 .hint", { opacity: 0, y: -40 }, 0);
+
+// 2. машинка крутится и дрожит, слова сменяют друг друга, падают волоски
+const words = gsap.utils.toArray(".s2 .w");
+const t2 = gsap.timeline({ scrollTrigger: { trigger: "#s2", start: "top top", end: "+=260%", scrub: 1, pin: true } });
+t2.fromTo(".s2 .clip", { rotate: -120, scale: .3, opacity: 0 }, { rotate: 25, scale: 1, opacity: 1, duration: .6 });
+words.forEach((w, i) => {
+  t2.fromTo(w, { opacity: 0, y: 80, clipPath: "inset(100% 0 0 0)" }, { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: .6 }, .6 + i * 1.1)
+    .to(".s2 .clip", { rotate: i % 2 ? 25 : -25, x: i % 2 ? 20 : -20, duration: .6 }, .6 + i * 1.1)
+    .to(w, { opacity: 0, y: -80, clipPath: "inset(0 0 100% 0)", duration: .5 }, 1.3 + i * 1.1);
+});
+t2.from(".s2 .note", { opacity: 0, y: 30, duration: .5 }, .8);
+const s2 = document.getElementById("s2");
+for (let i = 0; i < 26; i++) {
+  const h = document.createElement("i"); h.className = "hair"; h.style.left = (40 + Math.random() * 20) + "%"; h.style.top = "48%"; h.style.transform = `rotate(${Math.random() * 180}deg)`; s2.appendChild(h);
+  t2.fromTo(h, { opacity: 0, y: 0, x: 0 }, { opacity: 1, y: 260 + Math.random() * 200, x: (Math.random() - .5) * 220, rotate: Math.random() * 720, duration: 1.2, ease: "power1.in" }, 1 + Math.random() * 3.6)
+    .to(h, { opacity: 0, duration: .3 }, ">-0.3");
+}
+
+// 3. карточки услуг едут вбок, пока секция закреплена, и чуть поворачиваются
+const track = document.getElementById("track");
+const t3 = gsap.timeline({ scrollTrigger: { trigger: "#s3", start: "top top", end: () => "+=" + (track.scrollWidth), scrub: 1, pin: true, invalidateOnRefresh: true } });
+t3.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: "none" });
+gsap.utils.toArray(".card").forEach(c => gsap.fromTo(c, { rotateY: 25, scale: .9 }, { rotateY: -25, scale: 1, ease: "none", scrollTrigger: { trigger: c, containerAnimation: t3, start: "left right", end: "right left", scrub: true } }));
+gsap.from(".s3 h2", { x: -120, opacity: 0, scrollTrigger: { trigger: "#s3", start: "top 80%", end: "top top", scrub: true } });
+
+// 4. фото мастеров раскрываются кругом, имена выезжают по буквам
+gsap.utils.toArray(".m").forEach(m => {
+  const h = m.querySelector("h3"); h.innerHTML = [...h.textContent].map(c => `<span>${c}</span>`).join("");
+  gsap.to(m.querySelector(".ph"), { clipPath: "circle(75% at 50% 50%)", ease: "power2.out", scrollTrigger: { trigger: m, start: "top 85%", end: "top 25%", scrub: 1 } });
+  gsap.fromTo(m.querySelector("img"), { yPercent: -12, scale: 1.25 }, { yPercent: 0, scale: 1, ease: "none", scrollTrigger: { trigger: m, start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.to(h.children, { y: 0, stagger: .06, ease: "back.out(2)", scrollTrigger: { trigger: h, start: "top 90%", end: "top 55%", scrub: 1 } });
+  gsap.from(m.querySelector("p"), { opacity: 0, y: 20, scrollTrigger: { trigger: m.querySelector("p"), start: "top 95%", end: "top 75%", scrub: true } });
+});
+
+// 5. бегущие строки: едут от прокрутки, ускоряются и наклоняются от скорости
+const rows = gsap.utils.toArray(".row");
+rows.forEach(r => gsap.fromTo(r, { xPercent: r.dataset.dir > 0 ? -40 : 0 }, { xPercent: r.dataset.dir > 0 ? 0 : -40, ease: "none", scrollTrigger: { trigger: "#s5", start: "top bottom", end: "bottom top", scrub: true } }));
+const skew = gsap.quickTo(rows, "skewX", { duration: .4, ease: "power3" });
+ScrollTrigger.create({ trigger: "#s5", start: "top bottom", end: "bottom top", onUpdate: s => skew(gsap.utils.clamp(-18, 18, s.getVelocity() / -120)) });
+
+// 6. цифры считают, пока листаешь
+gsap.utils.toArray(".st b").forEach(b => {
+  const o = { v: 0 };
+  gsap.to(o, { v: +b.dataset.to, ease: "power1.out", onUpdate: () => b.textContent = Math.round(o.v), scrollTrigger: { trigger: b, start: "top 95%", end: "top 60%", scrub: .5 } });
+  gsap.from(b.parentElement, { x: -60, opacity: 0, scrollTrigger: { trigger: b, start: "top 95%", end: "top 60%", scrub: 1 } });
+});
+
+// 7. бритва проходит и открывает надпись, потом кнопка
+const t7 = gsap.timeline({ scrollTrigger: { trigger: "#s7", start: "top top", end: "+=120%", scrub: 1, pin: true } });
+t7.to(".s7 .razor", { left: "105vw", rotate: 12, ease: "power1.inOut", duration: 1 }, 0)
+  .to(".s7 .big", { clipPath: "inset(0 0% 0 0)", ease: "power1.inOut", duration: 1 }, 0)
+  .to(".s7 .cta", { opacity: 1, y: 0, duration: .4 }, .9);
+if (calm) ScrollTrigger.getAll().forEach(t => t.progress(1));
+</script>
+</body>
+</html>
