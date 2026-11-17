@@ -103,6 +103,9 @@
   /* ---------- блоки главной ---------- */
   const H = {};
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
+  // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
+  const ctag = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
+  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : ""].filter(Boolean).join(" · ") || c.short || "";
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   H.hero = () => `<section class="hero">
@@ -129,7 +132,8 @@
     const list = S.featured.map(course).filter(Boolean);
     if (VIEW === "tiles") return `<section class="sec" style="padding-top:0"><div class="wrap">
       <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
-      <div class="ctiles">${S.courses.map((c) => `<a class="ctile" href="${cURL(c)}">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}<div class="ctile__t"><span class="ctile__n">${esc(c.name)}</span><span class="chip-price">${rub(c.price)}</span></div></a>`).join("")}</div></div></section>`;
+      <div class="ctiles">${S.courses.map((c) => `<a class="ctile" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
+        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a>`).join("")}</div></div></section>`;
     return `<section class="sec flow-sec" style="padding-top:0">
       <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
       <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
@@ -370,7 +374,7 @@
   const html = document.documentElement, burger = document.querySelector(".burger");
   burger.addEventListener("click", () => { const o = html.classList.toggle("menu-open"); burger.setAttribute("aria-expanded", o); html.style.overflow = o ? "hidden" : ""; });
   // открытое меню закрывается нажатием в любое место экрана, кроме самих пунктов меню
-  document.addEventListener("click", (e) => { if (!html.classList.contains("menu-open") || e.target.closest(".burger") || e.target.closest(".nav a")) return; html.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; }, true);
+  document.addEventListener("click", (e) => { if (!html.classList.contains("menu-open") || e.target.closest(".burger") || e.target.closest(".nav a")) return; e.preventDefault(); e.stopPropagation(); html.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; }, true);
   document.addEventListener("click", (e) => {
     const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
     if (th) { apply("theme", th.dataset.themeSet); return; }
