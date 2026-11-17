@@ -230,7 +230,14 @@
   F.photos = (label, o, k) => { if (!Array.isArray(o[k])) o[k] = [];
     return el("div", { class: "f" }, el("span", { text: label }), el("small", { style: "color:var(--ink2)", text: "1 фото будет большим, 2 встанут рядом, 3 в ряд, больше сеткой. Можно без фото." }),
       F.list(o[k], { title: (p) => p.alt, untitled: "Фото", fields: (p) => [F.img("Фото", p, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" })); };
-  const onHome = (id) => el("label", { class: "chk", style: "font-weight:600" }, el("input", { type: "checkbox", checked: S.home.includes(id), onchange: (e) => { S.home = S.home.filter((b) => b !== id); if (e.target.checked) S.home.splice(Math.min(1, S.home.length), 0, id); touch(); } }), el("span", { text: "Показывать на главной" }));
+  // галочка «показывать» и место блока на главной: стрелки двигают его выше или ниже среди остальных блоков
+  const onHome = (id) => { const box2 = el("div", { class: "brow", style: "flex-wrap:wrap;gap:8px" });
+    const draw = () => { const i = S.home.indexOf(id), shown = i >= 0;
+      box2.replaceChildren(el("label", { class: "chk", style: "font-weight:600;flex:1 1 auto" }, el("input", { type: "checkbox", checked: shown, onchange: (e) => { S.home = S.home.filter((b) => b !== id); if (e.target.checked) S.home.splice(Math.min(1, S.home.length), 0, id); touch(); draw(); } }), el("span", { text: "Показывать на главной" })),
+        shown ? el("span", { style: "color:var(--ink2);font-size:.9rem", text: `место ${i + 1} из ${S.home.length}` + (S.home[i - 1] ? `, после «${BLOCKS[S.home[i - 1]] || S.home[i - 1]}»` : ", первым") }) : null,
+        shown ? el("button", { type: "button", class: "ic", text: "↑", "aria-label": "Выше", disabled: i === 0, onclick: () => { [S.home[i - 1], S.home[i]] = [S.home[i], S.home[i - 1]]; touch(); draw(); } }) : null,
+        shown ? el("button", { type: "button", class: "ic", text: "↓", "aria-label": "Ниже", disabled: i === S.home.length - 1, onclick: () => { [S.home[i + 1], S.home[i]] = [S.home[i], S.home[i + 1]]; touch(); draw(); } }) : null); };
+    draw(); return box2; };
   const ensure = (k, def) => { if (!S[k] || typeof S[k] !== "object") S[k] = def; return S[k]; };
   V.sales = () => {
     const pr = ensure("promo", { on: true, kicker: "Акция", title: "", text: "", until: "", btn: "Записаться со скидкой", photos: [], size: "m", codes: [] }); if (!Array.isArray(pr.codes)) pr.codes = [];
