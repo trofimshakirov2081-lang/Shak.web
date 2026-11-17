@@ -133,18 +133,32 @@
     return el("div", { class: "f" }, el("span", { text: label }), box);
   };
   /* список карточек: порядок, удаление, добавление */
+  // перетаскивание строк пальцем или мышью за ручку ⠿: остальные строки расступаются, порядок меняется в данных
+  function dragSort(container, rowSel, onMove) {
+    container.addEventListener("pointerdown", (e) => {
+      const h = e.target.closest(".drag"); if (!h) return; const row = h.closest(rowSel); if (!row) return;
+      e.preventDefault(); const rows = [...container.querySelectorAll(":scope > " + rowSel)], from = rows.indexOf(row); let to = from;
+      const y0 = e.clientY, rects = rows.map((r) => r.getBoundingClientRect()); row.classList.add("dragging"); h.setPointerCapture(e.pointerId);
+      const move = (ev) => { const dy = ev.clientY - y0; row.style.transform = `translateY(${dy}px)`; const cy = rects[from].top + rects[from].height / 2 + dy;
+        to = rects.findIndex((r) => cy < r.top + r.height / 2); if (to < 0) to = rows.length - 1; else if (to > from) to -= 1; };
+      const up = () => { h.removeEventListener("pointermove", move); h.removeEventListener("pointerup", up); h.removeEventListener("pointercancel", up); row.style.transform = ""; row.classList.remove("dragging"); if (to !== from) onMove(from, to); };
+      h.addEventListener("pointermove", move); h.addEventListener("pointerup", up); h.addEventListener("pointercancel", up);
+    });
+  }
   F.list = (arr, opt) => {
     const box = el("div", { class: "list" }); let openI = -1;
+    if (!opt.fixed) dragSort(box, ".item", (a, b) => { const [x] = arr.splice(a, 1); arr.splice(b, 0, x); openI = -1; draw(); touch(); });
     const draw = () => {
       box.replaceChildren(...arr.map((it, i) => {
         const ttl = el("span", { class: "ttl", text: opt.title(it) || opt.untitled || "Без названия" });
         const meta = opt.meta ? el("span", { class: "meta", text: opt.meta(it) }) : null;
         const d = el("details", { class: "item", open: i === openI, ontoggle: (e) => { if (e.target.open) openI = i; else if (openI === i) openI = -1; } },
-          el("summary", {}, ttl, meta, opt.fixed ? null : el("span", { class: "ord" },
+          el("summary", {}, opt.fixed ? null : el("span", { class: "drag", "aria-label": "Перетащить", title: "Перетащить", text: "⠿" }), ttl, meta, opt.fixed ? null : el("span", { class: "ord" },
             el("button", { type: "button", class: "ic", "aria-label": "Выше", text: "↑", disabled: i === 0, onclick: (e) => { e.preventDefault(); [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; openI = -1; draw(); touch(); } }),
             el("button", { type: "button", class: "ic", "aria-label": "Ниже", text: "↓", disabled: i === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; openI = -1; draw(); touch(); } }))),
           el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) meta.textContent = opt.meta(it); }),
-            opt.fixed ? null : el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", style: "justify-self:start", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; draw(); touch(); } } })));
+            opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
+            el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; draw(); touch(); } } }))));
         return d;
       }), opt.fixed ? "" : el("button", { type: "button", class: "btn", text: opt.add || "Добавить", style: "justify-self:start", onclick: () => { arr.push(opt.blank()); openI = arr.length - 1; draw(); touch(); const n = box.querySelectorAll(".item")[openI]; if (n) { n.scrollIntoView({ block: "center" }); const f = n.querySelector("input"); if (f) f.focus(); } } }));
     };
@@ -217,12 +231,33 @@
     return [el("h1", { text: "Главная страница" }), el("p", { class: "sub", text: "Тексты и фото главной. Порядок блоков меняется стрелками." }),
       box("Первый экран", "заголовок и фото", [F.area("Заголовок", S.hero, "title", { max: 160 }), F.area("Короткий текст под заголовком", S.hero, "short", { max: 240 }), F.img("Главное фото", S.hero, "photo", "alt"),
         el("div", { class: "f" }, el("span", { text: "Ещё два фото: стоят рядом с главным, как альбом" }), F.list(Array.isArray(S.hero.more) ? S.hero.more : (S.hero.more = []), { title: (it) => it.alt, untitled: "Фото", fields: (it) => [F.img("Фото", it, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" }))], true),
-      box("Порядок блоков", "что и в каком порядке показывать", [bl]),
+      el("p", { class: "sub" }, "Порядок и показ блоков: вкладка ", el("a", { href: "#", onclick: (e) => { e.preventDefault(); TAB = "sections"; render(); } }, "«Разделы сайта»"), "."),
       box("Блок записи", null, [F.area("Заголовок", S.enroll, "title", { max: 160 }), F.area("Текст", S.enroll, "text", { max: 400 }), F.img("Фото", S.enroll, "photo", "alt")]),
       box("Фото-сцена «Как мы учим»", null, [F.text("Надпись над заголовком", S.zoom, "kicker"), F.text("Заголовок", S.zoom, "title"), F.img("Главное фото", S.zoom, "main", "alt"),
         el("div", { class: "f" }, el("span", { text: "Четыре боковых фото" }), F.list(S.zoom.side, { fixed: true, title: (p) => p.cap, untitled: "Фото", fields: (p, re) => [F.text("Подпись", p, "cap", { on: re }), F.img("Фото", p, "src")] }))]),
       box("Преимущества", "плитки с фото", [F.list(S.advantages, { add: "Добавить преимущество", title: (a) => a.t, blank: () => ({ t: "", short: "", d: "", photo: "" }),
         fields: (a, re) => [F.text("Заголовок", a, "t", { on: re }), F.text("Короткая подпись на плитке", a, "short"), F.area("Описание", a, "d", { max: 400 }), F.img("Фото", a, "photo")] })])];
+  };
+
+  /* ---------- разделы сайта: один список, порядок и показ ---------- */
+  V.sections = () => {
+    if (!Array.isArray(S.homeOff)) S.homeOff = [];
+    const all = Object.keys(BLOCKS); S.homeOff = S.homeOff.filter((b) => all.includes(b) && !S.home.includes(b)); all.forEach((b) => { if (!S.home.includes(b) && !S.homeOff.includes(b)) S.homeOff.push(b); });
+    const list = el("div", { class: "list blocks" });
+    const empty = (b) => { const d = { promo: S.promo && S.promo.title, batches: (S.batches || []).length, numbers: (S.numbers || []).length, reviews: (S.reviews || []).length, cert: S.cert && ((S.cert.photos || []).length || S.cert.text), gallery: S.gallery && (S.gallery.photos || []).length }; return b in d && !d[b]; };
+    const draw = () => { const on = S.home, off = S.homeOff;
+      list.replaceChildren(...on.map((b, i) => el("div", { class: "brow" }, el("span", { class: "drag", text: "⠿", "aria-label": "Перетащить" }),
+          el("button", { type: "button", class: "ic", text: "↑", "aria-label": "Выше", disabled: i === 0, onclick: () => { [on[i - 1], on[i]] = [on[i], on[i - 1]]; draw(); touch(); } }),
+          el("button", { type: "button", class: "ic", text: "↓", "aria-label": "Ниже", disabled: i === on.length - 1, onclick: () => { [on[i + 1], on[i]] = [on[i], on[i + 1]]; draw(); touch(); } }),
+          el("span", { style: "flex:1", text: BLOCKS[b] || b }, empty(b) ? el("small", { style: "display:block;color:var(--ink2)", text: "пока пустой, на сайте не виден: заполните во вкладке «Продажи»" }) : null),
+          el("label", { class: "chk" }, el("input", { type: "checkbox", checked: true, onchange: () => { on.splice(i, 1); off.unshift(b); draw(); touch(); } }), el("span", { text: "Показан" })))),
+        off.length ? el("p", { class: "sub", style: "margin:14px 0 4px", text: "Скрытые разделы" }) : "",
+        ...off.map((b, i) => el("div", { class: "brow", style: "opacity:.65" }, el("span", { style: "flex:1", text: BLOCKS[b] || b }),
+          el("label", { class: "chk" }, el("input", { type: "checkbox", checked: false, onchange: () => { off.splice(i, 1); on.push(b); draw(); touch(); } }), el("span", { text: "Скрыт" })))));
+    };
+    dragSort(list, ".brow", (a, b) => { if (a >= S.home.length || b >= S.home.length) return; const [x] = S.home.splice(a, 1); S.home.splice(b, 0, x); draw(); touch(); });
+    draw();
+    return [el("h1", { text: "Разделы сайта" }), el("p", { class: "sub", text: "Порядок блоков на главной: тяните за ⠿ или жмите стрелки. Галочка показывает или скрывает раздел." }), list];
   };
 
   /* ---------- раздел «Продажи»: акции, промокоды, наборы, отзывы, цифры, сертификат, фото ---------- */
@@ -327,13 +362,22 @@
   };
 
   /* ---------- каркас ---------- */
-  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
+  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["sections", "Разделы сайта"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
   function paintTabs() { const n = LEADS.filter((l) => l.status === "new").length; const t = $('[data-tab="leads"]'); if (t) t.replaceChildren("Заявки", n ? el("b", { text: n }) : ""); }
-  function render() {
+  // поиск по админке: слова, по которым находится вкладка
+  const KEYS = { leads: "заявки клиенты", courses: "курсы цены программа фото курса направления", home: "главная первый экран фото заголовок как мы учим преимущества блок записи",
+    sales: "продажи акция скидка промокод частями рассрочка наборы даты места цифры отзывы звёзды сертификат фото-блок галерея", sections: "разделы порядок блоки скрыть показать переставить",
+    contacts: "контакты телефон whatsapp telegram адрес карта график вк", pages: "тексты преподаватель о себе об академии вопросы обучение работы", look: "оформление цвет шрифт анимация вид курсов черновик", set: "настройки пароль версии выход" };
+  let Q = "", SNAP = null, SNAPTAB = null;
+  function snap() { if (SNAPTAB !== TAB) { SNAP = JSON.stringify(S); SNAPTAB = TAB; } }
+  function render() { snap();
     app.replaceChildren(
       el("header", { class: "top" }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
+        el("button", { class: "btn", text: "Отменить", title: "Вернуть этот раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }),
         el("button", { class: "btn", text: "Посмотреть", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),
-        el("nav", { class: "tabs", role: "tablist" }, TABS.map(([id, n]) => el("button", { class: "tab", role: "tab", "data-tab": id, "aria-selected": String(TAB === id), text: n, onclick: () => { TAB = id; render(); window.scrollTo(0, 0); } })))),
+        el("div", { class: "search" }, el("input", { type: "search", placeholder: "Найти: промокод, отзывы, адрес…", value: Q, oninput: (e) => { Q = e.target.value.trim().toLowerCase(); document.querySelectorAll(".tabs .tab").forEach((t) => { const id = t.dataset.tab; t.hidden = !!Q && !((t.textContent + " " + (KEYS[id] || "")).toLowerCase().includes(Q)); }); },
+          onkeydown: (e) => { if (e.key === "Enter") { const t = [...document.querySelectorAll(".tabs .tab")].find((x) => !x.hidden); if (t) t.click(); } } })),
+        el("nav", { class: "tabs", role: "tablist" }, TABS.map(([id, n]) => el("button", { class: "tab", role: "tab", "data-tab": id, "aria-selected": String(TAB === id), hidden: !!Q && !((n + " " + (KEYS[id] || "")).toLowerCase().includes(Q)), text: n, onclick: () => { TAB = id; Q = ""; render(); window.scrollTo(0, 0); } })))),
       el("main", { class: "wrap" }, DEMO ? el("div", { class: "demo", text: "Пробный режим. Так выглядит админка: можно менять всё и нажимать «Посмотреть». Изменения остаются только в этом браузере, сайт не меняется." }) : null, V[TAB]()));
     paintTabs(); paintState();
   }
