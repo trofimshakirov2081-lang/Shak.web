@@ -37,7 +37,7 @@ window.SITE = {
     { label: "Контакты", href: "contacts/", page: "contacts" }
   ],
   // блоки главной: порядок и видимость меняются в админке
-  home: ["hero", "directions", "featured", "enroll", "zoom", "teacher"],
+  home: ["hero", "directions", "featured", "compare", "enroll", "zoom", "gallery", "calc", "teacher", "notify"],
   hero: {
     title: "Освойте востребованную бьюти-профессию в Туймазах",
     text: "Практическое обучение с преподавателем, который помогает разобраться в профессии и получить первые профессиональные навыки.",
@@ -139,8 +139,19 @@ window.SITE = {
     codes: [] }, // промокоды: { code: "ЗОЛОТО", text: "скидка 10%" }; поле в форме заявки появляется, когда есть хотя бы один
   pay: { on: false, text: "Можно оплатить частями" },
   cert: { on: true, title: "Сертификат после обучения", text: "", photos: [], size: "m" },
-  gallery: { on: true, title: "Как проходят занятия", text: "", photos: [], size: "m" },
+  gallery: { on: true, title: "Как проходят занятия", text: "Короткие видео с настоящих занятий в АлтынНур.", size: "l", photos: [
+    { src: "ph/v-uchenitsa-rabota", video: "ph/v-uchenitsa-rabota.mp4", alt: "Ученица наращивает ресницы модели" },
+    { src: "ph/v-praktika", video: "ph/v-praktika.mp4", alt: "Практика на модели" },
+    { src: "ph/v-teoriya", video: "ph/v-teoriya.mp4", alt: "Теория с учебным пособием" },
+    { src: "ph/v-rezultat", video: "ph/v-rezultat.mp4", alt: "Результат: наращенные ресницы" }
+  ] },
   batchesNote: "",
+  compare: { on: true, title: "Какой курс выбрать", text: "", courses: ["lashes", "lashes-pro"] },
+  calc: { on: true, title: "Когда окупится обучение", text: "", course: "lashes-pro", price: 2500, per: 3, note: "Расчёт примерный, без учёта материалов и аренды.", btn: "Записаться на курс" },
+  referral: { on: true, kicker: "Вдвоём выгоднее", title: "", text: "", btn: "Записаться вдвоём", wa: "Здравствуйте! Хотим записаться на обучение вдвоём с подругой." },
+  notify: { on: true, title: "Не нашли удобную дату?", text: "Напишите, какой курс интересует, и мы сообщим о следующем наборе.", btn: "Сообщить о наборе" },
+  design: { corners: "soft", blur: true, shadow: "soft", fontBody: "" }, // углы, размытие, тени, шрифт текста
+  blocks: [], // свои блоки из конструктора, на главной стоят как "b:<id>"
   works: [       // реальные работы: { src, alt, cat, author, kind: "student"|"teacher" }. Прислала Айгуль 16.11, чьи работы, уточнить
     { src: "ph/r-lash-brown", alt: "Наращивание ресниц, естественный эффект", cat: "brows-lashes" },
     { src: "ph/r-lash-volume", alt: "Объёмное наращивание ресниц", cat: "brows-lashes" },

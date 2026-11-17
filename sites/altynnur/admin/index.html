@@ -103,6 +103,12 @@ main{padding:20px 0 80px}
 .dragging{position:relative;z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:.95}
 .blocks .brow{flex-wrap:wrap}
 .search{padding:0 16px 8px;max-width:860px;margin:0 auto}.search input{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.types{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.type{display:grid;gap:4px;justify-items:center;padding:12px 6px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;font:inherit}
+.type b{font-size:1.4rem;line-height:1}.type span{font-size:.85rem}.type:active{transform:scale(.97)}
+.btn--icon{width:42px;padding:0;font-size:1.25rem;justify-content:center}
+.top__in{flex-wrap:wrap;row-gap:6px}.top__in .state{order:9;flex:1 0 100%;font-size:.8rem;margin:0}.top__in .btn--icon{margin-left:auto}
+@media(max-width:420px){.top__in{gap:6px;padding:10px 12px}.top__in .btn{padding:0 11px;font-size:.9rem;min-height:38px}.top__in .btn--icon{width:38px;padding:0}.top__name{font-size:1rem}}
 </style>
 </head>
 <body>

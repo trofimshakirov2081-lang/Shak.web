@@ -97,9 +97,13 @@
   "hero",
   "directions",
   "featured",
+  "compare",
   "enroll",
   "zoom",
-  "teacher"
+  "gallery",
+  "calc",
+  "teacher",
+  "notify"
  ],
  "hero": {
   "title": "Освойте востребованную бьюти-профессию в Туймазах",
@@ -581,11 +585,72 @@
  "gallery": {
   "on": true,
   "title": "Как проходят занятия",
-  "text": "",
-  "photos": [],
-  "size": "m"
+  "text": "Короткие видео с настоящих занятий в АлтынНур.",
+  "size": "l",
+  "photos": [
+   {
+    "src": "ph/v-uchenitsa-rabota",
+    "video": "ph/v-uchenitsa-rabota.mp4",
+    "alt": "Ученица наращивает ресницы модели"
+   },
+   {
+    "src": "ph/v-praktika",
+    "video": "ph/v-praktika.mp4",
+    "alt": "Практика на модели"
+   },
+   {
+    "src": "ph/v-teoriya",
+    "video": "ph/v-teoriya.mp4",
+    "alt": "Теория с учебным пособием"
+   },
+   {
+    "src": "ph/v-rezultat",
+    "video": "ph/v-rezultat.mp4",
+    "alt": "Результат: наращенные ресницы"
+   }
+  ]
  },
  "batchesNote": "",
+ "compare": {
+  "on": true,
+  "title": "Какой курс выбрать",
+  "text": "",
+  "courses": [
+   "lashes",
+   "lashes-pro"
+  ]
+ },
+ "calc": {
+  "on": true,
+  "title": "Когда окупится обучение",
+  "text": "",
+  "course": "lashes-pro",
+  "price": 2500,
+  "per": 3,
+  "note": "Расчёт примерный, без учёта материалов и аренды.",
+  "btn": "Записаться на курс"
+ },
+ "referral": {
+  "on": true,
+  "kicker": "Вдвоём выгоднее",
+  "title": "",
+  "text": "",
+  "btn": "Записаться вдвоём",
+  "wa": "Здравствуйте! Хотим записаться на обучение вдвоём с подругой."
+ },
+ "notify": {
+  "on": true,
+  "title": "Не нашли удобную дату?",
+  "text": "Напишите, какой курс интересует, и мы сообщим о следующем наборе.",
+  "btn": "Сообщить о наборе"
+ },
+ "design": {
+  "corners": "soft",
+  "blur": true,
+  "shadow": "soft",
+  "fontBody": ""
+ },
+ "blocks": [],
  "works": [
   {
    "src": "ph/r-lash-brown",

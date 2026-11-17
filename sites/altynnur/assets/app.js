@@ -40,12 +40,18 @@
   const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
     { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
-  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }];
+  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }, { id: "finlandica", name: "Finlandica", ff: "'Finlandica'" }];
   const pick = (key, list, def) => { if (!PK(key)) return def; let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
   const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
   const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
   let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
   document.documentElement.dataset.anim = ANIM;
+  // дизайн из админки: углы, размытие, шрифт текста, тени
+  (() => { const D = S.design || {}, st = document.documentElement.style, R = { sharp: [3, 6], soft: [14, 22], round: [24, 34] }[D.corners];
+    if (R) { st.setProperty("--r", R[0] + "px"); st.setProperty("--r-l", R[1] + "px"); }
+    document.documentElement.dataset.blur = D.blur === false ? "off" : "on";
+    const FB = { ysabeau: "'Ysabeau Office'", arsenal: "'Arsenal'", finlandica: "'Finlandica'" }[D.fontBody]; if (FB) st.setProperty("--f-body", FB + ",system-ui,sans-serif");
+    document.documentElement.dataset.shadow = D.shadow || "soft"; })();
   let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = S.modeToggle === false ? "light" : MODE === "dark" ? "dark" : "light";
   document.documentElement.dataset.mode = MODE;
   const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
@@ -164,7 +170,7 @@
   /* ---------- блоки доверия и продаж: на сайте появляются, только когда заполнены ---------- */
   // фото в блоке: 1 большое, 2 рядом, 3 в ряд, больше сеткой; общий размер блока примерно одинаковый
   const PH = (photos, size) => { const ps = (photos || []).filter((p) => p && p.src); if (!ps.length) return "";
-    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
+    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => p.video ? `<div class="ph ph--video"><video data-src="${R}${esc(p.video)}" poster="${R}${p.src}-640.webp" muted loop playsinline preload="none" aria-label="${esc(p.alt || "Видео")}"></video></div>` : ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
   const SEC = (title, sub, inner) => `<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="rv-t sec__h">${esc(title)}</h2>${sub ? `<p class="lead sec__sub">${esc(sub)}</p>` : ""}${inner}</div></section>`;
   const ON = (o) => !!o && o.on !== false;
   const seatsTxt = (n) => `${n} ${plural(n, "место", "места", "мест")}`;
@@ -183,8 +189,56 @@
     return SEC("Отзывы учениц", sub, `<div class="revs">${r.map((x) => { const n = parseInt(x.stars, 10); return `<figure class="rev">${n >= 1 && n <= 5 ? `<span class="stars" aria-label="Оценка ${n} из 5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : ""}${PH(x.photos, "s")}${x.text ? `<blockquote>${esc(x.text)}</blockquote>` : ""}<figcaption><b>${esc(x.name || "")}</b>${x.course ? `<span class="muted"> · ${esc(x.course)}</span>` : ""}</figcaption></figure>`; }).join("")}</div>`); };
   H.cert = () => { const c = S.cert || {}; if (!ON(c) || !(c.text || (c.photos || []).some((p) => p.src))) return ""; return SEC(c.title || "Сертификат после обучения", c.text, PH(c.photos, c.size)); };
   H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
+  /* ---------- готовые блоки: сравнение курсов, калькулятор дохода, приведи подругу, узнать о наборе ---------- */
+  H.compare = () => { const C = S.compare || {}; const cs = (C.courses || []).map(course).filter(Boolean); if (!ON(C) || cs.length < 2) return "";
+    const rows = [["Цена", (c) => rub(c.price)], ["Длительность", (c) => c.duration], ["Практика на моделях", (c) => c.models], ["Материалы", (c) => c.materials], ["Документ", (c) => c.certificate], ["Что изучите", (c) => { const t = c.topics || []; return t.slice(0, 4).join(", ") + (t.length > 4 ? ` и ещё ${t.length - 4}` : ""); }]]
+      .filter(([, f]) => cs.some((c) => has(f(c))));
+    return SEC(C.title || "Какой курс выбрать", C.text, `<div class="cmp" style="--n:${cs.length}"><div class="cmp__h"><span></span>${cs.map((c) => `<a href="${cURL(c)}"><b>${esc(c.name)}</b></a>`).join("")}</div>
+      ${rows.map(([l, f]) => `<div class="cmp__r"><span class="cmp__l">${l}</span>${cs.map((c) => `<span>${esc(f(c) || "—")}</span>`).join("")}</div>`).join("")}
+      <div class="cmp__r cmp__r--act"><span></span>${cs.map((c) => `<span><button class="btn btn--accent btn--sm" data-enroll="${c.slug}">Записаться</button></span>`).join("")}</div></div>`); };
+  H.calc = () => { const K = S.calc || {}; if (!ON(K)) return ""; const cs = S.courses;
+    return SEC(K.title || "Когда окупится обучение", K.text || "Посчитайте сами: сколько клиенток в неделю и по какой цене.", `<div class="calc" data-calc>
+      <label>Курс<select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select></label>
+      <label>Цена процедуры, ₽<input data-k="price" type="number" inputmode="numeric" min="100" step="100" value="${parseInt(K.price, 10) || 2500}"></label>
+      <label>Клиенток в неделю: <b data-o="per">${parseInt(K.per, 10) || 3}</b><input data-k="per" type="range" min="1" max="20" value="${parseInt(K.per, 10) || 3}"></label>
+      <div class="calc__res"><div><span>Обучение окупится примерно за</span><b data-o="weeks"></b></div><div><span>Доход в месяц около</span><b data-o="month"></b></div></div>
+      <p class="muted calc__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p>
+      <button class="btn btn--accent" data-enroll>${esc(K.btn || "Записаться на курс")}</button></div>`); };
+  H.referral = () => { const F2 = S.referral || {}; if (!ON(F2) || !F2.title) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo promo--text"><div class="promo__t"><span class="promo__k">${esc(F2.kicker || "Вдвоём выгоднее")}</span><h2>${esc(F2.title)}</h2>${F2.text ? `<p>${esc(F2.text)}</p>` : ""}
+      <a class="btn btn--accent" href="${wa(F2.wa || "Здравствуйте! Хотим записаться на обучение вдвоём с подругой.")}" target="_blank" rel="noopener">${esc(F2.btn || "Записаться вдвоём")}</a></div></div></div></section>`; };
+  H.notify = () => { const N = S.notify || {}; if (!ON(N)) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="notify"><div><h2>${esc(N.title || "Не нашли удобную дату?")}</h2><p class="muted">${esc(N.text || "Напишите, какой курс интересует, и мы сообщим о следующем наборе.")}</p></div>
+      <div class="notify__f"><select data-notify>${S.courses.map((c) => `<option>${esc(c.name)}</option>`).join("")}</select><button class="btn btn--accent" data-notify-go>${esc(N.btn || "Сообщить о наборе")}</button></div></div></div></section>`; };
+
+  /* ---------- конструктор: свои блоки любого вида ---------- */
+  const lines = (t) => String(t || "").split("\n").map((x) => x.trim()).filter(Boolean);
+  const pair = (l) => { const i = l.indexOf("::"); return i < 0 ? [l, ""] : [l.slice(0, i).trim(), l.slice(i + 2).trim()]; };
+  const embed = (u) => { u = String(u || "").trim(); let m;
+    if ((m = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/))) return `https://www.youtube.com/embed/${m[1]}`;
+    if ((m = u.match(/rutube\.ru\/(?:video|shorts)\/([\w]+)/))) return `https://rutube.ru/play/embed/${m[1]}`;
+    if ((m = u.match(/vk(?:video)?\.(?:com|ru)\/.*video(-?\d+)_(\d+)/))) return `https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}`;
+    return ""; };
+  const btnHTML = (b) => !b.btn ? "" : b.act === "wa" ? `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${esc(b.btn)}</a>`
+    : b.act === "link" && b.url ? `<a class="btn btn--accent" href="${esc(b.url)}"${/^https?:/.test(b.url) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.btn)}</a>` : `<button class="btn btn--accent" data-enroll="${esc(b.course || "")}">${esc(b.btn)}</button>`;
+  function custom(b) { if (!b || b.on === false) return ""; const T = b.type || "text", al = b.align || "left";
+    const head = b.title && T !== "quote" && T !== "divider" ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
+    const txt = b.text && !["list", "cards", "stats", "accordion", "gallery"].includes(T) ? lines(b.text).map((p) => `<p>${esc(p)}</p>`).join("") : "";
+    let inner = "";
+    if (T === "text" || T === "cta" || T === "form") inner = `${head}<div class="cb__txt">${txt}</div>${T === "form" ? `<div class="cb__form" data-inline-form></div>` : ""}${btnHTML(b)}`;
+    else if (T === "text-photo" && !(b.photos || []).some((x) => x && x.src)) inner = `${head}<div class="cb__txt">${txt}</div>${btnHTML(b)}`;
+    else if (T === "text-photo") inner = `<div class="cb__split cb__split--${b.side || "right"}"><div>${head}<div class="cb__txt">${txt}</div>${btnHTML(b)}</div><div>${PH(b.photos, "l")}</div></div>`;
+    else if (T === "list") inner = `${head}<ul class="cb__list">${lines(b.text).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>${btnHTML(b)}`;
+    else if (T === "gallery") inner = `${head}${b.text ? `<p class="lead sec__sub">${esc(b.text)}</p>` : ""}${PH(b.photos, b.size)}${btnHTML(b)}`;
+    else if (T === "cards") inner = `${head}<div class="cb__cards">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__card"><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</div>`; }).join("")}</div>${btnHTML(b)}`;
+    else if (T === "quote") inner = `<figure class="cb__quote"><blockquote>${esc(b.text || "")}</blockquote>${b.title ? `<figcaption>${esc(b.title)}</figcaption>` : ""}</figure>`;
+    else if (T === "stats") inner = `${head}<div class="nums">${lines(b.text).map((l) => { const [n, t] = pair(l); return `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`; }).join("")}</div>`;
+    else if (T === "video") { const e = embed(b.url); inner = `${head}<div class="cb__txt">${txt}</div>${e ? `<div class="cb__video"><iframe src="${e}" title="${esc(b.title || "Видео")}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : PH(b.photos, b.size)}${btnHTML(b)}`; }
+    else if (T === "accordion") inner = `${head}<div class="acc">${lines(b.text).map((l) => { const [q, a] = pair(l); return `<details><summary>${esc(q)}</summary><p class="ans">${esc(a)}</p></details>`; }).join("")}</div>`;
+    else if (T === "divider") inner = `<div class="cb__div">${b.title ? `<span>${esc(b.title)}</span>` : ""}</div>`;
+    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"}" style="padding-top:0"><div class="wrap"><div class="cb__in">${inner}</div></div></section>`; }
   const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
-  P.home = () => S.home.map((b) => H[b] ? H[b]() : "").join("");
+  P.home = () => S.home.map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
   P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
       <h1>Курсы и цены</h1><p class="lead">${S.courses.length} программ в трёх направлениях. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
       <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
@@ -208,7 +262,7 @@
       : L === "frame" ? `<section class="wrap chero chero--frame">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div>${text}</div></section>`
       : `<section class="chero chero--split">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="chero__t">${text}</div></section>`;
     const facts = [["Длительность", c.duration], ["Учебных часов", c.hours], ["Группа", c.group], ["Практика на моделях", c.models], ["Материалы", c.materials], ["Документ после обучения", c.certificate]].filter((f) => has(f[1]));
-    const faqs = S.faq.filter((f) => f.tags && f.tags.includes("course")).slice(0, 5);
+    const faqs = (c.faq || []).filter((f) => f && f.q).concat(S.faq.filter((f) => f.tags && f.tags.includes("course"))).slice(0, 8);
     const others = S.courses.filter((x) => x.slug !== c.slug).sort((a, b) => (b.cat === c.cat) - (a.cat === c.cat)).slice(0, 4);
     return `${hero}
       <section class="sec"><div class="wrap learn"><h2 class="rv-t">Что изучите</h2><div><ul>${c.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
@@ -481,6 +535,17 @@
     addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
     move();
   }
+  document.querySelectorAll("[data-calc]").forEach((k) => { const g = (n) => k.querySelector(`[data-k="${n}"]`), o = (n) => k.querySelector(`[data-o="${n}"]`);
+    const calc = () => { const cp = +g("course").value || 0, pr = Math.max(0, +g("price").value || 0), per = +g("per").value || 1; o("per").textContent = per;
+      const wk = pr * per; o("weeks").textContent = wk ? `${Math.max(1, Math.ceil(cp / wk))} ${plural(Math.max(1, Math.ceil(cp / wk)), "неделю", "недели", "недель")}` : "—"; o("month").textContent = rub(Math.round(wk * 4.3 / 100) * 100); };
+    k.addEventListener("input", calc); calc(); });
+  // видео в фото-блоках: грузятся и играют, только когда видны на экране
+  const vids = document.querySelectorAll("video[data-src]");
+  if (vids.length && "IntersectionObserver" in window) { const vo = new IntersectionObserver((es) => es.forEach((en) => { const v = en.target;
+      if (en.isIntersecting) { if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
+  else vids.forEach((v) => { v.src = v.dataset.src; v.controls = true; });
+  document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
+  document.querySelectorAll("[data-inline-form]").forEach((x) => { x.innerHTML = formHTML(null); bindForm(x.querySelector("form"), null, x); });
   const zoom = document.querySelector("section.zoom");
   if (zoom && !RM) {
     const st = zoom.querySelector(".zoom__stick"); let zq = 0;

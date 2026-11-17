@@ -158,7 +158,7 @@
             el("button", { type: "button", class: "ic", "aria-label": "Ниже", text: "↓", disabled: i === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; openI = -1; draw(); touch(); } }))),
           el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) meta.textContent = opt.meta(it); }),
             opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
-            el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; draw(); touch(); } } }))));
+            el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } }))));
         return d;
       }), opt.fixed ? "" : el("button", { type: "button", class: "btn", text: opt.add || "Добавить", style: "justify-self:start", onclick: () => { arr.push(opt.blank()); openI = arr.length - 1; draw(); touch(); const n = box.querySelectorAll(".item")[openI]; if (n) { n.scrollIntoView({ block: "center" }); const f = n.querySelector("input"); if (f) f.focus(); } } }));
     };
@@ -207,6 +207,7 @@
         row2(F.text("Длительность", c, "duration", { ph: "Например: 3 дня" }), F.text("Часов", c, "hours", { ph: "Например: 18 часов" })),
         row2(F.text("Группа", c, "group", { ph: "Например: до 4 человек" }), F.text("Практика на моделях", c, "models", { ph: "Например: 2 модели" })),
         row2(F.text("Материалы", c, "materials", { ph: "Например: всё выдаём" }), F.text("Документ после курса", c, "certificate", { ph: "Например: сертификат" })),
+        el("div", { class: "f" }, el("span", { text: "Вопросы об этом курсе (покажутся на его странице первыми)" }), F.list(c.faq || (c.faq = []), { add: "Добавить вопрос", untitled: "Новый вопрос", title: (f) => f.q, blank: () => ({ q: "", a: "" }), fields: (f, re2) => [F.text("Вопрос", f, "q", { on: re2, ph: "Нужен ли опыт?" }), F.area("Ответ", f, "a", { max: 800 })] })),
         F.img("Главное фото курса", c, "photo", "alt"),
         el("div", { class: "f" }, el("span", { text: "Ещё фото на странице курса" }), F.list(c.photos || (c.photos = []), { add: "Добавить фото", untitled: "Фото", title: (p) => p.alt, blank: () => ({ src: "", alt: "" }), fields: (p, r2) => [F.img("Фото", p, "src"), F.text("Что на фото", p, "alt", { on: r2 })] })),
         F.bool("Показывать на главной странице", { get v() { return (S.featured || []).includes(c.slug) && !!c.slug; }, set v(x) { S.featured = (S.featured || []).filter((s) => s !== c.slug); if (x && c.slug) S.featured.push(c.slug); } }, "v"),
@@ -218,7 +219,7 @@
       blank: () => ({ id: "cat-" + Date.now().toString(36), name: "", text: "", photo: "", alt: "" }),
       fields: (c, re) => [F.text("Название", c, "name", { on: re }), F.text("Подпись", c, "text"), F.img("Фото", c, "photo", "alt")] })];
 
-  const BLOCKS = { promo: "Акция", batches: "Ближайшие наборы", numbers: "Цифры", reviews: "Отзывы", cert: "Сертификат", gallery: "Фото-блок", hero: "Первый экран", directions: "Направления обучения", featured: "Курсы и цены", enroll: "Блок записи", zoom: "Фото-сцена «Как мы учим»", teacher: "Преимущества и преподаватель", manifest: "Текст с мини-фото", ribbon: "Лента фото" };
+  const BLOCKS = { compare: "Сравнение курсов", calc: "Калькулятор дохода", referral: "Приведи подругу", notify: "Сообщить о наборе", promo: "Акция", batches: "Ближайшие наборы", numbers: "Цифры", reviews: "Отзывы", cert: "Сертификат", gallery: "Фото-блок", hero: "Первый экран", directions: "Направления обучения", featured: "Курсы и цены", enroll: "Блок записи", zoom: "Фото-сцена «Как мы учим»", teacher: "Преимущества и преподаватель", manifest: "Текст с мини-фото", ribbon: "Лента фото" };
   V.home = () => {
     const bl = el("div", { class: "list blocks" });
     const drawB = () => { const on = S.home, off = Object.keys(BLOCKS).filter((b) => !on.includes(b));
@@ -239,20 +240,23 @@
         fields: (a, re) => [F.text("Заголовок", a, "t", { on: re }), F.text("Короткая подпись на плитке", a, "short"), F.area("Описание", a, "d", { max: 400 }), F.img("Фото", a, "photo")] })])];
   };
 
+  const TYPES = [["text", "📄", "Текст"], ["text-photo", "🖼", "Текст и фото"], ["list", "☰", "Список"], ["gallery", "▦", "Фото"], ["cards", "▤", "Карточки"], ["quote", "❝", "Цитата"],
+    ["stats", "#", "Цифры"], ["cta", "→", "Кнопка"], ["video", "▶", "Видео"], ["form", "✎", "Форма заявки"], ["accordion", "▾", "Вопрос-ответ"], ["divider", "—", "Разделитель"]];
+  const bName = (id) => { if (id.startsWith("b:")) { const b = (S.blocks || []).find((x) => "b:" + x.id === id); const t = TYPES.find((x) => x[0] === (b && b.type)); return "Свой блок: " + ((b && b.title) || (t ? t[2] : "без названия")); } return BLOCKS[id] || id; };
   /* ---------- разделы сайта: один список, порядок и показ ---------- */
   V.sections = () => {
     if (!Array.isArray(S.homeOff)) S.homeOff = [];
-    const all = Object.keys(BLOCKS); S.homeOff = S.homeOff.filter((b) => all.includes(b) && !S.home.includes(b)); all.forEach((b) => { if (!S.home.includes(b) && !S.homeOff.includes(b)) S.homeOff.push(b); });
+    const all = Object.keys(BLOCKS).concat((S.blocks || []).map((b) => "b:" + b.id)); S.homeOff = S.homeOff.filter((b) => all.includes(b) && !S.home.includes(b)); all.forEach((b) => { if (!S.home.includes(b) && !S.homeOff.includes(b)) S.homeOff.push(b); });
     const list = el("div", { class: "list blocks" });
     const empty = (b) => { const d = { promo: S.promo && S.promo.title, batches: (S.batches || []).length, numbers: (S.numbers || []).length, reviews: (S.reviews || []).length, cert: S.cert && ((S.cert.photos || []).length || S.cert.text), gallery: S.gallery && (S.gallery.photos || []).length }; return b in d && !d[b]; };
     const draw = () => { const on = S.home, off = S.homeOff;
       list.replaceChildren(...on.map((b, i) => el("div", { class: "brow" }, el("span", { class: "drag", text: "⠿", "aria-label": "Перетащить" }),
           el("button", { type: "button", class: "ic", text: "↑", "aria-label": "Выше", disabled: i === 0, onclick: () => { [on[i - 1], on[i]] = [on[i], on[i - 1]]; draw(); touch(); } }),
           el("button", { type: "button", class: "ic", text: "↓", "aria-label": "Ниже", disabled: i === on.length - 1, onclick: () => { [on[i + 1], on[i]] = [on[i], on[i + 1]]; draw(); touch(); } }),
-          el("span", { style: "flex:1", text: BLOCKS[b] || b }, empty(b) ? el("small", { style: "display:block;color:var(--ink2)", text: "пока пустой, на сайте не виден: заполните во вкладке «Продажи»" }) : null),
+          el("span", { style: "flex:1", text: bName(b) }, empty(b) ? el("small", { style: "display:block;color:var(--ink2)", text: "пока пустой, на сайте не виден: заполните во вкладке «Продажи»" }) : null),
           el("label", { class: "chk" }, el("input", { type: "checkbox", checked: true, onchange: () => { on.splice(i, 1); off.unshift(b); draw(); touch(); } }), el("span", { text: "Показан" })))),
         off.length ? el("p", { class: "sub", style: "margin:14px 0 4px", text: "Скрытые разделы" }) : "",
-        ...off.map((b, i) => el("div", { class: "brow", style: "opacity:.65" }, el("span", { style: "flex:1", text: BLOCKS[b] || b }),
+        ...off.map((b, i) => el("div", { class: "brow", style: "opacity:.65" }, el("span", { style: "flex:1", text: bName(b) }),
           el("label", { class: "chk" }, el("input", { type: "checkbox", checked: false, onchange: () => { off.splice(i, 1); on.push(b); draw(); touch(); } }), el("span", { text: "Скрыт" })))));
     };
     dragSort(list, ".brow", (a, b) => { if (a >= S.home.length || b >= S.home.length) return; const [x] = S.home.splice(a, 1); S.home.splice(b, 0, x); draw(); touch(); });
@@ -260,16 +264,43 @@
     return [el("h1", { text: "Разделы сайта" }), el("p", { class: "sub", text: "Порядок блоков на главной: тяните за ⠿ или жмите стрелки. Галочка показывает или скрывает раздел." }), list];
   };
 
+  /* ---------- конструктор своих блоков ---------- */
+  V.build = () => { if (!Array.isArray(S.blocks)) S.blocks = []; const pos = { where: "end" };
+    const add = (t) => { const id = Date.now().toString(36); S.blocks.push({ id, type: t, on: true, title: "", text: "", align: "left", bg: "none", photos: [], size: "m", side: "right", btn: t === "cta" ? "Записаться" : "", act: "enroll", url: "", waText: "", course: "" });
+      if (pos.where === "start") S.home.unshift("b:" + id); else if (pos.where === "hidden") { (S.homeOff = S.homeOff || []).unshift("b:" + id); } else S.home.push("b:" + id); touch(); render(); toast("Блок создан, заполните его ниже"); setTimeout(() => { const n = [...document.querySelectorAll(".bl-list > .item")].pop(); if (n) { n.open = true; n.scrollIntoView({ block: "start" }); } }, 60); };
+    const hint = { text: "Абзацы с новой строки.", list: "Каждый пункт с новой строки.", cards: "Каждая карточка с новой строки: Заголовок :: текст", stats: "Каждая цифра с новой строки: 8 лет :: опыт преподавания", accordion: "Каждый вопрос с новой строки: Вопрос :: Ответ", quote: "Текст цитаты. Заголовок станет подписью автора." };
+    const fields = (b, re) => { const T = b.type, F2 = [onHome("b:" + b.id), F.bool("Показывать этот блок", b, "on"), F.sel("Вид блока", b, "type", TYPES.map((t) => [t[0], t[1] + " " + t[2]]), { hint: "Поменяйте, если нужен другой вид. Тексты сохранятся" })];
+      if (T !== "divider") F2.push(F.text(T === "quote" ? "Подпись (автор)" : "Заголовок", b, "title", { on: re }));
+      else F2.push(F.text("Надпись на разделителе (можно пусто)", b, "title", { on: re }));
+      if (T !== "divider" && T !== "gallery") F2.push(F.area("Текст", b, "text", { max: 3000, hint: hint[T] || "" }));
+      if (T === "gallery") F2.push(F.area("Подпись под заголовком", b, "text", { max: 400 }));
+      if (["text-photo", "gallery", "video"].includes(T)) F2.push(F.photos(T === "video" ? "Фото, если видео нет" : "Фото", b, "photos"));
+      if (T === "text-photo") F2.push(F.sel("Где фото", b, "side", [["right", "Справа"], ["left", "Слева"], ["top", "Сверху"]]));
+      if (T === "gallery" || T === "video") F2.push(F.sel("Размер", b, "size", SIZES));
+      if (T === "video") F2.push(F.text("Ссылка на видео", b, "url", { ph: "YouTube, Rutube или VK Видео", max: 400 }));
+      if (!["divider", "quote", "stats", "accordion"].includes(T)) F2.push(F.text("Кнопка (пусто: без кнопки)", b, "btn", { ph: "Записаться" }), F.sel("Что делает кнопка", b, "act", [["enroll", "Открывает заявку"], ["wa", "Пишет в WhatsApp"], ["link", "Ведёт по ссылке"]]),
+        F.text("Ссылка для кнопки", b, "url", { ph: "https://... или courses/", max: 400, hint: "Только если кнопка ведёт по ссылке" }), F.sel("Курс в заявке", b, "course", [["", "Не выбран"]].concat(S.courses.map((c) => [c.slug, c.name]))));
+      if (T !== "divider") F2.push(row2(F.sel("Текст по", b, "align", [["left", "Левому краю"], ["center", "Центру"], ["right", "Правому краю"]]), F.sel("Фон", b, "bg", [["none", "Без фона"], ["card", "Карточка"], ["accent", "С золотой рамкой"]])));
+      return F2; };
+    const clean = () => { const ids = new Set(S.blocks.map((b) => "b:" + b.id)); S.home = S.home.filter((x) => !x.startsWith("b:") || ids.has(x)); S.homeOff = (S.homeOff || []).filter((x) => !x.startsWith("b:") || ids.has(x)); };
+    const list = F.list(S.blocks, { title: (b) => b.title || (TYPES.find((t) => t[0] === b.type) || [, , "Блок"])[2], meta: (b) => (TYPES.find((t) => t[0] === b.type) || [, ""])[1] + (b.on === false ? " скрыт" : ""), untitled: "Блок", fields, del: "Удалить блок", blank: () => ({}), onChange: clean });
+    list.classList.add("bl-list"); const addBtn = list.querySelector(":scope > .btn"); if (addBtn) addBtn.remove();
+    return [el("h1", { text: "Конструктор блоков" }), el("p", { class: "sub", text: "Создайте любой блок с нуля: выберите вид, заполните текст, фото и кнопку. Порядок на главной: стрелки у блока или вкладка «Разделы сайта»." }),
+      box("Новый блок", "выберите вид", [F.sel("Куда поставить", pos, "where", [["end", "В конец главной"], ["start", "В начало главной"], ["hidden", "Пока скрыть"]]),
+        el("div", { class: "types" }, TYPES.map(([id, ic, n]) => el("button", { type: "button", class: "type", onclick: () => add(id) }, el("b", { text: ic }), el("span", { text: n }))))], true),
+      S.blocks.length ? box("Ваши блоки", S.blocks.length + " шт.", [list], true) : el("p", { class: "sub", text: "Своих блоков пока нет." })];
+  };
+
   /* ---------- раздел «Продажи»: акции, промокоды, наборы, отзывы, цифры, сертификат, фото ---------- */
   const SIZES = [["s", "Небольшой"], ["m", "Средний"], ["l", "На всю ширину"]];
   F.photos = (label, o, k) => { if (!Array.isArray(o[k])) o[k] = [];
     return el("div", { class: "f" }, el("span", { text: label }), el("small", { style: "color:var(--ink2)", text: "1 фото будет большим, 2 встанут рядом, 3 в ряд, больше сеткой. Можно без фото." }),
-      F.list(o[k], { title: (p) => p.alt, untitled: "Фото", fields: (p) => [F.img("Фото", p, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" })); };
+      F.list(o[k], { title: (p) => p.alt, untitled: "Фото", fields: (p) => [F.img(p.video ? "Обложка видео" : "Фото", p, "src", "alt"), p.video ? F.text("Видео", p, "video", { hint: "Файл видео на сайте. Новые видео пока добавляет Трофим" }) : null], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" })); };
   // галочка «показывать» и место блока на главной: стрелки двигают его выше или ниже среди остальных блоков
   const onHome = (id) => { const box2 = el("div", { class: "brow", style: "flex-wrap:wrap;gap:8px" });
     const draw = () => { const i = S.home.indexOf(id), shown = i >= 0;
       box2.replaceChildren(el("label", { class: "chk", style: "font-weight:600;flex:1 1 auto" }, el("input", { type: "checkbox", checked: shown, onchange: (e) => { S.home = S.home.filter((b) => b !== id); if (e.target.checked) S.home.splice(Math.min(1, S.home.length), 0, id); touch(); draw(); } }), el("span", { text: "Показывать на главной" })),
-        shown ? el("span", { style: "color:var(--ink2);font-size:.9rem", text: `место ${i + 1} из ${S.home.length}` + (S.home[i - 1] ? `, после «${BLOCKS[S.home[i - 1]] || S.home[i - 1]}»` : ", первым") }) : null,
+        shown ? el("span", { style: "color:var(--ink2);font-size:.9rem", text: `место ${i + 1} из ${S.home.length}` + (S.home[i - 1] ? `, после «${bName(S.home[i - 1])}»` : ", первым") }) : null,
         shown ? el("button", { type: "button", class: "ic", text: "↑", "aria-label": "Выше", disabled: i === 0, onclick: () => { [S.home[i - 1], S.home[i]] = [S.home[i], S.home[i - 1]]; touch(); draw(); } }) : null,
         shown ? el("button", { type: "button", class: "ic", text: "↓", "aria-label": "Ниже", disabled: i === S.home.length - 1, onclick: () => { [S.home[i + 1], S.home[i]] = [S.home[i], S.home[i + 1]]; touch(); draw(); } }) : null); };
     draw(); return box2; };
@@ -293,6 +324,15 @@
       box("Отзывы", "только настоящие", [onHome("reviews"), F.list(S.reviews, { title: (r) => r.name, untitled: "Новый отзыв", add: "Добавить отзыв", blank: () => ({ name: "", course: "", text: "", stars: "5", photos: [] }),
         fields: (r, re) => [row2(F.text("От кого (имя)", r, "name", { on: re }), F.text("Курс", r, "course")), F.sel("Оценка", r, "stars", [["5", "★★★★★ 5"], ["4", "★★★★ 4"], ["3", "★★★ 3"], ["2", "★★ 2"], ["1", "★ 1"], ["", "Без звёзд"]]), F.area("Текст отзыва", r, "text", { max: 800 }), F.photos("Скриншоты или фото (можно без них)", r, "photos")] })]),
       box("Сертификат", null, [onHome("cert"), F.text("Заголовок", ce, "title"), F.area("Текст", ce, "text", { max: 400, ph: "" }), F.photos("Фото сертификата", ce, "photos"), F.sel("Размер фото", ce, "size", SIZES)]),
+      box("Сравнение курсов", "таблица: что входит", [onHome("compare"), F.text("Заголовок", ensure("compare", { on: true, title: "Какой курс выбрать", text: "", courses: ["lashes", "lashes-pro"] }), "title"), F.area("Подпись", S.compare, "text", { max: 300 }),
+        F.multi("Какие курсы сравнить (2-3)", S.compare, "courses", S.courses.map((c) => [c.slug, c.name]))]),
+      box("Калькулятор дохода", "когда окупится курс", [onHome("calc"), F.text("Заголовок", ensure("calc", { on: true, title: "Когда окупится обучение", text: "", course: "lashes-pro", price: 2500, per: 3, note: "Расчёт примерный, без учёта материалов и аренды.", btn: "Записаться на курс" }), "title"),
+        F.area("Подпись", S.calc, "text", { max: 300 }), F.sel("Курс по умолчанию", S.calc, "course", S.courses.map((c) => [c.slug, c.name])),
+        row2(F.text("Цена процедуры, ₽", S.calc, "price", { type: "number", mode: "numeric" }), F.text("Клиенток в неделю", S.calc, "per", { type: "number", mode: "numeric" })), F.text("Примечание", S.calc, "note"), F.text("Кнопка", S.calc, "btn")]),
+      box("Приведи подругу", null, [onHome("referral"), F.text("Метка", ensure("referral", { on: true, kicker: "Вдвоём выгоднее", title: "", text: "", btn: "Записаться вдвоём", wa: "Здравствуйте! Хотим записаться на обучение вдвоём с подругой." }), "kicker"),
+        F.text("Заголовок", S.referral, "title", { ph: "Приходите с подругой: скидка 10% обеим" }), F.area("Текст", S.referral, "text", { max: 400 }), F.text("Кнопка", S.referral, "btn"), F.text("Сообщение в WhatsApp", S.referral, "wa", { max: 300 })]),
+      box("Сообщить о наборе", "если дата не подошла", [onHome("notify"), F.text("Заголовок", ensure("notify", { on: true, title: "Не нашли удобную дату?", text: "Напишите, какой курс интересует, и мы сообщим о следующем наборе.", btn: "Сообщить о наборе" }), "title"),
+        F.area("Текст", S.notify, "text", { max: 300 }), F.text("Кнопка", S.notify, "btn")]),
       box("Фото-блок", "любые фото: занятия, студия, выпускницы", [onHome("gallery"), F.text("Заголовок", ga, "title"), F.area("Текст", ga, "text", { max: 400 }), F.photos("Фото", ga, "photos"), F.sel("Размер", ga, "size", SIZES)])];
   };
 
@@ -320,10 +360,17 @@
       box("Подбор курса", "заголовок теста", [F.text("Заголовок", S.quiz, "title"), F.area("Текст", S.quiz, "text")])];
   };
 
+  const ensureD = () => { if (!S.design || typeof S.design !== "object") S.design = { corners: "soft", blur: true, shadow: "soft", fontBody: "" }; return S.design; };
   V.look = () => [el("h1", { text: "Оформление" }), el("p", { class: "sub", text: "Общий вид сайта. Изменения видны после публикации, заранее посмотреть можно кнопкой «Посмотреть»." }),
     box("Цвет, шрифт и движение", null, [
       F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]]),
-      F.sel("Шрифт заголовков", S, "font", [["arsenal", "Arsenal (простой)"], ["bona", "Bona Nova"], ["prata", "Prata"], ["cormorant", "Cormorant"]]),
+      F.sel("Шрифт заголовков", S, "font", [["arsenal", "Arsenal (простой)"], ["finlandica", "Finlandica (современный)"], ["bona", "Bona Nova (с засечками)"], ["prata", "Prata (с засечками)"], ["cormorant", "Cormorant (изящный)"]]),
+      F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Как задано в шрифте заголовков"], ["ysabeau", "Ysabeau Office"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
+      F.sel("Углы", ensureD(), "corners", [["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
+      F.bool("Размытие под шапкой и метками (эффект стекла)", ensureD(), "blur"),
+      F.sel("Тени у карточек", ensureD(), "shadow", [["soft", "Лёгкие"], ["none", "Без теней"], ["strong", "Заметные"]]),
+      el("div", { class: "f" }, el("span", { text: "Готовые наборы" }), el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, [["Мягкий", { corners: "round", blur: true, shadow: "soft" }, "arsenal"], ["Строгий", { corners: "sharp", blur: false, shadow: "none" }, "finlandica"], ["Классика", { corners: "soft", blur: true, shadow: "strong" }, "bona"]]
+        .map(([n, d, f]) => el("button", { type: "button", class: "btn btn--sm", text: n, onclick: () => { Object.assign(ensureD(), d); S.font = f; touch(); render(); toast("Набор «" + n + "» применён. Нажмите «Посмотреть»"); } })))),
       F.sel("Анимация", S, "anim", [["calm", "Спокойная"], ["soft", "Мягкая"], ["live", "Живая"]]),
       F.sel("Курсы на главной", S, "coursesView", [["flow", "По дуге (карусель)"], ["tiles", "Плиткой"]])], true),
     box("Режим черновика", null, [F.bool("Сайт в режиме черновика", S, "preview"),
@@ -362,19 +409,19 @@
   };
 
   /* ---------- каркас ---------- */
-  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["sections", "Разделы сайта"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
+  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["build", "Конструктор"], ["sections", "Разделы сайта"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
   function paintTabs() { const n = LEADS.filter((l) => l.status === "new").length; const t = $('[data-tab="leads"]'); if (t) t.replaceChildren("Заявки", n ? el("b", { text: n }) : ""); }
   // поиск по админке: слова, по которым находится вкладка
   const KEYS = { leads: "заявки клиенты", courses: "курсы цены программа фото курса направления", home: "главная первый экран фото заголовок как мы учим преимущества блок записи",
-    sales: "продажи акция скидка промокод частями рассрочка наборы даты места цифры отзывы звёзды сертификат фото-блок галерея", sections: "разделы порядок блоки скрыть показать переставить",
-    contacts: "контакты телефон whatsapp telegram адрес карта график вк", pages: "тексты преподаватель о себе об академии вопросы обучение работы", look: "оформление цвет шрифт анимация вид курсов черновик", set: "настройки пароль версии выход" };
+    sales: "продажи сравнение калькулятор доход подруга сообщить о наборе акция скидка промокод частями рассрочка наборы даты места цифры отзывы звёзды сертификат фото-блок галерея", sections: "разделы порядок блоки скрыть показать переставить", build: "конструктор свой блок новый блок текст фото кнопка видео карточки цитата список форма вопрос разделитель",
+    contacts: "контакты телефон whatsapp telegram адрес карта график вк", pages: "тексты преподаватель о себе об академии вопросы обучение работы", look: "оформление дизайн цвет шрифт углы скругление размытие стекло тени анимация вид курсов черновик", set: "настройки пароль версии выход" };
   let Q = "", SNAP = null, SNAPTAB = null;
   function snap() { if (SNAPTAB !== TAB) { SNAP = JSON.stringify(S); SNAPTAB = TAB; } }
   function render() { snap();
     app.replaceChildren(
       el("header", { class: "top" }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
-        el("button", { class: "btn", text: "Отменить", title: "Вернуть этот раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }),
-        el("button", { class: "btn", text: "Посмотреть", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),
+        el("button", { class: "btn btn--icon", text: "↶", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }),
+        el("button", { class: "btn", text: "Просмотр", title: "Посмотреть сайт с изменениями", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),
         el("div", { class: "search" }, el("input", { type: "search", placeholder: "Найти: промокод, отзывы, адрес…", value: Q, oninput: (e) => { Q = e.target.value.trim().toLowerCase(); document.querySelectorAll(".tabs .tab").forEach((t) => { const id = t.dataset.tab; t.hidden = !!Q && !((t.textContent + " " + (KEYS[id] || "")).toLowerCase().includes(Q)); }); },
           onkeydown: (e) => { if (e.key === "Enter") { const t = [...document.querySelectorAll(".tabs .tab")].find((x) => !x.hidden); if (t) t.click(); } } })),
         el("nav", { class: "tabs", role: "tablist" }, TABS.map(([id, n]) => el("button", { class: "tab", role: "tab", "data-tab": id, "aria-selected": String(TAB === id), hidden: !!Q && !((n + " " + (KEYS[id] || "")).toLowerCase().includes(Q)), text: n, onclick: () => { TAB = id; Q = ""; render(); window.scrollTo(0, 0); } })))),
