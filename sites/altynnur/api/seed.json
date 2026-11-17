@@ -556,6 +556,36 @@
    }
   ]
  },
+ "promo": {
+  "on": true,
+  "kicker": "Акция",
+  "title": "",
+  "text": "",
+  "until": "",
+  "btn": "Записаться со скидкой",
+  "photos": [],
+  "size": "m",
+  "codes": []
+ },
+ "pay": {
+  "on": false,
+  "text": "Можно оплатить частями"
+ },
+ "cert": {
+  "on": true,
+  "title": "Сертификат после обучения",
+  "text": "",
+  "photos": [],
+  "size": "m"
+ },
+ "gallery": {
+  "on": true,
+  "title": "Как проходят занятия",
+  "text": "",
+  "photos": [],
+  "size": "m"
+ },
+ "batchesNote": "",
  "works": [
   {
    "src": "ph/r-lash-brown",

@@ -204,7 +204,7 @@
       blank: () => ({ id: "cat-" + Date.now().toString(36), name: "", text: "", photo: "", alt: "" }),
       fields: (c, re) => [F.text("Название", c, "name", { on: re }), F.text("Подпись", c, "text"), F.img("Фото", c, "photo", "alt")] })];
 
-  const BLOCKS = { hero: "Первый экран", directions: "Направления обучения", featured: "Курсы и цены", enroll: "Блок записи", zoom: "Фото-сцена «Как мы учим»", teacher: "Преимущества и преподаватель", manifest: "Текст с мини-фото", ribbon: "Лента фото" };
+  const BLOCKS = { promo: "Акция", batches: "Ближайшие наборы", numbers: "Цифры", reviews: "Отзывы", cert: "Сертификат", gallery: "Фото-блок", hero: "Первый экран", directions: "Направления обучения", featured: "Курсы и цены", enroll: "Блок записи", zoom: "Фото-сцена «Как мы учим»", teacher: "Преимущества и преподаватель", manifest: "Текст с мини-фото", ribbon: "Лента фото" };
   V.home = () => {
     const bl = el("div", { class: "list blocks" });
     const drawB = () => { const on = S.home, off = Object.keys(BLOCKS).filter((b) => !on.includes(b));
@@ -223,6 +223,35 @@
         el("div", { class: "f" }, el("span", { text: "Четыре боковых фото" }), F.list(S.zoom.side, { fixed: true, title: (p) => p.cap, untitled: "Фото", fields: (p, re) => [F.text("Подпись", p, "cap", { on: re }), F.img("Фото", p, "src")] }))]),
       box("Преимущества", "плитки с фото", [F.list(S.advantages, { add: "Добавить преимущество", title: (a) => a.t, blank: () => ({ t: "", short: "", d: "", photo: "" }),
         fields: (a, re) => [F.text("Заголовок", a, "t", { on: re }), F.text("Короткая подпись на плитке", a, "short"), F.area("Описание", a, "d", { max: 400 }), F.img("Фото", a, "photo")] })])];
+  };
+
+  /* ---------- раздел «Продажи»: акции, промокоды, наборы, отзывы, цифры, сертификат, фото ---------- */
+  const SIZES = [["s", "Небольшой"], ["m", "Средний"], ["l", "На всю ширину"]];
+  F.photos = (label, o, k) => { if (!Array.isArray(o[k])) o[k] = [];
+    return el("div", { class: "f" }, el("span", { text: label }), el("small", { style: "color:var(--ink2)", text: "1 фото будет большим, 2 встанут рядом, 3 в ряд, больше сеткой. Можно без фото." }),
+      F.list(o[k], { title: (p) => p.alt, untitled: "Фото", fields: (p) => [F.img("Фото", p, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" })); };
+  const onHome = (id) => el("label", { class: "chk", style: "font-weight:600" }, el("input", { type: "checkbox", checked: S.home.includes(id), onchange: (e) => { S.home = S.home.filter((b) => b !== id); if (e.target.checked) S.home.splice(Math.min(1, S.home.length), 0, id); touch(); } }), el("span", { text: "Показывать на главной" }));
+  const ensure = (k, def) => { if (!S[k] || typeof S[k] !== "object") S[k] = def; return S[k]; };
+  V.sales = () => {
+    const pr = ensure("promo", { on: true, kicker: "Акция", title: "", text: "", until: "", btn: "Записаться со скидкой", photos: [], size: "m", codes: [] }); if (!Array.isArray(pr.codes)) pr.codes = [];
+    const pay = ensure("pay", { on: false, text: "Можно оплатить частями" }), ce = ensure("cert", { on: true, title: "Сертификат после обучения", text: "", photos: [], size: "m" }), ga = ensure("gallery", { on: true, title: "Как проходят занятия", text: "", photos: [], size: "m" });
+    ["batches", "numbers", "reviews"].forEach((k) => { if (!Array.isArray(S[k])) S[k] = []; });
+    const courses = [["", "Выберите курс"]].concat(S.courses.map((c) => [c.slug, c.name]));
+    return [el("h1", { text: "Продажи и доверие" }), el("p", { class: "sub", text: "То, что помогает решиться на запись. Блок появляется на главной, когда он заполнен и стоит галочка «Показывать на главной». Порядок блоков меняется на вкладке «Главная»." }),
+      box("Акция", "скидка, подарок, срок", [onHome("promo"), F.text("Метка", pr, "kicker", { ph: "Акция" }), F.text("Заголовок", pr, "title", { ph: "Например: −10% на курс ресниц до конца месяца" }), F.area("Текст", pr, "text", { max: 400 }),
+        row2(F.text("До какого числа", pr, "until", { ph: "30 ноября" }), F.text("Надпись на кнопке", pr, "btn")), F.photos("Фото акции", pr, "photos"), F.sel("Размер фото", pr, "size", SIZES)], true),
+      box("Промокоды", "поле в форме заявки", [el("small", { style: "color:var(--ink2)", text: "Когда есть хотя бы один промокод, в форме заявки появляется поле «Промокод». Неверный код сайт не примет, верный придёт вам в сообщении с заявкой." }),
+        F.list(pr.codes, { title: (c) => c.code, untitled: "Новый промокод", add: "Добавить промокод", blank: () => ({ code: "", text: "" }), fields: (c, re) => [row2(F.text("Промокод", c, "code", { on: re, ph: "ЗОЛОТО" }), F.text("Что даёт", c, "text", { ph: "скидка 10%" }))] })]),
+      box("Оплата частями", null, [F.bool("Показывать «можно частями» у цен", pay, "on"), F.text("Текст", pay, "text")]),
+      box("Ближайшие наборы", "даты и свободные места", [onHome("batches"), F.text("Подпись под заголовком", S, "batchesNote", { ph: "Например: группы до 3 человек" }),
+        F.list(S.batches, { title: (b) => [b.start, (S.courses.find((c) => c.slug === b.course) || {}).name].filter(Boolean).join(", "), untitled: "Новый набор", add: "Добавить набор", blank: () => ({ course: "", start: "", format: "", seats: "", on: true }),
+          fields: (b, re) => [F.sel("Курс", b, "course", courses, { hint: "" }), row2(F.text("Дата старта", b, "start", { ph: "1 декабря", on: re }), F.text("Свободных мест", b, "seats", { ph: "3", hint: "3 и меньше: «Осталось 3 места». 0: «Мест нет»" })), F.text("Формат", b, "format", { ph: "Будни, 10:00-17:00" }), F.bool("Показывать", b, "on")] })]),
+      box("Цифры", "опыт, выпускницы", [onHome("numbers"), F.list(S.numbers, { title: (n) => [n.n, n.t].filter(Boolean).join(" "), untitled: "Новая цифра", add: "Добавить цифру", blank: () => ({ n: "", t: "" }),
+        fields: (n, re) => [row2(F.text("Число", n, "n", { ph: "8 лет", on: re }), F.text("Подпись", n, "t", { ph: "преподаю наращивание", on: re }))] })]),
+      box("Отзывы", "только настоящие", [onHome("reviews"), F.list(S.reviews, { title: (r) => r.name, untitled: "Новый отзыв", add: "Добавить отзыв", blank: () => ({ name: "", course: "", text: "", stars: "5", photos: [] }),
+        fields: (r, re) => [row2(F.text("От кого (имя)", r, "name", { on: re }), F.text("Курс", r, "course")), F.sel("Оценка", r, "stars", [["5", "★★★★★ 5"], ["4", "★★★★ 4"], ["3", "★★★ 3"], ["2", "★★ 2"], ["1", "★ 1"], ["", "Без звёзд"]]), F.area("Текст отзыва", r, "text", { max: 800 }), F.photos("Скриншоты или фото (можно без них)", r, "photos")] })]),
+      box("Сертификат", null, [onHome("cert"), F.text("Заголовок", ce, "title"), F.area("Текст", ce, "text", { max: 400, ph: "" }), F.photos("Фото сертификата", ce, "photos"), F.sel("Размер фото", ce, "size", SIZES)]),
+      box("Фото-блок", "любые фото: занятия, студия, выпускницы", [onHome("gallery"), F.text("Заголовок", ga, "title"), F.area("Текст", ga, "text", { max: 400 }), F.photos("Фото", ga, "photos"), F.sel("Размер", ga, "size", SIZES)])];
   };
 
   const CHN = { phone: ["Телефон", "+7 927 123-45-67"], whatsapp: ["WhatsApp", "Номер: 79271234567"], telegram: ["Telegram", "Ник или ссылка: @altynnur"], max: ["Макс", "Ссылка на профиль"], vk: ["ВКонтакте", "https://vk.ru/..."], instagram: ["Instagram", "Ник или ссылка"], email: ["Почта", "name@mail.ru"] };
@@ -291,7 +320,7 @@
   };
 
   /* ---------- каркас ---------- */
-  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
+  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
   function paintTabs() { const n = LEADS.filter((l) => l.status === "new").length; const t = $('[data-tab="leads"]'); if (t) t.replaceChildren("Заявки", n ? el("b", { text: n }) : ""); }
   function render() {
     app.replaceChildren(

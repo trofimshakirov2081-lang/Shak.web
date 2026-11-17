@@ -105,7 +105,7 @@
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
   const ctag = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
-  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : ""].filter(Boolean).join(" · ") || c.short || "";
+  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(" · ") || c.short || "";
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   H.hero = () => `<section class="hero">
@@ -161,6 +161,29 @@
 
   /* ---------- страницы ---------- */
   const P = {};
+  /* ---------- блоки доверия и продаж: на сайте появляются, только когда заполнены ---------- */
+  // фото в блоке: 1 большое, 2 рядом, 3 в ряд, больше сеткой; общий размер блока примерно одинаковый
+  const PH = (photos, size) => { const ps = (photos || []).filter((p) => p && p.src); if (!ps.length) return "";
+    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
+  const SEC = (title, sub, inner) => `<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="rv-t sec__h">${esc(title)}</h2>${sub ? `<p class="lead sec__sub">${esc(sub)}</p>` : ""}${inner}</div></section>`;
+  const ON = (o) => !!o && o.on !== false;
+  const seatsTxt = (n) => `${n} ${plural(n, "место", "места", "мест")}`;
+  H.promo = () => { const p = S.promo || {}; if (!ON(p) || !p.title) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo${(p.photos || []).some((x) => x.src) ? "" : " promo--text"}">${PH(p.photos, p.size)}<div class="promo__t"><span class="promo__k">${esc(p.kicker || "Акция")}</span><h2>${esc(p.title)}</h2>${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.until ? `<p class="promo__until">Действует до ${esc(p.until)}</p>` : ""}<button class="btn btn--accent" data-enroll>${esc(p.btn || "Записаться")}</button></div></div></div></section>`; };
+  H.batches = () => { const b = (S.batches || []).filter((x) => x && x.start && x.on !== false); if (!b.length) return "";
+    return SEC("Ближайшие наборы", S.batchesNote || "", `<div class="batches">${b.map((x) => { const c = course(x.course), n = parseInt(x.seats, 10);
+      return `<div class="bcard"><span class="bcard__d">${esc(x.start)}</span><b>${esc(c ? c.name : x.course || "Курс")}</b>${x.format ? `<span class="muted">${esc(x.format)}</span>` : ""}
+        ${n > 0 ? `<span class="bcard__s${n <= 3 ? " hot" : ""}">${n <= 3 ? "Осталось " : "Свободно "}${seatsTxt(n)}</span>` : String(x.seats).trim() === "0" ? `<span class="bcard__s">Мест нет, запишем в лист ожидания</span>` : ""}
+        <button class="btn btn--line" data-enroll="${c ? c.slug : ""}">Записаться</button></div>`; }).join("")}</div>`); };
+  H.numbers = () => { const n = (S.numbers || []).filter((x) => x && x.n); if (!n.length) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="nums">${n.map((x) => `<div><b>${esc(x.n)}</b><span>${esc(x.t || "")}</span></div>`).join("")}</div></div></section>`; };
+  H.reviews = () => { const r = (S.reviews || []).filter((x) => x && (x.text || (x.photos || []).some((p) => p.src))); if (!r.length) return "";
+    const st = r.map((x) => parseInt(x.stars, 10)).filter((n) => n >= 1 && n <= 5), avg = st.length ? st.reduce((a, b) => a + b, 0) / st.length : 0;
+    const sub = avg ? `★ ${avg.toFixed(1).replace(".", ",")} из 5 · ${r.length} ${plural(r.length, "отзыв", "отзыва", "отзывов")}` : "";
+    return SEC("Отзывы учениц", sub, `<div class="revs">${r.map((x) => { const n = parseInt(x.stars, 10); return `<figure class="rev">${n >= 1 && n <= 5 ? `<span class="stars" aria-label="Оценка ${n} из 5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : ""}${PH(x.photos, "s")}${x.text ? `<blockquote>${esc(x.text)}</blockquote>` : ""}<figcaption><b>${esc(x.name || "")}</b>${x.course ? `<span class="muted"> · ${esc(x.course)}</span>` : ""}</figcaption></figure>`; }).join("")}</div>`); };
+  H.cert = () => { const c = S.cert || {}; if (!ON(c) || !(c.text || (c.photos || []).some((p) => p.src))) return ""; return SEC(c.title || "Сертификат после обучения", c.text, PH(c.photos, c.size)); };
+  H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
+  const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
   P.home = () => S.home.map((b) => H[b] ? H[b]() : "").join("");
   P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
       <h1>Курсы и цены</h1><p class="lead">${S.courses.length} программ в трёх направлениях. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
@@ -178,7 +201,7 @@
     document.title = `${c.name}: обучение в Туймазах | ${S.org.name}`;
     const L = c.layout || "split", cr = crumbs([{ t: "Курсы", href: `${R}courses/` }, { t: c.name }]);
     const text = `${cr}<span class="${L === "cover" ? "muted" : "cap"}">${esc(cat(c.cat).name)}</span><h1>${esc(c.name)}</h1><p class="${L === "cover" ? "" : "lead"}" style="max-width:46ch">${esc(c.short)}</p>
-      <div class="chero__price"><span class="price">${rub(c.price)}</span><span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
+      <div class="chero__price"><span class="price">${rub(c.price)}</span>${PARTS() ? `<span class="parts">${esc(PARTS())}</span>` : ""}<span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
       <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button><a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a></div>`;
     const heroPh = ph(c.photo, c.alt, { reveal: false, eager: true, sizes: L === "cover" ? "100vw" : "(max-width: 860px) 100vw, 50vw", cap: ILL, style: L === "split" ? "height:100%" : "" });
     const hero = L === "cover" ? `<section class="chero chero--cover">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="wrap chero__t">${text}</div></section>`
@@ -249,6 +272,7 @@
       ${c ? `<input type="hidden" name="course" value="${c.slug}">` : `<div class="fld"><label for="fCourse">Курс</label><select id="fCourse" name="course"><option value="">Пока не выбрала, нужна консультация</option>${S.courses.map((x) => `<option value="${x.slug}">${esc(x.name)}</option>`).join("")}</select></div>`}
       <div class="fld"><label for="fWay">Как с вами связаться</label><select id="fWay" name="way"><option>WhatsApp</option><option>Звонок</option><option>Telegram</option></select></div>
       <div class="fld"><label for="fNote">Комментарий, если хотите</label><textarea id="fNote" name="note" maxlength="600"></textarea></div>
+      ${has(S.promo && S.promo.codes) ? `<div class="fld"><label for="fPromo">Промокод, если есть</label><input id="fPromo" name="promo" maxlength="30" autocapitalize="characters"><span class="err" data-perr></span></div>` : ""}
       <div class="hp" aria-hidden="true"><label>Не заполняйте <input name="website" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent"><input type="checkbox" name="consent"><span>Согласна на обработку персональных данных по <a href="${R}privacy/" target="_blank">политике</a>.</span></label><span class="err" data-cerr></span>
       <button class="btn btn--accent" type="submit">Отправить заявку</button>
@@ -265,10 +289,11 @@
     if (!ok) { (form.querySelector(".has-err input") || form.querySelector("[name=consent]")).focus(); return null; }
     return d;
   }
+  const promoFind = (v) => ((S.promo && S.promo.codes) || []).find((x) => x.code && x.code.trim().toUpperCase() === String(v).trim().toUpperCase());
   function send(d, extra) {
     const c = d.course && course(d.course);
     const text = [`Здравствуйте! Меня зовут ${d.name.trim()}.`, c ? `Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.` : "Хочу узнать об обучении в АлтынНур и подобрать курс.",
-      extra && extra.summary ? extra.summary : "", `Телефон: ${d.phone}.${d.way ? ` Удобнее: ${d.way}.` : ""}`, d.note ? `Комментарий: ${d.note.trim()}` : ""].filter(Boolean).join("\n");
+      extra && extra.summary ? extra.summary : "", `Телефон: ${d.phone}.${d.way ? ` Удобнее: ${d.way}.` : ""}`, d.promo && d.promo.trim() ? `Промокод: ${d.promo.trim().toUpperCase()}${d.promoText ? ` (${d.promoText})` : ""}` : "", d.note ? `Комментарий: ${d.note.trim()}` : ""].filter(Boolean).join("\n");
     window.open(wa(text), "_blank", "noopener");
   }
   const okHTML = `<div class="ok"><div class="ok__mark" aria-hidden="true">✓</div><h3>Спасибо!</h3><p>Мы открыли WhatsApp с готовым сообщением, осталось нажать «Отправить». Мы свяжемся с вами по указанному номеру.</p></div>`;
@@ -285,6 +310,7 @@
   function bindForm(form, extra, target) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault(); const d = validate(form, true); if (!d) return;
+      if (d.promo && d.promo.trim()) { const m = promoFind(d.promo); const pe = form.querySelector("[data-perr]"); if (!m) { if (pe) pe.textContent = "Такого промокода нет. Проверьте написание или оставьте поле пустым"; return; } if (pe) pe.textContent = ""; d.promoText = m.text; }
       if (S.preview || DRAFT || S.mode === "static") { send(d, extra); target.innerHTML = okHTML; return; }
       // рабочая версия: заявка сохраняется на сервере. Если сервер не ответил, открываем WhatsApp, чтобы заявка не потерялась
       const btn = form.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Отправляем…";

@@ -134,6 +134,13 @@ window.SITE = {
       { src: "ph/r-lash-wing", alt: "Объёмные ресницы, работа АлтынНур" }
     ]
   },
+  // блоки продаж и доверия (на сайте появляются, когда заполнены и включены в «Порядок блоков» на главной)
+  promo: { on: true, kicker: "Акция", title: "", text: "", until: "", btn: "Записаться со скидкой", photos: [], size: "m",
+    codes: [] }, // промокоды: { code: "ЗОЛОТО", text: "скидка 10%" }; поле в форме заявки появляется, когда есть хотя бы один
+  pay: { on: false, text: "Можно оплатить частями" },
+  cert: { on: true, title: "Сертификат после обучения", text: "", photos: [], size: "m" },
+  gallery: { on: true, title: "Как проходят занятия", text: "", photos: [], size: "m" },
+  batchesNote: "",
   works: [       // реальные работы: { src, alt, cat, author, kind: "student"|"teacher" }. Прислала Айгуль 16.11, чьи работы, уточнить
     { src: "ph/r-lash-brown", alt: "Наращивание ресниц, естественный эффект", cat: "brows-lashes" },
     { src: "ph/r-lash-volume", alt: "Объёмное наращивание ресниц", cat: "brows-lashes" },
