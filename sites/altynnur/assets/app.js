@@ -67,6 +67,9 @@
     instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + v.replace(/^@/, ""), show: (v) => "@" + v.replace(/^@/, "") },
     email: { t: "Почта", href: (v) => "mailto:" + v, show: (v) => v }
   };
+  // один источник правды для всех мест вывода: включён ли канал и есть ли у него значение
+  const CON = (t) => { const c = S.contacts.find((x) => x.type === t); return c && c.on && has(c.value) ? c : null; };
+  const WAON = () => !!CON("whatsapp");
   const contactRows = () => S.contacts.filter((c) => c.on && has(c.value)).map((c) => {
     const k = CH[c.type]; if (!k) return "";
     return has(c.value) ? `<li><span>${k.t}</span><a href="${esc(k.href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(k.show(c.value))}</a></li>`
@@ -93,7 +96,7 @@
     <header class="hdr"><div class="wrap hdr__in">
       <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
-        <div class="nav__extra"><a href="tel:+${S.org.wa}">${esc(S.org.phone)}</a><a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></nav>
+        <div class="nav__extra">${CON("phone") ? `<a href="${CH.phone.href(CON("phone").value)}">${esc(CON("phone").value)}</a>` : ""}${WAON() ? `<a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></nav>
       ${S.modeToggle === false ? "" : `<button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>`}
       <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
       <button class="btn btn--accent" data-enroll>Записаться</button>
@@ -149,7 +152,7 @@
   // запись: такая же фото-плитка, как направления, с двумя кнопками
   H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="etile">${ph(S.enroll.photo, S.enroll.alt, { sizes: "100vw" })}
       <div class="etile__t"><h2>Запишитесь на консультацию</h2><p>Подскажем курс и ближайшие даты</p>
-        <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button><a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a></div></div></div></div></section>`;
+        <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></div></div></div></section>`;
   // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
   H.zoom = () => `<section class="zoom" aria-label="Обучение на практике"><div class="zoom__stick">
       ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p.src}-640.webp" alt="" loading="lazy"><em>${esc(p.cap)}</em></span>`).join("")}
@@ -206,7 +209,7 @@
       <button class="btn btn--accent" data-enroll>${esc(K.btn || "Записаться на курс")}</button></div>`); };
   H.referral = () => { const F2 = S.referral || {}; if (!ON(F2) || !F2.title) return "";
     return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo promo--text"><div class="promo__t"><span class="promo__k">${esc(F2.kicker || "Вдвоём выгоднее")}</span><h2>${esc(F2.title)}</h2>${F2.text ? `<p>${esc(F2.text)}</p>` : ""}
-      <a class="btn btn--accent" href="${wa(F2.wa || "Здравствуйте! Хотим записаться на обучение вдвоём с подругой.")}" target="_blank" rel="noopener">${esc(F2.btn || "Записаться вдвоём")}</a></div></div></div></section>`; };
+      ${WAON() ? `<a class="btn btn--accent" href="${wa(F2.wa || "Здравствуйте! Хотим записаться на обучение вдвоём с подругой.")}" target="_blank" rel="noopener">${esc(F2.btn || "Записаться вдвоём")}</a>` : `<button class="btn btn--accent" data-enroll>${esc(F2.btn || "Записаться вдвоём")}</button>`}</div></div></div></section>`; };
   H.notify = () => { const N = S.notify || {}; if (!ON(N)) return "";
     return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="notify"><div><h2>${esc(N.title || "Не нашли удобную дату?")}</h2><p class="muted">${esc(N.text || "Напишите, какой курс интересует, и мы сообщим о следующем наборе.")}</p></div>
       <div class="notify__f"><select data-notify>${S.courses.map((c) => `<option>${esc(c.name)}</option>`).join("")}</select><button class="btn btn--accent" data-notify-go>${esc(N.btn || "Сообщить о наборе")}</button></div></div></div></section>`; };
@@ -219,7 +222,7 @@
     if ((m = u.match(/rutube\.ru\/(?:video|shorts)\/([\w]+)/))) return `https://rutube.ru/play/embed/${m[1]}`;
     if ((m = u.match(/vk(?:video)?\.(?:com|ru)\/.*video(-?\d+)_(\d+)/))) return `https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}`;
     return ""; };
-  const btnHTML = (b) => !b.btn ? "" : b.act === "wa" ? `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${esc(b.btn)}</a>`
+  const btnHTML = (b) => !b.btn ? "" : b.act === "wa" && WAON() ? `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${esc(b.btn)}</a>`
     : b.act === "link" && b.url ? `<a class="btn btn--accent" href="${esc(b.url)}"${/^https?:/.test(b.url) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.btn)}</a>` : `<button class="btn btn--accent" data-enroll="${esc(b.course || "")}">${esc(b.btn)}</button>`;
   function custom(b) { if (!b || b.on === false) return ""; const T = b.type || "text", al = b.align || "left";
     const head = b.title && T !== "quote" && T !== "divider" ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
@@ -256,7 +259,7 @@
     const L = c.layout || "split", cr = crumbs([{ t: "Курсы", href: `${R}courses/` }, { t: c.name }]);
     const text = `${cr}<span class="${L === "cover" ? "muted" : "cap"}">${esc(cat(c.cat).name)}</span><h1>${esc(c.name)}</h1><p class="${L === "cover" ? "" : "lead"}" style="max-width:46ch">${esc(c.short)}</p>
       <div class="chero__price"><span class="price">${rub(c.price)}</span>${PARTS() ? `<span class="parts">${esc(PARTS())}</span>` : ""}<span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
-      <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button><a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a></div>`;
+      <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button>${WAON() ? `<a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a>` : ""}</div>`;
     const heroPh = ph(c.photo, c.alt, { reveal: false, eager: true, sizes: L === "cover" ? "100vw" : "(max-width: 860px) 100vw, 50vw", cap: ILL, style: L === "split" ? "height:100%" : "" });
     const hero = L === "cover" ? `<section class="chero chero--cover">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="wrap chero__t">${text}</div></section>`
       : L === "frame" ? `<section class="wrap chero chero--frame">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div>${text}</div></section>`
@@ -299,13 +302,12 @@
     <section class="sec" style="padding-top:0"><div class="wrap two"><h2 class="rv-t">Кому подойдёт</h2><div class="who">${S.audience.map((a) => `<div><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></div>`).join("")}</div></div></section>
     <div class="pair">${ph("ph/hair-2", "Работа с волосами в салоне", { cap: ILL })}${ph("ph/manicure", "Мастер ногтевого сервиса за работой")}</div>
     <section class="sec enroll" id="quiz"><div class="wrap quiz"><div><h2 class="rv-t">${esc(S.quiz.title)}</h2><p class="lead" style="margin-top:20px">${esc(S.quiz.text)}</p></div><div class="qbox" id="qbox" aria-live="polite"></div></div></section>`;
-  P.faq = () => `<div class="wrap phead">${crumbs([{ t: "Вопросы" }])}<h1>Частые вопросы</h1><p class="lead">Не нашли ответ? Напишите нам в WhatsApp, ответит преподаватель.</p></div>
-    <section class="wrap" style="padding-bottom:var(--sec)"><div class="two"><div><a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">Задать вопрос</a></div><div class="acc">${S.faq.map((f) => `<details><summary>${esc(f.q)}</summary><p class="ans">${esc(f.a)}</p></details>`).join("")}</div></div></section>`;
+  P.faq = () => `<div class="wrap phead">${crumbs([{ t: "Вопросы" }])}<h1>Частые вопросы</h1><p class="lead">Не нашли ответ? ${WAON() ? "Напишите нам в WhatsApp" : "Оставьте вопрос в заявке"}, ответит преподаватель.</p></div>
+    <section class="wrap" style="padding-bottom:var(--sec)"><div class="two"><div>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">Задать вопрос</a>` : `<button class="btn btn--line" data-enroll>Задать вопрос</button>`}</div><div class="acc">${S.faq.map((f) => `<details><summary>${esc(f.q)}</summary><p class="ans">${esc(f.a)}</p></details>`).join("")}</div></div></section>`;
   P.contacts = () => {
     const o = S.org;
-    const rows = [["Телефон", `<a href="tel:+${o.wa}">${esc(o.phone)}</a>`], ["WhatsApp", `<a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">Написать</a>`], ["ВКонтакте", `<a href="${o.vk}" target="_blank" rel="noopener">${esc(o.vkLabel)}</a>`],
-      o.telegram ? ["Telegram", `<a href="${o.telegram}" target="_blank" rel="noopener">Написать</a>`] : null,
-      ["Адрес", o.address ? esc(o.address) : `${esc(o.city)}, ${esc(o.region)}. Точный адрес сообщим при записи.`], o.hours ? ["Часы работы", esc(o.hours)] : null].filter(Boolean);
+    const rows = S.contacts.filter((c) => c.on && has(c.value) && CH[c.type]).map((c) => [CH[c.type].t, `<a href="${esc(CH[c.type].href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(CH[c.type].show(c.value))}</a>`])
+      .concat([["Адрес", o.address ? esc(o.address) : `${esc(o.city)}, ${esc(o.region)}. Точный адрес сообщим при записи.`], o.hours ? ["Часы работы", esc(o.hours)] : null]).filter(Boolean);
     return `<div class="wrap phead">${crumbs([{ t: "Контакты" }])}<h1>Будем рады видеть вас в ${esc(o.name)}</h1></div>
       <section class="wrap" style="padding-bottom:var(--sec)"><div class="two"><div><p class="muted">${esc(o.owner)}, основательница и преподаватель.</p></div><div><ul class="clines">${rows.map((r) => `<li><span>${r[0]}</span><div>${r[1]}</div></li>`).join("")}</ul>
         <h2 style="font-size:var(--fs-h3);margin:clamp(48px,6vw,80px) 0 22px">Задать вопрос</h2><div id="inlineForm"></div></div></div></section>`;
@@ -544,7 +546,7 @@
   if (vids.length && "IntersectionObserver" in window) { const vo = new IntersectionObserver((es) => es.forEach((en) => { const v = en.target;
       if (en.isIntersecting) { if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
   else vids.forEach((v) => { v.src = v.dataset.src; v.controls = true; });
-  document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
+  document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; if (!WAON()) { const cc = S.courses.find((x) => x.name === c); return openForm(cc ? cc.slug : "", { label: "Сообщить о следующем наборе", summary: `Прошу сообщить о следующем наборе на курс «${c}».` }); } window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
   document.querySelectorAll("[data-inline-form]").forEach((x) => { x.innerHTML = formHTML(null); bindForm(x.querySelector("form"), null, x); });
   const zoom = document.querySelector("section.zoom");
   if (zoom && !RM) {

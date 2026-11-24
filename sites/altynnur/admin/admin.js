@@ -24,6 +24,7 @@
     for (const c of kids.flat()) if (c != null && c !== false) n.append(c.nodeType ? c : document.createTextNode(c));
     return n;
   }
+  function fail(t) { toast(t, true); setTimeout(() => alert("Не сохранилось: " + t), 50); }
   function toast(t, bad) { const e = $("#toast"); e.textContent = t; e.className = "toast on" + (bad ? " bad" : ""); clearTimeout(toast.t); toast.t = setTimeout(() => (e.className = "toast"), bad ? 4200 : 1900); }
   const hhmm = (s) => { if (!s) return ""; const d = new Date(s.replace(" ", "T") + "Z"); return isNaN(d) ? "" : d.toLocaleString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); };
   const TR = { а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "e", ж: "zh", з: "z", и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o", п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "h", ц: "c", ч: "ch", ш: "sh", щ: "sch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya" };
@@ -61,10 +62,10 @@
     saving = true; clearTimeout(saveT); beforeSave();
     try {
       if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); }
-      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); localStorage.setItem(GKEY, JSON.stringify({ site: S, at: META.draft_at })); }
+      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.setItem(GKEY, JSON.stringify({ site: S, at: META.draft_at })); } catch (er) { throw new Error("Не хватает места для черновика в браузере. Опубликуйте изменения сейчас"); } }
       else META.draft_at = (await api("draft", { site: S })).draft_at;
       dirty = false;
-    } catch (e) { toast(e.message, true); }
+    } catch (e) { fail(e.message); }
     saving = false; paintState();
   }
   async function publish() {
@@ -76,7 +77,7 @@
       else { META.published_at = (await api("publish", { site: S })).published_at; toast("Опубликовано. Сайт обновлён"); }
       dirty = false; unpublished = false;
     }
-    catch (e) { toast(e.message, true); }
+    catch (e) { fail(e.message + ". Изменения остались в черновике на этом устройстве, попробуйте опубликовать ещё раз"); }
     b.textContent = "Опубликовать"; paintState();
   }
   function preview() {
@@ -107,13 +108,14 @@
     const file = el("input", { type: "file", accept: "image/jpeg,image/png,image/webp", style: "display:none", onchange: async (e) => {
       const f = e.target.files[0]; if (!f) return;
       if (DEMO) return toast("Пробный режим: загрузка фото работает на сервере", true);
+      const ticket = (file.ticket = (file.ticket || 0) + 1); // если пока грузилось, выбрали другое фото, старый ответ не перезапишет новый
       if (GHM) {
         toast("Загружаем фото…");
-        try { const r = await GH.uploadPhoto(f); IMG[r.src] = r.preview; o[k] = r.src; paint(); touch(); toast("Фото загружено"); } catch (er) { toast(er.message, true); }
+        try { const r = await GH.uploadPhoto(f); if (ticket !== file.ticket) return; IMG[r.src] = r.preview; o[k] = r.src; paint(); touch(); toast("Фото загружено"); } catch (er) { if (ticket === file.ticket) fail(er.message); }
         e.target.value = ""; return;
       }
       const fd = new FormData(); fd.append("file", f); toast("Загружаем фото…");
-      try { o[k] = (await api("upload", fd, true)).src; paint(); touch(); toast("Фото загружено"); } catch (er) { toast(er.message, true); }
+      try { const src = (await api("upload", fd, true)).src; if (ticket !== file.ticket) return; o[k] = src; paint(); touch(); toast("Фото загружено"); } catch (er) { if (ticket === file.ticket) fail(er.message); }
       e.target.value = "";
     } });
     paint();
@@ -300,7 +302,7 @@
         const f = e.target.files[0]; e.target.value = ""; if (!f) return;
         if (!GHM) return toast(DEMO ? "Пробный режим: видео загружается на рабочем сайте" : "Видео загружается только в GitHub-версии сайта", true);
         toast("Загружаем видео, это может занять минуту…");
-        try { const r = await GH.uploadVideo(f); IMG[r.src] = r.preview; o[k].push({ src: r.src, video: r.video, alt: "Видео с занятия" }); touch(); render(); toast("Видео загружено. Нажмите «Опубликовать»"); } catch (er) { toast(er.message, true); } } })),
+        try { const r = await GH.uploadVideo(f); IMG[r.src] = r.preview; o[k].push({ src: r.src, video: r.video, alt: "Видео с занятия" }); touch(); render(); toast("Видео загружено. Нажмите «Опубликовать»"); } catch (er) { fail(er.message); } } })),
       el("small", { style: "color:var(--ink2)", text: "Видео лучше короткое, 5-15 секунд, до 30 МБ." })); };
   // галочка «показывать» и место блока на главной: стрелки двигают его выше или ниже среди остальных блоков
   const onHome = (id) => { const box2 = el("div", { class: "brow", style: "flex-wrap:wrap;gap:8px" });
@@ -423,7 +425,11 @@
     contacts: "контакты телефон whatsapp telegram адрес карта график вк", pages: "тексты преподаватель о себе об академии вопросы обучение работы", look: "оформление дизайн цвет шрифт углы скругление размытие стекло тени анимация вид курсов черновик", set: "настройки пароль версии выход" };
   let Q = "", SNAP = null, SNAPTAB = null;
   function snap() { if (SNAPTAB !== TAB) { SNAP = JSON.stringify(S); SNAPTAB = TAB; } }
+  // раскрытые разделы и карточки не должны закрываться, когда вкладка перерисовывается (загрузка фото, новый блок, отмена)
+  const openKey = (d) => { const p = []; let n = d; while (n && n !== app) { if (n.tagName === "DETAILS") { const sm = n.querySelector(":scope > summary"); p.unshift((sm ? sm.textContent : "").slice(0, 60) + "#" + [...n.parentElement.children].indexOf(n)); } n = n.parentElement; } return p.join("/"); };
   function render() { snap();
+    const keep = new Set(), sy = window.scrollY, sameTab = render.lastTab === TAB; render.lastTab = TAB;
+    if (sameTab) app.querySelectorAll("main details[open]").forEach((d) => keep.add(openKey(d)));
     app.replaceChildren(
       el("header", { class: "top" }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
         el("button", { class: "btn btn--icon", text: "↶", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }),
@@ -433,6 +439,7 @@
         el("nav", { class: "tabs", role: "tablist" }, TABS.map(([id, n]) => el("button", { class: "tab", role: "tab", "data-tab": id, "aria-selected": String(TAB === id), hidden: !!Q && !((n + " " + (KEYS[id] || "")).toLowerCase().includes(Q)), text: n, onclick: () => { TAB = id; Q = ""; render(); window.scrollTo(0, 0); } })))),
       el("main", { class: "wrap" }, DEMO ? el("div", { class: "demo", text: "Пробный режим. Так выглядит админка: можно менять всё и нажимать «Посмотреть». Изменения остаются только в этом браузере, сайт не меняется." }) : null, V[TAB]()));
     paintTabs(); paintState();
+    if (sameTab && keep.size) { app.querySelectorAll("main details").forEach((d) => { if (keep.has(openKey(d))) d.open = true; }); window.scrollTo(0, sy); }
   }
   function screenLogin(msg) {
     const d = { login: "", pass: "" }, m = el("div", { class: "msg", text: msg || "" });
