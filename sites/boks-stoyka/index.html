@@ -8,7 +8,7 @@
 <title>Стойка: клуб бокса (концепт)</title>
 <meta name="description" content="Концепт сайта клуба бокса для детей и взрослых от shak.web.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tektur:wdth,wght@75..100,400..900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Три цвета и всё. Никаких градиентов поверх фото, теней, скруглений и наклеек. */
 :root{
@@ -16,7 +16,7 @@
   --mute:rgba(236,233,226,.55); --line:rgba(236,233,226,.15);
   --ink-mute:rgba(15,15,14,.6); --ink-line:rgba(15,15,14,.16);
   --gut:clamp(16px,3.4vw,48px);
-  --disp:Tektur,'Arial Narrow',sans-serif; --body:'Golos Text',system-ui,sans-serif;
+  --disp:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif; --body:Onest,system-ui,sans-serif;
   --grade:grayscale(1) contrast(1.12) brightness(.92);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -193,7 +193,9 @@ a{color:inherit;text-decoration:none}
 /* слово целиком за боксёром ниже головы, «клуб бокса» перед ним */
 .w1{top:max(70px,10svh);font-size:clamp(110px,31vw,300px)}
 .w2{top:auto;bottom:21%;font-size:clamp(54px,15vw,140px)}
-.hero__me{width:min(100vw,62svh,560px)}
+.hero__me{width:auto;height:calc(100svh - max(70px,10svh) - 31vw * .58)}
+.hero__me img{width:auto;height:100%;max-width:none}
+@media (min-width:900px){.hero__me img{height:100%}}
 @media (min-width:900px){
   .w1,.w2{text-align:right;padding:0 var(--gut) 0 0}
   .w1{top:auto;bottom:31svh;font-size:min(25vw,44svh)}
@@ -214,8 +216,6 @@ a{color:inherit;text-decoration:none}
 .sched{display:grid;gap:0;margin-top:32px;border-top:1px solid var(--ink-line)}
 .sched div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--ink-line);font-weight:500}
 .sched span{color:var(--ink-mute)}
-/* шрифт: Tektur, суженный до 75%, рубленые углы как у спортивной формы */
-.disp,.say p:first-child,.pin__t b,.day h3,.go,.mark,.hdr b,.day__h b,.pan h3,.price b,.beat,.crs__head h2{font-stretch:75%;letter-spacing:-.01em}
 </style>
 </head>
 <body>
