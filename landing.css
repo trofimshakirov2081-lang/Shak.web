@@ -71,6 +71,7 @@ mark { background: linear-gradient(transparent 58%, var(--sun) 58%); color: inhe
 .admin-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .tile { background: var(--soft); border-radius: 22px; padding: 22px; }
 .tile span { font-size: 30px; }
+.tile .tile-n { display: block; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--mut); margin-bottom: 14px; }
 .tile p { margin: 0; color: var(--mut); font-size: 15px; }
 @media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .admin-grid { grid-template-columns: 1fr; } }
@@ -96,10 +97,10 @@ mark { background: linear-gradient(transparent 58%, var(--sun) 58%); color: inhe
 .demos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .demo { text-decoration: none; background: var(--soft); border-radius: 22px; padding: 14px; display: grid; gap: 2px; transition: transform .2s; }
 .demo:hover { transform: translateY(-4px); }
-.d-pic { height: 150px; border-radius: 16px; background: linear-gradient(135deg, var(--c1), var(--c2)); display: grid; place-items: center; font-size: 60px; margin-bottom: 10px; }
+.d-pic { display: block; width: 100%; height: 150px; border-radius: 16px; object-fit: cover; object-position: top; background: var(--soft); margin-bottom: 10px; }
 .demo small { color: var(--mut); font-size: 14px; }
 @media (max-width: 900px) { .demos { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 420px) { .d-pic { height: 110px; font-size: 44px; } .demo small { font-size: 13px; } }
+@media (max-width: 420px) { .d-pic { height: 130px; } .demo small { font-size: 13px; } }
 .row-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 
 .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: s; }

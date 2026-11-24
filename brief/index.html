@@ -831,7 +831,7 @@ function sitePreview(styleId, palId, fontId, generic){
     <div class="sp-row">${ben.map(b => `<div style="background:${card};border-radius:${Math.min(m.r,16)}px"><i style="background:${ac}"></i><b>${esc(cut(b, 40))}</b></div>`).join('')}</div>
   </div>`;
 }
-const vcap = v => [(STYLES.find(x=>x.id===v.s)||{}).name, (PALETTES.find(x=>x.id===v.p)||{}).name, (FONTS.find(x=>x.id===v.f)||{}).name].filter(Boolean).join(' · ');
+const vcap = v => [(STYLES.find(x=>x.id===v.s)||{}).name, (PALETTES.find(x=>x.id===v.p)||{}).name, (FONTS.find(x=>x.id===v.f)||{}).name].filter(Boolean).join(', ');
 function variants(){
   const st = A.styles.length ? A.styles : A.liked.length ? A.liked : niche().styles.slice(0,2);
   const pl = A.palettes.length ? A.palettes : [null], ft = A.fonts.length ? A.fonts : [null];
@@ -851,7 +851,7 @@ const R = {
     const demo = ['bright','luxury','soft','tech','eco','photo','brutal','bento','retro','cosmic'];
     return `<section class="wl">
       <div>
-        <span class="badge"><i></i>${esc(CONFIG.designer)} · бриф на сайт</span>
+        <span class="badge"><i></i>${esc(CONFIG.designer)}, бриф на сайт</span>
         <h1>Соберите <span class="grad-text">свой сайт</span> за&nbsp;10&nbsp;минут</h1>
         <p class="lead">Не нужно разбираться в дизайне: листайте варианты и выбирайте, что нравится. В конце увидите, как может выглядеть ваш сайт, - а ТЗ само уйдёт дизайнеру.</p>
         <div class="wform" id="wform">
@@ -929,7 +929,7 @@ const R = {
         <span class="tick">✓</span><span class="reco">Подходит вам</span>
         <div class="big" style="font-family:'${f.h}';font-weight:${f.hw};${f.up?'text-transform:uppercase':''};margin-top:22px">${name}</div>
         <div class="small" style="font-family:'${f.b}'">Текст на сайте будет выглядеть вот так. Удобно читать с телефона.</div>
-        <h4>${f.name}</h4><p>${f.desc} · ${f.h} + ${f.b}</p></div>`).join('')}</div>${shortList('fonts', FONTS, rec).more}`;
+        <h4>${f.name}</h4><p>${f.desc}, ${f.h} + ${f.b}</p></div>`).join('')}</div>${shortList('fonts', FONTS, rec).more}`;
   },
   mood(){
     return stepHead('Настроение и бренд','Какие эмоции должен вызывать сайт и что нужно по фирменному стилю.')
@@ -955,7 +955,7 @@ const R = {
     + sec('Домен (адрес сайта)','', chips('domain', ['Уже есть','Нужно купить','Помогите выбрать','Нужна корпоративная почта'], true, true))
     + sec('Материалы','Логотип, фото, скриншоты понравившихся сайтов, документы - всё уйдёт дизайнеру вместе с ТЗ. До 20 МБ на файл.',
       `<label class="drop"><input type="file" id="fileIn" multiple hidden><b>＋ Прикрепить файлы</b><span>Можно выбрать сразу несколько</span></label>
-       <div class="files">${FILES.map((f, i) => `<div class="fl"><span>${/^image/.test(f.type) ? '🖼' : '📄'} ${esc(f.name)} · ${(f.size/1048576).toFixed(1)} МБ</span><button data-rmfile="${i}" title="Убрать">✕</button></div>`).join('')}</div>
+       <div class="files">${FILES.map((f, i) => `<div class="fl"><span>${/^image/.test(f.type) ? '🖼' : '📄'} ${esc(f.name)}, ${(f.size/1048576).toFixed(1)} МБ</span><button data-rmfile="${i}" title="Убрать">✕</button></div>`).join('')}</div>
        ${FILES.length ? '<p class="hint" style="margin-top:8px">Файлы хранятся только в этой вкладке - не закрывайте её до отправки.</p>' : ''}`);
   },
   terms(){
@@ -977,7 +977,7 @@ const R = {
     if(CONFIG.whatsapp) send.push(`<button class="btn primary" data-send="wa">Отправить в WhatsApp</button>`);
     if(CONFIG.email) send.push(`<button class="btn" data-send="mail">Отправить на почту</button>`);
     const top = VIEW
-      ? stepHead(`Бриф${A.company ? ': ' + esc(A.company) : ''}`, `${esc(A.name || 'Клиент')}${A.contact ? ' · ' + esc(A.contact) : ''}`)
+      ? stepHead(`Бриф${A.company ? ': ' + esc(A.company) : ''}`, `${esc(A.name || 'Клиент')}${A.contact ? ', ' + esc(A.contact) : ''}`)
         + `<div class="send no-print"><button class="btn primary" data-send="copy">Скопировать текст ТЗ</button><button class="btn" data-send="print">Сохранить PDF</button></div>`
       : stepHead('Готово! Вот ваше ТЗ 🎉', `Проверьте, всё ли верно. Изменить ответы можно кнопкой «Назад» - обновлённая версия тоже уйдёт дизайнеру.`)
         + `<div class="sendbox no-print" id="sendbox">${sendboxHTML()}</div>`
@@ -1250,7 +1250,7 @@ function briefHTML(){
   const doc = $('.doc').outerHTML;
   const css = document.querySelector('style').textContent;
   const fonts = document.querySelector('link[href*="fonts.googleapis.com/css2"]').outerHTML;
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ТЗ - ${esc(A.company||A.name||'сайт')}</title>${fonts}<style>${css}</style></head><body data-theme="light"><main><div class="wrap"><h1 style="letter-spacing:-.03em">ТЗ на сайт${A.company?' - '+esc(A.company):''}</h1><p style="color:#6b6b75">${esc(A.name)} · ${new Date().toLocaleDateString('ru-RU')}</p>${doc}<pre style="white-space:pre-wrap;font-size:12px;color:#888;margin-top:40px">${esc(buildText())}</pre></div></main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ТЗ - ${esc(A.company||A.name||'сайт')}</title>${fonts}<style>${css}</style></head><body data-theme="light"><main><div class="wrap"><h1 style="letter-spacing:-.03em">ТЗ на сайт${A.company?' - '+esc(A.company):''}</h1><p style="color:#6b6b75">${esc(A.name)}, ${new Date().toLocaleDateString('ru-RU')}</p>${doc}<pre style="white-space:pre-wrap;font-size:12px;color:#888;margin-top:40px">${esc(buildText())}</pre></div></main></body></html>`;
 }
 function download(){
   const a = document.createElement('a');
@@ -1293,7 +1293,7 @@ function render(){
   $('#bottom').classList.toggle('swiping', swiping);
   $('#prevBtn').textContent = swiping ? '←' : '← Назад';
   $('#nextBtn').textContent = swiping ? 'Пропустить' : S.step === STEPS.length-2 ? 'Собрать ТЗ ✓' : 'Дальше →';
-  $('#note').textContent = S.step === STEPS.length-1 ? 'Можно вернуться и поменять ответы' : 'Ответы сохраняются автоматически · можно пропускать';
+  $('#note').textContent = S.step === STEPS.length-1 ? 'Можно вернуться и поменять ответы' : 'Ответы сохраняются автоматически, можно пропускать';
   $('#bottom').style.display = (S.step === 0 || VIEW) ? 'none' : '';
   if(VIEW){ $('.progress').style.visibility = 'hidden'; $('#stepnum').textContent = ''; }
   if(st.id === 'taste') bindSwipe();
@@ -1353,7 +1353,7 @@ function drawPeek(){
   if(!m){ m = document.createElement('div'); m.id = 'modal'; m.className = 'modal'; document.body.appendChild(m); }
   m.innerHTML = `<div class="box"><div class="mh"><b>Ваш сайт сейчас</b><button class="btn sm" data-peek="close" aria-label="Закрыть">✕</button></div>
     ${sitePreview(x.s, x.p, x.f)}
-    <div class="nav2"><button class="btn sm" data-peek="prev" ${v.length < 2 ? 'disabled' : ''}>‹</button><small>${vcap(x)}${v.length > 1 ? ' · ' + (PV + 1) + ' из ' + v.length : ''}</small><button class="btn sm" data-peek="next" ${v.length < 2 ? 'disabled' : ''}>›</button></div>
+    <div class="nav2"><button class="btn sm" data-peek="prev" ${v.length < 2 ? 'disabled' : ''}>‹</button><small>${vcap(x)}${v.length > 1 ? ', ' + (PV + 1) + ' из ' + v.length : ''}</small><button class="btn sm" data-peek="next" ${v.length < 2 ? 'disabled' : ''}>›</button></div>
     <p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Превью меняется, когда вы выбираете стиль, цвета и шрифты.</p><a class="btn primary" style="margin-top:12px;display:inline-flex" href="${esc(siteLink())}" target="_blank" rel="noopener">Открыть сайт целиком ↗</a></div>`;
 }
 const closePeek = () => $('#modal')?.remove();

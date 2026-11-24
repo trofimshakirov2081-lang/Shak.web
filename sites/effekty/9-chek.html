@@ -33,7 +33,7 @@ const MENU=[['Капучино 0,3',290],['Раф лаванда',340],['Кру�
 const rc=document.getElementById('rc');
 function print(){rc.className='rc';const n=3+Math.floor(Math.random()*3),it=[...MENU].sort(()=>Math.random()-.5).slice(0,n).map(m=>[1+(Math.random()<.25?1:0),...m]);
   const sub=it.reduce((s,[q,,p])=>s+q*p,0);const d=new Date();
-  rc.innerHTML=`<h2>ЧЕРНИЛА</h2><div class="c">КОФЕЙНЯ · УЛ. БАУМАНА, 12<br>КАЗАНЬ · ЗАКАЗ №${1000+Math.floor(Math.random()*9000)}</div><div class="ln"></div>
+  rc.innerHTML=`<h2>ЧЕРНИЛА</h2><div class="c">КОФЕЙНЯ, УЛ. БАУМАНА, 12<br>КАЗАНЬ, ЗАКАЗ №${1000+Math.floor(Math.random()*9000)}</div><div class="ln"></div>
   ${it.map(([q,t,p])=>`<div class="r"><span>${q} × ${t}</span><span>${q*p}</span></div>`).join('')}<div class="ln"></div>
   <div class="r tot"><span>ИТОГО</span><span>${sub} ₽</span></div><div class="r"><span>СБП</span><span>ОДОБРЕНО</span></div><div class="ln"></div>
   <div class="c">${d.toLocaleDateString('ru-RU')} ${d.toTimeString().slice(0,5)}<br>СПАСИБО! ЗАХОДИТЕ ЕЩЁ ☕</div><div class="bc"></div>`;

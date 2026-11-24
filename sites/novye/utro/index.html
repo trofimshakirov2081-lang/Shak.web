@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Утро · кофейня</title>
+<title>Утро, кофейня</title>
 <meta name="description" content="Кофейня «Утро» в Казани: кофе к 8:00, заказ с собой без очереди.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Finlandica:wght@400;500;600;700&family=PT+Mono&display=swap" rel="stylesheet">
@@ -93,7 +93,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <nav class="nav"><div class="in"><b>Утро</b><a class="hide" href="#live">Сейчас</a><a href="#menu">Меню</a><a class="hide" href="#order">С собой</a><a class="buy" href="#order">Заказать</a></div></nav>
 
 <section class="hero"><div class="w">
-  <h1>Кофе к 8:00.<br>Каждый день.</h1>
+  <h1>Кофе к 8:00<br>каждый день</h1>
   <p>Маленькая кофейня у метро «Кремлёвская». Закажите заранее и заберите без очереди по дороге на работу.</p>
   <div class="ctas"><button class="lq" onclick="location.hash='order'">Заказать с собой</button><a class="link" href="#menu">Смотреть меню ›</a></div>
   <svg class="cup" viewBox="0 0 340 300" aria-hidden="true">
@@ -137,7 +137,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="pact"><button class="clear" id="clear">Скомкать чек</button></div></div>
 </div></section>
 
-<footer><div class="w"><span>Кофейня «Утро» · Казань, ул. Баумана, 3 · с 7:30 до 21:00</span><span>Демо-сайт shak.web</span></div></footer>
+<footer><div class="w"><span>Кофейня «Утро», Казань, ул. Баумана, 3, с 7:30 до 21:00</span><span>Демо-сайт shak.web</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 // liquid button follows the cursor
@@ -160,7 +160,7 @@ addEventListener('resize',rs);rs();loop();
 // receipt
 const paper=document.getElementById('paper');let items={};
 function draw(newKey){const keys=Object.keys(items);const sum=keys.reduce((s,k)=>s+items[k].q*items[k].p,0);
- paper.innerHTML=`<h4>УТРО</h4><div class="c">КОФЕЙНЯ · БАУМАНА, 3</div><hr>`+(keys.length?keys.map(k=>`<div class="r"${k===newKey?'':' style="animation:none"'}><span>${items[k].q} × ${k}</span><span>${items[k].q*items[k].p}</span></div>`).join(''):'<div class="empty">Добавьте напиток из меню</div>')+`<hr><div class="r tot" style="animation:none"><span>ИТОГО</span><span>${sum} ₽</span></div><div class="c">${new Date().toLocaleDateString('ru-RU')} · ЗАБРАТЬ ЧЕРЕЗ 10 МИН</div>`}
+ paper.innerHTML=`<h4>УТРО</h4><div class="c">КОФЕЙНЯ, БАУМАНА, 3</div><hr>`+(keys.length?keys.map(k=>`<div class="r"${k===newKey?'':' style="animation:none"'}><span>${items[k].q} × ${k}</span><span>${items[k].q*items[k].p}</span></div>`).join(''):'<div class="empty">Добавьте напиток из меню</div>')+`<hr><div class="r tot" style="animation:none"><span>ИТОГО</span><span>${sum} ₽</span></div><div class="c">${new Date().toLocaleDateString('ru-RU')}, ЗАБРАТЬ ЧЕРЕЗ 10 МИН</div>`}
 draw();
 document.querySelectorAll('.add').forEach(b=>b.onclick=()=>{const n=b.dataset.n;items[n]=items[n]||{q:0,p:+b.dataset.p};items[n].q++;paper.classList.remove('crump');draw(n);toast(`${n} в чеке`)});
 document.getElementById('clear').onclick=()=>{paper.classList.add('crump');setTimeout(()=>{items={};paper.classList.remove('crump');draw()},750)};

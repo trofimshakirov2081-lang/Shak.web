@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ирис · студия красоты</title>
+<title>Ирис, студия красоты</title>
 <meta name="description" content="Студия красоты «Ирис» в Казани: мастера, к которым возвращаются. Запись онлайн.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -79,13 +79,13 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="dockwrap"><div class="dock" id="dock"><span class="lbl" id="dl">Ваш визит пока пуст</span></div></div>
 </div></section>
 
-<footer><div class="w"><span>Студия красоты «Ирис» · Казань, Островского, 21 · 9:00-21:00</span><span>Демо-сайт shak.web</span></div></footer>
+<footer><div class="w"><span>Студия красоты «Ирис», Казань, Островского, 21, 9:00-21:00</span><span>Демо-сайт shak.web</span></div></footer>
 <script>
 const M=[['Алина','маникюр','#F3B38F'],['Ирина','брови','#F0D27A'],['Ксения','стрижки','#A9C8A0'],['Мадина','окрашивание','#E6A3B7'],['Ольга','массаж','#9EC4DA'],['Вера','ресницы','#C7B3E6'],['Диана','макияж','#F2A48A'],['Лейла','педикюр','#B5D6B0'],['Софья','укладки','#F6C98F'],['Наталья','маникюр','#D8B4A0'],['Ева','брови','#A7C7E7'],['Камила','ресницы','#E3B5D0']];
 const st=document.getElementById('st'),who=document.getElementById('who');let focus=5;
 const els=M.map((m,i)=>{const d=document.createElement('div');d.className='c';d.style.background=m[2];d.innerHTML=`<em>№ ${String(i+1).padStart(2,'0')}</em><div class="ph">${m[0][0]}</div><b>${m[0]}</b><small>${m[1]}</small>`;d.onclick=()=>{focus=i;lay();stop()};st.appendChild(d);return d});
 function lay(){const s=innerWidth<600?.7:1;els.forEach((d,i)=>{const k=i-focus;d.style.transform=`translate(-50%,-50%) translate3d(${k*96*s}px,${-k*24*s}px,${-Math.abs(k)*100+(k?0:140)}px) rotateY(${-k*8}deg) scale(${k?1:1.25})`;d.style.zIndex=100-Math.abs(k);d.style.opacity=Math.abs(k)>6?0:1;d.style.filter=k<-1?`blur(${Math.min(6,(-k-1)*2)}px)`:'none'});
- who.innerHTML=`<b>${M[focus][0]}</b><span>${M[focus][1]} · свободна завтра с 12:00</span>`}
+ who.innerHTML=`<b>${M[focus][0]}</b><span>${M[focus][1]}, свободна завтра с 12:00</span>`}
 lay();addEventListener('resize',lay);
 let auto=setInterval(()=>{focus=(focus+1)%M.length;lay()},2600);function stop(){clearInterval(auto)}
 function find(){const v=document.getElementById('q').value.toLowerCase().trim();if(!v)return;const i=M.findIndex(m=>m[0].toLowerCase().includes(v)||m[1].includes(v));stop();if(i>=0){focus=i;lay()}else who.innerHTML='<b>Никого не нашли</b><span>Попробуйте услугу: маникюр, брови, ресницы</span>'}
