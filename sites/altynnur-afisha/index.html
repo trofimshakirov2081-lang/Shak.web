@@ -74,7 +74,7 @@ a{color:inherit;text-decoration:none}
 /* 3. сцена на прокрутке: видео идёт вперёд-назад за пальцем, текста минимум */
 .pin{position:relative;height:190svh}
 .pin__st{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink)}
-.pin__st video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--grade) brightness(.62)}
+.pin__st canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:var(--grade) brightness(.62)}
 .pin__t{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(70px,13svh,130px);opacity:0;transform:translateY(40px);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1)}
 .pin.show .pin__t{opacity:1;transform:none}
 .pin__t b{display:block;font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(120px,28vw,340px);line-height:.78;color:var(--bone)}
@@ -222,7 +222,7 @@ a{color:inherit;text-decoration:none}
 
   <section class="pin" id="pin" aria-label="Практика">
     <div class="pin__st ph">
-      <video data-wide="../altynnur/ph/v-praktika-scrub.mp4" poster="../altynnur/ph/v-praktika-1600.webp" muted playsinline preload="auto" aria-hidden="true"></video>
+      <canvas data-wide="../altynnur/ph/praktika-seq/" data-wn="61" aria-hidden="true"></canvas>
       <div class="pin__hint cap" aria-hidden="true"><i></i>Листайте</div>
       <div class="pin__t"><b>2‑3</b><span>человека в группе. Преподаватель рядом с&nbsp;каждой</span></div>
       <div class="pin__line" aria-hidden="true"><i></i></div>
@@ -324,24 +324,37 @@ a{color:inherit;text-decoration:none}
   // открыт только один курс за раз
   var its = document.querySelectorAll(".it");
   its.forEach(function (d) { d.addEventListener("toggle", function () { if (d.open) its.forEach(function (o) { if (o !== d) o.open = false; }); }); });
-  // сцена: прокрутка двигает видео, кадр догоняет плавно; в конце одна фраза
-  var pin = document.getElementById("pin"), sv = pin.querySelector("video"), line = pin.querySelector(".pin__line i"), want = 0, have = 0, raf = 0;
-  if (sv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches) { sv.src = sv.dataset.tall; sv.poster = sv.dataset.tallPoster || sv.poster; } else sv.src = sv.dataset.wide;
-  function tick() {
-    have += (want - have) * 0.18;
-    if (sv.duration) { var t = have * (sv.duration - 0.05); if (Math.abs(sv.currentTime - t) > 0.01) sv.currentTime = t; }
-    if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else raf = 0;
+  // сцена: кадры-картинки рисуются на canvas по прокрутке (видео телефоны без нажатия не грузят)
+  var pin = document.getElementById("pin"), cv = pin.querySelector("canvas"), cx = cv.getContext("2d"), line = pin.querySelector(".pin__line i");
+  var tall = cv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches, base = tall ? cv.dataset.tall : cv.dataset.wide, N = +(tall ? cv.dataset.tn : cv.dataset.wn);
+  var F = [], want = 0, have = 0, raf = 0, drawn = -1;
+  function src(i) { return base + String(i + 1).padStart(3, "0") + ".webp"; }
+  function size() { var r = devicePixelRatio > 1 ? 1.5 : 1; cv.width = cv.clientWidth * r; cv.height = cv.clientHeight * r; drawn = -1; draw(); }
+  function draw() {
+    var i = Math.round(have * (N - 1)), im = F[i];
+    while (im && !im.ok && i > 0) im = F[--i];
+    if (!im || !im.ok || i === drawn) return;
+    var W = cv.width, H = cv.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight) * (1.12 - have * 0.12), w = im.naturalWidth * s, h = im.naturalHeight * s;
+    cx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h); drawn = i;
   }
+  function load(i) { var im = new Image(); im.decoding = "async"; im.onload = function () { im.ok = true; if (i === 0 || Math.abs(i - Math.round(have * (N - 1))) < 2) { drawn = -1; draw(); } }; im.src = src(i); F[i] = im; }
+  load(0);
+  var started = false;
+  function startLoad() { if (started) return; started = true; for (var i = 1; i < N; i++) load(i); }
+  function tick() { have += (want - have) * 0.2; drawn = -1; draw(); if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else { have = want; raf = 0; drawn = -1; draw(); } }
+  var bs = pin.querySelectorAll(".beat");
   function scene() {
     var r = pin.getBoundingClientRect(), total = r.height - innerHeight;
+    if (r.top < innerHeight * 2.5) startLoad();
     want = Math.min(1, Math.max(0, -r.top / total));
     line.parentNode.style.setProperty("--p", want);
-    sv.style.transform = "scale(" + (1.14 - want * 0.14) + ")";
-    pin.classList.toggle("show", want > 0.6);
+    pin.classList.toggle("show", want > (bs.length ? 0.72 : 0.6));
+    if (bs.length) { var bi = Math.min(bs.length - 1, Math.floor(want * bs.length * 1.05)); bs.forEach(function (b, k) { b.classList.toggle("on", k === bi); b.classList.toggle("gone", k < bi); }); }
     if (!raf) raf = requestAnimationFrame(tick);
   }
-  if (!RM) { addEventListener("scroll", scene, { passive: true }); addEventListener("resize", scene); sv.addEventListener("loadedmetadata", scene); scene(); }
-  else { pin.classList.add("show"); sv.autoplay = true; sv.loop = true; }
+  addEventListener("resize", size); size();
+  if (!RM) { addEventListener("scroll", scene, { passive: true }); scene(); }
+  else { startLoad(); pin.classList.add("show"); }
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll(".rise").forEach(function (el) { io.observe(el); });
