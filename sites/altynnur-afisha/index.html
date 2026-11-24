@@ -71,23 +71,19 @@ a{color:inherit;text-decoration:none}
 .say p em{font-style:normal;color:var(--gold)}
 .say .cap{margin-top:28px;max-width:40ch;font-size:15px;line-height:1.5}
 
-/* 3. закреплённая сцена: видео стоит, факты меняются, всего около двух пролистываний */
-.pin{position:relative;height:210svh}
-.pin__st{position:sticky;top:0;height:100svh;overflow:hidden}
-.pin__st video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--grade) brightness(.5)}
-.fact{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(90px,16svh,150px);opacity:0;transform:translateY(60px);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1)}
-.fact.on{opacity:1;transform:none}
-.fact.out{opacity:0;transform:translateY(-60px)}
-.fact b{display:block;font-family:var(--disp);font-weight:900;font-size:clamp(150px,34vw,400px);line-height:.78;color:var(--bone);text-transform:uppercase}
-.fact span{display:block;margin-top:14px;font-size:clamp(18px,2vw,26px);font-weight:500;max-width:22ch;line-height:1.25}
-.pin__bar{position:absolute;top:72px;left:var(--gut);right:var(--gut);display:flex;gap:6px}
-.pin__bar i{flex:1;height:3px;background:var(--line);position:relative;overflow:hidden}
-.pin__bar i::after{content:"";position:absolute;inset:0;background:var(--gold);transform:scaleX(var(--p,0));transform-origin:0 0}
-.pin__lbl{position:absolute;top:88px;left:var(--gut);right:var(--gut);display:flex;justify-content:space-between}
-.pin__lbl b{font-weight:600;color:var(--bone)}
-.pin__hint{position:absolute;left:var(--gut);bottom:28px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;transition:opacity .4s}
+/* 3. сцена на прокрутке: видео идёт вперёд-назад за пальцем, текста минимум */
+.pin{position:relative;height:190svh}
+.pin__st{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink)}
+.pin__st video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--grade) brightness(.62)}
+.pin__t{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(70px,13svh,130px);opacity:0;transform:translateY(40px);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.pin.show .pin__t{opacity:1;transform:none}
+.pin__t b{display:block;font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(120px,28vw,340px);line-height:.78;color:var(--bone)}
+.pin__t span{display:block;margin-top:14px;font-size:clamp(18px,2vw,26px);font-weight:500;max-width:22ch;line-height:1.25}
+.pin__line{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--line)}
+.pin__line i{position:absolute;inset:0;background:var(--gold);transform:scaleX(var(--p,0));transform-origin:0 0}
+.pin__hint{position:absolute;left:var(--gut);top:84px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;transition:opacity .4s}
 .pin__hint i{display:block;width:1px;height:28px;background:var(--bone);animation:drip 1.4s ease-in-out infinite;transform-origin:0 0}
-.pin.end .pin__hint{opacity:0}
+.pin.show .pin__hint{opacity:0}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
 /* 4. курсы: список с крупным фото и явной кнопкой «Подробнее» */
@@ -197,8 +193,7 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .in{opacity:1}.js .rise{opacity:1;transform:none}
-  .pin{height:auto}.pin__st{position:relative;height:auto;padding:120px 0 60px}
-  .fact{position:relative;opacity:1;transform:none;margin-top:40px;bottom:auto}
+  .pin{height:auto}.pin__st{position:relative}
 }
 </style>
 </head>
@@ -225,16 +220,12 @@ a{color:inherit;text-decoration:none}
     <p class="cap rise">Преподаватель сидит рядом и видит каждое движение пинцета. Ошибку поправляем сразу, а&nbsp;не&nbsp;после курса.</p>
   </section>
 
-  <section class="pin" id="pin" aria-label="Цифры">
+  <section class="pin" id="pin" aria-label="Практика">
     <div class="pin__st ph">
-      <video src="../altynnur/ph/v-praktika.mp4" poster="../altynnur/ph/v-praktika-1600.webp" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
-      <div class="pin__bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="cap pin__lbl"><span>Что получает ученица</span><b id="pinN">1 / 4</b></div>
-      <div class="pin__hint" aria-hidden="true"><i></i>Листайте дальше</div>
-      <div class="fact on"><b>2-3</b><span>человека в группе, преподаватель рядом с&nbsp;каждой</span></div>
-      <div class="fact"><b>3 дня</b><span>от первой схемы до&nbsp;своей модели и&nbsp;сертификата</span></div>
-      <div class="fact"><b>1 год</b><span>общий чат с&nbsp;тренером и&nbsp;отработка ещё одной модели</span></div>
-      <div class="fact"><b>−10%</b><span>на материалы после курса</span></div>
+      <video data-wide="../altynnur/ph/v-praktika-scrub.mp4" poster="../altynnur/ph/v-praktika-1600.webp" muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="pin__hint cap" aria-hidden="true"><i></i>Листайте</div>
+      <div class="pin__t"><b>2‑3</b><span>человека в группе. Преподаватель рядом с&nbsp;каждой</span></div>
+      <div class="pin__line" aria-hidden="true"><i></i></div>
     </div>
   </section>
 
@@ -333,16 +324,24 @@ a{color:inherit;text-decoration:none}
   // открыт только один курс за раз
   var its = document.querySelectorAll(".it");
   its.forEach(function (d) { d.addEventListener("toggle", function () { if (d.open) its.forEach(function (o) { if (o !== d) o.open = false; }); }); });
-  // закреплённая сцена: доля прокрутки секции выбирает факт
-  var pin = document.getElementById("pin"), facts = pin.querySelectorAll(".fact"), bars = pin.querySelectorAll(".pin__bar i"), pinN = document.getElementById("pinN"), cur = 0;
-  function scene() {
-    var r = pin.getBoundingClientRect(), total = r.height - innerHeight, p = Math.min(1, Math.max(0, -r.top / total)), n = facts.length;
-    var i = Math.min(n - 1, Math.floor(p * n * 1.12));
-    if (i !== cur) { facts[cur].classList.remove("on"); facts[cur].classList.toggle("out", i > cur); facts[i].classList.remove("out"); facts[i].classList.add("on"); cur = i; pinN.textContent = (i + 1) + " / " + n; }
-    bars.forEach(function (b, k) { b.style.setProperty("--p", Math.min(1, Math.max(0, p * n * 1.12 - k))); });
-    pin.classList.toggle("end", i === n - 1);
+  // сцена: прокрутка двигает видео, кадр догоняет плавно; в конце одна фраза
+  var pin = document.getElementById("pin"), sv = pin.querySelector("video"), line = pin.querySelector(".pin__line i"), want = 0, have = 0, raf = 0;
+  if (sv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches) { sv.src = sv.dataset.tall; sv.poster = sv.dataset.tallPoster || sv.poster; } else sv.src = sv.dataset.wide;
+  function tick() {
+    have += (want - have) * 0.18;
+    if (sv.duration) { var t = have * (sv.duration - 0.05); if (Math.abs(sv.currentTime - t) > 0.01) sv.currentTime = t; }
+    if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else raf = 0;
   }
-  if (!RM) { addEventListener("scroll", scene, { passive: true }); addEventListener("resize", scene); scene(); }
+  function scene() {
+    var r = pin.getBoundingClientRect(), total = r.height - innerHeight;
+    want = Math.min(1, Math.max(0, -r.top / total));
+    line.parentNode.style.setProperty("--p", want);
+    sv.style.transform = "scale(" + (1.14 - want * 0.14) + ")";
+    pin.classList.toggle("show", want > 0.6);
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  if (!RM) { addEventListener("scroll", scene, { passive: true }); addEventListener("resize", scene); sv.addEventListener("loadedmetadata", scene); scene(); }
+  else { pin.classList.add("show"); sv.autoplay = true; sv.loop = true; }
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll(".rise").forEach(function (el) { io.observe(el); });
