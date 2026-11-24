@@ -11,7 +11,7 @@
 <meta property="og:description" content="Ресницы, брови, ногти. Практика на моделях с первого дня. Туймазы.">
 <meta property="og:image" content="../altynnur/ph/r-lash-brown-1280.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Три цвета и всё. Никаких градиентов поверх фото, теней, скруглений и наклеек. */
 :root{
@@ -19,7 +19,7 @@
   --mute:rgba(237,229,218,.56); --line:rgba(237,229,218,.16);
   --ink-mute:rgba(21,16,13,.58); --ink-line:rgba(21,16,13,.16);
   --gut:clamp(16px,3.4vw,48px);
-  --disp:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif; --body:Onest,system-ui,sans-serif;
+  --disp:Oranienbaum,Georgia,serif; --body:Onest,system-ui,sans-serif;
   --grade:saturate(.82) contrast(1.06) brightness(.96) sepia(.06);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -86,47 +86,39 @@ a{color:inherit;text-decoration:none}
 .pin.show .pin__hint{opacity:0}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-/* 4. курсы: список с крупным фото и явной кнопкой «Подробнее» */
+/* 4. выбор: вкладки и одна большая карточка вместо прайс-листа */
 .crs{padding:clamp(80px,11vw,150px) 0 clamp(60px,8vw,120px)}
 .crs__head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 var(--gut) 22px}
 .crs__head h2{font-size:clamp(70px,13vw,190px)}
-.crs__list{border-top:1px solid var(--line)}
-.it{border-bottom:1px solid var(--line)}
-.it summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px var(--gut);align-items:stretch}
-.it summary::-webkit-details-marker{display:none}
-.it .ph{aspect-ratio:4/5;overflow:hidden}
-.it .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.it .t{display:flex;flex-direction:column;min-width:0}
-.it h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(32px,4.6vw,64px);line-height:.88}
-.it .t>.cap{margin-top:6px}
-.it .pr{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3vw,44px);color:var(--gold);margin-top:auto;padding-top:10px;line-height:1}
-.more{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:8px 14px;border:1px solid var(--bone);font-size:14px;font-weight:600}
-.more::after{content:"+";font-size:18px;line-height:1;transition:transform .25s}
-.it[open] .more::after{transform:rotate(45deg)}
-.it[open] .more{background:var(--bone);color:var(--ink)}
-.more .c{display:none}.it[open] .more .o{display:none}.it[open] .more .c{display:inline}
-.it .body{padding:4px var(--gut) 28px;display:grid;gap:18px}
-.it ul{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
-.it li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
-.it dl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.it dd{margin-top:3px;font-size:15px;font-weight:500}
-.it .go2{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:var(--gold);color:var(--ink);font-weight:600}
-.it .go2::after{content:"→"}
+.sel{display:flex;overflow-x:auto;scroll-padding-inline:var(--gut);-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);scrollbar-width:none;border-bottom:1px solid var(--line);padding:0 var(--gut);scroll-snap-type:x proximity}
+.sel::-webkit-scrollbar{display:none}
+.sel::after{content:"";flex:0 0 18vw}
+@media (min-width:900px){.sel{-webkit-mask-image:none;mask-image:none}.sel::after{display:none}}
+.sel button{flex:0 0 auto;margin-right:26px;padding:16px 0 14px;font:600 15px/1.2 var(--body);color:var(--mute);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;scroll-snap-align:start;transition:color .25s,border-color .25s}
+.sel button:hover{color:var(--bone)}
+.sel button[aria-selected=true]{color:var(--bone);border-color:var(--gold)}
+.pan{display:grid;gap:22px;padding:24px var(--gut) 0;animation:panIn .5s cubic-bezier(.2,.8,.2,1)}
+.pan[hidden]{display:none}
+@keyframes panIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pan .ph{aspect-ratio:4/3;overflow:hidden}
+.pan .ph img{width:100%;height:100%;object-fit:cover}
+.pan h3{font-family:var(--disp);font-weight:var(--dw,900);text-transform:var(--dt,uppercase);font-size:clamp(46px,7vw,104px);line-height:.88;margin-top:10px}
+.pan .sub{margin-top:10px;color:var(--mute);font-size:16px}
+.price{display:flex;align-items:baseline;gap:12px;margin:22px 0 20px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price b{font-family:var(--disp);font-weight:var(--dw,900);font-size:clamp(52px,7vw,96px);line-height:.85;color:var(--gold)}
+.price span{font-size:14px;color:var(--mute)}
+.pan ul{list-style:none}
+.pan li{padding:9px 0 9px 22px;position:relative;font-size:15px}
+.pan li::before{content:"";position:absolute;left:0;top:18px;width:10px;height:1px;background:var(--gold)}
+.pan dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.pan dd{margin-top:3px;font-size:15px;font-weight:500}
+.pan .go2{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding:18px 20px;background:var(--gold);color:var(--ink);font-weight:600}
+.pan .go2::after{content:"→"}
 @media (min-width:900px){
-  .it summary{grid-template-columns:40px 200px 1fr;gap:28px;padding:22px var(--gut);align-items:center;transition:background .3s}
-  .it summary:hover .ph img{transform:scale(1.05)}
-  .it .n{font-size:14px;color:var(--mute);align-self:start}
-  .it .t{display:grid;grid-template-columns:1fr auto;column-gap:24px;align-content:center}
-  .it .t>*{grid-column:1}
-  .it .t .pr{grid-column:2;grid-row:1/4;margin:0;padding:0;align-self:center;text-align:right}
-  .more{margin-top:16px}
-  .it .body{grid-template-columns:268px 1fr 1fr;gap:28px;padding:0 var(--gut) 36px}
-  .it .body ul{grid-column:2;grid-row:1/3}
-  .it .body dl{grid-column:3;align-self:start}
-  .it .go2{grid-column:3;align-self:start}
-  .it .t .more{justify-self:start}
+  .pan{grid-template-columns:1.15fr 1fr;gap:clamp(32px,5vw,80px);padding-top:36px;align-items:start}
+  .pan .ph{aspect-ratio:4/5;position:sticky;top:80px}
+  .pi{padding-top:8px}
 }
-@media (max-width:899px){.it .n{display:none}}
 
 /* 5. три дня: подряд, без рамок */
 .days{background:var(--bone);color:var(--ink);padding:clamp(72px,10vw,140px) var(--gut)}
@@ -195,6 +187,12 @@ a{color:inherit;text-decoration:none}
   .hero .in{opacity:1}.js .rise{opacity:1;transform:none}
   .pin{height:auto}.pin__st{position:relative}
 }
+/* шрифт: Oranienbaum, контрастная антиква строчными, как в журнале */
+:root{--dw:400;--dt:none}
+.disp,.say p:first-child,.pin__t b,.day h3,.go,.mark,.hdr b,.day__h b,.pan h3,.price b,.beat,.crs__head h2{font-weight:400;text-transform:none;letter-spacing:-.03em;line-height:.9}
+.hdr b{letter-spacing:0;font-size:24px}
+.mark{font-size:19.5vw}
+@media (min-width:900px){.w1{font-size:min(18.5vw,34svh)}}
 </style>
 </head>
 <body>
@@ -231,23 +229,57 @@ a{color:inherit;text-decoration:none}
 
   <section class="crs" id="kursy" aria-label="Курсы">
     <div class="crs__head"><h2 class="disp rise">Курсы</h2><span class="cap">7 направлений</span></div>
-    <div class="crs__list">
-      <details class="it"><summary><span class="n">01</span><span class="ph"><img src="../altynnur/ph/r-lash-volume-640.webp" alt="Наращенные ресницы, работа АлтынНур" loading="lazy"></span><span class="t"><h3>Ресницы. Комплекс</h3><span class="cap">Классика, 2D и 3D, 3 дня</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">20 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Схемы, материалы и протокол работы</li><li>Подбор пинцетов под вашу руку</li><li>Здоровье мастера и клиента, СанПиН</li><li>Снятие наращённых ресниц</li><li>Архитектура пучка, пучки 2D и 3D в разных техниках</li><li>Наращивание «классика» и 2-3D на моделях</li><li>Ценообразование: прайс и шаги повышения цен</li><li>Первоначальный набор лешмейкера</li></ul><dl><div><dt class="cap">Длительность</dt><dd>3 дня</dd></div><div><dt class="cap">Модели</dt><dd>Модели предоставляет студия</dd></div><div><dt class="cap">Материалы</dt><dd>Материал на время обучения от студии, потом скидка 10% на материалы</dd></div><div><dt class="cap">В конце</dt><dd>Сертификат</dd></div></dl><a class="go2" href="#zapis" data-course="Ресницы: комплексное обучение">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">02</span><span class="ph"><img src="../altynnur/ph/r-lash-classic-640.webp" alt="Наращенные ресницы, работа АлтынНур" loading="lazy"></span><span class="t"><h3>Ресницы. База</h3><span class="cap">С нуля, для начинающих</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">25 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Базовое обучение для начинающих</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Ресницы: базовый курс с нуля">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">03</span><span class="ph"><img src="../altynnur/ph/brows-eye-640.webp" alt="Бровь и глаз крупным планом" loading="lazy"></span><span class="t"><h3>Брови</h3><span class="cap">Архитектура, хна и краска</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">10 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Архитектура бровей</li><li>Окрашивание хной</li><li>Окрашивание краской</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Архитектура и оформление бровей">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">04</span><span class="ph"><img src="../altynnur/ph/face-4-640.webp" alt="Уходовая процедура для лица" loading="lazy"></span><span class="t"><h3>Косметик-эстетист</h3><span class="cap">Уход за лицом</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">20 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Уходовые процедуры для лица</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Косметик-эстетист">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">05</span><span class="ph"><img src="../altynnur/ph/hair-1-640.webp" alt="Укладка волос феном и брашингом" loading="lazy"></span><span class="t"><h3>Волосы</h3><span class="cap">Ботокс, кератин, нанопластика</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">15 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Ботокс для волос</li><li>Кератиновое выпрямление</li><li>Нанопластика</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Ботокс, кератин и нанопластика волос">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">06</span><span class="ph"><img src="../altynnur/ph/pedi-1-640.webp" alt="Покрытие ногтей на ногах" loading="lazy"></span><span class="t"><h3>Педикюр</h3><span class="cap">Аппарат и покрытие, можно с нуля</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">8 500 ₽</span></span></summary>
-        <div class="body"><ul><li>Аппаратный педикюр</li><li>Покрытие</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Аппаратный педикюр и покрытие">Записаться на этот курс</a></div></details>
-      <details class="it"><summary><span class="n">07</span><span class="ph"><img src="../altynnur/ph/nails-2-640.webp" alt="Ногти с нюдовым и серебристым покрытием" loading="lazy"></span><span class="t"><h3>Дизайн ногтей</h3><span class="cap">Рисунки и втирки</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">3 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Рисунки</li><li>Втирки</li><li>Декор</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Дизайн ногтей">Записаться на этот курс</a></div></details>
-    </div>
-  </section>
+    <div class="sel" role="tablist" aria-label="Выбор"><button type="button" role="tab" id="t0" aria-controls="g0" aria-selected="true">Ресницы. Комплекс</button><button type="button" role="tab" id="t1" aria-controls="g1" aria-selected="false" tabindex="-1">Ресницы. База</button><button type="button" role="tab" id="t2" aria-controls="g2" aria-selected="false" tabindex="-1">Брови</button><button type="button" role="tab" id="t3" aria-controls="g3" aria-selected="false" tabindex="-1">Косметик-эстетист</button><button type="button" role="tab" id="t4" aria-controls="g4" aria-selected="false" tabindex="-1">Волосы</button><button type="button" role="tab" id="t5" aria-controls="g5" aria-selected="false" tabindex="-1">Педикюр</button><button type="button" role="tab" id="t6" aria-controls="g6" aria-selected="false" tabindex="-1">Дизайн ногтей</button></div>
+      <div class="pan" id="g0" role="tabpanel" aria-labelledby="t0">
+        <div class="ph"><img src="../altynnur/ph/r-lash-volume-1280.webp" alt="Наращенные ресницы, работа АлтынНур" loading="lazy"></div>
+        <div class="pi"><span class="cap">01 / 07</span><h3>Ресницы. Комплекс</h3><p class="sub">Классика, 2D и 3D, 3 дня</p>
+          <div class="price"><b>20 000 ₽</b><span>за курс</span></div>
+          <ul><li>Схемы, материалы и протокол работы</li><li>Подбор пинцетов под вашу руку</li><li>Здоровье мастера и клиента, СанПиН</li><li>Снятие наращённых ресниц</li><li>Архитектура пучка, пучки 2D и 3D в разных техниках</li><li>Наращивание «классика» и 2-3D на моделях</li><li>Ценообразование: прайс и шаги повышения цен</li><li>Первоначальный набор лешмейкера</li></ul><dl><div><dt class="cap">Длительность</dt><dd>3 дня</dd></div><div><dt class="cap">Модели</dt><dd>Модели предоставляет студия</dd></div><div><dt class="cap">Материалы</dt><dd>Материал на время обучения от студии, потом скидка 10% на материалы</dd></div><div><dt class="cap">В конце</dt><dd>Сертификат</dd></div></dl><a class="go2" href="#zapis" data-course="Ресницы: комплексное обучение">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g1" role="tabpanel" aria-labelledby="t1" hidden>
+        <div class="ph"><img src="../altynnur/ph/r-lash-classic-1280.webp" alt="Наращенные ресницы, работа АлтынНур" loading="lazy"></div>
+        <div class="pi"><span class="cap">02 / 07</span><h3>Ресницы. База</h3><p class="sub">С нуля, для начинающих</p>
+          <div class="price"><b>25 000 ₽</b><span>за курс</span></div>
+          <ul><li>Базовое обучение для начинающих</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Ресницы: базовый курс с нуля">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g2" role="tabpanel" aria-labelledby="t2" hidden>
+        <div class="ph"><img src="../altynnur/ph/brows-eye-1280.webp" alt="Бровь и глаз крупным планом" loading="lazy"></div>
+        <div class="pi"><span class="cap">03 / 07</span><h3>Брови</h3><p class="sub">Архитектура, хна и краска</p>
+          <div class="price"><b>10 000 ₽</b><span>за курс</span></div>
+          <ul><li>Архитектура бровей</li><li>Окрашивание хной</li><li>Окрашивание краской</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Архитектура и оформление бровей">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g3" role="tabpanel" aria-labelledby="t3" hidden>
+        <div class="ph"><img src="../altynnur/ph/face-4-1280.webp" alt="Уходовая процедура для лица" loading="lazy"></div>
+        <div class="pi"><span class="cap">04 / 07</span><h3>Косметик-эстетист</h3><p class="sub">Уход за лицом</p>
+          <div class="price"><b>20 000 ₽</b><span>за курс</span></div>
+          <ul><li>Уходовые процедуры для лица</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Косметик-эстетист">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g4" role="tabpanel" aria-labelledby="t4" hidden>
+        <div class="ph"><img src="../altynnur/ph/hair-1-1280.webp" alt="Укладка волос феном и брашингом" loading="lazy"></div>
+        <div class="pi"><span class="cap">05 / 07</span><h3>Волосы</h3><p class="sub">Ботокс, кератин, нанопластика</p>
+          <div class="price"><b>15 000 ₽</b><span>за курс</span></div>
+          <ul><li>Ботокс для волос</li><li>Кератиновое выпрямление</li><li>Нанопластика</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Ботокс, кератин и нанопластика волос">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g5" role="tabpanel" aria-labelledby="t5" hidden>
+        <div class="ph"><img src="../altynnur/ph/pedi-1-1280.webp" alt="Покрытие ногтей на ногах" loading="lazy"></div>
+        <div class="pi"><span class="cap">06 / 07</span><h3>Педикюр</h3><p class="sub">Аппарат и покрытие, можно с нуля</p>
+          <div class="price"><b>8 500 ₽</b><span>за курс</span></div>
+          <ul><li>Аппаратный педикюр</li><li>Покрытие</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Аппаратный педикюр и покрытие">Записаться на этот курс</a>
+        </div>
+      </div>
+      <div class="pan" id="g6" role="tabpanel" aria-labelledby="t6" hidden>
+        <div class="ph"><img src="../altynnur/ph/nails-2-1280.webp" alt="Ногти с нюдовым и серебристым покрытием" loading="lazy"></div>
+        <div class="pi"><span class="cap">07 / 07</span><h3>Дизайн ногтей</h3><p class="sub">Рисунки и втирки</p>
+          <div class="price"><b>3 000 ₽</b><span>за курс</span></div>
+          <ul><li>Рисунки</li><li>Втирки</li><li>Декор</li></ul><dl><div><dt class="cap">Формат</dt><dd>Очно, группа 2-3 человека</dd></div><div><dt class="cap">Даты и подробности</dt><dd>Ответим в WhatsApp</dd></div></dl><a class="go2" href="#zapis" data-course="Дизайн ногтей">Записаться на этот курс</a>
+        </div>
+      </div>
+    </section>
 
   <section class="days" aria-label="Как проходит курс ресниц">
     <h2 class="disp rise">Три дня<br>в студии</h2>
@@ -321,9 +353,16 @@ a{color:inherit;text-decoration:none}
   document.querySelectorAll("[data-course]").forEach(function (a) {
     a.addEventListener("click", function () { var c = a.dataset.course; wa.href = base + encodeURIComponent("Здравствуйте! Хочу записаться на курс «" + c + "» в АлтынНур."); waT.textContent = "Записаться: " + c.split(":")[0]; });
   });
-  // открыт только один курс за раз
-  var its = document.querySelectorAll(".it");
-  its.forEach(function (d) { d.addEventListener("toggle", function () { if (d.open) its.forEach(function (o) { if (o !== d) o.open = false; }); }); });
+  // вкладки выбора: одна карточка на экране, стрелки клавиатуры тоже работают
+  var tabs = [].slice.call(document.querySelectorAll(".sel [role=tab]"));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+    t.scrollIntoView({ block: "nearest", inline: "center", behavior: RM ? "auto" : "smooth" }); if (focus) t.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(t); });
+    t.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
+  });
   // сцена: кадры-картинки рисуются на canvas по прокрутке (видео телефоны без нажатия не грузят)
   var pin = document.getElementById("pin"), cv = pin.querySelector("canvas"), cx = cv.getContext("2d"), line = pin.querySelector(".pin__line i");
   var tall = cv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches, base = tall ? cv.dataset.tall : cv.dataset.wide, N = +(tall ? cv.dataset.tn : cv.dataset.wn);

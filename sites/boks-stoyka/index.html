@@ -8,7 +8,7 @@
 <title>Стойка: клуб бокса (концепт)</title>
 <meta name="description" content="Концепт сайта клуба бокса для детей и взрослых от shak.web.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wdth,wght@75..100,400..900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Три цвета и всё. Никаких градиентов поверх фото, теней, скруглений и наклеек. */
 :root{
@@ -16,7 +16,7 @@
   --mute:rgba(236,233,226,.55); --line:rgba(236,233,226,.15);
   --ink-mute:rgba(15,15,14,.6); --ink-line:rgba(15,15,14,.16);
   --gut:clamp(16px,3.4vw,48px);
-  --disp:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif; --body:Onest,system-ui,sans-serif;
+  --disp:Tektur,'Arial Narrow',sans-serif; --body:'Golos Text',system-ui,sans-serif;
   --grade:grayscale(1) contrast(1.12) brightness(.92);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -83,47 +83,39 @@ a{color:inherit;text-decoration:none}
 .pin.show .pin__hint{opacity:0}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-/* 4. курсы: список с крупным фото и явной кнопкой «Подробнее» */
+/* 4. выбор: вкладки и одна большая карточка вместо прайс-листа */
 .crs{padding:clamp(80px,11vw,150px) 0 clamp(60px,8vw,120px)}
 .crs__head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 var(--gut) 22px}
 .crs__head h2{font-size:clamp(70px,13vw,190px)}
-.crs__list{border-top:1px solid var(--line)}
-.it{border-bottom:1px solid var(--line)}
-.it summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px var(--gut);align-items:stretch}
-.it summary::-webkit-details-marker{display:none}
-.it .ph{aspect-ratio:4/5;overflow:hidden}
-.it .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.it .t{display:flex;flex-direction:column;min-width:0}
-.it h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(32px,4.6vw,64px);line-height:.88}
-.it .t>.cap{margin-top:6px}
-.it .pr{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3vw,44px);color:var(--gold);margin-top:auto;padding-top:10px;line-height:1}
-.more{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:8px 14px;border:1px solid var(--bone);font-size:14px;font-weight:600}
-.more::after{content:"+";font-size:18px;line-height:1;transition:transform .25s}
-.it[open] .more::after{transform:rotate(45deg)}
-.it[open] .more{background:var(--bone);color:var(--ink)}
-.more .c{display:none}.it[open] .more .o{display:none}.it[open] .more .c{display:inline}
-.it .body{padding:4px var(--gut) 28px;display:grid;gap:18px}
-.it ul{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
-.it li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
-.it dl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.it dd{margin-top:3px;font-size:15px;font-weight:500}
-.it .go2{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:var(--gold);color:var(--ink);font-weight:600}
-.it .go2::after{content:"→"}
+.sel{display:flex;overflow-x:auto;scroll-padding-inline:var(--gut);-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);scrollbar-width:none;border-bottom:1px solid var(--line);padding:0 var(--gut);scroll-snap-type:x proximity}
+.sel::-webkit-scrollbar{display:none}
+.sel::after{content:"";flex:0 0 18vw}
+@media (min-width:900px){.sel{-webkit-mask-image:none;mask-image:none}.sel::after{display:none}}
+.sel button{flex:0 0 auto;margin-right:26px;padding:16px 0 14px;font:600 15px/1.2 var(--body);color:var(--mute);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;scroll-snap-align:start;transition:color .25s,border-color .25s}
+.sel button:hover{color:var(--bone)}
+.sel button[aria-selected=true]{color:var(--bone);border-color:var(--gold)}
+.pan{display:grid;gap:22px;padding:24px var(--gut) 0;animation:panIn .5s cubic-bezier(.2,.8,.2,1)}
+.pan[hidden]{display:none}
+@keyframes panIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pan .ph{aspect-ratio:4/3;overflow:hidden}
+.pan .ph img{width:100%;height:100%;object-fit:cover}
+.pan h3{font-family:var(--disp);font-weight:var(--dw,900);text-transform:var(--dt,uppercase);font-size:clamp(46px,7vw,104px);line-height:.88;margin-top:10px}
+.pan .sub{margin-top:10px;color:var(--mute);font-size:16px}
+.price{display:flex;align-items:baseline;gap:12px;margin:22px 0 20px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price b{font-family:var(--disp);font-weight:var(--dw,900);font-size:clamp(52px,7vw,96px);line-height:.85;color:var(--gold)}
+.price span{font-size:14px;color:var(--mute)}
+.pan ul{list-style:none}
+.pan li{padding:9px 0 9px 22px;position:relative;font-size:15px}
+.pan li::before{content:"";position:absolute;left:0;top:18px;width:10px;height:1px;background:var(--gold)}
+.pan dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.pan dd{margin-top:3px;font-size:15px;font-weight:500}
+.pan .go2{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding:18px 20px;background:var(--gold);color:var(--ink);font-weight:600}
+.pan .go2::after{content:"→"}
 @media (min-width:900px){
-  .it summary{grid-template-columns:40px 200px 1fr;gap:28px;padding:22px var(--gut);align-items:center;transition:background .3s}
-  .it summary:hover .ph img{transform:scale(1.05)}
-  .it .n{font-size:14px;color:var(--mute);align-self:start}
-  .it .t{display:grid;grid-template-columns:1fr auto;column-gap:24px;align-content:center}
-  .it .t>*{grid-column:1}
-  .it .t .pr{grid-column:2;grid-row:1/4;margin:0;padding:0;align-self:center;text-align:right}
-  .more{margin-top:16px}
-  .it .body{grid-template-columns:268px 1fr 1fr;gap:28px;padding:0 var(--gut) 36px}
-  .it .body ul{grid-column:2;grid-row:1/3}
-  .it .body dl{grid-column:3;align-self:start}
-  .it .go2{grid-column:3;align-self:start}
-  .it .t .more{justify-self:start}
+  .pan{grid-template-columns:1.15fr 1fr;gap:clamp(32px,5vw,80px);padding-top:36px;align-items:start}
+  .pan .ph{aspect-ratio:4/5;position:sticky;top:80px}
+  .pi{padding-top:8px}
 }
-@media (max-width:899px){.it .n{display:none}}
 
 /* 5. три дня: подряд, без рамок */
 .days{background:var(--bone);color:var(--ink);padding:clamp(72px,10vw,140px) var(--gut)}
@@ -194,8 +186,8 @@ a{color:inherit;text-decoration:none}
 }
 
 /* бокс: красный только акцентом, кнопки острые, фото чёрно-белые */
-.it .go2,.end .go:hover{color:var(--bone)}
-.it .go2{background:var(--gold);color:#fff}
+.end .go:hover{color:var(--gold)}
+.pan .go2{background:var(--gold);color:#fff}
 .w{color:var(--bone)}.w2{color:var(--gold)}
 .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;padding:3px 7px;margin-left:10px;vertical-align:middle}
 /* слово целиком за боксёром ниже головы, «клуб бокса» перед ним */
@@ -222,6 +214,8 @@ a{color:inherit;text-decoration:none}
 .sched{display:grid;gap:0;margin-top:32px;border-top:1px solid var(--ink-line)}
 .sched div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--ink-line);font-weight:500}
 .sched span{color:var(--ink-mute)}
+/* шрифт: Tektur, суженный до 75%, рубленые углы как у спортивной формы */
+.disp,.say p:first-child,.pin__t b,.day h3,.go,.mark,.hdr b,.day__h b,.pan h3,.price b,.beat,.crs__head h2{font-stretch:75%;letter-spacing:-.01em}
 </style>
 </head>
 <body>
@@ -258,19 +252,43 @@ a{color:inherit;text-decoration:none}
 
   <section class="crs" id="gruppy" aria-label="Группы">
     <div class="crs__head"><h2 class="disp rise">Группы</h2><span class="cap">цены за месяц</span></div>
-    <div class="crs__list">
-      <details class="it"><summary><span class="n">01</span><span class="ph"><img src="ph/gloves-640.webp" alt="Дети 7-11" loading="lazy"></span><span class="t"><h3>Дети 7-11</h3><span class="cap">Координация, дисциплина, без спаррингов</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">3 500 ₽</span></span></summary>
-        <div class="body"><ul><li>Общая физическая подготовка</li><li>Стойка, передвижения, базовые удары</li><li>Игры на реакцию</li><li>Аттестация раз в полгода</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 17:00</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Дети 7-11">Записаться на пробную</a></div></details>
-      <details class="it"><summary><span class="n">02</span><span class="ph"><img src="ph/teen-640.webp" alt="Подростки 12-17" loading="lazy"></span><span class="t"><h3>Подростки 12-17</h3><span class="cap">Техника и первые турниры</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">4 000 ₽</span></span></summary>
-        <div class="body"><ul><li>Техника ударов и защиты</li><li>Работа на лапах с тренером</li><li>Лёгкие спарринги в шлеме</li><li>Подготовка к соревнованиям по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 18:30</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Подростки 12-17">Записаться на пробную</a></div></details>
-      <details class="it"><summary><span class="n">03</span><span class="ph"><img src="ph/adult-640.webp" alt="Взрослые с нуля" loading="lazy"></span><span class="t"><h3>Взрослые с нуля</h3><span class="cap">Для формы и уверенности</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">4 500 ₽</span></span></summary>
-        <div class="body"><ul><li>Стойка, удары, защита с первого занятия</li><li>Кардио и сила без тренажёрного зала</li><li>Спарринги только по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>вт, чт 20:00, сб 12:00</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Взрослые с нуля">Записаться на пробную</a></div></details>
-      <details class="it"><summary><span class="n">04</span><span class="ph"><img src="ph/sport-640.webp" alt="Соревновательная" loading="lazy"></span><span class="t"><h3>Соревновательная</h3><span class="cap">По отбору тренера</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">5 500 ₽</span></span></summary>
-        <div class="body"><ul><li>Тренировки 5 раз в неделю</li><li>Сборы и выезды на турниры</li><li>План питания и веса</li></ul><dl><div><dt class="cap">Когда</dt><dd>по отдельному расписанию</dd></div><div><dt class="cap">Вход</dt><dd>после просмотра тренером</dd></div></dl><a class="go2" href="#zapis" data-course="Соревновательная">Записаться на пробную</a></div></details>
-      <details class="it"><summary><span class="n">05</span><span class="ph"><img src="ph/pers-640.webp" alt="Персонально" loading="lazy"></span><span class="t"><h3>Персонально</h3><span class="cap">Один на один с тренером</span><span class="more"><span class="o">Подробнее</span><span class="c">Свернуть</span></span><span class="pr">1 800 ₽</span></span></summary>
-        <div class="body"><ul><li>Разбор техники под вашу цель</li><li>Удобное время</li><li>Лапы, мешок, спарринг по желанию</li></ul><dl><div><dt class="cap">Цена</dt><dd>за одну тренировку</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Персонально">Записаться на пробную</a></div></details>
-    </div>
-  </section>
+    <div class="sel" role="tablist" aria-label="Выбор"><button type="button" role="tab" id="t0" aria-controls="g0" aria-selected="true">Дети 7-11</button><button type="button" role="tab" id="t1" aria-controls="g1" aria-selected="false" tabindex="-1">Подростки 12-17</button><button type="button" role="tab" id="t2" aria-controls="g2" aria-selected="false" tabindex="-1">Взрослые с нуля</button><button type="button" role="tab" id="t3" aria-controls="g3" aria-selected="false" tabindex="-1">Соревновательная</button><button type="button" role="tab" id="t4" aria-controls="g4" aria-selected="false" tabindex="-1">Персонально</button></div>
+      <div class="pan" id="g0" role="tabpanel" aria-labelledby="t0">
+        <div class="ph"><img src="ph/gloves-1280.webp" alt="Дети 7-11" loading="lazy"></div>
+        <div class="pi"><span class="cap">01 / 05</span><h3>Дети 7-11</h3><p class="sub">Координация, дисциплина, без спаррингов</p>
+          <div class="price"><b>3 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Общая физическая подготовка</li><li>Стойка, передвижения, базовые удары</li><li>Игры на реакцию</li><li>Аттестация раз в полгода</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 17:00</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Дети 7-11">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g1" role="tabpanel" aria-labelledby="t1" hidden>
+        <div class="ph"><img src="ph/teen-1280.webp" alt="Подростки 12-17" loading="lazy"></div>
+        <div class="pi"><span class="cap">02 / 05</span><h3>Подростки 12-17</h3><p class="sub">Техника и первые турниры</p>
+          <div class="price"><b>4 000 ₽</b><span>в месяц</span></div>
+          <ul><li>Техника ударов и защиты</li><li>Работа на лапах с тренером</li><li>Лёгкие спарринги в шлеме</li><li>Подготовка к соревнованиям по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 18:30</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Подростки 12-17">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g2" role="tabpanel" aria-labelledby="t2" hidden>
+        <div class="ph"><img src="ph/adult-1280.webp" alt="Взрослые с нуля" loading="lazy"></div>
+        <div class="pi"><span class="cap">03 / 05</span><h3>Взрослые с нуля</h3><p class="sub">Для формы и уверенности</p>
+          <div class="price"><b>4 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Стойка, удары, защита с первого занятия</li><li>Кардио и сила без тренажёрного зала</li><li>Спарринги только по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>вт, чт 20:00, сб 12:00</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Взрослые с нуля">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g3" role="tabpanel" aria-labelledby="t3" hidden>
+        <div class="ph"><img src="ph/sport-1280.webp" alt="Соревновательная" loading="lazy"></div>
+        <div class="pi"><span class="cap">04 / 05</span><h3>Соревновательная</h3><p class="sub">По отбору тренера</p>
+          <div class="price"><b>5 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Тренировки 5 раз в неделю</li><li>Сборы и выезды на турниры</li><li>План питания и веса</li></ul><dl><div><dt class="cap">Когда</dt><dd>по отдельному расписанию</dd></div><div><dt class="cap">Вход</dt><dd>после просмотра тренером</dd></div></dl><a class="go2" href="#zapis" data-course="Соревновательная">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g4" role="tabpanel" aria-labelledby="t4" hidden>
+        <div class="ph"><img src="ph/pers-1280.webp" alt="Персонально" loading="lazy"></div>
+        <div class="pi"><span class="cap">05 / 05</span><h3>Персонально</h3><p class="sub">Один на один с тренером</p>
+          <div class="price"><b>1 800 ₽</b><span>за тренировку</span></div>
+          <ul><li>Разбор техники под вашу цель</li><li>Удобное время</li><li>Лапы, мешок, спарринг по желанию</li></ul><dl><div><dt class="cap">Цена</dt><dd>за одну тренировку</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Персонально">Записаться на пробную</a>
+        </div>
+      </div>
+    </section>
 
   <section class="days" aria-label="Первая тренировка">
     <h2 class="disp rise">Первая<br>тренировка</h2>
@@ -348,8 +366,16 @@ a{color:inherit;text-decoration:none}
   // концепт: вместо мессенджера клуба подставится его WhatsApp или Telegram
   var waT = document.getElementById("waTxt");
   document.querySelectorAll("[data-course]").forEach(function (a) { a.addEventListener("click", function () { waT.textContent = "Пробная: " + a.dataset.course; }); });
-  var its = document.querySelectorAll(".it");
-  its.forEach(function (d) { d.addEventListener("toggle", function () { if (d.open) its.forEach(function (o) { if (o !== d) o.open = false; }); }); });
+  // вкладки выбора: одна карточка на экране, стрелки клавиатуры тоже работают
+  var tabs = [].slice.call(document.querySelectorAll(".sel [role=tab]"));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+    t.scrollIntoView({ block: "nearest", inline: "center", behavior: RM ? "auto" : "smooth" }); if (focus) t.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(t); });
+    t.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
+  });
   // сцена: кадры-картинки рисуются на canvas по прокрутке (видео телефоны без нажатия не грузят)
   var pin = document.getElementById("pin"), cv = pin.querySelector("canvas"), cx = cv.getContext("2d"), line = pin.querySelector(".pin__line i");
   var tall = cv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches, base = tall ? cv.dataset.tall : cv.dataset.wide, N = +(tall ? cv.dataset.tn : cv.dataset.wn);

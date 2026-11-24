@@ -5,9 +5,9 @@
   "intro": 2.8,
   "steps": [
    [
-    ".it summary",
+    ".sel button",
     "click",
-    0
+    1
    ],
    [
     ".faq summary",
@@ -22,9 +22,9 @@
   "intro": 2.8,
   "steps": [
    [
-    ".it summary",
+    ".sel button",
     "click",
-    0
+    1
    ],
    [
     ".faq summary",
