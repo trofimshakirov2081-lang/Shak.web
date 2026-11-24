@@ -5,14 +5,31 @@
   "intro": 2.8,
   "steps": [
    [
-    ".faq summary",
+    ".it summary",
     "click",
     0
    ],
    [
     ".faq summary",
     "click",
-    3
+    0
+   ]
+  ]
+ },
+ {
+  "slug": "boks-stoyka",
+  "url": "sites/boks-stoyka/",
+  "intro": 2.8,
+  "steps": [
+   [
+    ".it summary",
+    "click",
+    0
+   ],
+   [
+    ".faq summary",
+    "click",
+    0
    ]
   ]
  },
