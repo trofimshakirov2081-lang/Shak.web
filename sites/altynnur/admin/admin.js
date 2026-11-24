@@ -295,7 +295,13 @@
   const SIZES = [["s", "Небольшой"], ["m", "Средний"], ["l", "На всю ширину"]];
   F.photos = (label, o, k) => { if (!Array.isArray(o[k])) o[k] = [];
     return el("div", { class: "f" }, el("span", { text: label }), el("small", { style: "color:var(--ink2)", text: "1 фото будет большим, 2 встанут рядом, 3 в ряд, больше сеткой. Можно без фото." }),
-      F.list(o[k], { title: (p) => p.alt, untitled: "Фото", fields: (p) => [F.img(p.video ? "Обложка видео" : "Фото", p, "src", "alt"), p.video ? F.text("Видео", p, "video", { hint: "Файл видео на сайте. Новые видео пока добавляет Трофим" }) : null], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" })); };
+      F.list(o[k], { title: (p) => (p.video ? "▶ " : "") + (p.alt || ""), untitled: "Фото", fields: (p) => [F.img(p.video ? "Обложка видео" : "Фото", p, "src", "alt"), p.video ? el("small", { style: "color:var(--ink2)", text: "Видео: " + p.video + ". На сайте играет без звука, по кругу" }) : null], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать" }),
+      el("label", { class: "btn btn--sm", style: "justify-self:start;cursor:pointer" }, "Добавить видео", el("input", { type: "file", accept: "video/mp4,video/quicktime,video/*", style: "display:none", onchange: async (e) => {
+        const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+        if (!GHM) return toast(DEMO ? "Пробный режим: видео загружается на рабочем сайте" : "Видео загружается только в GitHub-версии сайта", true);
+        toast("Загружаем видео, это может занять минуту…");
+        try { const r = await GH.uploadVideo(f); IMG[r.src] = r.preview; o[k].push({ src: r.src, video: r.video, alt: "Видео с занятия" }); touch(); render(); toast("Видео загружено. Нажмите «Опубликовать»"); } catch (er) { toast(er.message, true); } } })),
+      el("small", { style: "color:var(--ink2)", text: "Видео лучше короткое, 5-15 секунд, до 30 МБ." })); };
   // галочка «показывать» и место блока на главной: стрелки двигают его выше или ниже среди остальных блоков
   const onHome = (id) => { const box2 = el("div", { class: "brow", style: "flex-wrap:wrap;gap:8px" });
     const draw = () => { const i = S.home.indexOf(id), shown = i >= 0;

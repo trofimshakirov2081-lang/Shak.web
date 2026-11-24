@@ -286,7 +286,7 @@
     const ills = S.courses.flatMap((c) => [{ src: c.photo, alt: c.alt, cat: c.cat }].concat(c.photos.map((p) => ({ src: p.src, alt: p.alt, cat: c.cat })))).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i);
     const items = has(S.works) ? S.works : S.preview ? ills : [];
     return `<div class="wrap phead">${crumbs([{ t: "Работы" }])}<h1>Результаты, которые говорят сами за себя</h1>
-      <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
+      <div class="filters" role="group" aria-label="Направление">${new Set(items.map((x) => x.cat)).size < 2 ? "" : `<button class="chip" data-filter="all" aria-pressed="true">Все</button>`}${new Set(items.map((x) => x.cat)).size < 2 ? "" : S.categories.filter((c) => items.some((x) => x.cat === c.id)).map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
       <section class="wrap" style="padding-bottom:var(--sec)">
       ${has(S.works) ? "" : `<div class="empty-works"><div><h2 style="font-size:var(--fs-h3)">Галерея работ появится после съёмки</h2><p class="muted" style="margin-top:12px">Здесь будут только настоящие работы учениц и преподавателя, подписанные и с согласия авторов:</p><ul><li>брови, ресницы, ногти, педикюр, уход, волосы;</li><li>сравнения «до и после»;</li><li>процесс обучения.</li></ul></div>
         <div><p class="muted">${NOTE ? "Ниже иллюстрации направлений, чтобы показать, как будет работать галерея. Это не работы АлтынНур." : ""}</p></div></div>`}

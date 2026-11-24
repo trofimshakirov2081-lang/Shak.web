@@ -109,6 +109,22 @@
     return { src: name, preview: urls[640] };
   }
 
+  /* видео: файл как есть (до 30 МБ), обложка из кадра на 1-й секунде в трёх размерах */
+  async function uploadVideo(file) {
+    if (file.size > 30e6) throw new Error("Видео больше 30 МБ. Обрежьте его до 10-15 секунд в «Фото» на телефоне и попробуйте снова");
+    const url = URL.createObjectURL(file), v = document.createElement("video");
+    v.muted = true; v.playsInline = true; v.preload = "auto"; v.src = url;
+    await new Promise((ok, bad) => { v.onloadeddata = ok; v.onerror = () => bad(new Error("Не получилось открыть видео. Попробуйте MP4 или MOV с iPhone")); });
+    await new Promise((ok) => { v.onseeked = ok; v.currentTime = Math.min(1, (v.duration || 2) / 2); });
+    const img = document.createElement("canvas"); img.width = v.videoWidth; img.height = v.videoHeight; img.getContext("2d").drawImage(v, 0, 0);
+    const pic = new Image(); pic.src = img.toDataURL("image/jpeg", 0.9); await pic.decode();
+    const name = "ph/vid-" + Date.now().toString(36), ext = /quicktime|mov/i.test(file.type + file.name) ? "mov" : "mp4", files = [], urls = {};
+    for (const w of [640, 1280, 1600]) { const r = await toBin(pic, w); files.push({ path: `${name}-${w}.webp`, bin: r.bin }); urls[w] = r.url; }
+    files.push({ path: `${name}.${ext}`, bin: new Uint8Array(await file.arrayBuffer()) });
+    await commit(files, "Видео из админки");
+    return { src: name, video: `${name}.${ext}`, preview: urls[640] };
+  }
+
   async function changePassword(oldPw, newPw) {
     if ((newPw || "").length < 8) throw new Error("Новый пароль: не короче 8 символов");
     const t = await decryptToken(oldPw);
@@ -118,5 +134,5 @@
     C.enc = e;
   }
 
-  window.GH = { login, restore, forget, loadSite, publish, history, uploadPhoto, changePassword, encryptToken, siteText, parseSite };
+  window.GH = { login, restore, forget, loadSite, publish, history, uploadPhoto, uploadVideo, changePassword, encryptToken, siteText, parseSite };
 })();
