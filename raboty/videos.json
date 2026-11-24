@@ -1,5 +1,27 @@
 [
  {
+  "slug": "altynnur-afisha",
+  "url": "sites/altynnur-afisha/",
+  "intro": 2.6,
+  "steps": [
+   [
+    ".courses__nav button",
+    "click",
+    1
+   ],
+   [
+    ".courses__nav button",
+    "click",
+    1
+   ],
+   [
+    ".faq summary",
+    "click",
+    0
+   ]
+  ]
+ },
+ {
   "slug": "galant",
   "steps": [
    [

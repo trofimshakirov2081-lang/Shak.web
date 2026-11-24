@@ -1,6 +1,6 @@
 // Видео для портфолио: сайт на экране телефона листается сверху вниз, по пути нажимаются живые элементы.
 // node tools/record-video.cjs raboty/videos.json [slug]   (нужны playwright, ffmpeg и запущенный http-server на 8080)
-// В videos.json: [{ "slug": "...", "steps": [["селектор", "click", номер], ["селектор", "range", 0.8], ["селектор", "drag", [0.5, 0.9, 0.2]]] }]
+// В videos.json: [{ "slug": "...", "url": "sites/... (если не демо)", "steps": [["селектор", "click", номер], ["селектор", "range", 0.8], ["селектор", "drag", [0.5, 0.9, 0.2]]] }]
 const { chromium } = require("playwright");
 const { execFileSync } = require("child_process");
 const fs = require("fs"), path = require("path"), os = require("os");
@@ -10,7 +10,7 @@ async function record(job, outDir) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rec-"));
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true });
-  await p.goto(BASE + job.slug + "/", { waitUntil: "networkidle" }).catch(() => {});
+  await p.goto(job.url ? "http://localhost:8080/" + job.url : BASE + job.slug + "/", { waitUntil: "networkidle" }).catch(() => {});
   await p.addStyleTag({ content: ".c-demo{display:none!important}html{scroll-behavior:auto!important}::-webkit-scrollbar{display:none}" });
   // Заранее проходим страницу, чтобы ленивые картинки успели загрузиться
   await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { scrollTo(0, y); await new Promise(r => setTimeout(r, 150)); } scrollTo(0, 0); });
