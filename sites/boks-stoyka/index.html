@@ -203,11 +203,22 @@ a{color:inherit;text-decoration:none}
 .w2{top:auto;bottom:21%;font-size:clamp(54px,15vw,140px)}
 .hero__me{width:min(100vw,62svh,560px)}
 @media (min-width:900px){
-  .w1,.w2{text-align:center;padding:0}
-  .w1{top:auto;bottom:30svh;font-size:min(27vw,46svh)}
-  .w2{bottom:10svh;font-size:min(12vw,20svh)}
-  .hero__me{left:50%;height:86svh}
+  .w1,.w2{text-align:right;padding:0 var(--gut) 0 0}
+  .w1{top:auto;bottom:31svh;font-size:min(25vw,44svh)}
+  .w2{bottom:9svh;font-size:min(11vw,19svh)}
+  .hero__me{left:20%;height:88svh}
+  .hero__low{max-width:22ch}
 }
+/* сцена бокса: слова сменяются в такт ударам, текст есть с первого кадра */
+.pin{height:230svh}
+.beats{opacity:1;transform:none}
+.bw{position:relative;height:clamp(100px,24vw,300px)}
+.beat{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(50%);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);font-size:clamp(110px,26vw,320px)!important}
+.beat.on{opacity:1;transform:none}
+.beat.gone{opacity:0;transform:translateY(-50%)}
+.beats span{opacity:0;transition:opacity .5s}
+.pin.show .beats span{opacity:1}
+.pin__st video{filter:var(--grade) brightness(.72)}
 .sched{display:grid;gap:0;margin-top:32px;border-top:1px solid var(--ink-line)}
 .sched div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--ink-line);font-weight:500}
 .sched span{color:var(--ink-mute)}
@@ -239,8 +250,8 @@ a{color:inherit;text-decoration:none}
   <section class="pin" id="pin" aria-label="Удар">
     <div class="pin__st ph">
       <video data-wide="ph/udar-wide.mp4" data-tall="ph/udar-tall.mp4" data-tall-poster="ph/udar-tall.jpg" poster="ph/udar-wide.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
-      <div class="pin__hint cap" aria-hidden="true"><i></i>Листайте</div>
-      <div class="pin__t"><b>Раз. Два</b><span>Первую связку бьёте уже на&nbsp;пробной тренировке</span></div>
+      <div class="pin__hint cap" aria-hidden="true"><i></i>Листайте, и он начнёт бить</div>
+      <div class="pin__t beats"><div class="bw"><b class="beat on">Стойка</b><b class="beat">Джеб</b><b class="beat">Прямой</b></div><span>Первую связку бьёте уже на&nbsp;пробной тренировке</span></div>
       <div class="pin__line" aria-hidden="true"><i></i></div>
     </div>
   </section>
@@ -352,7 +363,9 @@ a{color:inherit;text-decoration:none}
     want = Math.min(1, Math.max(0, -r.top / total));
     line.parentNode.style.setProperty("--p", want);
     sv.style.transform = "scale(" + (1.14 - want * 0.14) + ")";
-    pin.classList.toggle("show", want > 0.6);
+    pin.classList.toggle("show", want > 0.72);
+    var bs = pin.querySelectorAll(".beat");
+    if (bs.length) { var bi = Math.min(bs.length - 1, Math.floor(want * bs.length * 1.05)); bs.forEach(function (b, k) { b.classList.toggle("on", k === bi); b.classList.toggle("gone", k < bi); }); }
     if (!raf) raf = requestAnimationFrame(tick);
   }
   if (!RM) { addEventListener("scroll", scene, { passive: true }); addEventListener("resize", scene); sv.addEventListener("loadedmetadata", scene); scene(); }
