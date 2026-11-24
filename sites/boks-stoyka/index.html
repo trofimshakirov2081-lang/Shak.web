@@ -193,9 +193,12 @@ a{color:inherit;text-decoration:none}
 /* слово целиком за боксёром ниже головы, «клуб бокса» перед ним */
 .w1{top:max(70px,10svh);font-size:clamp(110px,31vw,300px)}
 .w2{top:auto;bottom:21%;font-size:clamp(54px,15vw,140px)}
-.hero__me{width:auto;height:calc(100svh - max(70px,10svh) - 31vw * .58)}
-.hero__me img{width:auto;height:100%;max-width:none}
-@media (min-width:900px){.hero__me img{height:100%}}
+.hero__me{width:min(100vw,62svh,560px)}
+/* телефон: макушка доходит до середины высоты «Й», считается в CSS, без скрипта и рывка при загрузке */
+@media (max-width:899px){
+  .hero__me{--t:calc(max(70px,10svh) + 31vw * .19);--x:0px;transform:none;top:var(--t);bottom:auto;width:auto;height:calc(max(100svh,620px) - var(--t));left:calc(56.06vw - .3394 * (max(100svh,620px) - var(--t)))}
+  .hero__me img{width:auto;height:100%;max-width:none}
+}
 @media (min-width:900px){
   .w1,.w2{text-align:right;padding:0 var(--gut) 0 0}
   .w1{top:auto;bottom:31svh;font-size:min(25vw,44svh)}
@@ -366,23 +369,6 @@ a{color:inherit;text-decoration:none}
   // концепт: вместо мессенджера клуба подставится его WhatsApp или Telegram
   var waT = document.getElementById("waTxt");
   document.querySelectorAll("[data-course]").forEach(function (a) { a.addEventListener("click", function () { waT.textContent = "Пробная: " + a.dataset.course; }); });
-  // телефон: слово за боксёром, макушка заходит на «Й» ровно до середины высоты буквы
-  var hero = document.querySelector(".hero"), me = hero.querySelector(".hero__me"), meImg = me.querySelector("img"), w1 = hero.querySelector(".w1");
-  var TOP = 0.004, HEADX = 0.54;
-  function placeHead() {
-    if (innerWidth >= 900) { me.removeAttribute("style"); return; }
-    var t = w1.firstChild, r = document.createRange(); r.setStart(t, 3); r.setEnd(t, 4);
-    var box = r.getBoundingClientRect(), hb = hero.getBoundingClientRect(), cs = getComputedStyle(w1), c = document.createElement("canvas").getContext("2d");
-    c.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
-    var mc = c.measureText("С");
-    var base = box.top + (box.height - (mc.fontBoundingBoxAscent + mc.fontBoundingBoxDescent)) / 2 + mc.fontBoundingBoxAscent;
-    var mid = base - mc.actualBoundingBoxAscent * 0.84 - hb.top;
-    var H = (hb.height - mid) / (1 - TOP), W = H * meImg.naturalWidth / meImg.naturalHeight;
-    me.style.cssText = "--x:0px;width:" + W + "px;height:" + H + "px;top:" + (mid - H * TOP) + "px;bottom:auto;left:" + (box.left + box.width / 2 - hb.left - W * HEADX) + "px";
-  }
-  function headWhenReady() { if (meImg.complete && meImg.naturalWidth) placeHead(); else meImg.addEventListener("load", placeHead, { once: true }); }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(headWhenReady); else headWhenReady();
-  addEventListener("resize", placeHead);
   // вкладки выбора: одна карточка на экране, стрелки клавиатуры тоже работают
   var tabs = [].slice.call(document.querySelectorAll(".sel [role=tab]"));
   function pick(t, focus) {
