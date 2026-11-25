@@ -160,6 +160,11 @@
       <div class="etile__t"><h2>Запишитесь на консультацию</h2><p>Подскажем курс и ближайшие даты</p>
         <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></div></div></div></section>`;
   // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
+  // видео на прокрутке: кадры-картинки рисуются на canvas, телефоны их показывают без нажатия play
+  H.scrub = () => !S.scrub || !S.scrub.on ? "" : `<section class="scrub" id="scrub" aria-label="${esc(S.scrub.title)}"><div class="scrub__st">
+      <canvas data-seq="${R}${esc(S.scrub.seq)}" data-n="${S.scrub.n}" aria-hidden="true"></canvas>
+      <div class="wrap scrub__t"><span class="scrub__k">${esc(S.scrub.kicker || "")}</span><h2>${esc(S.scrub.title)}</h2><p>${esc(S.scrub.text || "")}</p></div>
+      <span class="scrub__hint">Листайте</span><span class="scrub__bar"><i></i></span></div></section>`;
   H.zoom = () => `<section class="zoom" aria-label="Обучение на практике"><div class="zoom__stick">
       ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p.src}-640.webp" alt="" loading="lazy"><em>${esc(p.cap)}</em></span>`).join("")}
       <div class="zoom__c"><img ${srcset(S.zoom.main)} sizes="100vw" alt="${esc(S.zoom.alt)}" loading="lazy"></div>
@@ -289,8 +294,10 @@
     <section class="sec" style="padding-top:0"><div class="wrap"><p class="big rv-t">Профессии осваивают руками. Поэтому у нас теория всегда рядом с практикой, а преподаватель рядом с ученицей.</p>
       <ul class="approach" style="margin-top:clamp(48px,6vw,90px)">${S.about.approach.map((a) => `<li><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></li>`).join("")}</ul>
       ${NOTE ? `<p class="note">Тексты о подходе предварительные, утвердим с Айгуль.</p>` : ""}</div></section>
-    ${H.teacher()}
-    <section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap"><div class="help" style="background:var(--ivory)"><div><h3>Посмотрите программы</h3><p class="muted" style="margin-top:8px">${S.courses.length} курсов: брови и ресницы, ногти, лицо и волосы.</p></div><a class="btn btn--accent" href="${R}courses/">Все курсы</a></div></div></section>`;
+    <section class="sec" style="padding-top:0"><div class="wrap tbio">${has(S.teacher.photo) ? `<div class="ph tbio__ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : ""}
+      <div><span class="cap">${esc(S.teacher.role)}</span><h2 style="margin-top:10px">${esc(S.teacher.name)}</h2>${S.teacher.bio ? `<p class="lead" style="margin-top:16px">${esc(S.teacher.bio)}</p>` : ""}
+      ${(S.teacher.facts || []).length ? `<dl class="tbio__f">${S.teacher.facts.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${esc(f.d)}</dd></div>`).join("")}</dl>` : ""}</div></div></section>
+    <section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap"><div class="help" style="background:var(--ivory)"><div><h3>Посмотрите программы</h3><p class="muted" style="margin-top:8px">${S.courses.length} ${plural(S.courses.length, "курс", "курса", "курсов")}: ${S.categories.map((c) => c.name.toLowerCase()).join(", ")}.</p></div><a class="btn btn--accent" href="${R}courses/">Все курсы</a></div></div></section>`;
   P.works = () => {
     const ills = S.courses.flatMap((c) => [{ src: c.photo, alt: c.alt, cat: c.cat }].concat(c.photos.map((p) => ({ src: p.src, alt: p.alt, cat: c.cat })))).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i);
     const items = has(S.works) ? S.works : S.preview ? ills : [];
@@ -426,6 +433,22 @@
   }
 
   /* ---------- фильтр (каталог и работы) ---------- */
+  function scrub() {
+    const sec = document.getElementById("scrub"); if (!sec) return;
+    const cv = sec.querySelector("canvas"), cx = cv.getContext("2d"), bar = sec.querySelector(".scrub__bar i"), N = +cv.dataset.n, base = cv.dataset.seq;
+    const F = []; let want = 0, have = 0, raf = 0, started = false;
+    const src = (i) => base + String(i + 1).padStart(3, "0") + ".webp";
+    const draw = () => { let i = Math.round(have * (N - 1)); let im = F[i]; while (im && !im.ok && i > 0) im = F[--i]; if (!im || !im.ok) return;
+      const W = cv.width, H2 = cv.height, k = Math.max(W / im.naturalWidth, H2 / im.naturalHeight), w = im.naturalWidth * k, h = im.naturalHeight * k; cx.drawImage(im, (W - w) / 2, (H2 - h) / 2, w, h); };
+    const load = (i) => { const im = new Image(); im.onload = () => { im.ok = true; if (i === 0 || Math.abs(i - Math.round(have * (N - 1))) < 2) draw(); }; im.src = src(i); F[i] = im; };
+    const size = () => { const r = devicePixelRatio > 1 ? 1.5 : 1; cv.width = cv.clientWidth * r; cv.height = cv.clientHeight * r; draw(); };
+    const tick = () => { have += (want - have) * 0.2; draw(); if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else { have = want; raf = 0; draw(); } };
+    const scene = () => { const r = sec.getBoundingClientRect(), total = r.height - innerHeight; if (!started && r.top < innerHeight * 2.5) { started = true; for (let i = 1; i < N; i++) load(i); }
+      want = Math.min(1, Math.max(0, -r.top / total)); bar.style.transform = `scaleX(${want})`; sec.classList.toggle("is-end", want > 0.9); if (!raf) raf = requestAnimationFrame(tick); };
+    load(0); addEventListener("resize", size); size();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { started = true; for (let i = 1; i < N; i++) load(i); return; }
+    addEventListener("scroll", scene, { passive: true }); scene();
+  }
   function filters(listSel, itemSel) {
     const list = document.querySelector(listSel);
     if (!list) return;
@@ -488,7 +511,7 @@
   const inl = document.getElementById("inlineForm");
   if (inl) { inl.innerHTML = formHTML(null); bindForm(inl.querySelector("form"), null, inl); }
   const qb = document.getElementById("qbox"); if (qb) quiz(qb);
-  filters("#spreads", ".spread"); filters("#gal", "button"); lightbox();
+  filters("#spreads", ".spread"); filters("#gal", "button"); lightbox(); scrub();
 
   const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
   // «Назад»: возвращает туда, откуда пришли, на то же место страницы

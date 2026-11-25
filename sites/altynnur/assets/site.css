@@ -764,3 +764,33 @@ html.menu-open .burger span{background:transparent!important}
 @keyframes hpIn{from{transform:scale(1.06)}to{transform:none}}
 @media (min-width:900px){.hp__ph{left:34%}.hero--poster::after{background:linear-gradient(90deg,#15100D 34%,rgba(21,16,13,.4) 50%,rgba(21,16,13,0) 66%),linear-gradient(180deg,rgba(21,16,13,0) 60%,rgba(21,16,13,.6))}.hp__ph img{object-position:45% 50%}}
 @media (prefers-reduced-motion:reduce){.hp__ph img,.hp__h{animation:none}}
+
+/* Об академии: преподаватель с регалиями */
+.tbio{display:grid;gap:28px;align-items:start}
+.tbio__ph{aspect-ratio:4/5;border-radius:var(--r-l);overflow:hidden;max-width:440px}
+.tbio__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.tbio__f{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px 24px;margin-top:28px;border-top:1px solid var(--line);padding-top:20px}
+.tbio__f dt{font-family:var(--f-head);font-size:1.5rem;line-height:1.1}
+.tbio__f dd{margin-top:6px;color:var(--ink-2);font-size:.95rem}
+@media (min-width:900px){.tbio{grid-template-columns:minmax(300px,420px) 1fr;gap:clamp(32px,5vw,80px)}}
+
+/* Видео на прокрутке: кадры ресниц, один заголовок */
+.scrub{position:relative;height:190svh;background:#15100D;color:#F4EADB}
+.scrub__st{position:sticky;top:0;height:100svh;overflow:hidden}
+.scrub canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scrub__st::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,13,0) 50%,rgba(21,16,13,.85));pointer-events:none}
+.scrub__t{position:absolute;left:0;right:0;bottom:clamp(40px,9svh,90px);z-index:2}
+.scrub__k{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#D9B26A}
+.scrub__t h2{font-family:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(56px,14vw,150px);line-height:.85;margin-top:10px;color:#F4EADB}
+.scrub__t p{margin-top:12px;max-width:34ch;color:#EADFCF}
+.scrub__hint{position:absolute;top:90px;left:var(--gut,20px);z-index:2;font-size:13px;color:#EADFCF;transition:opacity .4s}
+.scrub.is-end .scrub__hint{opacity:0}
+.scrub__bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(244,234,219,.18);z-index:2}
+.scrub__bar i{position:absolute;inset:0;background:#D9B26A;transform-origin:0 0;transform:scaleX(0)}
+@media (prefers-reduced-motion:reduce){.scrub{height:auto}.scrub__st{position:relative;height:80svh}}
+@media (min-width:900px){
+  .scrub canvas{left:auto;right:max(4vw,calc((100vw - 1280px) / 2));top:7svh;width:min(40vw,520px);height:86svh;border-radius:var(--r-l)}
+  .scrub__st::after{display:none}
+  .scrub__t{bottom:auto;top:50%;transform:translateY(-50%)}
+  .scrub__t h2,.scrub__t p{max-width:min(46vw,560px)}
+}
