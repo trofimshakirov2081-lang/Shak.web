@@ -14,7 +14,7 @@
   } catch (e) {}
   const S = window.SITE, D = document.body.dataset, R = D.root || "", PAGE = D.page || "home";
   const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const rub = (n) => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
+  const rub = (n) => !n ? "Цена по запросу" : n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
   const tph = (p) => (/\.\w{3,4}$/.test(p) ? p : p + "-1280.webp");
   const has = (v) => Array.isArray(v) ? v.length > 0 : v != null && v !== "";
   const cat = (id) => S.categories.find((c) => c.id === id) || {};
@@ -114,10 +114,16 @@
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
   const ctag = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
-  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(" · ") || c.short || "";
+  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(", ") || c.short || "";
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
-  H.hero = () => `<section class="hero">
+  // постер: фото на весь экран, крупный заголовок, строки переносятся по запятым (Вариант 1, выбран Айгуль 24.11)
+  H.hero = () => S.hero.style === "poster" ? `<section class="hero hero--poster">
+      <div class="hp__ph"><img src="${R}${S.hero.photo}-1600.webp" srcset="${R}${S.hero.photo}-640.webp 640w, ${R}${S.hero.photo}-1280.webp 1280w, ${R}${S.hero.photo}-1600.webp 1600w" sizes="100vw" alt="${esc(S.hero.alt)}" fetchpriority="high"></div>
+      <div class="wrap hp__t"><h1 class="hp__h">${esc(S.hero.title).replace(/,\s*/g, ",<br>")}</h1><p class="hp__sub">${esc(S.hero.short)}</p>
+        <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div>
+        <p class="hp__cnt"><b>${S.courses.length}</b> ${plural(S.courses.length, "курс", "курса", "курсов")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}</p></div>
+    </section>` : `<section class="hero">
       <div class="hero__ph${heroSlides().length > 2 ? " hero__ph--album" : ""}">${heroSlides().slice(0, 3).map((h, i) => `<img class="ha ha--${i + 1}" src="${R}${h.src}-${i ? 1280 : 1600}.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w${i ? "" : `, ${R}${h.src}-1600.webp 1600w`}" sizes="${i ? "(max-width: 860px) 40vw, 22vw" : "(max-width: 860px) 60vw, 33vw"}" alt="${esc(h.alt)}"${i ? ' decoding="async"' : ' fetchpriority="high"'}>`).join("")}${NOTE && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
       <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
@@ -188,8 +194,8 @@
     return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="nums">${n.map((x) => `<div><b>${esc(x.n)}</b><span>${esc(x.t || "")}</span></div>`).join("")}</div></div></section>`; };
   H.reviews = () => { const r = (S.reviews || []).filter((x) => x && (x.text || (x.photos || []).some((p) => p.src))); if (!r.length) return "";
     const st = r.map((x) => parseInt(x.stars, 10)).filter((n) => n >= 1 && n <= 5), avg = st.length ? st.reduce((a, b) => a + b, 0) / st.length : 0;
-    const sub = avg ? `★ ${avg.toFixed(1).replace(".", ",")} из 5 · ${r.length} ${plural(r.length, "отзыв", "отзыва", "отзывов")}` : "";
-    return SEC("Отзывы учениц", sub, `<div class="revs">${r.map((x) => { const n = parseInt(x.stars, 10); return `<figure class="rev">${n >= 1 && n <= 5 ? `<span class="stars" aria-label="Оценка ${n} из 5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : ""}${PH(x.photos, "s")}${x.text ? `<blockquote>${esc(x.text)}</blockquote>` : ""}<figcaption><b>${esc(x.name || "")}</b>${x.course ? `<span class="muted"> · ${esc(x.course)}</span>` : ""}</figcaption></figure>`; }).join("")}</div>`); };
+    const sub = avg ? `★ ${avg.toFixed(1).replace(".", ",")} из 5, ${r.length} ${plural(r.length, "отзыв", "отзыва", "отзывов")}` : "";
+    return SEC("Отзывы учениц", sub, `<div class="revs">${r.map((x) => { const n = parseInt(x.stars, 10); return `<figure class="rev">${n >= 1 && n <= 5 ? `<span class="stars" aria-label="Оценка ${n} из 5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : ""}${PH(x.photos, "s")}${x.text ? `<blockquote>${esc(x.text)}</blockquote>` : ""}<figcaption><b>${esc(x.name || "")}</b>${x.course ? `<span class="muted">, ${esc(x.course)}</span>` : ""}</figcaption></figure>`; }).join("")}</div>`); };
   H.cert = () => { const c = S.cert || {}; if (!ON(c) || !(c.text || (c.photos || []).some((p) => p.src))) return ""; return SEC(c.title || "Сертификат после обучения", c.text, PH(c.photos, c.size)); };
   H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
   /* ---------- готовые блоки: сравнение курсов, калькулятор дохода, приведи подругу, узнать о наборе ---------- */
@@ -243,7 +249,7 @@
   const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
   P.home = () => S.home.map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
   P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
-      <h1>Курсы и цены</h1><p class="lead">${S.courses.length} программ в трёх направлениях. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
+      <h1>Курсы и цены</h1><p class="lead">${S.courses.length} ${plural(S.courses.length, "программа", "программы", "программ")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
       <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
     <div class="wrap" id="spreads">${S.courses.map((c) => `<article class="spread" data-cat="${c.cat}">
         <a class="spread__ph zoom" href="${cURL(c)}" tabindex="-1" aria-hidden="true">${ph(c.photo, "", { sizes: "(max-width: 760px) 100vw, 45vw", style: "height:100%;border-radius:inherit" })}</a>

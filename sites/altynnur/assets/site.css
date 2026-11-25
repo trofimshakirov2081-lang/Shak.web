@@ -700,7 +700,9 @@ html.menu-open .burger span{background:transparent!important}
 .cmp__r:nth-child(2) span:not(.cmp__l){color:var(--accent-text);font-weight:700;font-size:1.05rem}
 .cmp__r--act>*{border-bottom:0}
 .calc{display:grid;gap:14px;max-width:560px;padding:clamp(18px,3vw,28px);border-radius:var(--r-l);background:var(--parchment);border:1px solid var(--line)}
-.calc label{display:grid;gap:6px;font-size:.92rem;color:var(--ink-2)}
+.calc label{display:grid;gap:6px;font-size:.92rem;color:var(--ink-2);min-width:0}
+.calc{grid-template-columns:minmax(0,1fr)}
+.calc select{width:100%;max-width:100%;text-overflow:ellipsis}
 .calc select,.calc input[type=number]{padding:11px 12px;border-radius:var(--r);border:1px solid var(--line-strong);background:var(--ivory);color:var(--ink);font:inherit}
 .calc input[type=range]{accent-color:var(--accent);width:100%}
 .calc__res{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -709,8 +711,8 @@ html.menu-open .burger span{background:transparent!important}
 .calc__note{font-size:.82rem}.calc .btn{justify-self:start}
 .notify{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:center;padding:clamp(18px,3vw,30px);border-radius:var(--r-l);border:1px dashed var(--line-strong)}
 .notify h2{font-size:clamp(1.4rem,1.1rem + 1.4vw,2rem);margin-bottom:6px}
-.notify__f{display:grid;gap:10px}.notify__f select{padding:11px 12px;border-radius:var(--r);border:1px solid var(--line-strong);background:var(--parchment);color:var(--ink);font:inherit}
-@media (max-width:760px){.notify{grid-template-columns:1fr}.cmp__h>*,.cmp__r>*{padding:10px 8px;font-size:.82rem}}
+.notify__f{display:grid;gap:10px;min-width:0}.notify__f select{width:100%;max-width:100%}.notify__f select{padding:11px 12px;border-radius:var(--r);border:1px solid var(--line-strong);background:var(--parchment);color:var(--ink);font:inherit}
+@media (max-width:760px){.notify{grid-template-columns:minmax(0,1fr)}.cmp__h>*,.cmp__r>*{padding:10px 8px;font-size:.82rem}}
 /* ---------- конструктор ---------- */
 .cb__in{display:grid;gap:14px}
 .cb--center .cb__in{text-align:center;justify-items:center}.cb--right .cb__in{text-align:right;justify-items:end}
@@ -746,3 +748,19 @@ html.menu-open .burger span{background:transparent!important}
 .pgrid--many .ph--video,.pgrid--3 .ph--video{aspect-ratio:9/16}
 .cb--center .cb__split>div:first-child{text-align:center;justify-items:center}.cb--right .cb__split>div:first-child{text-align:right;justify-items:end}
 .cb--center .cb__txt{margin:0 auto}
+
+/* Первый экран «постер» (Вариант 1): фото на весь экран, крупный золотой заголовок */
+.hero--poster{display:block;position:relative;min-height:calc(100svh - 72px);overflow:hidden;background:#15100D;color:#F4EADB}
+.hp__ph{position:absolute;inset:0}
+.hp__ph img{width:100%;height:100%;object-fit:cover;object-position:40% 70%;filter:saturate(.9) brightness(.82);animation:hpIn 2.2s var(--ease) both}
+.hero--poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,13,.25),rgba(21,16,13,0) 28%,rgba(21,16,13,.55) 55%,rgba(21,16,13,.92) 86%);pointer-events:none}
+.hp__t{position:relative;z-index:2;min-height:calc(100svh - 72px);display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(28px,6vh,64px)}
+.hero--poster .hp__h{font-family:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(76px,min(23vw,26svh),200px);line-height:.82;letter-spacing:-.005em;color:#D9B26A;max-width:none;animation:fadeUp 1s .1s var(--ease) both}
+.hp__sub{margin-top:16px;max-width:32ch;font-size:clamp(17px,1.5vw,21px);line-height:1.4;color:#EADFCF}
+.hero--poster .hero__row{margin-top:22px}
+.hero--poster .link{color:#F4EADB}
+.hp__cnt{margin-top:22px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#BFB3A1}
+.hp__cnt b{color:#F4EADB;font-weight:600}
+@keyframes hpIn{from{transform:scale(1.06)}to{transform:none}}
+@media (min-width:900px){.hp__ph{left:34%}.hero--poster::after{background:linear-gradient(90deg,#15100D 34%,rgba(21,16,13,.4) 50%,rgba(21,16,13,0) 66%),linear-gradient(180deg,rgba(21,16,13,0) 60%,rgba(21,16,13,.6))}.hp__ph img{object-position:45% 50%}}
+@media (prefers-reduced-motion:reduce){.hp__ph img,.hp__h{animation:none}}
