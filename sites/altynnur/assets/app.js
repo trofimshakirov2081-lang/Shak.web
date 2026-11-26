@@ -107,7 +107,7 @@
   };
 
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Просмотр черновика из админки. Посетители этого ещё не видят.</span><a href="?draft=0" style="color:inherit;white-space:nowrap">Закрыть просмотр</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Черновик из админки. Посетители видят старую версию, пока вы не нажмёте «Опубликовать».</span><a href="${R}admin/" data-draft-close style="color:inherit;white-space:nowrap;font-weight:600">← Вернуться в админку</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       ${!["theme", "font", "anim", "view"].some(PK) ? "" : `<div class="pickers">${PK("theme") ? `<span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>` : ""}
       ${PK("font") ? `<span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>` : ""}
       ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
@@ -298,7 +298,7 @@
       inner = `${head}${txt ? `<div class="cb__txt">${txt}</div>` : ""}<dl class="cb__con">${o.address ? `<div><dt>Адрес</dt><dd>${esc((o.city ? o.city + ", " : "") + o.address)}</dd></div>` : ""}${o.hours ? `<div><dt>Часы работы</dt><dd>${esc(o.hours)}</dd></div>` : ""}${o.phone ? `<div><dt>Телефон</dt><dd><a href="tel:+${ruNum(o.phone)}">${esc(o.phone)}</a></dd></div>` : ""}</dl>
         ${B || `<div class="cb__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}<a class="btn btn--line" href="${R}contacts/">Как добраться</a></div>`}`; }
     const st = b.bg === "color" && b.bgc ? ` style="--cb-bg:${esc(b.bgc)};--cb-fg:${cbLum(b.bgc) > .45 ? "#1d1714" : "#fbf6ee"}"` : "";
-    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"} cb--pad-${b.pad || "m"} cb--w-${b.width || "m"} cb--h-${b.hsize || "m"}"${b.anchor ? ` id="${esc(b.anchor)}"` : ""} style="padding-top:0"><div class="wrap"><div class="cb__in"${st}>${inner}</div></div></section>`; }
+    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"} cb--pad-${b.pad || "m"} cb--w-${b.width || "m"} cb--h-${b.hsize || "m"}"${` id="${esc(b.anchor || "cb-" + b.id)}"`} style="padding-top:0"><div class="wrap"><div class="cb__in"${st}>${inner}</div></div></section>`; }
   // свои блоки на других страницах (внизу, перед подвалом)
   const extraBlocks = () => PAGE === "home" ? "" : (S.blocks || []).filter((b) => (b.pages || []).includes(PAGE)).map(custom).join("");
   const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
@@ -534,8 +534,20 @@
   }
 
   /* ---------- сборка ---------- */
+  document.addEventListener("click", (e) => { const a = e.target.closest("[data-draft-close]"); if (!a) return; e.preventDefault();
+    try { sessionStorage.removeItem("altyn-draft-on"); } catch (er) {}
+    if (window.opener && !window.opener.closed) { window.close(); setTimeout(() => (location.href = a.href), 300); } else location.href = a.href; });
+  // в просмотре черновика переход по сайту сохраняет режим, а якорь блока прокручивает к нему
   const main = document.getElementById("main");
   main.innerHTML = (P[PAGE] || P.home)() + extraBlocks();
+  // кадр фото из админки: точка фокуса (x, y в %) и приближение z; ключ = имя фото без размера
+  const CROP = S.crop || {};
+  const cropKey = (img) => { const m = (img.getAttribute("src") || img.getAttribute("data-src") || "").match(/(ph\/[\w-]+?)-(?:640|1280|1600)\.webp/); return m ? m[1] : ""; };
+  const applyCrop = (root) => { if (!root || !root.querySelectorAll) return; (root.tagName === "IMG" ? [root] : root.querySelectorAll("img")).forEach((img) => { const c = CROP[cropKey(img)]; if (!c) return;
+    img.style.objectPosition = `${+c.x || 50}% ${+c.y || 50}%`; const z = Math.min(3, Math.max(1, +c.z || 1)); if (z > 1) { img.style.scale = String(z); img.style.transformOrigin = `${+c.x || 50}% ${+c.y || 50}%`; } }); };
+  if (Object.keys(CROP).length) { applyCrop(document.body); new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(applyCrop))).observe(document.body, { childList: true, subtree: true }); }
+  // страница собирается скриптом, поэтому к якорю (#блок) прокручиваем сами
+  if (location.hash.length > 1) setTimeout(() => { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView({ block: "start" }); }, 80);
   main.insertAdjacentHTML("beforebegin", header());
   main.insertAdjacentHTML("afterend", footer() + `<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal__box"><div class="modal__top"><h3 id="mTitle"></h3><button class="x" data-close aria-label="Закрыть">×</button></div><div id="mBody"></div></div></div>`);
 

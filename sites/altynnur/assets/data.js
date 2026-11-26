@@ -1112,7 +1112,7 @@ window.SITE = {
     "btn": "Сообщить о наборе"
   },
   "design": {
-    "corners": "none",
+    "corners": "round",
     "blur": false,
     "shadow": "none",
     "fontBody": "",

@@ -999,3 +999,11 @@ html.menu-open .burger span{background:transparent!important}
 .cb__con dt{font-size:.8rem;opacity:.7}.cb__con dd{margin:2px 0 0;font-size:1.05rem}
 @media (min-width:761px){.cb__con{grid-template-columns:repeat(3,1fr)}}
 .cb__ban--no{min-height:0}.cb__ban--no::after{display:none}
+/* «Студия» + скругление: у карточек нет фона, поэтому скругляются фото, а не невидимая рамка
+   (иначе линия сверху гнётся дугой, а углы срезают цену и стрелку) */
+[data-style="studio"] :is(.ctile,.why__p,.why__a,.etile,.dir,.dirs>a){border-radius:0!important;overflow:visible!important}
+[data-style="studio"] :is(.ctile__ph,.sec .ph,.ctile .ph){border-radius:var(--r-l);overflow:hidden;-webkit-mask-image:-webkit-radial-gradient(white,black)}
+[data-style="studio"] .sec .ph img,[data-style="studio"] .ctile__ph img{border-radius:inherit}
+/* «Студия» + стекло: шапка полупрозрачная, фото под ней размываются при прокрутке */
+[data-style="studio"][data-blur="on"] .hdr{background:color-mix(in srgb,var(--ivory) 62%,transparent)!important;-webkit-backdrop-filter:blur(18px) saturate(160%)!important;backdrop-filter:blur(18px) saturate(160%)!important}
+[data-style="studio"][data-blur="on"] .ctile__tag{background:color-mix(in srgb,var(--accent) 72%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}

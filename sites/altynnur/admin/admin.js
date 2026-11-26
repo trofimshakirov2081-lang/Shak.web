@@ -112,7 +112,14 @@
   function preview() {
     beforeSave();
     try { localStorage.setItem("altyn-admin-draft", JSON.stringify(S)); } catch (e) { return toast("Не удалось открыть просмотр", true); }
-    window.open("../?draft=1", "_blank");
+    // просмотр открывает страницу того раздела, где вы сейчас
+    const openBox = (t) => [...app.querySelectorAll("main details.box[open] > summary")].some((x) => x.textContent.includes(t));
+    let path = "", hash = "";
+    if (TAB === "courses") { const it = app.querySelector("main > .list > details.item[open]"); const i = it ? [...it.parentElement.querySelectorAll(":scope > details.item")].indexOf(it) : -1; path = i >= 0 && S.courses[i] && S.courses[i].slug ? "courses/" + S.courses[i].slug + "/" : "courses/"; }
+    else if (TAB === "contacts") path = "contacts/";
+    else if (TAB === "pages") path = openBox("Частые вопросы") ? "faq/" : openBox("Работы") ? "works/" : openBox("Как проходит") || openBox("Подбор") ? "training/" : "about/";
+    else if (TAB === "build") { const it = app.querySelector(".bl-list > details.item[open]"); const i = it ? [...it.parentElement.querySelectorAll(":scope > details.item")].indexOf(it) : -1; const bl = i >= 0 && S.blocks[i]; if (bl) { const pg = S.home.includes("b:" + bl.id) ? "" : ((bl.pages || [])[0] === "course" ? "courses/" + ((S.courses[0] || {}).slug || "") + "/" : (bl.pages || [])[0] ? bl.pages[0] + "/" : ""); path = pg; hash = "#" + (bl.anchor || "cb-" + bl.id); } }
+    window.open("../" + path + "?draft=1" + hash, "_blank");
   }
   function paintState() {
     const st = $("#state"), b = $("#pubBtn"); if (!st) return;
@@ -146,7 +153,7 @@
     const draw = () => {
       const more = S.hero.more.filter((m) => m && m.src); S.hero.more = more;
       const tile = (label, src, onRep, onDel) => el("div", { class: "hp-tile" }, el("div", { class: "hp-tile__pv", style: src ? `background-image:${url(src)}` : "" }), el("b", { text: label }),
-        el("div", { class: "hp-tile__b" }, el("button", { type: "button", class: "btn btn--sm", text: src ? "Заменить" : "Загрузить", onclick: onRep }), onDel ? el("button", { type: "button", class: "btn btn--sm btn--bad", text: "Убрать", onclick: onDel }) : null));
+        el("div", { class: "hp-tile__b" }, el("button", { type: "button", class: "btn btn--sm", text: src ? "Заменить" : "Загрузить", onclick: onRep }), src ? cropBtn(() => src) : null, onDel ? el("button", { type: "button", class: "btn btn--sm btn--bad", text: "Убрать", onclick: onDel }) : null));
       wrap.replaceChildren(el("span", { text: "Фото первого экрана" }), el("small", { class: "hint", text: more.length ? "Фото плавно сменяют друг друга каждые 5 секунд. Первое показывается сразу." : "Можно добавить ещё до двух фото: тогда они будут плавно сменять друг друга." }),
         el("div", { class: "hp-tiles" },
           tile("Главное", S.hero.photo, () => pickPhoto((src) => { S.hero.photo = src; touch(); draw(); }), null),
@@ -156,6 +163,25 @@
     };
     draw(); return wrap;
   };
+  // кадр: нажмите на главное в фото, ползунком приблизьте. Сайт сдвигает фото к этой точке во всех рамках
+  function cropEditor(src) { if (!src) return; S.crop = S.crop || {}; const c0 = S.crop[src] || { x: 50, y: 50, z: 1 }, c = { x: +c0.x || 50, y: +c0.y || 50, z: +c0.z || 1 };
+    const url = IMG[src] || "../" + String(src).replace(/"/g, "") + "-1280.webp";
+    const dot = el("i", { class: "cr__dot" }), img = el("img", { src: url, alt: "", draggable: "false" }), stage = el("div", { class: "cr__stage" }, img, dot);
+    const frames = [["Квадрат", "1/1"], ["Вертикаль", "4/5"], ["Широкий", "16/9"]].map(([n, r]) => { const im = el("img", { src: url, alt: "" }); return { im, node: el("figure", { class: "cr__f" }, el("div", { class: "cr__fb", style: "aspect-ratio:" + r }, im), el("figcaption", { text: n })) }; });
+    const zoom = el("input", { type: "range", min: "1", max: "2.5", step: "0.05", value: String(c.z) });
+    const paint = () => { dot.style.left = c.x + "%"; dot.style.top = c.y + "%"; frames.forEach((f) => { f.im.style.objectPosition = c.x + "% " + c.y + "%"; f.im.style.scale = String(c.z); f.im.style.transformOrigin = c.x + "% " + c.y + "%"; }); };
+    const setXY = (e) => { const r = img.getBoundingClientRect(); c.x = Math.round(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100))); c.y = Math.round(Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100))); paint(); };
+    stage.addEventListener("pointerdown", (e) => { e.preventDefault(); stage.setPointerCapture(e.pointerId); setXY(e); const mv = (ev) => setXY(ev), up = () => { stage.removeEventListener("pointermove", mv); stage.removeEventListener("pointerup", up); }; stage.addEventListener("pointermove", mv); stage.addEventListener("pointerup", up); });
+    zoom.addEventListener("input", () => { c.z = +zoom.value; paint(); });
+    const close = () => { wrap.remove(); document.documentElement.style.overflow = ""; };
+    const wrap = el("div", { class: "cr", role: "dialog", "aria-modal": "true", "aria-label": "Кадр фото" }, el("div", { class: "cr__box" },
+      el("h2", { text: "Кадр фото" }), el("p", { class: "sub", text: "Нажмите на то, что важно показать: сайт сдвинет фото к этой точке. Ползунком можно приблизить." }), stage,
+      el("label", { class: "f" }, el("span", { text: "Приближение" }), zoom), el("div", { class: "cr__fs" }, frames.map((f) => f.node)),
+      el("div", { class: "cr__b" }, el("button", { type: "button", class: "btn btn--bad", text: "Сбросить", onclick: () => { delete S.crop[src]; touch(); close(); toast("Кадр сброшен"); } }),
+        el("button", { type: "button", class: "btn", text: "Отмена", onclick: close }),
+        el("button", { type: "button", class: "btn btn--acc", text: "Готово", onclick: () => { if (c.x === 50 && c.y === 50 && c.z === 1) delete S.crop[src]; else S.crop[src] = { x: c.x, y: c.y, z: Math.round(c.z * 100) / 100 }; touch(); close(); toast("Кадр сохранён. Посмотрите в «Просмотре»"); } }))));
+    document.body.append(wrap); document.documentElement.style.overflow = "hidden"; paint(); }
+  const cropBtn = (getSrc) => el("button", { type: "button", class: "btn btn--sm", text: "Кадр", title: "Сдвинуть и приблизить фото", onclick: () => cropEditor(getSrc()) });
   F.img = (label, o, k, altKey) => {
     const pv = el("div", { class: "img__pv" });
     const paint = () => { pv.style.backgroundImage = o[k] ? `url("${IMG[o[k]] || "../" + String(o[k]).replace(/"/g, "") + "-640.webp"}")` : "none"; };
@@ -175,6 +201,7 @@
     paint();
     return el("div", { class: "f" }, el("span", { text: label }), el("div", { class: "img" }, pv, el("div", { class: "img__b" },
       el("button", { type: "button", class: "btn btn--sm", text: o[k] ? "Заменить фото" : "Загрузить фото", onclick: () => file.click() }), file,
+      o[k] ? cropBtn(() => o[k]) : null,
       o[k] ? el("button", { type: "button", class: "btn btn--sm btn--bad", text: "Убрать", onclick: () => { o[k] = ""; paint(); touch(); } }) : null)),
       altKey ? F.text("Что на фото (для поиска и незрячих)", o, altKey, { ph: "Например: мастер наращивает ресницы" }) : null);
   };
@@ -485,7 +512,7 @@
       F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Как задано в шрифте заголовков"], ["ysabeau", "Ysabeau Office"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
       F.sel("Стиль блоков", ensureD(), "style", [["studio", "Студия: строгие линии, без плашек"], ["", "Классика: карточки и плашки"]]),
       F.sel("Углы", ensureD(), "corners", [["none", "Без скругления"], ["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
-      F.bool("Размытие под шапкой и метками (эффект стекла)", ensureD(), "blur"),
+      F.bool("Стекло: полупрозрачная шапка сайта", ensureD(), "blur"), el("small", { class: "hint", text: "Видно при прокрутке: фото под шапкой сайта слегка просвечивают и размываются. Ещё стекло на метках курсов («С нуля»)." }),
       F.sel("Тени у карточек", ensureD(), "shadow", [["soft", "Лёгкие"], ["none", "Без теней"], ["strong", "Заметные"]]),
       el("div", { class: "f" }, el("span", { text: "Готовые наборы" }), el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, [["Мягкий", { corners: "round", blur: true, shadow: "soft" }, "arsenal"], ["Строгий", { corners: "sharp", blur: false, shadow: "none" }, "finlandica"], ["Классика", { corners: "soft", blur: true, shadow: "strong" }, "bona"]]
         .map(([n, d, f]) => el("button", { type: "button", class: "btn btn--sm", text: n, onclick: () => { Object.assign(ensureD(), d); S.font = f; touch(); render(); toast("Набор «" + n + "» применён. Нажмите «Посмотреть»"); } })))),
