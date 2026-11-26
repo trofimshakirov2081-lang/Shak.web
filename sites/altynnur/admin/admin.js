@@ -206,7 +206,7 @@
     if (!opt.fixed) dragSort(box, ".item", (a, b) => { const [x] = arr.splice(a, 1); arr.splice(b, 0, x); openI = -1; draw(); touch(); });
     const draw = () => {
       box.replaceChildren(...arr.map((it, i) => {
-        const ttl = el("span", { class: "ttl", text: opt.title(it) || (opt.untitled ? opt.untitled + (arr.length > 1 ? " " + (i + 1) : "") : "Без названия") });
+        const ttl = el("span", { class: "ttl", text: opt.title(it) || (opt.untitled ? opt.untitled + (arr.length > 1 ? " " + (i + 1) : "") : "Без названия") }); if (opt.meta) ttl.dataset.meta = opt.meta(it) || "";
         // миниатюра в строке: сразу видно, какое фото, без раскрытия
         const tsrc = opt.thumb ? opt.thumb(it) : (it && typeof it.src === "string" && it.src ? it.src : (it && typeof it.photo === "string" && it.photo ? it.photo : ""));
         const thumb = tsrc ? el("span", { class: "thumb", style: `background-image:url("${IMG[tsrc] || "../" + String(tsrc).replace(/"/g, "") + "-640.webp"}")` }) : null;
@@ -216,7 +216,7 @@
           el("summary", {}, opt.fixed ? null : el("span", { class: "drag", "aria-label": "Перетащить", title: "Перетащить", text: "⠿" }), thumb, ttl, meta, opt.fixed ? null : el("span", { class: "ord" },
             el("button", { type: "button", class: "ic", "aria-label": "Выше", text: "↑", disabled: i === 0, onclick: (e) => { e.preventDefault(); [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; openI = -1; draw(); touch(); } }),
             el("button", { type: "button", class: "ic", "aria-label": "Ниже", text: "↓", disabled: i === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; openI = -1; draw(); touch(); } }), delNow)),
-          el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) meta.textContent = opt.meta(it); }),
+          el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) { meta.textContent = opt.meta(it); ttl.dataset.meta = opt.meta(it) || ""; } }),
             opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: opt.copyText || "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; if (opt.onCopy) opt.onCopy(c, it); arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
             el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (opt.onDelete ? opt.onDelete(it) : confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } }))));
         return d;
