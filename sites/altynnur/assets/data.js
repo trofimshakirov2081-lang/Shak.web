@@ -5,7 +5,7 @@ window.SITE = {
   "pickers": false,
   "notes": false,
   "modeToggle": false,
-  "font": "studio",
+  "font": "arsenal",
   "anim": "calm",
   "coursesView": "tiles",
   "org": {
@@ -1095,7 +1095,8 @@ window.SITE = {
     "corners": "none",
     "blur": false,
     "shadow": "none",
-    "fontBody": ""
+    "fontBody": "",
+    "style": "studio"
   },
   "blocks": [],
   "works": [

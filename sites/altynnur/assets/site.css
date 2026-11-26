@@ -851,73 +851,76 @@ html.menu-open .burger span{background:transparent!important}
 
 /* ===================== «Студия» (26.11): как «Стойка» и RCC Padel =====================
    Острые углы, три цвета, узкие заголовки капсом, линии вместо карточек, текст под фото, а не на градиенте */
-[data-font="studio"]{--f-head:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;--f-body:'Onest',system-ui,sans-serif;--r:0px;--r-l:0px}
-[data-font="studio"][data-theme="night"]{--ivory:#15100D;--parchment:#1C1612;--espresso:#110D0B;--espresso-2:#1C1612;--ink:#EDE5DA;--ink-2:rgba(237,229,218,.58);--line:rgba(237,229,218,.14);--line-strong:rgba(237,229,218,.32);--accent:#C99A4B;--accent-hover:#D6AB5E;--on-accent:#15100D;--accent-text:#D2A657}
+[data-font="studio"]{--f-head:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;--f-body:'Onest',system-ui,sans-serif}
+[data-style="studio"]{--r:0px;--r-l:0px}
+[data-style="studio"][data-theme="night"]{--ivory:#15100D;--parchment:#1C1612;--espresso:#110D0B;--espresso-2:#1C1612;--ink:#EDE5DA;--ink-2:rgba(237,229,218,.58);--line:rgba(237,229,218,.14);--line-strong:rgba(237,229,218,.32);--accent:#C99A4B;--accent-hover:#D6AB5E;--on-accent:#15100D;--accent-text:#D2A657}
 [data-font="studio"] body{font-family:var(--f-body)}
-[data-font="studio"] :is(h1,h2,h3,.ctile__n,.ftr__title,.tool summary,.cmp2__n,.manifest__q){font-family:var(--f-head);font-weight:900;text-transform:uppercase;letter-spacing:-.005em;text-shadow:none!important}
-[data-font="studio"] :is(.flow-head,.rail-head) h2,[data-font="studio"] .sec h2.rv-t,[data-font="studio"] .phead h1,[data-font="studio"] .ftr__title,[data-font="studio"] .sec>.wrap>h2{font-size:clamp(52px,13vw,128px);line-height:.84}
-[data-font="studio"] .phead h1{max-width:none}
-[data-font="studio"] h3{line-height:.92}
-[data-font="studio"] .manifest__q{font-size:clamp(40px,9vw,104px);line-height:.88;max-width:16ch}
-[data-font="studio"] .manifest__q .inl{border-radius:0}
+[data-style="studio"] :is(h1,h2,h3,.ctile__n,.ftr__title,.tool summary,.cmp2__n,.manifest__q){font-family:var(--f-head);text-shadow:none!important}
+[data-font="studio"] :is(h1,h2,h3,.ctile__n,.ftr__title,.tool summary,.cmp2__n,.manifest__q,.price,.ctile__price,.logo){font-weight:900;text-transform:uppercase;letter-spacing:-.005em}
+[data-style="studio"] :is(.flow-head,.rail-head) h2,[data-style="studio"] .sec h2.rv-t,[data-style="studio"] .phead h1,[data-style="studio"] .ftr__title,[data-style="studio"] .sec>.wrap>h2{font-size:clamp(52px,13vw,128px);line-height:.84}
+[data-style="studio"] .phead h1{max-width:none}
+[data-style="studio"] h3{line-height:.92}
+[data-style="studio"] .manifest__q{font-size:clamp(40px,9vw,104px);line-height:.88;max-width:16ch}
+[data-style="studio"] .manifest__q .inl{border-radius:0}
 /* кнопки и переключатели без «таблеток» */
-[data-font="studio"] .btn{border-radius:0;font-weight:600}
-[data-font="studio"] .btn--glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:transparent}
-[data-font="studio"] .chip{border-radius:0;border:0;border-bottom:2px solid transparent;padding:0 2px;margin-right:14px;min-height:40px}
-[data-font="studio"] .chip[aria-pressed="true"]{background:none;color:var(--ink);border-color:var(--accent)}
-[data-font="studio"] .themes button{border-radius:0}
+[data-style="studio"] .btn--glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:transparent}
+[data-style="studio"] .chip{border-radius:0;border:0;border-bottom:2px solid transparent;padding:0 2px;margin-right:14px;min-height:40px}
+[data-style="studio"] .chip[aria-pressed="true"]{background:none;color:var(--ink);border-color:var(--accent)}
+[data-style="studio"] .themes button{border-radius:0}
 /* курсы: фото и строка под ним, без плашки-карточки */
-[data-font="studio"] .ctile{background:none;border:0;border-top:1px solid var(--line);padding-top:12px}
-[data-font="studio"] .ctile__b{padding:12px 0 0}
-[data-font="studio"] .ctile__n{font-size:clamp(24px,6.2vw,36px);line-height:.9;-webkit-line-clamp:4}
-[data-font="studio"] .ctile__tag{border-radius:0;background:var(--accent);color:var(--on-accent);-webkit-backdrop-filter:none;backdrop-filter:none;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px}
-[data-font="studio"] .ctile__price{font-family:var(--f-head);font-weight:900;font-size:clamp(26px,6vw,34px);line-height:1}
-[data-font="studio"] .ctile:first-child .ctile__price{font-size:clamp(30px,7vw,40px)}
-[data-font="studio"] .ctile__ph img{filter:saturate(.85) contrast(1.05)}
+[data-style="studio"] .ctile{background:none;border:0;border-top:1px solid var(--line);padding-top:12px}
+[data-style="studio"] .ctile__b{padding:12px 0 0}
+[data-style="studio"] .ctile__n{font-size:clamp(24px,6.2vw,36px);line-height:.9;-webkit-line-clamp:4}
+[data-style="studio"] .ctile__tag{border-radius:0;background:var(--accent);color:var(--on-accent);-webkit-backdrop-filter:none;backdrop-filter:none;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px}
+[data-style="studio"] .ctile__price{font-family:var(--f-head);font-weight:900;font-size:clamp(26px,6vw,34px);line-height:1}
+[data-style="studio"] .ctile:first-child .ctile__price{font-size:clamp(30px,7vw,40px)}
+[data-style="studio"] .ctile__ph img{filter:saturate(.85) contrast(1.05)}
 /* направления и «почему мы»: текст под фото, без затемнения */
-[data-font="studio"] .dirs{height:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));grid-template-rows:none;gap:28px 14px}
-[data-font="studio"] .dir{color:var(--ink);display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
-[data-font="studio"] .dir:first-child{grid-row:auto}
-[data-font="studio"] .dir .ph{position:relative;inset:auto;aspect-ratio:4/5}
-[data-font="studio"] .dir::after,[data-font="studio"] .why__p::after,[data-font="studio"] .why__a::after{display:none!important}
-[data-font="studio"] .dir__t{position:static;text-shadow:none!important;gap:6px}
-[data-font="studio"] .dir h3{font-size:clamp(34px,8vw,52px)}
-[data-font="studio"] .dir p{color:var(--ink-2)}
-[data-font="studio"] .dir .link{color:var(--ink)}
-[data-font="studio"] .why{grid-auto-rows:auto;gap:24px 14px}
-[data-font="studio"] .why__p,[data-font="studio"] .why__a{color:var(--ink);display:grid;gap:10px;border-top:1px solid var(--line);padding-top:12px}
-[data-font="studio"] .why__p .ph,[data-font="studio"] .why__a .ph{position:relative;inset:auto;aspect-ratio:4/5}
-[data-font="studio"] .why__a .ph{aspect-ratio:1}
-[data-font="studio"] .why__p .dir__t h3{font-size:clamp(40px,10vw,72px)}
-[data-font="studio"] .why__a h3{font-size:clamp(22px,5vw,30px)}
-[data-font="studio"] .why__k{opacity:1;color:var(--accent-text);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+[data-style="studio"] .why{grid-auto-rows:auto;gap:24px 14px}
+[data-style="studio"] .why__p,[data-style="studio"] .why__a{color:var(--ink);display:grid;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+[data-style="studio"] .why__p .ph,[data-style="studio"] .why__a .ph{position:relative;inset:auto;aspect-ratio:4/5}
+[data-style="studio"] .why__a .ph{aspect-ratio:1}
+[data-style="studio"] .why__p .dir__t h3{font-size:clamp(40px,10vw,72px)}
+[data-style="studio"] .why__a h3{font-size:clamp(22px,5vw,30px)}
+[data-style="studio"] .why__k{opacity:1;color:var(--accent-text);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 /* запись: фото сверху, текст на тёмном, без градиента */
-[data-font="studio"] .etile{display:grid;min-height:0;color:var(--ink);background:var(--parchment)}
-[data-font="studio"] .etile::after{display:none}
-[data-font="studio"] .etile .ph{position:relative;inset:auto;aspect-ratio:16/9}
-[data-font="studio"] .etile h2{color:var(--ink);font-size:clamp(40px,9vw,80px);line-height:.88}
-[data-font="studio"] .etile p{color:var(--ink-2)}
-[data-font="studio"] .etile .btn--glass{border-color:var(--line-strong);color:var(--ink)}
-@media (min-width:900px){[data-font="studio"] .etile{grid-template-columns:1fr 1fr;align-items:center}[data-font="studio"] .etile .ph{aspect-ratio:4/3;height:100%}}
+[data-style="studio"] .etile{display:grid;min-height:0;color:var(--ink);background:var(--parchment)}
+[data-style="studio"] .etile::after{display:none}
+[data-style="studio"] .etile .ph{position:relative;inset:auto;aspect-ratio:16/9}
+[data-style="studio"] .etile h2{color:var(--ink);font-size:clamp(40px,9vw,80px);line-height:.88}
+[data-style="studio"] .etile p{color:var(--ink-2)}
+[data-style="studio"] .etile .btn--glass{border-color:var(--line-strong);color:var(--ink)}
+@media (min-width:900px){[data-style="studio"] .etile{grid-template-columns:1fr 1fr;align-items:center}[data-style="studio"] .etile .ph{aspect-ratio:4/3;height:100%}}
 /* «Как мы учим»: фото без поворотов и скруглений */
-[data-font="studio"] .zoom__s{border-radius:0}
-[data-font="studio"] .zoom__s--1,[data-font="studio"] .zoom__s--2,[data-font="studio"] .zoom__s--3,[data-font="studio"] .zoom__s--4{rotate:0deg}
-[data-font="studio"] .zoom__t h2{font-size:clamp(48px,11vw,120px);line-height:.86}
+[data-style="studio"] .zoom__s{border-radius:0}
+[data-style="studio"] .zoom__s--1,[data-style="studio"] .zoom__s--2,[data-style="studio"] .zoom__s--3,[data-style="studio"] .zoom__s--4{rotate:0deg}
+[data-style="studio"] .zoom__t h2{font-size:clamp(48px,11vw,120px);line-height:.86}
 /* формы, подвал, инструменты */
-[data-font="studio"] :is(.help,.notify,.calc,.ftr,.map,.map__bar,.cmp,.tool,.lb img){border-radius:0}
-[data-font="studio"] .notify{border-style:solid}
-[data-font="studio"] .tool summary{font-size:clamp(26px,6vw,40px)}
-[data-font="studio"] .acc summary{font-family:var(--f-body);text-transform:none}
-[data-font="studio"] .price,[data-font="studio"] .chero__price .price{font-family:var(--f-head);font-weight:900}
-[data-font="studio"] .spread__topics li::before{border-radius:0;width:10px;height:1px;background:var(--accent)}
-[data-font="studio"] .hdr{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--ivory)}
-[data-font="studio"] .logo{font-family:var(--f-head);font-weight:900;text-transform:uppercase;letter-spacing:.02em}
-[data-font="studio"] .dir{aspect-ratio:auto!important;overflow:visible;grid-column:auto!important}
-[data-font="studio"] .dirs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-@media (min-width:900px){[data-font="studio"] .dirs{grid-template-columns:repeat(5,minmax(0,1fr))!important}}
-[data-font="studio"] .dir h3{font-size:clamp(28px,7vw,44px)}
-[data-font="studio"] .dir p{font-size:.88rem;line-height:1.4}
-[data-font="studio"] .why__p,[data-font="studio"] .why__a{overflow:visible}
-[data-font="studio"] :is(.flow-head,.rail-head) .link{white-space:nowrap}
-@media (max-width:899px){[data-font="studio"] .dir p{display:none}}
-[data-font="studio"] .back{border-radius:0}
+[data-style="studio"] :is(.help,.notify,.calc,.ftr,.map,.map__bar,.cmp,.tool,.lb img){border-radius:0}
+[data-style="studio"] .notify{border-style:solid}
+[data-style="studio"] .tool summary{font-size:clamp(26px,6vw,40px)}
+[data-style="studio"] .acc summary{font-family:var(--f-body);text-transform:none}
+[data-style="studio"] .price,[data-style="studio"] .chero__price .price{font-family:var(--f-head);font-weight:900}
+[data-style="studio"] .spread__topics li::before{border-radius:0;width:10px;height:1px;background:var(--accent)}
+[data-style="studio"] .hdr{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--ivory)}
+[data-style="studio"] .logo{font-family:var(--f-head);font-weight:900;text-transform:uppercase;letter-spacing:.02em}
+[data-style="studio"] .why__p,[data-style="studio"] .why__a{overflow:visible}
+[data-style="studio"] :is(.flow-head,.rail-head) .link{white-space:nowrap}
+
+/* кнопки скруглённые (Трофим 26.11: квадратные выглядят устаревшими) */
+[data-style="studio"] .btn{border-radius:999px}
+/* появление при прокрутке: идёт вместе с пальцем, а не по таймеру (--rv от 0 до 1 ставит скрипт) */
+.js .ph.rv::before,.js[data-anim] .ph.rv::before{transform:scaleY(calc(1 - var(--rv,0)))!important;transition:none!important;transition-delay:0s!important}
+.js .ph.rv img,.js .ph.rv.is-in img{transform:scale(calc(1.06 - .06 * var(--rv,0)))!important;transition:none!important}
+.js .rv-t:not(.rv-w),.js .rv-t.is-in:not(.rv-w){opacity:var(--rv,0);transform:translateY(calc((1 - var(--rv,0)) * 18px));transition:none}
+.js .rv-w .w>span{transition-duration:.45s!important;transition-delay:calc(var(--i) * 25ms)!important}
+
+/* форма: на виду только имя и телефон, остальное по желанию */
+.fmore{border-top:1px solid var(--line);padding-top:10px}
+.fmore summary{cursor:pointer;color:var(--ink-2);font-size:.92rem;list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:40px}
+.fmore summary::-webkit-details-marker{display:none}
+.fmore summary::before{content:"+";font-size:1.1rem;line-height:1;color:var(--accent-text)}
+.fmore[open] summary::before{content:"−"}
+.fmore .fld{margin-top:10px}
+.form .btn[type=submit]{width:100%}
+[data-style="studio"] .hero--poster .hp__h{font-family:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase}

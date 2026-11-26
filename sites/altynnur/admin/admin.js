@@ -374,6 +374,7 @@
       F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]]),
       F.sel("Шрифт заголовков", S, "font", [["studio", "Студия: узкий капс, как у дизайн-студий"], ["arsenal", "Arsenal (простой)"], ["finlandica", "Finlandica (современный)"], ["bona", "Bona Nova (с засечками)"], ["prata", "Prata (с засечками)"], ["cormorant", "Cormorant (изящный)"]]),
       F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Как задано в шрифте заголовков"], ["ysabeau", "Ysabeau Office"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
+      F.sel("Стиль блоков", ensureD(), "style", [["studio", "Студия: строгие линии, без плашек"], ["", "Классика: карточки и плашки"]]),
       F.sel("Углы", ensureD(), "corners", [["none", "Без скругления"], ["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
       F.bool("Размытие под шапкой и метками (эффект стекла)", ensureD(), "blur"),
       F.sel("Тени у карточек", ensureD(), "shadow", [["soft", "Лёгкие"], ["none", "Без теней"], ["strong", "Заметные"]]),

@@ -50,6 +50,7 @@
   (() => { const D = S.design || {}, st = document.documentElement.style, R = { none: [0, 0], sharp: [3, 6], soft: [14, 22], round: [24, 34] }[D.corners];
     if (R) { st.setProperty("--r", R[0] + "px"); st.setProperty("--r-l", R[1] + "px"); }
     document.documentElement.dataset.blur = D.blur === false ? "off" : "on";
+    if (D.style) document.documentElement.dataset.style = D.style;
     const FB = { ysabeau: "'Ysabeau Office'", arsenal: "'Arsenal'", finlandica: "'Finlandica'" }[D.fontBody]; if (FB) st.setProperty("--f-body", FB + ",system-ui,sans-serif");
     document.documentElement.dataset.shadow = D.shadow || "soft"; })();
   let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = S.modeToggle === false ? "light" : MODE === "dark" ? "dark" : "light";
@@ -345,12 +346,14 @@
       <div class="fld"><label for="fName">Ваше имя</label><input id="fName" name="name" autocomplete="name" maxlength="80"><span class="err"></span></div>
       <div class="fld"><label for="fPhone">Телефон</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" maxlength="20"><span class="err"></span></div>
       ${c ? `<input type="hidden" name="course" value="${c.slug}">` : `<div class="fld"><label for="fCourse">Курс</label><select id="fCourse" name="course"><option value="">Пока не выбрала, нужна консультация</option>${S.courses.map((x) => `<option value="${x.slug}">${esc(x.name)}</option>`).join("")}</select></div>`}
+      <details class="fmore"><summary>Добавить комментарий${has(S.promo && S.promo.codes) ? " или промокод" : ""}</summary>
       <div class="fld"><label for="fWay">Как с вами связаться</label><select id="fWay" name="way"><option>WhatsApp</option><option>Звонок</option><option>Telegram</option></select></div>
       <div class="fld"><label for="fNote">Комментарий, если хотите</label><textarea id="fNote" name="note" maxlength="600"></textarea></div>
       ${has(S.promo && S.promo.codes) ? `<div class="fld"><label for="fPromo">Промокод, если есть</label><input id="fPromo" name="promo" maxlength="30" autocapitalize="characters"><span class="err" data-perr></span></div>` : ""}
+      </details>
       <div class="hp" aria-hidden="true"><label>Не заполняйте <input name="website" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent"><input type="checkbox" name="consent"><span>Согласна на обработку персональных данных по <a href="${R}privacy/" target="_blank">политике</a>.</span></label><span class="err" data-cerr></span>
-      <button class="btn btn--accent" type="submit">Отправить заявку</button>
+      <button class="btn btn--accent" type="submit">Записаться</button>
       ${NOTE ? `<p class="cap">Заявка открывает WhatsApp с готовым сообщением для Айгуль.</p>` : ""}</form>`;
   function validate(form, needConsent) {
     const d = Object.fromEntries(new FormData(form));
@@ -394,7 +397,7 @@
           body: JSON.stringify({ name: d.name, phone: d.phone, course: d.course || "", way: d.way || "", note: d.note || "", consent: !!d.consent, website: d.website || "", extra: (extra && extra.summary) || "", page: location.pathname }) });
         const j = await r.json();
         if (j.ok) { target.innerHTML = okSaved; return; }
-        if (r.status === 422 || r.status === 429) { btn.disabled = false; btn.textContent = "Отправить заявку"; form.querySelector("[data-cerr]").textContent = j.error; return; }
+        if (r.status === 422 || r.status === 429) { btn.disabled = false; btn.textContent = "Записаться"; form.querySelector("[data-cerr]").textContent = j.error; return; }
         throw new Error("server");
       } catch (er) { send(d, extra); target.innerHTML = okHTML; }
     });
@@ -518,7 +521,16 @@
   if (inl) { inl.innerHTML = formHTML(null); bindForm(inl.querySelector("form"), null, inl); }
   const qb = document.getElementById("qbox"); if (qb) quiz(qb);
   filters("#spreads", ".spread"); filters("#gal", "button"); lightbox(); scrub();
-  document.querySelectorAll("[data-map]").forEach((b) => b.addEventListener("click", () => { const f = document.createElement("iframe"); f.title = "Карта"; f.src = b.dataset.map; f.allowFullscreen = true; b.replaceWith(f); }));
+  // карта грузится сама, когда до неё остаётся немного прокрутки (так первый экран лёгкий), по нажатию сразу
+  const mapLoad = (b) => { if (!b.isConnected) return; const f = document.createElement("iframe"); f.title = "Карта"; f.src = b.dataset.map; f.allowFullscreen = true; b.replaceWith(f); };
+  const maps = document.querySelectorAll("[data-map]");
+  maps.forEach((b) => b.addEventListener("click", () => mapLoad(b)));
+  if (maps.length && "IntersectionObserver" in window) { const mo = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { mo.unobserve(en.target); mapLoad(en.target); } }), { rootMargin: "800px 0px" }); maps.forEach((b) => mo.observe(b)); }
+  else maps.forEach(mapLoad);
+  // появление фото и заголовков идёт вместе с прокруткой: доля от 0 до 1 в переменной --rv
+  const rvs = [...document.querySelectorAll(".ph.rv, .rv-t:not(.rv-w)")];
+  if (rvs.length) { let rq = 0; const noMo = matchMedia("(prefers-reduced-motion: reduce)").matches; const rv = () => { rq = 0; const vh = innerHeight; for (const el of rvs) { const t = el.getBoundingClientRect().top; const p = Math.min(1, Math.max(0, (vh - t) / (vh * 0.45))); el.style.setProperty("--rv", noMo ? 1 : p.toFixed(3)); } };
+    addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(rv); }, { passive: true }); addEventListener("resize", rv); rv(); }
   document.querySelectorAll("[data-more]").forEach((b) => b.addEventListener("click", () => { document.getElementById(b.dataset.more).classList.remove("is-cut"); b.remove(); }));
   document.querySelectorAll("[data-cmp-box]").forEach((box) => { const up = () => { const v = (k) => course(box.querySelector(`[data-cmp="${k}"]`).value); box.querySelector("[data-cmp-cols]").innerHTML = cmpCol(v("a")) + cmpCol(v("b")); }; box.addEventListener("change", up); });
 
