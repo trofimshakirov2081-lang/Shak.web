@@ -98,6 +98,8 @@ window.SITE = {
     "hero",
     "directions",
     "featured",
+    "compare",
+    "calc",
     "enroll",
     "zoom",
     "gallery",
@@ -110,12 +112,7 @@ window.SITE = {
     "short": "Учебный центр бьюти-профессий в Туймазах. Практика на моделях с первого дня, рядом с преподавателем",
     "photo": "ph/r-lash-brown",
     "alt": "Наращенные ресницы крупным планом",
-    "more": [
-      {
-        "src": "ph/up-mwxoklvt",
-        "alt": ""
-      }
-    ],
+    "more": [],
     "style": "poster"
   },
   "zoom": {

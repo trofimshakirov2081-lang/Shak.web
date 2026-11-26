@@ -176,7 +176,7 @@
   };
   // запись: такая же фото-плитка, как направления, с двумя кнопками
   H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="etile">${ph(S.enroll.photo, S.enroll.alt, { sizes: "100vw" })}
-      <div class="etile__t"><h2>Запишитесь на консультацию</h2><p>Подскажем курс и ближайшие даты</p>
+      <div class="etile__t"><h2>${esc(S.enroll.title || "Запишитесь на консультацию")}</h2><p>${esc(S.enroll.text || "Подскажем курс и ближайшие даты")}</p>
         <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></div></div></div></section>`;
   // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
   // видео на прокрутке: кадры-картинки рисуются на canvas, телефоны их показывают без нажатия play
@@ -195,7 +195,7 @@
       <div class="why">
         <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${NOTE ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
           <div class="dir__t"><span class="why__k">Ваш преподаватель</span><h3>${esc(S.teacher.name)}</h3><span class="link">${arrow("Об академии")}</span></div></a>
-        ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short)}</h3></div></div>`).join("")}
+        ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short || a.t)}</h3></div></div>`).join("")}
       </div></div></section>`;
 
   /* ---------- страницы ---------- */
@@ -229,13 +229,13 @@
   H.compare = () => { const C = S.compare || {}; if (!ON(C)) return ""; const pre = (C.courses || []).map(course).filter(Boolean), a = pre[0] || S.courses[0], b = pre[1] || S.courses[1];
     const sel = (k, cur) => `<select data-cmp="${k}" aria-label="Курс ${k === "a" ? "слева" : "справа"}">${S.courses.map((c) => `<option value="${c.slug}"${c === cur ? " selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
     return `<details class="tool"><summary><span>${esc(C.title || "Сравнить два курса")}</span><i aria-hidden="true"></i></summary>
-      <div class="cmp2" data-cmp-box><div class="cmp2__sel">${sel("a", a)}${sel("b", b)}</div><div class="cmp2__cols" data-cmp-cols>${cmpCol(a)}${cmpCol(b)}</div></div></details>`; };
+      ${C.text ? `<p class="muted tool__sub">${esc(C.text)}</p>` : ""}<div class="cmp2" data-cmp-box><div class="cmp2__sel">${sel("a", a)}${sel("b", b)}</div><div class="cmp2__cols" data-cmp-cols>${cmpCol(a)}${cmpCol(b)}</div></div></details>`; };
   H.calc = () => { const K = S.calc || {}; if (!ON(K)) return ""; const cs = S.courses.filter((c) => c.price);
     return `<details class="tool"><summary><span>${esc(K.title || "Когда окупится обучение")}</span><i aria-hidden="true"></i></summary>
-      <div class="calc2" data-calc><p>Курс <select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select>
+      ${K.text ? `<p class="muted tool__sub">${esc(K.text)}</p>` : ""}<div class="calc2" data-calc><p>Курс <select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select>
       окупится примерно за <b data-o="weeks"></b>, если брать <input data-k="per" type="number" inputmode="numeric" min="1" max="40" value="${parseInt(K.per, 10) || 3}"> ${"клиенток в неделю"} по <input data-k="price" type="number" inputmode="numeric" min="100" step="100" value="${parseInt(K.price, 10) || 2500}"> ₽.
-      Это около <b data-o="month"></b> в месяц.</p><p class="muted calc2__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p></div></details>`; };
-  const tools = () => { const t = H.compare() + H.calc(); return t ? `<div class="tools">${t}</div>` : ""; };
+      Это около <b data-o="month"></b> в месяц.</p><p class="muted calc2__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p>${K.btn ? `<button class="btn btn--accent" data-enroll>${esc(K.btn)}</button>` : ""}</div></details>`; };
+  const tools = () => { const t = (S.home.includes("compare") ? H.compare() : "") + (S.home.includes("calc") ? H.calc() : ""); return t ? `<div class="tools">${t}</div>` : ""; };
 
   H.referral = () => { const F2 = S.referral || {}; if (!ON(F2) || !F2.title) return "";
     return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo promo--text"><div class="promo__t"><span class="promo__k">${esc(F2.kicker || "Вдвоём выгоднее")}</span><h2>${esc(F2.title)}</h2>${F2.text ? `<p>${esc(F2.text)}</p>` : ""}
@@ -271,7 +271,7 @@
     else if (T === "divider") inner = `<div class="cb__div">${b.title ? `<span>${esc(b.title)}</span>` : ""}</div>`;
     return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"}" style="padding-top:0"><div class="wrap"><div class="cb__in">${inner}</div></div></section>`; }
   const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
-  P.home = () => S.home.map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
+  P.home = () => S.home.filter((b) => b !== "compare" && b !== "calc").map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
   P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
       <h1>Курсы и цены</h1><p class="lead">${S.courses.length} ${plural(S.courses.length, "программа", "программы", "программ")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
       <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
@@ -312,10 +312,11 @@
     <section class="sec" style="padding-top:0"><div class="wrap collage">${S.about.collage.map((p, i) => ph(p.src, p.alt, { sizes: i ? "(max-width: 760px) 60vw, 50vw" : "40vw", cap: i ? "" : ILL })).join("")}</div></section>
     <section class="sec" style="padding-top:0"><div class="wrap"><p class="big rv-t">Профессии осваивают руками. Поэтому у нас теория всегда рядом с практикой, а преподаватель рядом с ученицей.</p>
       <ul class="approach" style="margin-top:clamp(48px,6vw,90px)">${S.about.approach.map((a) => `<li><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></li>`).join("")}</ul>
+      ${(S.advantages || []).some((x) => x.d) ? `<h2 class="sec__h" style="margin-top:clamp(48px,6vw,90px)">Почему АлтынНур</h2><ul class="approach">${S.advantages.filter((x) => x.t || x.d).map((x) => `<li><h3>${esc(x.t || x.short)}</h3><p class="muted">${esc(x.d || "")}</p></li>`).join("")}</ul>` : ""}
       ${NOTE ? `<p class="note">Тексты о подходе предварительные, утвердим с Айгуль.</p>` : ""}</div></section>
     <section class="sec" style="padding-top:0"><div class="wrap tbio">${has(S.teacher.photo) ? `<div class="ph tbio__ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : ""}
       <div><span class="cap">${esc(S.teacher.role)}</span><h2 style="margin-top:10px">${esc(S.teacher.name)}</h2>${S.teacher.bio ? `<p class="lead" style="margin-top:16px">${esc(S.teacher.bio)}</p>` : ""}
-      ${(S.teacher.facts || []).length ? `<dl class="tbio__f">${S.teacher.facts.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${esc(f.d)}</dd></div>`).join("")}</dl>` : ""}</div></div></section>
+      ${(S.teacher.facts || []).length ? `<dl class="tbio__f">${S.teacher.facts.map((f) => typeof f === "string" ? `<div><dd>${esc(f)}</dd></div>` : `<div><dt>${esc(f.t)}</dt><dd>${esc(f.d)}</dd></div>`).join("")}</dl>` : ""}</div></div></section>
     <section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap"><div class="help" style="background:var(--ivory)"><div><h3>Посмотрите программы</h3><p class="muted" style="margin-top:8px">${S.courses.length} ${plural(S.courses.length, "курс", "курса", "курсов")}: ${S.categories.map((c) => c.name.toLowerCase()).join(", ")}.</p></div><a class="btn btn--accent" href="${R}courses/">Все курсы</a></div></div></section>`;
   P.works = () => {
     const ills = S.courses.flatMap((c) => [{ src: c.photo, alt: c.alt, cat: c.cat }].concat(c.photos.map((p) => ({ src: p.src, alt: p.alt, cat: c.cat })))).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i);
@@ -325,7 +326,7 @@
       <section class="wrap" style="padding-bottom:var(--sec)">
       ${has(S.works) ? "" : `<div class="empty-works"><div><h2 style="font-size:var(--fs-h3)">Галерея работ появится после съёмки</h2><p class="muted" style="margin-top:12px">Здесь будут только настоящие работы учениц и преподавателя, подписанные и с согласия авторов:</p><ul><li>брови, ресницы, ногти, педикюр, уход, волосы;</li><li>сравнения «до и после»;</li><li>процесс обучения.</li></ul></div>
         <div><p class="muted">${NOTE ? "Ниже иллюстрации направлений, чтобы показать, как будет работать галерея. Это не работы АлтынНур." : ""}</p></div></div>`}
-      <div class="masonry" id="gal">${items.map((p, i) => `<button data-cat="${p.cat}" data-i="${i}" aria-label="Открыть фото: ${esc(p.alt)}">${ph(p.src, p.alt, { sizes: "(max-width: 760px) 100vw, 33vw", cap: has(S.works) ? "" : ILL })}</button>`).join("")}</div>
+      <div class="masonry" id="gal">${items.map((p, i) => `<button data-cat="${p.cat}" data-i="${i}" data-author="${esc([p.kind === "teacher" ? "Работа преподавателя" : p.kind === "student" ? "Работа ученицы" : "", p.author ? "автор: " + p.author : ""].filter(Boolean).join(", "))}" aria-label="Открыть фото: ${esc(p.alt)}">${ph(p.src, p.alt, { sizes: "(max-width: 760px) 100vw, 33vw", cap: has(S.works) ? "" : ILL })}</button>`).join("")}</div>
       </section>
       <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото"><button class="lb-btn lb-x" data-lb="x" aria-label="Закрыть">×</button><button class="lb-btn lb-p" data-lb="p" aria-label="Предыдущее">‹</button><figure style="margin:0"><img alt=""><p></p></figure><button class="lb-btn lb-n" data-lb="n" aria-label="Следующее">›</button></div>`;
   };
@@ -495,7 +496,7 @@
     if (!lb || !gal) return;
     let cur = 0;
     const items = () => [...gal.querySelectorAll("button:not([hidden])")];
-    const show = (i) => { const it = items(); cur = (i + it.length) % it.length; const img = it[cur].querySelector("img"); lb.querySelector("img").src = img.currentSrc.replace("-640.", "-1280."); lb.querySelector("img").alt = img.alt; lb.querySelector("p").textContent = img.alt + (S.works.length ? "" : ". Иллюстрация, не работа АлтынНур."); };
+    const show = (i) => { const it = items(); cur = (i + it.length) % it.length; const img = it[cur].querySelector("img"); lb.querySelector("img").src = img.currentSrc.replace("-640.", "-1280."); lb.querySelector("img").alt = img.alt; lb.querySelector("p").textContent = img.alt + (it[cur].dataset.author ? ". " + it[cur].dataset.author : "") + (S.works.length ? "" : ". Иллюстрация, не работа АлтынНур."); };
     gal.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; show(items().indexOf(b)); lb.classList.add("is-open"); lb.querySelector(".lb-x").focus(); });
     lb.addEventListener("click", (e) => { const a = e.target.closest("[data-lb]"); if (!a && e.target !== lb) return; const k = a ? a.dataset.lb : "x"; if (k === "x") lb.classList.remove("is-open"); else show(cur + (k === "n" ? 1 : -1)); });
     document.addEventListener("keydown", (e) => { if (!lb.classList.contains("is-open")) return; if (e.key === "Escape") lb.classList.remove("is-open"); if (e.key === "ArrowRight") show(cur + 1); if (e.key === "ArrowLeft") show(cur - 1); });

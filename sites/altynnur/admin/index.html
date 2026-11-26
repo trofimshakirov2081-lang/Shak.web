@@ -60,6 +60,17 @@ main{padding:20px 0 80px}
 .item>summary{list-style:none;cursor:pointer;padding:10px 12px;display:flex;align-items:center;gap:8px;font-weight:600;min-height:48px}
 .item>summary::-webkit-details-marker{display:none}
 .item>summary .ttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item>summary .thumb{flex:none;width:44px;height:44px;border-radius:8px;background:#ddd center/cover no-repeat;border:1px solid var(--line)}
+.hp-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}
+.hp-tile{display:grid;gap:6px;align-content:start;font:inherit;text-align:left;background:none;border:0;padding:0;color:inherit}
+.hp-tile__pv{aspect-ratio:3/4;border-radius:12px;background:#e9e2d8 center/cover no-repeat;border:1px solid var(--line)}
+.hp-tile b{font-size:.88rem}
+.hp-tile__b{display:grid;gap:6px}
+.hp-tile__b .btn{width:100%;justify-content:center;padding:0 8px}
+.hp-tile--add{cursor:pointer}
+.hp-tile--add span{aspect-ratio:3/4;border-radius:12px;border:2px dashed var(--line);display:grid;place-items:center;font-size:2rem;color:var(--ink2,#8b7466)}
+.hint{display:block;color:var(--ink2,#8b7466);font-size:.85rem;margin-top:2px}
+.ic--del{color:#A3392F;border-color:rgba(163,57,47,.35);font-size:1.2rem}
 .item>summary .meta{color:var(--ink2);font-weight:400;font-size:.9rem;white-space:nowrap}
 .item__in{padding:4px 12px 14px;display:grid;gap:14px;border-top:1px solid var(--line)}
 .ord{display:flex;gap:4px}
@@ -109,14 +120,13 @@ main{padding:20px 0 80px}
 .btn--icon{width:42px;padding:0;font-size:1.25rem;justify-content:center}
 .top__in{flex-wrap:wrap;row-gap:6px}.top__in .state{order:9;flex:1 0 100%;font-size:.8rem;margin:0}.top__in .btn--icon{margin-left:auto}
 @media(max-width:420px){.top__in{gap:6px;padding:10px 12px}.top__in .btn{padding:0 11px;font-size:.9rem;min-height:38px}.top__in .btn--icon{width:38px;padding:0}.top__name{font-size:1rem}}
+.bstate{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:99px;background:#f1e3e0;color:#8a3a2e;margin-left:8px;white-space:nowrap}
+.bstate--on{background:#e3efe4;color:#2f6b3a}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="config.js" onerror="void 0"></script>
-<script src="../assets/pages-lib.js"></script>
-<script src="gh.js"></script>
-<script src="admin.js"></script>
+<script>(function () { var v = Date.now(); ["config.js", "../assets/pages-lib.js", "gh.js", "admin.js"].forEach(function (f) { document.write('<script src="' + f + '?v=' + v + '"' + (f === "config.js" ? ' onerror="void 0"' : "") + '><\/script>'); }); })();</script>
 </body>
 </html>

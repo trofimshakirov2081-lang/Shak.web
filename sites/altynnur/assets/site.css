@@ -958,3 +958,6 @@ html.menu-open .burger span{background:transparent!important}
 
 /* заголовок первого экрана: цвет акцента из палитры, если он виден на фото */
 .hero--poster .hp__h{color:var(--hero-h,#D9B26A)}
+/* подписи и кнопка внутри сравнения и калькулятора */
+.tool__sub{margin:0 0 14px}
+.calc2 .btn{margin-top:16px}
