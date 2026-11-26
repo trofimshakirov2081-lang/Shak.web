@@ -83,7 +83,7 @@
   };
   const mapHTML = () => {
     const c = mapCoords(), open = S.org.map.link || `https://yandex.ru/maps/?pt=${c.lon},${c.lat}&z=${c.z}&l=sat%2Cskl`;
-    return `<div class="map"><iframe title="Карта" src="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm&l=sat%2Cskl" loading="lazy" allowfullscreen></iframe>
+    return `<div class="map"><button class="map__load" type="button" data-map="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm&l=sat%2Cskl"><span class="map__pin" aria-hidden="true"></span>Показать карту</button>
       <div class="map__bar"><span>${esc(S.org.address || `${S.org.city}, ${S.org.region}`)}${NOTE && !S.org.address ? " (точка временная)" : ""}</span><a href="${open}" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></div></div>`;
   };
 
@@ -190,7 +190,7 @@
   /* ---------- блоки доверия и продаж: на сайте появляются, только когда заполнены ---------- */
   // фото в блоке: 1 большое, 2 рядом, 3 в ряд, больше сеткой; общий размер блока примерно одинаковый
   const PH = (photos, size) => { const ps = (photos || []).filter((p) => p && p.src); if (!ps.length) return "";
-    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => p.video ? `<div class="ph ph--video"><video data-src="${R}${esc(p.video)}" poster="${R}${p.src}-640.webp" muted loop playsinline preload="none" aria-label="${esc(p.alt || "Видео")}"></video></div>` : ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
+    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => p.video ? `<div class="ph ph--video"><video data-src="${R}${esc(p.video)}" data-poster="${R}${p.src}-640.webp" muted loop playsinline preload="none" aria-label="${esc(p.alt || "Видео")}"></video></div>` : ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
   const SEC = (title, sub, inner) => `<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="rv-t sec__h">${esc(title)}</h2>${sub ? `<p class="lead sec__sub">${esc(sub)}</p>` : ""}${inner}</div></section>`;
   const ON = (o) => !!o && o.on !== false;
   const seatsTxt = (n) => `${n} ${plural(n, "место", "места", "мест")}`;
@@ -518,6 +518,7 @@
   if (inl) { inl.innerHTML = formHTML(null); bindForm(inl.querySelector("form"), null, inl); }
   const qb = document.getElementById("qbox"); if (qb) quiz(qb);
   filters("#spreads", ".spread"); filters("#gal", "button"); lightbox(); scrub();
+  document.querySelectorAll("[data-map]").forEach((b) => b.addEventListener("click", () => { const f = document.createElement("iframe"); f.title = "Карта"; f.src = b.dataset.map; f.allowFullscreen = true; b.replaceWith(f); }));
   document.querySelectorAll("[data-more]").forEach((b) => b.addEventListener("click", () => { document.getElementById(b.dataset.more).classList.remove("is-cut"); b.remove(); }));
   document.querySelectorAll("[data-cmp-box]").forEach((box) => { const up = () => { const v = (k) => course(box.querySelector(`[data-cmp="${k}"]`).value); box.querySelector("[data-cmp-cols]").innerHTML = cmpCol(v("a")) + cmpCol(v("b")); }; box.addEventListener("change", up); });
 
@@ -581,8 +582,8 @@
   // видео в фото-блоках: грузятся и играют, только когда видны на экране
   const vids = document.querySelectorAll("video[data-src]");
   if (vids.length && "IntersectionObserver" in window) { const vo = new IntersectionObserver((es) => es.forEach((en) => { const v = en.target;
-      if (en.isIntersecting) { if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
-  else vids.forEach((v) => { v.src = v.dataset.src; v.controls = true; });
+      if (en.isIntersecting) { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
+  else vids.forEach((v) => { if (v.dataset.poster) v.poster = v.dataset.poster; v.src = v.dataset.src; v.controls = true; });
   document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; if (!WAON()) { const cc = S.courses.find((x) => x.name === c); return openForm(cc ? cc.slug : "", { label: "Сообщить о следующем наборе", summary: `Прошу сообщить о следующем наборе на курс «${c}».` }); } window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
   document.querySelectorAll("[data-inline-form]").forEach((x) => { x.innerHTML = formHTML(null); bindForm(x.querySelector("form"), null, x); });
   const zoom = document.querySelector("section.zoom");

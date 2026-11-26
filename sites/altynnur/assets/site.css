@@ -843,3 +843,8 @@ html.menu-open .burger span{background:transparent!important}
 /* Вход в админку: в самом низу, едва заметно */
 .ftr__admin{opacity:.35;font-size:.82rem;transition:opacity .2s}
 .ftr__admin:hover,.ftr__admin:focus-visible{opacity:.8}
+
+/* Карта по нажатию: до этого лёгкая заглушка, а не 3 МБ виджета */
+.map__load{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding-bottom:56px;border:0;cursor:pointer;color:var(--on-dark,#F1E9DE);font:600 1rem var(--f-body);background:radial-gradient(circle at 50% 42%,rgba(217,178,106,.18),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 12px,transparent 12px 24px),var(--espresso-2)}
+.map__pin{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#D9B26A;box-shadow:0 0 0 6px rgba(217,178,106,.18)}
+.map__load:hover .map__pin{transform:rotate(-45deg) scale(1.1)}
