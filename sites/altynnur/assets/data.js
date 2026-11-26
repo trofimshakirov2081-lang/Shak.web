@@ -98,12 +98,9 @@ window.SITE = {
     "hero",
     "directions",
     "featured",
-    "scrub",
-    "compare",
     "enroll",
     "zoom",
     "gallery",
-    "calc",
     "teacher",
     "notify"
   ],
@@ -1063,11 +1060,11 @@ window.SITE = {
   "batchesNote": "",
   "compare": {
     "on": true,
-    "title": "Какой курс выбрать",
+    "title": "Сравнить два курса",
     "text": "",
     "courses": [
       "lashes",
-      "lashes-pro"
+      "lami"
     ]
   },
   "calc": {
@@ -1338,5 +1335,6 @@ window.SITE = {
     "kicker": "Наращивание ресниц",
     "title": "Объём крупным планом",
     "text": "Так выглядит работа вблизи: каждая ресница видна."
-  }
+  },
+  "moreAfter": "6"
 };

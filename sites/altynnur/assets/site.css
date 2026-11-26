@@ -794,3 +794,42 @@ html.menu-open .burger span{background:transparent!important}
   .scrub__t{bottom:auto;top:50%;transform:translateY(-50%)}
   .scrub__t h2,.scrub__t p{max-width:min(46vw,560px)}
 }
+
+/* Курсы: часть под «Показать ещё» */
+.ctiles.is-cut .ctile--more{display:none}
+.more-btn{margin-top:18px;width:100%;justify-content:center}
+@media (min-width:760px){.more-btn{width:auto}}
+/* Инструменты под курсами: свёрнутые строки */
+.tools{margin-top:clamp(28px,4vw,48px);border-top:1px solid var(--line)}
+.tool{border-bottom:1px solid var(--line)}
+.tool summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-family:var(--f-head);font-size:var(--fs-h3)}
+.tool summary::-webkit-details-marker{display:none}
+.tool summary i{width:14px;height:14px;position:relative;flex:none}
+.tool summary i::before,.tool summary i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:currentColor;transition:transform .25s}
+.tool summary i::after{transform:rotate(90deg)}
+.tool[open] summary i::after{transform:none}
+.cmp2{padding:0 0 24px}
+.cmp2__sel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp2 select,.calc2 select,.calc2 input{font:inherit;color:var(--ink);background:var(--ivory);border:1px solid var(--line-strong);border-radius:var(--r);padding:9px 10px;min-width:0;max-width:100%}
+.cmp2__cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.cmp2__c{display:grid;gap:0;align-content:start}
+.cmp2__n{font-family:var(--f-head);font-size:1.1rem;line-height:1.2;padding:8px 0 10px}
+.cmp2__r{display:grid;gap:2px;padding:9px 0;border-top:1px solid var(--line)}
+.cmp2__r span{font-size:.8rem;color:var(--ink-2)}
+.cmp2__r b{font-weight:500;font-size:.95rem}
+.cmp2__c .btn{margin-top:12px;justify-self:start}
+.calc2{padding:0 0 24px;font-size:1.08rem;line-height:2.1}
+.calc2 select{max-width:100%}
+.calc2 input[type=number]{width:5.2em;text-align:center}
+.calc2 b{color:var(--accent-text);font-weight:600;white-space:nowrap}
+.calc2__note{font-size:.88rem;line-height:1.5;margin-top:6px}
+/* Постер на телефоне: фото отдельным блоком сверху, текст под ним, глаза свободны (как в Варианте 1) */
+@media (max-width:899px){
+  .hero--poster{display:flex;flex-direction:column;min-height:calc(100svh - 72px)}
+  .hp__ph{position:relative;inset:auto;height:clamp(240px,46svh,460px);flex:none}
+  .hp__ph img{object-position:45% 55%}
+  .hp__ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg,rgba(21,16,13,0),#15100D)}
+  .hero--poster::after{display:none}
+  .hp__t{min-height:0;flex:1;justify-content:flex-start;margin-top:-34px;padding-bottom:28px}
+  .hero--poster .hp__h{font-size:clamp(64px,min(20vw,11svh),120px)}
+}

@@ -145,10 +145,16 @@
   // курсы: «по дуге» (карусель) или «плиткой», вариант выбирается в админке
   H.featured = () => {
     const list = S.featured.map(course).filter(Boolean);
-    if (VIEW === "tiles") return `<section class="sec" style="padding-top:0"><div class="wrap">
+    if (VIEW === "tiles") {
+      // сначала главные курсы, потом остальные; часть прячется под «Показать ещё» (число задаётся в админке)
+      const ord = list.concat(S.courses.filter((c) => !list.includes(c))), lim = S.moreAfter == null ? 6 : +S.moreAfter, cut = lim > 0 && ord.length > lim + 1 ? lim : 0;
+      return `<section class="sec" style="padding-top:0"><div class="wrap">
       <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
-      <div class="ctiles">${S.courses.map((c) => `<a class="ctile" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
-        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a>`).join("")}</div></div></section>`;
+      <div class="ctiles${cut ? " is-cut" : ""}" id="ctiles">${ord.map((c, i) => `<a class="ctile${cut && i >= cut ? " ctile--more" : ""}" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
+        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a>`).join("")}</div>
+      ${cut ? `<button class="btn btn--line more-btn" type="button" data-more="ctiles">Показать ещё ${ord.length - cut} ${plural(ord.length - cut, "курс", "курса", "курсов")}</button>` : ""}
+      ${tools()}</div></section>`;
+    }
     return `<section class="sec flow-sec" style="padding-top:0">
       <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
       <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
@@ -204,20 +210,20 @@
   H.cert = () => { const c = S.cert || {}; if (!ON(c) || !(c.text || (c.photos || []).some((p) => p.src))) return ""; return SEC(c.title || "Сертификат после обучения", c.text, PH(c.photos, c.size)); };
   H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
   /* ---------- готовые блоки: сравнение курсов, калькулятор дохода, приведи подругу, узнать о наборе ---------- */
-  H.compare = () => { const C = S.compare || {}; const cs = (C.courses || []).map(course).filter(Boolean); if (!ON(C) || cs.length < 2) return "";
-    const rows = [["Цена", (c) => rub(c.price)], ["Длительность", (c) => c.duration], ["Практика на моделях", (c) => c.models], ["Материалы", (c) => c.materials], ["Документ", (c) => c.certificate], ["Что изучите", (c) => { const t = c.topics || []; return t.slice(0, 4).join(", ") + (t.length > 4 ? ` и ещё ${t.length - 4}` : ""); }]]
-      .filter(([, f]) => cs.some((c) => has(f(c))));
-    return SEC(C.title || "Какой курс выбрать", C.text, `<div class="cmp" style="--n:${cs.length}"><div class="cmp__h"><span></span>${cs.map((c) => `<a href="${cURL(c)}"><b>${esc(c.name)}</b></a>`).join("")}</div>
-      ${rows.map(([l, f]) => `<div class="cmp__r"><span class="cmp__l">${l}</span>${cs.map((c) => `<span>${esc(f(c) || "—")}</span>`).join("")}</div>`).join("")}
-      <div class="cmp__r cmp__r--act"><span></span>${cs.map((c) => `<span><button class="btn btn--accent btn--sm" data-enroll="${c.slug}">Записаться</button></span>`).join("")}</div></div>`); };
-  H.calc = () => { const K = S.calc || {}; if (!ON(K)) return ""; const cs = S.courses;
-    return SEC(K.title || "Когда окупится обучение", K.text || "Посчитайте сами: сколько клиенток в неделю и по какой цене.", `<div class="calc" data-calc>
-      <label>Курс<select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select></label>
-      <label>Цена процедуры, ₽<input data-k="price" type="number" inputmode="numeric" min="100" step="100" value="${parseInt(K.price, 10) || 2500}"></label>
-      <label>Клиенток в неделю: <b data-o="per">${parseInt(K.per, 10) || 3}</b><input data-k="per" type="range" min="1" max="20" value="${parseInt(K.per, 10) || 3}"></label>
-      <div class="calc__res"><div><span>Обучение окупится примерно за</span><b data-o="weeks"></b></div><div><span>Доход в месяц около</span><b data-o="month"></b></div></div>
-      <p class="muted calc__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p>
-      <button class="btn btn--accent" data-enroll>${esc(K.btn || "Записаться на курс")}</button></div>`); };
+  // инструменты под курсами: свёрнуты, открываются по нажатию
+  const cmpRows = (c) => [["Цена", rub(c.price)], ["Длительность", c.duration], ["Практика", c.models], ["Материалы", c.materials], ["Документ", c.certificate], ["Что изучите", (c.topics || []).slice(0, 4).join(", ") + ((c.topics || []).length > 4 ? ` и ещё ${(c.topics || []).length - 4}` : "")]];
+  const cmpCol = (c) => c ? `<div class="cmp2__c"><a class="cmp2__n" href="${cURL(c)}">${esc(c.name)}</a>${cmpRows(c).map(([l, v]) => `<div class="cmp2__r"><span>${l}</span><b>${esc(v || "уточняйте при записи")}</b></div>`).join("")}<button class="btn btn--accent btn--sm" data-enroll="${c.slug}">Записаться</button></div>` : "";
+  H.compare = () => { const C = S.compare || {}; if (!ON(C)) return ""; const pre = (C.courses || []).map(course).filter(Boolean), a = pre[0] || S.courses[0], b = pre[1] || S.courses[1];
+    const sel = (k, cur) => `<select data-cmp="${k}" aria-label="Курс ${k === "a" ? "слева" : "справа"}">${S.courses.map((c) => `<option value="${c.slug}"${c === cur ? " selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
+    return `<details class="tool"><summary><span>${esc(C.title || "Сравнить два курса")}</span><i aria-hidden="true"></i></summary>
+      <div class="cmp2" data-cmp-box><div class="cmp2__sel">${sel("a", a)}${sel("b", b)}</div><div class="cmp2__cols" data-cmp-cols>${cmpCol(a)}${cmpCol(b)}</div></div></details>`; };
+  H.calc = () => { const K = S.calc || {}; if (!ON(K)) return ""; const cs = S.courses.filter((c) => c.price);
+    return `<details class="tool"><summary><span>${esc(K.title || "Когда окупится обучение")}</span><i aria-hidden="true"></i></summary>
+      <div class="calc2" data-calc><p>Курс <select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select>
+      окупится примерно за <b data-o="weeks"></b>, если брать <input data-k="per" type="number" inputmode="numeric" min="1" max="40" value="${parseInt(K.per, 10) || 3}"> ${"клиенток в неделю"} по <input data-k="price" type="number" inputmode="numeric" min="100" step="100" value="${parseInt(K.price, 10) || 2500}"> ₽.
+      Это около <b data-o="month"></b> в месяц.</p><p class="muted calc2__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p></div></details>`; };
+  const tools = () => { const t = H.compare() + H.calc(); return t ? `<div class="tools">${t}</div>` : ""; };
+
   H.referral = () => { const F2 = S.referral || {}; if (!ON(F2) || !F2.title) return "";
     return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo promo--text"><div class="promo__t"><span class="promo__k">${esc(F2.kicker || "Вдвоём выгоднее")}</span><h2>${esc(F2.title)}</h2>${F2.text ? `<p>${esc(F2.text)}</p>` : ""}
       ${WAON() ? `<a class="btn btn--accent" href="${wa(F2.wa || "Здравствуйте! Хотим записаться на обучение вдвоём с подругой.")}" target="_blank" rel="noopener">${esc(F2.btn || "Записаться вдвоём")}</a>` : `<button class="btn btn--accent" data-enroll>${esc(F2.btn || "Записаться вдвоём")}</button>`}</div></div></div></section>`; };
@@ -512,6 +518,8 @@
   if (inl) { inl.innerHTML = formHTML(null); bindForm(inl.querySelector("form"), null, inl); }
   const qb = document.getElementById("qbox"); if (qb) quiz(qb);
   filters("#spreads", ".spread"); filters("#gal", "button"); lightbox(); scrub();
+  document.querySelectorAll("[data-more]").forEach((b) => b.addEventListener("click", () => { document.getElementById(b.dataset.more).classList.remove("is-cut"); b.remove(); }));
+  document.querySelectorAll("[data-cmp-box]").forEach((box) => { const up = () => { const v = (k) => course(box.querySelector(`[data-cmp="${k}"]`).value); box.querySelector("[data-cmp-cols]").innerHTML = cmpCol(v("a")) + cmpCol(v("b")); }; box.addEventListener("change", up); });
 
   const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
   // «Назад»: возвращает туда, откуда пришли, на то же место страницы
@@ -567,7 +575,7 @@
     move();
   }
   document.querySelectorAll("[data-calc]").forEach((k) => { const g = (n) => k.querySelector(`[data-k="${n}"]`), o = (n) => k.querySelector(`[data-o="${n}"]`);
-    const calc = () => { const cp = +g("course").value || 0, pr = Math.max(0, +g("price").value || 0), per = +g("per").value || 1; o("per").textContent = per;
+    const calc = () => { const cp = +g("course").value || 0, pr = Math.max(0, +g("price").value || 0), per = Math.max(1, +g("per").value || 1); if (o("per")) o("per").textContent = per;
       const wk = pr * per; o("weeks").textContent = wk ? `${Math.max(1, Math.ceil(cp / wk))} ${plural(Math.max(1, Math.ceil(cp / wk)), "неделю", "недели", "недель")}` : "—"; o("month").textContent = rub(Math.round(wk * 4.3 / 100) * 100); };
     k.addEventListener("input", calc); calc(); });
   // видео в фото-блоках: грузятся и играют, только когда видны на экране
