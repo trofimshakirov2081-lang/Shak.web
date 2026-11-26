@@ -848,3 +848,76 @@ html.menu-open .burger span{background:transparent!important}
 .map__load{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding-bottom:56px;border:0;cursor:pointer;color:var(--on-dark,#F1E9DE);font:600 1rem var(--f-body);background:radial-gradient(circle at 50% 42%,rgba(217,178,106,.18),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 12px,transparent 12px 24px),var(--espresso-2)}
 .map__pin{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#D9B26A;box-shadow:0 0 0 6px rgba(217,178,106,.18)}
 .map__load:hover .map__pin{transform:rotate(-45deg) scale(1.1)}
+
+/* ===================== «Студия» (26.11): как «Стойка» и RCC Padel =====================
+   Острые углы, три цвета, узкие заголовки капсом, линии вместо карточек, текст под фото, а не на градиенте */
+[data-font="studio"]{--f-head:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;--f-body:'Onest',system-ui,sans-serif;--r:0px;--r-l:0px}
+[data-font="studio"][data-theme="night"]{--ivory:#15100D;--parchment:#1C1612;--espresso:#110D0B;--espresso-2:#1C1612;--ink:#EDE5DA;--ink-2:rgba(237,229,218,.58);--line:rgba(237,229,218,.14);--line-strong:rgba(237,229,218,.32);--accent:#C99A4B;--accent-hover:#D6AB5E;--on-accent:#15100D;--accent-text:#D2A657}
+[data-font="studio"] body{font-family:var(--f-body)}
+[data-font="studio"] :is(h1,h2,h3,.ctile__n,.ftr__title,.tool summary,.cmp2__n,.manifest__q){font-family:var(--f-head);font-weight:900;text-transform:uppercase;letter-spacing:-.005em;text-shadow:none!important}
+[data-font="studio"] :is(.flow-head,.rail-head) h2,[data-font="studio"] .sec h2.rv-t,[data-font="studio"] .phead h1,[data-font="studio"] .ftr__title,[data-font="studio"] .sec>.wrap>h2{font-size:clamp(52px,13vw,128px);line-height:.84}
+[data-font="studio"] .phead h1{max-width:none}
+[data-font="studio"] h3{line-height:.92}
+[data-font="studio"] .manifest__q{font-size:clamp(40px,9vw,104px);line-height:.88;max-width:16ch}
+[data-font="studio"] .manifest__q .inl{border-radius:0}
+/* кнопки и переключатели без «таблеток» */
+[data-font="studio"] .btn{border-radius:0;font-weight:600}
+[data-font="studio"] .btn--glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:transparent}
+[data-font="studio"] .chip{border-radius:0;border:0;border-bottom:2px solid transparent;padding:0 2px;margin-right:14px;min-height:40px}
+[data-font="studio"] .chip[aria-pressed="true"]{background:none;color:var(--ink);border-color:var(--accent)}
+[data-font="studio"] .themes button{border-radius:0}
+/* курсы: фото и строка под ним, без плашки-карточки */
+[data-font="studio"] .ctile{background:none;border:0;border-top:1px solid var(--line);padding-top:12px}
+[data-font="studio"] .ctile__b{padding:12px 0 0}
+[data-font="studio"] .ctile__n{font-size:clamp(24px,6.2vw,36px);line-height:.9;-webkit-line-clamp:4}
+[data-font="studio"] .ctile__tag{border-radius:0;background:var(--accent);color:var(--on-accent);-webkit-backdrop-filter:none;backdrop-filter:none;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px}
+[data-font="studio"] .ctile__price{font-family:var(--f-head);font-weight:900;font-size:clamp(26px,6vw,34px);line-height:1}
+[data-font="studio"] .ctile:first-child .ctile__price{font-size:clamp(30px,7vw,40px)}
+[data-font="studio"] .ctile__ph img{filter:saturate(.85) contrast(1.05)}
+/* направления и «почему мы»: текст под фото, без затемнения */
+[data-font="studio"] .dirs{height:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));grid-template-rows:none;gap:28px 14px}
+[data-font="studio"] .dir{color:var(--ink);display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+[data-font="studio"] .dir:first-child{grid-row:auto}
+[data-font="studio"] .dir .ph{position:relative;inset:auto;aspect-ratio:4/5}
+[data-font="studio"] .dir::after,[data-font="studio"] .why__p::after,[data-font="studio"] .why__a::after{display:none!important}
+[data-font="studio"] .dir__t{position:static;text-shadow:none!important;gap:6px}
+[data-font="studio"] .dir h3{font-size:clamp(34px,8vw,52px)}
+[data-font="studio"] .dir p{color:var(--ink-2)}
+[data-font="studio"] .dir .link{color:var(--ink)}
+[data-font="studio"] .why{grid-auto-rows:auto;gap:24px 14px}
+[data-font="studio"] .why__p,[data-font="studio"] .why__a{color:var(--ink);display:grid;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+[data-font="studio"] .why__p .ph,[data-font="studio"] .why__a .ph{position:relative;inset:auto;aspect-ratio:4/5}
+[data-font="studio"] .why__a .ph{aspect-ratio:1}
+[data-font="studio"] .why__p .dir__t h3{font-size:clamp(40px,10vw,72px)}
+[data-font="studio"] .why__a h3{font-size:clamp(22px,5vw,30px)}
+[data-font="studio"] .why__k{opacity:1;color:var(--accent-text);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+/* запись: фото сверху, текст на тёмном, без градиента */
+[data-font="studio"] .etile{display:grid;min-height:0;color:var(--ink);background:var(--parchment)}
+[data-font="studio"] .etile::after{display:none}
+[data-font="studio"] .etile .ph{position:relative;inset:auto;aspect-ratio:16/9}
+[data-font="studio"] .etile h2{color:var(--ink);font-size:clamp(40px,9vw,80px);line-height:.88}
+[data-font="studio"] .etile p{color:var(--ink-2)}
+[data-font="studio"] .etile .btn--glass{border-color:var(--line-strong);color:var(--ink)}
+@media (min-width:900px){[data-font="studio"] .etile{grid-template-columns:1fr 1fr;align-items:center}[data-font="studio"] .etile .ph{aspect-ratio:4/3;height:100%}}
+/* «Как мы учим»: фото без поворотов и скруглений */
+[data-font="studio"] .zoom__s{border-radius:0}
+[data-font="studio"] .zoom__s--1,[data-font="studio"] .zoom__s--2,[data-font="studio"] .zoom__s--3,[data-font="studio"] .zoom__s--4{rotate:0deg}
+[data-font="studio"] .zoom__t h2{font-size:clamp(48px,11vw,120px);line-height:.86}
+/* формы, подвал, инструменты */
+[data-font="studio"] :is(.help,.notify,.calc,.ftr,.map,.map__bar,.cmp,.tool,.lb img){border-radius:0}
+[data-font="studio"] .notify{border-style:solid}
+[data-font="studio"] .tool summary{font-size:clamp(26px,6vw,40px)}
+[data-font="studio"] .acc summary{font-family:var(--f-body);text-transform:none}
+[data-font="studio"] .price,[data-font="studio"] .chero__price .price{font-family:var(--f-head);font-weight:900}
+[data-font="studio"] .spread__topics li::before{border-radius:0;width:10px;height:1px;background:var(--accent)}
+[data-font="studio"] .hdr{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--ivory)}
+[data-font="studio"] .logo{font-family:var(--f-head);font-weight:900;text-transform:uppercase;letter-spacing:.02em}
+[data-font="studio"] .dir{aspect-ratio:auto!important;overflow:visible;grid-column:auto!important}
+[data-font="studio"] .dirs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media (min-width:900px){[data-font="studio"] .dirs{grid-template-columns:repeat(5,minmax(0,1fr))!important}}
+[data-font="studio"] .dir h3{font-size:clamp(28px,7vw,44px)}
+[data-font="studio"] .dir p{font-size:.88rem;line-height:1.4}
+[data-font="studio"] .why__p,[data-font="studio"] .why__a{overflow:visible}
+[data-font="studio"] :is(.flow-head,.rail-head) .link{white-space:nowrap}
+@media (max-width:899px){[data-font="studio"] .dir p{display:none}}
+[data-font="studio"] .back{border-radius:0}

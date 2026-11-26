@@ -40,14 +40,14 @@
   const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
     { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
     { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
-  const FONTS = [{ id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }, { id: "finlandica", name: "Finlandica", ff: "'Finlandica'" }];
+  const FONTS = [{ id: "studio", name: "Студия (узкий капс)", ff: "'Sofia Sans Extra Condensed'" }, { id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }, { id: "finlandica", name: "Finlandica", ff: "'Finlandica'" }];
   const pick = (key, list, def) => { if (!PK(key)) return def; let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
   const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
   const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
   let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
   document.documentElement.dataset.anim = ANIM;
   // дизайн из админки: углы, размытие, шрифт текста, тени
-  (() => { const D = S.design || {}, st = document.documentElement.style, R = { sharp: [3, 6], soft: [14, 22], round: [24, 34] }[D.corners];
+  (() => { const D = S.design || {}, st = document.documentElement.style, R = { none: [0, 0], sharp: [3, 6], soft: [14, 22], round: [24, 34] }[D.corners];
     if (R) { st.setProperty("--r", R[0] + "px"); st.setProperty("--r-l", R[1] + "px"); }
     document.documentElement.dataset.blur = D.blur === false ? "off" : "on";
     const FB = { ysabeau: "'Ysabeau Office'", arsenal: "'Arsenal'", finlandica: "'Finlandica'" }[D.fontBody]; if (FB) st.setProperty("--f-body", FB + ",system-ui,sans-serif");
@@ -307,7 +307,7 @@
   P.works = () => {
     const ills = S.courses.flatMap((c) => [{ src: c.photo, alt: c.alt, cat: c.cat }].concat(c.photos.map((p) => ({ src: p.src, alt: p.alt, cat: c.cat })))).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i);
     const items = has(S.works) ? S.works : S.preview ? ills : [];
-    return `<div class="wrap phead">${crumbs([{ t: "Работы" }])}<h1>Результаты, которые говорят сами за себя</h1>
+    return `<div class="wrap phead">${crumbs([{ t: "Работы" }])}<h1>Работы учениц и студии</h1>
       <div class="filters" role="group" aria-label="Направление">${new Set(items.map((x) => x.cat)).size < 2 ? "" : `<button class="chip" data-filter="all" aria-pressed="true">Все</button>`}${new Set(items.map((x) => x.cat)).size < 2 ? "" : S.categories.filter((c) => items.some((x) => x.cat === c.id)).map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
       <section class="wrap" style="padding-bottom:var(--sec)">
       ${has(S.works) ? "" : `<div class="empty-works"><div><h2 style="font-size:var(--fs-h3)">Галерея работ появится после съёмки</h2><p class="muted" style="margin-top:12px">Здесь будут только настоящие работы учениц и преподавателя, подписанные и с согласия авторов:</p><ul><li>брови, ресницы, ногти, педикюр, уход, волосы;</li><li>сравнения «до и после»;</li><li>процесс обучения.</li></ul></div>

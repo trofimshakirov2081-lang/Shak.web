@@ -372,9 +372,9 @@
   V.look = () => [el("h1", { text: "Оформление" }), el("p", { class: "sub", text: "Общий вид сайта. Изменения видны после публикации, заранее посмотреть можно кнопкой «Посмотреть»." }),
     box("Цвет, шрифт и движение", null, [
       F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]]),
-      F.sel("Шрифт заголовков", S, "font", [["arsenal", "Arsenal (простой)"], ["finlandica", "Finlandica (современный)"], ["bona", "Bona Nova (с засечками)"], ["prata", "Prata (с засечками)"], ["cormorant", "Cormorant (изящный)"]]),
+      F.sel("Шрифт заголовков", S, "font", [["studio", "Студия: узкий капс, как у дизайн-студий"], ["arsenal", "Arsenal (простой)"], ["finlandica", "Finlandica (современный)"], ["bona", "Bona Nova (с засечками)"], ["prata", "Prata (с засечками)"], ["cormorant", "Cormorant (изящный)"]]),
       F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Как задано в шрифте заголовков"], ["ysabeau", "Ysabeau Office"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
-      F.sel("Углы", ensureD(), "corners", [["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
+      F.sel("Углы", ensureD(), "corners", [["none", "Без скругления"], ["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
       F.bool("Размытие под шапкой и метками (эффект стекла)", ensureD(), "blur"),
       F.sel("Тени у карточек", ensureD(), "shadow", [["soft", "Лёгкие"], ["none", "Без теней"], ["strong", "Заметные"]]),
       el("div", { class: "f" }, el("span", { text: "Готовые наборы" }), el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, [["Мягкий", { corners: "round", blur: true, shadow: "soft" }, "arsenal"], ["Строгий", { corners: "sharp", blur: false, shadow: "none" }, "finlandica"], ["Классика", { corners: "soft", blur: true, shadow: "strong" }, "bona"]]
