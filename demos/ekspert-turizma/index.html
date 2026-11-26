@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru" data-fonts="Piazzolla|Ysabeau Office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+  <title>Эксперт Туризма | Туры и экскурсии</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@400;700&family=Ysabeau+Office:wght@400;700&display=swap">
+  <style>
+    /* «Маршрут»: туры. Фон как топографическая карта, туры стоят остановками на линии, линия прорисовывается при прокрутке */
+    :root { --bg: #F1EDE4; --text: #14213D; --main: #1D3557; --accent: #E76F51; --forest: #2A6F4E; --card: #FBF9F4; --c-radius: 14px; --c-surface: var(--card); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 700; margin: 0; line-height: 1.02; letter-spacing: -.02em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 64%, transparent); }
+    .topo { background-color: var(--bg); background-image: repeating-radial-gradient(ellipse at 18% 30%, transparent 0 22px, rgba(29, 53, 87, .09) 22px 23px), repeating-radial-gradient(ellipse at 88% 78%, transparent 0 26px, rgba(42, 111, 78, .08) 26px 27px); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 0; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--card) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 700 20px/1 var(--font-head); text-decoration: none; }
+    .cta { background: var(--main); color: #fff; border-radius: 999px; padding: 10px 18px; font-weight: 500; font-size: 15px; text-decoration: none; }
+
+    .hero { padding: 20px 0 0; }
+    .hero h1 { font-size: clamp(44px, 11.5vw, 108px); max-width: 11ch; }
+    .hero .lead { max-width: 40ch; margin: 16px 0 0; font-size: 17px; }
+    .post { position: relative; margin-top: 28px; }
+    .post img { width: 100%; height: 52svh; min-height: 320px; object-fit: cover; border-radius: 22px; }
+    .pin { position: absolute; left: 18px; bottom: 18px; background: var(--card); border-radius: 14px; padding: 10px 14px; display: flex; gap: 10px; align-items: center; box-shadow: 0 10px 30px -10px rgba(20, 33, 61, .4); }
+    .pin i { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 25%, transparent); }
+    .pin span { font-weight: 500; font-size: 14px; }
+
+    section { padding: 64px 0 0; }
+    h2 { font-size: clamp(34px, 7.5vw, 64px); margin-bottom: 12px; }
+
+    /* Линия маршрута слева, остановки-туры справа от неё */
+    .route { position: relative; padding-left: 30px; display: grid; gap: 22px; margin-top: 26px; }
+    .route svg { position: absolute; left: 0; top: 0; width: 20px; height: 100%; overflow: visible; }
+    .route path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 9; }
+    .route .bg { stroke: color-mix(in srgb, var(--text) 18%, transparent); }
+    .stop { position: relative; background: var(--card); border-radius: 20px; }
+    .stop::before { content: ""; position: absolute; left: -30px; top: 26px; width: 20px; height: 20px; margin-left: 0; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); box-sizing: border-box; }
+    .stop .ph { border-radius: 20px 20px 0 0; overflow: hidden; aspect-ratio: 16 / 10; background: color-mix(in srgb, var(--forest) 25%, var(--card)); }
+    .stop .ph img, .stop .ph .noimg { width: 100%; height: 100%; object-fit: cover; display: grid; place-items: center; font-size: 60px; }
+    .stop .in { padding: 16px 16px 18px; display: grid; gap: 8px; }
+    .stop h3 { font-size: 24px; }
+    .stop .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stop .meta span { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--forest) 12%, transparent); color: var(--forest); font-weight: 500; }
+    .stop .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; }
+    .stop .price { font: 700 22px var(--font-head); }
+    .stop .price small { font: 400 13px var(--font-body); color: color-mix(in srgb, var(--text) 60%, transparent); }
+    .pick { border: 0; border-radius: 999px; background: var(--main); color: #fff; padding: 10px 16px; font-weight: 500; cursor: pointer; }
+    .stop.on { box-shadow: 0 0 0 2px var(--accent); }
+    .stop.on .pick { background: var(--accent); }
+
+    .form { background: var(--main); color: #fff; border-radius: 22px; padding: 22px 18px; display: grid; gap: 14px; }
+    .form h3 { font-size: 28px; }
+    .form .lab { font-size: 13px; opacity: .75; margin-bottom: 6px; }
+    .dates { display: flex; gap: 6px; flex-wrap: wrap; }
+    .dates button { border: 1px solid rgba(255, 255, 255, .35); background: none; color: #fff; border-radius: 12px; padding: 8px 12px; cursor: pointer; line-height: 1.2; }
+    .dates button small { display: block; font-size: 11px; opacity: .7; }
+    .dates button.on { background: #fff; color: var(--main); }
+    .ppl { display: flex; align-items: center; gap: 14px; }
+    .ppl button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .4); background: none; color: #fff; font-size: 20px; cursor: pointer; }
+    .ppl b { font: 700 24px var(--font-head); min-width: 2ch; text-align: center; }
+    .form input { font: 16px var(--font-body); padding: 13px; border-radius: 12px; border: 0; width: 100%; min-width: 0; min-height: 48px; }
+    .form .sum { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255, 255, 255, .2); padding-top: 12px; }
+    .form .sum b { font: 700 30px var(--font-head); }
+    .form .go { border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: 500 17px var(--font-body); padding: 16px; cursor: pointer; }
+
+    .inc { display: grid; gap: 12px; }
+    .inc div { display: grid; grid-template-columns: 40px 1fr; gap: 0 12px; }
+    .inc span.i { grid-row: span 2; font-size: 26px; }
+    .about { font: 500 clamp(21px, 4.8vw, 30px)/1.4 var(--font-head); max-width: 32ch; margin: 0 0 24px; }
+
+    .find { padding-bottom: 36px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 55%, transparent); padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .grid2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+      .form { position: sticky; top: 20px; padding: 28px; }
+      .stop { display: grid; grid-template-columns: 1fr 1.1fr; }
+      .stop .ph { aspect-ratio: auto; min-height: 240px; border-radius: 20px 0 0 20px; }
+      .inc { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var DN = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+    // Ближайшие даты: по умолчанию субботы и воскресенья следующих трёх недель
+    var dates = [], d = new Date();
+    for (var k = 1; dates.length < 6 && k < 40; k++) { var x = new Date(d); x.setDate(d.getDate() + k); if (x.getDay() === 6 || x.getDay() === 0) dates.push(x); }
+
+    var stops = D.items.map(function (i, n) {
+      var meta = (i.desc || "").split(/[,.;]\s*/).filter(Boolean).slice(0, 3);
+      return '<article class="stop' + (n ? '' : ' on') + '" data-stop="' + e(i.id) + '"><div class="ph">' + Core.pic(i) + '</div><div class="in"><h3>' + e(i.name) + '</h3>' +
+        (meta.length ? '<div class="meta">' + meta.map(function (m) { return '<span>' + e(m) + '</span>'; }).join("") + '</div>' : '') + (i.tag ? '<p class="mute" style="margin:0">' + e(i.tag) + '</p>' : '') +
+        '<div class="row"><span class="price">' + Core.money(i.price) + ' <small>' + e(X.per || "с человека") + '</small></span><button class="pick" data-pick="' + e(i.id) + '">' + e(D.sections.addLabel || "Выбрать") + '</button></div></div></article>';
+    }).join("");
+    var inc = D.features.map(function (f) { return '<div><span class="i" aria-hidden="true">' + e(f.icon || "") + '</span><strong>' + e(f.title) + '</strong><span class="mute">' + e(f.text) + '</span></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#tours">' + e(X.bookBtn || "Выбрать тур") + '</a></div></header>' +
+      '<div class="topo"><main id="top"><section class="hero" style="padding-top:20px"><div class="wrap"><p class="mute" style="margin:0 0 12px">' + e(D.brand.tagline || "") + '</p><h1>' + e(X.heroTitle || D.hero.title) + '</h1><p class="lead mute">' + e(D.hero.text) + '</p>' +
+        '<div class="post">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') + '<div class="pin"><i></i><span>' + e(X.startPoint || ("Старт: " + (D.brand.city || "ваш город"))) + '</span></div></div></div></section></main></div>' +
+      '<section id="tours"><div class="wrap grid2"><div><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:0">' + e(D.sections.catalogText) + '</p>' +
+        '<div class="route" data-route><svg aria-hidden="true" preserveAspectRatio="none"><path class="bg"></path><path class="fg"></path></svg>' + stops + '</div></div>' +
+        '<form class="form" onsubmit="return false"><h3 data-tname></h3><div><div class="lab">Дата</div><div class="dates">' + dates.map(function (x, n) { return '<button type="button" data-date="' + n + '"' + (n ? '' : ' class="on"') + '>' + x.getDate() + '.' + String(x.getMonth() + 1).padStart(2, "0") + '<small>' + DN[x.getDay()] + '</small></button>'; }).join("") + '</div></div>' +
+        '<div><div class="lab">Сколько человек</div><div class="ppl"><button type="button" data-p="-1" aria-label="Меньше">−</button><b data-ppl>2</b><button type="button" data-p="1" aria-label="Больше">+</button></div></div>' +
+        '<input data-who placeholder="Имя и телефон" autocomplete="name"><div class="sum"><span>Итого</span><b data-sum></b></div><button class="go" data-go>' + e(X.sendLabel || "Забронировать в WhatsApp") + '</button></form></div></section>' +
+      '<section><div class="wrap"><h2>' + e(X.incTitle || "Что входит") + '</h2><div class="inc">' + inc + '</div></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Связаться") + '</h2><div class="rows">' + rows + '</div></div></section>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var $ = function (s) { return document.querySelector(s); }, cur = D.items[0] && D.items[0].id, di = 0, ppl = 2;
+    function calc() {
+      var it = Core.item(cur); $("[data-tname]").textContent = it ? it.name : "";
+      var t = it ? it.price * ppl : 0; $("[data-sum]").textContent = Core.money(t); return t;
+    }
+    // Линия маршрута: волнистая дорожка по высоте списка, заполняется по мере прокрутки
+    var route = $("[data-route]"), svg = route.querySelector("svg"), bg = svg.querySelector(".bg"), fg = svg.querySelector(".fg"), len = 0;
+    function draw() {
+      var h = route.offsetHeight, p = "M10 0";
+      for (var y = 0; y < h; y += 120) p += " C 18 " + (y + 40) + ", 2 " + (y + 80) + ", 10 " + Math.min(h, y + 120);
+      svg.setAttribute("viewBox", "0 0 20 " + h); bg.setAttribute("d", p); fg.setAttribute("d", p);
+      len = fg.getTotalLength(); fg.style.strokeDasharray = len; scroll();
+    }
+    function scroll() {
+      var r = route.getBoundingClientRect(), k = Math.max(0, Math.min(1, (innerHeight * .7 - r.top) / r.height));
+      fg.style.strokeDashoffset = len * (1 - k);
+    }
+    addEventListener("scroll", function () { requestAnimationFrame(scroll); }, { passive: true });
+    addEventListener("resize", draw);
+    document.addEventListener("click", function (ev) {
+      var p = ev.target.closest("[data-pick]");
+      if (p) { cur = p.dataset.pick; [].forEach.call(document.querySelectorAll("[data-stop]"), function (s) { s.classList.toggle("on", s.dataset.stop === cur); }); calc(); if (innerWidth < 860) $(".form").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+      var dt = ev.target.closest("[data-date]");
+      if (dt) { di = +dt.dataset.date; [].forEach.call(document.querySelectorAll("[data-date]"), function (b) { b.classList.toggle("on", b === dt); }); return; }
+      var pp = ev.target.closest("[data-p]");
+      if (pp) { ppl = Math.max(1, Math.min(30, ppl + +pp.dataset.p)); $("[data-ppl]").textContent = ppl; calc(); return; }
+      if (ev.target.closest("[data-go]")) {
+        var t = calc(), x = dates[di], who = $("[data-who]").value.trim();
+        window.open(Core.wa("Здравствуйте! Хочу забронировать: " + Core.item(cur).name + "\n" + x.getDate() + "." + String(x.getMonth() + 1).padStart(2, "0") + ", " + ppl + " чел.\nПо сайту выходит " + Core.money(t) + (who ? "\n" + who : "")), "_blank");
+      }
+    });
+    calc(); setTimeout(draw, 50);
+  })();
+  </script>
+</body>
+</html>

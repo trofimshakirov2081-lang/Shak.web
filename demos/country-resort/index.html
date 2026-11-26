@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru" data-fonts="Brygada 1918|Arsenal">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌲</text></svg>">
+  <title>Кантри Резорт | Гостиница</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Brygada+1918:wght@400;700&family=Arsenal:wght@400;700&display=swap">
+  <style>
+    /* «Тропа»: загородный отдых. Главное на первом экране: бронь в виде билета с датами и расчётом цены */
+    :root { --bg: #F2EFE6; --text: #1B241E; --main: #24352B; --accent: #D9692E; --lake: #9DB7B5; --paper: #FBF9F4; --c-radius: 14px; --c-surface: var(--paper); --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; letter-spacing: -.015em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 -76px; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--paper) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 600 19px/1 var(--font-head); text-decoration: none; }
+    .book-btn { border: 0; border-radius: 999px; background: var(--main); color: #fff; padding: 10px 18px; font-weight: 600; font-size: 15px; cursor: pointer; text-decoration: none; }
+
+    .hero { position: relative; min-height: 86svh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; }
+    .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 20, 14, .45) 0%, rgba(10, 20, 14, 0) 30%, rgba(10, 20, 14, .1) 55%, rgba(10, 20, 14, .72) 100%); }
+    .hero > .wrap { position: relative; z-index: 1; padding-bottom: 104px; }
+    .place { font-size: 15px; opacity: .9; margin: 0 0 12px; }
+    .hero h1 { font-size: clamp(38px, 9.5vw, 88px); line-height: 1.02; max-width: 13ch; }
+    .hero p.lead { max-width: 46ch; margin: 16px 0 0; font-size: 17px; opacity: .92; }
+
+    /* Билет: левая часть с полями, правая отрывная со сроком и суммой */
+    .ticket { position: relative; z-index: 5; margin-top: -72px; display: grid; grid-template-columns: 1fr; background: var(--paper); border-radius: 22px; box-shadow: 0 30px 60px -30px rgba(27, 36, 30, .45); }
+    .t-main { padding: 22px 20px 18px; display: grid; gap: 14px; }
+    .t-main h2 { font-size: 24px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fields > *, .t-main > * { min-width: 0; }
+    .f { display: grid; min-width: 0; gap: 4px; font-size: 13px; color: color-mix(in srgb, var(--text) 65%, transparent); }
+    .f.wide { grid-column: 1 / -1; }
+    .f input, .f select { font: 500 16px var(--font-body); color: var(--text); background: var(--bg); border: 1px solid transparent; border-radius: 12px; padding: 12px; width: 100%; min-width: 0; min-height: 48px; -webkit-appearance: none; appearance: none; }
+    .f select { background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 18px) 21px, calc(100% - 13px) 21px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 32px; }
+    .f input:focus, .f select:focus { outline: none; border-color: var(--main); }
+    .guests { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border-radius: 12px; padding: 4px; min-height: 48px; }
+    .guests button { width: 40px; height: 40px; border-radius: 10px; border: 0; background: var(--paper); color: var(--text); font-size: 20px; cursor: pointer; }
+    .guests b { font: 600 17px var(--font-body); color: var(--text); }
+    .t-stub { position: relative; padding: 18px 20px 22px; border-top: 2px dashed color-mix(in srgb, var(--text) 18%, transparent); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6px 14px; }
+    .t-stub::before, .t-stub::after { content: ""; position: absolute; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); }
+    .t-stub::before { left: -12px; } .t-stub::after { right: -12px; }
+    .nights { font: 400 15px var(--font-body); color: color-mix(in srgb, var(--text) 65%, transparent); }
+    .sum { font: 600 32px/1 var(--font-head); letter-spacing: -.02em; }
+    .sum.bump { animation: bump .35s var(--ease); }
+    @keyframes bump { 40% { transform: translateY(-4px); color: var(--accent); } }
+    .note { grid-column: 1 / -1; font-size: 13px; color: color-mix(in srgb, var(--text) 60%, transparent); margin: 0; }
+    .send { grid-column: 1 / -1; margin-top: 8px; border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: 600 17px var(--font-body); padding: 16px; cursor: pointer; }
+    .send:active { transform: scale(.99); }
+
+    section { padding: 72px 0 0; }
+    .head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .head h2 { font-size: clamp(30px, 6vw, 48px); line-height: 1.05; }
+    .head p { margin: 8px 0 0; color: color-mix(in srgb, var(--text) 70%, transparent); max-width: 44ch; }
+
+    /* Домики: на телефоне листаются пальцем */
+    .houses { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 16px 8px; margin: 0 -16px; scrollbar-width: none; }
+    .houses::-webkit-scrollbar { display: none; }
+    .house { scroll-snap-align: center; background: var(--paper); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+    .house .ph { position: relative; aspect-ratio: 4 / 3; background: var(--lake); }
+    .house .ph img, .house .ph .noimg { width: 100%; height: 100%; object-fit: cover; display: grid; place-items: center; font-size: 64px; }
+    .house .tag { position: absolute; left: 12px; top: 12px; background: var(--paper); color: var(--text); border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 500; }
+    .house .in { padding: 16px 16px 18px; display: grid; gap: 6px; flex: 1; }
+    .house h3 { font-size: 22px; line-height: 1.15; }
+    .house p { margin: 0; color: color-mix(in srgb, var(--text) 70%, transparent); font-size: 15px; }
+    .house .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+    .house .price { font: 600 20px var(--font-head); }
+    .house .price small { font: 400 13px var(--font-body); color: color-mix(in srgb, var(--text) 60%, transparent); }
+    .pick { border: 1px solid var(--main); background: none; color: var(--main); border-radius: 999px; padding: 9px 16px; font-weight: 600; cursor: pointer; }
+    .pick.on { background: var(--main); color: #fff; }
+
+    .stay { display: grid; gap: 0; }
+    .stay div { display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 16px 0; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+    .stay span.i { grid-row: span 2; font-size: 28px; line-height: 1.1; }
+    .stay strong { font: 600 19px var(--font-head); }
+    .stay p { margin: 0; color: color-mix(in srgb, var(--text) 70%, transparent); }
+
+    .about { display: grid; gap: 20px; }
+    .about img { border-radius: 20px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+    .about p { font: 400 clamp(20px, 4.6vw, 30px)/1.4 var(--font-head); margin: 0; }
+
+    .find { background: linear-gradient(180deg, var(--bg) 0, color-mix(in srgb, var(--main) 35%, var(--bg)) 90px, color-mix(in srgb, var(--main) 80%, var(--bg)) 170px, var(--main) 240px); color: #F2EFE6; margin-top: 24px; padding: 230px 0 40px; }
+    .find h2 { font-size: clamp(30px, 6vw, 48px); margin-bottom: 18px; }
+    .rows { display: grid; }
+    .rows a, .rows div { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid rgba(242, 239, 230, .18); text-decoration: none; }
+    .rows small { opacity: .65; font-size: 13px; }
+    .find .send { display: inline-block; margin-top: 20px; text-decoration: none; text-align: center; width: 100%; }
+    footer { background: var(--main); color: rgba(242, 239, 230, .65); font-size: 13px; padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid rgba(242, 239, 230, .18); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .hero > .wrap { padding-bottom: 150px; }
+      .ticket { grid-template-columns: 1fr 300px; margin-top: -96px; }
+      .t-main { padding: 26px 28px; }
+      .fields { grid-template-columns: 1fr 1fr 150px 1.4fr; }
+      .f.wide { grid-column: auto; }
+      .t-stub { border-top: 0; border-left: 2px dashed color-mix(in srgb, var(--text) 18%, transparent); padding: 26px 26px; align-content: end; }
+      .t-stub::before, .t-stub::after { left: -13px; right: auto; }
+      .t-stub::before { top: -12px; } .t-stub::after { top: auto; bottom: -12px; }
+      .houses { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; padding: 0; margin: 0; }
+      .stay { grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
+      .about { grid-template-columns: 1fr 1.2fr; align-items: center; gap: 48px; }
+      .find .send { width: auto; padding: 16px 32px; }
+    }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var aboutPic = X.aboutPhoto || (D.items[1] && D.items[1].photo) || hp;
+    var weekend = Number(X.weekend || 0);
+    var minG = 1, maxG = Number(X.maxGuests || 12);
+
+    var houses = D.items.map(function (i) {
+      return '<article class="house"><div class="ph">' + Core.pic(i) + (i.tag ? '<span class="tag">' + e(i.tag) + '</span>' : '') + '</div>' +
+        '<div class="in"><h3>' + e(i.name) + '</h3><p>' + e(i.desc || "") + '</p>' +
+        '<div class="row"><span class="price">' + Core.money(i.price) + ' <small>' + e(X.per || "за ночь") + '</small></span>' +
+        '<button class="pick" data-pick="' + e(i.id) + '">' + e(D.sections.addLabel || "Выбрать") + '</button></div></div></article>';
+    }).join("");
+    var opts = D.items.map(function (i) { return '<option value="' + e(i.id) + '">' + e(i.name) + ', ' + Core.money(i.price) + '</option>'; }).join("");
+    var stay = D.features.map(function (f) { return '<div><span class="i" aria-hidden="true">' + e(f.icon || "") + '</span><strong>' + e(f.title) + '</strong><p>' + e(f.text) + '</p></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) {
+      return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>';
+    }).join("");
+
+    Core.mount(
+            '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="book-btn" href="#book">' + e(X.bookBtn || "Забронировать") + '</a></div></header>' + '<main id="top"><section class="hero" style="padding:0">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') +
+        '<div class="wrap"><p class="place">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p>' +
+        '<h1>' + e(X.heroTitle || D.hero.title) + '</h1><p class="lead">' + e(D.hero.text) + '</p></div></section>' +
+      '<div class="wrap"><form class="ticket" id="book" onsubmit="return false"><div class="t-main"><h2>' + e(X.ticketTitle || "Бронь") + '</h2><div class="fields">' +
+        '<label class="f">Заезд<input type="date" data-in></label><label class="f">Выезд<input type="date" data-out></label>' +
+        '<div class="f">Гостей<div class="guests"><button type="button" data-g="-1" aria-label="Меньше гостей">−</button><b data-guests>2</b><button type="button" data-g="1" aria-label="Больше гостей">+</button></div></div>' +
+        '<label class="f wide">' + e(X.houseLabel || "Домик") + '<select data-house>' + opts + '</select></label></div>' +
+        '<label class="f">Имя и телефон<input data-who placeholder="Анна, +7 900 000-00-00" autocomplete="name"></label></div>' +
+        '<div class="t-stub"><span class="nights" data-nights></span><span class="sum" data-sum></span>' +
+        '<p class="note">' + e(weekend ? "Пятница и суббота +" + weekend + "%. " : "") + e(X.ticketNote || "Оплата при заезде, бронь подтвердим в течение часа.") + '</p>' +
+        '<button class="send" data-book>' + e(X.sendLabel || "Отправить заявку") + '</button></div></form></div>' +
+      '<section id="houses"><div class="wrap"><div class="head"><div><h2>' + e(D.sections.catalogTitle) + '</h2><p>' + e(D.sections.catalogText) + '</p></div></div>' +
+        '<div class="houses">' + houses + '</div></div></section>' +
+      '<section><div class="wrap"><div class="head"><h2>' + e(X.stayTitle || "Что вас ждёт") + '</h2></div><div class="stay">' + stay + '</div></div></section>' +
+      '<section><div class="wrap about">' + (aboutPic ? '<img src="' + e(aboutPic) + '" alt="" loading="lazy">' : '') + '<div><h2 style="font-size:15px;font-family:var(--font-body);font-weight:600;margin-bottom:12px">' + e(D.sections.aboutTitle) + '</h2><p>' + e(D.sections.aboutText || "") + '</p></div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Как нас найти") + '</h2><div class="rows">' + rows + '</div>' +
+        '<a class="send" href="#book">' + e(X.bookBtn || "Забронировать") + '</a></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var $ = function (s) { return document.querySelector(s); };
+    var inEl = $("[data-in]"), outEl = $("[data-out]"), house = $("[data-house]"), gEl = $("[data-guests]"), sum = $("[data-sum]"), nights = $("[data-nights]");
+    function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+    function ru(s) { var p = s.split("-"); return p[2] + "." + p[1]; }
+    // По умолчанию ближайшие выходные: заезд в пятницу, выезд в воскресенье
+    var now = new Date(), fri = new Date(now); fri.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7 || 7));
+    var sun = new Date(fri); sun.setDate(fri.getDate() + 2);
+    inEl.value = iso(fri); outEl.value = iso(sun); inEl.min = iso(now); outEl.min = iso(now);
+    var guests = 2, last = "";
+    function calc() {
+      var a = new Date(inEl.value), b = new Date(outEl.value), n = Math.round((b - a) / 864e5), it = Core.item(house.value);
+      if (!(n > 0) || !it) { nights.textContent = "Выберите даты"; sum.textContent = "…"; return null; }
+      var total = 0;
+      for (var k = 0; k < n; k++) { var d = new Date(a); d.setDate(a.getDate() + k); var wd = d.getDay(); total += it.price * ((wd === 5 || wd === 6) ? 1 + weekend / 100 : 1); }
+      total = Math.round(total / 100) * 100;
+      nights.textContent = n + " " + (n % 10 === 1 && n % 100 !== 11 ? "ночь" : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? "ночи" : "ночей") + ", " + guests + " гост" + (guests === 1 ? "ь" : guests < 5 ? "я" : "ей");
+      var txt = Core.money(total);
+      if (txt !== last) { sum.textContent = txt; sum.classList.remove("bump"); void sum.offsetWidth; sum.classList.add("bump"); last = txt; }
+      return { n: n, total: total, it: it, a: inEl.value, b: outEl.value };
+    }
+    inEl.addEventListener("change", function () { if (outEl.value <= inEl.value) { var d = new Date(inEl.value); d.setDate(d.getDate() + 1); outEl.value = iso(d); } calc(); });
+    [outEl, house].forEach(function (el) { el.addEventListener("change", function () { calc(); mark(); }); });
+    function mark() { [].forEach.call(document.querySelectorAll("[data-pick]"), function (b) { b.classList.toggle("on", b.dataset.pick === house.value); }); }
+    document.addEventListener("click", function (ev) {
+      var g = ev.target.closest("[data-g]");
+      if (g) { guests = Math.max(minG, Math.min(maxG, guests + Number(g.dataset.g))); gEl.textContent = guests; calc(); return; }
+      var p = ev.target.closest("[data-pick]");
+      if (p) { house.value = p.dataset.pick; calc(); mark(); document.getElementById("book").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+      if (ev.target.closest("[data-book]")) {
+        var r = calc(); if (!r) { Core.toast("Выберите даты заезда и выезда"); return; }
+        var who = $("[data-who]").value.trim();
+        var text = "Здравствуйте! Хочу забронировать.\n" + r.it.name + "\nЗаезд " + ru(r.a) + ", выезд " + ru(r.b) + " (" + nights.textContent + ")\nПо сайту выходит " + Core.money(r.total) + (who ? "\n" + who : "");
+        window.open(Core.wa(text), "_blank");
+      }
+    });
+    calc(); mark();
+  })();
+  </script>
+</body>
+</html>

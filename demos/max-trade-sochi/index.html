@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru" data-fonts="Old Standard TT|Gidole">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
+  <title>Макс-Трейд | Бани под ключ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&family=Gidole:wght@400;700&display=swap">
+  <style>
+    /* «Столяр»: мебель и бани на заказ. Миллиметровка, живой чертёж изделия: модули прибавляются с длиной, фасады красятся в выбранный материал */
+    :root { --bg: #F2F0EA; --text: #23262B; --main: #3D5A80; --accent: #B98A5A; --sheet: #FBFAF7; --c-radius: 4px; --c-surface: var(--sheet); --ease: cubic-bezier(.2, .8, .2, 1); --front: #D8C3A5; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--text); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased;
+      background-color: var(--bg); background-image: linear-gradient(color-mix(in srgb, var(--main) 7%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--main) 7%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; line-height: 1.04; letter-spacing: -.025em; }
+    .wrap { width: min(1160px, 100% - 32px); margin: 0 auto; }
+    button { font: inherit; color: inherit; }
+    .mute { color: color-mix(in srgb, var(--text) 64%, transparent); }
+
+    /* Шапка из «жидкого стекла»: плавает над контентом, под ней размытие */
+    .top { position: sticky; top: 10px; z-index: 30; margin: 10px 0 0; pointer-events: none; }
+    .top .wrap { pointer-events: auto; height: 56px; padding: 0 7px 0 18px; border-radius: 999px; color: var(--text); background: color-mix(in srgb, var(--sheet) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7); border: 1px solid color-mix(in srgb, #fff 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent), 0 12px 32px -14px rgba(0, 0, 0, .35); display: flex; align-items: center; justify-content: space-between; }
+    .top .wrap > a:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+    .top .wrap > a:last-child { flex: none; white-space: nowrap; }
+    .logo { font: 500 21px/1 var(--font-head); text-decoration: none; }
+    .cta { background: var(--main); color: #fff; border-radius: 999px; padding: 10px 16px; font-weight: 600; font-size: 14px; text-decoration: none; }
+
+    .hero { padding: 30px 0 0; }
+    .hero h1 { font-size: clamp(34px, 10vw, 112px); max-width: 11ch; }
+    .hero .lead { max-width: 40ch; margin: 16px 0 26px; font-size: 17px; }
+    .plate { position: relative; padding: 0 0 34px 0; }
+    .plate img { width: 100%; height: 54svh; min-height: 300px; object-fit: cover; border-radius: 2px; }
+    /* Размерные линии чертежа вокруг фото */
+    .dim { position: absolute; left: 0; right: 0; bottom: 6px; height: 16px; color: var(--main); }
+    .dim::before, .dim::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1.5px; background: currentColor; }
+    .dim::before { left: 0; } .dim::after { right: 0; }
+    .dim i { position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: currentColor; transform-origin: center; animation: grow 1.1s .4s var(--ease) both; }
+    .dim b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 10px; font: 500 15px var(--font-body); white-space: nowrap; animation: fade .5s 1.3s both; }
+    @keyframes grow { from { transform: scaleX(0); } } @keyframes fade { from { opacity: 0; } }
+
+    section { padding: 64px 0 0; }
+    h2 { font-size: clamp(36px, 8vw, 68px); margin-bottom: 12px; }
+
+    /* Чертёж изделия */
+    .board { background: var(--sheet); border: 1px solid color-mix(in srgb, var(--main) 25%, transparent); border-radius: 4px; padding: 18px; display: grid; gap: 18px; }
+    .draw { position: relative; height: 210px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: 0 0 30px; }
+    .row { display: flex; gap: 3px; height: 64px; transition: width .35s var(--ease); margin: 0 auto; }
+    .row.up { height: 50px; }
+    .row span { flex: 1; min-width: 0; border: 1.5px solid var(--text); border-radius: 2px; background: var(--front); position: relative; transition: background .4s; }
+    .row span::after { content: ""; position: absolute; top: 8px; left: 50%; width: 18px; height: 3px; margin-left: -9px; border-radius: 2px; background: var(--text); opacity: .7; }
+    .row.up span::after { top: auto; bottom: 8px; }
+    .top-line { height: 6px; background: var(--text); border-radius: 1px; margin: 0 auto; transition: width .35s var(--ease); }
+    .draw .dim { bottom: 4px; left: 50%; right: auto; transform: translateX(-50%); transition: width .35s var(--ease); }
+    .draw .dim i { animation: none; }
+    .draw .dim b { background: var(--sheet); animation: none; }
+    .house { margin: 0 auto; transition: width .35s var(--ease); position: relative; height: 150px; }
+    .house::before { content: ""; position: absolute; left: -6%; right: -6%; top: 0; height: 60px; background: var(--text); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .house span { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; background: var(--front); border: 1.5px solid var(--text); transition: background .4s; background-image: repeating-linear-gradient(180deg, transparent 0 13px, rgba(0, 0, 0, .18) 13px 14px); }
+    .lab { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+    .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+    .opts button { border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); background: var(--sheet); border-radius: 999px; padding: 8px 13px; cursor: pointer; }
+    .opts button.on { border-color: var(--text); background: var(--text); color: var(--sheet); }
+    .len { display: flex; align-items: center; gap: 14px; }
+    .len input { flex: 1; min-width: 0; accent-color: var(--main); height: 28px; }
+    .len output { font: 500 22px var(--font-head); min-width: 5ch; text-align: right; }
+    .sw { display: flex; flex-wrap: wrap; gap: 10px; }
+    .sw button { width: 64px; display: grid; gap: 6px; justify-items: center; background: none; border: 0; padding: 0; cursor: pointer; font-size: 12px; line-height: 1.2; text-align: center; }
+    .sw i { width: 46px; height: 46px; border-radius: 50%; border: 2px solid transparent; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
+    .sw button.on i { border-color: var(--main); outline: 2px solid var(--sheet); outline-offset: -4px; }
+    .res { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 14px; border-top: 1px dashed color-mix(in srgb, var(--main) 40%, transparent); }
+    .res b { font: 500 34px var(--font-head); color: var(--main); }
+    .board input[data-who] { font: 16px var(--font-body); padding: 13px; border-radius: 4px; border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); background: #fff; width: 100%; min-width: 0; min-height: 48px; }
+    .go { border: 0; border-radius: 999px; background: var(--main); color: #fff; font: 600 17px var(--font-body); padding: 16px; cursor: pointer; }
+
+    .works { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+    .work:nth-child(3n + 1) { grid-column: 1 / -1; }
+    .work .ph { aspect-ratio: 4 / 5; overflow: hidden; background: var(--sheet); border-radius: 2px; }
+    .work:nth-child(3n + 1) .ph { aspect-ratio: 16 / 10; }
+    .work .ph img, .work .ph .noimg { width: 100%; height: 100%; object-fit: cover; display: grid; place-items: center; font-size: 56px; }
+    .work h3 { font-size: 21px; margin-top: 10px; }
+    .work p { margin: 2px 0 0; font-size: 14px; }
+
+    .time { display: grid; gap: 0; }
+    .time div { display: grid; grid-template-columns: 90px 1fr; gap: 2px 14px; padding: 16px 0; border-top: 1px solid color-mix(in srgb, var(--main) 25%, transparent); }
+    .time em { grid-row: span 2; font: 400 italic 17px/1.3 var(--font-head); color: var(--main); }
+    .time strong { font-size: 18px; }
+    .about { font: 400 clamp(22px, 5vw, 32px)/1.35 var(--font-head); max-width: 30ch; margin: 0 0 26px; }
+    .feats { display: grid; gap: 14px; }
+    .feats strong { display: block; }
+
+    .find { padding-bottom: 36px; }
+    .rows a, .rows div { display: grid; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--main) 22%, transparent); text-decoration: none; }
+    .rows small { font-size: 13px; opacity: .6; }
+    footer { font-size: 13px; color: color-mix(in srgb, var(--text) 55%, transparent); padding: 0 0 28px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; border-top: 1px solid color-mix(in srgb, var(--main) 22%, transparent); padding-top: 18px; }
+
+    @media (min-width: 860px) {
+      .hero .wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 44px; align-items: end; }
+      .plate img { height: 68svh; }
+      .grid2 { display: grid; grid-template-columns: 1fr 1.25fr; gap: 44px; align-items: start; }
+      .draw { height: 240px; }
+      .works { grid-template-columns: repeat(3, 1fr); } .work:nth-child(3n + 1) { grid-column: auto; } .work:nth-child(3n + 1) .ph { aspect-ratio: 4 / 5; }
+      .time { grid-template-columns: repeat(4, 1fr); gap: 0 24px; } .time div { grid-template-columns: 1fr; }
+      .feats { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) { .dim i, .dim b { animation: none; } }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, X = Core.x;
+    var hp = D.hero.photo || (D.items[0] && D.items[0].photo) || "";
+    var house = X.drawing === "house";
+    // Материал: название, множитель цены, как выглядит образец (CSS)
+    var MAT = X.materials || (house
+      ? [["Брус", 1, "repeating-linear-gradient(180deg,#D8B48A 0 10px,#C9A276 10px 12px)"], ["Клееный брус", 1.35, "repeating-linear-gradient(180deg,#E3C49B 0 14px,#D2AF83 14px 15px)"], ["Каркас", .8, "linear-gradient(135deg,#E8E2D6,#CFC6B6)"], ["Оцилиндровка", 1.2, "repeating-linear-gradient(180deg,#C79A6A 0 12px,#8E6740 12px 14px)"]]
+      : [["Белый мат", 1, "linear-gradient(135deg,#F3F1EC,#DAD6CE)"], ["Дуб", 1.35, "repeating-linear-gradient(100deg,#C99E6E 0 3px,#B98A5A 3px 7px,#D2AC7E 7px 9px)"], ["Орех", 1.6, "repeating-linear-gradient(100deg,#6B4532 0 3px,#5B3A29 3px 8px,#7A5340 8px 10px)"], ["Графит", 1.25, "linear-gradient(135deg,#4A4D52,#2F3236)"]]);
+    var unit = X.unit || (house ? "м²" : "м");
+    var minL = Number(X.min || (house ? 12 : 1.2)), maxL = Number(X.max || (house ? 120 : 6)), defL = Number(X.def || (house ? 36 : 3.2)), stepL = house ? 1 : 0.1;
+    var steps = X.steps || (house
+      ? [["1 день", "Выезд на участок", "Смотрим место, обсуждаем проект."], ["3-5 дней", "Проект и смета", "Точная цена, которая не вырастет."], ["2-6 недель", "Строительство", "Фото каждого этапа вам в мессенджер."], ["1 день", "Сдача", "Принимаете работу, подписываем гарантию."]]
+      : [["1 день", "Замер", "Приезжаем бесплатно, обсуждаем идеи."], ["2-3 дня", "Проект", "3D-эскиз и точная цена."], ["2-4 недели", "Производство", "Делаем на своём производстве."], ["1 день", "Сборка", "Привозим, собираем, убираем за собой."]]);
+
+    var works = D.items.map(function (i) { return '<article class="work"><div class="ph">' + Core.pic(i) + '</div><h3>' + e(i.name) + '</h3><p class="mute">' + e(i.desc || "") + (i.desc ? ". " : "") + 'От ' + Core.money(i.price) + ' за ' + e(unit) + '</p></article>'; }).join("");
+    var feats = D.features.map(function (f) { return '<div><strong>' + e(f.title) + '</strong><span class="mute">' + e(f.text) + '</span></div>'; }).join("");
+    var rows = Core.contacts().map(function (r) { return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener"><small>' + e(r[0]) + '</small>' + e(r[1]) + '</a>' : '<div><small>' + e(r[0]) + '</small>' + e(r[1]) + '</div>'; }).join("");
+    var drawing = house ? '<div class="house" data-w><span></span></div>' : '<div class="row up" data-w data-up></div><div class="top-line" data-w></div><div class="row" data-w data-low></div>';
+
+    Core.mount(
+      '<header class="top"><div class="wrap"><a class="logo" href="#top">' + e(D.brand.name) + '</a><a class="cta" href="#calc">' + e(X.bookBtn || (house ? "Посчитать" : "Замер")) + '</a></div></header>' +
+      '<main id="top"><section class="hero" style="padding-top:30px"><div class="wrap"><div><p class="mute" style="margin:0 0 12px">' + e(D.brand.city ? D.brand.city + ". " : "") + e(D.brand.tagline || "") + '</p><h1>' + e(X.heroTitle || D.hero.title) + '</h1><p class="lead mute">' + e(D.hero.text) + '</p></div>' +
+        '<div class="plate">' + (hp ? '<img src="' + e(hp) + '" alt="">' : '') + '<span class="dim" aria-hidden="true"><i></i><b>' + e(X.dimW || (house ? "6 000 × 8 000 мм" : "3 200 мм")) + '</b></span></div></div></section>' +
+      '<section id="calc"><div class="wrap grid2"><div><h2>' + e(X.calcTitle || (house ? "Соберите свой дом" : "Соберите свою кухню")) + '</h2><p class="mute">' + e(X.calcText || "Двигайте размер и выбирайте материал: чертёж и цена меняются сразу. Точную смету дадим после замера.") + '</p></div>' +
+        '<form class="board" onsubmit="return false"><div class="draw" aria-hidden="true">' + drawing + '<span class="dim" data-w><i></i><b data-dimv></b></span></div>' +
+        '<div><span class="lab">Что делаем</span><div class="opts">' + D.items.map(function (i, k) { return '<button type="button" data-i="' + e(i.id) + '"' + (k ? '' : ' class="on"') + '>' + e(i.name) + '</button>'; }).join("") + '</div></div>' +
+        '<div><span class="lab">' + (house ? "Площадь" : "Длина") + '</span><div class="len"><input type="range" min="' + minL + '" max="' + maxL + '" step="' + stepL + '" value="' + defL + '" data-len aria-label="Размер"><output data-lenv></output></div></div>' +
+        '<div><span class="lab">' + e(X.matLabel || (house ? "Материал стен" : "Фасады")) + '</span><div class="sw">' + MAT.map(function (m, k) { return '<button type="button" data-m="' + k + '"' + (k ? '' : ' class="on"') + '><i style="background:' + m[2] + '"></i>' + e(m[0]) + '</button>'; }).join("") + '</div></div>' +
+        '<div class="res"><span class="mute">Примерно от</span><b data-sum></b></div>' +
+        '<input data-who placeholder="Имя, телефон и район" autocomplete="name"><button class="go" data-go>' + e(X.sendLabel || (house ? "Получить смету" : "Вызвать замерщика")) + '</button></form></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="mute" style="margin:0 0 20px">' + e(D.sections.catalogText) + '</p><div class="works">' + works + '</div></div></section>' +
+      '<section><div class="wrap"><h2>' + e(X.stepsTitle || "От замера до ключа") + '</h2><div class="time">' + steps.map(function (s) { return '<div><em>' + e(s[0]) + '</em><strong>' + e(s[1]) + '</strong><span class="mute">' + e(s[2]) + '</span></div>'; }).join("") + '</div></div></section>' +
+      '<section><div class="wrap"><h2>' + e(D.sections.aboutTitle) + '</h2><p class="about">' + e(D.sections.aboutText || "") + '</p><div class="feats">' + feats + '</div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><h2>' + e(X.findTitle || "Контакты") + '</h2><div class="rows">' + rows + '</div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    var $ = function (s) { return document.querySelector(s); }, cur = D.items[0] && D.items[0].id, mat = 0;
+    function fmt(L) { return house ? Math.round(L) + " " + unit : L.toFixed(1).replace(".", ",") + " " + unit; }
+    function calc() {
+      var L = parseFloat($("[data-len]").value), it = Core.item(cur);
+      $("[data-lenv]").textContent = fmt(L);
+      // Чертёж: ширина растёт с размером, модули по 60 см
+      var k = (L - minL) / (maxL - minL), w = (house ? 46 + k * 54 : 30 + k * 70) + "%";
+      [].forEach.call(document.querySelectorAll("[data-w]"), function (el) { el.style.width = w; });
+      if (!house) {
+        var n = Math.max(2, Math.round(L / 0.6)), m = '<span></span>'.repeat(n);
+        $("[data-low]").innerHTML = m; $("[data-up]").innerHTML = m;
+        $("[data-dimv]").textContent = Math.round(L * 1000).toLocaleString("ru-RU") + " мм";
+      } else {
+        var side = Math.sqrt(L); $("[data-dimv]").textContent = side.toFixed(1).replace(".", ",") + " × " + side.toFixed(1).replace(".", ",") + " м";
+      }
+      document.documentElement.style.setProperty("--front", MAT[mat][2]);
+      var t = it ? Math.round(it.price * L * MAT[mat][1] / 500) * 500 : 0;
+      $("[data-sum]").textContent = Core.money(t);
+      return { t: t, L: L, it: it };
+    }
+    $("[data-len]").addEventListener("input", calc);
+    document.addEventListener("click", function (ev) {
+      var i = ev.target.closest("[data-i]"), m = ev.target.closest("[data-m]");
+      if (i) { cur = i.dataset.i; [].forEach.call(document.querySelectorAll("[data-i]"), function (b) { b.classList.toggle("on", b === i); }); calc(); return; }
+      if (m) { mat = +m.dataset.m; [].forEach.call(document.querySelectorAll("[data-m]"), function (b) { b.classList.toggle("on", b === m); }); calc(); return; }
+      if (ev.target.closest("[data-go]")) {
+        var r = calc(), who = $("[data-who]").value.trim();
+        window.open(Core.wa("Здравствуйте! " + (house ? "Хочу смету." : "Хочу вызвать замерщика.") + "\n" + (r.it ? r.it.name : "") + ", " + fmt(r.L) + ", " + MAT[mat][0] + "\nПо калькулятору примерно от " + Core.money(r.t) + (who ? "\n" + who : "")), "_blank");
+      }
+    });
+    calc();
+  })();
+  </script>
+</body>
+</html>

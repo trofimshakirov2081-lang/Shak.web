@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru" data-fonts="Wix Madefor Display|Golos Text">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+  <title>Кот энд кофе | Кофе</title>
+  <meta name="description" content="Кот энд кофе, Первоуральск. Кот энд кофе в Первоуральске. Соберите заказ на сайте и заберите его, когда удобно.">
+  <meta property="og:title" content="Кот энд кофе">
+  <meta property="og:description" content="Кот энд кофе в Первоуральске. Соберите заказ на сайте и заберите его, когда удобно.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap">
+  <style>
+    :root { --main: #1F4E9A; --accent: #F2B544; --bg: #F4F6FA; --text: #0F1E33; --deep: #0E2A55; --sky: #E3EBF8; --ok: #3BA272; --c-radius: 14px; --c-surface: #fff; --ease: cubic-bezier(.2, .8, .2, 1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; letter-spacing: -.025em; margin: 0; }
+    .wrap { width: min(1120px, 100% - 28px); margin: 0 auto; }
+
+    /* Первый экран: глубокий синий и золотой рассвет, который мягко «дышит» */
+    .hero { position: relative; overflow: hidden; background: var(--deep); color: #fff; border-radius: 0 0 36px 36px; isolation: isolate; }
+    .glow { position: absolute; z-index: -1; border-radius: 50%; filter: blur(60px); }
+    .g1 { width: 120vw; max-width: 900px; aspect-ratio: 1; left: 85%; bottom: 25%; opacity: .7; transform: translateX(-50%); background: radial-gradient(circle, var(--accent) 0%, var(--glow, #E8902F) 35%, rgba(31,78,154,0) 70%); animation: dawn 3s var(--ease) both, breathe 9s 3s ease-in-out infinite; }
+    .g2 { width: 70vw; max-width: 600px; aspect-ratio: 1; right: -30%; top: -20%; background: radial-gradient(circle, var(--glow2, #2F6BD0) 0%, rgba(14,42,85,0) 70%); opacity: .8; }
+    @keyframes dawn { from { transform: translate(-50%, 35%); opacity: 0; } }
+    @keyframes breathe { 50% { transform: translate(-50%, -4%) scale(1.06); } }
+    .top { position: relative; z-index: 2; }
+    .top .wrap { display: flex; align-items: center; gap: 10px; height: 64px; }
+    .logo { margin-right: auto; display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 19px var(--font-head); letter-spacing: -.02em; }
+    .logo i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 50% 70%, #fff, var(--accent) 60%); box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent); }
+    .req { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; font: 500 14px var(--font-body); padding: 9px 10px 9px 15px; border-radius: 999px; cursor: pointer; }
+    .req b { min-width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; font-size: 12px; }
+    .req b.has { background: var(--accent); color: var(--text); }
+    .hero .in { padding: 26px 0 0; display: grid; gap: 28px; }
+    .hero h1 { font-size: clamp(32px, 8.6vw, 64px); line-height: 1.04; animation: up 1s .2s var(--ease) both; }
+    .hero p { margin: 14px 0 24px; max-width: 40ch; color: rgba(255,255,255,.78); animation: up 1s .35s var(--ease) both; }
+    @keyframes up { from { opacity: 0; transform: translateY(24px); } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 26px; border-radius: 999px; border: 0; background: var(--accent); color: var(--text); font: 600 16px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--accent) 80%, transparent); }
+    .hero .btn { animation: up 1s .5s var(--ease) both; }
+    .pic { position: relative; border-radius: 28px 28px 0 0; overflow: hidden; aspect-ratio: 4 / 3.3; animation: up 1.2s .4s var(--ease) both; }
+    .pic img { width: 100%; height: 100%; object-fit: cover; }
+    .stats { position: absolute; left: 12px; right: 12px; bottom: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .stats span { padding: 10px; border-radius: 16px; background: color-mix(in srgb, var(--deep) 45%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.18); font: 500 12px/1.25 var(--font-body); }
+
+    /* Курсы: вкладки по направлениям */
+    .courses { padding: 60px 0 30px; }
+    .courses h2, .about h2, .find h2 { font-size: clamp(30px, 7.4vw, 50px); line-height: 1.05; }
+    .lead { margin: 10px 0 22px; max-width: 46ch; opacity: .7; }
+    .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -14px 18px; padding: 0 14px; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs button { flex: none; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); background: #fff; color: var(--text); font: 500 14px var(--font-body); padding: 10px 16px; border-radius: 999px; cursor: pointer; transition: background .3s, color .3s, border-color .3s; }
+    .tabs button.on { background: var(--main); color: #fff; border-color: var(--main); }
+    .list { display: grid; gap: 10px; }
+    .c { display: grid; grid-template-columns: 84px 1fr; gap: 14px; padding: 10px 14px 10px 10px; border-radius: 24px; background: #fff; align-items: center; animation: show .45s var(--ease) both; }
+    .c[hidden] { display: none; }
+    @keyframes show { from { opacity: 0; transform: translateY(10px); } }
+    .c .ph { width: 84px; height: 84px; border-radius: 18px; overflow: hidden; background: var(--sky); }
+    .c .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .c .noimg { display: grid; place-items: center; height: 100%; font-size: 34px; }
+    .dir { font-size: 12px; font-weight: 500; color: var(--main); }
+    .c h3 { font-size: 17px; line-height: 1.2; letter-spacing: -.015em; }
+    .c p { margin: 2px 0 0; font-size: 14px; line-height: 1.35; opacity: .65; }
+    .c .row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 4px 2px; border-top: 1px solid var(--sky); }
+    .price { font: 700 20px var(--font-head); letter-spacing: -.02em; }
+    .add { border: 0; border-radius: 999px; background: var(--sky); color: var(--main); font: 600 14px var(--font-body); padding: 11px 18px; cursor: pointer; transition: background .3s, color .3s, transform .2s; }
+    .add:hover { background: var(--main); color: #fff; }
+    .add:active { transform: scale(.95); }
+    .add.done { background: var(--ok); color: #fff; }
+
+    .about { padding: 40px 0; }
+    .about .box { border-radius: 32px; background: #fff; padding: 32px 22px; display: grid; gap: 22px; position: relative; overflow: hidden; }
+    .about .box::before { content: ""; position: absolute; width: 300px; height: 300px; right: -120px; top: -120px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%); }
+    .about p { margin: 12px 0 0; max-width: 58ch; font-size: 17px; position: relative; }
+    .feats { display: grid; gap: 10px; position: relative; }
+    .feats div { padding: 18px; border-radius: 20px; background: var(--bg); }
+    .feats strong { display: block; font: 700 17px var(--font-head); letter-spacing: -.015em; }
+    .feats span { opacity: .7; font-size: 15px; }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+    [data-reveal].in { opacity: 1; transform: none; }
+
+    .find { padding: 0 0 48px; }
+    .find .box { border-radius: 32px; background: var(--deep); color: #fff; padding: 32px 22px; display: grid; gap: 22px; position: relative; overflow: hidden; isolation: isolate; }
+    .find .box::before { content: ""; position: absolute; z-index: -1; width: 500px; height: 500px; left: -150px; bottom: -330px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 55%, transparent), transparent 65%); filter: blur(20px); }
+    .rows > * { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.14); text-decoration: none; }
+    .rows small { opacity: .6; }
+    .rows strong { font-weight: 500; text-align: right; }
+    .acts { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn.glass { background: rgba(255,255,255,.12); color: #fff; }
+    footer { padding: 0 0 28px; font-size: 13px; opacity: .7; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+    .c-drawer { border-radius: 28px 0 0 28px; }
+    .c-send { border-radius: 999px; }
+
+    @media (min-width: 820px) {
+      .hero .in { grid-template-columns: 1.1fr 1fr; align-items: end; padding-top: 40px; }
+      .hero .in > div:first-child { padding-bottom: 90px; }
+      .pic { aspect-ratio: 4 / 4.2; }
+      .g1 { left: 72%; bottom: -55%; opacity: .85; }
+      .list { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .about .box { grid-template-columns: 1.2fr 1fr; padding: 52px; gap: 48px; }
+      .find .box { grid-template-columns: 1fr 1fr; padding: 48px; }
+    }
+  </style>
+  <script src="data.js"></script>
+  <script src="assets/store.js"></script>
+  <script src="assets/core.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  (function () {
+    var D = Core.data, e = Core.esc, x = Core.x;
+    var hp = D.hero.photo || "";
+    var DIRS = x.groups ? x.groups.map(function (g) { return [g[0], new RegExp(g[1], "i")]; }) :
+      [["Брови и ресницы", /бров|ресниц|леш|lash|brow/i], ["Волосы", /волос|кератин|ботокс|нанопласт/i], ["Ногти", /ногт|маник|педик/i], ["Лицо", /косметик|эстет|лиц|уход/i]];
+    function dir(i) { for (var k = 0; k < DIRS.length; k++) if (DIRS[k][1].test(i.name + " " + i.tag)) return k; return -1; }
+    var used = DIRS.filter(function (d, k) { return D.items.some(function (i) { return dir(i) === k; }); });
+
+    var tabs = used.length > 1 ? '<div class="tabs" role="group" aria-label="Направление"><button class="on" data-d="all">' + e(x.allLabel || "Все курсы") + '</button>' +
+      DIRS.map(function (d, k) { return used.indexOf(d) >= 0 ? '<button data-d="' + k + '">' + e(d[0]) + '</button>' : ''; }).join("") + '</div>' : '';
+
+    var list = D.items.map(function (i) {
+      var k = dir(i);
+      return '<article class="c" data-dir="' + k + '"><div class="ph">' + Core.pic(i) + '</div><div>' + (k >= 0 ? '<span class="dir">' + e(DIRS[k][0]) + '</span>' : '') +
+        '<h3>' + e(i.name) + '</h3>' + (i.desc ? '<p>' + e(i.desc) + '</p>' : '') + '</div>' +
+        '<div class="row"><span class="price">' + Core.money(i.price) + '</span>' + (i.tag ? '<span class="dir">' + e(i.tag) + '</span>' : '') + '<button class="add" data-add="' + e(i.id) + '">' + e(D.sections.addLabel || "Записаться") + '</button></div></article>';
+    }).join("");
+
+    var rows = Core.contacts().map(function (r) {
+      var inner = '<small>' + e(r[0]) + '</small><strong>' + e(r[1]) + '</strong>';
+      return r[2] ? '<a href="' + e(r[2]) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>';
+    }).join("");
+    var vk = x.vk ? (/^https?:/.test(x.vk) ? "" : "https://") + x.vk : "";
+
+    Core.mount(
+      '<section class="hero" id="top"><span class="glow g1"></span><span class="glow g2"></span>' +
+        '<header class="top"><div class="wrap"><a class="logo" href="#top"><i></i>' + e(D.brand.name) + '</a><button class="req" data-open-cart>' + e(x.cartBtn || "Заявка") + ' <b data-count>0</b></button></div></header>' +
+        '<div class="wrap in"><div><h1>' + e(D.hero.title) + '</h1><p>' + e(D.hero.text) + '</p><a class="btn" href="#courses">' + e(D.hero.cta) + '</a></div>' +
+        '<div class="pic">' + (hp ? '<img src="' + e(hp) + '" alt="Занятие в учебном центре ' + e(D.brand.name) + '">' : '') +
+          '<div class="stats">' + D.features.map(function (f) { return '<span>' + e(f.title) + '</span>'; }).join("") + '</div></div></div></section>' +
+      '<main><section class="courses" id="courses"><div class="wrap"><h2>' + e(D.sections.catalogTitle) + '</h2><p class="lead">' + e(D.sections.catalogText) + '</p>' + tabs + '<div class="list">' + list + '</div></div></section>' +
+      '<section class="about"><div class="wrap"><div class="box"><div><h2>' + e(D.sections.aboutTitle) + '</h2><p>' + e(D.sections.aboutText) + '</p></div>' +
+        '<div class="feats">' + D.features.map(function (f) { return '<div data-reveal><strong>' + e(f.title) + '</strong><span>' + e(f.text) + '</span></div>'; }).join("") + '</div></div></div></section>' +
+      '<section class="find" id="contacts"><div class="wrap"><div class="box"><div><h2>' + e(x.orderTitle || "Записаться") + '</h2><p style="opacity:.75;margin:12px 0 22px">' + e(x.orderText || "Напишите, какой курс интересует, пришлём программу и даты ближайшей группы.") + '</p><div class="acts">' +
+        (D.contacts.whatsapp ? '<a class="btn" href="' + Core.wa(x.orderMsg || "Здравствуйте! Хочу узнать про курсы") + '" target="_blank" rel="noopener">Написать в WhatsApp</a>' : '') +
+        (vk ? '<a class="btn glass" href="' + e(vk) + '" target="_blank" rel="noopener">ВКонтакте</a>' : '') + '</div></div><div class="rows">' + rows + '</div></div></div></section></main>' +
+      '<footer><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + e(D.brand.name) + (D.credits ? '. ' + e(D.credits) : '') + '</span><span><a href="admin.html">Вход для владельца</a>. Сайт сделан в <a href="https://instagram.com/shak.web" target="_blank" rel="noopener">shak.web</a></span></div></footer>'
+    );
+
+    document.addEventListener("click", function (ev) {
+      var b = ev.target.closest("[data-d]"); if (!b) return;
+      [].forEach.call(document.querySelectorAll("[data-d]"), function (t) { t.classList.toggle("on", t === b); });
+      [].forEach.call(document.querySelectorAll(".c"), function (c) { c.hidden = b.dataset.d !== "all" && c.dataset.dir !== b.dataset.d; });
+    });
+  })();
+  </script>
+</body>
+</html>
