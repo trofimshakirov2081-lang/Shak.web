@@ -261,7 +261,7 @@
   const V = {};
   const STATUS = [["new", "Новая"], ["work", "В работе"], ["done", "Записалась"], ["refuse", "Отказ"]];
   V.leads = () => {
-    if (GHM) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Сейчас форма на сайте открывает у клиента WhatsApp с готовым сообщением: имя, телефон и курс. Заявка дойдёт, только если клиент нажмёт «Отправить» в WhatsApp. Здесь заявки не хранятся." }), el("p", { class: "sub", text: "Чтобы заявки не терялись, их можно сохранять на сервере с уведомлением в Telegram. Это подключает Трофим." })];
+    if (GHM) return [el("h1", { text: "Заявки" }), el("div", { class: "empty", text: "Заявки будут появляться здесь, когда подключим базу и домен." }), el("p", { class: "sub", text: "Пока форма на сайте открывает у клиента WhatsApp с готовым сообщением (имя, телефон, курс), и заявка приходит вам в WhatsApp, когда клиент нажмёт «Отправить»." })];
     if (DEMO) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Здесь появляются заявки с сайта: имя, телефон, выбранный курс. В пробном режиме список пуст, на сервере он будет наполняться сам." }), el("div", { class: "empty", text: "Заявок пока нет" })];
     const list = el("div");
     const draw = () => list.replaceChildren(...(LEADS.length ? LEADS.map((l) => {
@@ -454,12 +454,7 @@
     const pay = ensure("pay", { on: false, text: "Можно оплатить частями" }), ce = ensure("cert", { on: true, title: "Сертификат после обучения", text: "", photos: [], size: "m" }), ga = ensure("gallery", { on: true, title: "Как проходят занятия", text: "", photos: [], size: "m" });
     ["batches", "numbers", "reviews"].forEach((k) => { if (!Array.isArray(S[k])) S[k] = []; });
     const courses = [["", "Выберите курс"]].concat(S.courses.map((c) => [c.slug, c.name]));
-    return [el("h1", { text: "Продажи и доверие" }), el("p", { class: "sub", text: "То, что помогает решиться на запись. Блок появляется на главной, когда он заполнен и стоит галочка «Показывать на главной». Порядок блоков меняется на вкладке «Главная»." }),
-      box("Акция", "скидка, подарок, срок", [onHome("promo"), el("small", { class: "hint", text: "Акция видна на сайте, только когда заполнен заголовок." }), F.text("Метка", pr, "kicker", { ph: "Акция" }), F.text("Заголовок", pr, "title", { ph: "Например: −10% на курс ресниц до конца месяца" }), F.area("Текст", pr, "text", { max: 400 }),
-        row2(F.text("До какого числа", pr, "until", { ph: "30 ноября" }), F.text("Надпись на кнопке", pr, "btn")), F.photos("Фото акции", pr, "photos"), F.sel("Размер фото", pr, "size", SIZES)], true),
-      box("Промокоды", "поле в форме заявки", [el("small", { style: "color:var(--ink2)", text: "Когда есть хотя бы один промокод, в форме заявки появляется поле «Промокод». Неверный код сайт не примет, верный придёт вам в сообщении с заявкой." }),
-        F.list(pr.codes, { title: (c) => c.code, untitled: "Новый промокод", add: "Добавить промокод", blank: () => ({ code: "", text: "" }), fields: (c, re) => [row2(F.text("Промокод", c, "code", { on: re, ph: "ЗОЛОТО" }), F.text("Что даёт", c, "text", { ph: "скидка 10%" }))] })]),
-      box("Оплата частями", null, [el("small", { class: "hint", text: "Текст появляется рядом с ценой на странице курса и в карточках." }), F.bool("Показывать «можно частями» у цен", pay, "on"), F.text("Текст", pay, "text")]),
+    return [el("h1", { text: "Продажи и доверие" }), el("p", { class: "sub", text: "То, что помогает решиться на запись. Скидки, промокоды и метки: вкладка «Акции». Блок появляется на главной, когда он заполнен и стоит галочка «Показывать на главной». Порядок блоков меняется на вкладке «Главная»." }),
       box("Ближайшие наборы", "даты и свободные места", [onHome("batches"), el("small", { class: "hint", text: "Блок появится на сайте, когда добавите хотя бы одну дату набора." }), F.text("Подпись под заголовком", S, "batchesNote", { ph: "Например: группы до 3 человек" }),
         F.list(S.batches, { title: (b) => [b.start, (S.courses.find((c) => c.slug === b.course) || {}).name].filter(Boolean).join(", "), untitled: "Новый набор", add: "Добавить набор", blank: () => ({ course: "", start: "", format: "", seats: "", on: true }),
           fields: (b, re) => [F.sel("Курс", b, "course", courses, { hint: "" }), row2(F.text("Дата старта", b, "start", { ph: "1 декабря", on: re }), F.text("Свободных мест", b, "seats", { ph: "3", hint: "3 и меньше: «Осталось 3 места». 0: «Мест нет»" })), F.text("Формат", b, "format", { ph: "Будни, 10:00-17:00" }), F.bool("Показывать", b, "on")] })]),
@@ -478,6 +473,33 @@
       box("Сообщить о наборе", "если дата не подошла", [onHome("notify"), F.text("Заголовок", ensure("notify", { on: true, title: "Не нашли удобную дату?", text: "Напишите, какой курс интересует, и мы сообщим о следующем наборе.", btn: "Сообщить о наборе" }), "title"),
         F.area("Текст", S.notify, "text", { max: 300 }), F.text("Кнопка", S.notify, "btn")]),
       box("Фото-блок", "любые фото: занятия, студия, выпускницы", [onHome("gallery"), F.text("Заголовок", ga, "title"), F.area("Текст", ga, "text", { max: 400 }), F.photos("Фото", ga, "photos"), F.sel("Размер", ga, "size", SIZES)])];
+  };
+
+  /* ---------- «Акции»: то, что подталкивает купить: скидки, сроки, промокоды, метки ---------- */
+  V.promo = () => {
+    const pr = ensure("promo", { on: true, kicker: "Акция", title: "", text: "", until: "", btn: "Записаться со скидкой", photos: [], size: "m", codes: [] }); if (!Array.isArray(pr.codes)) pr.codes = [];
+    const pay = ensure("pay", { on: false, text: "Можно оплатить частями" });
+    const dsc = ensure("discount", { on: false, pct: 10, all: true, courses: [], until: "" }), bar = ensure("bar", { on: false, text: "", btn: "Записаться", until: "", timer: true });
+    S.badges = S.badges || {}; S.badgeText = S.badgeText || {};
+    const BADGES = [["", "Без метки"], ["hit", "Хит"], ["new", "Новинка"], ["few", "Мало мест"], ["start", "Скоро старт"], ["own", "Свой текст"]];
+    const scope = el("div"); const drawScope = () => scope.replaceChildren(dsc.all === false ? F.multi("На какие курсы", dsc, "courses", S.courses.map((c) => [c.slug, c.name])) : el("small", { class: "hint", text: "Скидка на все курсы с ценой." }));
+    drawScope();
+    const badgeRows = el("div", { class: "list" }, S.courses.map((c) => { const o = { v: S.badges[c.slug] && !["hit", "new", "few", "start"].includes(S.badges[c.slug]) ? "own" : S.badges[c.slug] || "" }; const own = el("div");
+      const drawOwn = () => own.replaceChildren(o.v === "own" ? F.text("Текст метки", S.badgeText, c.slug, { ph: "Например: −20% до пятницы", max: 24 }) : "");
+      const sel = el("select", { onchange: (e) => { o.v = e.target.value; if (o.v) S.badges[c.slug] = o.v === "own" ? "own" : o.v; else { delete S.badges[c.slug]; delete S.badgeText[c.slug]; } touch(); drawOwn(); } }, BADGES.map(([v, n]) => el("option", { value: v, text: n }))); sel.value = o.v; drawOwn();
+      return el("div", { class: "item", style: "padding:10px 12px;display:grid;gap:6px" }, el("b", { text: c.name }), sel, own); }));
+    return [el("h1", { text: "Акции" }), el("p", { class: "sub", text: "То, что подталкивает записаться сейчас: скидки, сроки, промокоды, метки. Оплаты на сайте нет: скидка показывается в цене и в сообщении WhatsApp, деньги вы принимаете как обычно." }),
+      box("Скидка на курсы", "процент, срок, на какие курсы", [F.bool("Включить скидку", dsc, "on"), row2(F.text("Скидка, %", dsc, "pct", { type: "number", mode: "numeric", ph: "10" }), F.text("До какого числа (включительно)", dsc, "until", { type: "date" })),
+        F.sel("Курсы", { get v() { return dsc.all === false ? "some" : "all"; }, set v(x) { dsc.all = x !== "some"; drawScope(); } }, "v", [["all", "Все курсы"], ["some", "Только выбранные"]]), scope,
+        el("small", { class: "hint", text: "На сайте старая цена зачёркнута рядом с новой, на фото курса метка «−10%». После даты скидка выключится сама." })], true),
+      box("Плашка над сайтом", "строка сверху на всех страницах", [F.bool("Показывать плашку", bar, "on"), F.text("Текст", bar, "text", { ph: "−10% на все курсы до 30 ноября", max: 90 }), row2(F.text("Кнопка (пусто: без кнопки)", bar, "btn", { ph: "Записаться" }), F.text("Показывать до (включительно)", bar, "until", { type: "date" })),
+        F.bool("Обратный отсчёт до этой даты", bar, "timer")]),
+      box("Акция на главной", "блок с фото, сроком и кнопкой", [onHome("promo"), el("small", { class: "hint", text: "Акция видна на сайте, только когда заполнен заголовок." }), F.text("Метка", pr, "kicker", { ph: "Акция" }), F.text("Заголовок", pr, "title", { ph: "Например: −10% на курс ресниц до конца месяца" }), F.area("Текст", pr, "text", { max: 400 }),
+        row2(F.text("До какого числа (включительно)", pr, "untilDate", { type: "date" }), F.text("Надпись на кнопке", pr, "btn")), F.bool("Показывать обратный отсчёт до конца акции", pr, "timer"), el("small", { class: "hint", text: "После этой даты акция сама исчезнет с сайта." }), F.photos("Фото акции", pr, "photos"), F.sel("Размер фото", pr, "size", SIZES)], true),
+      box("Промокоды", "поле в форме заявки", [el("small", { style: "color:var(--ink2)", text: "Когда есть хотя бы один промокод, в форме заявки появляется поле «Промокод». Неверный код сайт не примет, верный придёт вам в сообщении с заявкой." }),
+        F.list(pr.codes, { title: (c) => c.code, untitled: "Новый промокод", add: "Добавить промокод", blank: () => ({ code: "", text: "" }), fields: (c, re) => [row2(F.text("Промокод", c, "code", { on: re, ph: "ЗОЛОТО" }), F.text("Скидка, %", c, "pct", { type: "number", mode: "numeric", ph: "10" })), F.text("Или что даёт (подарок, бонус)", c, "text", { ph: "Например: набор материалов в подарок" })] })]),
+      box("Оплата частями", null, [el("small", { class: "hint", text: "Текст появляется рядом с ценой на странице курса и в карточках." }), F.bool("Показывать «можно частями» у цен", pay, "on"), F.text("Текст", pay, "text")]),
+      box("Метки на курсах", "Хит, Новинка, Мало мест", [el("small", { class: "hint", text: "Метка стоит на фото курса вместо «С нуля». Ставьте честно: «Мало мест», только когда мест правда мало." }), badgeRows])];
   };
 
   const CHN = { phone: ["Телефон", "+7 927 123-45-67"], whatsapp: ["WhatsApp", "Номер: 79271234567"], telegram: ["Telegram", "Ник или ссылка: @altynnur"], max: ["Макс", "Ссылка на профиль"], vk: ["ВКонтакте", "https://vk.ru/..."], instagram: ["Instagram", "Ник или ссылка"], email: ["Почта", "name@mail.ru"] };
@@ -507,9 +529,9 @@
   const ensureD = () => { if (!S.design || typeof S.design !== "object") S.design = { corners: "soft", blur: true, shadow: "soft", fontBody: "" }; return S.design; };
   V.look = () => [el("h1", { text: "Оформление" }), el("p", { class: "sub", text: "Общий вид сайта. Изменения видны после публикации, заранее посмотреть можно кнопкой «Посмотреть»." }),
     box("Цвет, шрифт и движение", null, [
-      F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]]),
+      (ensureD().palette ? el("div", { class: "f" }, el("span", { text: "Цвета" }), el("small", { class: "hint", text: "Сейчас действует «Своя палитра» ниже. Чтобы выбрать готовые цвета, нажмите там «Вернуть стандартные цвета»." })) : F.sel("Цвета", S, "theme", [["gold", "Кость и золото"], ["burgundy", "Кость и бордо"], ["night", "Ночное золото"]])),
       F.sel("Шрифт заголовков", S, "font", [["studio", "Студия: узкий капс, как у дизайн-студий"], ["arsenal", "Arsenal (простой)"], ["finlandica", "Finlandica (современный)"], ["bona", "Bona Nova (с засечками)"], ["prata", "Prata (с засечками)"], ["cormorant", "Cormorant (изящный)"]]),
-      F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Как задано в шрифте заголовков"], ["ysabeau", "Ysabeau Office"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
+      F.sel("Шрифт текста", ensureD(), "fontBody", [["", "Ysabeau Office (стандартный)"], ["arsenal", "Arsenal"], ["finlandica", "Finlandica"]]),
       F.sel("Стиль блоков", ensureD(), "style", [["studio", "Студия: строгие линии, без плашек"], ["", "Классика: карточки и плашки"]]),
       F.sel("Углы", ensureD(), "corners", [["none", "Без скругления"], ["soft", "Мягкие, скруглённые"], ["sharp", "Острые"], ["round", "Сильно скруглённые"]]),
       F.bool("Стекло: полупрозрачная шапка сайта", ensureD(), "blur"), el("small", { class: "hint", text: "Видно при прокрутке: фото под шапкой сайта слегка просвечивают и размываются. Ещё стекло на метках курсов («С нуля»)." }),
@@ -567,11 +589,11 @@
   };
 
   /* ---------- каркас ---------- */
-  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["sales", "Продажи"], ["build", "Конструктор"], ["sections", "Разделы сайта"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
+  const TABS = [["leads", "Заявки"], ["courses", "Курсы"], ["home", "Главная"], ["promo", "Акции"], ["sales", "Продажи"], ["build", "Конструктор"], ["sections", "Разделы сайта"], ["contacts", "Контакты"], ["pages", "Тексты"], ["look", "Оформление"], ["set", "Настройки"]];
   function paintTabs() { const n = LEADS.filter((l) => l.status === "new").length; const t = $('[data-tab="leads"]'); if (t) t.replaceChildren("Заявки", n ? el("b", { text: n }) : ""); }
   // поиск по админке: слова, по которым находится вкладка
   const KEYS = { leads: "заявки клиенты", courses: "курсы цены программа фото курса направления", home: "главная первый экран фото заголовок как мы учим преимущества блок записи",
-    sales: "продажи сравнение калькулятор доход подруга сообщить о наборе акция скидка промокод частями рассрочка наборы даты места цифры отзывы звёзды сертификат фото-блок галерея", sections: "разделы порядок блоки скрыть показать переставить", build: "конструктор свой блок новый блок текст фото кнопка видео карточки цитата список форма вопрос разделитель",
+    promo: "акции акция скидка процент промокод частями рассрочка плашка таймер отсчёт метка хит новинка мало мест", sales: "продажи сравнение калькулятор доход подруга сообщить о наборе наборы даты места цифры отзывы звёзды сертификат фото-блок галерея", sections: "разделы порядок блоки скрыть показать переставить", build: "конструктор свой блок новый блок текст фото кнопка видео карточки цитата список форма вопрос разделитель",
     contacts: "контакты телефон whatsapp telegram адрес карта график вк", pages: "тексты преподаватель о себе об академии вопросы обучение работы", look: "оформление дизайн цвет шрифт углы скругление размытие стекло тени анимация вид курсов черновик", set: "настройки пароль версии выход" };
   let Q = "", SNAP = null, SNAPTAB = null;
   function snap() { if (SNAPTAB !== TAB) { SNAP = JSON.stringify(S); SNAPTAB = TAB; } }
@@ -581,7 +603,7 @@
     const keep = new Set(), sy = window.scrollY, sameTab = render.lastTab === TAB; render.lastTab = TAB;
     if (sameTab) app.querySelectorAll("main details[open]").forEach((d) => keep.add(openKey(d)));
     app.replaceChildren(
-      el("header", { class: "top" + (Q ? " s-open" : "") }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
+      el("header", { class: "top" + (Q ? " s-open" : "") }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("a", { class: "tosite", href: "../", title: "Открыть сайт (то, что сейчас опубликовано)", text: "← На сайт" }), el("span", { class: "state", id: "state" }),
         (() => { const u = el("button", { class: "btn btn--icon", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }); u.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>'; return u; })(),
         (() => { const sb = el("button", { class: "btn btn--icon s-toggle", "aria-label": "Поиск по админке", onclick: () => { const t = app.querySelector(".top"); t.classList.toggle("s-open"); if (t.classList.contains("s-open")) app.querySelector(".search input").focus(); } }); sb.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'; return sb; })(),
         el("button", { class: "btn", text: "Просмотр", title: "Посмотреть сайт с изменениями", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),

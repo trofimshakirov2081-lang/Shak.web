@@ -107,7 +107,8 @@
   };
 
   /* ---------- шапка и подвал ---------- */
-  const header = () => `${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Черновик из админки. Посетители видят старую версию, пока вы не нажмёте «Опубликовать».</span><a href="${R}admin/" data-draft-close style="color:inherit;white-space:nowrap;font-weight:600">← Вернуться в админку</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+  const bar = () => { const B = S.bar; if (!live(B) || !B.text) return ""; return `<div class="sbar"><div class="wrap sbar__in"><span>${esc(B.text)}${B.until && B.timer ? ` <b class="sbar__t" data-until="${esc(B.until)}T23:59:59"></b>` : ""}</span>${B.btn ? `<button class="sbar__b" data-enroll>${esc(B.btn)}</button>` : ""}</div></div>`; };
+  const header = () => `${bar()}${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Черновик из админки. Посетители видят старую версию, пока вы не нажмёте «Опубликовать».</span><a href="${R}admin/" data-draft-close style="color:inherit;white-space:nowrap;font-weight:600">← Вернуться в админку</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
       ${!["theme", "font", "anim", "view"].some(PK) ? "" : `<div class="pickers">${PK("theme") ? `<span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>` : ""}
       ${PK("font") ? `<span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>` : ""}
       ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
@@ -132,14 +133,23 @@
   const H = {};
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
-  const ctag = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
+  // «Акции» из админки: скидка в процентах на все или выбранные курсы, до даты включительно
+  const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const live = (o) => !!o && o.on !== false && (!o.from || todayISO() >= o.from) && (!o.until || todayISO() <= o.until);
+  const pct = (c) => { const D = S.discount; const n = parseInt(D && D.pct, 10); if (!c || !live(D) || !(n > 0 && n < 100) || !c.price) return 0; return D.all !== false || (D.courses || []).includes(c.slug) ? n : 0; };
+  const newPrice = (c) => Math.round((c.price * (100 - pct(c))) / 100 / 10) * 10;
+  const PR = (c) => pct(c) ? `<s class="pold">${rub(c.price)}</s> ${rub(newPrice(c))}` : rub(c.price);
+  const BADGE = { hit: "Хит", new: "Новинка", few: "Мало мест", start: "Скоро старт" };
+  const badge = (c) => { const b = (S.badges || {})[c.slug]; return b ? (BADGE[b] || ((S.badgeText || {})[c.slug] || "")) : ""; };
+  const ctag = (c) => pct(c) ? "−" + pct(c) + "%" : badge(c) || ctag0(c);
+  const ctag0 = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
   const nextB = (c) => (S.batches || []).find((b) => b && b.on !== false && b.course === c.slug && b.start);
   const cmeta = (c) => [nextB(c) ? "набор " + nextB(c).start : "", c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(", ") || c.short || "";
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   // постер: фото на весь экран, крупный заголовок, строки переносятся по запятым (Вариант 1, выбран Айгуль 24.11)
   H.hero = () => S.hero.style === "poster" ? `<section class="hero hero--poster">
-      <div class="hp__ph">${heroSlides().slice(0, 3).map((h, i) => `<img class="hp__s${i ? "" : " is-on"}" ${i ? "loading=\"lazy\" " : ""}src="${R}${h.src}-1600.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w, ${R}${h.src}-1600.webp 1600w" sizes="100vw" alt="${esc(h.alt || S.hero.alt)}"${i ? "" : ' fetchpriority="high"'}>`).join("")}</div>
+      <div class="hp__ph">${heroSlides().slice(0, 3).map((h, i) => `<img class="hp__s${i ? "" : " is-on"}" ${i ? "loading=\"lazy\" " : "fetchpriority=\"high\" "}src="${R}${h.src}-1600.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w, ${R}${h.src}-1600.webp 1600w" sizes="100vw" alt="${esc(h.alt || S.hero.alt)}"${i ? "" : ' fetchpriority="high"'}>`).join("")}</div>
       <div class="wrap hp__t"><h1 class="hp__h">${esc(S.hero.title).replace(/,\s*/g, ",<br>")}</h1><p class="hp__sub">${esc(S.hero.short)}</p>
         <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div>
         <p class="hp__cnt"><b>${S.courses.length}</b> ${plural(S.courses.length, "курс", "курса", "курсов")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}</p></div>
@@ -171,14 +181,14 @@
       return `<section class="sec" style="padding-top:0"><div class="wrap">
       <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
       <div class="ctiles${cut ? " is-cut" : ""}" id="ctiles">${ord.map((c, i) => `<div class="ctile-w${cut && i >= cut ? " ctile--more" : ""}"><a class="ctile" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
-        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a><button class="btn btn--accent btn--sm ctile__en" type="button" data-enroll="${c.slug}">Записаться</button></div>`).join("")}</div>
+        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${PR(c)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a><button class="btn btn--accent btn--sm ctile__en" type="button" data-enroll="${c.slug}">Записаться</button></div>`).join("")}</div>
       ${cut ? `<button class="btn btn--line more-btn" type="button" data-more="ctiles">Показать ещё ${ord.length - cut} ${plural(ord.length - cut, "курс", "курса", "курсов")}</button>` : ""}
       ${tools()}</div></section>`;
     }
     return `<section class="sec flow-sec" style="padding-top:0">
       <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
       <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
-        <span class="fcard__cat">${esc(cat(c.cat).name)}</span><span class="fcard__t">${esc(c.name)}</span><span class="price">${rub(c.price)}</span></a>`).join("")}</div>
+        <span class="fcard__cat">${esc(cat(c.cat).name)}</span><span class="fcard__t">${esc(c.name)}</span><span class="price">${PR(c)}</span></a>`).join("")}</div>
       <div class="wrap flow-foot"><span class="swipe-hint" aria-hidden="true"><i></i>Листайте</span><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div></section>`;
   };
   // запись: такая же фото-плитка, как направления, с двумя кнопками
@@ -214,8 +224,8 @@
   const SEC = (title, sub, inner) => `<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="rv-t sec__h">${esc(title)}</h2>${sub ? `<p class="lead sec__sub">${esc(sub)}</p>` : ""}${inner}</div></section>`;
   const ON = (o) => !!o && o.on !== false;
   const seatsTxt = (n) => `${n} ${plural(n, "место", "места", "мест")}`;
-  H.promo = () => { const p = S.promo || {}; if (!ON(p) || !p.title) return "";
-    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo${(p.photos || []).some((x) => x.src) ? "" : " promo--text"}">${PH(p.photos, p.size)}<div class="promo__t"><span class="promo__k">${esc(p.kicker || "Акция")}</span><h2>${esc(p.title)}</h2>${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.until ? `<p class="promo__until">Действует до ${esc(p.until)}</p>` : ""}<button class="btn btn--accent" data-enroll>${esc(p.btn || "Записаться")}</button></div></div></div></section>`; };
+  H.promo = () => { const p = S.promo || {}; if (!ON(p) || !p.title || (p.untilDate && todayISO() > p.untilDate)) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo${(p.photos || []).some((x) => x.src) ? "" : " promo--text"}">${PH(p.photos, p.size)}<div class="promo__t"><span class="promo__k">${esc(p.kicker || "Акция")}</span><h2>${esc(p.title)}</h2>${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.untilDate ? `<p class="promo__until">Действует до ${new Date(p.untilDate).toLocaleDateString("ru-RU", { day: "numeric", month: "long" })}${p.timer ? ` <b class="sbar__t" data-until="${esc(p.untilDate)}T23:59:59"></b>` : ""}</p>` : p.until ? `<p class="promo__until">Действует до ${esc(p.until)}</p>` : ""}<button class="btn btn--accent" data-enroll>${esc(p.btn || "Записаться")}</button></div></div></div></section>`; };
   H.batches = () => { const b = (S.batches || []).filter((x) => x && x.start && x.on !== false); if (!b.length) return "";
     return SEC("Ближайшие наборы", S.batchesNote || "", `<div class="batches">${b.map((x) => { const c = course(x.course), n = parseInt(x.seats, 10);
       return `<div class="bcard"><span class="bcard__d">${esc(x.start)}</span><b>${esc(c ? c.name : x.course || "Курс")}</b>${x.format ? `<span class="muted">${esc(x.format)}</span>` : ""}
@@ -231,7 +241,7 @@
   H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
   /* ---------- готовые блоки: сравнение курсов, калькулятор дохода, приведи подругу, узнать о наборе ---------- */
   // инструменты под курсами: свёрнуты, открываются по нажатию
-  const cmpRows = (c) => [["Цена", rub(c.price)], ["Длительность", c.duration], ["Практика", c.models], ["Материалы", c.materials], ["Документ", c.certificate], ["Что изучите", (c.topics || []).slice(0, 4).join(", ") + ((c.topics || []).length > 4 ? ` и ещё ${(c.topics || []).length - 4}` : "")]];
+  const cmpRows = (c) => [["Цена", pct(c) ? rub(newPrice(c)) + " со скидкой " + pct(c) + "%" : rub(c.price)], ["Длительность", c.duration], ["Практика", c.models], ["Материалы", c.materials], ["Документ", c.certificate], ["Что изучите", (c.topics || []).slice(0, 4).join(", ") + ((c.topics || []).length > 4 ? ` и ещё ${(c.topics || []).length - 4}` : "")]];
   const cmpCol = (c) => c ? `<div class="cmp2__c"><a class="cmp2__n" href="${cURL(c)}">${esc(c.name)}</a>${cmpRows(c).map(([l, v]) => `<div class="cmp2__r"><span>${l}</span><b>${esc(v || "уточняйте при записи")}</b></div>`).join("")}<button class="btn btn--accent btn--sm" data-enroll="${c.slug}">Записаться</button></div>` : "";
   H.compare = () => { const C = S.compare || {}; if (!ON(C)) return ""; const pre = (C.courses || []).map(course).filter(Boolean), a = pre[0] || S.courses[0], b = pre[1] || S.courses[1];
     const sel = (k, cur) => `<select data-cmp="${k}" aria-label="Курс ${k === "a" ? "слева" : "справа"}">${S.courses.map((c) => `<option value="${c.slug}"${c === cur ? " selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
@@ -310,7 +320,7 @@
         <a class="spread__ph zoom" href="${cURL(c)}" tabindex="-1" aria-hidden="true">${ph(c.photo, "", { sizes: "(max-width: 760px) 100vw, 45vw", style: "height:100%;border-radius:inherit" })}</a>
         <div><span class="cap">${esc(cat(c.cat).name)}</span><h2><a href="${cURL(c)}">${esc(c.name)}</a></h2><p class="lead">${esc(c.short)}</p>
           <ul class="spread__topics">${c.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-          <div class="spread__act"><span class="price">${rub(c.price)}</span><a class="link" href="${cURL(c)}">${arrow("О курсе")}</a><button class="btn btn--line" data-enroll="${c.slug}">Записаться</button></div></div>
+          <div class="spread__act"><span class="price">${PR(c)}</span><a class="link" href="${cURL(c)}">${arrow("О курсе")}</a><button class="btn btn--line" data-enroll="${c.slug}">Записаться</button></div></div>
       </article>`).join("")}</div>
     <div class="wrap" style="padding-bottom:var(--sec)"><div class="help"><div><h3>Не знаете, что выбрать?</h3><p class="muted" style="margin-top:8px">Три вопроса, и мы покажем подходящие курсы. Телефон не нужен.</p></div><button class="btn btn--accent" data-quiz>Подобрать курс</button></div></div>`;
   P.course = () => {
@@ -319,7 +329,7 @@
     document.title = `${c.name}: обучение в Туймазах | ${S.org.name}`;
     const L = c.layout || "split", cr = crumbs([{ t: "Курсы", href: `${R}courses/` }, { t: c.name }]);
     const text = `${cr}<span class="${L === "cover" ? "muted" : "cap"}">${esc(cat(c.cat).name)}</span><h1>${esc(c.name)}</h1><p class="${L === "cover" ? "" : "lead"}" style="max-width:46ch">${esc(c.short)}</p>
-      <div class="chero__price"><span class="price">${rub(c.price)}</span>${PARTS() ? `<span class="parts">${esc(PARTS())}</span>` : ""}<span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
+      <div class="chero__price"><span class="price">${PR(c)}</span>${pct(c) && S.discount.until ? `<span class="parts">Скидка ${pct(c)}% до ${new Date(S.discount.until).toLocaleDateString("ru-RU", { day: "numeric", month: "long" })}</span>` : ""}${PARTS() ? `<span class="parts">${esc(PARTS())}</span>` : ""}<span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
       <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button>${WAON() ? `<a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a>` : ""}</div>`;
     const heroPh = ph(c.photo, c.alt, { reveal: false, eager: true, sizes: L === "cover" ? "100vw" : "(max-width: 860px) 100vw, 50vw", cap: ILL, style: L === "split" ? "height:100%" : "" });
     const hero = L === "cover" ? `<section class="chero chero--cover">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="wrap chero__t">${text}</div></section>`
@@ -337,7 +347,7 @@
         <div class="two" style="margin-top:var(--sec)"><h2 class="rv-t">Вопросы о курсе</h2><div class="acc">${faqs.map((f) => `<details><summary>${esc(f.q)}</summary><p class="ans">${esc(f.a)}</p></details>`).join("")}</div></div>
       </div></section>
       <section class="sec" style="padding-top:0"><div class="wrap rail-head"><h2 class="rv-t">Другие курсы</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
-        <div class="rail">${others.map((o) => `<a class="rcard" href="${cURL(o)}">${ph(o.photo, o.alt, { sizes: "(max-width: 760px) 70vw, 26vw" })}<span class="rcard__cat">${esc(cat(o.cat).name)}</span><h3>${esc(o.name)}</h3><span class="price">${rub(o.price)}</span></a>`).join("")}</div></section>`;
+        <div class="rail">${others.map((o) => `<a class="rcard" href="${cURL(o)}">${ph(o.photo, o.alt, { sizes: "(max-width: 760px) 70vw, 26vw" })}<span class="rcard__cat">${esc(cat(o.cat).name)}</span><h3>${esc(o.name)}</h3><span class="price">${PR(o)}</span></a>`).join("")}</div></section>`;
   };
   P.about = () => `<div class="wrap phead">${crumbs([{ t: "Об академии" }])}<h1>${esc(S.org.name)}</h1><p class="lead">Название значит ${esc(S.org.meaning)}. ${esc(S.about.lead)}</p></div>
     <section class="sec" style="padding-top:0"><div class="wrap collage">${S.about.collage.map((p, i) => ph(p.src, p.alt, { sizes: i ? "(max-width: 760px) 60vw, 50vw" : "40vw", cap: i ? "" : ILL })).join("")}</div></section>
@@ -436,7 +446,7 @@
     phoneMask(form.querySelector("[name=phone]"));
     form.addEventListener("submit", async (e) => {
       e.preventDefault(); const d = validate(form, true); if (!d) return;
-      if (d.promo && d.promo.trim()) { const m = promoFind(d.promo); const pe = form.querySelector("[data-perr]"); if (!m) { if (pe) pe.textContent = "Такого промокода нет. Проверьте написание или оставьте поле пустым"; return; } if (pe) pe.textContent = ""; d.promoText = m.text; }
+      if (d.promo && d.promo.trim()) { const m = promoFind(d.promo); const pe = form.querySelector("[data-perr]"); if (!m) { if (pe) pe.textContent = "Такого промокода нет. Проверьте написание или оставьте поле пустым"; return; } if (pe) pe.textContent = ""; d.promoText = [m.text, parseInt(m.pct, 10) > 0 ? "скидка " + parseInt(m.pct, 10) + "%" : ""].filter(Boolean).join(", "); }
       if (S.preview || DRAFT || S.mode === "static") { send(d, extra); target.innerHTML = okHTML; return; }
       // рабочая версия: заявка сохраняется на сервере. Если сервер не ответил, открываем WhatsApp, чтобы заявка не потерялась
       const btn = form.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Отправляем…";
@@ -478,7 +488,7 @@
       const picks = fm === "consult" ? [] : S.courses.map((c) => ({ c, s: (c.level.includes(lv) ? 2 : 0) + (c.format.includes(fm) ? 3 : 0) })).filter((x) => x.s >= 3).sort((a, b) => b.s - a.s).slice(0, 3).map((x) => x.c);
       const summary = `Ответы в подборе курса: ${Q.map((q) => ans[q.id].t).join("; ")}.` + (picks.length ? ` Подошли: ${picks.map((p) => p.name).join(", ")}.` : "");
       box.innerHTML = `<div class="qprog"><span>Готово</span><span class="qprog__bar"><i style="width:100%"></i></span></div><div class="qstep">
-        ${picks.length ? `<h3>Вам могут подойти</h3><div class="qres">${picks.map((p) => `<a href="${cURL(p)}"><img src="${R}${p.photo}-640.webp" alt=""><span>${esc(p.name)}</span><span class="price">${rub(p.price)}</span></a>`).join("")}</div>`
+        ${picks.length ? `<h3>Вам могут подойти</h3><div class="qres">${picks.map((p) => `<a href="${cURL(p)}"><img src="${R}${p.photo}-640.webp" alt=""><span>${esc(p.name)}</span><span class="price">${PR(p)}</span></a>`).join("")}</div>`
           : `<h3>Подберём курс вместе</h3><p class="lead" style="margin:12px 0 24px">По ответам сложно выбрать одно направление. Расскажем о программах и поможем определиться.</p>`}
         <p class="muted">Хотите узнать подробности об обучении? Оставьте номер, и мы поможем подобрать подходящий вариант.</p>
         <div class="qnav"><button class="link" data-again><span>Пройти заново</span></button><button class="btn btn--accent" data-lead>Оставить номер</button></div>
@@ -546,6 +556,10 @@
   const applyCrop = (root) => { if (!root || !root.querySelectorAll) return; (root.tagName === "IMG" ? [root] : root.querySelectorAll("img")).forEach((img) => { const c = CROP[cropKey(img)]; if (!c) return;
     img.style.objectPosition = `${+c.x || 50}% ${+c.y || 50}%`; const z = Math.min(3, Math.max(1, +c.z || 1)); if (z > 1) { img.style.scale = String(z); img.style.transformOrigin = `${+c.x || 50}% ${+c.y || 50}%`; } }); };
   if (Object.keys(CROP).length) { applyCrop(document.body); new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(applyCrop))).observe(document.body, { childList: true, subtree: true }); }
+  // фото грузятся заранее, примерно за полтора экрана до появления, чтобы при быстрой прокрутке не было пустых рамок
+  if ("IntersectionObserver" in window) { const pre = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.loading = "eager"; pre.unobserve(en.target); } }), { rootMargin: "1400px 0px" });
+    const watch = (root) => root.querySelectorAll && root.querySelectorAll('img[loading="lazy"]').forEach((i) => pre.observe(i)); watch(document);
+    new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(watch))).observe(document.body, { childList: true, subtree: true }); }
   // страница собирается скриптом, поэтому к якорю (#блок) прокручиваем сами
   if (location.hash.length > 1) setTimeout(() => { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView({ block: "start" }); }, 80);
   main.insertAdjacentHTML("beforebegin", header());
@@ -656,9 +670,12 @@
   // видео в фото-блоках: грузятся и играют, только когда видны на экране
   const vids = document.querySelectorAll("video[data-src]");
   if (vids.length && "IntersectionObserver" in window) { const vo = new IntersectionObserver((es) => es.forEach((en) => { const v = en.target;
-      if (en.isIntersecting) { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
+      if (en.isIntersecting) { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "900px 0px" }); vids.forEach((v) => vo.observe(v)); }
   else vids.forEach((v) => { if (v.dataset.poster) v.poster = v.dataset.poster; v.src = v.dataset.src; v.controls = true; });
   document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; if (!WAON()) { const cc = S.courses.find((x) => x.name === c); return openForm(cc ? cc.slug : "", { label: "Сообщить о следующем наборе", summary: `Прошу сообщить о следующем наборе на курс «${c}».` }); } window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
+  // короткий отсчёт «осталось 2 дн 05:12:09» в плашке и акции
+  document.querySelectorAll(".sbar__t").forEach((t) => { const end = new Date(t.dataset.until).getTime(); if (isNaN(end)) return; const tick = () => { const l = Math.max(0, end - Date.now()), d = Math.floor(l / 864e5), h = Math.floor(l / 36e5) % 24, m = Math.floor(l / 6e4) % 60, s2 = Math.floor(l / 1e3) % 60;
+    t.textContent = l ? "· осталось " + (d ? d + " дн " : "") + [h, m, s2].map((x) => String(x).padStart(2, "0")).join(":") : ""; }; tick(); setInterval(tick, 1000); });
   // обратный отсчёт в блоке «Таймер»
   document.querySelectorAll(".cb__timer").forEach((t) => { const end = new Date(t.dataset.until).getTime(); if (isNaN(end)) return;
     const tick = () => { const left = Math.max(0, end - Date.now()); if (!left) { t.textContent = t.dataset.after; t.classList.add("is-over"); return clearInterval(iv); }

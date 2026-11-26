@@ -1,7 +1,7 @@
 /* Страницы-обёртки сайта АлтынНур: /courses/<slug>/ и разделы.
    Общий код для tools/pages.mjs (сборка на компьютере) и админки (публикация через GitHub). */
 /* версия кода сайта: меняется при правках кода, чтобы браузер не держал старые app.js и site.css; данные из админки грузятся без кеша */
-const VER = "20261127a";
+const VER = "20261127b";
 (function (g) {
   "use strict";
   function buildPages(S) {
@@ -14,7 +14,7 @@ const head = (title, desc, rootRel) => `<!doctype html><html lang="ru"><head><me
 <title>${A(title)}</title><meta name="description" content="${A(desc)}">
 <meta property="og:title" content="${A(title)}"><meta property="og:description" content="${A(desc)}"><meta property="og:type" content="website"><meta property="og:image" content="${rootRel}ph/hero-eye-1280.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&family=Prata&family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600&family=Finlandica:wght@400;500;600&family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&family=Prata&family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600&family=Finlandica:wght@400;500;600&family=Arsenal:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="${rootRel}assets/site.css?v=${VER}"></head>`;
 const page = (dir, pg, title, desc, extra = "", ld = "") => {
   const depth = dir ? dir.split("/").length : 0, r = "../".repeat(depth);

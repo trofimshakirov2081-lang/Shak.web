@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Админка АлтынНур</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 :root{--bg:#F3EDE4;--paper:#FBF8F2;--ink:#2A2420;--ink2:#6F655C;--line:#E0D6C8;--acc:#B8902F;--acc-ink:#fff;--bad:#A8382B;--ok:#3F7A4E;--r:14px}
 *{box-sizing:border-box}
@@ -167,11 +167,14 @@ main{padding:20px 0 80px}
 .cr__b{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .cr input[type=range]{width:100%;accent-color:var(--acc,#B8912F)}
 .hp-tile__b{flex-wrap:wrap}
+.tosite{font-size:.85rem;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap;order:8;padding:4px 0}
+@media(min-width:601px){.tosite{order:0;margin-right:4px}}
+@media(max-width:600px){.top__in::after{content:"";flex-basis:100%;order:8;height:0}.tosite{order:9;flex:0 0 auto}.top__in .state{flex:1 1 0!important;order:10;text-align:right;min-width:0}}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>(function () { var v = Date.now(); ["config.js", "../assets/pages-lib.js", "gh.js", "admin.js"].forEach(function (f) { document.write('<script src="' + f + '?v=' + v + '"' + (f === "config.js" ? ' onerror="void 0"' : "") + '><\/script>'); }); })();</script>
+<script>(function () { var t = Date.now(), v = Math.floor(t / 6e5); ["config.js", "../assets/pages-lib.js", "gh.js", "admin.js"].forEach(function (f) { document.write('<script src="' + f + '?v=' + (f === "config.js" ? t : v) + '"' + (f === "config.js" ? ' onerror="void 0"' : "") + '><\/script>'); }); })();</script>
 </body>
 </html>
