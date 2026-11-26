@@ -253,28 +253,47 @@
     if ((m = u.match(/vk(?:video)?\.(?:com|ru)\/.*video(-?\d+)_(\d+)/))) return `https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}`;
     return ""; };
   // кнопка своего блока: act none = без кнопки; текст по умолчанию подставляется сам
-  const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее" };
-  const btnHTML = (b) => { const act = b.act || "enroll", link = b.link || (b.type !== "video" ? b.url : "") || "";
+  const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее", tel: "Позвонить" };
+  const btnHTML = (b, two) => { const act = b.act || "enroll", link = b.link || (b.type !== "video" ? b.url : "") || "", cls = two ? "btn btn--line" : "btn btn--accent";
     if (act === "none") return ""; const t = esc(b.btn || BTN0[act] || "Подробнее");
-    if (act === "wa" && WAON()) return `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${t}</a>`;
-    if (act === "link") return link ? `<a class="btn btn--accent" href="${esc(link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
-    return `<button class="btn btn--accent" data-enroll="${esc(b.course || "")}">${t}</button>`; };
-  function custom(b) { if (!b || b.on === false) return ""; const T = b.type || "text", al = b.align || "left";
-    const head = b.title && T !== "quote" && T !== "divider" ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
-    const txt = b.text && !["list", "cards", "stats", "accordion", "gallery"].includes(T) ? lines(b.text).map((p) => `<p>${esc(p)}</p>`).join("") : "";
-    let inner = "";
-    if (T === "text" || T === "cta" || T === "form") inner = `${head}<div class="cb__txt">${txt}</div>${T === "form" ? `<div class="cb__form" data-inline-form></div>` : ""}${btnHTML(b)}`;
-    else if (T === "text-photo" && !(b.photos || []).some((x) => x && x.src)) inner = `${head}<div class="cb__txt">${txt}</div>${btnHTML(b)}`;
-    else if (T === "text-photo") inner = `<div class="cb__split cb__split--${b.side || "right"}"><div>${head}<div class="cb__txt">${txt}</div>${btnHTML(b)}</div><div>${PH(b.photos, "l")}</div></div>`;
-    else if (T === "list") inner = `${head}<ul class="cb__list">${lines(b.text).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>${btnHTML(b)}`;
-    else if (T === "gallery") inner = `${head}${b.text ? `<p class="lead sec__sub">${esc(b.text)}</p>` : ""}${PH(b.photos, b.size)}${btnHTML(b)}`;
-    else if (T === "cards") inner = `${head}<div class="cb__cards">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__card"><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</div>`; }).join("")}</div>${btnHTML(b)}`;
+    if (act === "wa" && WAON()) return `<a class="${cls}" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${t}</a>`;
+    if (act === "link") return link ? `<a class="${cls}" href="${esc(link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
+    if (act === "tel" && S.org.phone) return `<a class="${cls}" href="tel:${S.org.phone.replace(/[^\d+]/g, "")}">${t}</a>`;
+    return `<button class="${cls}" data-enroll="${esc(b.course || "")}">${t}</button>`; };
+  const BTNS = (b) => { const one = btnHTML(b), two = one && b.act2 && b.act2 !== "none" ? btnHTML({ type: b.type, act: b.act2, btn: b.btn2, link: b.link2, waText: b.waText2, course: b.course2 }, true) : "";
+    return one || two ? `<div class="cb__btns">${one}${two}</div>` : ""; };
+  const cbLum = (h) => { const c = [1, 3, 5].map((i) => parseInt(String(h).slice(i, i + 2), 16) / 255 || 0); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  // показ по датам: с какого и по какое число включительно
+  const today = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const dateOK = (b) => (!b.from || today() >= b.from) && (!b.to || today() <= b.to);
+  function custom(b) { if (!b || b.on === false || !dateOK(b)) return ""; const T = b.type || "text", al = b.align || "left";
+    const head = b.title && !["quote", "divider", "banner"].includes(T) ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
+    const txt = b.text && !["list", "cards", "stats", "accordion", "gallery", "steps", "prices"].includes(T) ? lines(b.text).map((p) => `<p>${esc(p)}</p>`).join("") : "";
+    const B = BTNS(b); let inner = "";
+    if (T === "text" || T === "cta" || T === "form") inner = `${head}<div class="cb__txt">${txt}</div>${T === "form" ? `<div class="cb__form" data-inline-form></div>` : ""}${B}`;
+    else if (T === "text-photo" && !(b.photos || []).some((x) => x && x.src)) inner = `${head}<div class="cb__txt">${txt}</div>${B}`;
+    else if (T === "text-photo") inner = `<div class="cb__split cb__split--${b.side || "right"}"><div>${head}<div class="cb__txt">${txt}</div>${B}</div><div>${PH(b.photos, "l")}</div></div>`;
+    else if (T === "list") inner = `${head}<ul class="cb__list">${lines(b.text).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>${B}`;
+    else if (T === "gallery") inner = `${head}${b.text ? `<p class="lead sec__sub">${esc(b.text)}</p>` : ""}${PH(b.photos, b.size)}${B}`;
+    else if (T === "cards") inner = `${head}<div class="cb__cards">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__card"><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</div>`; }).join("")}</div>${B}`;
+    else if (T === "steps") inner = `${head}<ol class="cb__steps">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<li><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</li>`; }).join("")}</ol>${B}`;
+    else if (T === "prices") inner = `${head}<div class="cb__prices">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__pr"><span>${esc(h)}</span><i aria-hidden="true"></i><b>${esc(d)}</b></div>`; }).join("")}</div>${B}`;
     else if (T === "quote") inner = `<figure class="cb__quote"><blockquote>${esc(b.text || "")}</blockquote>${b.title ? `<figcaption>${esc(b.title)}</figcaption>` : ""}</figure>`;
     else if (T === "stats") inner = `${head}<div class="nums">${lines(b.text).map((l) => { const [n, t] = pair(l); return `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`; }).join("")}</div>`;
-    else if (T === "video") { const e = embed(b.url); inner = `${head}<div class="cb__txt">${txt}</div>${e ? `<div class="cb__video"><iframe src="${e}" title="${esc(b.title || "Видео")}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : PH(b.photos, b.size)}${btnHTML(b)}`; }
+    else if (T === "video") { const e = embed(b.url); inner = `${head}<div class="cb__txt">${txt}</div>${e ? `<div class="cb__video"><iframe src="${e}" title="${esc(b.title || "Видео")}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : PH(b.photos, b.size)}${B}`; }
     else if (T === "accordion") inner = `${head}<div class="acc">${lines(b.text).map((l) => { const [q, a] = pair(l); return `<details><summary>${esc(q)}</summary><p class="ans">${esc(a)}</p></details>`; }).join("")}</div>`;
     else if (T === "divider") inner = `<div class="cb__div">${b.title ? `<span>${esc(b.title)}</span>` : ""}</div>`;
-    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"}" style="padding-top:0"><div class="wrap"><div class="cb__in">${inner}</div></div></section>`; }
+    else if (T === "banner") { const p = (b.photos || []).find((x) => x && x.src);
+      inner = `<div class="cb__ban${p ? "" : " cb__ban--no"}">${p ? `<img ${srcset(p.src)} sizes="100vw" alt="${esc(p.alt || "")}" loading="lazy">` : ""}<div class="cb__ban-t">${b.title ? `<h2>${esc(b.title)}</h2>` : ""}${txt ? `<div class="cb__txt">${txt}</div>` : ""}${B}</div></div>`; }
+    else if (T === "timer") { if (b.until && b.end === "hide" && new Date(b.until) < new Date()) return "";
+      inner = `${head}<div class="cb__txt">${txt}</div>${b.until ? `<div class="cb__timer" data-until="${esc(b.until)}" data-after="${esc(b.after || "Время вышло")}"><span><b data-t="d">0</b>дней</span><span><b data-t="h">0</b>часов</span><span><b data-t="m">0</b>минут</span><span><b data-t="s">0</b>секунд</span></div>` : ""}${B}`; }
+    else if (T === "contacts") { const o = S.org;
+      inner = `${head}${txt ? `<div class="cb__txt">${txt}</div>` : ""}<dl class="cb__con">${o.address ? `<div><dt>Адрес</dt><dd>${esc((o.city ? o.city + ", " : "") + o.address)}</dd></div>` : ""}${o.hours ? `<div><dt>Часы работы</dt><dd>${esc(o.hours)}</dd></div>` : ""}${o.phone ? `<div><dt>Телефон</dt><dd><a href="tel:${o.phone.replace(/[^\d+]/g, "")}">${esc(o.phone)}</a></dd></div>` : ""}</dl>
+        ${B || `<div class="cb__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}<a class="btn btn--line" href="${R}contacts/">Как добраться</a></div>`}`; }
+    const st = b.bg === "color" && b.bgc ? ` style="--cb-bg:${esc(b.bgc)};--cb-fg:${cbLum(b.bgc) > .45 ? "#1d1714" : "#fbf6ee"}"` : "";
+    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"} cb--pad-${b.pad || "m"} cb--w-${b.width || "m"} cb--h-${b.hsize || "m"}"${b.anchor ? ` id="${esc(b.anchor)}"` : ""} style="padding-top:0"><div class="wrap"><div class="cb__in"${st}>${inner}</div></div></section>`; }
+  // свои блоки на других страницах (внизу, перед подвалом)
+  const extraBlocks = () => PAGE === "home" ? "" : (S.blocks || []).filter((b) => (b.pages || []).includes(PAGE)).map(custom).join("");
   const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
   P.home = () => S.home.filter((b) => b !== "compare" && b !== "calc").map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
   P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
@@ -509,7 +528,7 @@
 
   /* ---------- сборка ---------- */
   const main = document.getElementById("main");
-  main.innerHTML = (P[PAGE] || P.home)();
+  main.innerHTML = (P[PAGE] || P.home)() + extraBlocks();
   main.insertAdjacentHTML("beforebegin", header());
   main.insertAdjacentHTML("afterend", footer() + `<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal__box"><div class="modal__top"><h3 id="mTitle"></h3><button class="x" data-close aria-label="Закрыть">×</button></div><div id="mBody"></div></div></div>`);
 
@@ -621,6 +640,12 @@
       if (en.isIntersecting) { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "200px 0px" }); vids.forEach((v) => vo.observe(v)); }
   else vids.forEach((v) => { if (v.dataset.poster) v.poster = v.dataset.poster; v.src = v.dataset.src; v.controls = true; });
   document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; if (!WAON()) { const cc = S.courses.find((x) => x.name === c); return openForm(cc ? cc.slug : "", { label: "Сообщить о следующем наборе", summary: `Прошу сообщить о следующем наборе на курс «${c}».` }); } window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
+  // обратный отсчёт в блоке «Таймер»
+  document.querySelectorAll(".cb__timer").forEach((t) => { const end = new Date(t.dataset.until).getTime(); if (isNaN(end)) return;
+    const tick = () => { const left = Math.max(0, end - Date.now()); if (!left) { t.textContent = t.dataset.after; t.classList.add("is-over"); return clearInterval(iv); }
+      const v = { d: Math.floor(left / 864e5), h: Math.floor(left / 36e5) % 24, m: Math.floor(left / 6e4) % 60, s: Math.floor(left / 1e3) % 60 };
+      Object.keys(v).forEach((k) => { const b2 = t.querySelector(`[data-t="${k}"]`); if (b2) b2.textContent = String(v[k]).padStart(2, "0"); }); };
+    const iv = setInterval(tick, 1000); tick(); });
   document.querySelectorAll("[data-inline-form]").forEach((x) => { x.innerHTML = formHTML(null); bindForm(x.querySelector("form"), null, x); });
   const zoom = document.querySelector("section.zoom");
   if (zoom && !RM) {

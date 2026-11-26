@@ -56,13 +56,24 @@
     const slugs = new Set(S.courses.map((x) => x.slug));
     S.featured = (S.featured || []).filter((s) => slugs.has(s));
   }
+  // Слияние изменений: base = версия сайта, с которой начали править; mine = наш черновик; theirs = то, что на сайте сейчас.
+  // Что поменяли мы, берём наше; что поменяли на сайте без нас (другой человек, Трофим), сохраняем.
+  let BASE = null;
+  const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
+  function merge3(base, mine, theirs) {
+    if (eq(mine, base)) return theirs; if (eq(theirs, base) || eq(theirs, mine)) return mine;
+    if (isObj(mine) && isObj(theirs)) { const out = {}, b = isObj(base) ? base : {};
+      new Set([...Object.keys(mine), ...Object.keys(theirs)]).forEach((k) => { if (!(k in mine) && k in b) return; if (!(k in theirs) && k in b && eq(mine[k], b[k])) return; const v = merge3(b[k], mine[k], theirs[k]); if (v !== undefined) out[k] = v; });
+      return out; }
+    return mine; }
   function touch() { dirty = true; unpublished = true; paintState(); clearTimeout(saveT); saveT = setTimeout(saveDraft, 1500); }
   async function saveDraft() {
     if (!dirty || saving) return;
     saving = true; clearTimeout(saveT); beforeSave();
     try {
       if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); }
-      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.setItem(GKEY, JSON.stringify({ site: S, at: META.draft_at })); } catch (er) { throw new Error("Не хватает места для черновика в браузере. Опубликуйте изменения сейчас"); } }
+      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.setItem(GKEY, JSON.stringify({ site: S, base: BASE, at: META.draft_at })); } catch (er) { throw new Error("Не хватает места для черновика в браузере. Опубликуйте изменения сейчас"); } }
       else META.draft_at = (await api("draft", { site: S })).draft_at;
       dirty = false;
     } catch (e) { fail(e.message); }
@@ -73,7 +84,7 @@
     if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); toast("Пробный режим: на сервере это опубликует сайт"); return; }
     const b = $("#pubBtn"); b.disabled = true; b.textContent = "Публикуем…";
     try {
-      if (GHM) { await GH.publish(S); META.published_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.removeItem(GKEY); } catch (e) {} toast("Опубликовано. Сайт обновится примерно через минуту"); }
+      if (GHM) { const cur = await GH.loadSite(); if (BASE && !eq(cur, BASE)) { S = merge3(BASE, S, cur); render(); } await GH.publish(S); BASE = JSON.parse(JSON.stringify(S)); META.published_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.removeItem(GKEY); } catch (e) {} toast("Опубликовано. Сайт обновится примерно через минуту"); }
       else { META.published_at = (await api("publish", { site: S })).published_at; toast("Опубликовано. Сайт обновлён"); }
       dirty = false; unpublished = false;
     }
@@ -273,8 +284,12 @@
         fields: (a, re) => [F.text("Подпись на плитке (главная)", a, "short", { on: re }), F.text("Заголовок (страница «Об академии»)", a, "t"), F.area("Описание (страница «Об академии»)", a, "d", { max: 400 }), F.img("Фото", a, "photo")] })])];
   };
 
-  const TYPES = [["text", "📄", "Текст"], ["text-photo", "🖼", "Текст и фото"], ["list", "☰", "Список"], ["gallery", "▦", "Фото"], ["cards", "▤", "Карточки"], ["quote", "❝", "Цитата"],
-    ["stats", "#", "Цифры"], ["cta", "→", "Кнопка"], ["video", "▶", "Видео"], ["form", "✎", "Форма заявки"], ["accordion", "▾", "Вопрос-ответ"], ["divider", "—", "Разделитель"]];
+  // иконки видов блоков: одинаковые линии на любом телефоне (эмодзи на iPhone выглядят разнобойно)
+  const BICO = {"text": "<path d=\"M5 6h14M5 10h14M5 14h14M5 18h9\"/>", "text-photo": "<rect x=\"13\" y=\"6\" width=\"8\" height=\"12\" rx=\"1.5\"/><path d=\"M3 7h7M3 11h7M3 15h5\"/>", "banner": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"m3 16 5-5 4 4 3-3 6 6\"/><path d=\"M7 9h0\"/>", "cta": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\"/><path d=\"M10 12h5m-2-2 2 2-2 2\"/>", "list": "<path d=\"M9 6h11M9 12h11M9 18h11\"/><circle cx=\"4.5\" cy=\"6\" r=\"1\"/><circle cx=\"4.5\" cy=\"12\" r=\"1\"/><circle cx=\"4.5\" cy=\"18\" r=\"1\"/>", "cards": "<rect x=\"3\" y=\"4\" width=\"7.5\" height=\"7\" rx=\"1.5\"/><rect x=\"13.5\" y=\"4\" width=\"7.5\" height=\"7\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"7.5\" height=\"7\" rx=\"1.5\"/><rect x=\"13.5\" y=\"14\" width=\"7.5\" height=\"7\" rx=\"1.5\"/>", "steps": "<circle cx=\"5\" cy=\"6\" r=\"2\"/><circle cx=\"5\" cy=\"18\" r=\"2\"/><path d=\"M5 8v8M10 6h10M10 18h10\"/>", "prices": "<path d=\"M4 7h9M4 12h9M4 17h9\"/><path d=\"M16 7h4M16 12h4M16 17h4\"/>", "stats": "<path d=\"M4 20V10M10 20V4M16 20v-7M21 20H3\"/>", "gallery": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"m3 16 5-5 4 4 3-3 6 6\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.3\"/>", "video": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"m10 9 5 3-5 3z\"/>", "quote": "<path d=\"M5 18c2-1 3-3 3-6H5V7h5v5c0 4-2 6-5 7zM14 18c2-1 3-3 3-6h-3V7h5v5c0 4-2 6-5 7z\"/>", "timer": "<circle cx=\"12\" cy=\"13\" r=\"8\"/><path d=\"M12 9v4l3 2M9 2h6\"/>", "form": "<rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"2\"/><path d=\"M8 8h8M8 12h8M8 16h4\"/>", "contacts": "<path d=\"M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z\"/><circle cx=\"12\" cy=\"9\" r=\"2.5\"/>", "accordion": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"6\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"18\" height=\"6\" rx=\"1.5\"/><path d=\"m15 6 1.5 1.5L18 6\"/>", "divider": "<path d=\"M3 12h18\"/><path d=\"M8 7h8M8 17h8\" opacity=\".35\"/>"};
+  const bico = (id) => { const sp = el("b", { class: "bico", "aria-hidden": "true" }); sp.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${BICO[id] || ""}</svg>`; return sp; };
+  const TYPES = [["text", "📄", "Текст"], ["text-photo", "🖼", "Текст и фото"], ["banner", "🌄", "Фото на фоне"], ["cta", "→", "Кнопка"], ["list", "☰", "Список"], ["cards", "▤", "Карточки"],
+    ["steps", "①", "Шаги"], ["prices", "₽", "Цены"], ["stats", "#", "Цифры"], ["gallery", "▦", "Фото"], ["video", "▶", "Видео"], ["quote", "❝", "Цитата"],
+    ["timer", "⏱", "Таймер"], ["form", "✎", "Форма заявки"], ["contacts", "📍", "Контакты"], ["accordion", "▾", "Вопрос-ответ"], ["divider", "—", "Разделитель"]];
   const bName = (id) => { if (id.startsWith("b:")) { const b = (S.blocks || []).find((x) => "b:" + x.id === id); const t = TYPES.find((x) => x[0] === (b && b.type)); return "Свой блок: " + ((b && b.title) || (t ? t[2] : "без названия")); } return BLOCKS[id] || id; };
   /* ---------- разделы сайта: один список, порядок и показ ---------- */
   V.sections = () => {
@@ -305,36 +320,50 @@
       if (b.link == null) b.link = b.type !== "video" ? b.url || "" : "";
       if (!b.act || (b.act === "enroll" && !b.btn)) b.act = "none"; });
     const add = (t) => { const id = Date.now().toString(36);
-      S.blocks.push({ id, type: t, on: true, title: "", text: "", align: "left", bg: "none", photos: [], size: "m", side: "right", btn: t === "cta" || t === "form" ? "Записаться" : "", act: t === "cta" || t === "form" ? "enroll" : "none", url: "", link: "", waText: "", course: "" });
+      S.blocks.push({ id, type: t, on: true, title: "", text: "", align: "left", bg: "none", photos: [], size: "m", side: "right", btn: t === "cta" || t === "form" ? "Записаться" : "", act: t === "cta" || t === "form" ? "enroll" : "none", url: "", link: "", waText: "", course: "", act2: "none", btn2: "", link2: "", waText2: "", course2: "", pages: [], from: "", to: "", pad: "m", width: "m", hsize: "m", anchor: "", bgc: "#c9a24b", until: "", end: "hide", after: "" });
       if (pos.where === "start") S.home.unshift("b:" + id); else if (pos.where === "hidden") { (S.homeOff = S.homeOff || []).unshift("b:" + id); } else S.home.push("b:" + id); touch(); render(); toast("Блок создан, заполните его ниже"); setTimeout(() => { const n = [...document.querySelectorAll(".bl-list > .item")].pop(); if (n) { n.open = true; n.scrollIntoView({ block: "start" }); } }, 60); };
-    const DESC = { text: "заголовок и абзацы", "text-photo": "текст рядом с фото", list: "пункты с точками", gallery: "одно или несколько фото", cards: "плитки: заголовок и текст", quote: "крупная цитата с автором",
-      stats: "крупные цифры с подписями", cta: "призыв и кнопка", video: "YouTube, Rutube, VK или своё", form: "форма заявки прямо в блоке", accordion: "вопросы, ответ по нажатию", divider: "линия между блоками" };
-    const hint = { text: "Каждый абзац с новой строки.", list: "Каждый пункт с новой строки.", cards: "Каждая карточка с новой строки. Заголовок и текст разделите двумя двоеточиями, например:\nПрактика :: занятия на моделях", stats: "Каждая цифра с новой строки, подпись через два двоеточия, например:\n8 лет :: опыт преподавания", accordion: "Каждый вопрос с новой строки, ответ через два двоеточия, например:\nСколько длится курс? :: 3 дня", quote: "Текст цитаты." };
-    const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее" };
-    const sec = (t) => el("p", { class: "bsec", text: t });
+    const DESC = { text: "заголовок и абзацы", "text-photo": "текст рядом с фото", banner: "большое фото, текст поверх", list: "пункты с точками", gallery: "одно или несколько фото", cards: "плитки: заголовок и текст", quote: "крупная цитата с автором",
+      stats: "крупные цифры с подписями", cta: "призыв и кнопка", video: "YouTube, Rutube, VK или своё", form: "форма заявки прямо в блоке", accordion: "вопросы, ответ по нажатию", divider: "линия между блоками",
+      steps: "нумерованные шаги", prices: "прайс: название и цена", timer: "обратный отсчёт до даты", contacts: "адрес, часы, телефон" };
+    const EX = "Каждая строка отдельно. Левую и правую часть разделите двумя двоеточиями, например:\n";
+    const hint = { text: "Каждый абзац с новой строки.", list: "Каждый пункт с новой строки.", cards: EX + "Практика :: занятия на моделях", stats: EX + "8 лет :: опыт преподавания", accordion: EX + "Сколько длится курс? :: 3 дня",
+      steps: EX + "Заявка :: оставляете номер на сайте", prices: EX + "Наращивание ресниц :: 15 000 ₽", quote: "Текст цитаты.", banner: "Короткий текст поверх фото.", timer: "Текст над таймером, например: до конца скидки осталось", contacts: "Можно пусто. Адрес, часы и телефон берутся из вкладки «Контакты»." };
+    const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее", tel: "Позвонить" };
+    const ACTS = [["none", "Без кнопки"], ["enroll", "Открывает заявку"], ["wa", "Пишет в WhatsApp"], ["tel", "Звонит по телефону"], ["link", "Ведёт по ссылке"]];
+    const PAGES = [["courses", "Все курсы"], ["course", "Каждый курс"], ["about", "Об академии"], ["works", "Работы"], ["faq", "Вопросы"], ["contacts", "Контакты"], ["training", "Обучение"]];
+    const sec = (t, sub) => el("p", { class: "bsec" }, t, sub ? el("small", { text: sub }) : null);
+    const selF = (label, o, k, opts, after, hintT) => F.wrap(label, (() => { const s2 = el("select", { onchange: (e) => { const was = o[k]; o[k] = e.target.value; touch(); after && after(was); } }, opts.map(([v, n]) => el("option", { value: v, text: n }))); s2.value = o[k] == null ? opts[0][0] : o[k]; return s2; })(), hintT);
+    // поля одной кнопки; n = "" для первой, "2" для второй
+    const btnF = (b, n, redraw) => { const K = (x) => x + n, act = b[K("act")] || "none", out = [selF(n ? "Вторая кнопка" : "Кнопка в блоке", b, K("act"), ACTS, (was) => { if (!b[K("btn")] || b[K("btn")] === BTN0[was]) b[K("btn")] = BTN0[b[K("act")]] || ""; redraw(); })];
+      if (act === "none") return out;
+      out.push(F.text("Надпись на кнопке", b, K("btn"), { ph: BTN0[act] }));
+      if (act === "link") out.push(F.text("Куда ведёт", b, K("link"), { ph: "https://... или courses/lashes/ или #zapis", max: 400 }), el("small", { class: "hint", text: "Другой сайт откроется в новой вкладке. Страница этого сайта: courses/, contacts/. Блок на этой же странице: # и его адрес из «Оформления»." }));
+      if (act === "wa") out.push(F.text("Текст сообщения в WhatsApp", b, K("waText"), { ph: "Здравствуйте! Хочу узнать про курс", max: 300 }));
+      if (act === "enroll") out.push(F.sel("Курс в заявке", b, K("course"), [["", "Клиент выберет сам"]].concat(S.courses.map((c) => [c.slug, c.name]))));
+      return out; };
     const fields = (b, re) => { const wrap = el("div", { class: "bfields" });
-      const draw = () => { const T = b.type, F2 = [sec("Где показывать"), onHome("b:" + b.id), sec("Вид и текст"),
-          F.wrap("Вид блока", (() => { const s2 = el("select", { onchange: (e) => { b.type = e.target.value; touch(); re(); draw(); } }, TYPES.map((t) => el("option", { value: t[0], text: t[1] + " " + t[2] + ": " + DESC[t[0]] }))); s2.value = T; return s2; })(), "Можно поменять в любой момент, тексты сохранятся.")];
+      const draw = () => { const T = b.type; if (!Array.isArray(b.pages)) b.pages = [];
+        const F2 = [sec("Где показывать"), onHome("b:" + b.id), F.multi("Также внизу страниц", b, "pages", PAGES),
+          row2(F.text("Показывать с", b, "from", { type: "date" }), F.text("по (включительно)", b, "to", { type: "date" })), el("small", { class: "hint", text: "Даты можно не заполнять. Удобно для акций: блок сам появится и сам исчезнет." }),
+          sec("Вид и текст"), selF("Вид блока", b, "type", TYPES.map((t) => [t[0], t[2] + ": " + DESC[t[0]]]), () => { re(); draw(); }, "Можно поменять в любой момент, тексты сохранятся.")];
         if (T !== "divider") F2.push(F.text(T === "quote" ? "Автор цитаты" : "Заголовок", b, "title", { on: re }));
         else F2.push(F.text("Надпись на разделителе (можно пусто)", b, "title", { on: re }));
-        if (T !== "divider" && T !== "gallery") F2.push(F.area(T === "quote" ? "Цитата" : "Текст", b, "text", { max: 3000, hint: hint[T] || "" }));
+        if (!["divider", "gallery"].includes(T)) F2.push(F.area(T === "quote" ? "Цитата" : "Текст", b, "text", { max: 3000, hint: hint[T] || "" }));
         if (T === "gallery") F2.push(F.area("Подпись под заголовком", b, "text", { max: 400 }));
         if (T === "video") F2.push(F.text("Ссылка на видео", b, "url", { ph: "YouTube, Rutube или VK Видео", max: 400 }));
-        if (["text-photo", "gallery", "video"].includes(T)) F2.push(F.photos(T === "video" ? "Или своё фото и видео (если ссылки нет)" : "Фото", b, "photos"));
+        if (["text-photo", "gallery", "video", "banner"].includes(T)) F2.push(F.photos(T === "video" ? "Или своё фото и видео (если ссылки нет)" : T === "banner" ? "Фото на фон (берётся первое)" : "Фото", b, "photos"));
         if (T === "text-photo") F2.push(F.sel("Где фото", b, "side", [["right", "Справа"], ["left", "Слева"], ["top", "Сверху"]]));
         if (T === "gallery" || T === "video") F2.push(F.sel("Размер", b, "size", SIZES));
-        if (!["divider", "quote", "stats", "accordion"].includes(T)) {
-          F2.push(sec("Кнопка"), F.wrap("Кнопка в блоке", (() => { const s2 = el("select", { onchange: (e) => { const was = BTN0[b.act]; b.act = e.target.value; if (!b.btn || b.btn === was) b.btn = BTN0[b.act] || ""; touch(); draw(); } },
-            [["none", "Без кнопки"], ["enroll", "Открывает заявку"], ["wa", "Пишет в WhatsApp"], ["link", "Ведёт по ссылке"]].map(([v, n]) => el("option", { value: v, text: n }))); s2.value = b.act || "none"; return s2; })()));
-          if (b.act && b.act !== "none") {
-            F2.push(F.text("Надпись на кнопке", b, "btn", { ph: BTN0[b.act] }));
-            if (b.act === "link") F2.push(F.text("Куда ведёт", b, "link", { ph: "https://... или courses/lashes/", max: 400 }), el("small", { class: "hint", text: "Ссылка на другой сайт откроется в новой вкладке. Страница этого сайта: например courses/ или contacts/." }));
-            if (b.act === "wa") F2.push(F.text("Текст сообщения в WhatsApp", b, "waText", { ph: "Здравствуйте! Хочу узнать про курс", max: 300 }));
-            if (b.act === "enroll") F2.push(F.sel("Курс в заявке", b, "course", [["", "Клиент выберет сам"]].concat(S.courses.map((c) => [c.slug, c.name]))));
-          }
-        }
-        if (T !== "divider") F2.push(sec("Оформление"), row2(F.sel("Текст по", b, "align", [["left", "Левому краю"], ["center", "Центру"], ["right", "Правому краю"]]), F.sel("Фон", b, "bg", [["none", "Без фона"], ["card", "Карточка"], ["accent", "С золотой рамкой"]])));
-        wrap.replaceChildren(...F2); };
+        if (T === "timer") F2.push(F.text("До какого момента", b, "until", { type: "datetime-local" }), selF("Когда время вышло", b, "end", [["hide", "Скрыть блок"], ["text", "Показать надпись"]], draw),
+          b.end === "text" ? F.text("Надпись после окончания", b, "after", { ph: "Акция закончилась" }) : null);
+        if (!["divider", "quote", "stats", "accordion"].includes(T)) { F2.push(sec("Кнопки", T === "contacts" ? "если без кнопки, встанут «Записаться», WhatsApp и «Как добраться»" : ""), ...btnF(b, "", draw));
+          if (b.act && b.act !== "none") F2.push(...btnF(b, "2", draw)); }
+        if (T !== "divider") F2.push(sec("Оформление"),
+          row2(F.sel("Текст по", b, "align", [["left", "Левому краю"], ["center", "Центру"], ["right", "Правому краю"]]), selF("Фон", b, "bg", [["none", "Без фона"], ["card", "Светлая карточка"], ["accent", "С золотой рамкой"], ["gold", "Золотой"], ["dark", "Тёмный"], ["color", "Свой цвет"]], draw)),
+          b.bg === "color" ? F.text("Цвет фона", b, "bgc", { type: "color" }) : null,
+          row2(F.sel("Отступы", b, "pad", [["m", "Обычные"], ["s", "Плотнее"], ["l", "Просторнее"]]), F.sel("Ширина", b, "width", [["m", "Обычная"], ["s", "Узкая, по центру"], ["l", "Во весь экран"]])),
+          row2(F.sel("Размер заголовка", b, "hsize", [["m", "Обычный"], ["l", "Крупный"]]), F.text("Адрес блока (для ссылок)", b, "anchor", { ph: "например zapis", max: 40 })));
+        wrap.replaceChildren(...F2.filter(Boolean)); };
       draw(); return [wrap]; };
     const clean = () => { const ids = new Set(S.blocks.map((b) => "b:" + b.id)); S.home = S.home.filter((x) => !x.startsWith("b:") || ids.has(x)); S.homeOff = (S.homeOff || []).filter((x) => !x.startsWith("b:") || ids.has(x)); };
     // копия блока получает свой номер и встаёт на главной сразу после оригинала
@@ -344,7 +373,7 @@
     return [el("h1", { text: "Конструктор блоков" }),
       el("ol", { class: "steps" }, el("li", { text: "Нажмите на вид блока ниже." }), el("li", { text: "Заполните текст, фото и, если нужно, кнопку." }), el("li", { text: "Нажмите «Просмотр» вверху, чтобы увидеть, затем «Опубликовать»." })),
       box("Новый блок", "выберите вид", [F.sel("Куда поставить", pos, "where", [["end", "В конец главной"], ["start", "В начало главной"], ["hidden", "Пока скрыть"]]),
-        el("div", { class: "types" }, TYPES.map(([id, ic, n]) => el("button", { type: "button", class: "type", onclick: () => add(id) }, el("b", { text: ic }), el("span", { text: n }), el("small", { text: DESC[id] }))))], true),
+        el("div", { class: "types" }, TYPES.map(([id, ic, n]) => el("button", { type: "button", class: "type", onclick: () => add(id) }, bico(id), el("span", { text: n }), el("small", { text: DESC[id] }))))], true),
       S.blocks.length ? box("Ваши блоки", S.blocks.length + " шт.", [list], true) : el("p", { class: "sub", text: "Своих блоков пока нет." })];
   };
 
@@ -501,7 +530,7 @@
     if (sameTab) app.querySelectorAll("main details[open]").forEach((d) => keep.add(openKey(d)));
     app.replaceChildren(
       el("header", { class: "top" }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
-        el("button", { class: "btn btn--icon", text: "↶", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }),
+        (() => { const u = el("button", { class: "btn btn--icon", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }); u.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>'; return u; })(),
         el("button", { class: "btn", text: "Просмотр", title: "Посмотреть сайт с изменениями", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),
         el("div", { class: "search" }, el("input", { type: "search", placeholder: "Найти: промокод, отзывы, адрес…", value: Q, oninput: (e) => { Q = e.target.value.trim().toLowerCase(); document.querySelectorAll(".tabs .tab").forEach((t) => { const id = t.dataset.tab; t.hidden = !!Q && !((t.textContent + " " + (KEYS[id] || "")).toLowerCase().includes(Q)); }); },
           onkeydown: (e) => { if (e.key === "Enter") { const t = [...document.querySelectorAll(".tabs .tab")].find((x) => !x.hidden); if (t) t.click(); } } })),
@@ -537,9 +566,13 @@
   async function bootGH() {
     const pub = await GH.loadSite();
     let local = null; try { local = JSON.parse(localStorage.getItem(GKEY) || "null"); } catch (e) {}
-    S = local ? local.site : pub; META = { draft_at: local ? local.at : null, published_at: null };
+    // старый черновик без «базы» нельзя аккуратно слить: спрашиваем
+    if (local && !local.base && !eq(local.site, pub) && !confirm("На этом устройстве есть неопубликованный черновик от " + (local.at || "прошлого раза") + ". Продолжить с ним?\n\nОтмена: открыть то, что сейчас на сайте.")) { local = null; try { localStorage.removeItem(GKEY); } catch (e) {} }
+    S = local ? (local.base ? merge3(local.base, local.site, pub) : local.site) : pub; BASE = JSON.parse(JSON.stringify(pub));
+    if (local && eq(S, pub)) { local = null; try { localStorage.removeItem(GKEY); } catch (e) {} }
+    META = { draft_at: local ? local.at : null, published_at: null };
     unpublished = !!local; LEADS = []; TAB = "courses"; render();
-    if (local) toast("Открыт ваш неопубликованный черновик");
+    if (local) toast("Открыт ваш неопубликованный черновик, свежие изменения с сайта добавлены");
   }
   async function boot2() {
     const j = await api("draft"); S = j.site; META = { draft_at: j.draft_at, published_at: j.published_at };

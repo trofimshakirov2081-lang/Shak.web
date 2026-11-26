@@ -95,7 +95,6 @@ window.SITE = {
     }
   ],
   "home": [
-    "b:mwxqac4l",
     "hero",
     "directions",
     "featured",
@@ -1119,25 +1118,7 @@ window.SITE = {
     "fontBody": "",
     "style": "studio"
   },
-  "blocks": [
-    {
-      "id": "mwxqac4l",
-      "type": "text",
-      "on": true,
-      "title": "Оуиуг",
-      "text": "Утуиугутуиу",
-      "align": "center",
-      "bg": "accent",
-      "photos": [],
-      "size": "m",
-      "side": "right",
-      "btn": "",
-      "act": "link",
-      "url": "https://ru.wikipedia.org/wiki/RRR:_%D0%A0%D1%8F%D0%B4%D0%BE%D0%BC_%D1%80%D0%B5%D0%B2%D1%91%D1%82_%D1%80%D0%B5%D0%B2%D0%BE%D0%BB%D1%8E%D1%86%D0%B8%D1%8F",
-      "waText": "",
-      "course": ""
-    }
-  ],
+  "blocks": [],
   "works": [
     {
       "src": "ph/a-6657",
