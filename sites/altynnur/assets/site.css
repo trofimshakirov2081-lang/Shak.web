@@ -961,3 +961,6 @@ html.menu-open .burger span{background:transparent!important}
 /* подписи и кнопка внутри сравнения и калькулятора */
 .tool__sub{margin:0 0 14px}
 .calc2 .btn{margin-top:16px}
+/* свой блок первым на главной: не прилипает к шапке */
+#main > .cb:first-child{padding-top:calc(var(--hdr-h,72px) + 24px)!important}
+@media (max-width:960px){#main > .cb:first-child{padding-top:84px!important}}

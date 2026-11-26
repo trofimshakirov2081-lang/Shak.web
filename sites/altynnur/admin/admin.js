@@ -188,7 +188,7 @@
             el("button", { type: "button", class: "ic", "aria-label": "Выше", text: "↑", disabled: i === 0, onclick: (e) => { e.preventDefault(); [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; openI = -1; draw(); touch(); } }),
             el("button", { type: "button", class: "ic", "aria-label": "Ниже", text: "↓", disabled: i === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; openI = -1; draw(); touch(); } }), delNow)),
           el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) meta.textContent = opt.meta(it); }),
-            opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
+            opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: opt.copyText || "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; if (opt.onCopy) opt.onCopy(c, it); arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
             el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } }))));
         return d;
       }), opt.fixed ? "" : el("button", { type: "button", class: "btn", text: opt.add || "Добавить", style: "justify-self:start", onclick: () => { arr.push(opt.blank()); openI = arr.length - 1; draw(); touch(); const n = box.querySelectorAll(".item")[openI]; if (n) { n.scrollIntoView({ block: "center" }); const f = n.querySelector("input"); if (f) f.focus(); } } }));
@@ -299,28 +299,52 @@
 
   /* ---------- конструктор своих блоков ---------- */
   V.build = () => { if (!Array.isArray(S.blocks)) S.blocks = []; const pos = { where: "end" };
-    const add = (t) => { const id = Date.now().toString(36); S.blocks.push({ id, type: t, on: true, title: "", text: "", align: "left", bg: "none", photos: [], size: "m", side: "right", btn: t === "cta" ? "Записаться" : "", act: "enroll", url: "", waText: "", course: "" });
+    // старые блоки: одна галочка показа (через главную), ссылка кнопки отдельно от ссылки видео, «без кнопки» явно
+    S.blocks.forEach((b) => { const id = "b:" + b.id;
+      if (b.on === false) { b.on = true; S.home = S.home.filter((x) => x !== id); S.homeOff = S.homeOff || []; if (!S.homeOff.includes(id)) S.homeOff.unshift(id); }
+      if (b.link == null) b.link = b.type !== "video" ? b.url || "" : "";
+      if (!b.act || (b.act === "enroll" && !b.btn)) b.act = "none"; });
+    const add = (t) => { const id = Date.now().toString(36);
+      S.blocks.push({ id, type: t, on: true, title: "", text: "", align: "left", bg: "none", photos: [], size: "m", side: "right", btn: t === "cta" || t === "form" ? "Записаться" : "", act: t === "cta" || t === "form" ? "enroll" : "none", url: "", link: "", waText: "", course: "" });
       if (pos.where === "start") S.home.unshift("b:" + id); else if (pos.where === "hidden") { (S.homeOff = S.homeOff || []).unshift("b:" + id); } else S.home.push("b:" + id); touch(); render(); toast("Блок создан, заполните его ниже"); setTimeout(() => { const n = [...document.querySelectorAll(".bl-list > .item")].pop(); if (n) { n.open = true; n.scrollIntoView({ block: "start" }); } }, 60); };
-    const hint = { text: "Абзацы с новой строки.", list: "Каждый пункт с новой строки.", cards: "Каждая карточка с новой строки: Заголовок :: текст", stats: "Каждая цифра с новой строки: 8 лет :: опыт преподавания", accordion: "Каждый вопрос с новой строки: Вопрос :: Ответ", quote: "Текст цитаты. Заголовок станет подписью автора." };
-    const fields = (b, re) => { const T = b.type, F2 = [onHome("b:" + b.id), F.bool("Показывать этот блок", b, "on"), F.sel("Вид блока", b, "type", TYPES.map((t) => [t[0], t[1] + " " + t[2]]), { hint: "Поменяйте, если нужен другой вид. Тексты сохранятся" })];
-      if (T !== "divider") F2.push(F.text(T === "quote" ? "Подпись (автор)" : "Заголовок", b, "title", { on: re }));
-      else F2.push(F.text("Надпись на разделителе (можно пусто)", b, "title", { on: re }));
-      if (T !== "divider" && T !== "gallery") F2.push(F.area("Текст", b, "text", { max: 3000, hint: hint[T] || "" }));
-      if (T === "gallery") F2.push(F.area("Подпись под заголовком", b, "text", { max: 400 }));
-      if (["text-photo", "gallery", "video"].includes(T)) F2.push(F.photos(T === "video" ? "Фото, если видео нет" : "Фото", b, "photos"));
-      if (T === "text-photo") F2.push(F.sel("Где фото", b, "side", [["right", "Справа"], ["left", "Слева"], ["top", "Сверху"]]));
-      if (T === "gallery" || T === "video") F2.push(F.sel("Размер", b, "size", SIZES));
-      if (T === "video") F2.push(F.text("Ссылка на видео", b, "url", { ph: "YouTube, Rutube или VK Видео", max: 400 }));
-      if (!["divider", "quote", "stats", "accordion"].includes(T)) F2.push(F.text("Кнопка (пусто: без кнопки)", b, "btn", { ph: "Записаться" }), F.sel("Что делает кнопка", b, "act", [["enroll", "Открывает заявку"], ["wa", "Пишет в WhatsApp"], ["link", "Ведёт по ссылке"]]),
-        F.text("Ссылка для кнопки", b, "url", { ph: "https://... или courses/", max: 400, hint: "Только если кнопка ведёт по ссылке" }), F.sel("Курс в заявке", b, "course", [["", "Не выбран"]].concat(S.courses.map((c) => [c.slug, c.name]))));
-      if (T !== "divider") F2.push(row2(F.sel("Текст по", b, "align", [["left", "Левому краю"], ["center", "Центру"], ["right", "Правому краю"]]), F.sel("Фон", b, "bg", [["none", "Без фона"], ["card", "Карточка"], ["accent", "С золотой рамкой"]])));
-      return F2; };
+    const DESC = { text: "заголовок и абзацы", "text-photo": "текст рядом с фото", list: "пункты с точками", gallery: "одно или несколько фото", cards: "плитки: заголовок и текст", quote: "крупная цитата с автором",
+      stats: "крупные цифры с подписями", cta: "призыв и кнопка", video: "YouTube, Rutube, VK или своё", form: "форма заявки прямо в блоке", accordion: "вопросы, ответ по нажатию", divider: "линия между блоками" };
+    const hint = { text: "Каждый абзац с новой строки.", list: "Каждый пункт с новой строки.", cards: "Каждая карточка с новой строки. Заголовок и текст разделите двумя двоеточиями, например:\nПрактика :: занятия на моделях", stats: "Каждая цифра с новой строки, подпись через два двоеточия, например:\n8 лет :: опыт преподавания", accordion: "Каждый вопрос с новой строки, ответ через два двоеточия, например:\nСколько длится курс? :: 3 дня", quote: "Текст цитаты." };
+    const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее" };
+    const sec = (t) => el("p", { class: "bsec", text: t });
+    const fields = (b, re) => { const wrap = el("div", { class: "bfields" });
+      const draw = () => { const T = b.type, F2 = [sec("Где показывать"), onHome("b:" + b.id), sec("Вид и текст"),
+          F.wrap("Вид блока", (() => { const s2 = el("select", { onchange: (e) => { b.type = e.target.value; touch(); re(); draw(); } }, TYPES.map((t) => el("option", { value: t[0], text: t[1] + " " + t[2] + ": " + DESC[t[0]] }))); s2.value = T; return s2; })(), "Можно поменять в любой момент, тексты сохранятся.")];
+        if (T !== "divider") F2.push(F.text(T === "quote" ? "Автор цитаты" : "Заголовок", b, "title", { on: re }));
+        else F2.push(F.text("Надпись на разделителе (можно пусто)", b, "title", { on: re }));
+        if (T !== "divider" && T !== "gallery") F2.push(F.area(T === "quote" ? "Цитата" : "Текст", b, "text", { max: 3000, hint: hint[T] || "" }));
+        if (T === "gallery") F2.push(F.area("Подпись под заголовком", b, "text", { max: 400 }));
+        if (T === "video") F2.push(F.text("Ссылка на видео", b, "url", { ph: "YouTube, Rutube или VK Видео", max: 400 }));
+        if (["text-photo", "gallery", "video"].includes(T)) F2.push(F.photos(T === "video" ? "Или своё фото и видео (если ссылки нет)" : "Фото", b, "photos"));
+        if (T === "text-photo") F2.push(F.sel("Где фото", b, "side", [["right", "Справа"], ["left", "Слева"], ["top", "Сверху"]]));
+        if (T === "gallery" || T === "video") F2.push(F.sel("Размер", b, "size", SIZES));
+        if (!["divider", "quote", "stats", "accordion"].includes(T)) {
+          F2.push(sec("Кнопка"), F.wrap("Кнопка в блоке", (() => { const s2 = el("select", { onchange: (e) => { const was = BTN0[b.act]; b.act = e.target.value; if (!b.btn || b.btn === was) b.btn = BTN0[b.act] || ""; touch(); draw(); } },
+            [["none", "Без кнопки"], ["enroll", "Открывает заявку"], ["wa", "Пишет в WhatsApp"], ["link", "Ведёт по ссылке"]].map(([v, n]) => el("option", { value: v, text: n }))); s2.value = b.act || "none"; return s2; })()));
+          if (b.act && b.act !== "none") {
+            F2.push(F.text("Надпись на кнопке", b, "btn", { ph: BTN0[b.act] }));
+            if (b.act === "link") F2.push(F.text("Куда ведёт", b, "link", { ph: "https://... или courses/lashes/", max: 400 }), el("small", { class: "hint", text: "Ссылка на другой сайт откроется в новой вкладке. Страница этого сайта: например courses/ или contacts/." }));
+            if (b.act === "wa") F2.push(F.text("Текст сообщения в WhatsApp", b, "waText", { ph: "Здравствуйте! Хочу узнать про курс", max: 300 }));
+            if (b.act === "enroll") F2.push(F.sel("Курс в заявке", b, "course", [["", "Клиент выберет сам"]].concat(S.courses.map((c) => [c.slug, c.name]))));
+          }
+        }
+        if (T !== "divider") F2.push(sec("Оформление"), row2(F.sel("Текст по", b, "align", [["left", "Левому краю"], ["center", "Центру"], ["right", "Правому краю"]]), F.sel("Фон", b, "bg", [["none", "Без фона"], ["card", "Карточка"], ["accent", "С золотой рамкой"]])));
+        wrap.replaceChildren(...F2); };
+      draw(); return [wrap]; };
     const clean = () => { const ids = new Set(S.blocks.map((b) => "b:" + b.id)); S.home = S.home.filter((x) => !x.startsWith("b:") || ids.has(x)); S.homeOff = (S.homeOff || []).filter((x) => !x.startsWith("b:") || ids.has(x)); };
-    const list = F.list(S.blocks, { title: (b) => b.title || (TYPES.find((t) => t[0] === b.type) || [, , "Блок"])[2], meta: (b) => (TYPES.find((t) => t[0] === b.type) || [, ""])[1] + (b.on === false ? " скрыт" : ""), untitled: "Блок", fields, del: "Удалить блок", blank: () => ({}), onChange: clean });
+    // копия блока получает свой номер и встаёт на главной сразу после оригинала
+    const onCopy = (c, orig) => { c.id = Date.now().toString(36); const i = S.home.indexOf("b:" + orig.id); if (i >= 0) S.home.splice(i + 1, 0, "b:" + c.id); else (S.homeOff = S.homeOff || []).unshift("b:" + c.id); };
+    const list = F.list(S.blocks, { title: (b) => b.title || (TYPES.find((t) => t[0] === b.type) || [, , "Блок"])[2], meta: (b) => (TYPES.find((t) => t[0] === b.type) || [, , ""])[2] + (S.home.includes("b:" + b.id) ? "" : ", скрыт"), untitled: "Блок", fields, del: "Удалить блок", blank: () => ({}), onChange: clean, onCopy, copyText: "Сделать копию" });
     list.classList.add("bl-list"); const addBtn = list.querySelector(":scope > .btn"); if (addBtn) addBtn.remove();
-    return [el("h1", { text: "Конструктор блоков" }), el("p", { class: "sub", text: "Создайте любой блок с нуля: выберите вид, заполните текст, фото и кнопку. Порядок на главной: стрелки у блока или вкладка «Разделы сайта»." }),
+    return [el("h1", { text: "Конструктор блоков" }),
+      el("ol", { class: "steps" }, el("li", { text: "Нажмите на вид блока ниже." }), el("li", { text: "Заполните текст, фото и, если нужно, кнопку." }), el("li", { text: "Нажмите «Просмотр» вверху, чтобы увидеть, затем «Опубликовать»." })),
       box("Новый блок", "выберите вид", [F.sel("Куда поставить", pos, "where", [["end", "В конец главной"], ["start", "В начало главной"], ["hidden", "Пока скрыть"]]),
-        el("div", { class: "types" }, TYPES.map(([id, ic, n]) => el("button", { type: "button", class: "type", onclick: () => add(id) }, el("b", { text: ic }), el("span", { text: n }))))], true),
+        el("div", { class: "types" }, TYPES.map(([id, ic, n]) => el("button", { type: "button", class: "type", onclick: () => add(id) }, el("b", { text: ic }), el("span", { text: n }), el("small", { text: DESC[id] }))))], true),
       S.blocks.length ? box("Ваши блоки", S.blocks.length + " шт.", [list], true) : el("p", { class: "sub", text: "Своих блоков пока нет." })];
   };
 

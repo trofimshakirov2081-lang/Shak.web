@@ -252,8 +252,13 @@
     if ((m = u.match(/rutube\.ru\/(?:video|shorts)\/([\w]+)/))) return `https://rutube.ru/play/embed/${m[1]}`;
     if ((m = u.match(/vk(?:video)?\.(?:com|ru)\/.*video(-?\d+)_(\d+)/))) return `https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}`;
     return ""; };
-  const btnHTML = (b) => !b.btn ? "" : b.act === "wa" && WAON() ? `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${esc(b.btn)}</a>`
-    : b.act === "link" && b.url ? `<a class="btn btn--accent" href="${esc(b.url)}"${/^https?:/.test(b.url) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.btn)}</a>` : `<button class="btn btn--accent" data-enroll="${esc(b.course || "")}">${esc(b.btn)}</button>`;
+  // кнопка своего блока: act none = без кнопки; текст по умолчанию подставляется сам
+  const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее" };
+  const btnHTML = (b) => { const act = b.act || "enroll", link = b.link || (b.type !== "video" ? b.url : "") || "";
+    if (act === "none") return ""; const t = esc(b.btn || BTN0[act] || "Подробнее");
+    if (act === "wa" && WAON()) return `<a class="btn btn--accent" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${t}</a>`;
+    if (act === "link") return link ? `<a class="btn btn--accent" href="${esc(link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
+    return `<button class="btn btn--accent" data-enroll="${esc(b.course || "")}">${t}</button>`; };
   function custom(b) { if (!b || b.on === false) return ""; const T = b.type || "text", al = b.align || "left";
     const head = b.title && T !== "quote" && T !== "divider" ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
     const txt = b.text && !["list", "cards", "stats", "accordion", "gallery"].includes(T) ? lines(b.text).map((p) => `<p>${esc(p)}</p>`).join("") : "";
