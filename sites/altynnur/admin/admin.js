@@ -52,7 +52,7 @@
     o.wa = waSrc.replace(/\D/g, "").replace(/^8(\d{10})$/, "7$1");
     if (c.vk) { o.vk = c.vk.value; o.vkLabel = c.vk.value.replace(/^https?:\/\//, ""); }
     const used = new Set(S.courses.map((x) => x.slug).filter(Boolean));
-    S.courses.forEach((x, i) => { if (!x.slug) { let s = slugify(x.name || "") || "kurs-" + (i + 1); while (used.has(s)) s += "-2"; x.slug = s; used.add(s); } });
+    S.courses.forEach((x, i) => { if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(x.slug || "")) { let s = slugify(x.name || "") || "kurs-" + (i + 1); while (used.has(s)) s += "-2"; x.slug = s; used.add(s); } });
     const slugs = new Set(S.courses.map((x) => x.slug));
     S.featured = (S.featured || []).filter((s) => slugs.has(s));
   }
@@ -67,29 +67,47 @@
       new Set([...Object.keys(mine), ...Object.keys(theirs)]).forEach((k) => { if (!(k in mine) && k in b) return; if (!(k in theirs) && k in b && eq(mine[k], b[k])) return; const v = merge3(b[k], mine[k], theirs[k]); if (v !== undefined) out[k] = v; });
       return out; }
     return mine; }
-  function touch() { dirty = true; unpublished = true; paintState(); clearTimeout(saveT); saveT = setTimeout(saveDraft, 1500); }
+  function touch() { dirty = true; unpublished = true; paintState(); clearTimeout(saveT); saveT = setTimeout(saveDraft, 700); }
+  // номер вкладки: черновик общий для всех вкладок этого браузера, правки соседней вкладки сливаются, а не затираются
+  const TABID = Math.random().toString(36).slice(2); let OTHER = false;
+  function writeGH() { // синхронно, чтобы успеть при закрытии страницы
+    let cur = null; try { cur = JSON.parse(localStorage.getItem(GKEY) || "null"); } catch (e) {}
+    if (cur && cur.tab && cur.tab !== TABID && cur.site && (cur.base || BASE)) { const m = merge3(cur.base || BASE, S, cur.site); if (!eq(m, S)) { S = m; OTHER = true; } }
+    META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " ");
+    localStorage.setItem(GKEY, JSON.stringify({ site: S, base: BASE, at: META.draft_at, tab: TABID }));
+  }
+  function flushDraft() { if (!dirty || !S) return; clearTimeout(saveT); try { beforeSave(); if (GHM) writeGH(); else if (DEMO) localStorage.setItem(DKEY, JSON.stringify(S)); else return; dirty = false; } catch (e) {} }
+  window.addEventListener("pagehide", flushDraft);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) flushDraft(); else if (OTHER) { OTHER = false; render(); toast("Добавлены правки из другой вкладки"); } });
+  window.addEventListener("storage", (e) => { if (e.key !== GKEY || !GHM || !S || !BASE || !e.newValue) return; let o = null; try { o = JSON.parse(e.newValue); } catch (er) {} if (!o || o.tab === TABID) return;
+    flushDraft(); const m = merge3(o.base || BASE, S, o.site); if (eq(m, S)) return; S = m; unpublished = true; if (document.hidden) OTHER = true; else { render(); toast("Добавлены правки из другой вкладки"); } });
   async function saveDraft() {
     if (!dirty || saving) return;
     saving = true; clearTimeout(saveT); beforeSave();
     try {
       if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); }
-      else if (GHM) { META.draft_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.setItem(GKEY, JSON.stringify({ site: S, base: BASE, at: META.draft_at })); } catch (er) { throw new Error("Не хватает места для черновика в браузере. Опубликуйте изменения сейчас"); } }
+      else if (GHM) { try { writeGH(); } catch (er) { throw new Error("Не хватает места для черновика в браузере. Опубликуйте изменения сейчас"); } if (OTHER && !document.hidden) { OTHER = false; render(); toast("Добавлены правки из другой вкладки"); } }
       else META.draft_at = (await api("draft", { site: S })).draft_at;
       dirty = false;
     } catch (e) { fail(e.message); }
     saving = false; paintState();
   }
+  // что нельзя публиковать: пустой курс превращается в страницу без названия
+  function problems() { const p = []; S.courses.forEach((c, i) => { if (!String(c.name || "").trim()) p.push("У курса №" + (i + 1) + " нет названия"); });
+    (S.categories || []).forEach((c, i) => { if (!String(c.name || "").trim()) p.push("У направления №" + (i + 1) + " нет названия"); }); return p; }
+  let publishing = false;
   async function publish() {
-    clearTimeout(saveT); beforeSave();
+    if (publishing) return; const pr = problems(); if (pr.length) { TAB = "courses"; render(); return fail(pr.join(". ") + ". Заполните или удалите и опубликуйте снова"); }
+    dirty = true; flushDraft(); beforeSave();
     if (DEMO) { localStorage.setItem(DKEY, JSON.stringify(S)); toast("Пробный режим: на сервере это опубликует сайт"); return; }
-    const b = $("#pubBtn"); b.disabled = true; b.textContent = "Публикуем…";
+    const b = $("#pubBtn"); b.disabled = true; b.textContent = "Публикуем…"; publishing = true;
     try {
       if (GHM) { const cur = await GH.loadSite(); if (BASE && !eq(cur, BASE)) { S = merge3(BASE, S, cur); render(); } await GH.publish(S); BASE = JSON.parse(JSON.stringify(S)); META.published_at = new Date().toISOString().slice(0, 19).replace("T", " "); try { localStorage.removeItem(GKEY); } catch (e) {} toast("Опубликовано. Сайт обновится примерно через минуту"); }
       else { META.published_at = (await api("publish", { site: S })).published_at; toast("Опубликовано. Сайт обновлён"); }
       dirty = false; unpublished = false;
     }
-    catch (e) { fail(e.message + ". Изменения остались в черновике на этом устройстве, попробуйте опубликовать ещё раз"); }
-    b.textContent = "Опубликовать"; paintState();
+    catch (e) { dirty = true; flushDraft(); fail(e.message + ". Изменения остались в черновике на этом устройстве, попробуйте опубликовать ещё раз"); }
+    publishing = false; const b2 = $("#pubBtn") || b; b2.textContent = "Опубликовать"; paintState();
   }
   function preview() {
     beforeSave();
@@ -99,7 +117,7 @@
   function paintState() {
     const st = $("#state"), b = $("#pubBtn"); if (!st) return;
     st.textContent = dirty ? "Сохраняем…" : unpublished ? (GHM ? "Черновик сохранён на этом устройстве. На сайте ещё старая версия" : "Черновик сохранён. На сайте ещё старая версия") : META.published_at ? "Опубликовано " + hhmm(META.published_at) : "Ещё не опубликовано";
-    if (b) b.disabled = !unpublished && !!META.published_at;
+    if (b) b.disabled = publishing || (!unpublished && !!META.published_at);
   }
   window.addEventListener("beforeunload", (e) => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
 
@@ -192,7 +210,7 @@
         // миниатюра в строке: сразу видно, какое фото, без раскрытия
         const tsrc = opt.thumb ? opt.thumb(it) : (it && typeof it.src === "string" && it.src ? it.src : (it && typeof it.photo === "string" && it.photo ? it.photo : ""));
         const thumb = tsrc ? el("span", { class: "thumb", style: `background-image:url("${IMG[tsrc] || "../" + String(tsrc).replace(/"/g, "") + "-640.webp"}")` }) : null;
-        const delNow = opt.fixed ? null : el("button", { type: "button", class: "ic ic--del", "aria-label": opt.del || "Удалить", title: opt.del || "Удалить", text: "×", onclick: (e) => { e.preventDefault(); if (confirm((opt.del || "Удалить") + "?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } });
+        const delNow = opt.fixed ? null : el("button", { type: "button", class: "ic ic--del", "aria-label": opt.del || "Удалить", title: opt.del || "Удалить", text: "×", onclick: (e) => { e.preventDefault(); if (opt.onDelete ? opt.onDelete(it) : confirm((opt.del || "Удалить") + "?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } });
         const meta = opt.meta ? el("span", { class: "meta", text: opt.meta(it) }) : null;
         const d = el("details", { class: "item", open: i === openI, ontoggle: (e) => { if (e.target.open) openI = i; else if (openI === i) openI = -1; } },
           el("summary", {}, opt.fixed ? null : el("span", { class: "drag", "aria-label": "Перетащить", title: "Перетащить", text: "⠿" }), thumb, ttl, meta, opt.fixed ? null : el("span", { class: "ord" },
@@ -200,7 +218,7 @@
             el("button", { type: "button", class: "ic", "aria-label": "Ниже", text: "↓", disabled: i === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; openI = -1; draw(); touch(); } }), delNow)),
           el("div", { class: "item__in" }, opt.fields(it, () => { ttl.textContent = opt.title(it) || opt.untitled || "Без названия"; if (meta) meta.textContent = opt.meta(it); }),
             opt.fixed ? null : el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, el("button", { type: "button", class: "btn btn--sm", text: opt.copyText || "Копировать как шаблон", onclick: () => { const c = JSON.parse(JSON.stringify(it)); ["name", "t", "title", "q", "code"].forEach((k) => { if (c[k]) c[k] += k === "code" ? "2" : " (копия)"; }); if ("slug" in c) c.slug = ""; if (opt.onCopy) opt.onCopy(c, it); arr.splice(i + 1, 0, c); openI = i + 1; draw(); touch(); } }),
-            el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } }))));
+            el("button", { type: "button", class: "btn btn--sm btn--bad", text: opt.del || "Удалить", onclick: () => { if (opt.onDelete ? opt.onDelete(it) : confirm("Удалить «" + (opt.title(it) || "элемент") + "»?")) { arr.splice(i, 1); openI = -1; if (opt.onChange) opt.onChange(); draw(); touch(); } } }))));
         return d;
       }), opt.fixed ? "" : el("button", { type: "button", class: "btn", text: opt.add || "Добавить", style: "justify-self:start", onclick: () => { arr.push(opt.blank()); openI = arr.length - 1; draw(); touch(); const n = box.querySelectorAll(".item")[openI]; if (n) { n.scrollIntoView({ block: "center" }); const f = n.querySelector("input"); if (f) f.focus(); } } }));
     };
@@ -216,7 +234,7 @@
   const V = {};
   const STATUS = [["new", "Новая"], ["work", "В работе"], ["done", "Записалась"], ["refuse", "Отказ"]];
   V.leads = () => {
-    if (GHM) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Заявки с сайта приходят вам сразу в WhatsApp: имя, телефон и выбранный курс. Здесь они не хранятся, поэтому отвечайте прямо в мессенджере." })];
+    if (GHM) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Сейчас форма на сайте открывает у клиента WhatsApp с готовым сообщением: имя, телефон и курс. Заявка дойдёт, только если клиент нажмёт «Отправить» в WhatsApp. Здесь заявки не хранятся." }), el("p", { class: "sub", text: "Чтобы заявки не терялись, их можно сохранять на сервере с уведомлением в Telegram. Это подключает Трофим." })];
     if (DEMO) return [el("h1", { text: "Заявки" }), el("p", { class: "sub", text: "Здесь появляются заявки с сайта: имя, телефон, выбранный курс. В пробном режиме список пуст, на сервере он будет наполняться сам." }), el("div", { class: "empty", text: "Заявок пока нет" })];
     const list = el("div");
     const draw = () => list.replaceChildren(...(LEADS.length ? LEADS.map((l) => {
@@ -262,6 +280,12 @@
     el("h2", { text: "Направления", style: "margin:28px 0 6px" }), el("p", { class: "sub", text: "Группы, по которым разложены курсы." }),
     F.list(S.categories, { add: "Добавить направление", untitled: "Новое направление", title: (c) => c.name,
       blank: () => ({ id: "cat-" + Date.now().toString(36), name: "", text: "", photo: "", alt: "" }),
+      // в направлении есть курсы: не даём им пропасть из фильтров, переносим в другое направление
+      onDelete: (cat) => { const used = S.courses.filter((c) => c.cat === cat.id), other = S.categories.find((c) => c !== cat);
+        if (!used.length) return confirm("Удалить направление «" + (cat.name || "без названия") + "»?");
+        if (!other) { toast("Это последнее направление. Сначала создайте другое", true); return false; }
+        if (!confirm("В направлении «" + cat.name + "» " + used.length + " курс(ов). Удалить направление и перенести курсы в «" + other.name + "»?")) return false;
+        used.forEach((c) => (c.cat = other.id)); (S.works || []).forEach((w) => { if (w.cat === cat.id) w.cat = other.id; }); return true; },
       fields: (c, re) => [F.text("Название", c, "name", { on: re }), F.text("Подпись", c, "text"), F.img("Фото", c, "photo", "alt")] })];
 
   const BLOCKS = { scrub: "Видео на прокрутке", compare: "Сравнение курсов (под курсами)", calc: "Калькулятор дохода (под курсами)", referral: "Приведи подругу", notify: "Сообщить о наборе", promo: "Акция", batches: "Ближайшие наборы", numbers: "Цифры", reviews: "Отзывы", cert: "Сертификат", gallery: "Фото-блок", hero: "Первый экран", directions: "Направления обучения", featured: "Курсы и цены", enroll: "Блок записи", zoom: "Фото-сцена «Как мы учим»", teacher: "Преимущества и преподаватель", manifest: "Текст с мини-фото", ribbon: "Лента фото" };
@@ -489,8 +513,9 @@
         el("button", { class: "btn btn--sm", text: "Вернуть", onclick: async () => { if (!confirm("Вернуть эту версию в черновик? Сайт изменится после публикации")) return; try { S = await GH.loadSite(v.sha); unpublished = true; touch(); render(); toast("Версия возвращена в черновик"); } catch (e) { toast(e.message, true); } } }))) : [el("small", { text: "Версии появятся после первой публикации" })]))).catch((e) => vbox.replaceChildren(el("small", { text: e.message })));
       return [el("h1", { text: "Настройки" }),
         box("История версий", "последние 30 публикаций", [vbox], true),
-        box("Сменить пароль", null, [F.text("Текущий пароль", pw, "old", { type: "password", quiet: true }), F.text("Новый пароль (от 8 символов)", pw, "n1", { type: "password", quiet: true }), F.text("Новый пароль ещё раз", pw, "n2", { type: "password", quiet: true }),
-          el("button", { class: "btn", style: "justify-self:start", text: "Сменить пароль", onclick: async () => { if (pw.n1 !== pw.n2) return toast("Новые пароли не совпадают", true); try { await GH.changePassword(pw.old, pw.n1); toast("Пароль изменён"); } catch (e) { toast(e.message, true); } } })]),
+        box("Сменить пароль", null, [F.text("Текущий пароль", pw, "old", { type: "password", quiet: true }), F.text("Новый пароль (от 12 символов)", pw, "n1", { type: "password", quiet: true, hint: "Лучше 3-4 разных слова через дефис и цифры. Пароль защищает доступ к сайту, не используйте его в других местах" }), F.text("Новый пароль ещё раз", pw, "n2", { type: "password", quiet: true }),
+          el("button", { class: "btn", style: "justify-self:start", text: "Сменить пароль", onclick: async (e) => { if (pw.n1 !== pw.n2) return toast("Новые пароли не совпадают", true); const w = GH.weak(pw.n1); if (w) return toast(w, true); const bt = e.target; bt.disabled = true; bt.textContent = "Меняем…";
+            try { await GH.changePassword(pw.old, pw.n1); toast("Пароль изменён. Запомните его: восстановить нельзя"); } catch (er) { toast(er.message, true); } bt.disabled = false; bt.textContent = "Сменить пароль"; } })]),
         el("button", { class: "btn", text: "Выйти", onclick: async () => { await saveDraft(); GH.forget(); screenLoginGH(); } })];
     }
     if (DEMO) return [el("h1", { text: "Настройки" }), el("p", { class: "sub", text: "На сервере здесь меняется пароль, включаются уведомления о заявках и хранится история версий сайта." }),
@@ -529,8 +554,9 @@
     const keep = new Set(), sy = window.scrollY, sameTab = render.lastTab === TAB; render.lastTab = TAB;
     if (sameTab) app.querySelectorAll("main details[open]").forEach((d) => keep.add(openKey(d)));
     app.replaceChildren(
-      el("header", { class: "top" }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
+      el("header", { class: "top" + (Q ? " s-open" : "") }, el("div", { class: "top__in" }, el("span", { class: "top__name", text: "АлтынНур" }), el("span", { class: "state", id: "state" }),
         (() => { const u = el("button", { class: "btn btn--icon", "aria-label": "Отменить изменения в разделе", title: "Отменить: вернуть раздел к тому, каким он был, когда вы его открыли", onclick: () => { if (!SNAP || SNAP === JSON.stringify(S)) return toast("В этом разделе нет изменений"); if (!confirm("Отменить все изменения в этом разделе?")) return; S = JSON.parse(SNAP); touch(); render(); toast("Изменения отменены"); } }); u.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>'; return u; })(),
+        (() => { const sb = el("button", { class: "btn btn--icon s-toggle", "aria-label": "Поиск по админке", onclick: () => { const t = app.querySelector(".top"); t.classList.toggle("s-open"); if (t.classList.contains("s-open")) app.querySelector(".search input").focus(); } }); sb.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'; return sb; })(),
         el("button", { class: "btn", text: "Просмотр", title: "Посмотреть сайт с изменениями", onclick: preview }), el("button", { class: "btn btn--acc", id: "pubBtn", text: "Опубликовать", onclick: publish })),
         el("div", { class: "search" }, el("input", { type: "search", placeholder: "Найти: промокод, отзывы, адрес…", value: Q, oninput: (e) => { Q = e.target.value.trim().toLowerCase(); document.querySelectorAll(".tabs .tab").forEach((t) => { const id = t.dataset.tab; t.hidden = !!Q && !((t.textContent + " " + (KEYS[id] || "")).toLowerCase().includes(Q)); }); },
           onkeydown: (e) => { if (e.key === "Enter") { const t = [...document.querySelectorAll(".tabs .tab")].find((x) => !x.hidden); if (t) t.click(); } } })),
@@ -581,7 +607,7 @@
     TAB = LEADS.some((l) => l.status === "new") ? "leads" : "courses"; render();
   }
   (async function boot() {
-    if (GHM) { if (!GH.restore()) return screenLoginGH(); return bootGH().catch((e) => screenLoginGH(e.message)); }
+    if (GHM) { if (!(await GH.restore())) return screenLoginGH(); return bootGH().catch((e) => screenLoginGH(e.message)); }
     let p = null;
     try { const r = await fetch(API + "?r=ping", { credentials: "same-origin" }); p = await r.json(); } catch (e) {}
     if (!p || p.ok !== true) { DEMO = true; S = await demoLoad(); TAB = "courses"; return render(); }

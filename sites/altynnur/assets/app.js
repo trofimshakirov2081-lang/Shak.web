@@ -20,8 +20,15 @@
   const cat = (id) => S.categories.find((c) => c.id === id) || {};
   const course = (slug) => S.courses.find((c) => c.slug === slug);
   const plural = (n, a, b, c) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 10 || h >= 20) ? b : c; };
-  const wa = (t) => `https://wa.me/${S.org.wa}?text=${encodeURIComponent(t)}`;
+  const wa = (t) => `https://wa.me/${ruNum(S.org.wa)}?text=${encodeURIComponent(t)}`;
   const WA_HELLO = "Здравствуйте! Хочу узнать об обучении в АлтынНур.";
+  // номер в любом виде («8 (927) 123-45-67», «+7 927...», «9271234567») в международный формат 79271234567
+  const ruNum = (v) => { let d = String(v || "").replace(/\D/g, ""); if (d.length === 11 && d[0] === "8") d = "7" + d.slice(1); if (d.length === 10 && d[0] === "9") d = "7" + d; return d; };
+  // ник из ссылки или с @: «https://vk.com/name», «vk.com/name/», «@name» -> name
+  const handle = (v, host) => String(v || "").trim().replace(/^https?:\/\//i, "").replace(host, "").replace(/^@/, "").replace(/[?#].*$/, "").replace(/\/+$/, "");
+  // ссылка для кнопки: только http(s), tel, mailto, страницы сайта и якоря; «ya.ru» становится https://ya.ru; javascript: и прочее отбрасываются
+  const safeUrl = (u) => { u = String(u || "").trim(); if (!u) return ""; if (/^(https?:|tel:|mailto:)/i.test(u)) return u; if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return "";
+    if (/^[\w-]+(\.[\w-]+)+(\/|$|\?|#)/.test(u) && !/^(courses|about|works|faq|contacts|training|privacy)\b/.test(u)) return "https://" + u; return u.replace(/^\/+/, ""); };
   const cURL = (c) => `${R}courses/${c.slug}/`;
   const arrow = (t) => `<span>${esc(t)}</span><i aria-hidden="true"></i>`;
   // фото: две ширины, ленивая загрузка ниже первого экрана, проявление маской
@@ -71,13 +78,13 @@
 
   /* ---------- контакты: каждый канал включается и меняется в админке ---------- */
   const CH = {
-    phone: { t: "Телефон", href: (v) => "tel:+" + v.replace(/\D/g, ""), show: (v) => v },
-    whatsapp: { t: "WhatsApp", href: (v) => `https://wa.me/${v.replace(/\D/g, "")}?text=${encodeURIComponent(WA_HELLO)}`, show: () => "Написать" },
-    telegram: { t: "Telegram", href: (v) => "https://t.me/" + v.replace(/^@|https?:\/\/t\.me\//g, ""), show: (v) => "@" + v.replace(/^@|https?:\/\/t\.me\//g, "") },
-    max: { t: "MAX", href: (v) => (/^https?:/.test(v) ? v : "https://max.ru/" + v.replace(/^@/, "")), show: () => "Написать" },
-    vk: { t: "ВКонтакте", href: (v) => (/^https?:/.test(v) ? v : "https://vk.ru/" + v), show: (v) => v.replace(/^https?:\/\//, "") },
-    instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + v.replace(/^@/, ""), show: (v) => "@" + v.replace(/^@/, "") },
-    email: { t: "Почта", href: (v) => "mailto:" + v, show: (v) => v }
+    phone: { t: "Телефон", href: (v) => "tel:+" + ruNum(v), show: (v) => v },
+    whatsapp: { t: "WhatsApp", href: (v) => `https://wa.me/${ruNum(v)}?text=${encodeURIComponent(WA_HELLO)}`, show: () => "Написать" },
+    telegram: { t: "Telegram", href: (v) => "https://t.me/" + handle(v, /^(t|telegram)\.me\//i), show: (v) => "@" + handle(v, /^(t|telegram)\.me\//i) },
+    max: { t: "MAX", href: (v) => (/^(https?:\/\/)?(web\.)?max\.ru\//i.test(v.trim()) ? "https://" + v.trim().replace(/^https?:\/\//i, "") : "https://max.ru/" + handle(v, /^$/)), show: () => "Написать" },
+    vk: { t: "ВКонтакте", href: (v) => "https://vk.ru/" + handle(v, /^(m\.)?vk\.(com|ru)\//i), show: (v) => "vk.ru/" + handle(v, /^(m\.)?vk\.(com|ru)\//i) },
+    instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + handle(v, /^(www\.)?instagram\.com\//i), show: (v) => "@" + handle(v, /^(www\.)?instagram\.com\//i) },
+    email: { t: "Почта", href: (v) => "mailto:" + v.trim().replace(/^mailto:/i, ""), show: (v) => v.trim().replace(/^mailto:/i, "") }
   };
   // один источник правды для всех мест вывода: включён ли канал и есть ли у него значение
   const CON = (t) => { const c = S.contacts.find((x) => x.type === t); return c && c.on && has(c.value) ? c : null; };
@@ -106,7 +113,7 @@
       ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
       ${PAGE === "home" && PK("view") ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div>`}</div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
-      <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>${S.org.phone ? `<a class="hdr__tel" href="tel:${S.org.phone.replace(/[^\d+]/g, "")}" aria-label="Позвонить ${esc(S.org.phone)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>` : ""}
+      <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>${S.org.phone ? `<a class="hdr__tel" href="tel:+${ruNum(S.org.phone)}" aria-label="Позвонить ${esc(S.org.phone)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>` : ""}
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
         <div class="nav__extra">${CON("phone") ? `<a href="${CH.phone.href(CON("phone").value)}">${esc(CON("phone").value)}</a>` : ""}${WAON() ? `<a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></nav>
       ${S.modeToggle === false ? "" : `<button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>`}
@@ -254,11 +261,11 @@
     return ""; };
   // кнопка своего блока: act none = без кнопки; текст по умолчанию подставляется сам
   const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее", tel: "Позвонить" };
-  const btnHTML = (b, two) => { const act = b.act || "enroll", link = b.link || (b.type !== "video" ? b.url : "") || "", cls = two ? "btn btn--line" : "btn btn--accent";
+  const btnHTML = (b, two) => { const act = b.act || "enroll", link = safeUrl(b.link || (b.type !== "video" ? b.url : "") || ""), cls = two ? "btn btn--line" : "btn btn--accent";
     if (act === "none") return ""; const t = esc(b.btn || BTN0[act] || "Подробнее");
     if (act === "wa" && WAON()) return `<a class="${cls}" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${t}</a>`;
-    if (act === "link") return link ? `<a class="${cls}" href="${esc(link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
-    if (act === "tel" && S.org.phone) return `<a class="${cls}" href="tel:${S.org.phone.replace(/[^\d+]/g, "")}">${t}</a>`;
+    if (act === "link") return link ? `<a class="${cls}" href="${esc(/^(https?:|tel:|mailto:|#)/i.test(link) ? link : R + link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
+    if (act === "tel" && S.org.phone) return `<a class="${cls}" href="tel:+${ruNum(S.org.phone)}">${t}</a>`;
     return `<button class="${cls}" data-enroll="${esc(b.course || "")}">${t}</button>`; };
   const BTNS = (b) => { const one = btnHTML(b), two = one && b.act2 && b.act2 !== "none" ? btnHTML({ type: b.type, act: b.act2, btn: b.btn2, link: b.link2, waText: b.waText2, course: b.course2 }, true) : "";
     return one || two ? `<div class="cb__btns">${one}${two}</div>` : ""; };
@@ -288,7 +295,7 @@
     else if (T === "timer") { if (b.until && b.end === "hide" && new Date(b.until) < new Date()) return "";
       inner = `${head}<div class="cb__txt">${txt}</div>${b.until ? `<div class="cb__timer" data-until="${esc(b.until)}" data-after="${esc(b.after || "Время вышло")}"><span><b data-t="d">0</b>дней</span><span><b data-t="h">0</b>часов</span><span><b data-t="m">0</b>минут</span><span><b data-t="s">0</b>секунд</span></div>` : ""}${B}`; }
     else if (T === "contacts") { const o = S.org;
-      inner = `${head}${txt ? `<div class="cb__txt">${txt}</div>` : ""}<dl class="cb__con">${o.address ? `<div><dt>Адрес</dt><dd>${esc((o.city ? o.city + ", " : "") + o.address)}</dd></div>` : ""}${o.hours ? `<div><dt>Часы работы</dt><dd>${esc(o.hours)}</dd></div>` : ""}${o.phone ? `<div><dt>Телефон</dt><dd><a href="tel:${o.phone.replace(/[^\d+]/g, "")}">${esc(o.phone)}</a></dd></div>` : ""}</dl>
+      inner = `${head}${txt ? `<div class="cb__txt">${txt}</div>` : ""}<dl class="cb__con">${o.address ? `<div><dt>Адрес</dt><dd>${esc((o.city ? o.city + ", " : "") + o.address)}</dd></div>` : ""}${o.hours ? `<div><dt>Часы работы</dt><dd>${esc(o.hours)}</dd></div>` : ""}${o.phone ? `<div><dt>Телефон</dt><dd><a href="tel:+${ruNum(o.phone)}">${esc(o.phone)}</a></dd></div>` : ""}</dl>
         ${B || `<div class="cb__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}<a class="btn btn--line" href="${R}contacts/">Как добраться</a></div>`}`; }
     const st = b.bg === "color" && b.bgc ? ` style="--cb-bg:${esc(b.bgc)};--cb-fg:${cbLum(b.bgc) > .45 ? "#1d1714" : "#fbf6ee"}"` : "";
     return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"} cb--pad-${b.pad || "m"} cb--w-${b.width || "m"} cb--h-${b.hsize || "m"}"${b.anchor ? ` id="${esc(b.anchor)}"` : ""} style="padding-top:0"><div class="wrap"><div class="cb__in"${st}>${inner}</div></div></section>`; }

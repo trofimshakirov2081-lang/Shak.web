@@ -40,7 +40,7 @@ code{background:#fff;padding:1px 5px;border-radius:4px;font-size:14px}
 <label>Репозиторий <input id="repo" value="altynnur" autocomplete="off"></label>
 <label>Ветка <input id="branch" value="main" autocomplete="off"></label>
 <label>Ключ GitHub <input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></label>
-<label>Пароль для Айгуль <small>не короче 12 символов, его она будет вводить в админке</small>
+<label>Пароль для Айгуль <small>не короче 16 символов, лучше кнопкой «Придумать»</small>
   <span class="row"><input id="pw" type="text" autocomplete="off"><button class="sec" type="button" id="gen">Придумать</button></span></label>
 <button id="go" type="button">Подключить</button>
 <div id="log" aria-live="polite"></div>
@@ -52,13 +52,17 @@ code{background:#fff;padding:1px 5px;border-radius:4px;font-size:14px}
   var log = function (t, cls) { var d = document.createElement("div"); d.textContent = t; if (cls) d.className = cls; $("log").appendChild(d); };
   var enc = new TextEncoder();
   var b64 = function (buf) { var s = "", a = new Uint8Array(buf); for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]); return btoa(s); };
-  var ITER = 250000, API = new URLSearchParams(location.search).get("api") || "https://api.github.com";
+  var ITER = 600000, API = new URLSearchParams(location.search).get("api") || "https://api.github.com";
 
   // пароль из простых слов и цифр, чтобы его было легко продиктовать
   $("gen").onclick = function () {
-    var w = ["зола", "луна", "роса", "липа", "сова", "кедр", "мята", "река", "соль", "снег", "лето", "волна", "песок", "ветер"];
-    var r = crypto.getRandomValues(new Uint32Array(4));
-    $("pw").value = w[r[0] % w.length] + "-" + w[r[1] % w.length] + "-" + w[r[2] % w.length] + "-" + (100 + r[3] % 900);
+    // 5 слов из 94 и две цифры: около 39 бит, перебор занимает годы даже на видеокартах
+    var w = ["зола","луна","роса","липа","сова","кедр","мята","река","соль","снег","лето","волна","песок","ветер","берег","гроза","дождь","клён","ольха","осина","рябина","ромашка","сирень","тюльпан",
+      "пион","лилия","вишня","слива","груша","дыня","арбуз","лимон","инжир","кофе","какао","ваниль","корица","имбирь","перец","базилик","лаванда","шалфей","полынь","вереск","мох","папоротник",
+      "орёл","сокол","ястреб","лебедь","цапля","аист","журавль","филин","дятел","скворец","кит","дельфин","тюлень","выдра","бобр","барсук","енот","рысь","лиса","волк","медведь","олень","лось","заяц",
+      "гора","холм","скала","ущелье","поле","луг","степь","пустыня","остров","залив","бухта","маяк","мост","башня","замок","сад","парк","аллея","фонтан","рынок","вокзал","порт","склад","кузница"];
+    var r = crypto.getRandomValues(new Uint32Array(6));
+    $("pw").value = [0, 1, 2, 3, 4].map(function (i) { return w[r[i] % w.length]; }).join("-") + "-" + (10 + r[5] % 90);
   };
 
   async function gh(path, token, opt) {
@@ -72,7 +76,7 @@ code{background:#fff;padding:1px 5px;border-radius:4px;font-size:14px}
     var owner = $("owner").value.trim(), repo = $("repo").value.trim(), branch = $("branch").value.trim() || "main", token = $("token").value.trim(), pw = $("pw").value;
     $("log").textContent = "";
     if (!owner || !repo || !token) return log("Заполните владельца, репозиторий и ключ", "err");
-    if (pw.length < 12) return log("Пароль: не короче 12 символов", "err");
+    if (pw.length < 16) return log("Пароль: не короче 16 символов. Нажмите «Придумать»", "err");
     $("go").disabled = true;
     try {
       var r = await gh("/repos/" + owner + "/" + repo, token);

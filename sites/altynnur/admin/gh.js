@@ -7,8 +7,9 @@
   const C = window.GH_CFG;
   if (!C) return;
   const API = (C.api || "https://api.github.com").replace(/\/$/, "");
-  const ITER = C.iter || 250000;
-  const TKEY = "altyn-gh-token";
+  let ITER = C.iter || 250000;
+  const NEW_ITER = 600000; // новые пароли шифруются сильнее (рекомендация OWASP для PBKDF2-SHA256)
+  const TKEY = "altyn-gh-token", EKEY = "altyn-gh-token-e", DAYS = 30;
   let TOKEN = null;
 
   const enc = new TextEncoder(), dec = new TextDecoder();
@@ -16,13 +17,13 @@
   const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
   const utf8b64 = (str) => b64(enc.encode(str));
 
-  async function keyFrom(password, salt) {
+  async function keyFrom(password, salt, iter) {
     const base = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]);
-    return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: ITER, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+    return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iter || ITER, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
   }
   async function encryptToken(token, password) {
     const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
-    const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await keyFrom(password, salt), enc.encode(token));
+    const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await keyFrom(password, salt, NEW_ITER), enc.encode(token));
     return { salt: b64(salt), iv: b64(iv), ct: b64(ct) };
   }
   async function decryptToken(password) {
@@ -46,13 +47,34 @@
   const repo = () => `/repos/${C.owner}/${C.repo}`;
   const branch = () => C.branch || "main";
 
-  function remember(token, keep) { TOKEN = token; try { (keep ? localStorage : sessionStorage).setItem(TKEY, token); } catch (e) {} }
-  function forget() { TOKEN = null; try { localStorage.removeItem(TKEY); sessionStorage.removeItem(TKEY); } catch (e) {} }
-  function restore() { try { TOKEN = localStorage.getItem(TKEY) || sessionStorage.getItem(TKEY); } catch (e) {} return !!TOKEN; }
+  /* «Запомнить»: ключ GitHub не лежит в браузере открытым текстом. Он шифруется ключом устройства,
+     который создаётся в IndexedDB как неизвлекаемый (его нельзя прочитать, только использовать), и живёт 30 дней.
+     Это защищает от простого чтения localStorage. От активного вредного скрипта на том же адресе защищает только свой домен. */
+  function idbKey() {
+    return new Promise((ok, bad) => { const rq = indexedDB.open("altyn-admin", 1); rq.onupgradeneeded = () => rq.result.createObjectStore("k");
+      rq.onerror = () => bad(rq.error); rq.onsuccess = () => { const db = rq.result, g = db.transaction("k").objectStore("k").get("dev");
+        g.onerror = () => bad(g.error); g.onsuccess = async () => { if (g.result) return ok(g.result);
+          try { const k = await crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]); const t = db.transaction("k", "readwrite"); t.objectStore("k").put(k, "dev"); t.oncomplete = () => ok(k); t.onerror = () => bad(t.error); } catch (e) { bad(e); } }; }; });
+  }
+  async function seal(token) { const k = await idbKey(), iv = crypto.getRandomValues(new Uint8Array(12)); return JSON.stringify({ iv: b64(iv), ct: b64(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, k, enc.encode(token))), exp: Date.now() + DAYS * 864e5 }); }
+  async function unseal(s) { const o = JSON.parse(s); if (!o || !o.exp || o.exp < Date.now()) return null; const k = await idbKey(); return dec.decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(o.iv) }, k, unb64(o.ct))); }
+  async function remember(token, keep) { TOKEN = token;
+    try { localStorage.removeItem(TKEY); sessionStorage.removeItem(TKEY); const sealed = await seal(token); (keep ? localStorage : sessionStorage).setItem(EKEY, sealed); (keep ? sessionStorage : localStorage).removeItem(EKEY); }
+    catch (e) { try { sessionStorage.setItem(TKEY, token); } catch (e2) {} } }
+  function forget() { TOKEN = null; try { [TKEY, EKEY].forEach((k) => { localStorage.removeItem(k); sessionStorage.removeItem(k); }); } catch (e) {} }
+  async function restore() {
+    try {
+      // старый формат: ключ открытым текстом. Шифруем и стираем открытую копию
+      const plainL = localStorage.getItem(TKEY), plainS = sessionStorage.getItem(TKEY);
+      if (plainL || plainS) { await remember(plainL || plainS, !!plainL); return !!TOKEN; }
+      const s = localStorage.getItem(EKEY) || sessionStorage.getItem(EKEY); if (!s) return false;
+      TOKEN = await unseal(s); if (!TOKEN) forget(); return !!TOKEN;
+    } catch (e) { forget(); return false; }
+  }
 
   async function login(password, keep) {
     const t = await decryptToken(password);
-    TOKEN = t; await gh(repo()); remember(t, keep);
+    TOKEN = t; await gh(repo()); await remember(t, keep);
   }
 
   async function getText(path, ref) {
@@ -125,14 +147,18 @@
     return { src: name, video: `${name}.${ext}`, preview: urls[640] };
   }
 
+  // пароль защищает ключ, который лежит в открытом репозитории: его можно перебирать без ограничений, поэтому нужен длинный
+  function weak(pw) { pw = pw || ""; if (pw.length < 12) return "Новый пароль: не короче 12 символов. Удобно из 3-4 слов через дефис";
+    if (/^(.)\1+$/.test(pw) || /^\d+$/.test(pw) || /^(qwerty|12345|password|пароль|altyn|алтын)/i.test(pw)) return "Пароль слишком простой. Возьмите 3-4 разных слова через дефис и цифры";
+    if (new Set(pw.toLowerCase()).size < 6) return "В пароле слишком мало разных символов"; return ""; }
   async function changePassword(oldPw, newPw) {
-    if ((newPw || "").length < 8) throw new Error("Новый пароль: не короче 8 символов");
+    const w = weak(newPw); if (w) throw new Error(w);
     const t = await decryptToken(oldPw);
     const e = await encryptToken(t, newPw);
-    const cfg = Object.assign({}, C, { enc: e });
+    const cfg = Object.assign({}, C, { enc: e, iter: NEW_ITER });
     await commit([{ path: "admin/config.js", text: "/* Настройки админки: где лежит сайт. Ключ зашифрован паролем владельца. */\nwindow.GH_CFG = " + JSON.stringify(cfg, null, 2) + ";\n" }], "Смена пароля админки");
-    C.enc = e;
+    C.enc = e; C.iter = NEW_ITER; ITER = NEW_ITER;
   }
 
-  window.GH = { login, restore, forget, loadSite, publish, history, uploadPhoto, uploadVideo, changePassword, encryptToken, siteText, parseSite };
+  window.GH = { weak, login, restore, forget, loadSite, publish, history, uploadPhoto, uploadVideo, changePassword, encryptToken, siteText, parseSite };
 })();
