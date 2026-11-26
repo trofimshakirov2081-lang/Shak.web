@@ -95,7 +95,7 @@
       ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
       ${PAGE === "home" && PK("view") ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div>`}</div></div>` : ""}
     <header class="hdr"><div class="wrap hdr__in">
-      <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>
+      <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>${S.org.phone ? `<a class="hdr__tel" href="tel:${S.org.phone.replace(/[^\d+]/g, "")}" aria-label="Позвонить ${esc(S.org.phone)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>` : ""}
       <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
         <div class="nav__extra">${CON("phone") ? `<a href="${CH.phone.href(CON("phone").value)}">${esc(CON("phone").value)}</a>` : ""}${WAON() ? `<a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></nav>
       ${S.modeToggle === false ? "" : `<button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>`}
@@ -115,7 +115,8 @@
   const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
   // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
   const ctag = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
-  const cmeta = (c) => [c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(", ") || c.short || "";
+  const nextB = (c) => (S.batches || []).find((b) => b && b.on !== false && b.course === c.slug && b.start);
+  const cmeta = (c) => [nextB(c) ? "набор " + nextB(c).start : "", c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(", ") || c.short || "";
   // главный экран: альбом из главного фото и двух дополнительных
   const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
   // постер: фото на весь экран, крупный заголовок, строки переносятся по запятым (Вариант 1, выбран Айгуль 24.11)
@@ -151,8 +152,8 @@
       const ord = list.concat(S.courses.filter((c) => !list.includes(c))), lim = S.moreAfter == null ? 6 : +S.moreAfter, cut = lim > 0 && ord.length > lim + 1 ? lim : 0;
       return `<section class="sec" style="padding-top:0"><div class="wrap">
       <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
-      <div class="ctiles${cut ? " is-cut" : ""}" id="ctiles">${ord.map((c, i) => `<a class="ctile${cut && i >= cut ? " ctile--more" : ""}" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
-        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a>`).join("")}</div>
+      <div class="ctiles${cut ? " is-cut" : ""}" id="ctiles">${ord.map((c, i) => `<div class="ctile-w${cut && i >= cut ? " ctile--more" : ""}"><a class="ctile" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
+        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${rub(c.price)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a><button class="btn btn--accent btn--sm ctile__en" type="button" data-enroll="${c.slug}">Записаться</button></div>`).join("")}</div>
       ${cut ? `<button class="btn btn--line more-btn" type="button" data-more="ctiles">Показать ещё ${ord.length - cut} ${plural(ord.length - cut, "курс", "курса", "курсов")}</button>` : ""}
       ${tools()}</div></section>`;
     }
@@ -385,7 +386,11 @@
     setTimeout(() => { const f = m.querySelector("#mBody button, #mBody input:not([type=hidden])"); if (f) f.focus(); }, 60);
   }
   function closeModal() { document.getElementById("modal").classList.remove("is-open"); document.documentElement.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+  const phoneMask = (inp) => inp && inp.addEventListener("input", () => {
+    let d = inp.value.replace(/\D/g, ""); if (!d) { inp.value = ""; return; } if (d[0] === "8") d = "7" + d.slice(1); if (d[0] !== "7") d = "7" + d; d = d.slice(0, 11);
+    const p = [d.slice(1, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)]; inp.value = "+7" + (p[0] ? " (" + p[0] : "") + (p[0].length === 3 ? ")" : "") + (p[1] ? " " + p[1] : "") + (p[2] ? "-" + p[2] : "") + (p[3] ? "-" + p[3] : ""); });
   function bindForm(form, extra, target) {
+    phoneMask(form.querySelector("[name=phone]"));
     form.addEventListener("submit", async (e) => {
       e.preventDefault(); const d = validate(form, true); if (!d) return;
       if (d.promo && d.promo.trim()) { const m = promoFind(d.promo); const pe = form.querySelector("[data-perr]"); if (!m) { if (pe) pe.textContent = "Такого промокода нет. Проверьте написание или оставьте поле пустым"; return; } if (pe) pe.textContent = ""; d.promoText = m.text; }

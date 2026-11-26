@@ -924,3 +924,28 @@ html.menu-open .burger span{background:transparent!important}
 .fmore .fld{margin-top:10px}
 .form .btn[type=submit]{width:100%}
 [data-style="studio"] .hero--poster .hp__h{font-family:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase}
+
+/* карточка курса с кнопкой «Записаться» */
+.ctile-w{display:flex;flex-direction:column;gap:10px}
+.ctiles.is-cut .ctile-w.ctile--more{display:none}
+.ctile-w .ctile{flex:1}
+.ctile__en{width:100%;min-height:42px!important}
+.ctiles>.ctile-w:first-child{grid-column:span 2}
+@media (max-width:760px){.ctiles>.ctile-w:first-child{grid-column:1/-1}}
+/* шапка ниже и звонок одним нажатием */
+.hdr__tel{display:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);align-items:center;justify-content:center;color:var(--ink);margin-left:auto}
+@media (max-width:960px){
+  .hdr__in{min-height:56px;gap:10px}
+  .hdr .btn{min-height:38px;padding:0 16px;font-size:.9rem}
+  .burger{width:38px;height:38px}
+  .hdr__tel{display:inline-flex}
+  .hdr__tel~.burger{margin-left:0}
+  .logo b{font-size:1.3rem}
+  .logo small{display:none}
+  .hero--poster,.hp__t{min-height:calc(100svh - 56px)}
+}
+.ctile-w .ctile{grid-column:auto!important;grid-row:auto!important;aspect-ratio:auto!important}
+.ctile-w:not(:first-child) .ctile .ctile__ph{aspect-ratio:4/3.4}
+.ctile-w:not(:first-child) .ctile .ctile__price{font-size:1.18rem}
+[data-style="studio"] .ctile-w:not(:first-child) .ctile .ctile__price{font-size:clamp(22px,5vw,28px)}
+@media (max-width:760px){.ctile-w:not(:first-child) .ctile .ctile__go{font-size:0}}
