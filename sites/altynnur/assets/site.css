@@ -839,3 +839,7 @@ html.menu-open .burger span{background:transparent!important}
   .hero--poster .hp__h{font-size:clamp(56px,10.5svh,96px)}
   .hp__sub{font-size:15px}
 }
+
+/* Вход в админку: в самом низу, едва заметно */
+.ftr__admin{opacity:.35;font-size:.82rem;transition:opacity .2s}
+.ftr__admin:hover,.ftr__admin:focus-visible{opacity:.8}

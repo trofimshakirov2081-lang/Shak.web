@@ -106,7 +106,7 @@
         <div><h2 class="ftr__title">Связаться с нами</h2><ul class="ftr__contacts">${contactRows()}</ul></div>
         ${mapHTML()}
       </div>
-      <div class="ftr__bottom"><nav aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}">${esc(n.label)}</a>`).join("")}<a href="${R}faq/">Вопросы</a><a href="${R}privacy/">Политика данных</a></nav><span>© ${new Date().getFullYear()} ${esc(S.org.name)}, ${esc(S.org.city)}</span></div>
+      <div class="ftr__bottom"><nav aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}">${esc(n.label)}</a>`).join("")}<a href="${R}faq/">Вопросы</a><a href="${R}privacy/">Политика данных</a></nav><span>© ${new Date().getFullYear()} ${esc(S.org.name)}, ${esc(S.org.city)}</span><a class="ftr__admin" href="${R}admin/" rel="nofollow">Вход в админку</a></div>
     </div></footer>`;
 
   /* ---------- блоки главной ---------- */
