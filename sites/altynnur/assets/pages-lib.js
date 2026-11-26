@@ -1,5 +1,7 @@
 /* Страницы-обёртки сайта АлтынНур: /courses/<slug>/ и разделы.
    Общий код для tools/pages.mjs (сборка на компьютере) и админки (публикация через GitHub). */
+/* версия кода сайта: меняется при правках кода, чтобы браузер не держал старые app.js и site.css; данные из админки грузятся без кеша */
+const VER = "20261126d";
 (function (g) {
   "use strict";
   function buildPages(S) {
@@ -10,10 +12,10 @@ const head = (title, desc, rootRel) => `<!doctype html><html lang="ru"><head><me
 <meta property="og:title" content="${title}"><meta property="og:description" content="${desc}"><meta property="og:type" content="website"><meta property="og:image" content="${rootRel}ph/hero-eye-1280.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&family=Prata&family=Bona+Nova:wght@400;700&family=Ysabeau+Office:wght@400;500;600&family=Finlandica:wght@400;500;600&family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${rootRel}assets/site.css"></head>`;
+<link rel="stylesheet" href="${rootRel}assets/site.css?v=${VER}"></head>`;
 const page = (dir, pg, title, desc, extra = "", ld = "") => {
   const depth = dir ? dir.split("/").length : 0, r = "../".repeat(depth);
-  const html = `${head(title, desc, r)}<body data-page="${pg}" data-root="${r}"${extra}><main id="main"></main>${ld}<script src="${r}assets/data.js"></script><script src="${r}assets/app.js"></script></body></html>\n`;
+  const html = `${head(title, desc, r)}<body data-page="${pg}" data-root="${r}"${extra}><main id="main"></main>${ld}<script>document.write('<script src="${r}assets/data.js?v=' + Date.now() + '"><\\/script>')</script><script src="${r}assets/app.js?v=${VER}"></script></body></html>\n`;
   out.push({ path: (dir ? dir + "/" : "") + "index.html", html });
 };
 const org = { "@context": "https://schema.org", "@type": "EducationalOrganization", name: S.org.name, description: S.org.kind, telephone: S.org.phone, sameAs: [S.org.vk],

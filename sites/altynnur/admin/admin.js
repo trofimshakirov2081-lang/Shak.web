@@ -233,7 +233,7 @@
     }; drawB();
     return [el("h1", { text: "Главная страница" }), el("p", { class: "sub", text: "Тексты и фото главной. Порядок блоков меняется стрелками." }),
       box("Первый экран", "заголовок и фото", [F.area("Заголовок", S.hero, "title", { max: 160 }), F.area("Короткий текст под заголовком", S.hero, "short", { max: 240 }), F.img("Главное фото", S.hero, "photo", "alt"),
-        el("div", { class: "f" }, el("span", { text: "Ещё два фото: стоят рядом с главным, как альбом" }), F.list(Array.isArray(S.hero.more) ? S.hero.more : (S.hero.more = []), { title: (it) => it.alt, untitled: "Фото", fields: (it) => [F.img("Фото", it, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" }))], true),
+        el("div", { class: "f" }, el("span", { text: "Ещё до двух фото: на первом экране плавно сменяют главное каждые 5 секунд" }), F.list(Array.isArray(S.hero.more) ? S.hero.more : (S.hero.more = []), { title: (it) => it.alt, untitled: "Фото", fields: (it) => [F.img("Фото", it, "src", "alt")], blank: () => ({ src: "", alt: "" }), add: "Добавить фото", del: "Убрать фото" }))], true),
       el("p", { class: "sub" }, "Порядок и показ блоков: вкладка ", el("a", { href: "#", onclick: (e) => { e.preventDefault(); TAB = "sections"; render(); } }, "«Разделы сайта»"), "."),
       box("Блок записи", null, [F.area("Заголовок", S.enroll, "title", { max: 160 }), F.area("Текст", S.enroll, "text", { max: 400 }), F.img("Фото", S.enroll, "photo", "alt")]),
       box("Фото-сцена «Как мы учим»", null, [F.text("Надпись над заголовком", S.zoom, "kicker"), F.text("Заголовок", S.zoom, "title"), F.img("Главное фото", S.zoom, "main", "alt"),
@@ -383,6 +383,17 @@
       F.sel("Анимация", S, "anim", [["calm", "Спокойная"], ["soft", "Мягкая"], ["live", "Живая"]]),
       F.sel("Курсы на главной", S, "coursesView", [["flow", "По дуге (карусель)"], ["tiles", "Плиткой"]]),
       F.sel("Сколько курсов видно сразу", S, "moreAfter", [["4", "4, остальные под «Показать ещё»"], ["6", "6, остальные под «Показать ещё»"], ["8", "8, остальные под «Показать ещё»"], ["12", "12, остальные под «Показать ещё»"], ["0", "Все сразу"]], { hint: "Порядок: сначала курсы из списка «Главные курсы», потом остальные" })], true),
+    box("Своя палитра", "фон, текст и акцент: всё остальное сайт подберёт сам", (() => {
+      const D = ensureD(), P = D.palette || {}, cur = (k, d) => (/^#[0-9a-f]{6}$/i.test(P[k] || "") ? P[k] : d);
+      const pick = (label, k, d) => { const inp = el("input", { type: "color", value: cur(k, d), style: "width:64px;height:44px;padding:0;border:1px solid var(--line);border-radius:10px;background:none;cursor:pointer" });
+        inp.addEventListener("input", () => { D.palette = Object.assign({ bg: cur("bg", "#15100D"), text: cur("text", "#EDE5DA"), accent: cur("accent", "#C99A4B") }, D.palette || {}, { [k]: inp.value }); touch(); });
+        return el("label", { class: "f", style: "display:flex;align-items:center;gap:12px" }, inp, el("span", { text: label })); };
+      const PRE = [["Ночное золото", "#15100D", "#EDE5DA", "#C99A4B"], ["Шоколад и пудра", "#2A1D1A", "#F3E6DF", "#E2A897"], ["Изумруд и золото", "#0F1F1A", "#E8F0EA", "#C9A45C"], ["Графит и розовое золото", "#1B1B1D", "#F1ECE8", "#D7A48C"],
+        ["Молоко и бордо", "#F6F1EA", "#2B2523", "#7A2E3A"], ["Пудра и золото", "#F7EDE8", "#3A2A26", "#B07E36"], ["Белый и чёрный", "#FFFFFF", "#141414", "#141414"], ["Лаванда", "#F3F0F7", "#2A2533", "#7A5BA6"]];
+      return [pick("Фон", "bg", "#15100D"), pick("Текст", "text", "#EDE5DA"), pick("Акцент: кнопки и цены", "accent", "#C99A4B"),
+        el("div", { class: "f" }, el("span", { text: "Готовые палитры" }), el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" }, PRE.map(([n, b, t, a]) => el("button", { type: "button", class: "btn btn--sm", style: `background:${b};color:${t};border-color:${a}`, onclick: () => { ensureD().palette = { bg: b, text: t, accent: a }; touch(); render(); toast("Палитра «" + n + "». Нажмите «Посмотреть»"); } }, el("i", { style: `display:inline-block;width:10px;height:10px;border-radius:50%;background:${a};margin-right:6px` }), n)))),
+        el("button", { type: "button", class: "btn btn--sm", style: "justify-self:start", text: "Вернуть стандартные цвета", onclick: () => { delete ensureD().palette; touch(); render(); toast("Палитра сброшена. Цвета снова из пункта «Цвета»"); } })];
+    })()),
     box("Режим черновика", null, [F.bool("Сайт в режиме черновика", S, "preview"),
       el("small", { style: "color:var(--ink2)", text: GHM ? "Пока включено: посетители видят панель выбора оформления, поисковики сайт не показывают. Перед запуском выключите, и сайт появится в поиске." : "Пока включено: посетители видят панель выбора оформления, поисковики сайт не показывают, а заявка открывает WhatsApp. Перед запуском выключите: заявки начнут сохраняться в раздел «Заявки», а сайт появится в поиске." })], true)];
 

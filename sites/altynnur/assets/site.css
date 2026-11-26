@@ -949,3 +949,12 @@ html.menu-open .burger span{background:transparent!important}
 .ctile-w:not(:first-child) .ctile .ctile__price{font-size:1.18rem}
 [data-style="studio"] .ctile-w:not(:first-child) .ctile .ctile__price{font-size:clamp(22px,5vw,28px)}
 @media (max-width:760px){.ctile-w:not(:first-child) .ctile .ctile__go{font-size:0}}
+
+/* первый экран: несколько фото сменяют друг друга плавно, видно одно */
+.hp__ph .hp__s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
+.hp__ph .hp__s.is-on{opacity:1}
+@media (max-width:899px){.hp__ph .hp__s{height:114%;top:-14%}}
+@media (max-width:899px) and (max-height:780px){.hp__ph .hp__s{height:126%;top:-26%}}
+
+/* заголовок первого экрана: цвет акцента из палитры, если он виден на фото */
+.hero--poster .hp__h{color:var(--hero-h,#D9B26A)}
