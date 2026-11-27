@@ -1,0 +1,74 @@
+{
+  "slug": "garant-bani",
+  "name": "Гарант Бани",
+  "niche": "masterskaya",
+  "city": "Вологда",
+  "custom": "stolyar",
+  "tagline": "Бани под ключ",
+  "colors": {
+    "main": "#7A3E2B",
+    "accent": "#D9B38C",
+    "bg": "#F3EFE8",
+    "text": "#2A1E19"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Своя баня под ключ",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/garant-bani/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Гарант Бани: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Баня ПАРУС 600",
+      "price": 362000,
+      "desc": "КОМПЛЕКТАЦИЯ: Размеры: Количество секций: 3 Длина: 6 м…",
+      "photo": "files/garant-bani/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Баня квадро-овал \"ХАРД",
+      "price": 349000,
+      "desc": "Комплектация: - печь - дымоход в сборе из нержавеющей…",
+      "photo": "files/garant-bani/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Баня-бочка 600",
+      "price": 319000,
+      "desc": "- печь - дымоход в сборе из нержавеющей стали - бак для…",
+      "photo": "files/garant-bani/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Баня Квадро 600",
+      "price": 349000,
+      "desc": "Комплектация: - печь - дымоход в сборе из нержавеющей…",
+      "photo": "files/garant-bani/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 052-56-96",
+    "whatsapp": "79210525696",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FCFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://garant-bani.orgs.biz/",
+  "contact_lead": "em:garant_banya@mail.ru"
+}

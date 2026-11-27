@@ -1,0 +1,149 @@
+{
+  "slug": "centralnaya-kofeynya",
+  "name": "Центральная кофейня",
+  "niche": "кофейня",
+  "city": "Чебаркуль",
+  "custom": "altynnur",
+  "tagline": "Кофейня",
+  "colors": {
+    "main": "#2F4A66",
+    "accent": "#E3B778",
+    "bg": "#F6F7F9",
+    "text": "#121B26"
+  },
+  "fonts": {
+    "head": "Bitter",
+    "body": "Golos Text"
+  },
+  "hero": {
+    "title": "Место, куда приятно возвращаться",
+    "text": "Кофе отличного качества, холодные напитки и перекус. Ждём каждый день с 9:00 до 20:00 на Ленина, 15.",
+    "cta": "Смотреть меню",
+    "photo": "files/centralnaya-kofeynya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Меню",
+    "catalogText": "Цены за меньший объём. Добавьте напитки в заказ и отправьте нам.",
+    "aboutTitle": "О кофейне",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Центральная кофейня в Чебаркуле: кофе отличного качества, приятное обслуживание, холодные напитки и бургеры.",
+  "features": [
+    {
+      "icon": "☕",
+      "title": "Хороший кофе",
+      "text": "Раф, флэт уайт, гляссе."
+    },
+    {
+      "icon": "🍹",
+      "title": "Мохито и коктейли",
+      "text": "Холодные напитки."
+    },
+    {
+      "icon": "🍔",
+      "title": "Перекусить",
+      "text": "Бургеры и не только."
+    }
+  ],
+  "items": [
+    {
+      "name": "Раф",
+      "price": 350,
+      "desc": "Сливки и добавка на ваш вкус",
+      "photo": "files/centralnaya-kofeynya/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Флэт уайт",
+      "price": 220,
+      "desc": "На двойном эспрессо",
+      "photo": "files/centralnaya-kofeynya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Гляссе",
+      "price": 280,
+      "desc": "С мороженым",
+      "photo": "files/centralnaya-kofeynya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Фраппе",
+      "price": 300,
+      "desc": "Со взбитыми сливками",
+      "photo": "files/centralnaya-kofeynya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бамбл",
+      "price": 300,
+      "desc": "Апельсиновый или вишнёвый",
+      "photo": "files/centralnaya-kofeynya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Мохито классический",
+      "price": 300,
+      "desc": "Безалкогольный",
+      "photo": "files/centralnaya-kofeynya/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Молочный коктейль",
+      "price": 300,
+      "desc": "Сироп на выбор",
+      "photo": "files/centralnaya-kofeynya/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бургер",
+      "price": 250,
+      "desc": "Котлета, сыр, овощи",
+      "photo": "files/centralnaya-kofeynya/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 950 727-89-73",
+    "whatsapp": "79507278973",
+    "address": "ул. Ленина, 15",
+    "hours": "Ежедневно 9:00-20:00"
+  },
+  "extra": {
+    "groups": [
+      [
+        "Кофе",
+        "раф|флет|флэт|гляссе|фраппе|бамбл|латте"
+      ],
+      [
+        "Холодные напитки",
+        "мохито|коктейл|лагун|колад"
+      ],
+      [
+        "Еда",
+        "бургер"
+      ]
+    ],
+    "cartBtn": "Заказ",
+    "allLabel": "Всё меню",
+    "orderTitle": "Заказать заранее",
+    "orderText": "Соберите заказ на сайте и заберите его без очереди.",
+    "orderMsg": "Здравствуйте! Хочу сделать заказ",
+    "sendLabel": "Отправить заказ в WhatsApp",
+    "addedLabel": "В заказе",
+    "commentHint": "Ко скольки подготовить, объём, сироп",
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "emptyText": "Заказ пока пустой. Выберите напиток.",
+    "emptyToast": "Сначала выберите напиток",
+    "vars": {
+      "deep": "#1E2B3A",
+      "glow": "#C98A3E",
+      "glow2": "#3D6A93",
+      "sky": "#E4EAF1",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://koffe151515.orgs.biz/"
+}

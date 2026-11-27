@@ -1,0 +1,135 @@
+{
+  "slug": "roza-express",
+  "name": "Roza-express",
+  "niche": "цветы",
+  "city": "Ярославль",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#1C6E7D",
+    "accent": "#FFD8C7",
+    "bg": "#F3F8F8",
+    "text": "#0F2A30"
+  },
+  "fonts": {
+    "head": "Jost",
+    "body": "Jost"
+  },
+  "hero": {
+    "title": "Доставим букет к любому времени",
+    "text": "Доставка цветов по Ярославлю и области. Розы, сборные букеты и композиции.",
+    "cta": "Выбрать букет",
+    "photo": "files/roza-express/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Roza-express: доставка цветов по Ярославлю и Ярославской области. Привезём букет точно ко времени.",
+  "features": [
+    {
+      "icon": "⏱",
+      "title": "Точно ко времени",
+      "text": "Назовите удобный час."
+    },
+    {
+      "icon": "🌹",
+      "title": "Свежие розы",
+      "text": "И сезонные цветы."
+    },
+    {
+      "icon": "🚚",
+      "title": "По городу и области",
+      "text": "Доставим куда нужно."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/roza-express/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/roza-express/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/roza-express/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/roza-express/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/roza-express/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/roza-express/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/roza-express/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/roza-express/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 900 012-64-12",
+    "whatsapp": "79000126412",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#E2EFEF",
+      "ok": "#E07A5F"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://expressroseyaroslavl.orgs.biz/",
+  "email": "flowertver@mail.ru"
+}

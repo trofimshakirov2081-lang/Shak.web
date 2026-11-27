@@ -1,0 +1,73 @@
+{
+  "slug": "skolof-spb",
+  "name": "SKOLOF.NET",
+  "niche": "detailing",
+  "city": "Санкт-Петербург",
+  "custom": "glyanec",
+  "tagline": "Детейлинг",
+  "colors": {
+    "main": "#C9A227",
+    "accent": "#9FB4C7",
+    "bg": "#16181C",
+    "text": "#ECECEA"
+  },
+  "fonts": {
+    "head": "Akt",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Блеск, который держится годами",
+    "text": "Выберите класс машины и услуги: цена посчитается сразу, а запись уйдёт нам в WhatsApp.",
+    "photo": "files/skolof-spb/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Услуги и цены",
+    "catalogText": "Цены для седана, для других классов переключите выше.",
+    "aboutTitle": "О нас"
+  },
+  "about": "SKOLOF.NET: работаем аккуратно, показываем результат до и после.",
+  "items": [
+    {
+      "name": "Нанесение жидкого стекла на кузов автомобиля",
+      "price": 16000,
+      "desc": "Покрытие жидким стеклом – это хорошая возможность придать…",
+      "photo": "files/skolof-spb/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Защита лобового стекла бронирующей пленкой",
+      "price": 15000,
+      "desc": "Защита лобового стекла бронирующей пленкой ClearPlex",
+      "photo": "files/skolof-spb/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тонировка автомобиля пленками 3M MetallicShade",
+      "price": 4500,
+      "desc": "Тонировка задней полусферы автомобиля пленкой 3M…",
+      "photo": "files/skolof-spb/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бронирование антигравизной пленкой 3М",
+      "price": 38000,
+      "desc": "Пакет включает в себя защиту фар, зеркал, переднего…",
+      "photo": "files/skolof-spb/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 921 984-23-73",
+    "whatsapp": "79219842373",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "graphite": "#24272D"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://skolof-net.orgs.biz/",
+  "contact_lead": "em:spb@skolof.net"
+}

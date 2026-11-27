@@ -1,0 +1,126 @@
+{
+  "slug": "zefirnye-cvety",
+  "name": "Зефирные цветы",
+  "niche": "кондитерская",
+  "city": "Каменск-Шахтинский",
+  "custom": "yulya-konditer",
+  "tagline": "Зефирные цветы ручной работы",
+  "colors": {
+    "main": "#D46A92",
+    "accent": "#FCE1EC",
+    "bg": "#FFF9FB",
+    "text": "#3A2430"
+  },
+  "fonts": {
+    "head": "Marck Script",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Букеты из зефира, которые можно съесть",
+    "text": "Зефирные пионы, подсолнухи и хризантемы на яблочном пюре. Ручная работа и только натуральный состав.",
+    "cta": "Собрать заказ",
+    "photo": "files/zefirnye-cvety/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Зефирные букеты",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Азатуи",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Меня зовут Азатуи. Делаю домашний зефир в форме цветов: нежный, воздушный и без искусственных добавок.",
+  "features": [
+    {
+      "icon": "🌸",
+      "title": "Ручная работа",
+      "text": "Каждый цветок вручную."
+    },
+    {
+      "icon": "🍏",
+      "title": "На яблочном пюре",
+      "text": "Натуральный состав."
+    },
+    {
+      "icon": "🎁",
+      "title": "Красиво дарить",
+      "text": "Коробки и корзины."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет зефирных цветов",
+      "price": 3000,
+      "desc": "Нежнейший зефир",
+      "photo": "files/zefirnye-cvety/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Монобукет зефирных пионов",
+      "price": 4000,
+      "desc": "Большой букет",
+      "photo": "files/zefirnye-cvety/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Зефирные пионы",
+      "price": 2200,
+      "desc": "Воздушные",
+      "photo": "files/zefirnye-cvety/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Подсолнухи",
+      "price": 1400,
+      "desc": "Солнечный букет",
+      "photo": "files/zefirnye-cvety/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы и георгины",
+      "price": 2000,
+      "desc": "С гипсофилой",
+      "photo": "files/zefirnye-cvety/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Пионы в шляпной коробке",
+      "price": 1700,
+      "desc": "Коробка 16 см",
+      "photo": "files/zefirnye-cvety/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Корзина цветов и ягод",
+      "price": 3500,
+      "desc": "Диаметр 21 см",
+      "photo": "files/zefirnye-cvety/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Подсолнухи в коробке",
+      "price": 1600,
+      "desc": "Небольшая композиция",
+      "photo": "files/zefirnye-cvety/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 909 429-42-02",
+    "whatsapp": "79094294202",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Букеты от",
+    "vars": {
+      "lilac": "#F1E4F7",
+      "pist": "#E1F2E6",
+      "butter": "#FFF2D6"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://zefirka-kamensk.orgs.biz/"
+}

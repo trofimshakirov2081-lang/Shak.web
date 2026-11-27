@@ -1,0 +1,67 @@
+{
+  "slug": "shamahanskie-caricy",
+  "name": "Шамаханские царицы",
+  "niche": "sport",
+  "city": "Звенигород",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#1F7A4D",
+    "accent": "#E94F37",
+    "bg": "#F4F6F1",
+    "text": "#14201A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/shamahanskie-caricy/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Шамаханские царицы: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пробное занятие",
+      "price": 500,
+      "desc": "Восточный танец с нуля",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абонемент на месяц",
+      "price": 4000,
+      "desc": "8 занятий",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Постановка номера",
+      "price": 2500,
+      "desc": "Индивидуально",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 963 608-78-70",
+    "whatsapp": "79636087870",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E2E8DF"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://bellydance-zvenigorod-elenaky.orgs.biz/",
+  "contact_lead": "em:helenaky@yandex.ru"
+}

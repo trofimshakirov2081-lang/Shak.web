@@ -1,0 +1,77 @@
+{
+  "slug": "sea-breeze-anapa",
+  "name": "Sea Breeze Resort",
+  "niche": "otdyh",
+  "city": "Анапа",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Уютные номера и честные цены",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/sea-breeze-anapa/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Sea Breeze Resort в Анапе: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Стандарт двухместный",
+      "price": 6650,
+      "desc": "Номер, площадью 18-19 кв.м, подходит для уютного…",
+      "photo": "files/sea-breeze-anapa/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Стандарт двухместный улучшенный",
+      "price": 8100,
+      "desc": "В номере этой категории, площадью 24-25 кв.м, с комфортом…",
+      "photo": "files/sea-breeze-anapa/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Люкс студия",
+      "price": 9500,
+      "desc": "Просторный однокомнатный двухместный номер с двуспальной…",
+      "photo": "files/sea-breeze-anapa/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Люкс двухкомнатный",
+      "price": 10800,
+      "desc": "Жемчужина номерного фонда гостиницы Си Бриз Резорт -…",
+      "photo": "files/sea-breeze-anapa/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 918 066-91-27",
+    "whatsapp": "79180669127",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://sea-b-resort.orgs.biz/",
+  "contact_lead": "em:seabreezeresort@yandex.ru"
+}

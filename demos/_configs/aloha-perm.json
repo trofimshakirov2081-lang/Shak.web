@@ -1,0 +1,68 @@
+{
+  "slug": "aloha-perm",
+  "name": "За горизонтом Aloha",
+  "niche": "tury",
+  "city": "Пермь",
+  "custom": "marshrut",
+  "tagline": "Турагентство",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Отпуск, который подберут за вас",
+    "text": "Выберите направление, даты и сколько вас: цена посчитается сразу, заявка придёт в WhatsApp.",
+    "photo": "files/aloha-perm/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "За горизонтом Aloha: подбираем туры под ваш бюджет и сопровождаем до возвращения домой.",
+  "items": [
+    {
+      "name": "Турция, всё включено",
+      "price": 85000,
+      "desc": "7 ночей, перелёт и трансфер",
+      "photo": "files/aloha-perm/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абхазия у моря",
+      "price": 32000,
+      "desc": "Неделя, проживание и экскурсии",
+      "photo": "files/aloha-perm/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Горящий тур",
+      "price": 40000,
+      "desc": "Подберём за день под ваш бюджет",
+      "photo": "files/aloha-perm/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 908 261-83-75",
+    "whatsapp": "79082618375",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Пермь",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club220240897.orgs.biz/",
+  "contact_lead": "em:kovaleva@alohatur.ru"
+}

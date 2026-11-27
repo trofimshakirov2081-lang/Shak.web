@@ -1,0 +1,135 @@
+{
+  "slug": "cvetochka-kineshma",
+  "name": "ЦВЕточка",
+  "niche": "цветы",
+  "city": "Кинешма",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#6E8B5E",
+    "accent": "#F1D6D0",
+    "bg": "#F4F6F1",
+    "text": "#1F2A1C"
+  },
+  "fonts": {
+    "head": "Lora",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Букеты с доставкой по Кинешме",
+    "text": "Соберём букет под ваш бюджет и привезём вовремя.",
+    "cta": "Выбрать букет",
+    "photo": "files/cvetochka-kineshma/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "ЦВЕточка: цветы в Кинешме. Собираем букеты и композиции под повод и под человека, подскажем, если сложно выбрать.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "По Кинешме к нужному времени."
+    },
+    {
+      "icon": "🌷",
+      "title": "Свежие цветы",
+      "text": "Регулярные поставки."
+    },
+    {
+      "icon": "📸",
+      "title": "Фото перед отправкой",
+      "text": "Покажем букет заранее."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из альстромерий",
+      "price": 2390,
+      "desc": "Нежный букет из альстромерии будет отличным дополнением к…",
+      "photo": "files/cvetochka-kineshma/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Букет \"Нежные диантусы",
+      "price": 1790,
+      "desc": "Диантусы - это отдельная любовь. Если хотя бы раз они…",
+      "photo": "files/cvetochka-kineshma/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Яркие герберы",
+      "price": 2090,
+      "desc": "Ох, уже эти цветные ромашки))) Их очень любят дарить…",
+      "photo": "files/cvetochka-kineshma/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция \"Радужная",
+      "price": 1890,
+      "desc": "Гипсофила - это именно тот цветок, который обладает высокой…",
+      "photo": "files/cvetochka-kineshma/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Розовые мечты",
+      "price": 3390,
+      "desc": "Весенний букет из тюльпанов и эустомы — это утренний…",
+      "photo": "files/cvetochka-kineshma/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Солнечные блики",
+      "price": 2890,
+      "desc": "Композиция из жёлтых тюльпанов и альстрамерии — солнечный…",
+      "photo": "files/cvetochka-kineshma/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Краски весны",
+      "price": 3990,
+      "desc": "Букет из ирисов и жёлтых тюльпанов — это гармония ярких…",
+      "photo": "files/cvetochka-kineshma/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет \"Розовый шик",
+      "price": 3590,
+      "desc": "Букет из розовых тюльпанов и альстрамерии – нежное…",
+      "photo": "files/cvetochka-kineshma/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 915 832-24-62",
+    "whatsapp": "79158322462",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#E8EDE3",
+      "ok": "#6E8B5E"
+    }
+  },
+  "credits": "Фото товаров со страницы заведения, остальные фото: Pexels, для примера",
+  "source": "https://cvetochka-kineshma.orgs.biz/",
+  "telegram_lead": "Cvetochka_kineshma37"
+}

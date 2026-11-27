@@ -1,0 +1,131 @@
+{
+  "slug": "tsaplya",
+  "name": "Цапля в розах",
+  "niche": "цветы",
+  "city": "Курск",
+  "custom": "makov-cvet",
+  "tagline": "Цветочная мастерская в Курске",
+  "colors": {
+    "main": "#2F4858",
+    "accent": "#F3C9C9",
+    "bg": "#F5F7F8",
+    "text": "#18232B"
+  },
+  "fonts": {
+    "head": "Yeseva One",
+    "body": "Mulish"
+  },
+  "hero": {
+    "title": "Цветочная мастерская в самом центре Курска",
+    "text": "Сборные букеты на любой бюджет, корзины и композиции. Соберём букет на нужную сумму и доставим.",
+    "cta": "Выбрать букет",
+    "photo": "files/tsaplya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Цапля в розах: мастерская в центре города, на Радищева. Здесь всегда найдётся букет, который порадует вас и ваших близких.",
+  "features": [
+    {
+      "icon": "📍",
+      "title": "В центре города",
+      "text": "Ул. Радищева, 12."
+    },
+    {
+      "icon": "💐",
+      "title": "На любой бюджет",
+      "text": "Соберём букет на нужную сумму."
+    },
+    {
+      "icon": "🚚",
+      "title": "Доставка",
+      "text": "Привезём по Курску."
+    }
+  ],
+  "items": [
+    {
+      "name": "Большой сборный букет",
+      "price": 5000,
+      "desc": "Пышный и яркий",
+      "photo": "files/tsaplya/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Голубое небо",
+      "price": 3700,
+      "desc": "Сборный букет в голубых тонах",
+      "tag": "",
+      "photo": "files/tsaplya/item-2.jpg"
+    },
+    {
+      "name": "Нежный букет",
+      "price": 3600,
+      "desc": "Пастельные оттенки",
+      "photo": "files/tsaplya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Яркий сборный",
+      "price": 4600,
+      "desc": "Сочные цвета",
+      "photo": "files/tsaplya/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Весна",
+      "price": 3000,
+      "desc": "Лёгкий и нежный",
+      "photo": "files/tsaplya/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "С гортензией",
+      "price": 3000,
+      "desc": "Сборный букет с гортензией",
+      "photo": "files/tsaplya/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "С орхидеей",
+      "price": 2950,
+      "desc": "Изящный букет",
+      "photo": "files/tsaplya/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Корзина с хризантемой",
+      "price": 7000,
+      "desc": "Большая корзина с белой хризантемой",
+      "photo": "files/tsaplya/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 961 195-90-01",
+    "whatsapp": "79611959001",
+    "address": "ул. Радищева, 12",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Корзины",
+        "корзин"
+      ]
+    ],
+    "vars": {
+      "soft": "#E6ECEF",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://tsaplya--flowers.orgs.biz/"
+}

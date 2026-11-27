@@ -1,0 +1,131 @@
+{
+  "slug": "pion-buton",
+  "name": "Пион-Бутон",
+  "niche": "цветы",
+  "city": "Новосибирск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Новосибирске",
+  "colors": {
+    "main": "#D94F7A",
+    "accent": "#FFE0EA",
+    "bg": "#FFF8FA",
+    "text": "#2E1520"
+  },
+  "fonts": {
+    "head": "Montserrat",
+    "body": "Montserrat"
+  },
+  "hero": {
+    "title": "Стильные букеты по оптовым ценам",
+    "text": "Свежие цветы с бесплатной доставкой по Новосибирску точно ко времени. От маленького комплимента до большого букета.",
+    "cta": "Выбрать букет",
+    "photo": "files/pion-buton/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Пион-Бутон: цветочный магазин со стильными букетами и душевным сервисом. Цветы по оптовым ценам с гарантией свежести.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Бесплатная доставка",
+      "text": "С точностью до минуты."
+    },
+    {
+      "icon": "💸",
+      "title": "Оптовые цены",
+      "text": "Без лишних наценок."
+    },
+    {
+      "icon": "🌸",
+      "title": "Гарантия свежести",
+      "text": "Заменим, если что-то не так."
+    }
+  ],
+  "items": [
+    {
+      "name": "Дофаминовый букет",
+      "price": 4900,
+      "desc": "Яркий и большой",
+      "photo": "files/pion-buton/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет «Любовь»",
+      "price": 2390,
+      "desc": "Красно-розовые тона",
+      "photo": "files/pion-buton/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы и диантусы",
+      "price": 4100,
+      "desc": "Яркий и стойкий",
+      "photo": "files/pion-buton/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "13 кустовых роз",
+      "price": 3970,
+      "desc": "В розовой упаковке",
+      "tag": "",
+      "photo": "files/pion-buton/item-4.jpg"
+    },
+    {
+      "name": "25 красных роз",
+      "price": 5500,
+      "desc": "Сорт Ред Наоми",
+      "photo": "files/pion-buton/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Французские розы и альстромерия",
+      "price": 1890,
+      "desc": "Белый букет",
+      "photo": "files/pion-buton/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Комплимент с герберами",
+      "price": 1590,
+      "desc": "Мини-букет",
+      "photo": "files/pion-buton/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Коробочка с хризантемой",
+      "price": 1200,
+      "desc": "Небольшая композиция",
+      "photo": "files/pion-buton/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 923 193-27-27",
+    "whatsapp": "79231932727",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Комплименты",
+        "комплимент|коробоч"
+      ]
+    ],
+    "vars": {
+      "soft": "#FBE7EE",
+      "ok": "#4E8C6A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://club232578789.orgs.biz/"
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "winners-academy",
+  "name": "Winners Academy",
+  "niche": "sport",
+  "city": "Долгопрудный",
+  "custom": "start",
+  "tagline": "Спортивный клуб",
+  "colors": {
+    "main": "#1F7A4D",
+    "accent": "#E94F37",
+    "bg": "#F4F6F1",
+    "text": "#14201A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Сильные дети и уверенные взрослые",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/winners-academy/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Winners Academy: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Дзюдо, дети 4-6 лет",
+      "price": 4500,
+      "desc": "Игровая форма",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Самбо, 7-12 лет",
+      "price": 5000,
+      "desc": "Техника и соревнования",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Взрослые",
+      "price": 5500,
+      "desc": "Самбо с нуля",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 968 998-88-89",
+    "whatsapp": "79689988889",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E2E8DF"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://w-academy.orgs.biz/",
+  "contact_lead": "em:info@w-academy.ru"
+}

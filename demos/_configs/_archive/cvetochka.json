@@ -1,0 +1,135 @@
+{
+  "slug": "cvetochka",
+  "name": "Цветочка",
+  "niche": "цветы",
+  "city": "Топки",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#C8241B",
+    "accent": "#EF7A63",
+    "bg": "#F9E6E1",
+    "text": "#2B1513"
+  },
+  "fonts": {
+    "head": "Geologica",
+    "body": "Onest"
+  },
+  "hero": {
+    "title": "Цветочный салон и декор в Топках",
+    "text": "Букеты, украшение праздников и мероприятий. Заходите на Луначарского, 4.",
+    "cta": "Выбрать букет",
+    "photo": "files/cvetochka/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Цветочка: цветочный салон в Топках. Собираем букеты и украшаем мероприятия цветами.",
+  "features": [
+    {
+      "icon": "💐",
+      "title": "Букеты",
+      "text": "На любой повод."
+    },
+    {
+      "icon": "🎈",
+      "title": "Оформление",
+      "text": "Праздники и свадьбы."
+    },
+    {
+      "icon": "📍",
+      "title": "Топки",
+      "text": "Ул. Луначарского, 4."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/cvetochka/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/cvetochka/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/cvetochka/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/cvetochka/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/cvetochka/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/cvetochka/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/cvetochka/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/cvetochka/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 950 576-66-06",
+    "whatsapp": "79505766606",
+    "address": "ул. Луначарского, 4",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#F3E9E4",
+      "ok": "#2E5A3A"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://cvetochka-42.orgs.biz/",
+  "email": "for_florist@mail.ru"
+}

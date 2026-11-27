@@ -1,0 +1,70 @@
+{
+  "slug": "krepost-kuchugur",
+  "name": "Крепость Кучугур",
+  "niche": "otdyh",
+  "city": "Кучугуры",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#24352B",
+    "accent": "#D9692E",
+    "bg": "#F2EFE6",
+    "text": "#1B241E"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Номер на ваши даты за минуту",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/krepost-kuchugur/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Крепость Кучугур : чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Логово Дракона\" с Бассейном и кухней",
+      "price": 7000,
+      "desc": "👫👪​ \"Люкс\" в КРЕПОСТИ с бассейном🌊, ванной🛀,…",
+      "photo": "files/krepost-kuchugur/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Семейный с балконом на 2 этаже",
+      "price": 2500,
+      "desc": "Почувствуйте атмосферу средневековья!!! Вся мебель…",
+      "photo": "files/krepost-kuchugur/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Рыцарский номер с двориком или бассейном",
+      "price": 2700,
+      "desc": "Почувствуйте атмосферу средневековья в доме из…",
+      "photo": "files/krepost-kuchugur/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 938 100-00-40",
+    "whatsapp": "79381000040",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#9DB7B5",
+      "paper": "#FBF9F4"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://zamokkuchugura.orgs.biz/",
+  "contact_lead": "em:zamok.klub@mail.ru"
+}

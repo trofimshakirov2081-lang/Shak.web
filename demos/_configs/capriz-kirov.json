@@ -1,0 +1,73 @@
+{
+  "slug": "capriz-kirov",
+  "name": "КАПРИЗ",
+  "niche": "masterskaya",
+  "city": "Киров",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#2F5D50",
+    "accent": "#C08552",
+    "bg": "#EFEDE6",
+    "text": "#1F2622"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/capriz-kirov/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "КАПРИЗ: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Кухня Бирюза",
+      "price": 350000,
+      "desc": "Кухонный гарнитур с фасадами МДФ в покраске с фрезеровкой…",
+      "photo": "files/capriz-kirov/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Кухонный гарнитур \"Ёлка",
+      "price": 290000,
+      "desc": "Фасады изготовлены из МДФ в пленке ПВХ; Корпус ЛДСП;…",
+      "photo": "files/capriz-kirov/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Прихожая Вельвет",
+      "price": 101100,
+      "desc": "Успей заказать прихожую «Вельвет» до конца марта 2023…",
+      "photo": "files/capriz-kirov/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шкаф",
+      "price": 35000,
+      "desc": "Готовый шкаф - купе, материал ЛДСП, цвета каньон ледяной,…",
+      "photo": "files/capriz-kirov/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 912 734-26-00",
+    "whatsapp": "79127342600",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FAFAF6"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://ms-capriz.orgs.biz/",
+  "contact_lead": "em:203853@mail.ru"
+}

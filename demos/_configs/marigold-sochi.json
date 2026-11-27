@@ -1,0 +1,63 @@
+{
+  "slug": "marigold-sochi",
+  "name": "Отель Marigold",
+  "niche": "otdyh",
+  "city": "Сочи",
+  "custom": "tropa",
+  "tagline": "Гостиница",
+  "colors": {
+    "main": "#4A3B2A",
+    "accent": "#C8553D",
+    "bg": "#F4EEE4",
+    "text": "#2A2018"
+  },
+  "fonts": {
+    "head": "Brygada 1918",
+    "body": "Arsenal"
+  },
+  "hero": {
+    "title": "Уютные номера и честные цены",
+    "text": "Выберите даты и номер: сайт сразу посчитает цену, а заявка придёт администратору в WhatsApp.",
+    "photo": "files/marigold-sochi/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Номера",
+    "catalogText": "Цена за ночь.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Отель Marigold в Сочи: чистые номера, понятные цены и бронь без звонков.",
+  "items": [
+    {
+      "name": "Твин Комфорт",
+      "price": 4700,
+      "desc": "Просторный и уютный однокомнатныйй номер, состоящий из…",
+      "photo": "files/marigold-sochi/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Стандарт",
+      "price": 4500,
+      "desc": "Уютный однокомнатный номер, отлично подходящий для…",
+      "photo": "files/marigold-sochi/item-2.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 800 550-40-55",
+    "whatsapp": "78005504055",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "houseLabel": "Номер",
+    "weekend": 0,
+    "ticketNote": "Бронь подтвердим в течение часа.",
+    "vars": {
+      "lake": "#D8C3A5",
+      "paper": "#FCF8F2"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://club203313034.orgs.biz/",
+  "contact_lead": "em:booking@mh.ru"
+}

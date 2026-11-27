@@ -1,0 +1,74 @@
+{
+  "slug": "wood-cnt-nsk",
+  "name": "Wood-CNT",
+  "niche": "masterskaya",
+  "city": "Новосибирск",
+  "custom": "stolyar",
+  "tagline": "Строительство домов",
+  "colors": {
+    "main": "#3D5A80",
+    "accent": "#B98A5A",
+    "bg": "#F2F0EA",
+    "text": "#23262B"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Дом, который строят под вас",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/wood-cnt-nsk/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что строим",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Wood-CNT: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Дом из бруса",
+      "price": 28000,
+      "desc": "Коробка под крышу",
+      "photo": "files/wood-cnt-nsk/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Дом под ключ",
+      "price": 55000,
+      "desc": "С инженерией и отделкой",
+      "photo": "files/wood-cnt-nsk/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Баня",
+      "price": 32000,
+      "desc": "Под ключ, с печью",
+      "photo": "files/wood-cnt-nsk/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Каркасный дом",
+      "price": 24000,
+      "desc": "Тёплый контур",
+      "photo": "files/wood-cnt-nsk/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "",
+    "whatsapp": "",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "drawing": "house",
+    "vars": {
+      "sheet": "#FBFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://doma-iz-brusa-nsk.orgs.biz/",
+  "contact_lead": "em:zakaz@wood-cnt.ru"
+}

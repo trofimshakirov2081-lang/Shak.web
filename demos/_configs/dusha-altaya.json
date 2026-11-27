@@ -1,0 +1,75 @@
+{
+  "slug": "dusha-altaya",
+  "name": "Душа Алтая",
+  "niche": "tury",
+  "city": "Алтай",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/dusha-altaya/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Душа Алтая: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Каракольские озера, 3 дня",
+      "price": 65000,
+      "desc": "📆 3 дня / 2 ночи 🚙Протяженность от 850 км. 🚤 Прогулка на…",
+      "photo": "files/dusha-altaya/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Чуйсикий тракт до Марса, 3 дня",
+      "price": 65000,
+      "desc": "📆 3 дня / 2 ночи 🚙Протяженность от 850 км. 🏆Категория:…",
+      "photo": "files/dusha-altaya/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветение маральника, 3 дня",
+      "price": 65000,
+      "desc": "📆 3 дня / 2 ночи 🚙Протяженность от 850 км. 🏆Категория:…",
+      "photo": "files/dusha-altaya/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Лучшее на Алтае Летом, 5 дней",
+      "price": 140000,
+      "desc": "📆 5 дней / 4 ночи 🚙Протяженность от 1000 км. 🏆Категория:…",
+      "photo": "files/dusha-altaya/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 936 154-04-04",
+    "whatsapp": "79361540404",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Алтай",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://duhaltay.orgs.biz/",
+  "contact_lead": "em:info@duhaltay.ru"
+}

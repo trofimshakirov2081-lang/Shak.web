@@ -1,0 +1,74 @@
+{
+  "slug": "voshodyaschaya-zvezda",
+  "name": "Восходящая звезда",
+  "niche": "sport",
+  "city": "Симферополь",
+  "custom": "start",
+  "tagline": "Фигурное катание",
+  "colors": {
+    "main": "#D7442E",
+    "accent": "#2F6B4F",
+    "bg": "#F7F5F0",
+    "text": "#15171A"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "На лёд с первого занятия",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/voshodyaschaya-zvezda/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Восходящая звезда: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Дети с 3 лет",
+      "price": 5000,
+      "desc": "Первые шаги на льду",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Начальная подготовка",
+      "price": 6000,
+      "desc": "6-10 лет",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Взрослые с нуля",
+      "price": 5500,
+      "desc": "Вечерние группы",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуально",
+      "price": 2500,
+      "desc": "Занятие с тренером",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 985 481-81-58",
+    "whatsapp": "79854818158",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E6E0D4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://voshodyachaya-zvezda.orgs.biz/",
+  "contact_lead": "em:voshodychay_zvezda@mail.ru"
+}

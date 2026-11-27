@@ -1,0 +1,135 @@
+{
+  "slug": "cvety-opochka",
+  "name": "Цветы Опочка",
+  "niche": "цветы",
+  "city": "Опочка",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#E23C7C",
+    "accent": "#FFD3E4",
+    "bg": "#FFF7FA",
+    "text": "#2B0F1B"
+  },
+  "fonts": {
+    "head": "Rubik",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Бесплатная доставка букетов по Опочке",
+    "text": "Соберём букет под ваш бюджет и привезём по городу бесплатно. За город 30 ₽ за км.",
+    "cta": "Выбрать букет",
+    "photo": "files/cvety-opochka/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Доставка цветов по Опочке и пригороду. Можно выбрать готовый букет или составить свой.",
+  "features": [
+    {
+      "icon": "🚚",
+      "title": "Бесплатно по городу",
+      "text": "За город 30 ₽/км."
+    },
+    {
+      "icon": "💐",
+      "title": "Свой букет",
+      "text": "Соберём по вашей идее."
+    },
+    {
+      "icon": "📞",
+      "title": "Быстрый заказ",
+      "text": "Ответим в WhatsApp."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/cvety-opochka/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/cvety-opochka/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/cvety-opochka/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/cvety-opochka/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/cvety-opochka/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/cvety-opochka/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/cvety-opochka/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/cvety-opochka/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 989 197-07-13",
+    "whatsapp": "79891970713",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#FBE5EE",
+      "ok": "#2F8F6A"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://club140698455.orgs.biz/",
+  "email": "bee.happy@mail.ru"
+}

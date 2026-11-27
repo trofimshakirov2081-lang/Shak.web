@@ -1,0 +1,73 @@
+{
+  "slug": "komandor-chel",
+  "name": "KOMANDOR",
+  "niche": "masterskaya",
+  "city": "Челябинск",
+  "custom": "stolyar",
+  "tagline": "Мебель на заказ",
+  "colors": {
+    "main": "#3D5A80",
+    "accent": "#B98A5A",
+    "bg": "#F2F0EA",
+    "text": "#23262B"
+  },
+  "fonts": {
+    "head": "Old Standard TT",
+    "body": "Gidole"
+  },
+  "hero": {
+    "title": "Мебель по размеру вашего дома",
+    "text": "Соберите проект на сайте: размер, материал и примерная цена сразу. Заявка придёт нам в WhatsApp.",
+    "photo": "files/komandor-chel/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что делаем",
+    "catalogText": "Цены «от», точную скажем после замера.",
+    "aboutTitle": "О нас"
+  },
+  "about": "KOMANDOR: своё производство и свои мастера. Делаем сами от замера до сдачи.",
+  "items": [
+    {
+      "name": "Шкаф-купе со стеклом \"Клетка\" цвет трюфель",
+      "price": 60000,
+      "desc": "Шкаф-купе Командор. Размер ВхШхГ: 2400х1800х600 мм.…",
+      "photo": "files/komandor-chel/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Трехдверный шкаф-купе с зеркалом Милан",
+      "price": 92000,
+      "desc": "Шкаф-купе KOMANDOR, система Лазурит. Размеры шкафа ВхШхГ:…",
+      "photo": "files/komandor-chel/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шкаф-купе Классика",
+      "price": 50000,
+      "desc": "Шкаф-купе KOMANDOR. Размеры ВхШхГ: 2475х2200х620 мм.…",
+      "photo": "files/komandor-chel/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Шкаф-купе с цветными стеклами. Фирменный",
+      "price": 55000,
+      "desc": "Шкаф-купе KOMANDOR. Размер вхшхг 2400х1800х600 мм.…",
+      "photo": "files/komandor-chel/item-4.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 351 220-18-08",
+    "whatsapp": "73512201808",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "vars": {
+      "sheet": "#FBFAF7"
+    }
+  },
+  "credits": "Фото со страницы бизнеса, остальные фото: свободные стоки, для примера",
+  "source": "https://komandorchelyabinsk.orgs.biz/",
+  "contact_lead": "em:74komandor@mail.ru"
+}

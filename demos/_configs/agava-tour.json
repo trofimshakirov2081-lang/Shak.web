@@ -1,0 +1,68 @@
+{
+  "slug": "agava-tour",
+  "name": "Агава Тур",
+  "niche": "tury",
+  "city": "Москва",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#4B2E6F",
+    "accent": "#F4A261",
+    "bg": "#F3EEE7",
+    "text": "#1E1530"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Покажем то, чего нет в путеводителях",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/agava-tour/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Агава Тур: небольшие группы, опытные гиды и всё организовано. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Камчатка: вулканы",
+      "price": 189000,
+      "desc": "8 дней, вертолёт по желанию",
+      "photo": "files/agava-tour/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сахалин и маяки",
+      "price": 99000,
+      "desc": "6 дней",
+      "photo": "files/agava-tour/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Курилы: Итуруп",
+      "price": 149000,
+      "desc": "7 дней",
+      "photo": "files/agava-tour/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 909 932-87-72",
+    "whatsapp": "79099328772",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Москва",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FCFAF7"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club223655694.orgs.biz/",
+  "contact_lead": "em:tkagava@gmail.com"
+}

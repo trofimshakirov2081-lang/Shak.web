@@ -1,0 +1,725 @@
+/* АлтынНур v2: страницы собираются из window.SITE. Страница указана в <body data-page>, путь к корню в data-root. */
+(function () {
+  "use strict";
+  document.documentElement.classList.add("js");
+  // страховка: если скрипт где-то споткнулся, фото не остаются под заглушкой появления
+  addEventListener("error", () => document.documentElement.classList.remove("js"));
+  // просмотр черновика из админки: открывается по ?draft=1 и действует только в этой вкладке
+  let DRAFT = false;
+  try {
+    if (/[?&]draft=1/.test(location.search)) sessionStorage.setItem("altyn-draft-on", "1");
+    if (/[?&]draft=0/.test(location.search)) sessionStorage.removeItem("altyn-draft-on");
+    const dj = sessionStorage.getItem("altyn-draft-on") && localStorage.getItem("altyn-admin-draft");
+    if (dj) { window.SITE = JSON.parse(dj); DRAFT = true; }
+  } catch (e) {}
+  const S = window.SITE, D = document.body.dataset, R = D.root || "", PAGE = D.page || "home";
+  const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const rub = (n) => !n ? "Цена по запросу" : n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
+  const tph = (p) => (/\.\w{3,4}$/.test(p) ? p : p + "-1280.webp");
+  const has = (v) => Array.isArray(v) ? v.length > 0 : v != null && v !== "";
+  const cat = (id) => S.categories.find((c) => c.id === id) || {};
+  const course = (slug) => S.courses.find((c) => c.slug === slug);
+  const plural = (n, a, b, c) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 10 || h >= 20) ? b : c; };
+  const wa = (t) => `https://wa.me/${ruNum(S.org.wa)}?text=${encodeURIComponent(t)}`;
+  const WA_HELLO = "Здравствуйте! Хочу узнать об обучении в АлтынНур.";
+  // номер в любом виде («8 (927) 123-45-67», «+7 927...», «9271234567») в международный формат 79271234567
+  const ruNum = (v) => { let d = String(v || "").replace(/\D/g, ""); if (d.length === 11 && d[0] === "8") d = "7" + d.slice(1); if (d.length === 10 && d[0] === "9") d = "7" + d; return d; };
+  // ник из ссылки или с @: «https://vk.com/name», «vk.com/name/», «@name» -> name
+  const handle = (v, host) => String(v || "").trim().replace(/^https?:\/\//i, "").replace(host, "").replace(/^@/, "").replace(/[?#].*$/, "").replace(/\/+$/, "");
+  // ссылка для кнопки: только http(s), tel, mailto, страницы сайта и якоря; «ya.ru» становится https://ya.ru; javascript: и прочее отбрасываются
+  const safeUrl = (u) => { u = String(u || "").trim(); if (!u) return ""; if (/^(https?:|tel:|mailto:)/i.test(u)) return u; if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return "";
+    if (/^[\w-]+(\.[\w-]+)+(\/|$|\?|#)/.test(u) && !/^(courses|about|works|faq|contacts|training|privacy)\b/.test(u)) return "https://" + u; return u.replace(/^\/+/, ""); };
+  const cURL = (c) => `${R}courses/${c.slug}/`;
+  const arrow = (t) => `<span>${esc(t)}</span><i aria-hidden="true"></i>`;
+  // фото: две ширины, ленивая загрузка ниже первого экрана, проявление маской
+  const ph = (src, alt, o = {}) => `<div class="ph${o.reveal === false ? "" : " rv"}${o.cls ? " " + o.cls : ""}"${o.style ? ` style="${o.style}"` : ""}>
+    <img src="${R}${src}-1280.webp" srcset="${R}${src}-640.webp 640w, ${R}${src}-1280.webp 1280w${o.big ? `, ${R}${src}-1600.webp 1600w` : ""}" sizes="${o.sizes || "(max-width: 760px) 100vw, 50vw"}" alt="${esc(alt)}" ${o.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    ${o.cap && NOTE && !REAL(src) ? `<span class="ph__cap">${esc(o.cap)}</span>` : ""}</div>`;
+  const ILL = "Иллюстрация";
+  const REAL = (src) => /(^|\/)r-/.test(src || "");  // настоящие фото АлтынНур: ph/r-*, без подписи «Иллюстрация»
+  const crumbs = (items) => `<button class="back" data-back type="button"><i aria-hidden="true"></i>Назад</button><nav class="crumbs" aria-label="Навигация"><a href="${R}">Главная</a>${items.map((i) => `<span aria-hidden="true">/</span>${i.href ? `<a href="${i.href}">${esc(i.t)}</a>` : `<span aria-current="page">${esc(i.t)}</span>`}`).join("")}</nav>`;
+
+  /* ---------- цвет и шрифт: ?theme= и ?font=, затем выбор посетителя, затем значения по умолчанию из данных ---------- */
+  // какие переключатели показывать на черновике: true все, false ни одного, массив ["font", "view"] только эти
+  // тексты-заглушки черновика (подписи «Иллюстрация», «цена предварительная» и т.п.): S.notes = false их прячет
+  const NOTE = !!S.preview && S.notes !== false;
+  const PK = (k) => S.pickers === undefined || S.pickers === true || (Array.isArray(S.pickers) && S.pickers.includes(k));
+  const THEMES = [{ id: "gold", name: "Кость и золото (из брифа)", dot: "linear-gradient(90deg,#F8F4E9 50%,#D4AF37 50%)" },
+    { id: "burgundy", name: "Кость и бордо", dot: "linear-gradient(90deg,#F3EDE4 50%,#7A2E3A 50%)" },
+    { id: "night", name: "Ночное золото", dot: "linear-gradient(90deg,#151413 50%,#C9A45C 50%)" }];
+  const FONTS = [{ id: "studio", name: "Студия (узкий капс)", ff: "'Sofia Sans Extra Condensed'" }, { id: "bona", name: "Bona Nova", ff: "'Bona Nova'" }, { id: "prata", name: "Prata", ff: "'Prata'" }, { id: "cormorant", name: "Cormorant (из брифа)", ff: "'Cormorant Garamond'" }, { id: "arsenal", name: "Arsenal", ff: "'Arsenal'" }, { id: "finlandica", name: "Finlandica", ff: "'Finlandica'" }];
+  const pick = (key, list, def) => { if (!PK(key)) return def; let v = new URLSearchParams(location.search).get(key); try { v = v || localStorage.getItem("altyn-" + key); } catch (e) {} return list.some((t) => t.id === v) ? v : def; };
+  const VIEWS = [{ id: "flow", name: "По дуге" }, { id: "tiles", name: "Плиткой" }];
+  const ANIMS = [{ id: "calm", name: "Спокойная" }, { id: "soft", name: "Мягкая" }, { id: "live", name: "Живая" }];
+  let THEME = pick("theme", THEMES, S.theme || "gold"), FONT = pick("font", FONTS, S.font || "bona"), VIEW = pick("view", VIEWS, S.coursesView || "flow"), ANIM = pick("anim", ANIMS, S.anim || "calm");
+  document.documentElement.dataset.anim = ANIM;
+  // дизайн из админки: углы, размытие, шрифт текста, тени
+  (() => { const D = S.design || {}, st = document.documentElement.style, R = { none: [0, 0], sharp: [3, 6], soft: [14, 22], round: [24, 34] }[D.corners];
+    if (R) { st.setProperty("--r", R[0] + "px"); st.setProperty("--r-l", R[1] + "px"); }
+    document.documentElement.dataset.blur = D.blur === false ? "off" : "on";
+    if (D.style) document.documentElement.dataset.style = D.style;
+    const FB = { ysabeau: "'Ysabeau Office'", arsenal: "'Arsenal'", finlandica: "'Finlandica'" }[D.fontBody]; if (FB) st.setProperty("--f-body", FB + ",system-ui,sans-serif");
+    document.documentElement.dataset.shadow = D.shadow || "soft"; })();
+  // своя палитра из админки: фон, текст, акцент; остальные оттенки считаются сами под светлый или тёмный фон
+  const PAL = (() => { const P = (S.design || {}).palette; if (!P || !/^#[0-9a-f]{6}$/i.test(P.bg || "") || !/^#[0-9a-f]{6}$/i.test(P.text || "") || !/^#[0-9a-f]{6}$/i.test(P.accent || "")) return null;
+    const lum = (h) => { const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4))); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+    const dark = lum(P.bg) < 0.25, mix = (a, b, k) => `color-mix(in srgb, ${a} ${k}%, ${b})`, st = document.documentElement.style, set = (k, v) => st.setProperty(k, v);
+    set("--ivory", P.bg); set("--parchment", mix(P.bg, P.text, dark ? 92 : 95)); set("--sand", mix(P.bg, P.text, 70)); set("--taupe", mix(P.bg, P.text, 55));
+    set("--ink", P.text); set("--ink-2", mix(P.text, P.bg, 62)); set("--line", mix(P.text, "transparent", 14)); set("--line-strong", mix(P.text, "transparent", 32));
+    set("--espresso", dark ? mix(P.bg, "#000", 80) : mix(P.text, P.bg, 92)); set("--espresso-2", dark ? mix(P.bg, P.text, 90) : mix(P.text, P.bg, 84));
+    set("--on-dark", dark ? P.text : P.bg); set("--on-dark-2", dark ? mix(P.text, P.bg, 62) : mix(P.bg, P.text, 70)); set("--line-dark", mix(dark ? P.text : P.bg, "transparent", 15));
+    set("--accent", P.accent); set("--accent-hover", mix(P.accent, dark ? "#fff" : "#000", 86)); set("--accent-text", P.accent); set("--on-accent", lum(P.accent) > 0.35 ? "#15100D" : "#FFFFFF"); set("--hero-h", lum(P.accent) > 0.2 ? P.accent : "#F4EADB");
+    return { dark }; })();
+  let MODE = new URLSearchParams(location.search).get("mode"); try { MODE = MODE || localStorage.getItem("altyn-mode"); } catch (e) {} MODE = S.modeToggle === false ? "light" : MODE === "dark" ? "dark" : "light";
+  document.documentElement.dataset.mode = MODE;
+  if (PAL) { THEME = PAL.dark ? "night" : "gold"; document.documentElement.dataset.theme = THEME; }
+  const apply = (key, id) => { document.documentElement.dataset[key] = id; try { localStorage.setItem("altyn-" + key, id); } catch (e) {} document.querySelectorAll(`[data-${key}-set]`).forEach((b) => b.setAttribute("aria-pressed", b.getAttribute(`data-${key}-set`) === id)); };
+  document.documentElement.dataset.theme = THEME; document.documentElement.dataset.font = FONT;
+
+  /* ---------- контакты: каждый канал включается и меняется в админке ---------- */
+  const CH = {
+    phone: { t: "Телефон", href: (v) => "tel:+" + ruNum(v), show: (v) => v },
+    whatsapp: { t: "WhatsApp", href: (v) => `https://wa.me/${ruNum(v)}?text=${encodeURIComponent(WA_HELLO)}`, show: () => "Написать" },
+    telegram: { t: "Telegram", href: (v) => "https://t.me/" + handle(v, /^(t|telegram)\.me\//i), show: (v) => "@" + handle(v, /^(t|telegram)\.me\//i) },
+    max: { t: "MAX", href: (v) => (/^(https?:\/\/)?(web\.)?max\.ru\//i.test(v.trim()) ? "https://" + v.trim().replace(/^https?:\/\//i, "") : "https://max.ru/" + handle(v, /^$/)), show: () => "Написать" },
+    vk: { t: "ВКонтакте", href: (v) => "https://vk.ru/" + handle(v, /^(m\.)?vk\.(com|ru)\//i), show: (v) => "vk.ru/" + handle(v, /^(m\.)?vk\.(com|ru)\//i) },
+    instagram: { t: "Instagram", href: (v) => "https://instagram.com/" + handle(v, /^(www\.)?instagram\.com\//i), show: (v) => "@" + handle(v, /^(www\.)?instagram\.com\//i) },
+    email: { t: "Почта", href: (v) => "mailto:" + v.trim().replace(/^mailto:/i, ""), show: (v) => v.trim().replace(/^mailto:/i, "") }
+  };
+  // один источник правды для всех мест вывода: включён ли канал и есть ли у него значение
+  const CON = (t) => { const c = S.contacts.find((x) => x.type === t); return c && c.on && has(c.value) ? c : null; };
+  const WAON = () => !!CON("whatsapp");
+  const contactRows = () => S.contacts.filter((c) => c.on && has(c.value)).map((c) => {
+    const k = CH[c.type]; if (!k) return "";
+    return has(c.value) ? `<li><span>${k.t}</span><a href="${esc(k.href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(k.show(c.value))}</a></li>`
+      : `<li class="is-empty"><span>${k.t}</span><em>добавится в админке</em></li>`;
+  }).join("");
+  // карта: из ссылки Яндекс.Карт берём координаты (ll=, pt= или whatshere), иначе запасная точка
+  const mapCoords = () => {
+    const m = S.org.map || {}, l = m.link || "";
+    const g = l.match(/(?:ll|pt|whatshere%5Bpoint%5D|whatshere\[point\])=([\d.]+)(?:%2C|,)([\d.]+)/);
+    return g ? { lon: g[1], lat: g[2], z: m.zoom || 16 } : { lon: m.lon, lat: m.lat, z: m.zoom || 15 };
+  };
+  const mapHTML = () => {
+    const c = mapCoords(), open = S.org.map.link || `https://yandex.ru/maps/?pt=${c.lon},${c.lat}&z=${c.z}&l=sat%2Cskl`;
+    return `<div class="map"><button class="map__load" type="button" data-map="https://yandex.ru/map-widget/v1/?ll=${c.lon}%2C${c.lat}&z=${c.z}&pt=${c.lon},${c.lat},pm2rdm&l=sat%2Cskl"><span class="map__pin" aria-hidden="true"></span>Показать карту</button>
+      <div class="map__bar"><span>${esc(S.org.address || `${S.org.city}, ${S.org.region}`)}${NOTE && !S.org.address ? " (точка временная)" : ""}</span><a href="${open}" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></div></div>`;
+  };
+
+  /* ---------- шапка и подвал ---------- */
+  const bar = () => { const B = S.bar; if (!live(B) || !B.text) return ""; return `<div class="sbar"><div class="wrap sbar__in"><span>${esc(B.text)}${B.until && B.timer ? ` <b class="sbar__t" data-until="${esc(B.until)}T23:59:59"></b>` : ""}</span>${B.btn ? `<button class="sbar__b" data-enroll>${esc(B.btn)}</button>` : ""}</div></div>`; };
+  const header = () => `${bar()}${DRAFT ? `<div style="background:#2A2420;color:#F3EDE4;font-size:.9rem;padding:8px 0"><div class="wrap" style="display:flex;gap:12px;align-items:center;justify-content:space-between"><span>Черновик из админки. Посетители видят старую версию, пока вы не нажмёте «Опубликовать».</span><a href="${R}admin/" data-draft-close style="color:inherit;white-space:nowrap;font-weight:600">← Вернуться в админку</a></div></div>` : ""}${NOTE ? `<div class="draft"><div class="wrap"><p>Черновик для согласования: фото временные, цены предварительные.</p>
+      ${!["theme", "font", "anim", "view"].some(PK) ? "" : `<div class="pickers">${PK("theme") ? `<span>Цвет</span><span class="themes" role="group" aria-label="Цвет">${THEMES.map((t) => `<button data-theme-set="${t.id}" aria-pressed="${t.id === THEME}"><i style="background:${t.dot}"></i>${esc(t.name)}</button>`).join("")}</span>` : ""}
+      ${PK("font") ? `<span>Шрифт</span><span class="themes" role="group" aria-label="Шрифт">${FONTS.map((f) => `<button data-font-set="${f.id}" aria-pressed="${f.id === FONT}" style="font-family:${f.ff},serif;font-size:.95rem">${esc(f.name)}</button>`).join("")}</span>` : ""}
+      ${PK("anim") ? `<span>Анимация</span><span class="themes" role="group" aria-label="Анимация">${ANIMS.map((a) => `<a href="?anim=${a.id}" data-anim-set="${a.id}" aria-pressed="${a.id === ANIM}" class="vbtn">${a.name}</a>`).join("")}</span>` : ""}
+      ${PAGE === "home" && PK("view") ? `<span>Курсы</span><span class="themes" role="group" aria-label="Вид курсов">${VIEWS.map((v) => `<a href="?view=${v.id}" data-view-set="${v.id}" aria-pressed="${v.id === VIEW}" class="vbtn">${v.name}</a>`).join("")}</span>` : ""}</div>`}</div></div>` : ""}
+    <header class="hdr"><div class="wrap hdr__in">
+      <a class="logo" href="${R}" aria-label="${esc(S.org.name)}, на главную"><b>${esc(S.org.name)}</b><small>${esc(S.org.kind)}</small></a>${S.org.phone ? `<a class="hdr__tel" href="tel:+${ruNum(S.org.phone)}" aria-label="Позвонить ${esc(S.org.phone)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>` : ""}
+      <nav class="nav" id="nav" aria-label="Разделы"><div class="nav__links">${S.nav.map((n) => `<a href="${R}${n.href}"${n.page === PAGE || (PAGE === "course" && n.page === "courses") ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}</div>
+        <div class="nav__extra">${CON("phone") ? `<a href="${CH.phone.href(CON("phone").value)}">${esc(CON("phone").value)}</a>` : ""}${WAON() ? `<a href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></nav>
+      ${S.modeToggle === false ? "" : `<button class="mode" data-mode-toggle aria-label="Тёмная или светлая тема" title="Тёмная тема"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><g class="i-sun" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>`}
+      <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
+      <button class="btn btn--accent" data-enroll>Записаться</button>
+    </div></header>`;
+  const footer = () => `<footer class="ftr" id="contacts-ftr"><div class="wrap">
+      <div class="ftr__grid">
+        <div><h2 class="ftr__title">Связаться с нами</h2><ul class="ftr__contacts">${contactRows()}</ul></div>
+        ${mapHTML()}
+      </div>
+      <div class="ftr__bottom"><nav aria-label="Разделы">${S.nav.map((n) => `<a href="${R}${n.href}">${esc(n.label)}</a>`).join("")}<a href="${R}faq/">Вопросы</a><a href="${R}privacy/">Политика данных</a></nav><span>© ${new Date().getFullYear()} ${esc(S.org.name)}, ${esc(S.org.city)}</span><a class="ftr__admin" href="${R}admin/" rel="nofollow">Вход в админку</a></div>
+    </div></footer>`;
+
+  /* ---------- блоки главной ---------- */
+  const H = {};
+  const srcset = (p) => `src="${R}${p}-1280.webp" srcset="${R}${p}-640.webp 640w, ${R}${p}-1280.webp 1280w"`;
+  // карточки курсов: метка для выбора и короткая строка о курсе (только из данных, ничего не выдумываем)
+  // «Акции» из админки: скидка в процентах на все или выбранные курсы, до даты включительно
+  const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const live = (o) => !!o && o.on !== false && (!o.from || todayISO() >= o.from) && (!o.until || todayISO() <= o.until);
+  const pct = (c) => { const D = S.discount; const n = parseInt(D && D.pct, 10); if (!c || !live(D) || !(n > 0 && n < 100) || !c.price) return 0; return D.all !== false || (D.courses || []).includes(c.slug) ? n : 0; };
+  const newPrice = (c) => Math.round((c.price * (100 - pct(c))) / 100 / 10) * 10;
+  const PR = (c) => pct(c) ? `<s class="pold">${rub(c.price)}</s> ${rub(newPrice(c))}` : rub(c.price);
+  const BADGE = { hit: "Хит", new: "Новинка", few: "Мало мест", start: "Скоро старт" };
+  const badge = (c) => { const b = (S.badges || {})[c.slug]; return b ? (BADGE[b] || ((S.badgeText || {})[c.slug] || "")) : ""; };
+  const ctag = (c) => pct(c) ? "−" + pct(c) + "%" : badge(c) || ctag0(c);
+  const ctag0 = (c) => ((c.format || []).includes("complex") ? "Комплекс" : (c.level || []).length === 1 && c.level[0] === "zero" ? "С нуля" : (c.level || []).includes("zero") ? "Можно с нуля" : "");
+  const nextB = (c) => (S.batches || []).find((b) => b && b.on !== false && b.course === c.slug && b.start);
+  const cmeta = (c) => [nextB(c) ? "набор " + nextB(c).start : "", c.duration, c.certificate ? "сертификат" : "", PARTS() ? "можно частями" : ""].filter(Boolean).join(", ") || c.short || "";
+  // главный экран: альбом из главного фото и двух дополнительных
+  const heroSlides = () => [{ src: S.hero.photo, alt: S.hero.alt }].concat((S.hero.more || []).filter((h) => h && h.src)).filter((h) => h.src);
+  // постер: фото на весь экран, крупный заголовок, строки переносятся по запятым (Вариант 1, выбран Айгуль 24.11)
+  H.hero = () => S.hero.style === "poster" ? `<section class="hero hero--poster">
+      <div class="hp__ph">${heroSlides().slice(0, 3).map((h, i) => `<img class="hp__s${i ? "" : " is-on"}" ${i ? "loading=\"lazy\" " : "fetchpriority=\"high\" "}src="${R}${h.src}-1600.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w, ${R}${h.src}-1600.webp 1600w" sizes="100vw" alt="${esc(h.alt || S.hero.alt)}"${i ? "" : ' fetchpriority="high"'}>`).join("")}</div>
+      <div class="wrap hp__t"><h1 class="hp__h">${esc(S.hero.title).replace(/,\s*/g, ",<br>")}</h1><p class="hp__sub">${esc(S.hero.short)}</p>
+        <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div>
+        <p class="hp__cnt"><b>${S.courses.length}</b> ${plural(S.courses.length, "курс", "курса", "курсов")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}</p></div>
+    </section>` : `<section class="hero">
+      <div class="hero__ph${heroSlides().length > 2 ? " hero__ph--album" : ""}">${heroSlides().slice(0, 3).map((h, i) => `<img class="ha ha--${i + 1}" src="${R}${h.src}-${i ? 1280 : 1600}.webp" srcset="${R}${h.src}-640.webp 640w, ${R}${h.src}-1280.webp 1280w${i ? "" : `, ${R}${h.src}-1600.webp 1600w`}" sizes="${i ? "(max-width: 860px) 40vw, 22vw" : "(max-width: 860px) 60vw, 33vw"}" alt="${esc(h.alt)}"${i ? ' decoding="async"' : ' fetchpriority="high"'}>`).join("")}${NOTE && !REAL(S.hero.photo) ? `<span class="ph__cap">${ILL}</span>` : ""}</div>
+      <div class="hero__t"><h1>${esc(S.hero.title)}</h1><p class="hero__text">${esc(S.hero.short)}</p>
+        <div class="hero__row"><a class="btn btn--accent" href="${R}courses/">Посмотреть курсы</a><button class="link" data-quiz>${arrow("Подобрать за 3 вопроса")}</button></div></div>
+    </section>`;
+  // манифест: маленькие фото прямо внутри фразы, они раскрываются при прокрутке
+  H.manifest = () => {
+    const pics = S.manifest.inline;
+    const html = esc(S.manifest.text).replace(/\{(\d)\}/g, (_, i) => { const p = pics[+i - 1]; return p ? `<span class="inl rv"><img ${srcset(p.src)} sizes="160px" alt="${esc(p.alt)}" loading="lazy"></span>` : ""; });
+    return `<section class="sec manifest"><div class="wrap"><p class="manifest__q">${html}</p>
+      <div class="manifest__sign"><span class="muted">${esc(S.org.owner)}, основательница</span><a class="link" href="${R}about/">${arrow("Об академии")}</a></div></div></section>`;
+  };
+  H.directions = () => `<section class="sec" style="padding-top:0"><div class="wrap">
+      <h2 class="rv-t sec__h">Направления обучения</h2>
+      <div class="dirs">${S.categories.map((c, i) => {
+        const n = S.courses.filter((x) => x.cat === c.id).length;
+        return `<a class="dir" href="${R}courses/?cat=${c.id}">${ph(c.photo, c.alt, { sizes: i ? "(max-width: 760px) 50vw, 40vw" : "(max-width: 760px) 100vw, 58vw" })}
+          <div class="dir__t"><h3>${esc(c.name)}</h3><p>${esc(c.text)}</p><span class="link">${arrow(`${n} ${plural(n, "курс", "курса", "курсов")}`)}</span></div></a>`;
+      }).join("")}</div></div></section>`;
+  // курсы: «по дуге» (карусель) или «плиткой», вариант выбирается в админке
+  H.featured = () => {
+    const list = S.featured.map(course).filter(Boolean);
+    if (VIEW === "tiles") {
+      // сначала главные курсы, потом остальные; часть прячется под «Показать ещё» (число задаётся в админке)
+      const ord = list.concat(S.courses.filter((c) => !list.includes(c))), lim = S.moreAfter == null ? 6 : +S.moreAfter, cut = lim > 0 && ord.length > lim + 1 ? lim : 0;
+      return `<section class="sec" style="padding-top:0"><div class="wrap">
+      <div class="flow-head"><h2 class="rv-t">Курсы и цены</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
+      <div class="ctiles${cut ? " is-cut" : ""}" id="ctiles">${ord.map((c, i) => `<div class="ctile-w${cut && i >= cut ? " ctile--more" : ""}"><a class="ctile" href="${cURL(c)}"><div class="ctile__ph">${ph(c.photo, c.alt, { sizes: "(max-width: 760px) 50vw, 25vw" })}${ctag(c) ? `<span class="ctile__tag">${ctag(c)}</span>` : ""}</div>
+        <div class="ctile__b"><span class="ctile__n">${esc(c.name)}</span><span class="ctile__m">${esc(cmeta(c))}</span><span class="ctile__row"><span class="ctile__price">${PR(c)}</span><span class="ctile__go">Подробнее<i aria-hidden="true"></i></span></span></div></a><button class="btn btn--accent btn--sm ctile__en" type="button" data-enroll="${c.slug}">Записаться</button></div>`).join("")}</div>
+      ${cut ? `<button class="btn btn--line more-btn" type="button" data-more="ctiles">Показать ещё ${ord.length - cut} ${plural(ord.length - cut, "курс", "курса", "курсов")}</button>` : ""}
+      ${tools()}</div></section>`;
+    }
+    return `<section class="sec flow-sec" style="padding-top:0">
+      <div class="wrap flow-head"><h2 class="rv-t">Курсы и цены</h2><div class="flow-ctrl"><button class="flow-btn" data-flow="-1" aria-label="Предыдущий курс">‹</button><span class="flow-count" aria-live="polite">1 / ${list.length}</span><button class="flow-btn" data-flow="1" aria-label="Следующий курс">›</button></div></div>
+      <div class="flow" tabindex="0" aria-label="Курсы, листайте влево и вправо">${list.map((c, i) => `<a class="fcard" href="${cURL(c)}"><span class="fcard__ph${i % 2 ? " is-low" : ""}"><img ${srcset(c.photo)} sizes="(max-width: 760px) 70vw, 340px" alt="${esc(c.alt)}" loading="lazy"></span>
+        <span class="fcard__cat">${esc(cat(c.cat).name)}</span><span class="fcard__t">${esc(c.name)}</span><span class="price">${PR(c)}</span></a>`).join("")}</div>
+      <div class="wrap flow-foot"><span class="swipe-hint" aria-hidden="true"><i></i>Листайте</span><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div></section>`;
+  };
+  // запись: такая же фото-плитка, как направления, с двумя кнопками
+  H.enroll = () => `<section class="sec" style="padding-top:0"><div class="wrap"><div class="etile">${ph(S.enroll.photo, S.enroll.alt, { sizes: "100vw" })}
+      <div class="etile__t"><h2>${esc(S.enroll.title || "Запишитесь на консультацию")}</h2><p>${esc(S.enroll.text || "Подскажем курс и ближайшие даты")}</p>
+        <div class="etile__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--glass" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div></div></div></div></section>`;
+  // фото раскрывается на весь экран при прокрутке, соседние разлетаются в стороны
+  // видео на прокрутке: кадры-картинки рисуются на canvas, телефоны их показывают без нажатия play
+  H.scrub = () => !S.scrub || !S.scrub.on ? "" : `<section class="scrub" id="scrub" aria-label="${esc(S.scrub.title)}"><div class="scrub__st">
+      <canvas data-seq="${R}${esc(S.scrub.seq)}" data-n="${S.scrub.n}" aria-hidden="true"></canvas>
+      <div class="wrap scrub__t"><span class="scrub__k">${esc(S.scrub.kicker || "")}</span><h2>${esc(S.scrub.title)}</h2><p>${esc(S.scrub.text || "")}</p></div>
+      <span class="scrub__hint">Листайте</span><span class="scrub__bar"><i></i></span></div></section>`;
+  H.zoom = () => `<section class="zoom" aria-label="Обучение на практике"><div class="zoom__stick">
+      ${S.zoom.side.map((p, i) => `<span class="zoom__s zoom__s--${i + 1}"><img src="${R}${p.src}-640.webp" alt="" loading="lazy"><em>${esc(p.cap)}</em></span>`).join("")}
+      <div class="zoom__c"><img ${srcset(S.zoom.main)} sizes="100vw" alt="${esc(S.zoom.alt)}" loading="lazy"></div>
+      <div class="zoom__t"><span class="zoom__k">${esc(S.zoom.kicker)}</span><h2>${esc(S.zoom.title)}</h2><a class="btn btn--glass zoom__btn" href="${R}works/">Смотреть работы</a></div>
+    </div></section>`;
+  // преподаватель и преимущества: плитки с фото и короткими подписями
+  H.teacher = () => `<section class="sec" style="padding-top:0"><div class="wrap">
+      <h2 class="rv-t sec__h">Почему АлтынНур</h2>
+      <div class="why">
+        <a class="why__p" href="${R}about/">${has(S.teacher.photo) ? `<div class="ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : `<div class="ph why__ph">${NOTE ? "<span>Здесь будет ваш портрет</span>" : ""}</div>`}
+          <div class="dir__t"><span class="why__k">Ваш преподаватель</span><h3>${esc(S.teacher.name)}</h3><span class="link">${arrow("Об академии")}</span></div></a>
+        ${S.advantages.map((a) => `<div class="why__a">${ph(a.photo, "", { sizes: "(max-width: 760px) 50vw, 22vw" })}<div class="dir__t"><h3>${esc(a.short || a.t)}</h3></div></div>`).join("")}
+      </div></div></section>`;
+
+  /* ---------- страницы ---------- */
+  const P = {};
+  /* ---------- блоки доверия и продаж: на сайте появляются, только когда заполнены ---------- */
+  // фото в блоке: 1 большое, 2 рядом, 3 в ряд, больше сеткой; общий размер блока примерно одинаковый
+  const PH = (photos, size) => { const ps = (photos || []).filter((p) => p && p.src); if (!ps.length) return "";
+    return `<div class="pgrid pgrid--${ps.length > 3 ? "many" : ps.length} pgrid--${size || "m"}">${ps.map((p) => p.video ? `<div class="ph ph--video"><video data-src="${R}${esc(p.video)}" data-poster="${R}${p.src}-640.webp" muted loop playsinline preload="none" aria-label="${esc(p.alt || "Видео")}"></video></div>` : ph(p.src, p.alt || "", { sizes: ps.length > 1 ? "(max-width: 760px) 50vw, 33vw" : "(max-width: 760px) 100vw, 900px" })).join("")}</div>`; };
+  const SEC = (title, sub, inner) => `<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="rv-t sec__h">${esc(title)}</h2>${sub ? `<p class="lead sec__sub">${esc(sub)}</p>` : ""}${inner}</div></section>`;
+  const ON = (o) => !!o && o.on !== false;
+  const seatsTxt = (n) => `${n} ${plural(n, "место", "места", "мест")}`;
+  H.promo = () => { const p = S.promo || {}; if (!ON(p) || !p.title || (p.untilDate && todayISO() > p.untilDate)) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo${(p.photos || []).some((x) => x.src) ? "" : " promo--text"}">${PH(p.photos, p.size)}<div class="promo__t"><span class="promo__k">${esc(p.kicker || "Акция")}</span><h2>${esc(p.title)}</h2>${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.untilDate ? `<p class="promo__until">Действует до ${new Date(p.untilDate).toLocaleDateString("ru-RU", { day: "numeric", month: "long" })}${p.timer ? ` <b class="sbar__t" data-until="${esc(p.untilDate)}T23:59:59"></b>` : ""}</p>` : p.until ? `<p class="promo__until">Действует до ${esc(p.until)}</p>` : ""}<button class="btn btn--accent" data-enroll>${esc(p.btn || "Записаться")}</button></div></div></div></section>`; };
+  H.batches = () => { const b = (S.batches || []).filter((x) => x && x.start && x.on !== false); if (!b.length) return "";
+    return SEC("Ближайшие наборы", S.batchesNote || "", `<div class="batches">${b.map((x) => { const c = course(x.course), n = parseInt(x.seats, 10);
+      return `<div class="bcard"><span class="bcard__d">${esc(x.start)}</span><b>${esc(c ? c.name : x.course || "Курс")}</b>${x.format ? `<span class="muted">${esc(x.format)}</span>` : ""}
+        ${n > 0 ? `<span class="bcard__s${n <= 3 ? " hot" : ""}">${n <= 3 ? "Осталось " : "Свободно "}${seatsTxt(n)}</span>` : String(x.seats).trim() === "0" ? `<span class="bcard__s">Мест нет, запишем в лист ожидания</span>` : ""}
+        <button class="btn btn--line" data-enroll="${c ? c.slug : ""}">Записаться</button></div>`; }).join("")}</div>`); };
+  H.numbers = () => { const n = (S.numbers || []).filter((x) => x && x.n); if (!n.length) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="nums">${n.map((x) => `<div><b>${esc(x.n)}</b><span>${esc(x.t || "")}</span></div>`).join("")}</div></div></section>`; };
+  H.reviews = () => { const r = (S.reviews || []).filter((x) => x && (x.text || (x.photos || []).some((p) => p.src))); if (!r.length) return "";
+    const st = r.map((x) => parseInt(x.stars, 10)).filter((n) => n >= 1 && n <= 5), avg = st.length ? st.reduce((a, b) => a + b, 0) / st.length : 0;
+    const sub = avg ? `★ ${avg.toFixed(1).replace(".", ",")} из 5, ${r.length} ${plural(r.length, "отзыв", "отзыва", "отзывов")}` : "";
+    return SEC("Отзывы учениц", sub, `<div class="revs">${r.map((x) => { const n = parseInt(x.stars, 10); return `<figure class="rev">${n >= 1 && n <= 5 ? `<span class="stars" aria-label="Оценка ${n} из 5">${"★".repeat(n)}<i>${"★".repeat(5 - n)}</i></span>` : ""}${PH(x.photos, "s")}${x.text ? `<blockquote>${esc(x.text)}</blockquote>` : ""}<figcaption><b>${esc(x.name || "")}</b>${x.course ? `<span class="muted">, ${esc(x.course)}</span>` : ""}</figcaption></figure>`; }).join("")}</div>`); };
+  H.cert = () => { const c = S.cert || {}; if (!ON(c) || !(c.text || (c.photos || []).some((p) => p.src))) return ""; return SEC(c.title || "Сертификат после обучения", c.text, PH(c.photos, c.size)); };
+  H.gallery = () => { const g = S.gallery || {}; if (!ON(g) || !(g.photos || []).some((p) => p.src)) return ""; return SEC(g.title || "Как проходят занятия", g.text, PH(g.photos, g.size)); };
+  /* ---------- готовые блоки: сравнение курсов, калькулятор дохода, приведи подругу, узнать о наборе ---------- */
+  // инструменты под курсами: свёрнуты, открываются по нажатию
+  const cmpRows = (c) => [["Цена", pct(c) ? rub(newPrice(c)) + " со скидкой " + pct(c) + "%" : rub(c.price)], ["Длительность", c.duration], ["Практика", c.models], ["Материалы", c.materials], ["Документ", c.certificate], ["Что изучите", (c.topics || []).slice(0, 4).join(", ") + ((c.topics || []).length > 4 ? ` и ещё ${(c.topics || []).length - 4}` : "")]];
+  const cmpCol = (c) => c ? `<div class="cmp2__c"><a class="cmp2__n" href="${cURL(c)}">${esc(c.name)}</a>${cmpRows(c).map(([l, v]) => `<div class="cmp2__r"><span>${l}</span><b>${esc(v || "уточняйте при записи")}</b></div>`).join("")}<button class="btn btn--accent btn--sm" data-enroll="${c.slug}">Записаться</button></div>` : "";
+  H.compare = () => { const C = S.compare || {}; if (!ON(C)) return ""; const pre = (C.courses || []).map(course).filter(Boolean), a = pre[0] || S.courses[0], b = pre[1] || S.courses[1];
+    const sel = (k, cur) => `<select data-cmp="${k}" aria-label="Курс ${k === "a" ? "слева" : "справа"}">${S.courses.map((c) => `<option value="${c.slug}"${c === cur ? " selected" : ""}>${esc(c.name)}</option>`).join("")}</select>`;
+    return `<details class="tool"><summary><span>${esc(C.title || "Сравнить два курса")}</span><i aria-hidden="true"></i></summary>
+      ${C.text ? `<p class="muted tool__sub">${esc(C.text)}</p>` : ""}<div class="cmp2" data-cmp-box><div class="cmp2__sel">${sel("a", a)}${sel("b", b)}</div><div class="cmp2__cols" data-cmp-cols>${cmpCol(a)}${cmpCol(b)}</div></div></details>`; };
+  H.calc = () => { const K = S.calc || {}; if (!ON(K)) return ""; const cs = S.courses.filter((c) => c.price);
+    return `<details class="tool"><summary><span>${esc(K.title || "Когда окупится обучение")}</span><i aria-hidden="true"></i></summary>
+      ${K.text ? `<p class="muted tool__sub">${esc(K.text)}</p>` : ""}<div class="calc2" data-calc><p>Курс <select data-k="course">${cs.map((c) => `<option value="${c.price}"${c.slug === K.course ? " selected" : ""}>${esc(c.name)}, ${rub(c.price)}</option>`).join("")}</select>
+      окупится примерно за <b data-o="weeks"></b>, если брать <input data-k="per" type="number" inputmode="numeric" min="1" max="40" value="${parseInt(K.per, 10) || 3}"> ${"клиенток в неделю"} по <input data-k="price" type="number" inputmode="numeric" min="100" step="100" value="${parseInt(K.price, 10) || 2500}"> ₽.
+      Это около <b data-o="month"></b> в месяц.</p><p class="muted calc2__note">${esc(K.note || "Расчёт примерный, без учёта материалов и аренды.")}</p>${K.btn ? `<button class="btn btn--accent" data-enroll>${esc(K.btn)}</button>` : ""}</div></details>`; };
+  const tools = () => { const t = (S.home.includes("compare") ? H.compare() : "") + (S.home.includes("calc") ? H.calc() : ""); return t ? `<div class="tools">${t}</div>` : ""; };
+
+  H.referral = () => { const F2 = S.referral || {}; if (!ON(F2) || !F2.title) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="promo promo--text"><div class="promo__t"><span class="promo__k">${esc(F2.kicker || "Вдвоём выгоднее")}</span><h2>${esc(F2.title)}</h2>${F2.text ? `<p>${esc(F2.text)}</p>` : ""}
+      ${WAON() ? `<a class="btn btn--accent" href="${wa(F2.wa || "Здравствуйте! Хотим записаться на обучение вдвоём с подругой.")}" target="_blank" rel="noopener">${esc(F2.btn || "Записаться вдвоём")}</a>` : `<button class="btn btn--accent" data-enroll>${esc(F2.btn || "Записаться вдвоём")}</button>`}</div></div></div></section>`; };
+  H.notify = () => { const N = S.notify || {}; if (!ON(N)) return "";
+    return `<section class="sec" style="padding-top:0"><div class="wrap"><div class="notify"><div><h2>${esc(N.title || "Не нашли удобную дату?")}</h2><p class="muted">${esc(N.text || "Напишите, какой курс интересует, и мы сообщим о следующем наборе.")}</p></div>
+      <div class="notify__f"><select data-notify>${S.courses.map((c) => `<option>${esc(c.name)}</option>`).join("")}</select><button class="btn btn--accent" data-notify-go>${esc(N.btn || "Сообщить о наборе")}</button></div></div></div></section>`; };
+
+  /* ---------- конструктор: свои блоки любого вида ---------- */
+  const lines = (t) => String(t || "").split("\n").map((x) => x.trim()).filter(Boolean);
+  const pair = (l) => { const i = l.indexOf("::"); return i < 0 ? [l, ""] : [l.slice(0, i).trim(), l.slice(i + 2).trim()]; };
+  const embed = (u) => { u = String(u || "").trim(); let m;
+    if ((m = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/))) return `https://www.youtube.com/embed/${m[1]}`;
+    if ((m = u.match(/rutube\.ru\/(?:video|shorts)\/([\w]+)/))) return `https://rutube.ru/play/embed/${m[1]}`;
+    if ((m = u.match(/vk(?:video)?\.(?:com|ru)\/.*video(-?\d+)_(\d+)/))) return `https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}`;
+    return ""; };
+  // кнопка своего блока: act none = без кнопки; текст по умолчанию подставляется сам
+  const BTN0 = { enroll: "Записаться", wa: "Написать в WhatsApp", link: "Подробнее", tel: "Позвонить" };
+  const btnHTML = (b, two) => { const act = b.act || "enroll", link = safeUrl(b.link || (b.type !== "video" ? b.url : "") || ""), cls = two ? "btn btn--line" : "btn btn--accent";
+    if (act === "none") return ""; const t = esc(b.btn || BTN0[act] || "Подробнее");
+    if (act === "wa" && WAON()) return `<a class="${cls}" href="${wa(b.waText || WA_HELLO)}" target="_blank" rel="noopener">${t}</a>`;
+    if (act === "link") return link ? `<a class="${cls}" href="${esc(/^(https?:|tel:|mailto:|#)/i.test(link) ? link : R + link)}"${/^https?:/.test(link) ? ' target="_blank" rel="noopener"' : ""}>${t}</a>` : "";
+    if (act === "tel" && S.org.phone) return `<a class="${cls}" href="tel:+${ruNum(S.org.phone)}">${t}</a>`;
+    return `<button class="${cls}" data-enroll="${esc(b.course || "")}">${t}</button>`; };
+  const BTNS = (b) => { const one = btnHTML(b), two = one && b.act2 && b.act2 !== "none" ? btnHTML({ type: b.type, act: b.act2, btn: b.btn2, link: b.link2, waText: b.waText2, course: b.course2 }, true) : "";
+    return one || two ? `<div class="cb__btns">${one}${two}</div>` : ""; };
+  const cbLum = (h) => { const c = [1, 3, 5].map((i) => parseInt(String(h).slice(i, i + 2), 16) / 255 || 0); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  // показ по датам: с какого и по какое число включительно
+  const today = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const dateOK = (b) => (!b.from || today() >= b.from) && (!b.to || today() <= b.to);
+  function custom(b) { if (!b || b.on === false || !dateOK(b)) return ""; const T = b.type || "text", al = b.align || "left";
+    const head = b.title && !["quote", "divider", "banner"].includes(T) ? `<h2 class="rv-t sec__h">${esc(b.title)}</h2>` : "";
+    const txt = b.text && !["list", "cards", "stats", "accordion", "gallery", "steps", "prices"].includes(T) ? lines(b.text).map((p) => `<p>${esc(p)}</p>`).join("") : "";
+    const B = BTNS(b); let inner = "";
+    if (T === "text" || T === "cta" || T === "form") inner = `${head}<div class="cb__txt">${txt}</div>${T === "form" ? `<div class="cb__form" data-inline-form></div>` : ""}${B}`;
+    else if (T === "text-photo" && !(b.photos || []).some((x) => x && x.src)) inner = `${head}<div class="cb__txt">${txt}</div>${B}`;
+    else if (T === "text-photo") inner = `<div class="cb__split cb__split--${b.side || "right"}"><div>${head}<div class="cb__txt">${txt}</div>${B}</div><div>${PH(b.photos, "l")}</div></div>`;
+    else if (T === "list") inner = `${head}<ul class="cb__list">${lines(b.text).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>${B}`;
+    else if (T === "gallery") inner = `${head}${b.text ? `<p class="lead sec__sub">${esc(b.text)}</p>` : ""}${PH(b.photos, b.size)}${B}`;
+    else if (T === "cards") inner = `${head}<div class="cb__cards">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__card"><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</div>`; }).join("")}</div>${B}`;
+    else if (T === "steps") inner = `${head}<ol class="cb__steps">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<li><b>${esc(h)}</b>${d ? `<p class="muted">${esc(d)}</p>` : ""}</li>`; }).join("")}</ol>${B}`;
+    else if (T === "prices") inner = `${head}<div class="cb__prices">${lines(b.text).map((l) => { const [h, d] = pair(l); return `<div class="cb__pr"><span>${esc(h)}</span><i aria-hidden="true"></i><b>${esc(d)}</b></div>`; }).join("")}</div>${B}`;
+    else if (T === "quote") inner = `<figure class="cb__quote"><blockquote>${esc(b.text || "")}</blockquote>${b.title ? `<figcaption>${esc(b.title)}</figcaption>` : ""}</figure>`;
+    else if (T === "stats") inner = `${head}<div class="nums">${lines(b.text).map((l) => { const [n, t] = pair(l); return `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`; }).join("")}</div>`;
+    else if (T === "video") { const e = embed(b.url); inner = `${head}<div class="cb__txt">${txt}</div>${e ? `<div class="cb__video"><iframe src="${e}" title="${esc(b.title || "Видео")}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : PH(b.photos, b.size)}${B}`; }
+    else if (T === "accordion") inner = `${head}<div class="acc">${lines(b.text).map((l) => { const [q, a] = pair(l); return `<details><summary>${esc(q)}</summary><p class="ans">${esc(a)}</p></details>`; }).join("")}</div>`;
+    else if (T === "divider") inner = `<div class="cb__div">${b.title ? `<span>${esc(b.title)}</span>` : ""}</div>`;
+    else if (T === "banner") { const p = (b.photos || []).find((x) => x && x.src);
+      inner = `<div class="cb__ban${p ? "" : " cb__ban--no"}">${p ? `<img ${srcset(p.src)} sizes="100vw" alt="${esc(p.alt || "")}" loading="lazy">` : ""}<div class="cb__ban-t">${b.title ? `<h2>${esc(b.title)}</h2>` : ""}${txt ? `<div class="cb__txt">${txt}</div>` : ""}${B}</div></div>`; }
+    else if (T === "timer") { if (b.until && b.end === "hide" && new Date(b.until) < new Date()) return "";
+      inner = `${head}<div class="cb__txt">${txt}</div>${b.until ? `<div class="cb__timer" data-until="${esc(b.until)}" data-after="${esc(b.after || "Время вышло")}"><span><b data-t="d">0</b>дней</span><span><b data-t="h">0</b>часов</span><span><b data-t="m">0</b>минут</span><span><b data-t="s">0</b>секунд</span></div>` : ""}${B}`; }
+    else if (T === "contacts") { const o = S.org;
+      inner = `${head}${txt ? `<div class="cb__txt">${txt}</div>` : ""}<dl class="cb__con">${o.address ? `<div><dt>Адрес</dt><dd>${esc((o.city ? o.city + ", " : "") + o.address)}</dd></div>` : ""}${o.hours ? `<div><dt>Часы работы</dt><dd>${esc(o.hours)}</dd></div>` : ""}${o.phone ? `<div><dt>Телефон</dt><dd><a href="tel:+${ruNum(o.phone)}">${esc(o.phone)}</a></dd></div>` : ""}</dl>
+        ${B || `<div class="cb__btns"><button class="btn btn--accent" data-enroll>Записаться</button>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}<a class="btn btn--line" href="${R}contacts/">Как добраться</a></div>`}`; }
+    const st = b.bg === "color" && b.bgc ? ` style="--cb-bg:${esc(b.bgc)};--cb-fg:${cbLum(b.bgc) > .45 ? "#1d1714" : "#fbf6ee"}"` : "";
+    return `<section class="sec cb cb--${T} cb--${al} cb--bg-${b.bg || "none"} cb--pad-${b.pad || "m"} cb--w-${b.width || "m"} cb--h-${b.hsize || "m"}"${` id="${esc(b.anchor || "cb-" + b.id)}"`} style="padding-top:0"><div class="wrap"><div class="cb__in"${st}>${inner}</div></div></section>`; }
+  // свои блоки на других страницах (внизу, перед подвалом)
+  const extraBlocks = () => PAGE === "home" ? "" : (S.blocks || []).filter((b) => (b.pages || []).includes(PAGE)).map(custom).join("");
+  const PARTS = () => (S.pay && S.pay.on && S.pay.text ? S.pay.text : "");
+  P.home = () => S.home.filter((b) => b !== "compare" && b !== "calc").map((b) => b.startsWith("b:") ? custom((S.blocks || []).find((x) => "b:" + x.id === b)) : H[b] ? H[b]() : "").join("");
+  P.courses = () => `<div class="wrap phead">${crumbs([{ t: "Курсы" }])}
+      <h1>Курсы и цены</h1><p class="lead">${S.courses.length} ${plural(S.courses.length, "программа", "программы", "программ")} в ${S.categories.length} ${plural(S.categories.length, "направлении", "направлениях", "направлениях")}. Цена указана за весь курс. Программу, длительность и ближайшие даты подскажем при записи.</p>
+      <div class="filters" role="group" aria-label="Направление"><button class="chip" data-filter="all" aria-pressed="true">Все</button>${S.categories.map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
+    <div class="wrap" id="spreads">${S.courses.map((c) => `<article class="spread" data-cat="${c.cat}">
+        <a class="spread__ph zoom" href="${cURL(c)}" tabindex="-1" aria-hidden="true">${ph(c.photo, "", { sizes: "(max-width: 760px) 100vw, 45vw", style: "height:100%;border-radius:inherit" })}</a>
+        <div><span class="cap">${esc(cat(c.cat).name)}</span><h2><a href="${cURL(c)}">${esc(c.name)}</a></h2><p class="lead">${esc(c.short)}</p>
+          <ul class="spread__topics">${c.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+          <div class="spread__act"><span class="price">${PR(c)}</span><a class="link" href="${cURL(c)}">${arrow("О курсе")}</a><button class="btn btn--line" data-enroll="${c.slug}">Записаться</button></div></div>
+      </article>`).join("")}</div>
+    <div class="wrap" style="padding-bottom:var(--sec)"><div class="help"><div><h3>Не знаете, что выбрать?</h3><p class="muted" style="margin-top:8px">Три вопроса, и мы покажем подходящие курсы. Телефон не нужен.</p></div><button class="btn btn--accent" data-quiz>Подобрать курс</button></div></div>`;
+  P.course = () => {
+    const c = course(D.slug);
+    if (!c) return `<div class="wrap phead"><h1>Курс не найден</h1><p class="lead">Возможно, ссылка устарела.</p><p style="margin-top:28px"><a class="btn btn--accent" href="${R}courses/">Все курсы</a></p></div>`;
+    document.title = `${c.name}: обучение в Туймазах | ${S.org.name}`;
+    const L = c.layout || "split", cr = crumbs([{ t: "Курсы", href: `${R}courses/` }, { t: c.name }]);
+    const text = `${cr}<span class="${L === "cover" ? "muted" : "cap"}">${esc(cat(c.cat).name)}</span><h1>${esc(c.name)}</h1><p class="${L === "cover" ? "" : "lead"}" style="max-width:46ch">${esc(c.short)}</p>
+      <div class="chero__price"><span class="price">${PR(c)}</span>${pct(c) && S.discount.until ? `<span class="parts">Скидка ${pct(c)}% до ${new Date(S.discount.until).toLocaleDateString("ru-RU", { day: "numeric", month: "long" })}</span>` : ""}${PARTS() ? `<span class="parts">${esc(PARTS())}</span>` : ""}<span class="${L === "cover" ? "muted" : "cap"}">за весь курс${NOTE ? ", цена предварительная" : ""}</span></div>
+      <div class="chero__act"><button class="btn btn--accent" data-enroll="${c.slug}">Записаться на курс</button>${WAON() ? `<a class="btn btn--line" href="${wa(`Здравствуйте! Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.`)}" target="_blank" rel="noopener">Спросить в WhatsApp</a>` : ""}</div>`;
+    const heroPh = ph(c.photo, c.alt, { reveal: false, eager: true, sizes: L === "cover" ? "100vw" : "(max-width: 860px) 100vw, 50vw", cap: ILL, style: L === "split" ? "height:100%" : "" });
+    const hero = L === "cover" ? `<section class="chero chero--cover">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="wrap chero__t">${text}</div></section>`
+      : L === "frame" ? `<section class="wrap chero chero--frame">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div>${text}</div></section>`
+      : `<section class="chero chero--split">${heroPh.replace('class="ph', 'class="ph chero__ph')}<div class="chero__t">${text}</div></section>`;
+    const facts = [["Длительность", c.duration], ["Учебных часов", c.hours], ["Группа", c.group], ["Практика на моделях", c.models], ["Материалы", c.materials], ["Документ после обучения", c.certificate]].filter((f) => has(f[1]));
+    const faqs = (c.faq || []).filter((f) => f && f.q).concat(S.faq.filter((f) => f.tags && f.tags.includes("course"))).slice(0, 8);
+    const others = S.courses.filter((x) => x.slug !== c.slug).sort((a, b) => (b.cat === c.cat) - (a.cat === c.cat)).slice(0, 4);
+    return `${hero}
+      <section class="sec"><div class="wrap learn"><h2 class="rv-t">Что изучите</h2><div><ul>${c.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+        ${facts.length ? `<div class="facts" style="margin-top:40px">${facts.map((f) => `<div><span class="cap">${f[0]}</span><b>${esc(f[1])}</b></div>`).join("")}</div>` : NOTE ? `<p class="note">Программа по модулям, длительность, практика на моделях, материалы и документ после обучения появятся, когда Айгуль их подтвердит. Пока на сайте их нет: мы не придумываем условия.</p>` : ""}</div></div></section>
+      <div class="pair">${c.photos.map((p, i) => ph(p.src, p.alt, { sizes: "(max-width: 700px) 50vw, 50vw", cap: i ? "" : ILL })).join("")}</div>
+      <section class="sec"><div class="wrap">
+        <div class="batch"><div><h2 style="font-size:var(--fs-h3)">Ближайшие даты</h2><p class="muted" style="margin-top:8px">${has(S.batches) ? "" : "Даты набора на этот курс уточняются. Оставьте заявку, и мы сообщим о старте."}</p></div><button class="btn btn--accent" data-enroll="${c.slug}">Узнать о наборе</button></div>
+        <div class="two" style="margin-top:var(--sec)"><h2 class="rv-t">Вопросы о курсе</h2><div class="acc">${faqs.map((f) => `<details><summary>${esc(f.q)}</summary><p class="ans">${esc(f.a)}</p></details>`).join("")}</div></div>
+      </div></section>
+      <section class="sec" style="padding-top:0"><div class="wrap rail-head"><h2 class="rv-t">Другие курсы</h2><a class="link" href="${R}courses/">${arrow("Все курсы")}</a></div>
+        <div class="rail">${others.map((o) => `<a class="rcard" href="${cURL(o)}">${ph(o.photo, o.alt, { sizes: "(max-width: 760px) 70vw, 26vw" })}<span class="rcard__cat">${esc(cat(o.cat).name)}</span><h3>${esc(o.name)}</h3><span class="price">${PR(o)}</span></a>`).join("")}</div></section>`;
+  };
+  P.about = () => `<div class="wrap phead">${crumbs([{ t: "Об академии" }])}<h1>${esc(S.org.name)}</h1><p class="lead">Название значит ${esc(S.org.meaning)}. ${esc(S.about.lead)}</p></div>
+    <section class="sec" style="padding-top:0"><div class="wrap collage">${S.about.collage.map((p, i) => ph(p.src, p.alt, { sizes: i ? "(max-width: 760px) 60vw, 50vw" : "40vw", cap: i ? "" : ILL })).join("")}</div></section>
+    <section class="sec" style="padding-top:0"><div class="wrap"><p class="big rv-t">Профессии осваивают руками. Поэтому у нас теория всегда рядом с практикой, а преподаватель рядом с ученицей.</p>
+      <ul class="approach" style="margin-top:clamp(48px,6vw,90px)">${S.about.approach.map((a) => `<li><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></li>`).join("")}</ul>
+      ${(S.advantages || []).some((x) => x.d) ? `<h2 class="sec__h" style="margin-top:clamp(48px,6vw,90px)">Почему АлтынНур</h2><ul class="approach">${S.advantages.filter((x) => x.t || x.d).map((x) => `<li><h3>${esc(x.t || x.short)}</h3><p class="muted">${esc(x.d || "")}</p></li>`).join("")}</ul>` : ""}
+      ${NOTE ? `<p class="note">Тексты о подходе предварительные, утвердим с Айгуль.</p>` : ""}</div></section>
+    <section class="sec" style="padding-top:0"><div class="wrap tbio">${has(S.teacher.photo) ? `<div class="ph tbio__ph"><img src="${R}${tph(S.teacher.photo)}" alt="${esc(S.teacher.name)}" loading="lazy"></div>` : ""}
+      <div><span class="cap">${esc(S.teacher.role)}</span><h2 style="margin-top:10px">${esc(S.teacher.name)}</h2>${S.teacher.bio ? `<p class="lead" style="margin-top:16px">${esc(S.teacher.bio)}</p>` : ""}
+      ${(S.teacher.facts || []).length ? `<dl class="tbio__f">${S.teacher.facts.map((f) => typeof f === "string" ? `<div><dd>${esc(f)}</dd></div>` : `<div><dt>${esc(f.t)}</dt><dd>${esc(f.d)}</dd></div>`).join("")}</dl>` : ""}</div></div></section>
+    <section class="enroll" style="padding:clamp(20px,3vw,40px) 0 var(--sec)"><div class="wrap"><div class="help" style="background:var(--ivory)"><div><h3>Посмотрите программы</h3><p class="muted" style="margin-top:8px">${S.courses.length} ${plural(S.courses.length, "курс", "курса", "курсов")}: ${S.categories.map((c) => c.name.toLowerCase()).join(", ")}.</p></div><a class="btn btn--accent" href="${R}courses/">Все курсы</a></div></div></section>`;
+  P.works = () => {
+    const ills = S.courses.flatMap((c) => [{ src: c.photo, alt: c.alt, cat: c.cat }].concat(c.photos.map((p) => ({ src: p.src, alt: p.alt, cat: c.cat })))).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i);
+    const items = has(S.works) ? S.works : S.preview ? ills : [];
+    return `<div class="wrap phead">${crumbs([{ t: "Работы" }])}<h1>Работы учениц и студии</h1>
+      <div class="filters" role="group" aria-label="Направление">${new Set(items.map((x) => x.cat)).size < 2 ? "" : `<button class="chip" data-filter="all" aria-pressed="true">Все</button>`}${new Set(items.map((x) => x.cat)).size < 2 ? "" : S.categories.filter((c) => items.some((x) => x.cat === c.id)).map((c) => `<button class="chip" data-filter="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join("")}</div></div>
+      <section class="wrap" style="padding-bottom:var(--sec)">
+      ${has(S.works) ? "" : `<div class="empty-works"><div><h2 style="font-size:var(--fs-h3)">Галерея работ появится после съёмки</h2><p class="muted" style="margin-top:12px">Здесь будут только настоящие работы учениц и преподавателя, подписанные и с согласия авторов:</p><ul><li>брови, ресницы, ногти, педикюр, уход, волосы;</li><li>сравнения «до и после»;</li><li>процесс обучения.</li></ul></div>
+        <div><p class="muted">${NOTE ? "Ниже иллюстрации направлений, чтобы показать, как будет работать галерея. Это не работы АлтынНур." : ""}</p></div></div>`}
+      <div class="masonry" id="gal">${items.map((p, i) => `<button data-cat="${p.cat}" data-i="${i}" data-author="${esc([p.kind === "teacher" ? "Работа преподавателя" : p.kind === "student" ? "Работа ученицы" : "", p.author ? "автор: " + p.author : ""].filter(Boolean).join(", "))}" aria-label="Открыть фото: ${esc(p.alt)}">${ph(p.src, p.alt, { sizes: "(max-width: 760px) 100vw, 33vw", cap: has(S.works) ? "" : ILL })}</button>`).join("")}</div>
+      </section>
+      <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото"><button class="lb-btn lb-x" data-lb="x" aria-label="Закрыть">×</button><button class="lb-btn lb-p" data-lb="p" aria-label="Предыдущее">‹</button><figure style="margin:0"><img alt=""><p></p></figure><button class="lb-btn lb-n" data-lb="n" aria-label="Следующее">›</button></div>`;
+  };
+  P.training = () => `<div class="wrap phead">${crumbs([{ t: "Обучение" }])}<h1>Как проходит обучение</h1><p class="lead">Очно, в ${esc(S.org.cityIn)}, с преподавателем рядом. От первого вопроса до готового навыка четыре шага.</p></div>
+    <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap"><ol class="steps">${S.process.map((s, i) => `<li><span class="steps__n" aria-hidden="true">${i + 1}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></li>`).join("")}</ol></div></section>
+    <section class="sec" style="padding-top:0"><div class="wrap two"><h2 class="rv-t">Кому подойдёт</h2><div class="who">${S.audience.map((a) => `<div><h3>${esc(a.t)}</h3><p class="muted">${esc(a.d)}</p></div>`).join("")}</div></div></section>
+    <div class="pair">${ph("ph/hair-2", "Работа с волосами в салоне", { cap: ILL })}${ph("ph/manicure", "Мастер ногтевого сервиса за работой")}</div>
+    <section class="sec enroll" id="quiz"><div class="wrap quiz"><div><h2 class="rv-t">${esc(S.quiz.title)}</h2><p class="lead" style="margin-top:20px">${esc(S.quiz.text)}</p></div><div class="qbox" id="qbox" aria-live="polite"></div></div></section>`;
+  P.faq = () => `<div class="wrap phead">${crumbs([{ t: "Вопросы" }])}<h1>Частые вопросы</h1><p class="lead">Не нашли ответ? ${WAON() ? "Напишите нам в WhatsApp" : "Оставьте вопрос в заявке"}, ответит преподаватель.</p></div>
+    <section class="wrap" style="padding-bottom:var(--sec)"><div class="two"><div>${WAON() ? `<a class="btn btn--line" href="${wa(WA_HELLO)}" target="_blank" rel="noopener">Задать вопрос</a>` : `<button class="btn btn--line" data-enroll>Задать вопрос</button>`}</div><div class="acc">${S.faq.map((f) => `<details><summary>${esc(f.q)}</summary><p class="ans">${esc(f.a)}</p></details>`).join("")}</div></div></section>`;
+  P.contacts = () => {
+    const o = S.org;
+    const rows = S.contacts.filter((c) => c.on && has(c.value) && CH[c.type]).map((c) => [CH[c.type].t, `<a href="${esc(CH[c.type].href(c.value))}"${c.type === "phone" || c.type === "email" ? "" : ' target="_blank" rel="noopener"'}>${esc(CH[c.type].show(c.value))}</a>`])
+      .concat([["Адрес", o.address ? esc(o.address) : `${esc(o.city)}, ${esc(o.region)}. Точный адрес сообщим при записи.`], o.hours ? ["Часы работы", esc(o.hours)] : null]).filter(Boolean);
+    return `<div class="wrap phead">${crumbs([{ t: "Контакты" }])}<h1>Будем рады видеть вас в ${esc(o.name)}</h1></div>
+      <section class="wrap" style="padding-bottom:var(--sec)"><div class="two"><div><p class="muted">${esc(o.owner)}, основательница и преподаватель.</p></div><div><ul class="clines">${rows.map((r) => `<li><span>${r[0]}</span><div>${r[1]}</div></li>`).join("")}</ul>
+        <h2 style="font-size:var(--fs-h3);margin:clamp(48px,6vw,80px) 0 22px">Задать вопрос</h2><div id="inlineForm"></div></div></div></section>`;
+  };
+  P.privacy = () => `<div class="wrap phead" style="max-width:860px">${crumbs([{ t: "Политика" }])}<h1 style="font-size:clamp(2rem,1.4rem + 2.4vw,3.2rem)">Политика обработки персональных данных</h1>
+    <p class="ctx" style="margin:28px 0">Черновик. Заполним реквизитами оператора и проверим перед запуском. До этого документ не считается окончательным.</p>
+    <div class="lead" style="display:grid;gap:16px;max-width:none;padding-bottom:var(--sec)">
+      <p><b>Оператор:</b> [ФИО или наименование, ИНН, адрес: заполнит Айгуль].</p><p><b>Какие данные собираем:</b> имя, телефон, выбранный курс, способ связи, комментарий и ответы в подборе курса, если вы их указали.</p>
+      <p><b>Зачем:</b> чтобы связаться с вами по заявке и рассказать об обучении.</p><p><b>Основание:</b> ваше согласие, которое вы даёте, отмечая галочку в форме.</p>
+      <p><b>Где хранятся:</b> [на серверах в России, уточним при выборе хостинга].</p><p><b>Кому передаются:</b> [сервисы уведомлений, если будут].</p><p><b>Сколько хранятся:</b> [срок хранения заявок].</p>
+      <p><b>Как отозвать согласие:</b> [почта для обращений] или WhatsApp ${esc(S.org.phone)}.</p></div></div>`;
+
+  /* ---------- форма заявки ---------- */
+  const formHTML = (c, extra) => `<form class="form" novalidate>
+      ${c ? `<p class="ctx">Вы оставляете заявку на курс: ${esc(c.name)}</p>` : ""}${extra && extra.label ? `<p class="ctx">${esc(extra.label)}</p>` : ""}
+      <div class="fld"><label for="fName">Ваше имя</label><input id="fName" name="name" autocomplete="name" maxlength="80"><span class="err"></span></div>
+      <div class="fld"><label for="fPhone">Телефон</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" maxlength="20"><span class="err"></span></div>
+      ${c ? `<input type="hidden" name="course" value="${c.slug}">` : `<div class="fld"><label for="fCourse">Курс</label><select id="fCourse" name="course"><option value="">Пока не выбрала, нужна консультация</option>${S.courses.map((x) => `<option value="${x.slug}">${esc(x.name)}</option>`).join("")}</select></div>`}
+      <details class="fmore"><summary>Добавить комментарий${has(S.promo && S.promo.codes) ? " или промокод" : ""}</summary>
+      <div class="fld"><label for="fWay">Как с вами связаться</label><select id="fWay" name="way"><option>WhatsApp</option><option>Звонок</option><option>Telegram</option></select></div>
+      <div class="fld"><label for="fNote">Комментарий, если хотите</label><textarea id="fNote" name="note" maxlength="600"></textarea></div>
+      ${has(S.promo && S.promo.codes) ? `<div class="fld"><label for="fPromo">Промокод, если есть</label><input id="fPromo" name="promo" maxlength="30" autocapitalize="characters"><span class="err" data-perr></span></div>` : ""}
+      </details>
+      <div class="hp" aria-hidden="true"><label>Не заполняйте <input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="consent"><input type="checkbox" name="consent"><span>Согласна на обработку персональных данных по <a href="${R}privacy/" target="_blank">политике</a>.</span></label><span class="err" data-cerr></span>
+      <button class="btn btn--accent" type="submit">Записаться</button>
+      ${NOTE ? `<p class="cap">Заявка открывает WhatsApp с готовым сообщением для Айгуль.</p>` : ""}</form>`;
+  function validate(form, needConsent) {
+    const d = Object.fromEntries(new FormData(form));
+    if (d.website) return null;
+    let ok = true;
+    const setErr = (name, msg) => { const f = form.querySelector(`[name=${name}]`).closest(".fld"); f.classList.toggle("has-err", !!msg); f.querySelector(".err").textContent = msg || ""; if (msg) ok = false; };
+    setErr("name", (d.name || "").trim().length < 2 ? "Напишите, как к вам обращаться" : "");
+    const dg = (d.phone || "").replace(/\D/g, "");
+    setErr("phone", /^[78]\d{10}$/.test(dg) || /^9\d{9}$/.test(dg) ? "" : "Проверьте номер: нужно 11 цифр, например +7 927 123-45-67");
+    if (needConsent) { const ce = form.querySelector("[data-cerr]"); ce.textContent = d.consent ? "" : "Без согласия мы не можем принять заявку"; if (!d.consent) ok = false; }
+    if (!ok) { (form.querySelector(".has-err input") || form.querySelector("[name=consent]")).focus(); return null; }
+    return d;
+  }
+  const promoFind = (v) => ((S.promo && S.promo.codes) || []).find((x) => x.code && x.code.trim().toUpperCase() === String(v).trim().toUpperCase());
+  function send(d, extra) {
+    const c = d.course && course(d.course);
+    const text = [`Здравствуйте! Меня зовут ${d.name.trim()}.`, c ? `Меня заинтересовал курс «${c.name}» в учебном центре АлтынНур. Хотела бы узнать подробности.` : "Хочу узнать об обучении в АлтынНур и подобрать курс.",
+      extra && extra.summary ? extra.summary : "", `Телефон: ${d.phone}.${d.way ? ` Удобнее: ${d.way}.` : ""}`, d.promo && d.promo.trim() ? `Промокод: ${d.promo.trim().toUpperCase()}${d.promoText ? ` (${d.promoText})` : ""}` : "", d.note ? `Комментарий: ${d.note.trim()}` : ""].filter(Boolean).join("\n");
+    window.open(wa(text), "_blank", "noopener");
+  }
+  const okHTML = `<div class="ok"><div class="ok__mark" aria-hidden="true">✓</div><h3>Спасибо!</h3><p>Мы открыли WhatsApp с готовым сообщением, осталось нажать «Отправить». Мы свяжемся с вами по указанному номеру.</p></div>`;
+  const okSaved = `<div class="ok"><div class="ok__mark" aria-hidden="true">✓</div><h3>Спасибо, заявка у нас!</h3><p>Мы свяжемся с вами по указанному номеру и ответим на все вопросы.</p></div>`;
+  let lastFocus = null;
+  function openModal(title, html, onReady) {
+    const m = document.getElementById("modal");
+    m.querySelector("h3").textContent = title; m.querySelector("#mBody").innerHTML = html;
+    lastFocus = document.activeElement; m.classList.add("is-open"); document.documentElement.style.overflow = "hidden";
+    if (onReady) onReady(m.querySelector("#mBody"));
+    setTimeout(() => { const f = m.querySelector("#mBody button, #mBody input:not([type=hidden])"); if (f) f.focus(); }, 60);
+  }
+  function closeModal() { document.getElementById("modal").classList.remove("is-open"); document.documentElement.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+  const phoneMask = (inp) => inp && inp.addEventListener("input", () => {
+    let d = inp.value.replace(/\D/g, ""); if (!d) { inp.value = ""; return; } if (d[0] === "8") d = "7" + d.slice(1); if (d[0] !== "7") d = "7" + d; d = d.slice(0, 11);
+    const p = [d.slice(1, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)]; inp.value = "+7" + (p[0] ? " (" + p[0] : "") + (p[0].length === 3 ? ")" : "") + (p[1] ? " " + p[1] : "") + (p[2] ? "-" + p[2] : "") + (p[3] ? "-" + p[3] : ""); });
+  function bindForm(form, extra, target) {
+    phoneMask(form.querySelector("[name=phone]"));
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); const d = validate(form, true); if (!d) return;
+      if (d.promo && d.promo.trim()) { const m = promoFind(d.promo); const pe = form.querySelector("[data-perr]"); if (!m) { if (pe) pe.textContent = "Такого промокода нет. Проверьте написание или оставьте поле пустым"; return; } if (pe) pe.textContent = ""; d.promoText = [m.text, parseInt(m.pct, 10) > 0 ? "скидка " + parseInt(m.pct, 10) + "%" : ""].filter(Boolean).join(", "); }
+      if (S.preview || DRAFT || S.mode === "static") { send(d, extra); target.innerHTML = okHTML; return; }
+      // рабочая версия: заявка сохраняется на сервере. Если сервер не ответил, открываем WhatsApp, чтобы заявка не потерялась
+      const btn = form.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Отправляем…";
+      try {
+        const r = await fetch(R + "api/?r=lead", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: d.name, phone: d.phone, course: d.course || "", way: d.way || "", note: d.note || "", consent: !!d.consent, website: d.website || "", extra: (extra && extra.summary) || "", page: location.pathname }) });
+        const j = await r.json();
+        if (j.ok) { target.innerHTML = okSaved; return; }
+        if (r.status === 422 || r.status === 429) { btn.disabled = false; btn.textContent = "Записаться"; form.querySelector("[data-cerr]").textContent = j.error; return; }
+        throw new Error("server");
+      } catch (er) { send(d, extra); target.innerHTML = okHTML; }
+    });
+  }
+  function openForm(slug, extra) {
+    const c = slug && course(slug);
+    openModal("Заявка на обучение", formHTML(c, extra), (b) => bindForm(b.querySelector("form"), extra, b));
+  }
+
+  /* ---------- квиз ---------- */
+  function quiz(box) {
+    const Q = S.quiz.questions, ans = {};
+    let step = 0;
+    const draw = () => {
+      if (step >= Q.length) return result();
+      const q = Q[step];
+      box.innerHTML = `<div class="qprog"><span>Вопрос ${step + 1} из ${Q.length}</span><span class="qprog__bar"><i style="width:${(step / Q.length) * 100}%"></i></span></div>
+        <div class="qstep"><h3>${esc(q.q)}</h3><div class="qopts">${q.a.map((a, i) => `<button class="qopt" data-i="${i}" aria-pressed="${!!ans[q.id] && ans[q.id].i === i}">${esc(a.t)}</button>`).join("")}</div></div>
+        <div class="qnav">${step ? `<button class="link" data-back><span>Назад</span></button>` : "<span></span>"}<button class="btn btn--accent" data-next ${ans[q.id] ? "" : "disabled"}>${step === Q.length - 1 ? "Показать результат" : "Продолжить"}</button></div>`;
+      box.querySelectorAll(".qopt").forEach((b) => b.addEventListener("click", () => {
+        const i = +b.dataset.i; ans[q.id] = { i, v: q.a[i].v, t: q.a[i].t };
+        box.querySelectorAll(".qopt").forEach((x) => x.setAttribute("aria-pressed", x === b));
+        box.querySelector("[data-next]").disabled = false;
+      }));
+      box.querySelector("[data-next]").addEventListener("click", () => { step++; draw(); });
+      const back = box.querySelector("[data-back]"); if (back) back.addEventListener("click", () => { step--; draw(); });
+    };
+    const result = () => {
+      const lv = ans.level.v, fm = ans.format.v;
+      const picks = fm === "consult" ? [] : S.courses.map((c) => ({ c, s: (c.level.includes(lv) ? 2 : 0) + (c.format.includes(fm) ? 3 : 0) })).filter((x) => x.s >= 3).sort((a, b) => b.s - a.s).slice(0, 3).map((x) => x.c);
+      const summary = `Ответы в подборе курса: ${Q.map((q) => ans[q.id].t).join("; ")}.` + (picks.length ? ` Подошли: ${picks.map((p) => p.name).join(", ")}.` : "");
+      box.innerHTML = `<div class="qprog"><span>Готово</span><span class="qprog__bar"><i style="width:100%"></i></span></div><div class="qstep">
+        ${picks.length ? `<h3>Вам могут подойти</h3><div class="qres">${picks.map((p) => `<a href="${cURL(p)}"><img src="${R}${p.photo}-640.webp" alt=""><span>${esc(p.name)}</span><span class="price">${PR(p)}</span></a>`).join("")}</div>`
+          : `<h3>Подберём курс вместе</h3><p class="lead" style="margin:12px 0 24px">По ответам сложно выбрать одно направление. Расскажем о программах и поможем определиться.</p>`}
+        <p class="muted">Хотите узнать подробности об обучении? Оставьте номер, и мы поможем подобрать подходящий вариант.</p>
+        <div class="qnav"><button class="link" data-again><span>Пройти заново</span></button><button class="btn btn--accent" data-lead>Оставить номер</button></div>
+        <p class="cap" style="margin-top:14px">Это подсказка по вашим ответам, а не оценка способностей. Окончательно выбрать поможет преподаватель.</p></div>`;
+      box.querySelector("[data-again]").addEventListener("click", () => { step = 0; for (const k in ans) delete ans[k]; draw(); });
+      box.querySelector("[data-lead]").addEventListener("click", () => openForm(picks.length === 1 ? picks[0].slug : "", { label: "Ответы из подбора передадим вместе с заявкой.", summary }));
+    };
+    draw();
+  }
+
+  /* ---------- фильтр (каталог и работы) ---------- */
+  function scrub() {
+    const sec = document.getElementById("scrub"); if (!sec) return;
+    const cv = sec.querySelector("canvas"), cx = cv.getContext("2d"), bar = sec.querySelector(".scrub__bar i"), N = +cv.dataset.n, base = cv.dataset.seq;
+    const F = []; let want = 0, have = 0, raf = 0, started = false;
+    const src = (i) => base + String(i + 1).padStart(3, "0") + ".webp";
+    const draw = () => { let i = Math.round(have * (N - 1)); let im = F[i]; while (im && !im.ok && i > 0) im = F[--i]; if (!im || !im.ok) return;
+      const W = cv.width, H2 = cv.height, k = Math.max(W / im.naturalWidth, H2 / im.naturalHeight), w = im.naturalWidth * k, h = im.naturalHeight * k; cx.drawImage(im, (W - w) / 2, (H2 - h) / 2, w, h); };
+    const load = (i) => { const im = new Image(); im.onload = () => { im.ok = true; if (i === 0 || Math.abs(i - Math.round(have * (N - 1))) < 2) draw(); }; im.src = src(i); F[i] = im; };
+    const size = () => { const r = devicePixelRatio > 1 ? 1.5 : 1; cv.width = cv.clientWidth * r; cv.height = cv.clientHeight * r; draw(); };
+    const tick = () => { have += (want - have) * 0.2; draw(); if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else { have = want; raf = 0; draw(); } };
+    const scene = () => { const r = sec.getBoundingClientRect(), total = r.height - innerHeight; if (!started && r.top < innerHeight * 2.5) { started = true; for (let i = 1; i < N; i++) load(i); }
+      want = Math.min(1, Math.max(0, -r.top / total)); bar.style.transform = `scaleX(${want})`; sec.classList.toggle("is-end", want > 0.9); if (!raf) raf = requestAnimationFrame(tick); };
+    load(0); addEventListener("resize", size); size();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { started = true; for (let i = 1; i < N; i++) load(i); return; }
+    addEventListener("scroll", scene, { passive: true }); scene();
+  }
+  function filters(listSel, itemSel) {
+    const list = document.querySelector(listSel);
+    if (!list) return;
+    const apply = (c) => {
+      document.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.filter === c));
+      list.querySelectorAll(itemSel).forEach((r) => {
+        const show = c === "all" || r.dataset.cat === c;
+        if (show) { r.hidden = false; requestAnimationFrame(() => r.classList.remove("is-out")); }
+        else { r.classList.add("is-out"); setTimeout(() => { if (r.classList.contains("is-out")) r.hidden = true; }, 350); }
+      });
+      const u = new URL(location.href); c === "all" ? u.searchParams.delete("cat") : u.searchParams.set("cat", c); history.replaceState(null, "", u);
+    };
+    document.querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter)));
+    const start = new URLSearchParams(location.search).get("cat");
+    if (start && S.categories.some((c) => c.id === start)) apply(start);
+  }
+  function lightbox() {
+    const lb = document.getElementById("lb"), gal = document.getElementById("gal");
+    if (!lb || !gal) return;
+    let cur = 0;
+    const items = () => [...gal.querySelectorAll("button:not([hidden])")];
+    const show = (i) => { const it = items(); cur = (i + it.length) % it.length; const img = it[cur].querySelector("img"); lb.querySelector("img").src = img.currentSrc.replace("-640.", "-1280."); lb.querySelector("img").alt = img.alt; lb.querySelector("p").textContent = img.alt + (it[cur].dataset.author ? ". " + it[cur].dataset.author : "") + (S.works.length ? "" : ". Иллюстрация, не работа АлтынНур."); };
+    gal.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; show(items().indexOf(b)); lb.classList.add("is-open"); lb.querySelector(".lb-x").focus(); });
+    lb.addEventListener("click", (e) => { const a = e.target.closest("[data-lb]"); if (!a && e.target !== lb) return; const k = a ? a.dataset.lb : "x"; if (k === "x") lb.classList.remove("is-open"); else show(cur + (k === "n" ? 1 : -1)); });
+    document.addEventListener("keydown", (e) => { if (!lb.classList.contains("is-open")) return; if (e.key === "Escape") lb.classList.remove("is-open"); if (e.key === "ArrowRight") show(cur + 1); if (e.key === "ArrowLeft") show(cur - 1); });
+  }
+
+  /* ---------- сборка ---------- */
+  document.addEventListener("click", (e) => { const a = e.target.closest("[data-draft-close]"); if (!a) return; e.preventDefault();
+    try { sessionStorage.removeItem("altyn-draft-on"); } catch (er) {}
+    if (window.opener && !window.opener.closed) { window.close(); setTimeout(() => (location.href = a.href), 300); } else location.href = a.href; });
+  // в просмотре черновика переход по сайту сохраняет режим, а якорь блока прокручивает к нему
+  const main = document.getElementById("main");
+  main.innerHTML = (P[PAGE] || P.home)() + extraBlocks();
+  // кадр фото из админки: точка фокуса (x, y в %) и приближение z; ключ = имя фото без размера
+  const CROP = S.crop || {};
+  const cropKey = (img) => { const m = (img.getAttribute("src") || img.getAttribute("data-src") || "").match(/(ph\/[\w-]+?)-(?:640|1280|1600)\.webp/); return m ? m[1] : ""; };
+  const applyCrop = (root) => { if (!root || !root.querySelectorAll) return; (root.tagName === "IMG" ? [root] : root.querySelectorAll("img")).forEach((img) => { const c = CROP[cropKey(img)]; if (!c) return;
+    img.style.objectPosition = `${+c.x || 50}% ${+c.y || 50}%`; const z = Math.min(3, Math.max(1, +c.z || 1)); if (z > 1) { img.style.scale = String(z); img.style.transformOrigin = `${+c.x || 50}% ${+c.y || 50}%`; } }); };
+  if (Object.keys(CROP).length) { applyCrop(document.body); new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(applyCrop))).observe(document.body, { childList: true, subtree: true }); }
+  // фото грузятся заранее, примерно за полтора экрана до появления, чтобы при быстрой прокрутке не было пустых рамок
+  if ("IntersectionObserver" in window) { const pre = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.loading = "eager"; pre.unobserve(en.target); } }), { rootMargin: "1400px 0px" });
+    const watch = (root) => root.querySelectorAll && root.querySelectorAll('img[loading="lazy"]').forEach((i) => pre.observe(i)); watch(document);
+    new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(watch))).observe(document.body, { childList: true, subtree: true }); }
+  // страница собирается скриптом, поэтому к якорю (#блок) прокручиваем сами
+  if (location.hash.length > 1) setTimeout(() => { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView({ block: "start" }); }, 80);
+  main.insertAdjacentHTML("beforebegin", header());
+  main.insertAdjacentHTML("afterend", footer() + `<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal__box"><div class="modal__top"><h3 id="mTitle"></h3><button class="x" data-close aria-label="Закрыть">×</button></div><div id="mBody"></div></div></div>`);
+
+  const html = document.documentElement, burger = document.querySelector(".burger");
+  burger.addEventListener("click", () => { const o = html.classList.toggle("menu-open"); burger.setAttribute("aria-expanded", o); html.style.overflow = o ? "hidden" : ""; });
+  // открытое меню закрывается нажатием в любое место экрана, кроме самих пунктов меню
+  document.addEventListener("click", (e) => { if (!html.classList.contains("menu-open") || e.target.closest(".burger") || e.target.closest(".nav a")) return; e.preventDefault(); e.stopPropagation(); html.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; }, true);
+  document.addEventListener("click", (e) => {
+    const th = e.target.closest("[data-theme-set]"), fo = e.target.closest("[data-font-set]");
+    if (th) { apply("theme", th.dataset.themeSet); return; }
+    if (fo) { apply("font", fo.dataset.fontSet); return; }
+    const an = e.target.closest("[data-anim-set]");
+    if (an) { try { localStorage.setItem("altyn-anim", an.dataset.animSet); } catch (er) {} return; }
+    const vw = e.target.closest("[data-view-set]");
+    if (vw) { try { localStorage.setItem("altyn-view", vw.dataset.viewSet); } catch (er) {} return; }
+    if (e.target.closest("[data-mode-toggle]")) { MODE = MODE === "dark" ? "light" : "dark"; document.documentElement.dataset.mode = MODE; try { localStorage.setItem("altyn-mode", MODE); } catch (er) {} return; }
+    const en = e.target.closest("[data-enroll]");
+    if (en) { e.preventDefault(); html.classList.remove("menu-open"); openForm(en.dataset.enroll || ""); return; }
+    if (e.target.closest("[data-quiz]")) {
+      e.preventDefault();
+      if (document.getElementById("qbox")) { document.getElementById("quiz").scrollIntoView({ behavior: "smooth" }); return; }
+      openModal("Подбор курса", `<div id="qboxM" aria-live="polite"></div>`, (b) => quiz(b.querySelector("#qboxM")));
+      return;
+    }
+    if (e.target.closest("[data-close]") || e.target.id === "modal") closeModal();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.getElementById("modal").classList.contains("is-open")) closeModal(); });
+  const qf = document.querySelector("[data-quick]");
+  if (qf) qf.addEventListener("submit", (e) => { e.preventDefault(); const d = validate(qf, false); if (!d) return; openForm("", { label: `${d.name.trim()}, ${d.phone}: осталось подтвердить согласие и выбрать курс.` }); const m = document.getElementById("modal"); m.querySelector("[name=name]").value = d.name; m.querySelector("[name=phone]").value = d.phone; });
+  const inl = document.getElementById("inlineForm");
+  if (inl) { inl.innerHTML = formHTML(null); bindForm(inl.querySelector("form"), null, inl); }
+  const qb = document.getElementById("qbox"); if (qb) quiz(qb);
+  filters("#spreads", ".spread"); filters("#gal", "button"); lightbox(); scrub();
+  // карта грузится сама, когда до неё остаётся немного прокрутки (так первый экран лёгкий), по нажатию сразу
+  const mapLoad = (b) => { if (!b.isConnected) return; const f = document.createElement("iframe"); f.title = "Карта"; f.src = b.dataset.map; f.allowFullscreen = true; b.replaceWith(f); };
+  const maps = document.querySelectorAll("[data-map]");
+  maps.forEach((b) => b.addEventListener("click", () => mapLoad(b)));
+  if (maps.length && "IntersectionObserver" in window) { const mo = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { mo.unobserve(en.target); mapLoad(en.target); } }), { rootMargin: "800px 0px" }); maps.forEach((b) => mo.observe(b)); }
+  else maps.forEach(mapLoad);
+  // появление фото и заголовков идёт вместе с прокруткой: доля от 0 до 1 в переменной --rv
+  const rvs = [...document.querySelectorAll(".ph.rv, .rv-t:not(.rv-w)")];
+  if (rvs.length) { let rq = 0; const noMo = matchMedia("(prefers-reduced-motion: reduce)").matches; const rv = () => { rq = 0; const vh = innerHeight; for (const el of rvs) { const t = el.getBoundingClientRect().top; const p = Math.min(1, Math.max(0, (vh - t) / (vh * 0.45))); el.style.setProperty("--rv", noMo ? 1 : p.toFixed(3)); } };
+    addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(rv); }, { passive: true }); addEventListener("resize", rv); rv(); }
+  const hs = document.querySelectorAll(".hp__s");
+  if (hs.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) { let hi = 0; setInterval(() => { if (document.hidden) return; hs[hi].classList.remove("is-on"); hi = (hi + 1) % hs.length; hs[hi].classList.add("is-on"); }, 5000); }
+  document.querySelectorAll("[data-more]").forEach((b) => b.addEventListener("click", () => { document.getElementById(b.dataset.more).classList.remove("is-cut"); b.remove(); }));
+  document.querySelectorAll("[data-cmp-box]").forEach((box) => { const up = () => { const v = (k) => course(box.querySelector(`[data-cmp="${k}"]`).value); box.querySelector("[data-cmp-cols]").innerHTML = cmpCol(v("a")) + cmpCol(v("b")); }; box.addEventListener("change", up); });
+
+  const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // «Назад»: возвращает туда, откуда пришли, на то же место страницы
+  const KEY = "altyn-scroll:" + location.pathname + location.search;
+  const save = () => { try { sessionStorage.setItem(KEY, String(scrollY)); } catch (e) {} };
+  addEventListener("pagehide", save);
+  document.addEventListener("click", (e) => { if (e.target.closest("a[href]")) save(); }, true);
+  const nav = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0]) || {};
+  if (nav.type === "back_forward") { try { const y = +sessionStorage.getItem(KEY); if (y) { history.scrollRestoration = "manual"; requestAnimationFrame(() => scrollTo(0, y)); setTimeout(() => scrollTo(0, y), 250); } } catch (e) {} }
+  document.querySelectorAll("[data-back]").forEach((b) => b.addEventListener("click", () => {
+    let same = false; try { same = document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+    if (same && history.length > 1) history.back(); else location.href = R || "./";
+  }));
+
+  // карусель курсов: ближняя карточка в центре, соседние уходят по дуге назад
+  const flow = document.querySelector(".flow");
+  if (flow) {
+    const cards = [...flow.querySelectorAll(".fcard")], count = document.querySelector(".flow-count");
+    let cur = 0;
+    const paint = () => {
+      const mid = flow.scrollLeft + flow.clientWidth / 2;
+      let best = 0, bd = 1e9;
+      cards.forEach((c, i) => {
+        const d = (c.offsetLeft + c.offsetWidth / 2 - mid) / c.offsetWidth, a = Math.min(Math.abs(d), 2.2);
+        if (Math.abs(d) < bd) { bd = Math.abs(d); best = i; }
+        if (RM) return;
+        c.style.transform = `translateZ(${-a * 140}px) rotateY(${Math.max(-50, Math.min(50, -d * 32))}deg) scale(${1 - a * 0.06})`;
+        c.style.opacity = String(1 - Math.min(a, 1.6) * 0.38);
+        c.style.zIndex = String(10 - Math.round(a * 3));
+      });
+      if (best !== cur || !count.dataset.init) { cur = best; count.dataset.init = 1; count.textContent = `${cur + 1} / ${cards.length}`; cards.forEach((c, i) => c.classList.toggle("is-cur", i === cur)); }
+    };
+    let raf = 0;
+    flow.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(); }); }, { passive: true });
+    addEventListener("resize", paint);
+    const go = (i) => { i = Math.max(0, Math.min(cards.length - 1, i)); const c = cards[i]; flow.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - flow.clientWidth / 2, behavior: RM ? "auto" : "smooth" }); };
+    document.querySelectorAll("[data-flow]").forEach((b) => b.addEventListener("click", () => go(cur + +b.dataset.flow)));
+    flow.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); } });
+    paint();
+    // подсказка «листайте»: один раз слегка качнём карусель, когда она появится на экране
+    if (!RM && "IntersectionObserver" in window) {
+      const hint = new IntersectionObserver((es) => { if (es[0].isIntersecting) { hint.disconnect(); setTimeout(() => { flow.scrollBy({ left: 70, behavior: "smooth" }); setTimeout(() => flow.scrollBy({ left: -70, behavior: "smooth" }), 650); }, 400); } }, { threshold: 0.6 });
+      hint.observe(flow);
+    }
+  }
+  // лента фото: ряды сдвигаются навстречу друг другу вместе с прокруткой страницы
+  const ribbon = document.querySelector(".ribbon");
+  if (ribbon && !RM) {
+    const rows = [...ribbon.querySelectorAll(".ribbon__row")];
+    let rq = 0;
+    const move = () => { rq = 0; const r = ribbon.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; const p = (innerHeight - r.top) / (innerHeight + r.height); rows.forEach((row) => { const max = row.scrollWidth / 2 - innerWidth * 0.6; row.style.transform = `translate3d(${(row.dataset.dir > 0 ? -max + p * max * 0.9 : -p * max * 0.9)}px,0,0)`; }); };
+    addEventListener("scroll", () => { if (!rq) rq = requestAnimationFrame(move); }, { passive: true });
+    move();
+  }
+  document.querySelectorAll("[data-calc]").forEach((k) => { const g = (n) => k.querySelector(`[data-k="${n}"]`), o = (n) => k.querySelector(`[data-o="${n}"]`);
+    const calc = () => { const cp = +g("course").value || 0, pr = Math.max(0, +g("price").value || 0), per = Math.max(1, +g("per").value || 1); if (o("per")) o("per").textContent = per;
+      const wk = pr * per; o("weeks").textContent = wk ? `${Math.max(1, Math.ceil(cp / wk))} ${plural(Math.max(1, Math.ceil(cp / wk)), "неделю", "недели", "недель")}` : "—"; o("month").textContent = rub(Math.round(wk * 4.3 / 100) * 100); };
+    k.addEventListener("input", calc); calc(); });
+  // видео в фото-блоках: грузятся и играют, только когда видны на экране
+  const vids = document.querySelectorAll("video[data-src]");
+  if (vids.length && "IntersectionObserver" in window) { const vo = new IntersectionObserver((es) => es.forEach((en) => { const v = en.target;
+      if (en.isIntersecting) { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; if (!v.src) v.src = v.dataset.src; if (!RM) v.play().catch(() => {}); } else if (v.src) v.pause(); }), { rootMargin: "900px 0px" }); vids.forEach((v) => vo.observe(v)); }
+  else vids.forEach((v) => { if (v.dataset.poster) v.poster = v.dataset.poster; v.src = v.dataset.src; v.controls = true; });
+  document.querySelectorAll("[data-notify-go]").forEach((b) => b.addEventListener("click", () => { const c = b.parentElement.querySelector("[data-notify]").value; if (!WAON()) { const cc = S.courses.find((x) => x.name === c); return openForm(cc ? cc.slug : "", { label: "Сообщить о следующем наборе", summary: `Прошу сообщить о следующем наборе на курс «${c}».` }); } window.open(wa(`Здравствуйте! Сообщите, пожалуйста, когда будет следующий набор на курс «${c}».`), "_blank", "noopener"); }));
+  // короткий отсчёт «осталось 2 дн 05:12:09» в плашке и акции
+  document.querySelectorAll(".sbar__t").forEach((t) => { const end = new Date(t.dataset.until).getTime(); if (isNaN(end)) return; const tick = () => { const l = Math.max(0, end - Date.now()), d = Math.floor(l / 864e5), h = Math.floor(l / 36e5) % 24, m = Math.floor(l / 6e4) % 60, s2 = Math.floor(l / 1e3) % 60;
+    t.textContent = l ? "· осталось " + (d ? d + " дн " : "") + [h, m, s2].map((x) => String(x).padStart(2, "0")).join(":") : ""; }; tick(); setInterval(tick, 1000); });
+  // обратный отсчёт в блоке «Таймер»
+  document.querySelectorAll(".cb__timer").forEach((t) => { const end = new Date(t.dataset.until).getTime(); if (isNaN(end)) return;
+    const tick = () => { const left = Math.max(0, end - Date.now()); if (!left) { t.textContent = t.dataset.after; t.classList.add("is-over"); return clearInterval(iv); }
+      const v = { d: Math.floor(left / 864e5), h: Math.floor(left / 36e5) % 24, m: Math.floor(left / 6e4) % 60, s: Math.floor(left / 1e3) % 60 };
+      Object.keys(v).forEach((k) => { const b2 = t.querySelector(`[data-t="${k}"]`); if (b2) b2.textContent = String(v[k]).padStart(2, "0"); }); };
+    const iv = setInterval(tick, 1000); tick(); });
+  document.querySelectorAll("[data-inline-form]").forEach((x) => { x.innerHTML = formHTML(null); bindForm(x.querySelector("form"), null, x); });
+  const zoom = document.querySelector("section.zoom");
+  if (zoom && !RM) {
+    const st = zoom.querySelector(".zoom__stick"); let zq = 0;
+    const zmove = () => { zq = 0; const r = zoom.getBoundingClientRect(), span = r.height - innerHeight; if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = Math.max(0, Math.min(1, -r.top / span)); st.style.setProperty("--p", p.toFixed(4)); st.classList.toggle("is-open", p > 0.55); };
+    addEventListener("scroll", () => { if (!zq) zq = requestAnimationFrame(zmove); }, { passive: true }); addEventListener("resize", zmove); zmove();
+  } else if (zoom) zoom.classList.add("is-static");
+  /* ---------- спокойные анимации ---------- */
+  // заголовки секций проявляются по словам, снизу из-под маски
+  document.querySelectorAll(".phead h1, .chero h1").forEach((h) => h.classList.add("rv-t"));
+  document.querySelectorAll("h2.rv-t, h1.rv-t").forEach((h) => { let i = 0; h.innerHTML = h.textContent.split(" ").map((w) => `<span class="w"><span style="--i:${i++}">${esc(w)}</span></span>`).join(" "); h.classList.add("rv-w"); });
+  // плитки в сетках появляются по очереди
+  document.querySelectorAll(".dirs, .why, .ctiles, .masonry, .approach, .steps, .who, .collage, .rail").forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty("--d", i * 110 + "ms")));
+  if (!RM) {
+    // фото внутри плиток чуть медленнее страницы: лёгкая глубина
+    const par = [...document.querySelectorAll(".hero__ph, .dir .ph, .why .ph, .etile .ph, .ctile .ph, .chero__ph, .spread__ph .ph, .pair .ph, .collage .ph")];
+    par.forEach((el) => el.classList.add("par"));
+    // шапка прячется, когда листают вниз, и возвращается, когда листают вверх; тонкая полоска показывает, сколько прочитано
+    const hdr = document.querySelector(".hdr"); let lastY = scrollY, pq = 0;
+    const tick = () => { pq = 0; const vh = innerHeight;
+      par.forEach((el) => { const r = el.getBoundingClientRect(); if (r.bottom < -50 || r.top > vh + 50) return; const k = (r.top + r.height / 2 - vh / 2) / vh; el.style.setProperty("--py", (k * -7).toFixed(2) + "%"); });
+      const y = scrollY, max = document.documentElement.scrollHeight - vh;
+      hdr.style.setProperty("--sp", max > 0 ? (y / max).toFixed(4) : 0);
+      if (!html.classList.contains("menu-open")) hdr.classList.toggle("is-hidden", y > lastY && y > 320);
+      lastY = y; };
+    addEventListener("scroll", () => { if (!pq) pq = requestAnimationFrame(tick); }, { passive: true }); tick();
+  }
+  document.querySelectorAll(".acc").forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty("--d", i * 60 + "ms")));
+  const seen = [...document.querySelectorAll(".steps>li, .approach>li, .who>div, .acc details, .spread>div:last-child")];
+  if ("IntersectionObserver" in window) { const so = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-seen"); so.unobserve(en.target); } }), { rootMargin: "0px 0px -6% 0px" }); seen.forEach((el) => so.observe(el)); } else seen.forEach((el) => el.classList.add("is-seen"));
+  // «Живая»: плитки всплывают, когда попадают в экран
+  if (ANIM === "live" && "IntersectionObserver" in window) {
+    const po = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-pop"); po.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".dirs>*, .why>*, .ctiles>*, .masonry>*").forEach((el) => po.observe(el));
+  } else document.querySelectorAll(".dirs>*, .why>*, .ctiles>*, .masonry>*").forEach((el) => el.classList.add("is-pop"));
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".rv, .rv-t").forEach((el) => io.observe(el));
+  } else document.querySelectorAll(".rv, .rv-t").forEach((el) => el.classList.add("is-in"));
+})();

@@ -1,0 +1,68 @@
+{
+  "slug": "ekspedicii-urala",
+  "name": "Экспедиции Урала",
+  "niche": "tury",
+  "city": "Екатеринбург",
+  "custom": "marshrut",
+  "tagline": "Туры и экскурсии",
+  "colors": {
+    "main": "#1D3557",
+    "accent": "#E76F51",
+    "bg": "#F1EDE4",
+    "text": "#14213D"
+  },
+  "fonts": {
+    "head": "Piazzolla",
+    "body": "Ysabeau Office"
+  },
+  "hero": {
+    "title": "Маршруты, которые сами не найдёте",
+    "text": "Выберите маршрут, дату и сколько вас: цена посчитается сразу, бронь придёт в WhatsApp.",
+    "photo": "files/ekspedicii-urala/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Маршруты",
+    "catalogText": "Цена за человека.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Меня зовут Дмитрий, я сам веду группы и знаю эти места. Без спешки и толп.",
+  "items": [
+    {
+      "name": "Заброска пеших групп",
+      "price": 15000,
+      "desc": "На вездеходе или снегоходе",
+      "photo": "files/ekspedicii-urala/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сопровождение снегоходов",
+      "price": 12000,
+      "desc": "Гид и маршрут",
+      "photo": "files/ekspedicii-urala/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Плато Маньпупунёр",
+      "price": 95000,
+      "desc": "Экспедиция, 7 дней",
+      "photo": "files/ekspedicii-urala/item-3.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 950 201-18-61",
+    "whatsapp": "79502011861",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "startPoint": "Старт: Екатеринбург",
+    "vars": {
+      "forest": "#2A6F4E",
+      "card": "#FBF9F4"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://tururalmountains.orgs.biz/",
+  "contact_lead": "tg:DmitriiTurUral"
+}

@@ -1,0 +1,126 @@
+{
+  "slug": "elena-konditer",
+  "name": "Елена Суворова",
+  "niche": "кондитерская",
+  "city": "Сургут",
+  "custom": "yulya-konditer",
+  "tagline": "Торты на заказ в Сургуте",
+  "colors": {
+    "main": "#2F5D8A",
+    "accent": "#F7D9A8",
+    "bg": "#F5F8FB",
+    "text": "#172537"
+  },
+  "fonts": {
+    "head": "Fira Sans",
+    "body": "Fira Sans"
+  },
+  "hero": {
+    "title": "Торты и десерты, которые делают момент особенным",
+    "text": "Бенто, свадебные и ярусные торты, капкейки и съедобные букеты в Сургуте.",
+    "cta": "Собрать заказ",
+    "photo": "files/elena-konditer/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Елена",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Я Елена, кондитер из Сургута. Готовлю торты на любой вкус, от классического шоколадного до фруктового, а ещё капкейки и съедобные букеты.",
+  "features": [
+    {
+      "icon": "🎂",
+      "title": "От бенто до ярусов",
+      "text": "Любой размер."
+    },
+    {
+      "icon": "💐",
+      "title": "Съедобные букеты",
+      "text": "Соберём из ваших любимых сладостей."
+    },
+    {
+      "icon": "✨",
+      "title": "Под ваш повод",
+      "text": "Свадьба, день рождения."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто-торт",
+      "price": 1500,
+      "desc": "Под ваши пожелания",
+      "photo": "files/elena-konditer/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто макси",
+      "price": 2000,
+      "desc": "Побольше",
+      "photo": "files/elena-konditer/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Капкейки «Два вкуса»",
+      "price": 1000,
+      "desc": "Набор",
+      "photo": "files/elena-konditer/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Трайфлы",
+      "price": 250,
+      "desc": "Лимон и голубика",
+      "photo": "files/elena-konditer/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт от 3 кг",
+      "price": 3800,
+      "desc": "Ручная работа",
+      "photo": "files/elena-konditer/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Свадебный торт",
+      "price": 4500,
+      "desc": "Украшение праздника",
+      "photo": "files/elena-konditer/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Торт от двух ярусов",
+      "price": 7000,
+      "desc": "Многоярусный",
+      "photo": "files/elena-konditer/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Съедобный букет",
+      "price": 4600,
+      "desc": "Начинку выбираете вы",
+      "photo": "files/elena-konditer/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 982 412-23-35",
+    "whatsapp": "79824122335",
+    "address": "Комсомольский пр., 27",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#E3E6F7",
+      "pist": "#DDEFE7",
+      "butter": "#FCEFD1"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://elena5666809.orgs.biz/"
+}

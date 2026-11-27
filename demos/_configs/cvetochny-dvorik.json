@@ -1,0 +1,131 @@
+{
+  "slug": "cvetochny-dvorik",
+  "name": "Цветочный Дворик",
+  "niche": "цветы",
+  "city": "Орск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы в Орске",
+  "colors": {
+    "main": "#3E7C4A",
+    "accent": "#F6D7A7",
+    "bg": "#F6F8F1",
+    "text": "#1C2A1E"
+  },
+  "fonts": {
+    "head": "Merriweather",
+    "body": "Nunito Sans"
+  },
+  "hero": {
+    "title": "Букеты, комнатные растения и шары в Орске",
+    "text": "Пришлём фото букета после сборки и фото с получателем. Доставка по Старому городу бесплатно от 5 000 ₽.",
+    "cta": "Выбрать букет",
+    "photo": "files/cvetochny-dvorik/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Цветочный Дворик: букеты, композиции, подарки и гелиевые шары в Орске. Присылаем фотоотчёт после сборки и фото с получателем.",
+  "features": [
+    {
+      "icon": "📸",
+      "title": "Фотоотчёт",
+      "text": "До отправки и с получателем."
+    },
+    {
+      "icon": "🚚",
+      "title": "Бесплатная доставка",
+      "text": "От 5 000 ₽ по Старому городу."
+    },
+    {
+      "icon": "🪴",
+      "title": "Растения в горшках",
+      "text": "Орхидеи, антуриум, спатифиллум."
+    }
+  ],
+  "items": [
+    {
+      "name": "21 роза с эвкалиптом",
+      "price": 2600,
+      "desc": "Кения",
+      "photo": "files/cvetochny-dvorik/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сборный букет",
+      "price": 3890,
+      "desc": "Хризантемы и сезонные цветы",
+      "photo": "files/cvetochny-dvorik/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "11 синих роз",
+      "price": 3850,
+      "desc": "Монобукет в оформлении",
+      "photo": "files/cvetochny-dvorik/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Сумочка из гипсофилы",
+      "price": 1500,
+      "desc": "Композиция",
+      "photo": "files/cvetochny-dvorik/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "45 высоких роз",
+      "price": 13850,
+      "desc": "Монобукет",
+      "photo": "files/cvetochny-dvorik/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Орхидея фаленопсис",
+      "price": 2250,
+      "desc": "Комнатное растение",
+      "photo": "files/cvetochny-dvorik/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Антуриум",
+      "price": 2200,
+      "desc": "«Мужское счастье»",
+      "photo": "files/cvetochny-dvorik/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Спатифиллум",
+      "price": 1100,
+      "desc": "«Женское счастье»",
+      "photo": "files/cvetochny-dvorik/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 905 898-32-00",
+    "whatsapp": "79058983200",
+    "address": "Орский пр., 6в",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Растения",
+        "фаленопс|антуриум|спатиф|орхиде"
+      ]
+    ],
+    "vars": {
+      "soft": "#E5EDDF",
+      "ok": "#3E7C4A"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://club232474380.orgs.biz/"
+}

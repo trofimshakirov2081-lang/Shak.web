@@ -1,0 +1,74 @@
+{
+  "slug": "aife-dance",
+  "name": "Aife",
+  "niche": "sport",
+  "city": "",
+  "custom": "start",
+  "tagline": "Школа танцев",
+  "colors": {
+    "main": "#2353C9",
+    "accent": "#F2B705",
+    "bg": "#F3F4F7",
+    "text": "#121826"
+  },
+  "fonts": {
+    "head": "Sofia Sans Extra Condensed",
+    "body": "Sofia Sans"
+  },
+  "hero": {
+    "title": "Первое занятие уже в эту неделю",
+    "text": "Выберите группу в расписании и запишитесь на пробное занятие, заявка придёт в WhatsApp.",
+    "photo": "files/aife-dance/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Абонементы и цены",
+    "catalogText": "Первое занятие можно попробовать.",
+    "aboutTitle": "О нас"
+  },
+  "about": "Aife: Понятная программа, внимание к каждому и результат, который видно.",
+  "items": [
+    {
+      "name": "Пробное занятие",
+      "price": 500,
+      "desc": "Любое направление",
+      "photo": "",
+      "tag": "Хит"
+    },
+    {
+      "name": "Абонемент на месяц",
+      "price": 4000,
+      "desc": "8 занятий",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Детская группа",
+      "price": 3500,
+      "desc": "С 5 лет",
+      "photo": "",
+      "tag": ""
+    },
+    {
+      "name": "Индивидуально",
+      "price": 2000,
+      "desc": "Постановка танца",
+      "photo": "",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 903 488-32-43",
+    "whatsapp": "79034883243",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "trialTitle": "Пробное занятие",
+    "vars": {
+      "lane": "#E1E5EE"
+    }
+  },
+  "credits": "остальные фото: свободные стоки, для примера",
+  "source": "https://club218615421.orgs.biz/",
+  "contact_lead": "em:eugenieledneva11@yandex.ru"
+}

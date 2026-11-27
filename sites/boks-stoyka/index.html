@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F0F0E">
+<meta name="robots" content="noindex">
+<title>Стойка: клуб бокса (концепт)</title>
+<meta name="description" content="Концепт сайта клуба бокса для детей и взрослых от shak.web.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Три цвета и всё. Никаких градиентов поверх фото, теней, скруглений и наклеек. */
+:root{
+  --ink:#0F0F0E; --bone:#ECE9E2; --gold:#E0301E;
+  --mute:rgba(236,233,226,.55); --line:rgba(236,233,226,.15);
+  --ink-mute:rgba(15,15,14,.6); --ink-line:rgba(15,15,14,.16);
+  --gut:clamp(16px,3.4vw,48px);
+  --disp:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif; --body:Onest,system-ui,sans-serif;
+  --grade:grayscale(1) contrast(1.12) brightness(.92);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--bone);font:400 16px/1.5 var(--body);overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.ph img,.ph video{filter:var(--grade)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.disp{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.82;letter-spacing:-.01em}
+.cap{font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--mute)}
+.lnk{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px;border-bottom:1px solid currentColor;padding-bottom:3px}
+.lnk::after{content:"→";transition:transform .3s}
+.lnk:hover::after{transform:translateX(4px)}
+
+/* шапка: одна строка мелким текстом */
+.hdr{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:16px var(--gut);mix-blend-mode:difference;color:#fff}
+.hdr b{font-family:var(--disp);font-weight:900;font-size:22px;letter-spacing:.02em;text-transform:uppercase}
+.hdr nav{display:flex;gap:22px;font-size:14px;font-weight:500}
+@media (max-width:719px){.hdr nav a:not(:last-child){display:none}}
+
+/* 1. портрет: верх слова за человеком, низ перед ним, голова свободна */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:var(--ink)}
+.w{position:absolute;left:0;right:0;text-align:center;color:var(--gold);font-size:clamp(130px,36vw,330px);white-space:nowrap}
+.w1{top:9svh;z-index:1}
+.w2{top:51svh;z-index:3}
+.hero__me{position:absolute;left:50%;bottom:0;width:min(118vw,560px);z-index:2;--x:-50%;transform:translateX(-50%)}
+.hero__me img{width:100%;height:auto;filter:grayscale(1) contrast(1.1);-webkit-mask-image:linear-gradient(#000 62%,transparent 94%);mask-image:linear-gradient(#000 62%,transparent 94%)}
+.hero__low{position:absolute;z-index:4;left:var(--gut);right:var(--gut);bottom:22px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.hero__low p{max-width:21ch;font-size:15px;line-height:1.35;font-weight:500}
+@media (min-width:900px){
+  .w{font-size:min(22vw,40svh)}
+  .w1{top:7svh;text-align:left;padding-left:var(--gut)}
+  .w2{top:auto;bottom:9svh;text-align:right;padding-right:var(--gut)}
+  .hero__me{width:auto;height:86svh;left:61%}
+  .hero__me img{height:100%;width:auto}
+  .hero__low{bottom:28px;right:auto;max-width:30ch}
+  .hero__low p{font-size:17px}
+  .hero__low .lnk{display:none}
+}
+.hero .in{opacity:0;animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero__me.in{animation-delay:.2s}.w2.in{animation-delay:.35s}.hero__low.in{animation-delay:.6s}
+@keyframes up{from{opacity:0;transform:translate(var(--x,0),40px)}to{opacity:1;transform:translate(var(--x,0),0)}}
+
+/* 2. фраза-манифест: переносы руками */
+.say{padding:clamp(72px,11vw,160px) var(--gut)}
+.say p:first-child{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(46px,8.4vw,128px);line-height:.88;max-width:15ch}
+.say p em{font-style:normal;color:var(--gold)}
+.say .cap{margin-top:28px;max-width:40ch;font-size:15px;line-height:1.5}
+
+/* 3. сцена на прокрутке: видео идёт вперёд-назад за пальцем, текста минимум */
+.pin{position:relative;height:190svh}
+.pin__st{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink)}
+.pin__st canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:var(--grade) brightness(.62)}
+.pin__t{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(70px,13svh,130px);opacity:0;transform:translateY(40px);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.pin.show .pin__t{opacity:1;transform:none}
+.pin__t b{display:block;font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(120px,28vw,340px);line-height:.78;color:var(--bone)}
+.pin__t span{display:block;margin-top:14px;font-size:clamp(18px,2vw,26px);font-weight:500;max-width:22ch;line-height:1.25}
+.pin__line{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--line)}
+.pin__line i{position:absolute;inset:0;background:var(--gold);transform:scaleX(var(--p,0));transform-origin:0 0}
+.pin__hint{position:absolute;left:var(--gut);top:84px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;transition:opacity .4s}
+.pin__hint i{display:block;width:1px;height:28px;background:var(--bone);animation:drip 1.4s ease-in-out infinite;transform-origin:0 0}
+.pin.show .pin__hint{opacity:0}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* 4. выбор: вкладки и одна большая карточка вместо прайс-листа */
+.crs{padding:clamp(80px,11vw,150px) 0 clamp(60px,8vw,120px)}
+.crs__head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 var(--gut) 22px}
+.crs__head h2{font-size:clamp(70px,13vw,190px)}
+.sel{display:flex;overflow-x:auto;scroll-padding-inline:var(--gut);-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);scrollbar-width:none;border-bottom:1px solid var(--line);padding:0 var(--gut);scroll-snap-type:x proximity}
+.sel::-webkit-scrollbar{display:none}
+.sel::after{content:"";flex:0 0 18vw}
+@media (min-width:900px){.sel{-webkit-mask-image:none;mask-image:none}.sel::after{display:none}}
+.sel button{flex:0 0 auto;margin-right:26px;padding:16px 0 14px;font:600 15px/1.2 var(--body);color:var(--mute);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;scroll-snap-align:start;transition:color .25s,border-color .25s}
+.sel button:hover{color:var(--bone)}
+.sel button[aria-selected=true]{color:var(--bone);border-color:var(--gold)}
+.pan{display:grid;gap:22px;padding:24px var(--gut) 0;animation:panIn .5s cubic-bezier(.2,.8,.2,1)}
+.pan[hidden]{display:none}
+@keyframes panIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pan .ph{aspect-ratio:4/3;overflow:hidden}
+.pan .ph img{width:100%;height:100%;object-fit:cover}
+.pan h3{font-family:var(--disp);font-weight:var(--dw,900);text-transform:var(--dt,uppercase);font-size:clamp(46px,7vw,104px);line-height:.88;margin-top:10px}
+.pan .sub{margin-top:10px;color:var(--mute);font-size:16px}
+.price{display:flex;align-items:baseline;gap:12px;margin:22px 0 20px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price b{font-family:var(--disp);font-weight:var(--dw,900);font-size:clamp(52px,7vw,96px);line-height:.85;color:var(--gold)}
+.price span{font-size:14px;color:var(--mute)}
+.pan ul{list-style:none}
+.pan li{padding:9px 0 9px 22px;position:relative;font-size:15px}
+.pan li::before{content:"";position:absolute;left:0;top:18px;width:10px;height:1px;background:var(--gold)}
+.pan dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.pan dd{margin-top:3px;font-size:15px;font-weight:500}
+.pan .go2{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding:18px 20px;background:var(--gold);color:var(--ink);font-weight:600}
+.pan .go2::after{content:"→"}
+@media (min-width:900px){
+  .pan{grid-template-columns:1.15fr 1fr;gap:clamp(32px,5vw,80px);padding-top:36px;align-items:start}
+  .pan .ph{aspect-ratio:4/5;position:sticky;top:80px}
+  .pi{padding-top:8px}
+}
+
+/* 5. три дня: подряд, без рамок */
+.days{background:var(--bone);color:var(--ink);padding:clamp(72px,10vw,140px) var(--gut)}
+.days h2{font-size:clamp(64px,11vw,160px)}
+.days>.cap{color:var(--ink-mute);font-size:15px;margin-top:18px;max-width:44ch}
+.days__g{display:grid;gap:40px;margin-top:clamp(40px,6vw,80px)}
+.day .ph{aspect-ratio:4/5;overflow:hidden;background:#d9d6cf}
+.day img{width:100%;height:100%;object-fit:cover}
+.day__h{display:flex;align-items:baseline;gap:12px;margin-top:16px;border-top:1px solid var(--ink-line);padding-top:12px}
+.day__h b{font-family:var(--disp);font-weight:900;font-size:44px;line-height:.8;color:var(--gold)}
+.day h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(30px,3vw,40px);line-height:.9}
+.day p{margin-top:10px;color:var(--ink-mute);font-size:15px;line-height:1.5}
+@media (min-width:900px){.days__g{grid-template-columns:repeat(3,1fr);gap:24px}}
+
+/* 6. работы: фото в край, щель 2px */
+.wk{padding:clamp(80px,11vw,150px) 0 0}
+.wk__head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:0 var(--gut) 24px}
+.wk__head h2{font-size:clamp(70px,13vw,190px)}
+.wk__g{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.wk__g .ph{overflow:hidden;aspect-ratio:4/5}
+.wk__g .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.wk__g .ph:hover img{transform:scale(1.04)}
+.wk__g .w2{grid-column:span 2;aspect-ratio:4/3}
+@media (min-width:900px){.wk__g{grid-template-columns:repeat(4,1fr)}.wk__g .w2{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}}
+
+/* 7. преподаватель */
+.tch{display:grid;gap:28px;padding:clamp(80px,11vw,150px) var(--gut)}
+.tch h2{font-size:clamp(64px,11vw,170px);color:var(--gold);margin-top:14px}
+.tch__t{font-size:clamp(18px,1.6vw,22px);line-height:1.45;max-width:36ch;margin-top:24px}
+.tch dl{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:28px}
+.tch dl div{padding:14px 0;border-bottom:1px solid var(--line)}
+.tch dd{margin-top:4px;font-size:16px;font-weight:500;padding-right:12px}
+.tch .ph{aspect-ratio:4/5;overflow:hidden}.tch .ph img{width:100%;height:100%;object-fit:cover}
+@media (min-width:900px){.tch{grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,100px);align-items:end}}
+
+/* 8. вопросы */
+.faq{background:var(--bone);color:var(--ink);padding:clamp(72px,10vw,140px) var(--gut)}
+.faq__in{display:grid;gap:28px}
+.faq h2{font-size:clamp(64px,11vw,160px)}
+.faq details{border-top:1px solid var(--ink-line)}
+.faq details:last-child{border-bottom:1px solid var(--ink-line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:18px 0;font-size:clamp(17px,1.5vw,20px);font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:22px;line-height:1;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;max-width:60ch;color:var(--ink-mute)}
+@media (min-width:900px){.faq__in{grid-template-columns:1fr 1.3fr}}
+
+/* 9. запись и знак */
+.end{padding:clamp(80px,11vw,150px) var(--gut) 0}
+.end h2{font-size:clamp(60px,10.5vw,160px)}
+.end h2 em{font-style:normal;color:var(--gold)}
+.go{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:36px;padding:22px 0;border-top:1px solid var(--bone);border-bottom:1px solid var(--bone);font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(30px,4.4vw,60px);line-height:.9;transition:color .3s}
+.go::after{content:"→";font-family:var(--body);font-weight:400;font-size:.7em}
+.go:hover{color:var(--gold)}
+.ctc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:36px}
+.ctc dd{margin-top:4px;font-weight:500}
+.ctc a{border-bottom:1px solid var(--line)}
+.mark{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:var(--gold);font-size:24.6vw;line-height:.74;margin:clamp(56px,8vw,110px) 0 0;white-space:nowrap;text-align:center;overflow:hidden;padding-top:.06em}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:16px var(--gut) 24px}
+
+.js .rise{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .in{opacity:1}.js .rise{opacity:1;transform:none}
+  .pin{height:auto}.pin__st{position:relative}
+}
+
+/* бокс: красный только акцентом, кнопки острые, фото чёрно-белые */
+.end .go:hover{color:var(--gold)}
+.pan .go2{background:var(--gold);color:#fff}
+.w{color:var(--bone)}.w2{color:var(--gold)}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;padding:3px 7px;margin-left:10px;vertical-align:middle}
+/* слово целиком за боксёром ниже головы, «клуб бокса» перед ним */
+.w1{top:max(70px,10svh);font-size:clamp(110px,31vw,300px)}
+.w2{top:auto;bottom:21%;font-size:clamp(54px,15vw,140px)}
+.hero__me{width:min(100vw,62svh,560px)}
+/* телефон: макушка доходит до середины высоты «Й», считается в CSS, без скрипта и рывка при загрузке */
+@media (max-width:899px){
+  .hero__me{--t:calc(max(70px,10svh) + 31vw * .13);--x:0px;transform:none;top:var(--t);bottom:auto;width:auto;height:calc(max(100svh,620px) - var(--t));left:calc(56.06vw - .3394 * (max(100svh,620px) - var(--t)))}
+  .hero__me img{width:auto;height:100%;max-width:none}
+}
+@media (min-width:900px){
+  .w1,.w2{text-align:right;padding:0 var(--gut) 0 0}
+  .w1{top:auto;bottom:31svh;font-size:min(25vw,44svh)}
+  .w2{bottom:9svh;font-size:min(11vw,19svh)}
+  .hero__me{left:20%;height:88svh}
+  .hero__low{max-width:22ch}
+}
+/* сцена бокса: слова сменяются в такт ударам, текст есть с первого кадра */
+.pin{height:230svh}
+.beats{opacity:1;transform:none}
+.bw{position:relative;height:clamp(100px,24vw,300px)}
+.beat{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(50%);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);font-size:clamp(110px,26vw,320px)!important}
+.beat.on{opacity:1;transform:none}
+.beat.gone{opacity:0;transform:translateY(-50%)}
+.beats span{opacity:0;transition:opacity .5s}
+.pin.show .beats span{opacity:1}
+.pin__st canvas{filter:var(--grade) brightness(.72)}
+.sched{display:grid;gap:0;margin-top:32px;border-top:1px solid var(--ink-line)}
+.sched div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--ink-line);font-weight:500}
+.sched span{color:var(--ink-mute)}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js")</script>
+<header class="hdr">
+  <b>Стойка<span class="tag">концепт</span></b>
+  <nav><a href="#gruppy">Группы</a><a href="#zal">Зал</a><a href="#zapis">Пробная</a></nav>
+</header>
+<main>
+  <section class="hero" aria-label="Стойка">
+    <h1 class="visually-hidden">Стойка, клуб бокса для детей и взрослых</h1>
+    <span class="w w1 disp in" aria-hidden="true">Стойка</span>
+    <div class="hero__me in"><img src="ph/hero-cut.webp" alt="Боксёр в стойке" fetchpriority="high"></div>
+    <span class="w w2 disp in" aria-hidden="true">Клуб бокса</span>
+    <div class="hero__low in">
+      <p>Клуб бокса для детей с&nbsp;7&nbsp;лет и&nbsp;взрослых с&nbsp;нуля. Первая тренировка бесплатно.</p>
+      <a class="lnk" href="#gruppy">Группы</a>
+    </div>
+  </section>
+
+  <section class="say" aria-label="Как мы тренируем">
+    <p class="rise">Сначала<br>стойка,<br><em>потом удар</em></p>
+    <p class="cap rise">Первый месяц ставим ноги, дыхание и&nbsp;защиту. В&nbsp;спарринг выходят только когда тренер видит, что техника держится.</p>
+  </section>
+
+  <section class="pin" id="pin" aria-label="Удар">
+    <div class="pin__st ph">
+      <canvas data-wide="ph/udar-wide/" data-wn="60" data-tall="ph/udar-tall/" data-tn="60" aria-hidden="true"></canvas>
+      <div class="pin__hint cap" aria-hidden="true"><i></i>Листайте, и он начнёт бить</div>
+      <div class="pin__t beats"><div class="bw"><b class="beat on">Стойка</b><b class="beat">Джеб</b><b class="beat">Прямой</b></div><span>Первую связку бьёте уже на&nbsp;пробной тренировке</span></div>
+      <div class="pin__line" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <section class="crs" id="gruppy" aria-label="Группы">
+    <div class="crs__head"><h2 class="disp rise">Группы</h2><span class="cap">цены за месяц</span></div>
+    <div class="sel" role="tablist" aria-label="Выбор"><button type="button" role="tab" id="t0" aria-controls="g0" aria-selected="true">Дети 7-11</button><button type="button" role="tab" id="t1" aria-controls="g1" aria-selected="false" tabindex="-1">Подростки 12-17</button><button type="button" role="tab" id="t2" aria-controls="g2" aria-selected="false" tabindex="-1">Взрослые с нуля</button><button type="button" role="tab" id="t3" aria-controls="g3" aria-selected="false" tabindex="-1">Соревновательная</button><button type="button" role="tab" id="t4" aria-controls="g4" aria-selected="false" tabindex="-1">Персонально</button></div>
+      <div class="pan" id="g0" role="tabpanel" aria-labelledby="t0">
+        <div class="ph"><img src="ph/gloves-1280.webp" alt="Дети 7-11" loading="lazy"></div>
+        <div class="pi"><span class="cap">01 / 05</span><h3>Дети 7-11</h3><p class="sub">Координация, дисциплина, без спаррингов</p>
+          <div class="price"><b>3 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Общая физическая подготовка</li><li>Стойка, передвижения, базовые удары</li><li>Игры на реакцию</li><li>Аттестация раз в полгода</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 17:00</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Дети 7-11">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g1" role="tabpanel" aria-labelledby="t1" hidden>
+        <div class="ph"><img src="ph/teen-1280.webp" alt="Подростки 12-17" loading="lazy"></div>
+        <div class="pi"><span class="cap">02 / 05</span><h3>Подростки 12-17</h3><p class="sub">Техника и первые турниры</p>
+          <div class="price"><b>4 000 ₽</b><span>в месяц</span></div>
+          <ul><li>Техника ударов и защиты</li><li>Работа на лапах с тренером</li><li>Лёгкие спарринги в шлеме</li><li>Подготовка к соревнованиям по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>пн, ср, пт 18:30</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Подростки 12-17">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g2" role="tabpanel" aria-labelledby="t2" hidden>
+        <div class="ph"><img src="ph/adult-1280.webp" alt="Взрослые с нуля" loading="lazy"></div>
+        <div class="pi"><span class="cap">03 / 05</span><h3>Взрослые с нуля</h3><p class="sub">Для формы и уверенности</p>
+          <div class="price"><b>4 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Стойка, удары, защита с первого занятия</li><li>Кардио и сила без тренажёрного зала</li><li>Спарринги только по желанию</li></ul><dl><div><dt class="cap">Когда</dt><dd>вт, чт 20:00, сб 12:00</dd></div><div><dt class="cap">Длительность</dt><dd>90 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Взрослые с нуля">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g3" role="tabpanel" aria-labelledby="t3" hidden>
+        <div class="ph"><img src="ph/sport-1280.webp" alt="Соревновательная" loading="lazy"></div>
+        <div class="pi"><span class="cap">04 / 05</span><h3>Соревновательная</h3><p class="sub">По отбору тренера</p>
+          <div class="price"><b>5 500 ₽</b><span>в месяц</span></div>
+          <ul><li>Тренировки 5 раз в неделю</li><li>Сборы и выезды на турниры</li><li>План питания и веса</li></ul><dl><div><dt class="cap">Когда</dt><dd>по отдельному расписанию</dd></div><div><dt class="cap">Вход</dt><dd>после просмотра тренером</dd></div></dl><a class="go2" href="#zapis" data-course="Соревновательная">Записаться на пробную</a>
+        </div>
+      </div>
+      <div class="pan" id="g4" role="tabpanel" aria-labelledby="t4" hidden>
+        <div class="ph"><img src="ph/pers-1280.webp" alt="Персонально" loading="lazy"></div>
+        <div class="pi"><span class="cap">05 / 05</span><h3>Персонально</h3><p class="sub">Один на один с тренером</p>
+          <div class="price"><b>1 800 ₽</b><span>за тренировку</span></div>
+          <ul><li>Разбор техники под вашу цель</li><li>Удобное время</li><li>Лапы, мешок, спарринг по желанию</li></ul><dl><div><dt class="cap">Цена</dt><dd>за одну тренировку</dd></div><div><dt class="cap">Длительность</dt><dd>60 минут</dd></div></dl><a class="go2" href="#zapis" data-course="Персонально">Записаться на пробную</a>
+        </div>
+      </div>
+    </section>
+
+  <section class="days" aria-label="Первая тренировка">
+    <h2 class="disp rise">Первая<br>тренировка</h2>
+    <p class="cap">Приходите в&nbsp;удобной форме. Бинты и&nbsp;перчатки на&nbsp;первое занятие даёт клуб.</p>
+    <div class="days__g">
+      <article class="day"><div class="ph"><img src="ph/step1-640.webp" alt="Боксёр отрабатывает удар на мешке" loading="lazy"></div>
+        <div class="day__h"><b>1</b><h3>Разминка и&nbsp;стойка</h3></div><p>Тренер ставит ноги и&nbsp;руки, показывает, как двигаться и&nbsp;не терять равновесие.</p></article>
+      <article class="day"><div class="ph"><img src="ph/step2-640.webp" alt="Удары по мешку" loading="lazy"></div>
+        <div class="day__h"><b>2</b><h3>Первые удары</h3></div><p>Джеб и&nbsp;прямой на&nbsp;мешке, без силы, на&nbsp;технику. Тренер поправляет каждого.</p></article>
+      <article class="day"><div class="ph"><img src="ph/coach-640.webp" alt="Боксёр в капюшоне держит защиту" loading="lazy"></div>
+        <div class="day__h"><b>3</b><h3>Защита и&nbsp;план</h3></div><p>Учимся держать руки. В&nbsp;конце тренер скажет, в&nbsp;какую группу идти и&nbsp;с&nbsp;чего начать.</p></article>
+    </div>
+  </section>
+
+  <section class="wk" id="zal" aria-label="Зал">
+    <div class="wk__head"><h2 class="disp rise">Зал</h2><span class="cap">Ринг, мешки, раздевалки с&nbsp;душем</span></div>
+    <div class="wk__g">
+      <div class="ph w2"><img src="ph/g1-1280.webp" alt="Тренировка на мешках" loading="lazy"></div>
+      <div class="ph"><img src="ph/adult-640.webp" alt="Боксёр в ринге" loading="lazy"></div>
+      <div class="ph"><img src="ph/sport-640.webp" alt="Удар по мешку" loading="lazy"></div>
+      <div class="ph"><img src="ph/g2-640.webp" alt="Ринг" loading="lazy"></div>
+      <div class="ph"><img src="ph/g3-640.webp" alt="Работа на мешке" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="tch" aria-label="Тренер">
+    <div>
+      <span class="cap">Старший тренер</span>
+      <h2 class="disp rise">Имя<br>Фамилия</h2>
+      <p class="tch__t">Здесь короткая история тренера: сколько лет в&nbsp;боксе, кого вывел на&nbsp;соревнования, как работает с&nbsp;новичками.</p>
+      <dl>
+        <div><dt class="cap">Опыт</dt><dd>Стаж и&nbsp;разряд</dd></div>
+        <div><dt class="cap">Ученики</dt><dd>Победы на&nbsp;турнирах</dd></div>
+        <div><dt class="cap">С кем работает</dt><dd>Дети и&nbsp;взрослые</dd></div>
+        <div><dt class="cap">Формат</dt><dd>Группы и&nbsp;персонально</dd></div>
+      </dl>
+    </div>
+    <div class="ph"><img src="ph/coach-1280.webp" alt="Боксёр в капюшоне" loading="lazy"></div>
+  </section>
+
+  <section class="faq" aria-label="Вопросы">
+    <div class="faq__in">
+      <div>
+        <h2 class="disp rise">Вопросы</h2>
+        <div class="sched">
+          <div>Дети 7-11<span>пн, ср, пт 17:00</span></div>
+          <div>Подростки<span>пн, ср, пт 18:30</span></div>
+          <div>Взрослые<span>вт, чт 20:00, сб 12:00</span></div>
+        </div>
+      </div>
+      <div>
+        <details><summary>Не будут ли бить по голове?</summary><p>Нет. Первые месяцы только техника, мешки и&nbsp;лапы. В&nbsp;лёгкий спарринг выходят по&nbsp;желанию и&nbsp;только в&nbsp;шлеме.</p></details>
+        <details><summary>С какого возраста можно ребёнку?</summary><p>С 7 лет. Детская группа тренируется отдельно от&nbsp;взрослых, упор на&nbsp;координацию и&nbsp;дисциплину.</p></details>
+        <details><summary>Что купить к первой тренировке?</summary><p>Ничего. Нужна спортивная форма и&nbsp;сменная обувь. Перчатки и&nbsp;бинты на&nbsp;пробное занятие даём.</p></details>
+        <details><summary>Можно начать в 40 лет?</summary><p>Да. Нагрузку тренер подбирает под&nbsp;возраст и&nbsp;форму, соревноваться не обязательно.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="end" id="zapis" aria-label="Запись">
+    <h2 class="disp rise">Первая<br>тренировка<br><em>бесплатно</em></h2>
+    <a class="go" id="waBtn" href="#zapis"><span id="waTxt">Записаться на пробную</span></a>
+    <dl class="ctc">
+      <div><dt class="cap">Телефон</dt><dd>номер клуба</dd></div>
+      <div><dt class="cap">Telegram</dt><dd>@клуб</dd></div>
+      <div><dt class="cap">Адрес</dt><dd>улица, дом</dd></div>
+    </dl>
+    <p class="mark" aria-hidden="true">Стойка</p>
+  </section>
+  <div class="foot cap"><span>Концепт сайта для портфолио shak.web. Клуб, цены и расписание условные. Фото: Pexels</span><span>shak.web</span></div>
+</main>
+<script>
+(function () {
+  var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // концепт: вместо мессенджера клуба подставится его WhatsApp или Telegram
+  var waT = document.getElementById("waTxt");
+  document.querySelectorAll("[data-course]").forEach(function (a) { a.addEventListener("click", function () { waT.textContent = "Пробная: " + a.dataset.course; }); });
+  // вкладки выбора: одна карточка на экране, стрелки клавиатуры тоже работают
+  var tabs = [].slice.call(document.querySelectorAll(".sel [role=tab]"));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+    t.scrollIntoView({ block: "nearest", inline: "center", behavior: RM ? "auto" : "smooth" }); if (focus) t.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(t); });
+    t.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
+  });
+  // сцена: кадры-картинки рисуются на canvas по прокрутке (видео телефоны без нажатия не грузят)
+  var pin = document.getElementById("pin"), cv = pin.querySelector("canvas"), cx = cv.getContext("2d"), line = pin.querySelector(".pin__line i");
+  var tall = cv.dataset.tall && matchMedia("(max-aspect-ratio: 1/1)").matches, base = tall ? cv.dataset.tall : cv.dataset.wide, N = +(tall ? cv.dataset.tn : cv.dataset.wn);
+  var F = [], want = 0, have = 0, raf = 0, drawn = -1;
+  function src(i) { return base + String(i + 1).padStart(3, "0") + ".webp"; }
+  function size() { var r = devicePixelRatio > 1 ? 1.5 : 1; cv.width = cv.clientWidth * r; cv.height = cv.clientHeight * r; drawn = -1; draw(); }
+  function draw() {
+    var i = Math.round(have * (N - 1)), im = F[i];
+    while (im && !im.ok && i > 0) im = F[--i];
+    if (!im || !im.ok || i === drawn) return;
+    var W = cv.width, H = cv.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight) * (1.12 - have * 0.12), w = im.naturalWidth * s, h = im.naturalHeight * s;
+    cx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h); drawn = i;
+  }
+  function load(i) { var im = new Image(); im.decoding = "async"; im.onload = function () { im.ok = true; if (i === 0 || Math.abs(i - Math.round(have * (N - 1))) < 2) { drawn = -1; draw(); } }; im.src = src(i); F[i] = im; }
+  load(0);
+  var started = false;
+  function startLoad() { if (started) return; started = true; for (var i = 1; i < N; i++) load(i); }
+  function tick() { have += (want - have) * 0.2; drawn = -1; draw(); if (Math.abs(want - have) > 0.001) raf = requestAnimationFrame(tick); else { have = want; raf = 0; drawn = -1; draw(); } }
+  var bs = pin.querySelectorAll(".beat");
+  function scene() {
+    var r = pin.getBoundingClientRect(), total = r.height - innerHeight;
+    if (r.top < innerHeight * 2.5) startLoad();
+    want = Math.min(1, Math.max(0, -r.top / total));
+    line.parentNode.style.setProperty("--p", want);
+    pin.classList.toggle("show", want > (bs.length ? 0.72 : 0.6));
+    if (bs.length) { var bi = Math.min(bs.length - 1, Math.floor(want * bs.length * 1.05)); bs.forEach(function (b, k) { b.classList.toggle("on", k === bi); b.classList.toggle("gone", k < bi); }); }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  addEventListener("resize", size); size();
+  if (!RM) { addEventListener("scroll", scene, { passive: true }); scene(); }
+  else { startLoad(); pin.classList.add("show"); }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".rise").forEach(function (el) { io.observe(el); });
+  } else document.querySelectorAll(".rise").forEach(function (el) { el.classList.add("in"); });
+})();
+</script>
+</body>
+</html>

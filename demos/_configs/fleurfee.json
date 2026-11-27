@@ -1,0 +1,135 @@
+{
+  "slug": "fleurfee",
+  "name": "Fleurfee",
+  "niche": "цветы",
+  "city": "Курск",
+  "custom": "makov-cvet",
+  "tagline": "Цветы с доставкой",
+  "colors": {
+    "main": "#E23C7C",
+    "accent": "#FFD3E4",
+    "bg": "#FFF7FA",
+    "text": "#2B0F1B"
+  },
+  "fonts": {
+    "head": "Rubik",
+    "body": "Rubik"
+  },
+  "hero": {
+    "title": "Свежие цветы в шляпных коробках",
+    "text": "Бесплатная доставка по Курску и мини-открытка к каждому заказу.",
+    "cta": "Выбрать букет",
+    "photo": "files/fleurfee/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Букеты",
+    "catalogText": "Листайте и добавляйте в корзину, заказ уйдёт нам в WhatsApp.",
+    "aboutTitle": "О нас",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "В корзину"
+  },
+  "about": "Fleurfee собирает свежие цветы в шляпных коробках. Выразите чувства родным и любимым, а доставку и открытку мы берём на себя.",
+  "features": [
+    {
+      "icon": "🎩",
+      "title": "Шляпные коробки",
+      "text": "Наш фирменный стиль."
+    },
+    {
+      "icon": "🚚",
+      "title": "Бесплатная доставка",
+      "text": "По Курску."
+    },
+    {
+      "icon": "💌",
+      "title": "Мини-открытка",
+      "text": "К каждому заказу."
+    }
+  ],
+  "items": [
+    {
+      "name": "Букет из 25 роз",
+      "price": 4500,
+      "desc": "Красные, белые или микс",
+      "photo": "files/fleurfee/item-1.jpg",
+      "tag": "Хит"
+    },
+    {
+      "name": "Сборный букет",
+      "price": 2900,
+      "desc": "Сезонные цветы и зелень",
+      "photo": "files/fleurfee/item-2.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Цветы в шляпной коробке",
+      "price": 3800,
+      "desc": "С мини-открыткой",
+      "photo": "files/fleurfee/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Хризантемы",
+      "price": 2200,
+      "desc": "Пышный и стойкий букет",
+      "photo": "files/fleurfee/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Тюльпаны, 25 шт",
+      "price": 3200,
+      "desc": "Цвет на выбор",
+      "photo": "files/fleurfee/item-5.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Композиция в корзине",
+      "price": 5200,
+      "desc": "Для особого повода",
+      "photo": "files/fleurfee/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Букет невесты",
+      "price": 4500,
+      "desc": "Соберём под ваш образ",
+      "photo": "files/fleurfee/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Нежный микс",
+      "price": 2600,
+      "desc": "Пастельные тона",
+      "photo": "files/fleurfee/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 951 312-74-81",
+    "whatsapp": "79513127481",
+    "address": "",
+    "hours": ""
+  },
+  "extra": {
+    "filters": [
+      [
+        "Букеты",
+        ""
+      ],
+      [
+        "Композиции",
+        "композиц|корзин|коробк|box|колб"
+      ]
+    ],
+    "commentHint": "Кому букет, адрес, дата и время",
+    "orderIntro": "Здравствуйте! Хочу заказать с сайта:",
+    "emptyText": "Пока пусто. Выберите букет на витрине.",
+    "vars": {
+      "soft": "#FBE5EE",
+      "ok": "#2F8F6A"
+    }
+  },
+  "credits": "остальные фото: Pexels и Openverse, для примера",
+  "source": "https://fleurfee.orgs.biz/",
+  "email": "fleurfeekursk@mail.ru"
+}

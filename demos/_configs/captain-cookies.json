@@ -1,0 +1,126 @@
+{
+  "slug": "captain-cookies",
+  "name": "Captain Cookies",
+  "niche": "кондитерская",
+  "city": "Балашиха",
+  "custom": "yulya-konditer",
+  "tagline": "Десерты на заказ",
+  "colors": {
+    "main": "#1F3A5F",
+    "accent": "#F2C14E",
+    "bg": "#F3F0EA",
+    "text": "#1A2433"
+  },
+  "fonts": {
+    "head": "Exo 2",
+    "body": "Nunito"
+  },
+  "hero": {
+    "title": "Бенто, моти и кукис, которые хочется съесть сразу",
+    "text": "Муссовые бенто-торты, кейк-попсы и толстые кукис из Балашихи. Вкусно внутри и красиво снаружи.",
+    "cta": "Собрать заказ",
+    "photo": "files/captain-cookies/hero.jpg"
+  },
+  "sections": {
+    "catalogTitle": "Что можно заказать",
+    "catalogText": "Начинку и надпись напишите в комментарии к заказу.",
+    "aboutTitle": "Привет, я Катя",
+    "orderTitle": "Ваш заказ",
+    "addLabel": "Добавить"
+  },
+  "about": "Я Екатерина, домашний кондитер. Мой девиз: вкусно внутри и красиво снаружи. Ваши ожидания совпадут с реальностью.",
+  "features": [
+    {
+      "icon": "🍪",
+      "title": "Толстые кукис",
+      "text": "Дубайский шоколад, сникерс, бархат."
+    },
+    {
+      "icon": "🍰",
+      "title": "Муссовые бенто",
+      "text": "Авторские вкусы."
+    },
+    {
+      "icon": "🏠",
+      "title": "Домашняя кухня",
+      "text": "Пеку сама под заказ."
+    }
+  ],
+  "items": [
+    {
+      "name": "Бенто «Морковный»",
+      "price": 1500,
+      "desc": "С карамелью и апельсином",
+      "photo": "files/captain-cookies/item-1.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Бенто «Клубничный мохито»",
+      "price": 1500,
+      "desc": "Муссовый бенто-торт",
+      "tag": "",
+      "photo": "files/captain-cookies/item-2.jpg"
+    },
+    {
+      "name": "Бенто «Ферреро»",
+      "price": 1500,
+      "desc": "Муссовый бенто-торт",
+      "photo": "files/captain-cookies/item-3.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кейк-попс",
+      "price": 200,
+      "desc": "Бисквитная «картошка», за штуку",
+      "photo": "files/captain-cookies/item-4.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Моти",
+      "price": 180,
+      "desc": "Японский десерт, за штуку",
+      "tag": "",
+      "photo": "files/captain-cookies/item-5.jpg"
+    },
+    {
+      "name": "Кукис «Дубайский шоколад»",
+      "price": 350,
+      "desc": "Тот самый вкус",
+      "photo": "files/captain-cookies/item-6.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кукис «Сникерс»",
+      "price": 350,
+      "desc": "Классика",
+      "photo": "files/captain-cookies/item-7.jpg",
+      "tag": ""
+    },
+    {
+      "name": "Кукис «Красный бархат»",
+      "price": 300,
+      "desc": "С вишней",
+      "photo": "files/captain-cookies/item-8.jpg",
+      "tag": ""
+    }
+  ],
+  "contacts": {
+    "phone": "+7 916 716-23-97",
+    "whatsapp": "79167162397",
+    "address": "мкр. Авиаторов",
+    "hours": ""
+  },
+  "extra": {
+    "orderIntro": "Здравствуйте! Хочу заказать:",
+    "commentHint": "Дата, начинка, надпись",
+    "emptyText": "Пока пусто. Выберите десерт.",
+    "fromLabel": "Десерты от",
+    "vars": {
+      "lilac": "#F3D3C4",
+      "pist": "#D9E6F2",
+      "butter": "#F6DFA8"
+    }
+  },
+  "credits": "Фото товаров: со страницы заведения; фото на первом экране: Pexels",
+  "source": "https://captain-cookies-msk.orgs.biz/"
+}
