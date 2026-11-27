@@ -4,6 +4,7 @@
 
 - `race2.py` гонка столбцов (1080x1920). `python3 -I race2.py cfg.json кадры/`. Рядом нужны `Akt.ttf`, `Finlandica.ttf` (Google Fonts) и `flags/<код>.png` (flagcdn.com/w160).
 - `smooth.py` сглаживает годовые точки: `smooth_cfg('cfg.json', 'cfg_s.json', 42)` (42 кадра на год).
+- `calm.py` спокойная музыка (пианино и подклад, 72 BPM): `python3 -I calm.py out.wav длительность [сид]`.
 - `music.py` своя музыка без чужих треков: `python3 -I music.py out.wav длительность [время_дропа|-] [сид]`.
 - `cfg_dr.json` пример: беспилотники по странам 2003-2026 (оценки).
 - `cap.cjs` снимает HTML-анимацию по кадрам: `node cap.cjs page.html секунды кадры/`. В странице должна быть функция `window.seek(t)`.

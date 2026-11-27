@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;background:radial-gradient(120% 70% at 50% 0%,#1d2a4a 0%,#121826 55%,#0c111c 100%);color:#fff;font-family:Manrope,sans-serif;position:relative;overflow:hidden}
+h1,.u{font-family:Unbounded,sans-serif;font-weight:800;letter-spacing:-.025em;line-height:1.08}
+mark{background:#FFD23F;color:#121826;padding:0 .14em;border-radius:14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 88px;gap:26px}
+[data-in]{opacity:0;will-change:transform,opacity}
+.big{font-size:96px}.mid{font-size:74px}.small{font-size:40px;font-weight:700;color:#b9c3d6;line-height:1.35}
+.kick{font-size:38px;font-weight:800;color:#FFD23F;letter-spacing:.04em;text-transform:uppercase}
+.pain{display:flex;gap:30px;align-items:center;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.08);border-radius:36px;padding:36px 40px}
+.pain i{flex:none;width:84px;height:84px;border-radius:50%;background:#E5484D;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:46px}
+.pain b{font-size:50px;line-height:1.2}
+.step{display:flex;gap:30px;align-items:flex-start}
+.step i{flex:none;width:96px;height:96px;border-radius:30px;background:#1F6BFF;display:grid;place-items:center;font:800 50px Unbounded,sans-serif;font-style:normal}
+.step b{font-size:50px;line-height:1.2;display:block}.step span{display:block;font-size:36px;color:#b9c3d6;font-weight:700;margin-top:8px;line-height:1.3}
+.step.pay i{background:#FFD23F;color:#121826}
+.price{font:800 176px Unbounded,sans-serif;letter-spacing:-.04em;line-height:1;white-space:nowrap}.price small{font-size:88px}
+.box{background:#FFD23F;color:#121826;border-radius:40px;padding:44px 48px;font-weight:800;font-size:58px;line-height:1.15}
+.box small{display:block;font-size:40px;font-weight:700;margin-top:12px;opacity:.8}
+.brand{position:absolute;left:88px;bottom:110px;font:800 44px Unbounded,sans-serif}.brand i{color:#1F6BFF;font-style:normal}
+</style></head>
+<body>
+<script>
+const S = {
+  hook: `<div class="wrap"><h1 class="big" data-in="0.1">Чтобы поменять цену на&nbsp;сайте,</h1><h1 class="big" data-in="0.9">вы пишете разработчику</h1><h1 class="big" data-in="1.7"><mark>и&nbsp;ждёте?</mark></h1></div>`,
+  pains: `<div class="wrap"><div class="kick" data-in="0">Знакомо?</div>
+    <div class="pain" data-in="0.5"><i>✕</i><b>Цены и фото на сайте устарели</b></div>
+    <div class="pain" data-in="2.2"><i>✕</i><b>Заявки теряются в&nbsp;переписках</b></div>
+    <div class="pain" data-in="3.9"><i>✕</i><b>Каждая правка: ждать и&nbsp;платить</b></div></div>`,
+  solution: `<div class="wrap"><div class="kick" data-in="0">Решение</div><h1 class="big" data-in="0.3">Сайт со своей <mark>админкой</mark></h1><p class="small" data-in="1.1">Цены, фото и акции меняете сами, с&nbsp;телефона. Заявки сразу приходят вам в&nbsp;Telegram или WhatsApp.</p></div><div class="brand" data-in="0.3">shak<i>.</i>web</div>`,
+  process: `<div class="wrap"><h1 class="mid" data-in="0">Как работаем</h1>
+    <div class="step" data-in="0.5"><i>1</i><div><b>Бриф за 10 минут</b><span>Отвечаете на то, что знаете</span></div></div>
+    <div class="step" data-in="1.7"><i>2</i><div><b>Дизайн на выбор</b><span>Несколько вариантов, правки, пока не понравится</span></div></div>
+    <div class="step pay" data-in="2.9"><i>₽</i><div><b>Оплата 50%, только когда всё устроило</b><span>Остальное после запуска</span></div></div></div>`,
+  offer: `<div class="wrap"><p class="small" data-in="0" style="color:#fff">Сайт под ключ с админкой</p><div class="price" data-in="0.2">15&nbsp;500 <small>₽</small></div>
+    <p class="small" data-in="0.7">Без предоплаты. Полный бриф: −1&nbsp;200&nbsp;₽</p><div class="box" data-in="1.5" style="margin-top:30px">Начните с брифа<small>ссылка в шапке профиля</small></div></div><div class="brand" data-in="1.5">shak<i>.</i>web</div>`,
+};
+document.body.innerHTML = S[new URLSearchParams(location.search).get('s')];
+const els = [...document.querySelectorAll('[data-in]')];
+const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+// кадр в момент t: элемент выплывает снизу за 0,6 с
+window.at = (t) => els.forEach((e) => { const k = ease((t - +e.dataset.in) / 0.6); e.style.opacity = k; e.style.transform = `translateY(${(1 - k) * 46}px)`; });
+window.at(0);
+</script>
+</body></html>
