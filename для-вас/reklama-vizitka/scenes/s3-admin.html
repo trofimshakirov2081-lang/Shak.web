@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--paper)}
+.world{position:absolute;inset:0;transform-origin:50% 55%}
+.h1{position:absolute;left:60px;top:150px;color:var(--ink);font-size:240px;white-space:nowrap}
+.h2{position:absolute;right:70px;top:360px;color:var(--cinnabar);font-size:220px;white-space:nowrap;clip-path:inset(0 100% 0 0)}
+.sub{position:absolute;left:66px;top:620px;font-size:40px;font-weight:600;color:var(--ink2);letter-spacing:.01em;display:flex;gap:22px}
+.sub b{font-weight:700}.sub i{width:8px;height:8px;border-radius:50%;background:var(--cinnabar);align-self:center}
+.big-bg{position:absolute;left:-30px;bottom:-60px;font-size:520px;color:rgba(20,17,15,.045);white-space:nowrap}
+#adm{left:58px;top:760px;width:480px;transform:rotate(-4deg);border:4px solid var(--ink);border-radius:52px;z-index:2}
+#adm img{width:472px}
+#site{left:584px;top:930px;width:440px;transform:rotate(4deg);border:4px solid var(--ink);border-radius:50px;z-index:3}
+#site img{width:432px;position:absolute;left:0;top:0}#site .base{position:relative}
+.lbl{position:absolute;z-index:6;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:12px}
+.lbl i{width:46px;height:2px;background:var(--ink)}
+svg{position:absolute;inset:0;z-index:8;overflow:visible}
+.tap{position:absolute;z-index:9;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:5px solid var(--cinnabar);opacity:0}
+.tapd{position:absolute;z-index:9;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--cinnabar);opacity:0}
+.chip{position:absolute;left:250px;top:1530px;box-shadow:0 20px 40px -10px rgba(20,17,15,.4);z-index:9;background:var(--ink);color:var(--paper);font-size:38px;font-weight:700;padding:20px 34px;border-radius:999px;display:flex;gap:14px;align-items:center}
+.chip i{width:14px;height:14px;border-radius:50%;background:#3DD68C}
+</style></head><body>
+<div class="world" id="world">
+  <div class="big-bg cond">Админка</div>
+  <div class="h1 cond" id="h1">Меняете</div>
+  <div class="h2 ital" id="h2">сами.</div>
+  <div class="sub" id="sub"><b>цены</b><i></i><b>фото</b><i></i><b>тексты</b><i></i><b>оформление</b></div>
+  <div class="lbl" id="l1" style="left:70px;top:715px"><i></i>Ваша админка</div>
+  <div class="lbl" id="l2" style="left:640px;top:880px"><i></i>Ваш сайт</div>
+  <div class="screen" id="adm"><img id="seq" src="../assets/admin/price/0000.jpg"></div>
+  <div class="screen" id="site"><img class="base" src="../assets/admin/site-before.jpg"><img id="after" src="../assets/admin/site-after.jpg" style="opacity:0"><div id="ring" style="position:absolute;left:8px;top:470px;width:232px;height:84px;border:6px solid #FF4D1A;border-radius:999px;z-index:4"></div></div>
+  <svg viewBox="0 0 1080 1920"><path id="link" d="M470 790 C 820 760, 930 1050, 712 1394" fill="none" stroke="#FF4D1A" stroke-width="7" stroke-linecap="round"/>
+    <circle id="dotA" cx="470" cy="790" r="12" fill="#FF4D1A"/><circle id="dotB" cx="712" cy="1394" r="12" fill="#FF4D1A"/>
+</svg>
+  <div class="tap" id="tap1" style="left:262px;top:1215px"></div><div class="tapd" id="tapd1" style="left:262px;top:1215px"></div>
+  <div class="tap" id="tap2" style="left:470px;top:790px"></div><div class="tapd" id="tapd2" style="left:470px;top:790px"></div>
+  <div class="chip" id="chip"><i></i>Через минуту на сайте</div>
+</div>
+<div class="grain" id="grain"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script><script src="engine.js"></script>
+<script>
+const frames = Array.from({ length: 135 }, (_, i) => `../assets/admin/price/${String(i).padStart(4, '0')}.jpg`);
+const T0 = 0.9; seq(document.getElementById('seq'), frames, T0, 30);
+const link = document.getElementById('link'), L = link.getTotalLength();
+gsap.set(link, { strokeDasharray: L, strokeDashoffset: L }); gsap.set(['#dotA', '#dotB'], { scale: 0, transformOrigin: 'center' }); gsap.set('#ring', { opacity: 0, scale: .6 });
+const ch = splitChars(document.getElementById('h1'));
+const tap = (id, t) => TL.fromTo('#tap' + id, { scale: .3, opacity: 1 }, { scale: 1.5, opacity: 0, duration: .55, ease: 'power2.out' }, t).fromTo('#tapd' + id, { opacity: 0, scale: .6 }, { opacity: .9, scale: 1, duration: .12, yoyo: true, repeat: 1, ease: 'power1.out' }, t);
+TL.to('#world', { scale: 1.04, duration: 4.5, ease: 'sine.inOut' }, 0)
+  .from(ch, { yPercent: 115, duration: .7, ease: 'power4.out', stagger: .03 }, .1)
+  .to('#h2', { clipPath: 'inset(0 0% 0 0)', duration: .7, ease: 'power3.inOut' }, .55)
+  .from('#sub > *', { opacity: 0, y: 18, duration: .5, stagger: .06, ease: 'power3.out' }, .8)
+  .from('#adm', { y: 520, rotate: -12, duration: 1.0, ease: 'power4.out' }, .25)
+  .from('#site', { x: 460, rotate: 14, duration: 1.0, ease: 'power4.out' }, .45)
+  .from(['#l1', '#l2'], { opacity: 0, x: -16, duration: .5, stagger: .12, ease: 'power3.out' }, 1.0);
+tap(1, T0 + 57 / 30); tap(2, T0 + 98 / 30);
+const tPub = T0 + 98 / 30 + .1;
+TL.to('#dotA', { scale: 1, duration: .2, ease: 'back.out(3)' }, tPub)
+  .to(link, { strokeDashoffset: 0, duration: .6, ease: 'power2.inOut' }, tPub + .05)
+  .to('#dotB', { scale: 1, duration: .25, ease: 'back.out(3)' }, tPub + .6)
+  .to('#after', { opacity: 1, duration: .35, ease: 'power1.inOut' }, tPub + .7)
+  .to('#ring', { opacity: 1, scale: 1, duration: .5, ease: 'back.out(2)' }, tPub + .75)
+  .from('#chip', { y: 40, opacity: 0, duration: .5, ease: 'back.out(2)' }, tPub + 1.0)
+  .to('#world', { scale: 1.32, duration: 1.1, ease: 'power3.inOut' }, tPub + .9);
+TL.set({}, {}, 7.6);
+gsap.set('#world', { transformOrigin: '709px 1440px' });
+onFrame((t) => { const f = Math.floor(t * 30); document.getElementById('grain').style.transform = `translate(${(f * 37) % 120 - 60}px,${(f * 53) % 120 - 60}px)`; });
+</script></body></html>

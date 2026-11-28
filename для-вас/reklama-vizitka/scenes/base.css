@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Ysabeau+Office:wght@500;600;700&display=block");
+/* Палитра «Витрина»: тёплая бумага и графит, один сигнальный цвет (киноварь), шалфей для спокойных мест */
+:root{--paper:#EFEAE2;--ivory:#F8F5EF;--ink:#14110F;--ink2:#2A2521;--mut:#8C8278;--cinnabar:#FF4D1A;--sage:#B9C4B1;--gold:#D8B26A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{font-family:"Ysabeau Office",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+.cond{font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:.86}
+.ital{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;letter-spacing:-.01em;line-height:.9}
+.cm{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
+.ch{display:inline-block;will-change:transform}
+/* зерно плёнки поверх кадра: убирает «стерильность» HTML */
+.grain{position:absolute;inset:-50%;pointer-events:none;z-index:50;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.screen{position:absolute;border-radius:44px;overflow:hidden;background:#000;box-shadow:0 70px 120px -30px rgba(20,17,15,.45),0 0 0 1px rgba(20,17,15,.06)}
+.screen img{display:block;width:100%;height:auto}

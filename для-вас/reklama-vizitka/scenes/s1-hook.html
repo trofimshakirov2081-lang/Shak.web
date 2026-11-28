@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--ink)}
+.stage{position:absolute;inset:0;perspective:2600px;perspective-origin:50% 40%;overflow:hidden}
+.plane{position:absolute;left:50%;top:50%;width:1800px;height:3400px;margin:-1700px 0 0 -900px;transform-style:preserve-3d;display:flex;gap:44px;justify-content:center}
+.col{display:flex;flex-direction:column;gap:44px;width:330px}
+.col .screen{position:relative;width:330px;flex:none;border-radius:38px}
+.col .screen img{width:330px;height:714px;object-fit:cover;object-position:top}
+.shade{position:absolute;inset:0;z-index:5;background:linear-gradient(180deg,rgba(20,17,15,.55) 0%,rgba(20,17,15,0) 22%,rgba(20,17,15,0) 46%,rgba(20,17,15,.72) 66%,rgba(20,17,15,.94) 100%)}
+.kick{position:absolute;left:76px;top:118px;z-index:10;color:var(--paper);font-size:34px;font-weight:600;letter-spacing:.06em;display:flex;align-items:center;gap:18px}
+.kick i{display:block;width:90px;height:2px;background:var(--cinnabar);transform-origin:left}
+.t1{position:absolute;left:62px;top:1170px;z-index:10;color:var(--paper);font-size:232px;white-space:nowrap}
+.t2{position:absolute;left:70px;top:1400px;white-space:nowrap;z-index:10;color:var(--cinnabar);font-size:230px;clip-path:inset(0 100% 0 0)}
+.t3{position:absolute;left:78px;top:1680px;z-index:10;color:#cfc6bb;font-size:40px;font-weight:600;letter-spacing:.02em}
+</style></head><body>
+<div class="stage"><div class="plane" id="plane"></div></div>
+<div class="shade"></div>
+<div class="kick" id="kick"><i id="kl"></i><span>сайты с админкой под ваш бизнес</span></div>
+<div class="t1 cond" id="t1">Не шаблон.</div>
+<div class="t2 ital" id="t2">Ваш сайт.</div>
+<div class="t3" id="t3">Дизайн с нуля под вашу идею</div>
+<div class="grain" id="grain"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script><script src="engine.js"></script>
+<script>
+const S = '../assets/sites/';
+const COLS = [['makov-top', 'barber-top', 'you-bloom-top'], ['glazur-top', 'altyn-top', 'the-rose-top'], ['yummy-cake-top', 'stoyka-top', 'galant-top'], ['the-rose-top', 'makov-top', 'barber-top']];
+const plane = document.getElementById('plane');
+const cols = COLS.map((c, i) => { const d = document.createElement('div'); d.className = 'col'; c.concat(c).forEach((n) => { const s = document.createElement('div'); s.className = 'screen'; s.innerHTML = `<img src="${S + n}.jpg">`; d.append(s); }); plane.append(d); return d; });
+gsap.set(plane, { rotateX: 30, rotateZ: -16, rotateY: 6, z: -200, scale: 1.9, filter: 'blur(14px)' });
+cols.forEach((c, i) => gsap.set(c, { y: i % 2 ? -900 : 0 }));
+// камера: наводка резкости и отъезд, колонны едут навстречу друг другу (параллакс)
+TL.to(plane, { scale: 1.18, filter: 'blur(0px)', duration: 1.1, ease: 'expo.out' }, 0)
+  .to(plane, { scale: 1.08, rotateZ: -12, duration: 2.2, ease: 'sine.inOut' }, 1.0);
+cols.forEach((c, i) => TL.to(c, { y: (i % 2 ? -900 : 0) + (i % 2 ? 520 : -520) * (1 + i * .12), duration: 3.6, ease: 'none' }, 0));
+// текст
+const ch = splitChars(document.getElementById('t1'));
+TL.from(document.getElementById('kl'), { scaleX: 0, duration: .6, ease: 'power3.out' }, .15).from('#kick span', { opacity: 0, x: -20, duration: .6, ease: 'power3.out' }, .25)
+  .from(ch, { yPercent: 115, duration: .75, ease: 'power4.out', stagger: .028 }, .5)
+  .to('#t2', { clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power3.inOut' }, 1.25)
+  .from('#t2', { x: -30, duration: .8, ease: 'power3.out' }, 1.25)
+  .from('#t3', { opacity: 0, y: 24, duration: .6, ease: 'power3.out' }, 1.75);
+TL.set({}, {}, 3.6);
+// плёночное зерно смещается каждый кадр
+onFrame((t) => { const f = Math.floor(t * 30); document.getElementById('grain').style.transform = `translate(${(f * 37) % 120 - 60}px,${(f * 53) % 120 - 60}px)`; });
+</script></body></html>
