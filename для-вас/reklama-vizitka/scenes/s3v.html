@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--bg,var(--paper));color:var(--fg,var(--ink))}
+.world{position:absolute;inset:0}
+.kick{position:absolute;left:66px;top:120px;font-size:32px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;gap:16px;align-items:center;opacity:.85}
+.kick i{width:60px;height:2px;background:currentColor;transform-origin:left}
+.num{position:absolute;right:60px;top:70px;font-size:230px;color:transparent;-webkit-text-stroke:3px var(--stroke,rgba(20,17,15,.18))}
+.ttl{position:absolute;left:58px;top:195px;font-size:138px;white-space:nowrap}
+.res{position:absolute;left:64px;top:330px;font-size:96px;color:var(--cinnabar);white-space:nowrap;clip-path:inset(0 100% 0 0)}
+.screen{border:4px solid var(--frame,var(--ink))}
+.screen img{position:absolute;left:0;top:0;width:100%}
+.screen .base{position:relative}
+.tag{position:absolute;z-index:9;background:var(--ink);color:var(--paper);font-size:34px;font-weight:700;padding:16px 28px;border-radius:999px;display:flex;gap:12px;align-items:center;box-shadow:0 20px 40px -12px rgba(0,0,0,.4)}
+.tag i{width:12px;height:12px;border-radius:50%;background:#3DD68C}
+svg{position:absolute;inset:0;z-index:8;overflow:visible}
+</style></head><body>
+<div class="world" id="world">
+  <div class="num cond" id="num"></div>
+  <div class="kick" id="kick"><i></i><span>Ваш пульт</span></div>
+  <div class="ttl cond" id="ttl"></div>
+  <div class="res ital" id="res"></div>
+  <div class="screen" id="adm"><img id="seq"></div>
+  <div class="screen" id="site"></div>
+  <svg viewBox="0 0 1080 1920"><path id="link" fill="none" stroke="#FF4D1A" stroke-width="7" stroke-linecap="round"/><circle id="dA" r="12" fill="#FF4D1A"/><circle id="dB" r="12" fill="#FF4D1A"/></svg>
+  <div class="tag" id="tag"><i></i><span>Уже на сайте</span></div>
+</div>
+<div class="grain" id="grain"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script><script src="engine.js"></script>
+<script>
+const A = '../assets/admin/';
+// каждая сцена: своя композиция и фон; from/to: отрезок живой записи админки; pub: кадр нажатия «Опубликовать»
+const V = {
+  photo: { n: '02', ttl: 'Заменили фото', res: 'и оно уже на сайте.', bg: '#EFEAE2', from: 22, to: 92, pub: 77,
+    adm: { l: 70, t: 900, w: 400, r: -5 }, site: { l: 430, t: 600, w: 590, r: 3 }, imgs: ['photo-before.jpg', 'photo-after.jpg'], reveal: 'wipe', a: [430, 1010], b: [700, 900], tag: [470, 1760] },
+  promo: { n: '03', ttl: 'Запустили акцию', res: 'со скидкой и таймером.', bg: '#C9D1C1', stroke: 'rgba(20,17,15,.16)', from: 6, to: 70, pub: 53,
+    adm: { l: 60, t: 620, w: 500, r: -3 }, site: { l: 560, t: 820, w: 470, r: 4 }, imgs: ['promo-before.jpg', 'promo-after.jpg'], reveal: 'fade', a: [470, 650], b: [640, 1300], tag: [560, 1810] },
+  look: { n: '04', ttl: 'Сменили стиль', res: 'в одно касание.', bg: '#14110F', fg: '#EFEAE2', frame: '#EFEAE2', stroke: 'rgba(239,234,226,.16)', from: 8, to: 60, pub: 42,
+    adm: { l: 640, t: 560, w: 380, r: 5 }, site: { l: 60, t: 640, w: 600, r: -3 }, imgs: ['look-0.jpg', 'look-1.jpg', 'look-2.jpg', 'look-3.jpg'], reveal: 'circles', a: [660, 640], b: [420, 1100], tag: [90, 1790] },
+  block: { n: '05', ttl: 'Добавили раздел', res: 'с ценами и кнопкой.', bg: '#EFEAE2', from: 30, to: 100, pub: 87,
+    adm: { l: 80, t: 700, w: 470, r: -4 }, site: { l: 520, t: 860, w: 500, r: 3 }, imgs: ['photo-before.jpg', 'block-after.jpg'], reveal: 'wipe', a: [480, 730], b: [700, 1150], tag: [100, 1800] },
+};
+const v = V[new URLSearchParams(location.search).get('v')], R = document.documentElement.style;
+R.setProperty('--bg', v.bg); if (v.fg) R.setProperty('--fg', v.fg); if (v.frame) R.setProperty('--frame', v.frame); if (v.stroke) R.setProperty('--stroke', v.stroke);
+document.getElementById('num').textContent = v.n; document.getElementById('ttl').textContent = v.ttl; document.getElementById('res').textContent = v.res;
+const place = (el, o, ratio) => Object.assign(el.style, { left: o.l + 'px', top: o.t + 'px', width: o.w + 'px', height: Math.round(o.w * ratio) + 'px', transform: `rotate(${o.r}deg)` });
+const adm = document.getElementById('adm'), site = document.getElementById('site'); place(adm, v.adm, 1688 / 780); place(site, v.site, 1688 / 780);
+site.innerHTML = v.imgs.map((s, i) => `<img src="${A + s}" id="si${i}" ${i ? 'style="opacity:0"' : ''}>`).join('');
+const frames = Array.from({ length: v.to - v.from }, (_, i) => `${A}${new URLSearchParams(location.search).get('v')}/${String(v.from + i).padStart(4, '0')}.jpg`);
+const S0 = .35; seq(document.getElementById('seq'), frames, S0, 30);
+const P = S0 + (v.pub - v.from) / 30; window.TIMES = { publish: P, change: P + .55, end: 4.8 };
+const tag = document.getElementById('tag'); tag.style.left = v.tag[0] + 'px'; tag.style.top = v.tag[1] + 'px';
+const link = document.getElementById('link'); link.setAttribute('d', `M${v.a[0]} ${v.a[1]} C ${v.a[0] + 260} ${v.a[1] - 40}, ${v.b[0] + 240} ${v.b[1] - 300}, ${v.b[0]} ${v.b[1]}`);
+['dA', 'dB'].forEach((id, i) => { const c = document.getElementById(id), p = i ? v.b : v.a; c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]); });
+const L = link.getTotalLength(); gsap.set(link, { strokeDasharray: L, strokeDashoffset: L }); gsap.set(['#dA', '#dB'], { scale: 0, transformOrigin: 'center', transformBox: 'fill-box' });
+const ch = splitChars(document.getElementById('ttl'));
+TL.from('#kick i', { scaleX: 0, duration: .5, ease: 'power3.out' }, 0).from('#kick span', { opacity: 0, x: -14, duration: .5, ease: 'power3.out' }, .05)
+  .from('#num', { opacity: 0, x: 80, duration: .9, ease: 'power3.out' }, 0)
+  .from(ch, { yPercent: 115, duration: .6, ease: 'power4.out', stagger: .022 }, .05)
+  .from(adm, { y: 380, opacity: 0, rotate: v.adm.r * 3, duration: .8, ease: 'power4.out' }, .05)
+  .from(site, { y: 420, opacity: 0, rotate: v.site.r * 3, duration: .85, ease: 'power4.out' }, .15)
+  .to('#dA', { scale: 1, duration: .2, ease: 'back.out(3)' }, P)
+  .to(link, { strokeDashoffset: 0, duration: .45, ease: 'power2.inOut' }, P + .05)
+  .to('#dB', { scale: 1, duration: .2, ease: 'back.out(3)' }, P + .45)
+  .to('#res', { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power3.inOut' }, P + .4)
+  .from(tag, { y: 30, opacity: 0, duration: .45, ease: 'back.out(2)' }, P + .8)
+  .to(site, { scale: 1.06, duration: 1.4, ease: 'power2.out' }, P + .5);
+// смена на сайте: шторка, плавная смена или круги из точки касания
+if (v.reveal === 'wipe') TL.fromTo('#si1', { opacity: 1, clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: .6, ease: 'power3.inOut' }, P + .5);
+if (v.reveal === 'fade') TL.to('#si1', { opacity: 1, duration: .35, ease: 'power1.inOut' }, P + .5);
+if (v.reveal === 'circles') [1, 2, 3].forEach((k, i) => TL.fromTo('#si' + k, { opacity: 1, clipPath: 'circle(0% at 70% 10%)' }, { clipPath: 'circle(150% at 70% 10%)', duration: .55, ease: 'power2.in' }, P + .5 + i * .62));
+if (v.reveal === 'circles') window.TIMES.extra = [P + 1.12, P + 1.74];
+TL.set({}, {}, 4.8);
+onFrame((t) => { const f = Math.floor(t * 30); document.getElementById('grain').style.transform = `translate(${(f * 37) % 120 - 60}px,${(f * 53) % 120 - 60}px)`; });
+</script></body></html>

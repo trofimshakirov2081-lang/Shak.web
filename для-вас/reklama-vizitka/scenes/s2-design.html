@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+body{background:#F4D9D2}
+#bg{position:absolute;inset:0;background:#F4D9D2}
+.kick{position:absolute;left:66px;top:118px;z-index:20;font-size:32px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;gap:16px;align-items:center;color:var(--ink)}
+.kick i{width:60px;height:2px;background:currentColor;transform-origin:left}
+.w{position:absolute;inset:0}
+.w .screen{left:430px;top:300px;width:580px;height:1255px;border:4px solid var(--ink);border-radius:54px;z-index:5}
+.w .screen img{position:absolute;left:0;top:0;width:100%}
+.w .lap{position:absolute;left:-210px;top:520px;width:720px;border-radius:22px;overflow:hidden;border:4px solid var(--ink);box-shadow:0 50px 90px -30px rgba(20,17,15,.45);z-index:3;transform:rotate(-4deg)}
+.w .lap img{display:block;width:100%}
+.niche{position:absolute;left:62px;top:1600px;z-index:10;font-size:124px;white-space:nowrap}
+.style{position:absolute;left:68px;top:1730px;z-index:10;font-size:96px;white-space:nowrap}
+.big{position:absolute;left:58px;top:175px;z-index:10;font-size:190px;line-height:.86;white-space:nowrap}
+.grid{position:absolute;left:60px;top:560px;width:960px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;z-index:12}
+.grid div{aspect-ratio:390/844;border-radius:26px;overflow:hidden;border:3px solid var(--ink)}
+.grid img{width:100%;display:block}
+.out1{position:absolute;left:58px;top:1200px;z-index:12;font-size:150px;color:var(--ink);white-space:nowrap}
+.out2{position:absolute;left:64px;top:1340px;z-index:12;font-size:130px;color:var(--cinnabar);white-space:nowrap;clip-path:inset(0 100% 0 0)}
+</style></head><body>
+<div id="bg"></div>
+<div class="kick" id="kick"><i></i><span>Индивидуальный дизайн</span></div>
+<div class="big cond" id="big"><div id="b1">Под ваш</div><div id="b2">бизнес</div></div>
+<div id="works"></div>
+<div class="grid" id="grid"></div>
+<div class="out1 cond" id="out1">От вашей идеи</div>
+<div class="out2 ital" id="out2">до готового сайта.</div>
+<div class="grain" id="grain"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script><script src="engine.js"></script>
+<script>
+const S = '../assets/sites/';
+// работа: фон сцены, цвет текста, ниша и характер дизайна
+const W = [
+  { img: 'makov-long', bg: '#F4D9D2', fg: '#14110F', acc: '#C8321F', niche: 'Цветочный магазин', style: 'нежный, живой' },
+  { img: 'yummy-cake-long', bg: '#F7E7B8', fg: '#14110F', acc: '#1F5C4A', niche: 'Кондитерская', style: 'яркий, вкусный', lap: 'yummy-d' },
+  { img: 'barber-long', bg: '#16120F', fg: '#EFE7DA', acc: '#C9A063', niche: 'Барбершоп', style: 'премиальный' },
+  { img: 'stoyka-long', bg: '#0C0C0C', fg: '#F2F2F2', acc: '#E3302F', niche: 'Клуб бокса', style: 'дерзкий, с анимацией' },
+];
+const box = document.getElementById('works');
+W.forEach((w, i) => { const d = document.createElement('div'); d.className = 'w'; d.id = 'w' + i; d.style.opacity = 0;
+  d.innerHTML = `${w.lap ? `<div class="lap"><img src="${S + w.lap}.jpg"></div>` : ''}<div class="screen" style="border-color:${w.fg}"><img src="${S + w.img}.jpg"></div>
+    <div class="niche cond" style="color:${w.fg}">${w.niche}</div><div class="style ital" style="color:${w.acc}">${w.style}</div>`; box.append(d); });
+document.getElementById('grid').innerHTML = ['makov-top', 'yummy-cake-top', 'barber-top', 'stoyka-top', 'altyn-top'].map((n) => `<div><img src="${S + n}.jpg"></div>`).join('');
+gsap.set('#grid', { opacity: 0 });
+const bigCh = splitChars(document.getElementById('b1')).concat(splitChars(document.getElementById('b2')));
+TL.from('#kick i', { scaleX: 0, duration: .5, ease: 'power3.out' }, 0).from('#kick span', { opacity: 0, x: -14, duration: .5 }, .05)
+  .from(bigCh, { yPercent: 115, duration: .6, ease: 'power4.out', stagger: .025 }, .05);
+const D = 1.55, T0 = .35; window.TIMES = { works: [] };
+W.forEach((w, i) => { const t = T0 + i * D, el = '#w' + i, img = el + ' .screen img'; window.TIMES.works.push(t);
+  TL.to('#bg', { backgroundColor: w.bg, duration: .5, ease: 'power2.inOut' }, t)
+    .to('#kick', { color: w.fg, duration: .4 }, t).to('#big', { color: w.fg, duration: .4 }, t)
+    .set(el, { opacity: 1 }, t)
+    .fromTo(el + ' .screen', { yPercent: 70, rotate: 6, clipPath: 'inset(100% 0 0 0 round 54px)' }, { yPercent: 0, rotate: i % 2 ? -2 : 2, clipPath: 'inset(0% 0 0 0 round 54px)', duration: .7, ease: 'power4.out' }, t)
+    .fromTo(img, { y: 0 }, { y: -900, duration: D + .4, ease: 'power1.inOut' }, t + .2)
+    .fromTo(el + ' .niche', { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .5, ease: 'power4.out' }, t + .15)
+    .fromTo(el + ' .style', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: .55, ease: 'power3.inOut' }, t + .3);
+  if (w.lap) TL.fromTo(el + ' .lap', { x: -400, opacity: 0 }, { x: 0, opacity: 1, duration: .7, ease: 'power3.out' }, t + .1);
+  if (i < W.length - 1) TL.to(el, { opacity: 0, y: -120, duration: .35, ease: 'power2.in' }, t + D - .05); });
+// финал главы: все работы собираются в ряд, «от вашей идеи до готового сайта»
+const tg = T0 + W.length * D; window.TIMES.grid = tg;
+TL.to('#w' + (W.length - 1), { opacity: 0, scale: .7, duration: .4, ease: 'power2.in' }, tg - .1)
+  .to('#bg', { backgroundColor: '#EFEAE2', duration: .5 }, tg).to(['#kick', '#big'], { color: '#14110F', duration: .4 }, tg)
+  .to('#grid', { opacity: 1, duration: .01 }, tg).from('#grid div', { y: 300, opacity: 0, rotate: (i) => (i - 2) * 6, duration: .7, ease: 'power4.out', stagger: .06 }, tg)
+  .fromTo('#out1', { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .6, ease: 'power4.out' }, tg + .4)
+  .to('#out2', { clipPath: 'inset(0 0% 0 0)', duration: .7, ease: 'power3.inOut' }, tg + .75);
+TL.set({}, {}, tg + 2.2); window.TIMES.end = tg + 2.2;
+onFrame((t) => { const f = Math.floor(t * 30); document.getElementById('grain').style.transform = `translate(${(f * 37) % 120 - 60}px,${(f * 53) % 120 - 60}px)`; });
+</script></body></html>

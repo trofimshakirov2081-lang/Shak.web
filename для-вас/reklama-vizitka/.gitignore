@@ -1,2 +1,6 @@
 node_modules/
 render/frames/
+render/clips/
+render/*.wav
+render/*-silent.mp4
+render/list.txt

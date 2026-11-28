@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--ink)}
+#bg{position:absolute;inset:0;background:var(--ink)}
+.kick{position:absolute;left:66px;top:118px;z-index:20;font-size:32px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;gap:16px;align-items:center;color:var(--paper)}
+.kick i{width:60px;height:2px;background:var(--cinnabar);transform-origin:left}
+.t1{position:absolute;left:58px;top:180px;z-index:10;font-size:150px;color:var(--paper);white-space:nowrap}
+.t2{position:absolute;left:64px;top:320px;z-index:10;font-size:84px;color:var(--cinnabar);white-space:nowrap;clip-path:inset(0 100% 0 0)}
+.t3{position:absolute;left:58px;top:180px;z-index:10;font-size:150px;color:var(--paper);white-space:nowrap}
+.t4{position:absolute;left:64px;top:320px;z-index:10;font-size:84px;color:var(--cinnabar);white-space:nowrap;clip-path:inset(0 100% 0 0)}
+#cl{left:70px;top:560px;width:520px;height:1125px;border:4px solid var(--paper);transform:rotate(-3deg);z-index:4}
+#cl img{width:100%}
+.cap{position:absolute;z-index:6;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);display:flex;gap:12px;align-items:center}
+.cap i{width:46px;height:2px;background:var(--paper)}
+/* телефон владельца: экран блокировки с уведомлением */
+#own{position:absolute;left:600px;top:700px;width:440px;height:952px;border-radius:56px;border:4px solid var(--paper);overflow:hidden;z-index:5;transform:rotate(4deg);
+  background:radial-gradient(120% 80% at 30% 10%,#FF4D1A 0%,#7A2412 35%,#1d1210 75%);box-shadow:0 70px 120px -30px rgba(0,0,0,.6)}
+#own .clock{position:absolute;left:0;right:0;top:110px;text-align:center;color:#fff;font:600 150px "Ysabeau Office";letter-spacing:-.02em}
+#own .date{position:absolute;left:0;right:0;top:92px;text-align:center;color:rgba(255,255,255,.85);font-size:28px;font-weight:600}
+#note{position:absolute;left:18px;right:18px;top:330px;border-radius:30px;background:rgba(255,255,255,.2);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:22px 24px;color:#fff}
+#note .h{display:flex;gap:12px;align-items:center;font-size:24px;font-weight:700;opacity:.9}
+#note .h i{width:34px;height:34px;border-radius:9px;background:#25D366;display:grid;place-items:center;font-style:normal;font-size:20px}
+#note .h span{margin-left:auto;font-weight:600;opacity:.75}
+#note b{display:block;font-size:28px;margin-top:10px}
+#note p{font-size:25px;line-height:1.3;margin-top:6px;opacity:.95}
+/* выгоды */
+.ben{position:absolute;left:58px;z-index:12;color:var(--ink)}
+.ben .a{font-size:132px;white-space:nowrap}.ben .b{font-size:96px;color:var(--cinnabar);white-space:nowrap;margin-top:-6px;clip-path:inset(0 100% 0 0)}
+.ben .n{position:absolute;right:-120px;top:10px;font:700 30px "Ysabeau Office";color:var(--mut)}
+</style></head><body>
+<div id="bg"></div>
+<div class="kick" id="kick"><i></i><span>Польза для бизнеса</span></div>
+<div class="t1 cond" id="t1">Клиенту удобно</div>
+<div class="t2 ital" id="t2">выбрал курс, оставил заявку.</div>
+<div class="t3 cond" id="t3">Заявка у вас</div>
+<div class="t4 ital" id="t4">сразу, в WhatsApp.</div>
+<div class="cap" id="c1" style="left:80px;top:515px"><i></i>Ваш клиент</div>
+<div class="cap" id="c2" style="left:640px;top:655px"><i></i>Ваш телефон</div>
+<div class="screen" id="cl"><img id="seq"></div>
+<div id="own"><div class="date">суббота, 28 ноября</div><div class="clock">14:32</div>
+  <div id="note"><div class="h"><i>✆</i>WhatsApp<span>сейчас</span></div><b>Анна</b><p id="msg"></p></div></div>
+<div class="ben" id="ben1" style="top:560px"><div class="a cond">Правки за минуту,</div><div class="b ital">а не за неделю.</div></div>
+<div class="ben" id="ben2" style="top:940px"><div class="a cond">Акции запускаете</div><div class="b ital">сами, в любой день.</div></div>
+<div class="ben" id="ben3" style="top:1320px"><div class="a cond">Не платите</div><div class="b ital">за каждую правку.</div></div>
+<div class="grain" id="grain"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script><script src="engine.js"></script>
+<script>
+document.getElementById('msg').textContent = 'Здравствуйте! Меня зовут Анна. Хочу узнать об обучении в АлтынНур и подобрать курс. Телефон: +7 (927) 123-45-67.';
+const F0 = 20, F1 = 129, SEND = 93, S0 = .3;
+seq(document.getElementById('seq'), Array.from({ length: F1 - F0 }, (_, i) => `../assets/admin/lead/${String(F0 + i).padStart(4, '0')}.jpg`), S0, 30);
+const tSend = S0 + (SEND - F0) / 30, tNote = tSend + .5; window.TIMES = { send: tSend, note: tNote };
+gsap.set('#own', { x: 600, rotate: 14 }); gsap.set(['#t3'], { opacity: 0 }); gsap.set('.ben', { opacity: 0 });
+const c1 = splitChars(document.getElementById('t1')), c3 = splitChars(document.getElementById('t3'));
+TL.from('#kick i', { scaleX: 0, duration: .5, ease: 'power3.out' }, 0).from('#kick span', { opacity: 0, x: -14, duration: .5 }, .05)
+  .from(c1, { yPercent: 115, duration: .6, ease: 'power4.out', stagger: .022 }, .05)
+  .to('#t2', { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power3.inOut' }, .5)
+  .from('#cl', { y: 500, rotate: -12, duration: .9, ease: 'power4.out' }, .05).from('#c1', { opacity: 0, x: -16, duration: .4 }, .6)
+  // заявка отправлена: телефон владельца въезжает, уведомление падает сверху
+  .to('#own', { x: 0, rotate: 4, duration: .8, ease: 'power4.out' }, tSend - .25).from('#c2', { opacity: 0, x: -16, duration: .4 }, tSend + .2)
+  .from('#note', { y: -220, opacity: 0, scale: .9, duration: .6, ease: 'back.out(1.6)' }, tNote)
+  .to(['#t1', '#t2'], { opacity: 0, y: -30, duration: .3, ease: 'power2.in' }, tNote - .2)
+  .to('#t3', { opacity: 1, duration: .01 }, tNote).from(c3, { yPercent: 115, duration: .6, ease: 'power4.out', stagger: .022 }, tNote)
+  .to('#t4', { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power3.inOut' }, tNote + .35)
+  .to('#own', { scale: 1.05, duration: 1.2, ease: 'power2.out' }, tNote);
+// выгоды на светлом
+const tb = tNote + 1.9; window.TIMES.benefits = tb;
+TL.to(['#cl', '#own', '#c1', '#c2', '#t3', '#t4'], { opacity: 0, y: -60, duration: .35, ease: 'power2.in', stagger: .02 }, tb - .2)
+  .to('#bg', { backgroundColor: '#EFEAE2', duration: .45, ease: 'power2.inOut' }, tb).to('#kick', { color: '#14110F', duration: .3 }, tb);
+['#ben1', '#ben2', '#ben3'].forEach((b, i) => { const t = tb + .25 + i * .9; window.TIMES['b' + i] = t;
+  TL.to(b, { opacity: 1, duration: .01 }, t).from(b + ' .a', { yPercent: 80, opacity: 0, duration: .55, ease: 'power4.out' }, t).to(b + ' .b', { clipPath: 'inset(0 0% 0 0)', duration: .55, ease: 'power3.inOut' }, t + .25); });
+TL.set({}, {}, tb + 3.6); window.TIMES.end = tb + 3.6;
+onFrame((t) => { const f = Math.floor(t * 30); document.getElementById('grain').style.transform = `translate(${(f * 37) % 120 - 60}px,${(f * 53) % 120 - 60}px)`; });
+</script></body></html>

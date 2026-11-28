@@ -3,7 +3,7 @@
 <style>
 body{background:var(--paper)}
 .world{position:absolute;inset:0;transform-origin:50% 55%}
-.h1{position:absolute;left:60px;top:150px;color:var(--ink);font-size:240px;white-space:nowrap}
+.h1{position:absolute;left:60px;top:160px;color:var(--ink);font-size:240px;white-space:nowrap}
 .h2{position:absolute;right:70px;top:360px;color:var(--cinnabar);font-size:220px;white-space:nowrap;clip-path:inset(0 100% 0 0)}
 .sub{position:absolute;left:66px;top:620px;font-size:40px;font-weight:600;color:var(--ink2);letter-spacing:.01em;display:flex;gap:22px}
 .sub b{font-weight:700}.sub i{width:8px;height:8px;border-radius:50%;background:var(--cinnabar);align-self:center}
@@ -22,6 +22,8 @@ svg{position:absolute;inset:0;z-index:8;overflow:visible}
 </style></head><body>
 <div class="world" id="world">
   <div class="big-bg cond">Админка</div>
+  <div class="cond" id="num" style="position:absolute;right:60px;top:70px;font-size:230px;color:transparent;-webkit-text-stroke:3px rgba(20,17,15,.18)">01</div>
+  <div id="kp" style="position:absolute;left:66px;top:96px;font-size:30px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);opacity:.85">— Ваш пульт</div>
   <div class="h1 cond" id="h1">Меняете</div>
   <div class="h2 ital" id="h2">сами.</div>
   <div class="sub" id="sub"><b>цены</b><i></i><b>фото</b><i></i><b>тексты</b><i></i><b>оформление</b></div>
