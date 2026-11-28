@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* Безопасная зона TikTok и Reels: сверху ~180 px строка вкладок, снизу ~420 px подпись и кнопки, справа ~150 px иконки */
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;background:radial-gradient(120% 70% at 50% 0%,#1d2a4a 0%,#121826 55%,#0c111c 100%);color:#fff;font-family:Manrope,sans-serif;position:relative;overflow:hidden}
+h1,.u{font-family:Unbounded,sans-serif;font-weight:800;letter-spacing:-.025em;line-height:1.08}
+mark{background:#FFD23F;color:#121826;padding:0 .14em;border-radius:14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.wrap{position:absolute;left:88px;right:170px;top:220px;bottom:440px;display:flex;flex-direction:column;justify-content:center;gap:26px}
+[data-in]{opacity:0}
+.big{font-size:86px}.mid{font-size:68px}.small{font-size:38px;font-weight:700;color:#b9c3d6;line-height:1.35}
+.kick{font-size:36px;font-weight:800;color:#FFD23F;letter-spacing:.04em;text-transform:uppercase}
+.pain{display:flex;gap:26px;align-items:center;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.08);border-radius:32px;padding:30px 34px}
+.pain i{flex:none;width:76px;height:76px;border-radius:50%;background:#E5484D;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:42px}
+.pain b{font-size:44px;line-height:1.2}
+.price{font:800 150px Unbounded,sans-serif;letter-spacing:-.04em;line-height:1;white-space:nowrap}.price small{font-size:76px}
+.box{background:#FFD23F;color:#121826;border-radius:36px;padding:38px 42px;font-weight:800;font-size:52px;line-height:1.15}
+.box small{display:block;font-size:36px;font-weight:700;margin-top:10px;opacity:.8}
+.brand{font:800 40px Unbounded,sans-serif}.brand i{color:#1F6BFF;font-style:normal}
+/* сцены с телефоном */
+.cap{position:absolute;left:60px;right:60px;top:190px;text-align:center}
+.cap h1{font-size:70px;white-space:nowrap}
+.cap p{font-size:34px;font-weight:700;color:#b9c3d6;margin-top:14px}
+.chip{display:inline-block;margin-top:18px;background:#1F6BFF;color:#fff;font-weight:800;font-size:36px;padding:10px 28px;border-radius:999px}
+.bezel{position:absolute;left:226px;top:426px;width:628px;height:1327px;border-radius:66px;background:#05070c;box-shadow:0 40px 120px rgba(31,107,255,.28),0 0 0 2px rgba(255,255,255,.08)}
+</style></head>
+<body>
+<script>
+const q = new URLSearchParams(location.search);
+const T = {
+  h_price: `<div class="wrap"><div class="kick" data-in="0">Сайт с админкой</div><h1 class="big" data-in="0.2">Вот так владелец <mark>сам</mark> меняет цену на&nbsp;своём сайте</h1></div>`,
+  h_pain: `<div class="wrap"><h1 class="big" data-in="0.1">Чтобы поменять цену на&nbsp;сайте,</h1><h1 class="big" data-in="0.8">вы пишете разработчику</h1><h1 class="big" data-in="1.5"><mark>и&nbsp;ждёте?</mark></h1></div>`,
+  pains: `<div class="wrap"><div class="kick" data-in="0">Знакомо?</div>
+    <div class="pain" data-in="0.4"><i>✕</i><b>Цены и фото на сайте устарели</b></div>
+    <div class="pain" data-in="1.6"><i>✕</i><b>Заявки теряются в&nbsp;переписках</b></div>
+    <div class="pain" data-in="2.8"><i>✕</i><b>Каждая правка: ждать и&nbsp;платить</b></div></div>`,
+  solution: `<div class="wrap"><div class="kick" data-in="0">Решение</div><h1 class="big" data-in="0.2">Сайт со своей <mark>админкой</mark></h1><p class="small" data-in="0.9">Цены, фото и акции меняете сами, с&nbsp;телефона. Заявки сразу приходят вам.</p></div>`,
+  h_promo: `<div class="wrap"><div class="kick" data-in="0">Сайт с админкой</div><h1 class="big" data-in="0.2">Акция, которая <mark>сама выключится</mark> в&nbsp;нужный день</h1></div>`,
+  h_design: `<div class="wrap"><h1 class="big" data-in="0.1">Шесть сайтов.</h1><h1 class="big" data-in="0.7"><mark>Ни одного шаблона</mark></h1><p class="small" data-in="1.3">И у каждого своя админка</p></div>`,
+  cta: `<div class="wrap"><p class="small" data-in="0" style="color:#fff">Сайт под ключ с админкой</p><div class="price" data-in="0.15">15&nbsp;500 <small>₽</small></div>
+    <p class="small" data-in="0.5">Без предоплаты. Полный бриф: −1&nbsp;200&nbsp;₽</p><div class="box" data-in="1.0" style="margin-top:20px">Начните с брифа<small>ссылка в шапке профиля</small></div><div class="brand" data-in="1.0" style="margin-top:20px">shak<i>.</i>web</div></div>`,
+};
+if (q.get('s')) document.body.innerHTML = T[q.get('s')];
+else document.body.innerHTML = `<div class="cap"><h1>${q.get('h')}</h1>${q.get('p') ? `<p>${q.get('p')}</p>` : ''}${q.get('c') ? `<span class="chip">${q.get('c')}</span>` : ''}</div><div class="bezel"></div>`;
+const els = [...document.querySelectorAll('[data-in]')];
+const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+window.at = (t) => els.forEach((e) => { const k = ease((t - +e.dataset.in) / 0.5); e.style.opacity = k; e.style.transform = `translateY(${(1 - k) * 40}px)`; });
+window.at(0);
+const h = document.querySelector('.cap h1'); if (h) { let f = 70; while (h.scrollWidth > 960 && f > 44) { f -= 2; h.style.fontSize = f + 'px'; } }
+</script>
+</body></html>
